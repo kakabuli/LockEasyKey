@@ -11,9 +11,8 @@ import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.clotheshangermachine.ClothesHangerMachineDetailActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockCameraVersionActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockFirwareNumberActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCameraVersionActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockFirwareNumberActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockMorePresenter;

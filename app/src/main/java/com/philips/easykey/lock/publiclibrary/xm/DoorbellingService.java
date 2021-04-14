@@ -1,8 +1,6 @@
 package com.philips.easykey.lock.publiclibrary.xm;
 
-import android.app.ActivityManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
@@ -13,36 +11,28 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockCallingActivity;
-import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DoorbellingResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiLockRecordResult;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiLockVideoBindBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
-import com.philips.easykey.lock.shulan.KeepAliveManager;
 import com.philips.easykey.lock.utils.AppUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.NotificationUtils;
 import com.philips.easykey.lock.utils.ServiceAliveUtils;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
-import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 
 /**
  *  启动蓝牙服务和Mqtt服务

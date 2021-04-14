@@ -16,9 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockAlbumDetailActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumDetailActivity;
 import com.philips.easykey.lock.adapter.WifiLockVistorIAdapter;
-import com.philips.easykey.lock.bean.FileBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockVistorRecordPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVistorRecordView;
@@ -39,7 +38,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;

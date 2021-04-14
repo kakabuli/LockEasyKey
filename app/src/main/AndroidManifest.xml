@@ -68,11 +68,11 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:allowBackup">
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockCallingTestActivity"
+            android:name=".activity.device.videolock.WifiVideoLockCallingTestActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockAMModeActivity"
+            android:name=".activity.device.videolock.WifiVideoLockAMModeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -88,68 +88,68 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockSafeModeActivity"
+            android:name=".activity.device.videolock.WifiVideoLockSafeModeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockLanguageSettingActivity"
+            android:name=".activity.device.videolock.WifiVideoLockLanguageSettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockDeviceRecordActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockDeviceRecordActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockPreViewActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockPreViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockCameraVersionActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockCameraVersionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFirwareNumberActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockFirwareNumberActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAlbumDetailActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockAlbumDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAlbumActivity"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeVideoActivity"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockCallingActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockAlbumActivity"/>
+        <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeVideoActivity"/>
+        <activity android:name=".activity.device.videolock.WifiVideoLockCallingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAddSuccessActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockAddSuccessActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockScanFailedActivity"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockScanActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockScanFailedActivity"/>
+        <activity android:name=".activity.device.videolock.WifiVideoLockScanActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFourthActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockFourthActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFifthActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockFifthActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockSixthActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockSixthActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeWeekPeriodActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeWeekPeriodActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingJudgeTimeActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockWanderingJudgeTimeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingPIRSensitivityActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockWanderingPIRSensitivityActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimePeriodActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockRealTimePeriodActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.device.wifilock.WifiLockMessagePushActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingAlarmActivity"
+        <activity android:name=".activity.device.videolock.WifiVideoLockWanderingAlarmActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.addDevice.singleswitch.SwipchSeetingArgus"/>
@@ -984,7 +984,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockMoreActivity"
+            android:name=".activity.device.videolock.WifiVideoLockMoreActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
@@ -1004,7 +1004,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.videolock.WifiVideoLockHelpActivity"
+            android:name=".activity.device.videolock.WifiVideoLockHelpActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

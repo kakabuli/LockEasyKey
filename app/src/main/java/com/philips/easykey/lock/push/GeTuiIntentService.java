@@ -15,7 +15,7 @@ import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;

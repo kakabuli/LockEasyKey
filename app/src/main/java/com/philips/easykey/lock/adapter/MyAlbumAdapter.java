@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
@@ -13,14 +12,9 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockAlbumDetailActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockPreViewActivity;
 import com.philips.easykey.lock.bean.FileBean;
 import com.philips.easykey.lock.bean.FileItemBean;
-import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.StringUtil;
 
 import java.util.List;
 

@@ -21,7 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
 import com.philips.easykey.lock.bean.WifiLockOperationRecordGroup;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;

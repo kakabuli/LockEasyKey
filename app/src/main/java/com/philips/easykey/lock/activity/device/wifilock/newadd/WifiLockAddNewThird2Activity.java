@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockHelpActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockHelpActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockFourthActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockFourthActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
 import butterknife.BindView;

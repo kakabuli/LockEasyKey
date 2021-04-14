@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
 import com.philips.easykey.lock.bean.PirEventBus;
 import com.philips.easykey.lock.publiclibrary.NotificationManager;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
