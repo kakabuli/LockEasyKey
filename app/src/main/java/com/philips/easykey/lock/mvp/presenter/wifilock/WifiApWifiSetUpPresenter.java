@@ -41,7 +41,7 @@ public class WifiApWifiSetUpPresenter<T> extends BasePresenter<IWifiLockAPWifiSe
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        LogUtils.e("第  " + aLong + "次访问");
+                        LogUtils.d("第  " + aLong + "次访问");
                         times = aLong;
                         WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
                         if (wifiLockInfo != null && wifiLockInfo.getIsAdmin() == 1) {

@@ -322,7 +322,7 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
 
     @Override
     public void readFailed(int errorCode) {
-        LogUtils.e("读取数据失败     " + errorCode);
+        LogUtils.d("读取数据失败     " + errorCode);
         ToastUtil.getInstance().showLong(R.string.bind_failed);
         hiddenLoading();
     }
@@ -443,7 +443,7 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
                 byte[] apBssid = params[1];
                 byte[] apPassword = params[2];
                 Context context = activity.getApplicationContext();
-                LogUtils.e("  apSsid  ");
+                LogUtils.d("  apSsid  ");
                 mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, context);
                 mEsptouchTask.setPackageBroadcast(true);  //true 广播方式
                 mEsptouchTask.setEsptouchListener(this::publishProgress);
@@ -485,7 +485,7 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
                 }
                 String deviceBssid = firstResult.getBssid();
                 String hostAddress = firstResult.getInetAddress().getHostAddress();
-                LogUtils.e("配置成功   deviceBssid   " + deviceBssid + "   hostAddress   " + hostAddress);
+                LogUtils.d("配置成功   deviceBssid   " + deviceBssid + "   hostAddress   " + hostAddress);
                 setUpResult.onSetUpSuccess(hostAddress);
             }
         }

@@ -266,7 +266,7 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
                     //永久
                 } else if (KeyConstants.ONE_DAY == timeStatus) {
                     //一天.
-                    LogUtils.e("点击添加密码   ");
+                    LogUtils.d("点击添加密码   ");
                     if (mPresenter.isAuth(bleLockInfo, true)) {
                         mPresenter.setPwd(strPassword, 2, nickName, System.currentTimeMillis(), System.currentTimeMillis() + 24 * 60 * 60 * 1000);
                     }
@@ -285,9 +285,9 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
                         ToastUtil.getInstance().showShort(R.string.end_time_must_bigger_end_time);
                         return;
                     }
-                    LogUtils.e("开始时间   " + DateUtils.getDateTimeFromMillisecond(startMilliseconds));
-                    LogUtils.e("结束时间   " + DateUtils.getDateTimeFromMillisecond(endMilliseconds));
-                    LogUtils.e("当前时间   " + DateUtils.getDateTimeFromMillisecond(System.currentTimeMillis()));
+                    LogUtils.d("开始时间   " + DateUtils.getDateTimeFromMillisecond(startMilliseconds));
+                    LogUtils.d("结束时间   " + DateUtils.getDateTimeFromMillisecond(endMilliseconds));
+                    LogUtils.d("当前时间   " + DateUtils.getDateTimeFromMillisecond(System.currentTimeMillis()));
                     if (mPresenter.isAuth(bleLockInfo, true)) {
                         mPresenter.setPwd(strPassword, 4, nickName, startMilliseconds, endMilliseconds);
                     }
@@ -411,7 +411,7 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
 
     @Override
     public void onSetTimePlanSuccess() {
-        LogUtils.e("设置时间计划成功");
+        LogUtils.d("设置时间计划成功");
     }
 
     @Override
@@ -454,7 +454,7 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
 
     @Override
     public void onUploadSuccess(String password, String number, String nickName) {
-        LogUtils.e("添加密码成功   " + password.toString());
+        LogUtils.d("添加密码成功   " + password.toString());
         Intent intent = new Intent();
         intent.setClass(MyApplication.getInstance(), BluetoothPasswordShareActivity.class);
         intent.putExtra(KeyConstants.TO_DETAIL_NUMBER, number);

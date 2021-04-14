@@ -133,7 +133,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
             if (!TextUtils.isEmpty(localShareUsers)) {
                 shareUsers = new Gson().fromJson(localShareUsers, new TypeToken<List<WifiLockShareResult.WifiLockShareUser>>() {
                 }.getType());
-                LogUtils.e("本地的分享用户为  shareUsers  " + (shareUsers == null ? 0 : shareUsers.size()));
+                LogUtils.d("本地的分享用户为  shareUsers  " + (shareUsers == null ? 0 : shareUsers.size()));
             }
             if(supportFunctions == null){
                 String functionSet = wifiLockInfo.getFunctionSet(); //锁功能集
@@ -199,7 +199,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                         return;
                     }
                 } catch (Exception e) {
-                    LogUtils.e("--kaadas--:" + e.getMessage());
+                    LogUtils.d("--kaadas--:" + e.getMessage());
                 }
             }
         }
@@ -207,7 +207,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
 
     private void changeLockIcon(Intent intent) {
         wifiSn = intent.getStringExtra(KeyConstants.WIFI_SN);
-        LogUtils.e("获取到的设备Sn是   " + wifiSn);
+        LogUtils.d("获取到的设备Sn是   " + wifiSn);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
 
         if (wifiLockInfo != null) {
@@ -236,7 +236,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                                     return;
                                 }
                             } catch (Exception e) {
-                                LogUtils.e("--kaadas--:" + e.getMessage());
+                                LogUtils.d("--kaadas--:" + e.getMessage());
                             }
                         }
 //                    }
@@ -257,7 +257,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
         //每次显示界面都重新设置状态和电量
         mPresenter.attachView(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
-        LogUtils.e("获取到的设备Sn是   " + wifiSn);
+        LogUtils.d("获取到的设备Sn是   " + wifiSn);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
     }
 
@@ -340,7 +340,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
         //todo  读取电量时间
         long readDeviceInfoTime = updateTime * 1000;
         long todayMillions = DateUtils.getTodayMillions();
-        LogUtils.e("更新时间   " + readDeviceInfoTime + "  当前时间  " + System.currentTimeMillis() + "  相差时间 " + ((System.currentTimeMillis() - readDeviceInfoTime))
+        LogUtils.d("更新时间   " + readDeviceInfoTime + "  当前时间  " + System.currentTimeMillis() + "  相差时间 " + ((System.currentTimeMillis() - readDeviceInfoTime))
                 + "  今天的时间  " + todayMillions + "    "
 
         );
@@ -377,9 +377,9 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                 func = 0x64;
             }
 
-            LogUtils.e("功能集是   " + func);
+            LogUtils.d("功能集是   " + func);
             supportFunctions = BleLockUtils.getWifiLockSupportFunction(func);
-            LogUtils.e("获取到的功能集是   " + supportFunctions.size());
+            LogUtils.d("获取到的功能集是   " + supportFunctions.size());
             if (wiFiLockPassword != null) {
                 for (WifiLockFunctionBean wifiLockFunctionBean : supportFunctions) {
                     switch (wifiLockFunctionBean.getType()) {

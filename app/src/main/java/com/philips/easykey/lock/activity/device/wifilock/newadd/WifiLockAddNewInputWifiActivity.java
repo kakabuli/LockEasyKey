@@ -165,7 +165,7 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
         @Override
         public void run() {
             super.run();
-            LogUtils.e("--Kaadas--发送************************************************************************************************APClose");
+            LogUtils.d("--Kaadas--发送************************************************************************************************APClose");
             socketManager.writeData("************************************************************************************************APClose".getBytes());
 
             onError(socketManager, -1);

@@ -119,7 +119,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
 
                         @Override
                         public void onAckErrorCode(BaseResult baseResult) {
-                            LogUtils.e("获取 开锁记录  失败   " + baseResult.getMsg() + "  " + baseResult.getCode());
+                            LogUtils.d("获取 开锁记录  失败   " + baseResult.getMsg() + "  " + baseResult.getCode());
                             if (isSafe()) {  //
                                 mViewRef.get().onLoadServerRecordFailedServer(baseResult);
                             }
@@ -127,7 +127,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
 
                         @Override
                         public void onFailed(Throwable throwable) {
-                            LogUtils.e("获取 开锁记录  失败   " + throwable.getMessage());
+                            LogUtils.d("获取 开锁记录  失败   " + throwable.getMessage());
                             if (isSafe()) {
                                 mViewRef.get().onLoadServerRecordFailed(throwable);
                             }
@@ -174,7 +174,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
 
         startIndex = 0;
         endIndex = 20;
-        LogUtils.e("重试次数   " + retryTimes + "    " + currentPage);
+        LogUtils.d("重试次数   " + retryTimes + "    " + currentPage);
         if (retryTimes > 2) { //已经重试了两次，即请求过三次
             //当前组数据已经查询完  不管查到的是什么结果  都显示给用户
             //看还有下一组数据没有   如果没有那么所有的数据都查询完了  不管之前查询到的是什么结果，都上传到服务器
@@ -243,14 +243,14 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
                                 }
 
                                 byte[] deVaule = Rsa.decrypt(bleDataBean.getPayload(), bleService.getBleLockInfo().getAuthKey());
-                                LogUtils.e("获取开锁记录   解码之后的数据是   " + Rsa.bytesToHexString(deVaule) + "原始数据是   " + Rsa.toHexString(bleDataBean.getOriginalData()));
+                                LogUtils.d("获取开锁记录   解码之后的数据是   " + Rsa.bytesToHexString(deVaule) + "原始数据是   " + Rsa.toHexString(bleDataBean.getOriginalData()));
                                 WarringRecord openLockRecord = BleUtil.parseWarringRecord(deVaule);
-                                LogUtils.e("获取报警记录是   " + openLockRecord.toString());
+                                LogUtils.d("获取报警记录是   " + openLockRecord.toString());
                                 if (warringRecords == null) {
                                     warringRecords = new WarringRecord[deVaule[0] & 0xff];
                                     total = deVaule[0] & 0xff;
                                     maxPage = (int) Math.ceil(total * 1.0 / 20.0);
-                                    LogUtils.e(" 总个数   " + total + "  最大页数  " + maxPage);
+                                    LogUtils.d(" 总个数   " + total + "  最大页数  " + maxPage);
                                 }
                                 warringRecords[deVaule[1] & 0xff] = openLockRecord;
 
@@ -284,7 +284,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
                                         toDisposable(disposable);
                                         upLoadOpenRecord(bleLockInfo.getServerLockInfo().getLockName(), getRecordToServer());
                                     } else {  //如果后面还有
-                                        LogUtils.e("收到一组完整的数据");
+                                        LogUtils.d("收到一组完整的数据");
                                         currentPage++;  //下一组数据
                                         retryTimes = 0; //重试次数
                                         getRecordByPage();  //获取数据
@@ -299,7 +299,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
                                     getRecordByPage();
                                     return;
                                 }
-                                LogUtils.e("获取数据  超时   数据完成");
+                                LogUtils.d("获取数据  超时   数据完成");
                                 // TODO: 2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < endIndex && i < total; i++) {
@@ -313,7 +313,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
                                 // TODO: 2019/3/7  开锁记录测试
                                 for (int i = startIndex; i < endIndex && i < total; i++) {
                                     if (warringRecords[i] == null) { //数据不全
-                                        LogUtils.e("数据不全  " + retryTimes);
+                                        LogUtils.d("数据不全  " + retryTimes);
                                         retryTimes++;
                                         if (retryTimes > 2) {  //如果已经尝试了三次  那么先显示数据
                                             if (isSafe()) {
@@ -354,7 +354,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传警报记录成功");
+                        LogUtils.d("上传警报记录成功");
                         if (isSafe()) {
                             mViewRef.get().onUploadServerRecordSuccess();
                         }
@@ -369,7 +369,7 @@ public class WarringRecordPresenter<T> extends BlePresenter<IWarringRecordView> 
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传警报记录失败");
+                        LogUtils.d("上传警报记录失败");
                         if (isSafe()) {
                             mViewRef.get().onUploadServerRecordFailed(throwable);
                         }

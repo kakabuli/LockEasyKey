@@ -22,7 +22,7 @@ public class RegisterPresenter<T> extends BasePresenter<IRegisterView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("发送验证码成功  " + result.getMsg());
+                        LogUtils.d("发送验证码成功  " + result.getMsg());
                         if (mViewRef != null) {
                             mViewRef.get().sendRandomSuccess();
                         }
@@ -54,7 +54,7 @@ public class RegisterPresenter<T> extends BasePresenter<IRegisterView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("发送验证码成功  " + result.getMsg());
+                        LogUtils.d("发送验证码成功  " + result.getMsg());
                         if (mViewRef != null) {
                             mViewRef.get().sendRandomSuccess();
                         }
@@ -88,7 +88,7 @@ public class RegisterPresenter<T> extends BasePresenter<IRegisterView> {
                         new BaseObserver<RegisterResult>() {
                             @Override
                             public void onSuccess(RegisterResult result) {
-                                LogUtils.e("注册成功  " + result.getData().toString());
+                                LogUtils.d("注册成功  " + result.getData().toString());
                                 MMKVUtils.setMMKV(SPUtils.TOKEN,result.getData().getToken());
                                 MMKVUtils.setMMKV(SPUtils.UID,result.getData().getUid());
 //                                SPUtils.put(SPUtils.TOKEN, result.getData().getToken());
@@ -131,7 +131,7 @@ public class RegisterPresenter<T> extends BasePresenter<IRegisterView> {
                         new BaseObserver<RegisterResult>() {
                             @Override
                             public void onSuccess(RegisterResult result) {
-                                LogUtils.e("注册成功  " + result.getData().toString());
+                                LogUtils.d("注册成功  " + result.getData().toString());
 //                                SPUtils.put(SPUtils.TOKEN, result.getData().getToken());
 //                                SPUtils.put(SPUtils.UID, result.getData().getUid());
                                 MMKVUtils.setMMKV(SPUtils.TOKEN,result.getData().getToken());

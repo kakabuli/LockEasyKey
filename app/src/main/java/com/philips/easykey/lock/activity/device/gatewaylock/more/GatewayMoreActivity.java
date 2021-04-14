@@ -21,13 +21,11 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.gatewaylock.GatewayDeviceInformationActivity;
-import com.philips.easykey.lock.adapter.ForecastAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockMorePresenter;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockMoreView;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
-import com.philips.easykey.lock.publiclibrary.http.result.SwitchStatusResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -251,7 +249,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
 
             case R.id.rl_am:
                 //设置A-M
-                LogUtils.e("点击了AM");
+                LogUtils.d("点击了AM");
                 if (flagAM) {
                     if (getAutoLockSuccess) {
                         if (autoRelock == 10) {
@@ -320,7 +318,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
 
     @Override
     public void updateDevNickNameThrowable(Throwable throwable) {
-        LogUtils.e("设置昵称失败" + throwable.getMessage());
+        LogUtils.d("设置昵称失败" + throwable.getMessage());
     }
 
     @Override
@@ -365,13 +363,13 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             loadingDialog.dismiss();
         }
         ToastUtil.getInstance().showShort("获取失败");
-        LogUtils.e("获取音量异常   " + throwable.getMessage());
+        LogUtils.d("获取音量异常   " + throwable.getMessage());
     }
 
     @Override
     public void setSoundVolumeSuccess(int volume) {
         loadingDialog.dismiss();
-        LogUtils.e("设置的音量是  " + volume);
+        LogUtils.d("设置的音量是  " + volume);
         //设置成功
         if (volume != 0) {
             ivSilentMode.setImageResource(R.mipmap.iv_close);
@@ -395,7 +393,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
     public void setSoundVolumeThrowable(Throwable throwable) {
         loadingDialog.dismiss();
         rlSilentMode.setEnabled(true);
-        LogUtils.e("设置音量异常    " + throwable.getMessage());
+        LogUtils.d("设置音量异常    " + throwable.getMessage());
     }
 
     @Override
@@ -427,7 +425,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             deleteDialog.dismiss();
         }
         ToastUtil.getInstance().showShort(getString(R.string.delete_fialed));
-        LogUtils.e("删除异常   " + throwable.getMessage());
+        LogUtils.d("删除异常   " + throwable.getMessage());
     }
 
 

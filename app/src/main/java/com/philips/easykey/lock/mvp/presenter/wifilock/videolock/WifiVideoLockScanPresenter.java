@@ -34,7 +34,7 @@ public class WifiVideoLockScanPresenter<T> extends BasePresenter<IWifiLockVideoF
      *
      */
     public void getDeviceBindingStatus(){
-        LogUtils.e("asasasasa");
+        LogUtils.d("asasasasa");
         if(mqttService != null){
             toDisposable(getVideoDeviceBindingDisposable);
             getVideoDeviceBindingDisposable = mqttService.listenerDataBack()

@@ -13,7 +13,7 @@ public class WiFiLockChooseToAddPresenter<T> extends BasePresenter<WiFiLockChoos
 
     public void searchLockProduct(String Product) {
 
-        LogUtils.e("--kaadas--WiFiLockUtils.pairMode(Product)=="+WiFiLockUtils.pairMode(Product));
+        LogUtils.d("--kaadas--WiFiLockUtils.pairMode(Product)=="+WiFiLockUtils.pairMode(Product));
 
         //equalsIgnoreCase不区分大小写
         if (WiFiLockUtils.pairMode(Product).equals("WiFi")) {

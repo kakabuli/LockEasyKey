@@ -37,10 +37,10 @@ public class MyAlbumItemAdapter extends BaseQuickAdapter<FileItemBean, BaseViewH
 
     @Override
     protected void convert(BaseViewHolder helper, FileItemBean item) {
-        LogUtils.e("MyAlbumItemAdapter");
+        LogUtils.d("MyAlbumItemAdapter");
         if(item.getType() == 2 && item.getSuffix().equals("mp4")){
-            LogUtils.e("---------" +(item.getPath()));
-            LogUtils.e("---------" +getVideoDuration(item.getPath()));
+            LogUtils.d("---------" +(item.getPath()));
+            LogUtils.d("---------" +getVideoDuration(item.getPath()));
 
             helper.getView(R.id.duration).setVisibility(View.VISIBLE);
             helper.setText(R.id.duration,getVideoDuration(item.getPath()));

@@ -152,10 +152,10 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
         wifiLockInfoChange = CloneObjectUtils.cloneObject(wifiLockInfo);
 //        wifiLockInfoChange =  wifiLockInfo;
-//        LogUtils.e("--kaadas--=wifiLockInfo.hashCode="+wifiLockInfo.hashCode());
-//        LogUtils.e("--kaadas--=wifiLockInfoChange.hashCode="+wifiLockInfoChange.hashCode());
-//        LogUtils.e("--kaadas--=wifiLockInfo.identityHashCode="+System.identityHashCode(wifiLockInfo));
-//        LogUtils.e("--kaadas--=wifiLockInfoChange.identityHashCode="+System.identityHashCode(wifiLockInfoChange));
+//        LogUtils.d("--kaadas--=wifiLockInfo.hashCode="+wifiLockInfo.hashCode());
+//        LogUtils.d("--kaadas--=wifiLockInfoChange.hashCode="+wifiLockInfoChange.hashCode());
+//        LogUtils.d("--kaadas--=wifiLockInfo.identityHashCode="+System.identityHashCode(wifiLockInfo));
+//        LogUtils.d("--kaadas--=wifiLockInfoChange.identityHashCode="+System.identityHashCode(wifiLockInfoChange));
 
     }
     private void initRecycleview() {
@@ -517,7 +517,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
     }
     @Override
     public void settingDeviceSuccess() {
-        LogUtils.e("--kaadas--设置成功");
+        LogUtils.d("--kaadas--设置成功");
 //        params = wifiLockInfoChange.getSingleFireSwitchInfo();
 //        bindingSingleFireSwitchBean = new BindingSingleFireSwitchBean(wifiSn,wifiLockInfoChange.getUid(),wifiLockInfoChange.getLockNickname(),params);
 //        mPresenter.updateSwitchNickname(bindingSingleFireSwitchBean);
@@ -525,7 +525,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void settingDeviceFail() {
-//        LogUtils.e("--kaadas--设置失败");
+//        LogUtils.d("--kaadas--设置失败");
 //        refresh();
         Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
     }
@@ -534,7 +534,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
     public void settingDeviceThrowable() {
 //         refresh();
         Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
-//        LogUtils.e("--kaadas--设置超时");
+//        LogUtils.d("--kaadas--设置超时");
 
     }
 
@@ -555,22 +555,22 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void addDeviceSuccess(AddSingleFireSwitchBean addSingleFireSwitchBean) {
-        LogUtils.e("--kaadas--添加成功");
+        LogUtils.d("--kaadas--添加成功");
     }
 
     @Override
     public void addDeviceFail() {
-        LogUtils.e("--kaadas--添加失败");
+        LogUtils.d("--kaadas--添加失败");
     }
 
     @Override
     public void addDeviceThrowable() {
-        LogUtils.e("--kaadas--添加超时");
+        LogUtils.d("--kaadas--添加超时");
     }
 
     @Override
     public void bindingAndModifyDeviceSuccess() {
-        LogUtils.e("--kaadas--修改信息成功");
+        LogUtils.d("--kaadas--修改信息成功");
 
 //        switchIsEn = wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchEn() == 1?true:false;
 //        List<SwitchNumberBean> switchNumber = wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber();
@@ -597,14 +597,14 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void bindingAndModifyDeviceFail() {
-//        LogUtils.e("--kaadas--修改信息失败");
+//        LogUtils.d("--kaadas--修改信息失败");
 //        refresh();
         Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void bindingAndModifyDeviceThrowable() {
-//        LogUtils.e("--kaadas--修改信息超时");
+//        LogUtils.d("--kaadas--修改信息超时");
 //        refresh();
         Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
     }
@@ -661,10 +661,10 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
             }
         }
         else if (requestCode == TO_SET_ALL_REQUEST_CODE ){
-//            LogUtils.e("--kaadas--TO_SET_ALL_REQUEST_CODE=="+resultCode);
+//            LogUtils.d("--kaadas--TO_SET_ALL_REQUEST_CODE=="+resultCode);
             if (resultCode == RESULT_OK && data != null) {
 
-                //                LogUtils.e("--kaadas--WIFI_LOCK_INFO_CHANGE_RESULT=="+data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));
+                //                LogUtils.d("--kaadas--WIFI_LOCK_INFO_CHANGE_RESULT=="+data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));
                 reload(data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));
 
                     if (data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false)) {

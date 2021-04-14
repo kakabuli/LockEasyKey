@@ -225,7 +225,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
                     public void run() {
                         super.run();
                         int writeResult = socketManager.writeData(("CRCError\r").getBytes());
-                        LogUtils.e("写 CRC Error  结果为   " + writeResult);
+                        LogUtils.d("写 CRC Error  结果为   " + writeResult);
                     }
                 }.start();
                 onError(socketManager, -3);

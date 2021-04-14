@@ -73,7 +73,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
 
     public void setBleLockInfo(BleLockInfo bleLockInfo) {
         //如果service中有bleLockInfo  并且deviceName一致，就不重新设置。
-        LogUtils.e("设置的  设备信息为    " + (this.bleLockInfo == null) + "   " + bleLockInfo.getServerLockInfo().toString());
+        LogUtils.d("设置的  设备信息为    " + (this.bleLockInfo == null) + "   " + bleLockInfo.getServerLockInfo().toString());
         this.bleLockInfo = bleLockInfo;
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -89,12 +89,12 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
             ServerBleDevice serverLockInfo = bleLockInfo.getServerLockInfo();
             if (serverLockInfo.getPassword1() != null && serverLockInfo.getPassword2() != null) {
                 if (serverLockInfo.getPassword1().equals(serviceLockInfo.getPassword1()) && serverLockInfo.getPassword2().equals(serviceLockInfo.getPassword2())) {
-                    LogUtils.e("进来了  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
+                    LogUtils.d("进来了  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
                     return;
                 }
             } else {
                 if ((serviceLockInfo.getPassword1() == null && serverLockInfo.getPassword1() == null) && (serviceLockInfo.getPassword2() == null && serverLockInfo.getPassword2() == null)) {
-                    LogUtils.e("进来了  密码为空  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
+                    LogUtils.d("进来了  密码为空  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
                     return;
                 }
             }
@@ -214,7 +214,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
             }
             return;
         }
-        LogUtils.e("开始连接设备   断开连接");
+        LogUtils.d("开始连接设备   断开连接");
         bleService.release();  //1  开始连接设备
         if (isSafe() && isNotify) {
             mViewRef.get().onStartConnectDevice();
@@ -235,7 +235,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     public void accept(BluetoothLockBroadcastBean broadcastBean) throws Exception {
                         BluetoothDevice device = broadcastBean.getDevice();
 
-                        LogUtils.e("查找设备成功   " + device.getName());
+                        LogUtils.d("查找设备成功   " + device.getName());
                         toDisposable(disposable);
                         bleService.connectDeviceByDevice(device);  //1
                         listenerConnectState();
@@ -251,7 +251,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("查找设备失败   " + throwable.getMessage());
+                        LogUtils.d("查找设备失败   " + throwable.getMessage());
                         //查找设备失败
                         if (isSafe() && isNotify) {
                             mViewRef.get().onEndConnectDevice(false);
@@ -278,7 +278,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("监听是否发现服务  出错  " + throwable);
+                        LogUtils.d("监听是否发现服务  出错  " + throwable);
                     }
                 });
         compositeDisposable.add(notDiscoverServiceDisposable);
@@ -304,7 +304,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                         @Override
                         public void accept(BleStateBean bleStateBean) throws Exception {
                             //连接状态改变之后   就不自动release连接了
-                            LogUtils.e("设备状态改变   bleLockInfo为空   " + (bleLockInfo == null) + "   连接状态   " + bleStateBean.isConnected());
+                            LogUtils.d("设备状态改变   bleLockInfo为空   " + (bleLockInfo == null) + "   连接状态   " + bleStateBean.isConnected());
 //                            if (bleLockInfo.isConnected() == bleStateBean.isConnected()){
 //                                return;
 //                            }
@@ -347,14 +347,14 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                                     bleService.getCurrentDevice().getName().equals(bleLockInfo.getServerLockInfo().getLockName())) {
                                 if (isSafe() && isNotify) {
                                     mViewRef.get().onEndConnectDevice(false);
-                                    LogUtils.e("设备连接失败");
+                                    LogUtils.d("设备连接失败");
                                 }
                             }
                         }
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("监听连接状态发生异常   " + throwable.getMessage());
+                            LogUtils.d("监听连接状态发生异常   " + throwable.getMessage());
                         }
                     });
             compositeDisposable.add(disposable1);
@@ -374,7 +374,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
      * 鉴权  延时三秒读取数据  如果失败   那么重试三次
      */
     public void readSystemId() {
-        LogUtils.e("设备连接成功     ");
+        LogUtils.d("设备连接成功     ");
         //发现服务之后不能立即读取特征值数据  需要延时500ms以上（魅族）
         //一秒没有读取到SystemId  则认为超时
         //超时然后重试
@@ -402,7 +402,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                         .subscribe(new Consumer<ReadInfoBean>() {
                             @Override
                             public void accept(ReadInfoBean readInfoBean) throws Exception {
-                                LogUtils.e("读取systemID成功   123");  //进行下一步
+                                LogUtils.d("读取systemID成功   123");  //进行下一步
                                 toDisposable(readSystemIdDisposable);
                                 getPwd3Times = 0;
                                 getPwd3(readInfoBean);
@@ -410,7 +410,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                LogUtils.e("读取SystemId失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                                LogUtils.d("读取SystemId失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                                 if (isSafe() && isNotify) {
                                     mViewRef.get().onEndConnectDevice(false);
                                     mViewRef.get().authResult(false);
@@ -440,13 +440,13 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 mViewRef.get().authResult(false);
                 mViewRef.get().onEndConnectDevice(false);
             }
-            LogUtils.e("鉴权三次   未成功   断开连接");
+            LogUtils.d("鉴权三次   未成功   断开连接");
             bleService.release();  //1鉴权三次   未成功
             return;
         }
         byte[] bSystemId = (byte[]) readInfoBean.data;
         if (bSystemId == null) {
-            LogUtils.e("读取SystemId为空       断开连接");
+            LogUtils.d("读取SystemId为空       断开连接");
             bleService.release(); //读取SystemId为空   断开连接
             return;
         }
@@ -454,7 +454,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
         systemId16 = new byte[16];  //读取到SystemId
 
         System.arraycopy(bSystemId, 0, systemId16, 0, bSystemId.length);
-        LogUtils.e("密码1是   " + bleLockInfo.getServerLockInfo().getPassword1() + "  密码2是  " + bleLockInfo.getServerLockInfo().getPassword2());
+        LogUtils.d("密码1是   " + bleLockInfo.getServerLockInfo().getPassword1() + "  密码2是  " + bleLockInfo.getServerLockInfo().getPassword2());
         if (bleService != null) {  //开始鉴权
             authCommand = BleCommandFactory.getAuthCommand(bleLockInfo.getServerLockInfo().getPassword1(),
                     bleLockInfo.getServerLockInfo().getPassword2(), systemId16);
@@ -471,7 +471,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     @Override
                     public boolean test(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getCmd() == 0x08 || authCommand[1] == bleDataBean.getTsn()) {
-                            LogUtils.e("  鉴权确认帧  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
+                            LogUtils.d("  鉴权确认帧  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
                             return true;
                         }
                         return false;
@@ -488,21 +488,21 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                                     mViewRef.get().onNeedRebind(bleDataBean.getPayload()[1] & 0xff);
                                     mViewRef.get().onEndConnectDevice(false);
                                 }
-                                LogUtils.e("鉴权确认帧  返回错误码   " + Rsa.byteToHexString(bleDataBean.getPayload()[0]));
+                                LogUtils.d("鉴权确认帧  返回错误码   " + Rsa.byteToHexString(bleDataBean.getPayload()[0]));
                                 bleService.release();// 鉴权确认帧  返回错误码
                                 toDisposable(getPwd3Dispose);
                             }
                             return;
                         }
-                        LogUtils.e("收到秘钥上报数据  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                        LogUtils.d("收到秘钥上报数据  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                         byte[] payload = new byte[16];
                         byte[] serverPsw1 = Rsa.hex2byte(bleLockInfo.getServerLockInfo().getPassword1());
                         byte[] tempPsw2 = Rsa.hex2byte(bleLockInfo.getServerLockInfo().getPassword2());
                         System.arraycopy(serverPsw1, 0, payload, 0, serverPsw1.length);
                         System.arraycopy(tempPsw2, 0, payload, serverPsw1.length, tempPsw2.length);
-                        LogUtils.e("负载数据是      " + Rsa.bytesToHexString(bleDataBean.getPayload()));
+                        LogUtils.d("负载数据是      " + Rsa.bytesToHexString(bleDataBean.getPayload()));
                         byte[] password_3de = Rsa.decrypt(bleDataBean.getPayload(), payload);  //解密password3
-                        LogUtils.e("收到鉴权数据   " + Rsa.bytesToHexString(password_3de));
+                        LogUtils.d("收到鉴权数据   " + Rsa.bytesToHexString(password_3de));
 
                         byte checkNum = 0;
                         for (int i = 0; i < password_3de.length; i++) {
@@ -517,7 +517,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                             System.arraycopy(serverPsw1, 0, encryptKey, 0, serverPsw1.length);
                             System.arraycopy(pwd3, 0, encryptKey, serverPsw1.length, pwd3.length);
                             bleLockInfo.setAuth(true);
-                            LogUtils.e("鉴权成功   鉴权的Key是  " + Rsa.bytesToHexString(encryptKey));
+                            LogUtils.d("鉴权成功   鉴权的Key是  " + Rsa.bytesToHexString(encryptKey));
                             bleLockInfo.setAuthKey(encryptKey);
 
                             //鉴权成功    取消延时断开的任务
@@ -543,9 +543,9 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("鉴权失败   " + throwable.getMessage());
+                        LogUtils.d("鉴权失败   " + throwable.getMessage());
                         if (throwable instanceof TimeOutException) {
-                            LogUtils.e("鉴权失败   pwd3返回超时   " + getPwd3Times);
+                            LogUtils.d("鉴权失败   pwd3返回超时   " + getPwd3Times);
                         }
                         getPwd3Times++;
                         getPwd3(readInfoBean);
@@ -579,7 +579,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
         if (bleLockInfo != null && (!bleLockInfo.isConnected() || !bleLockInfo.isAuth())) {
             return;
         }
-        LogUtils.e("开始同步时间   ");
+        LogUtils.d("开始同步时间   ");
         toDisposable(syncTimeDisposable1);
         byte[] time = Rsa.int2BytesArray((int) (System.currentTimeMillis() / 1000) - BleCommandFactory.defineTime);
 
@@ -594,9 +594,9 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
             @Override
             public void accept(BleDataBean bleDataBean) throws Exception {
                 if (bleDataBean.isConfirm() && bleDataBean.getPayload()[0] == 0) { //同步时间成功
-                    LogUtils.e("同步时间成功   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                    LogUtils.d("同步时间成功   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                 } else {
-                    LogUtils.e("同步时间失败  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                    LogUtils.d("同步时间失败  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                 }
                 toDisposable(syncTimeDisposable1);
             }
@@ -651,22 +651,22 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey() == null || MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey().length == 0) {
-                            LogUtils.e("收到锁状态改变，但是鉴权帧为空");
+                            LogUtils.d("收到锁状态改变，但是鉴权帧为空");
                             return;
                         }
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey());
-                        LogUtils.e("锁状态改变   " + Rsa.bytesToHexString(deValue));
+                        LogUtils.d("锁状态改变   " + Rsa.bytesToHexString(deValue));
                         int value0 = deValue[0] & 0xff;
                         int value1 = deValue[1] & 0xff;
                         int value2 = deValue[2] & 0xff;
                         if (value0 == 1) {  //上锁
                             if (value2 == 1) {
-                                LogUtils.e("上锁成功  ");
+                                LogUtils.d("上锁成功  ");
                                 if (isSafe()) {
                                     mViewRef.get().onLockLock();
                                 }
                             } else if (value2 == 2) {   //开锁
-                                LogUtils.e("开锁成功   " + Rsa.bytesToHexString(bleDataBean.getPayload()));
+                                LogUtils.d("开锁成功   " + Rsa.bytesToHexString(bleDataBean.getPayload()));
                                 if (isSafe()) {
                                     mViewRef.get().openLockSuccess();
                                 }
@@ -696,16 +696,16 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
             }
         }
         if (!TextUtils.isEmpty(bleLockInfo.getModeNumber())) {
-            LogUtils.e("已经存在蓝牙模块型号信息  不再读取   ");
+            LogUtils.d("已经存在蓝牙模块型号信息  不再读取   ");
             readFunctionSet();
             return;
         }
 
 
         if (bleService.getBleVersion() != 2) { //如果是蓝牙模块3   直接读取工嗯呢感激
-            LogUtils.e("蓝牙模块不是2  不读取蓝牙型号信息   ");
+            LogUtils.d("蓝牙模块不是2  不读取蓝牙型号信息   ");
             if (bleService.getBleVersion() == 3) {
-                LogUtils.e("蓝牙模块是3  读取功能集   ");
+                LogUtils.d("蓝牙模块是3  读取功能集   ");
                 readFunctionSet();
             }
             return;
@@ -733,7 +733,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 .subscribe(new Consumer<ReadInfoBean>() {
                     @Override
                     public void accept(ReadInfoBean readInfoBean) throws Exception {
-                        LogUtils.e("鉴权成功   读取蓝牙模块型号  成功  " + readInfoBean.data);  //进行下一步
+                        LogUtils.d("鉴权成功   读取蓝牙模块型号  成功  " + readInfoBean.data);  //进行下一步
                         bleLockInfo.setModeNumber((String) readInfoBean.data);
                         toDisposable(readModelNumberDisposable);
 
@@ -741,7 +741,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e(" 鉴权成功   读取蓝牙模块型号  失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                        LogUtils.d(" 鉴权成功   读取蓝牙模块型号  失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
 
                     }
                 });
@@ -774,7 +774,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                             toDisposable(functionSetDisposable);
 
                             int functionSet = (int) readInfoBean.data;
-                            LogUtils.e("更新  收到锁功能集   " + functionSet + "   本地功能集是否存在  " + TextUtils.isEmpty(bleLockInfo.getServerLockInfo().getFunctionSet()));
+                            LogUtils.d("更新  收到锁功能集   " + functionSet + "   本地功能集是否存在  " + TextUtils.isEmpty(bleLockInfo.getServerLockInfo().getFunctionSet()));
                             if (bleLockInfo.getServerLockInfo().functionIsEmpty()) {
                                 modifyFunctionSet(bleLockInfo.getServerLockInfo().getLockName(), "" + functionSet);
                             }
@@ -795,17 +795,17 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult baseResult) {
-                        LogUtils.e("更新功能集成功   " + baseResult.toString());
+                        LogUtils.d("更新功能集成功   " + baseResult.toString());
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("更新功能集失败   " + baseResult.toString());
+                        LogUtils.d("更新功能集失败   " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("更新功能集失败   " + throwable.getMessage());
+                        LogUtils.d("更新功能集失败   " + throwable.getMessage());
                     }
 
                     @Override
@@ -833,7 +833,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                         //获取成功缓存
 //                        GetPasswordUtil.deletePassword(bleLockInfo.getServerLockInfo().getLockName());
 //                        GetPasswordUtil.writePasswords(getPasswordResult, bleLockInfo.getServerLockInfo().getLockName());
-                        LogUtils.e("获取所有密码成功   " + getPasswordResult.toString());
+                        LogUtils.d("获取所有密码成功   " + getPasswordResult.toString());
                         if (isSafe()) {
                             mViewRef.get().onGetPasswordSuccess(getPasswordResult);
                         }
@@ -876,7 +876,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     bleService = MyApplication.getInstance().getBleService();
                 }
             }
-            LogUtils.e("延时断开连接  ");
+            LogUtils.d("延时断开连接  ");
             bleService.release();  //连接蓝牙时的延时断开蓝牙连接  1
         }
     };
@@ -940,7 +940,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     @Override
                     public void onSuccess(BaseResult result) {
                         if ("200".equals(result.getCode())) {
-                            LogUtils.e("服务器鉴权成功  开锁 ");
+                            LogUtils.d("服务器鉴权成功  开锁 ");
                             boolean isAdmin = bleLockInfo.getServerLockInfo().getIs_admin().equals("1");
                             localPwd = (String) SPUtils.get(KeyConstants.SAVE_PWD_HEARD + bleLockInfo.getServerLockInfo().getMacLock(), "");
                             //读取到蓝牙模块信号，且蓝牙型号是 rgbt1761或者Rgbt1761D  不用带密码开门  使用APP开门指令
@@ -1012,12 +1012,12 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                         if (bleDataBean.getOriginalData()[0] == 0) { //加密标志  0x01    且负载数据第一个是  0
                             if (bleDataBean.getPayload()[0] == 0) {
                                 //开锁返回确认帧     如果成功  保存密码    那么监听开锁上报   以开锁上报为准   开锁上报  五秒超时
-                                LogUtils.e("开锁成功3  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
+                                LogUtils.d("开锁成功3  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
                                 //开锁成功  保存密码
                                 SPUtils.put(KeyConstants.SAVE_PWD_HEARD + bleLockInfo.getServerLockInfo().getMacLock(), pwd); //Key
                                 listenerOpenLockUp();
                             } else {  //开锁失败
-                                LogUtils.e("开锁失败 4  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
+                                LogUtils.d("开锁失败 4  " + Rsa.bytesToHexString(bleDataBean.getPayload()));
                                 if (isSafe()) {
                                     mViewRef.get().openLockFailed(new BleProtocolFailedException(0xff & bleDataBean.getOriginalData()[0]));
                                 }
@@ -1056,7 +1056,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey() == null || MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey().length == 0) {
-                            LogUtils.e("收到报警记录，但是鉴权帧为空");
+                            LogUtils.d("收到报警记录，但是鉴权帧为空");
                             return;
                         }
 
@@ -1067,7 +1067,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                             if (value2 == 1) {
 
                             } else if (value2 == 2) {   //开锁
-                                LogUtils.e("开锁上报     111");
+                                LogUtils.d("开锁上报     111");
                                 if (isSafe()) {
                                     mViewRef.get().openLockSuccess();
                                 }
@@ -1089,7 +1089,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
 
     //////////////////////老模块开锁逻辑///////////////////////////////
     public void oldOpenLockMethod() {
-        LogUtils.e("老模块开锁    ");
+        LogUtils.d("老模块开锁    ");
         openLockRunnable.run();
         listenerOldModeOpenLockData();
     }
@@ -1101,7 +1101,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
             List<byte[]> openLockCommands = OldBleCommandFactory.getOpenLockCommands();
             //连续发送三个指令   BleService中有自己的队列   每隔100ms发送一个数据
             bleService.sendCommand(wakeUpFrame);
-            LogUtils.e("发送指令   老锁" + Rsa.bytesToHexString(openLockCommands.get(0)));
+            LogUtils.d("发送指令   老锁" + Rsa.bytesToHexString(openLockCommands.get(0)));
             bleService.sendCommand(openLockCommands.get(0));
             bleService.sendCommand(openLockCommands.get(1));
             handler.postDelayed(this, 1000);
@@ -1148,7 +1148,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
 
     private void parseOpenLockResponseTest(List<byte[]> datas) {
         for (byte[] data : datas) {
-            LogUtils.e("接收到的数据是  " + Rsa.bytesToHexString(data));
+            LogUtils.d("接收到的数据是  " + Rsa.bytesToHexString(data));
         }
         if (!(datas.get(0).length == 20 && datas.get(1).length == 12 && datas.get(2).length == 20 && datas.get(3).length == 12)) {
             return;
@@ -1161,9 +1161,9 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
         System.arraycopy(data2, 0, temp, 52, data2.length);
         for (int i = 0; i < 10; i++) {
             byte[] key = OldBleCommandFactory.oldModeKey.get(i);
-            LogUtils.e("解密前的数据是   " + Rsa.bytesToHexString(temp));
+            LogUtils.d("解密前的数据是   " + Rsa.bytesToHexString(temp));
             byte[] decryptByte = Rsa.decrypt(temp, key);// 对返回的数据进行解密
-            LogUtils.e("解密后的数据是   " + Rsa.bytesToHexString(decryptByte));
+            LogUtils.d("解密后的数据是   " + Rsa.bytesToHexString(decryptByte));
         }
     }
 
@@ -1198,7 +1198,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
         byte[] randomDecryptByte = null;
         for (int i = 0; i < 10; i++) {
             byte[] decryptByte = Rsa.decrypt(receiveByte, OldBleCommandFactory.oldModeKey.get(i));// 对返回的数据进行解密
-            LogUtils.e("解析之前的数据是   " + Rsa.bytesToHexString(receiveByte) + "   解析之后的数据是  " + Rsa.bytesToHexString(decryptByte));
+            LogUtils.d("解析之前的数据是   " + Rsa.bytesToHexString(receiveByte) + "   解析之后的数据是  " + Rsa.bytesToHexString(decryptByte));
             if (decryptByte[32] == (byte) 0x5f) {// 判断第二个包的第一个字节是否是0x5f,如果是就解密对了
                 // 提取16位密钥随机数来再次解密
                 byte[] randomByte16 = new byte[16];

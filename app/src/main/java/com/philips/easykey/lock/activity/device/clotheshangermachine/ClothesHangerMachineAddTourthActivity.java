@@ -157,7 +157,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
                 this.deviceSN = data.getStringExtra(KeyConstants.BLE_DEVICE_SN);
                 this.deviceMAC = data.getStringExtra(KeyConstants.BLE_MAC);
                 this.deviceName = data.getStringExtra(KeyConstants.DEVICE_NAME);
-                LogUtils.e("shulan times-->" + times);
+                LogUtils.d("shulan times-->" + times);
                 onAdminPasswordError();
             }
         }

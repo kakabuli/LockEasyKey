@@ -37,7 +37,7 @@ public class PersonalMessagePresenter<T> extends BasePresenter<IPersonalMessageV
                     }
                 } else {
                     if ("444".equals(getMessageResult.getCode())) { //Token过期
-                        LogUtils.e("token过期   " + Thread.currentThread().getName());
+                        LogUtils.d("token过期   " + Thread.currentThread().getName());
                         if (mqttService != null) {
                             mqttService.httpMqttDisconnect();
                         }
@@ -54,7 +54,7 @@ public class PersonalMessagePresenter<T> extends BasePresenter<IPersonalMessageV
                     }
                 } else {
                     if ("444".equals(getMessageResult.getCode())) { //Token过期
-                        LogUtils.e("token过期   " + Thread.currentThread().getName());
+                        LogUtils.d("token过期   " + Thread.currentThread().getName());
                         MyApplication.getInstance().tokenInvalid(true);
                     }
                 }*/

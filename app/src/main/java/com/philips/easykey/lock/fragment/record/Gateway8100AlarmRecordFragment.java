@@ -174,7 +174,7 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
     @Override
     public void getOpenLockRecordSuccess(List<GetAlarmRecordResult.DataBean> alarmList) {
         //获取开锁记录成功
-        LogUtils.e("获取到开锁记录多少条  " + alarmList.size());
+        LogUtils.d("获取到开锁记录多少条  " + alarmList.size());
 
         if (alarmList.size() == 0 && page == 1) {
             changeView(false);
@@ -212,7 +212,7 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
         }
-        LogUtils.e("获取开锁记录异常  网关锁");
+        LogUtils.d("获取开锁记录异常  网关锁");
         ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
         changeView(false);
     }
@@ -225,10 +225,10 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
         for (int i = 0; i < alarmList.size(); i++) {
             GetAlarmRecordResult.DataBean dataBean = alarmList.get(i);
             //获取开锁时间的毫秒数
-            LogUtils.e("网关的开锁毫秒时间" + dataBean.getWarningTime());
+            LogUtils.d("网关的开锁毫秒时间" + dataBean.getWarningTime());
             List<BluetoothItemRecordBean> itemList = new ArrayList<>();
             String open_time = DateUtils.getDateTimeFromMillisecond(dataBean.getWarningTime()  );//将毫秒时间转换成功年月日时分秒的格式
-            LogUtils.e("网关的开锁毫秒时间" + open_time);
+            LogUtils.d("网关的开锁毫秒时间" + open_time);
             //获取开锁时间的毫秒数
             String timeHead = open_time.substring(0, 10);
             String hourSecond = open_time.substring(11, 16);

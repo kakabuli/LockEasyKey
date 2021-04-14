@@ -87,7 +87,7 @@ public class FingerprintManagerActivity extends BaseBleActivity<IFingerprintMana
                 initData();
                 initRefresh();
             } catch (Exception e) {
-                LogUtils.e("--kaadas--:" + e.getMessage());
+                LogUtils.d("--kaadas--:" + e.getMessage());
             }
 
 

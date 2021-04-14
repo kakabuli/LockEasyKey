@@ -346,7 +346,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void settingDeviceSuccess() {
-        LogUtils.e("--kaadas--设置成功");
+        LogUtils.d("--kaadas--设置成功");
     }
 
     @Override
@@ -393,7 +393,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void bindingAndModifyDeviceSuccess() {
-        LogUtils.e("--kaadas--修改信息成功");
+        LogUtils.d("--kaadas--修改信息成功");
         MyApplication.getInstance().getAllDevicesByMqtt(true);
     }
 

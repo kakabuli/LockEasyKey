@@ -354,7 +354,7 @@ public class BleCommandFactory {
      * @return
      */
     public static byte[] syncLockInfoCommand(byte[] key) {
-        LogUtils.e("获取门锁信息   ");
+        LogUtils.d("获取门锁信息   ");
         byte cmd = 0x12;
         byte[] payload = new byte[16]; //负载数据
         payload[0] = 0x01;
@@ -552,7 +552,7 @@ public class BleCommandFactory {
         for (int i = 0; i < payload.length; i++) {
             checkSum += payload[i];
         }
-//        LogUtils.e("--kaadas--加密前 " + Rsa.bytesToHexString(payload) + "key是  " + Rsa.bytesToHexString(key));
+//        LogUtils.d("--kaadas--加密前 " + Rsa.bytesToHexString(payload) + "key是  " + Rsa.bytesToHexString(key));
         if (key != null) {
             dataFrame[0] = 1;
             tempBuff = Rsa.encryptAES(payload, key);
@@ -566,8 +566,8 @@ public class BleCommandFactory {
         dataFrame[2] = checkSum;
         dataFrame[3] = cmd;
         System.arraycopy(tempBuff, 0, dataFrame, 4, tempBuff.length);
-//        LogUtils.e("加密后 " + Rsa.bytesToHexString(tempBuff));
-//        LogUtils.e("加密后  整体数据 " + Rsa.bytesToHexString(dataFrame));
+//        LogUtils.d("加密后 " + Rsa.bytesToHexString(tempBuff));
+//        LogUtils.d("加密后  整体数据 " + Rsa.bytesToHexString(dataFrame));
         return dataFrame;
     }
 

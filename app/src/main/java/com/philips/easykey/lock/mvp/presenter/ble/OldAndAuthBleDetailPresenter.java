@@ -80,13 +80,13 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
     public void attachView(IOldBleDetailView view) {
         super.attachView(view);
         if (bleService != null) {
-            LogUtils.e("监听锁状态  111111");
+            LogUtils.d("监听锁状态  111111");
             toDisposable(warringDisposable);
             warringDisposable = bleService.listeneDataChange()
                     .filter(new Predicate<BleDataBean>() {
                         @Override
                         public boolean test(BleDataBean bleDataBean) throws Exception {
-                            LogUtils.e("收到上报   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "   " + (bleDataBean.getCmd() == 0x07));
+                            LogUtils.d("收到上报   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "   " + (bleDataBean.getCmd() == 0x07));
                             return bleDataBean.getCmd() == 0x07;
                         }
                     })
@@ -94,7 +94,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                     .subscribe(new Consumer<BleDataBean>() {
                         @Override
                         public void accept(BleDataBean bleDataBean) throws Exception {
-                            LogUtils.e("收到报警   234234234");
+                            LogUtils.d("收到报警   234234234");
                             getDeviceInfo();
                         }
                     }, new Consumer<Throwable>() {
@@ -118,7 +118,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                         @Override
                         public void accept(BleDataBean bleDataBean) throws Exception {
                             if (MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey() == null || MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey().length == 0) {
-                                LogUtils.e("收到锁状态改变，但是鉴权帧为空");
+                                LogUtils.d("收到锁状态改变，但是鉴权帧为空");
                                 return;
                             }
                             getDeviceInfo();
@@ -160,7 +160,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                                 if (bleLockInfo.getBattery() == -1) {   //没有获取过再重新获取   获取到电量  那么
                                     bleLockInfo.setBattery(power);
                                     bleLockInfo.setReadBatteryTime(System.currentTimeMillis());
-                                    LogUtils.e("读取电量成功   " + power);
+                                    LogUtils.d("读取电量成功   " + power);
                                     if (isSafe()) {  //读取电量成功
                                         mViewRef.get().onElectricUpdata(power);
                                     }
@@ -196,7 +196,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                         SPUtils.remove(KeyConstants.SAVE_PWD_HEARD + bleLockInfo.getServerLockInfo().getMacLock()); //Key  删除设备
 
                         //通知homeFragment  和  device刷新界面
-                        LogUtils.e("删除设备   断开连接");
+                        LogUtils.d("删除设备   断开连接");
                         bleService.release();  //删除设备   断开连接
 //                        MyApplication.getInstance().deleteDevice(deviceName);
                         bleService.removeBleLockInfo();
@@ -254,7 +254,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                 .subscribe(new Consumer<ReadInfoBean>() {
                     @Override
                     public void accept(ReadInfoBean readInfoBean) throws Exception {
-                        LogUtils.e("读取电量成功    " + (Integer) readInfoBean.data);
+                        LogUtils.d("读取电量成功    " + (Integer) readInfoBean.data);
                         Integer battery = (Integer) readInfoBean.data;
                         if (bleLockInfo.getBattery() == -1) {   //没有获取过再重新获取   获取到电量  那么
                             bleLockInfo.setBattery(battery);
@@ -268,7 +268,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("读取电量失败   " + throwable.getMessage());
+                        LogUtils.d("读取电量失败   " + throwable.getMessage());
                         if (isSafe()) {  //读取电量失败
                             mViewRef.get().onElectricUpdataFailed(throwable);
                         }
@@ -301,7 +301,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getOriginalData()[0] == 0) {
                             //收到门锁信息  确认帧
-                            LogUtils.e("收到门锁信息  确认帧   " + Rsa.toHexString(bleDataBean.getOriginalData()));
+                            LogUtils.d("收到门锁信息  确认帧   " + Rsa.toHexString(bleDataBean.getOriginalData()));
                             return;
                         }
 
@@ -310,7 +310,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                             return;
                         }
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("门锁信息的数据是   源数据是  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "    解密后的数据是    " + Rsa.bytesToHexString(deValue));
+                        LogUtils.d("门锁信息的数据是   源数据是  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "    解密后的数据是    " + Rsa.bytesToHexString(deValue));
                         byte lockState = deValue[4]; //第五个字节为锁状态信息
                         /**
                          * 门锁状态
@@ -332,7 +332,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                         int lockFun1 = deValue[1];
                         //支持反锁
                         bleLockInfo.setSupportBackLock((lockFun1 & 0b01000000) == 0b01000000 ? 1 : 0);
-                        LogUtils.e("是否支持反锁   " + bleLockInfo.getSupportBackLock());
+                        LogUtils.d("是否支持反锁   " + bleLockInfo.getSupportBackLock());
                         int state0 = (lockState & 0b00000001) == 0b00000001 ? 1 : 0;
                         int state1 = (lockState & 0b00000010) == 0b00000010 ? 1 : 0;
 
@@ -344,7 +344,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                         int state6 = (lockState & 0b01000000) == 0b01000000 ? 1 : 0;
                         int state7 = (lockState & 0b10000000) == 0b10000000 ? 1 : 0;  //手动模式/自动模式
                         int state8 = (deValue[5] & 0b00000001) == 0b00000001 ? 1 : 0;
-                        LogUtils.e("布防状态为   " + state8 + "  第五个字节数据为 " + Integer.toBinaryString((deValue[5] & 0xff))
+                        LogUtils.d("布防状态为   " + state8 + "  第五个字节数据为 " + Integer.toBinaryString((deValue[5] & 0xff))
                                 + "安全模式状态   " + state5 + "  反锁模式    " + state2);
                         int voice = deValue[8] & 0xff;  //是否是静音模式 0静音  1有声音
                         String lang = new String(new byte[]{deValue[9], deValue[10]});  //语言设置
@@ -371,7 +371,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                         bleLockInfo.setDoorState(state3);
                         bleLockInfo.setReadDeviceInfoTime(System.currentTimeMillis());
 
-                        LogUtils.e("锁上时间为    " + lockTime);
+                        LogUtils.d("锁上时间为    " + lockTime);
                         toDisposable(getDeviceInfoDisposable);
                         if (isSafe()) {
                             mViewRef.get().onDeviceInfoLoaded();
@@ -380,7 +380,7 @@ public class OldAndAuthBleDetailPresenter<T> extends BlePresenter<IOldBleDetailV
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("获取设备信息失败   " + throwable.getMessage());
+                        LogUtils.d("获取设备信息失败   " + throwable.getMessage());
                     }
                 });
         compositeDisposable.add(getDeviceInfoDisposable);

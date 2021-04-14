@@ -161,13 +161,13 @@ public class AddGatewayScanActivity extends CaptureActivity {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-            LogUtils.e("result",result);
+            LogUtils.d("result",result);
             if (result.contains("SN-GW")&&result.contains("MAC-")&&result.contains(" ")){
                 String[] strs=result.split(" ");
                 String deviceSN=strs[0].replace("SN-","");
                 Intent scanSuccessIntent=new Intent(context,AddGatewayThirdActivity.class);
                 scanSuccessIntent.putExtra("deviceSN",deviceSN);
-                LogUtils.e("设备SN是   " + deviceSN);
+                LogUtils.d("设备SN是   " + deviceSN);
                 startActivity(scanSuccessIntent);
                 finish();
             }else{

@@ -19,9 +19,6 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import org.apache.commons.net.bsd.RLoginClient;
-
 import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;

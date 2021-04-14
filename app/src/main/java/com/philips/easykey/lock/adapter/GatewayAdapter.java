@@ -9,15 +9,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.DeviceDetailBean;
-import com.philips.easykey.lock.bean.GatewayDeviceDetailBean;
 import com.philips.easykey.lock.bean.HomeShowBean;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.BatteryView;
-import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 
@@ -40,30 +35,8 @@ public class GatewayAdapter extends BaseQuickAdapter<HomeShowBean, BaseViewHolde
         String deviceStatus="";
         int power=0;
         int realPw=0;
-        //猫眼
-        if (HomeShowBean.TYPE_CAT_EYE==deviceType){
-            ivDeviceType.setImageResource(R.mipmap.cat_eye_icon);
-            CateEyeInfo cateEyeInfo= (CateEyeInfo) item.getObject();
-            GatewayInfo  gatewayInfo=MyApplication.getInstance().getGatewayById(cateEyeInfo.getGwID());
-            if (gatewayInfo!=null) {
-                if ("online".equals(gatewayInfo.getEvent_str())) {
-                    deviceStatus = cateEyeInfo.getServerInfo().getEvent_str();
-                } else {
-                    deviceStatus = "offline";
-                }
-            }
-            power=cateEyeInfo.getPower();
-            realPw=power;
-            batteryView.setPower(power);
-            powerView.setText(power+"%");
-            if (!TextUtils.isEmpty(cateEyeInfo.getServerInfo().getDeviceId())){
-                textView.setText(cateEyeInfo.getServerInfo().getNickName());
-            }else{
-                textView.setText(cateEyeInfo.getServerInfo().getDeviceId());
-            }
-        }else if (HomeShowBean.TYPE_GATEWAY_LOCK==deviceType){
+        if (HomeShowBean.TYPE_GATEWAY_LOCK==deviceType){
             //网关
-
             GwLockInfo gwLockInfo= (GwLockInfo) item.getObject();
             GatewayInfo  gatewayInfo=MyApplication.getInstance().getGatewayById(gwLockInfo.getGwID());
             String lockversion = gwLockInfo.getServerInfo().getLockversion();

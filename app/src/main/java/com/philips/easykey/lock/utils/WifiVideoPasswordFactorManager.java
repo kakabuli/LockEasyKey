@@ -12,7 +12,7 @@ public class WifiVideoPasswordFactorManager {
     public static WifiVideoPasswordFactorManager getInstance() {
         if (instance == null) {
             instance = new WifiVideoPasswordFactorManager();
-            LogUtils.e("--Kaadas--初始化OfflinePasswordFactorManager");
+            LogUtils.d("--Kaadas--初始化OfflinePasswordFactorManager");
         }
         return instance;
     }

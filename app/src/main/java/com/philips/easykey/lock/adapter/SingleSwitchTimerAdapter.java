@@ -26,7 +26,7 @@ public class SingleSwitchTimerAdapter extends BaseQuickAdapter<SingleSwitchTimer
 
     public SingleSwitchTimerAdapter(@Nullable List<SingleSwitchTimerShowBean> data) {
         super(R.layout.item_single_switch_timer_layout, data);
-        LogUtils.e("数据是  " + data.toString());
+        LogUtils.d("数据是  " + data.toString());
     }
 
     @Override

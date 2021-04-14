@@ -21,12 +21,6 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.greenDao.db.BleLockServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
-
-import org.linphone.mediastream.Log;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -66,7 +60,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                         MyApplication.getInstance().getAllDevicesByMqtt(true);
 
                         //通知homeFragment  和  device刷新界面
-                        LogUtils.e("删除设备  断开连接");
+                        LogUtils.d("删除设备  断开连接");
                         bleService.release();  //删除设备  断开连接
 //                        MyApplication.getInstance().deleteDevice(deviceName);
                         bleService.removeBleLockInfo();
@@ -142,7 +136,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                         byte lockState = deValue[4]; //第五个字节为锁状态信息
 
                         int voice = deValue[8] & 0xff;  //是否是静音模式 0静音  1有声音
-                        LogUtils.e("获取到音量   " + voice);
+                        LogUtils.d("获取到音量   " + voice);
                         String lang = new String(new byte[]{deValue[9], deValue[10]});  //语言设置
                         int battery = deValue[11] & 0xff; //电量
                         if (bleLockInfo.getBattery() == -1) {
@@ -153,7 +147,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                         //开门时间秒
                         long openTimes = time1 + BleCommandFactory.defineTime;
                         String lockTime = DateUtils.getDateTimeFromMillisecond(openTimes * 1000);//要上传的开锁时间
-                        LogUtils.e("锁上时间为    " + lockTime);
+                        LogUtils.d("锁上时间为    " + lockTime);
                         toDisposable(getDeviceInfoDisposable);
                         if (isSafe()) {
                             mViewRef.get().getVoice(voice);
@@ -342,7 +336,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                 .subscribe(new Consumer<ReadInfoBean>() {
                     @Override
                     public void accept(ReadInfoBean readInfoBean) throws Exception {
-                        LogUtils.e("读取SerialNumber成功 " + readInfoBean.data);  //进行下一步
+                        LogUtils.d("读取SerialNumber成功 " + readInfoBean.data);  //进行下一步
                         bleLockInfo.setSerialNumber((String) readInfoBean.data);
                         if (isSafe()) {
                             mViewRef.get().readSnSuccess((String) readInfoBean.data);
@@ -353,7 +347,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e(" 读取SerialNumber失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                        LogUtils.d(" 读取SerialNumber失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().readInfoFailed(throwable);
                         }
@@ -388,7 +382,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                 .subscribe(new Consumer<ReadInfoBean>() {
                     @Override
                     public void accept(ReadInfoBean readInfoBean) throws Exception {
-                        LogUtils.e(" 读取SoftwareRev成功 " + readInfoBean.data);  //进行下一步
+                        LogUtils.d(" 读取SoftwareRev成功 " + readInfoBean.data);  //进行下一步
                         bleLockInfo.setSoftware((String) readInfoBean.data);
                         String version = (String) readInfoBean.data;
                         if (version.contains("-")) {
@@ -402,13 +396,13 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                             mViewRef.get().readVersionSuccess(version);
                         }
                         // TODO: 2019/5/28    测试
-                        LogUtils.e("获取到的版本号是   " + version);
+                        LogUtils.d("获取到的版本号是   " + version);
                         if (version.length() >= 9) {
                             version = version.substring(1, 9);
                         }
                         String serverBleVersion = bleLockInfo.getServerLockInfo().getSoftwareVersion();
                         String deviceSN = bleLockInfo.getServerLockInfo().getDeviceSN();
-                        LogUtils.e("服务器数据是  serverBleVersion " + serverBleVersion + "  deviceSN  " + deviceSN + "  本地数据是  sn " + sn + "  version " + version);
+                        LogUtils.d("服务器数据是  serverBleVersion " + serverBleVersion + "  deviceSN  " + deviceSN + "  本地数据是  sn " + sn + "  version " + version);
                         if (version.equals(serverBleVersion) && sn.equals(deviceSN)) {
                             checkOTAInfo(sn, version, 1);
                         } else {
@@ -418,7 +412,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e(" 读取SoftwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                        LogUtils.d(" 读取SoftwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().readInfoFailed(throwable);
                         }
@@ -435,13 +429,13 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
         ).subscribe(new BaseObserver<BaseResult>() {
             @Override
             public void onSuccess(BaseResult baseResult) {
-                LogUtils.e("上传蓝牙信息成功");
+                LogUtils.d("上传蓝牙信息成功");
                 checkOTAInfo(sn, version, 1);
             }
 
             @Override
             public void onAckErrorCode(BaseResult baseResult) {
-                LogUtils.e(" 上传蓝牙软件信息失败  " + baseResult.getCode());
+                LogUtils.d(" 上传蓝牙软件信息失败  " + baseResult.getCode());
                 if (isSafe()) {
                     mViewRef.get().onUpdateSoftFailedServer(baseResult);
                 }
@@ -480,7 +474,7 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("监听设备状态改变出错   " + throwable.toString());
+                            LogUtils.d("监听设备状态改变出错   " + throwable.toString());
                         }
                     });
             compositeDisposable.add(deviceStateChangeDisposable);

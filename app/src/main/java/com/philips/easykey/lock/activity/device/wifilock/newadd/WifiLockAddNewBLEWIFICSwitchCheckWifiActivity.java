@@ -86,9 +86,9 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
         totalTimeOut();//设置页面总超时
         startSendComand();
 
-        LogUtils.e("--kaadas--randomCode数据是==" + randomCode);
-        LogUtils.e("--kaadas--功能集是=="+ func);
-        LogUtils.e("--kaadas--校验次数=="+ times);
+        LogUtils.d("--kaadas--randomCode数据是==" + randomCode);
+        LogUtils.d("--kaadas--功能集是=="+ func);
+        LogUtils.d("--kaadas--校验次数=="+ times);
 
         circleProgressBar2.setValue(0);
 
@@ -300,15 +300,15 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
     }
 
     private void onSuccess() {
-        LogUtils.e("--kaadas--开始往服务器发送绑定命令");
+        LogUtils.d("--kaadas--开始往服务器发送绑定命令");
 
         WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
         if (wifiLockInfo != null && wifiLockInfo.getIsAdmin() == 1) {
-            LogUtils.e("--kaadas--更新密码因子=="+randomCode);
+            LogUtils.d("--kaadas--更新密码因子=="+randomCode);
             //更新密码因子
             mPresenter.update(wifiSn, randomCode, sSsid, func);
         } else {
-            LogUtils.e("--kaadas--绑定设备=="+randomCode);
+            LogUtils.d("--kaadas--绑定设备=="+randomCode);
             //绑定设备
             mPresenter.bindDevice(wifiSn, wifiSn, MyApplication.getInstance().getUid(), randomCode, sSsid, func,2);
         }
@@ -502,7 +502,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
         super.onDestroy();
 //        thread.interrupt();
         secondThread.interrupt();
-        LogUtils.e("--kaadas--onDestroy");
+        LogUtils.d("--kaadas--onDestroy");
 
     }
 

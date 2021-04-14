@@ -32,4 +32,9 @@
 /linphoneLibrary/build/
 /tmpmob/ShareSDK/assets/
 /imagepicker/build/
+/push/pushsdk_xiaomi/build/
+/push/pushsdk_huawei/build/
+/push/pushsdk_getui/build/
+push/pushsdk_xiaomi/build/
+/app/PhilipsEasyKey/
 /.idea/

@@ -93,7 +93,7 @@ public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlay
     private void initSeekBar() {
         int videoDuration = mWifiVideoLockAlarmRecord.getVedioTime();
 
-        LogUtils.e("video duration = " + videoDuration);
+        LogUtils.d("video duration = " + videoDuration);
         if (videoDuration == 0) {
             Toast.makeText(this.getApplicationContext(), "Could not play this video.", Toast.LENGTH_SHORT).show();
             finish();

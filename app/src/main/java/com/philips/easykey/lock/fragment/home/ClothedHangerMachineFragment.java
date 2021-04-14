@@ -212,7 +212,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
     }
 
     private void startMotorUpAnimation() {
-        LogUtils.e("shulan 2 motorStatus -----> " + motorStatus);
+        LogUtils.d("shulan 2 motorStatus -----> " + motorStatus);
         if(motorStatus == 2){
             ivExternalBig.setBackgroundResource(R.drawable.hanger_motor_bottom_up);
         }else{
@@ -229,7 +229,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
     }
 
     private void startMotorDownAnimation() {
-        LogUtils.e("shulan 1 motorStatus -----> " + motorStatus);
+        LogUtils.d("shulan 1 motorStatus -----> " + motorStatus);
         if(motorStatus == 1){
             ivExternalBig.setBackgroundResource(R.drawable.hanger_motor_top_down);
         }else{
@@ -346,7 +346,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
                     @Override
                     public void right(int time) {
-                        LogUtils.e("shulan  clotheshangermachine time--->" + time);
+                        LogUtils.d("shulan  clotheshangermachine time--->" + time);
                         if(function == KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_BAKING){
                             mPresenter.setBakingTime(wifiSn,time);
                         }else if(function == KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_AIR_DRY){
@@ -358,7 +358,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setAirDryTimeSuccess(int action,int countdown) {
-        LogUtils.e("shulan --------setAirDryTimeSuccess");
+        LogUtils.d("shulan --------setAirDryTimeSuccess");
         if(action == 0){
             imgHangerAirdry.setSelected(false);
             tvHangerAirDry.setVisibility(View.GONE);
@@ -391,7 +391,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setBakingTimeSuccess(int action,int countdown) {
-        LogUtils.e("shulan --------setBakingTimeSuccess");
+        LogUtils.d("shulan --------setBakingTimeSuccess");
         if(action == 0){
             imgHangerBaking.setSelected(false);
             tvHangerBaking.setVisibility(View.GONE);
@@ -424,7 +424,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setChildLockSuccess(int action) {
-        LogUtils.e("shulan --------setChildLockSuccess");
+        LogUtils.d("shulan --------setChildLockSuccess");
         if(action == 1){
             imgHangerLock.setSelected(true);
         }else{
@@ -444,7 +444,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setVoiceSuccess(int action) {
-        LogUtils.e("shulan --------setVoiceSuccess");
+        LogUtils.d("shulan --------setVoiceSuccess");
         if(action == 1){
             imgHangerVoice.setSelected(true);
         }else{
@@ -464,7 +464,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setUVSuccess(int action,int countdown) {
-        LogUtils.e("shulan --------setUVSuccess");
+        LogUtils.d("shulan --------setUVSuccess");
         if(action == 1){
             imgHangerDisinfect.setSelected(true);
             tvHangerDisinfect.setVisibility(View.VISIBLE);
@@ -497,7 +497,7 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
 
     @Override
     public void setLightingSuccess(int action,int countdown) {
-        LogUtils.e("shulan --------setLightingSuccess");
+        LogUtils.d("shulan --------setLightingSuccess");
         if(action == 1){
             imgHangerLighting.setSelected(true);
             tvHangerLighting.setVisibility(View.VISIBLE);

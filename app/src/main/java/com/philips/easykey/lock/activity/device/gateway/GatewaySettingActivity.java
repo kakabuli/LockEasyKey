@@ -38,11 +38,8 @@ import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayBaseInfo;
-import com.philips.easykey.lock.utils.greenDao.db.CatEyeServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayBaseInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockServiceInfoDao;
@@ -720,7 +717,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
 
     @Override
     public void getZbChannelSuccess(GetZbChannelBean getZbChannelBean) {
-        LogUtils.e("getZbChannel----="+getZbChannelBean.getReturnData().getChannel());
+        LogUtils.d("getZbChannel----="+getZbChannelBean.getReturnData().getChannel());
 
         if (loadingDialog!=null){
             loadingDialog.dismiss();
@@ -760,7 +757,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if (loadingDialog!=null){
             loadingDialog.dismiss();
         }
-        LogUtils.e(throwable.getMessage());
+        LogUtils.d(throwable.getMessage());
         ToastUtil.getInstance().showShort(throwable.getMessage());
     }
 
@@ -774,7 +771,6 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         daoSession.getGatewayBaseInfoDao().deleteByKey(gatewayId+uid);
         daoSession.getGatewayServiceInfoDao().queryBuilder().where(GatewayServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关
         daoSession.getGatewayLockServiceInfoDao().queryBuilder().where(GatewayLockServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关锁
-        daoSession.getCatEyeServiceInfoDao().queryBuilder().where(CatEyeServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//猫眼
 
         //解绑成功
         Intent intent = new Intent(this, MainActivity.class);
@@ -878,7 +874,6 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         daoSession.getGatewayBaseInfoDao().deleteByKey(gatewayId+uid);
         daoSession.getGatewayServiceInfoDao().queryBuilder().where(GatewayServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关
         daoSession.getGatewayLockServiceInfoDao().queryBuilder().where(GatewayLockServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关锁
-        daoSession.getCatEyeServiceInfoDao().queryBuilder().where(CatEyeServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//猫眼
 
         //解绑成功
         Intent intent = new Intent(this, MainActivity.class);
@@ -911,7 +906,6 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         daoSession.getGatewayBaseInfoDao().deleteByKey(gatewayId+uid);
         daoSession.getGatewayServiceInfoDao().queryBuilder().where(GatewayServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关
         daoSession.getGatewayLockServiceInfoDao().queryBuilder().where(GatewayLockServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//网关锁
-        daoSession.getCatEyeServiceInfoDao().queryBuilder().where(CatEyeServiceInfoDao.Properties.Uid.eq(uid)).buildDelete().executeDeleteWithoutDetachingEntities();//猫眼
 
         //解绑成功
         Intent intent = new Intent(this, MainActivity.class);

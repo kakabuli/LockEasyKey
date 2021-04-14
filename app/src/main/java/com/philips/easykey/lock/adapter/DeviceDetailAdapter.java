@@ -1,17 +1,11 @@
 package com.philips.easykey.lock.adapter;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -23,10 +17,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.DeviceDetailBean;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
@@ -36,7 +28,6 @@ import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +39,7 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
     public DeviceDetailAdapter(@Nullable List<HomeShowBean> data,List<ProductInfo> product) {
         super(R.layout.fragment_device_item, data);
         productList = product;
-        //LogUtils.e("--kaadas--productList==" +  productList);
+        //LogUtils.d("--kaadas--productList==" +  productList);
         options = new RequestOptions()
                 .placeholder(R.mipmap.default_zigbee_lock_icon)      //加载成功之前占位图
                 .error(R.mipmap.default_zigbee_lock_icon)      //加载错误之后的错误图
@@ -91,37 +82,6 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
         }
 
         switch (item.getDeviceType()) {
-            //猫眼
-            case HomeShowBean.TYPE_CAT_EYE:
-                CateEyeInfo cateEyeInfo = (CateEyeInfo) item.getObject();
-                int power = cateEyeInfo.getPower();
-                if (power > 100) {
-                    power = 100;
-                }
-                if (power < 0) {
-                    power = 0;
-                }
-                cateEyeInfo.getGwID();
-
-                //根据当前的网关id，找出网关状态,网关离线猫眼也离线，不管服务器传过来什么值
-                GatewayInfo catGatewayInfo = MyApplication.getInstance().getGatewayById(cateEyeInfo.getGwID());
-                if (catGatewayInfo != null) {
-                    if ("offline".equals(catGatewayInfo.getEvent_str())) {
-                        isWifiDevice(true, helper, "offline", batteryView, power);
-                    } else {
-                        isWifiDevice(true, helper, cateEyeInfo.getServerInfo().getEvent_str(), batteryView, power);
-                    }
-                    helper.setImageResource(R.id.device_image, R.mipmap.cat_eye_icon);
-                    batteryView.setPower(power);
-                    helper.setText(R.id.device_power_text, power + "%");
-                    if (!TextUtils.isEmpty(cateEyeInfo.getServerInfo().getNickName())) {
-                        textView.setText(cateEyeInfo.getServerInfo().getNickName());
-                    } else {
-                        textView.setText(cateEyeInfo.getServerInfo().getDeviceId());
-                    }
-
-                }
-                break;
             //网关锁
             case HomeShowBean.TYPE_GATEWAY_LOCK:
                 GwLockInfo gwLockInfo = (GwLockInfo) item.getObject();
@@ -200,8 +160,8 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
 //                    if (BleLockUtils.getSmallImageByModel(model) == R.mipmap.default_zigbee_lock_icon){
                         for (ProductInfo productInfo:productList) {
                             if (productInfo.getDevelopmentModel().contentEquals(model)){
-//                                LogUtils.e("--kaadas--productList.DeviceListUrl==" + productInfo.getDeviceListUrl());
-//                                LogUtils.e("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
+//                                LogUtils.d("--kaadas--productList.DeviceListUrl==" + productInfo.getDeviceListUrl());
+//                                LogUtils.d("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
                                 //匹配型号获取下载地址
 //                                Glide.with(mContext).load(productInfo.getDeviceListUrl()).into((ImageView) helper.getView(R.id.device_image));
                                 Glide.with(mContext).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
@@ -209,7 +169,7 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
                             }
                         }
 //                    }
-                    LogUtils.e("--kaadas--:打印");
+                    LogUtils.d("--kaadas--:打印");
 
                     helper.setImageResource(R.id.device_image, BleLockUtils.getSmallImageByModel(model));
 
@@ -243,21 +203,21 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
                                 try {
 //                                    if (productInfo.getDevelopmentModel().contentEquals(model)) {
                                     if (productInfo.getSnHead().equals(deviceSN.substring(0,3))) {
-//                                LogUtils.e("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
-//                                LogUtils.e("--kaadas--productList.DeviceListUrl==" + productInfo.getDeviceListUrl());
+//                                LogUtils.d("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
+//                                LogUtils.d("--kaadas--productList.DeviceListUrl==" + productInfo.getDeviceListUrl());
                                         //匹配型号获取下载地址
 //                                Glide.with(mContext).load(productInfo.getDeviceListUrl()).into((ImageView) helper.getView(R.id.device_image));
                                         Glide.with(mContext).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
                                         return;
                                     }
                                 } catch (Exception e) {
-                                    LogUtils.e("--kaadas--:" + e.getMessage());
+                                    LogUtils.d("--kaadas--:" + e.getMessage());
                                 }
 
                             }
 //                        }
                     }
-                    LogUtils.e("--kaadas--:打印");
+                    LogUtils.d("--kaadas--:打印");
 
                     helper.setImageResource(R.id.device_image, BleLockUtils.getSmallImageByModel(model));
 
@@ -267,7 +227,7 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
     }
 
     public void isWifiDevice(boolean flag, BaseViewHolder helper, String status, BatteryView batteryView, int pw) {
-        LogUtils.e(status + "===");
+        LogUtils.d(status + "===");
         if ("online".equals(status)) {
             //在线
             if (flag) {

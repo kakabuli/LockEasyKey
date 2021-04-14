@@ -66,7 +66,7 @@ public class WifiLockDetailAdapater extends RecyclerView.Adapter {
         } else if (lockFunctionBean.getType() == BleLockUtils.TYPE_CARD) {
             holder.tvNumber.setText("("+lockFunctionBean.getNumber() + context.getString(R.string.pice)+")");
         } else if (lockFunctionBean.getType() == BleLockUtils.TYPE_SHARE) {
-            LogUtils.e("设置共享用户个数   " + lockFunctionBean.getNumber());
+            LogUtils.d("设置共享用户个数   " + lockFunctionBean.getNumber());
             holder.tvNumber.setText("("+lockFunctionBean.getNumber() + context.getString(R.string.rad)+")");
         } else    {
             holder.tvNumber.setVisibility(View.INVISIBLE);

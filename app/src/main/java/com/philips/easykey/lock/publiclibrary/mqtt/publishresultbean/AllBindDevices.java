@@ -1,12 +1,10 @@
 package com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean;
 
 import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ServerGwDevice;
@@ -354,7 +352,7 @@ public class AllBindDevices {
                             homeShowBean.setDeviceNickName(bleDevice.getLockNickName());
                             homeShowBeans.add(homeShowBean);
                         }
-                        LogUtils.e("设备已存在  是否连接 " + bleLockInfo.isConnected());
+                        LogUtils.d("设备已存在  是否连接 " + bleLockInfo.isConnected());
                     }
                 }
                 if (!isExist) {
@@ -396,8 +394,8 @@ public class AllBindDevices {
                     if (!isExistGateway && homeShowBean.getDeviceType() == HomeShowBean.TYPE_GATEWAY) {
                         //如果设备原来就存在，那么只替换服务器数据   其他数据不变
                         GatewayInfo gatewayInfo = (GatewayInfo) homeShowBean.getObject();
-                        LogUtils.e("gatewayInfo网关状态  " + gatewayInfo.getEvent_str());
-                        LogUtils.e("网关id " + gatewayInfo.getServerInfo().getDeviceSN());
+                        LogUtils.d("gatewayInfo网关状态  " + gatewayInfo.getEvent_str());
+                        LogUtils.d("网关id " + gatewayInfo.getServerInfo().getDeviceSN());
                         if (gwListBean.getDeviceSN().equals(gatewayInfo.getServerInfo().getDeviceSN())) {
                             isExistGateway = true;
                             gatewayInfo.setServerInfo(new ServerGatewayInfo(gwListBean));
@@ -409,10 +407,10 @@ public class AllBindDevices {
                 }
                 if (!isExistGateway) {
                     newGatewayInfo = new GatewayInfo(new ServerGatewayInfo(gwListBean));
-                    LogUtils.e("网关状态SN" + newGatewayInfo.getServerInfo().getDeviceSN());
+                    LogUtils.d("网关状态SN" + newGatewayInfo.getServerInfo().getDeviceSN());
                     String gatewayStatus = (String) SPUtils.get(newGatewayInfo.getServerInfo().getDeviceSN(), "");
                     newGatewayInfo.setEvent_str(gatewayStatus);
-                    LogUtils.e("newGatewayInfo网关状态   " + newGatewayInfo.getEvent_str() + "网关状态" + gatewayStatus);
+                    LogUtils.d("newGatewayInfo网关状态   " + newGatewayInfo.getEvent_str() + "网关状态" + gatewayStatus);
                     SPUtils.remove(newGatewayInfo.getServerInfo().getDeviceSN());
                     homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_GATEWAY, gwListBean.getDeviceSN(), gwListBean.getDeviceNickName(), newGatewayInfo));
                 }
@@ -423,107 +421,31 @@ public class AllBindDevices {
                         nickName = serverGwDevice.getDeviceId();
                     }
                     boolean isExist = false;
-                    if ("kdscateye".equalsIgnoreCase(serverGwDevice.getDevice_type())) {
-                        for (HomeShowBean homeShowBean : MyApplication.getInstance().getHomeShowDevices()) {
-                            if (!isExist && homeShowBean.getDeviceType() == HomeShowBean.TYPE_CAT_EYE) {
-                                CateEyeInfo cateEyeInfo = (CateEyeInfo) homeShowBean.getObject();
-                                //如果设备 网关Id 一致   且deviceId也一致   替换服务器数据
-                                if (cateEyeInfo.getGwID().equals(gwListBean.getDeviceSN())
-                                        && cateEyeInfo.getServerInfo().getDeviceId().equals(serverGwDevice.getDeviceId())
-                                        ) {
-                                    isExist = true;
-                                    cateEyeInfo.setServerInfo(serverGwDevice);
-                                    homeShowBean.setDeviceNickName(nickName);
-                                    homeShowBeans.add(homeShowBean);
-                                }
+                    for (HomeShowBean homeShowBean : MyApplication.getInstance().getHomeShowDevices()) {
+                        if (!isExist && homeShowBean.getDeviceType() == HomeShowBean.TYPE_GATEWAY_LOCK) {
+                            GwLockInfo gwLockInfo = (GwLockInfo) homeShowBean.getObject();
+                            //如果设备 网关Id 一致   且deviceId也一致   替换服务器数据
+                            LogUtils.d(gwLockInfo.getServerInfo().getNickName() + "值还没有改变");
+                            if (gwLockInfo.getGwID().equals(gwListBean.getDeviceSN())
+                                    && gwLockInfo.getServerInfo().getDeviceId().equals(serverGwDevice.getDeviceId())
+                                    ) {
+                                isExist = true;
+                                gwLockInfo.setServerInfo(serverGwDevice);
+                                LogUtils.d(gwLockInfo.getServerInfo().getNickName() + "值发生改变");
+                                homeShowBean.setDeviceNickName(nickName);
+                                homeShowBeans.add(homeShowBean);
                             }
                         }
-                        if (!isExist) {
-                            CateEyeInfo cateEyeInfo = new CateEyeInfo(gwListBean.getDeviceSN(), serverGwDevice);
-                            cateEyeInfo.setGatewayInfo(newGatewayInfo);
-                            homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_CAT_EYE, serverGwDevice.getDeviceId(), nickName, cateEyeInfo));
-                            LogUtils.e("猫眼不存在   昵称是" + cateEyeInfo.getServerInfo().getNickName());
-                        }
-
-                    } else {
-                        for (HomeShowBean homeShowBean : MyApplication.getInstance().getHomeShowDevices()) {
-                            if (!isExist && homeShowBean.getDeviceType() == HomeShowBean.TYPE_GATEWAY_LOCK) {
-                                GwLockInfo gwLockInfo = (GwLockInfo) homeShowBean.getObject();
-                                //如果设备 网关Id 一致   且deviceId也一致   替换服务器数据
-                                LogUtils.e(gwLockInfo.getServerInfo().getNickName() + "值还没有改变");
-                                if (gwLockInfo.getGwID().equals(gwListBean.getDeviceSN())
-                                        && gwLockInfo.getServerInfo().getDeviceId().equals(serverGwDevice.getDeviceId())
-                                        ) {
-                                    isExist = true;
-                                    gwLockInfo.setServerInfo(serverGwDevice);
-                                    LogUtils.e(gwLockInfo.getServerInfo().getNickName() + "值发生改变");
-                                    homeShowBean.setDeviceNickName(nickName);
-                                    homeShowBeans.add(homeShowBean);
-                                }
-                            }
-                        }
-                        if (!isExist) {
-                            homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_GATEWAY_LOCK, serverGwDevice.getDeviceId(),
-                                    nickName, new GwLockInfo(gwListBean.getDeviceSN(), serverGwDevice)));
-                        }
-
                     }
+                    if (!isExist) {
+                        homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_GATEWAY_LOCK, serverGwDevice.getDeviceId(),
+                                nickName, new GwLockInfo(gwListBean.getDeviceSN(), serverGwDevice)));
+                    }
+
                 }
             }
         }
         return homeShowBeans;
-    }
-
-
-    /**
-     * 获取猫眼列表
-     */
-    public List<CateEyeInfo> getCateEyes() {
-        List<ReturnDataBean.GwListBean> gwList = data.getGwList();
-        List<CateEyeInfo> cateEyeInfos = new ArrayList<>();
-        for (ReturnDataBean.GwListBean gwListBean : gwList) {
-            List<ServerGwDevice> deviceList = gwListBean.getDeviceList();
-            GatewayInfo gatewayInfo = new GatewayInfo(new ServerGatewayInfo(gwListBean));
-            for (ServerGwDevice gwDevice : deviceList) {
-                if ("kdscateye".equalsIgnoreCase(gwDevice.getDevice_type())) {
-                    CateEyeInfo cateEyeInfo = new CateEyeInfo(gwListBean.getDeviceSN(), gwDevice);
-                    cateEyeInfo.setGatewayInfo(gatewayInfo);
-                    cateEyeInfos.add(cateEyeInfo);
-                }
-            }
-        }
-        return cateEyeInfos;
-    }
-
-    /**
-     * 获取网关锁列表
-     */
-    public List<GwLockInfo> getGwLocks() {
-        List<ReturnDataBean.GwListBean> gwList = data.getGwList();
-        List<GwLockInfo> gwLockInfos = new ArrayList<>();
-        for (ReturnDataBean.GwListBean gwListBean : gwList) {
-            List<ServerGwDevice> deviceList = gwListBean.getDeviceList();
-            for (ServerGwDevice gwDevice : deviceList) {
-                if ("kdscateye".equalsIgnoreCase(gwDevice.getDevice_type())) {
-                    gwLockInfos.add(new GwLockInfo(gwListBean.getDeviceSN(), gwDevice));
-                }
-            }
-        }
-        return gwLockInfos;
-    }
-
-    /**
-     * 获取网关列表
-     *
-     * @return
-     */
-    public List<ReturnDataBean.GwListBean> getGateways() {
-        List<ReturnDataBean.GwListBean> gwList = data.getGwList();
-        List<ServerGatewayInfo> gatewayInfos = new ArrayList<>();
-        for (ReturnDataBean.GwListBean gwListBean : gwList) {
-            gatewayInfos.add(new ServerGatewayInfo());
-        }
-        return gwList;
     }
 
 }

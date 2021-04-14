@@ -40,7 +40,7 @@ public class WifiVideoLockRealTimeVideoActivity extends BaseActivity<IWifiLockRe
         setContentView(R.layout.activity_wifi_lock_real_time_video);
 
         ButterKnife.bind(this);
-        LogUtils.e( "WifiLockRealTimeVideoActivity onCreate: ");
+        LogUtils.d( "WifiLockRealTimeVideoActivity onCreate: ");
         mPresenter.startRealTimeVideo(mSufaceView);
     }
 

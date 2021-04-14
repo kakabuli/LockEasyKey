@@ -18,14 +18,11 @@ import com.philips.easykey.lock.activity.login.GuidePageActivity;
 import com.philips.easykey.lock.activity.login.LoginActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyFingerPrintActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyGesturePasswordActivity;
-import com.philips.easykey.lock.bean.HomeShowBean;
-import com.philips.easykey.lock.publiclibrary.linphone.linphonenew.LinphoneService;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.bean.VersionBean;
 import com.philips.easykey.lock.mvp.presenter.SplashPresenter;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
-import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.MyLog;
@@ -61,7 +58,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e("WelcomeActivity启动 ");
+        LogUtils.d("WelcomeActivity启动 ");
         setContentView(R.layout.activity_splash);
 //        CheckLanguageUtil.getInstance().checkLag();//语言
         mainIntent = new Intent(WelcomeActivity.this, MainActivity.class);
@@ -86,7 +83,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
         }
 
         if (mqttService != null && bleService != null) {
-            LogUtils.e("蓝牙和mqttService不为空");
+            LogUtils.d("蓝牙和mqttService不为空");
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -125,11 +122,11 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                 }
             }, 3 * 1000);
         } else {
-            LogUtils.e("监听蓝牙和mqtt服务");
+            LogUtils.d("监听蓝牙和mqtt服务");
             mPresenter.listenerServiceConnect();
             currentTime = System.currentTimeMillis();
         }
-        LogUtils.e("WelcomeActivity启动完成 ");
+        LogUtils.d("WelcomeActivity启动完成 ");
 
     }
 
@@ -181,7 +178,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
         if (remainTime < 0) {
             remainTime = 0;
         }
-        LogUtils.e("当前是多少时间   " + currentTime + "剩余多少时间   " + remainTime);
+        LogUtils.d("当前是多少时间   " + currentTime + "剩余多少时间   " + remainTime);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -273,18 +270,6 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
         } else {
             startService(bleServiceIntent);
         }
-//        //启动linphoneService
-        boolean isService = ServiceUtils.isServiceRunning(WelcomeActivity.this, "com.philips.easykey.lock.publiclibrary.linphone.linphonenew.LinphoneService");
-        if (!isService) {
-            Intent linphoneServiceIntent = new Intent(this, LinphoneService.class);
-            startService(linphoneServiceIntent);
-        }
-        //       Intent linphoneServiceIntent = new Intent(this, LinphoneService.class);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            startForegroundService(linphoneServiceIntent);
-//        }else {
-//            startService(intent);
-//        }
     }
 
     final int timeout = 20;
@@ -307,101 +292,26 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
 
         }
 
-        if (!TextUtils.isEmpty(sip_package_json)) {
-            String sip_package = new String(Base64.decode(sip_package_json, Base64.DEFAULT));
+        if(TextUtils.isEmpty(sip_package_json)) return;
 
-            Log.e(GeTui.VideoLog, "WelcomeActivity==>sip_package_json:" + sip_package);
-            if (sip_package.equals("openLock")) {
-                Log.e(GeTui.VideoLog, "WelcomeActivity======>普通密码开锁");
-            } else if (sip_package.equals("alarmOpenLockRisk")) {
-                Log.e(GeTui.VideoLog, "WelcomeActivity======>胁迫密码开锁");
-            } else if(sip_package.equals("{\"func\":\"alarm\"}")){
-                Log.e(GeTui.VideoLog, "WelcomeActivity======>wifi锁开锁");
-            }else if(sip_package.contains("\"func\":\"doorbell\"") && sip_package.contains("wifiSN")){
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(sip_package);
-                    wifiSN = jsonObject.optString("wifiSN");
-                    func = jsonObject.optString("func");
-                    time = getIntent().getLongExtra("longType",0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else if (sip_package.contains("{\"func\":\"alarm\"}")){ //11
+        String sip_package = new String(Base64.decode(sip_package_json, Base64.DEFAULT));
 
-            }else  {
-                long diff_time = (System.currentTimeMillis() - sip_time_json) / 1000;
-                Log.e(GeTui.VideoLog, "WelcomeActivity==>sip_time_json:" + sip_time_json + " diff_time:" + diff_time);
-                MyLog.getInstance().save("sip_time_json:" + sip_time_json + " diff_time:" + diff_time);
-                if (diff_time >= timeout && sip_time_json != 0) {
-                    List<HomeShowBean> homeShowDevices = MyApplication.getInstance().getHomeShowDevices();
-                    if(homeShowDevices != null){
-                        if(homeShowDevices.size() > 0){
-                            for(int i = 0 ; i < homeShowDevices.size();i++){
-                                if(homeShowDevices.get(i).getDeviceType() == HomeShowBean.TYPE_CAT_EYE){
-                                    //验证猫眼设备是否打开
-                                    Toast.makeText(WelcomeActivity.this, getResources().getString(R.string.cate_sleep), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }
-                    }
-                } else if (diff_time < timeout && sip_time_json != 0) {
-                    if (!TextUtils.isEmpty(sip_package_json)) {
-                        //String sip_package= new String(Base64.decode(sip_package_json,Base64.DEFAULT));
-                        JSONObject jsonObject = null;
-                        String sip_invite = null;
-                        String gwid = null;
-                        String deviceid = null;
-                        try {
-                            jsonObject = new JSONObject(sip_package);
-                            Log.e(GeTui.VideoLog, "WelcomActivity.." + jsonObject);
-                            sip_invite = jsonObject.optString("data");
-                            mainIntent.putExtra(Constants.SIP_INVERT_PKG_INTENT, sip_invite);
-                            SPUtils.put(Constants.SIP_INVERT_PKG_SP, sip_invite);
-                            //       gwid= jsonObject.optString("gwId");
-                            deviceid = jsonObject.optString("deviceId");
-                            if (TextUtils.isEmpty(deviceid)) {
-                                String startstr = "From: <sip:";
-                                int start = sip_invite.indexOf(startstr);
-                                //	System.out.println(start);
-                                int end = sip_invite.indexOf(">", start);
-                                //	System.out.println(end);
-                                String[] deviceIdstr = sip_invite.substring(start + startstr.length(), end).split("\\@");
-                                deviceid = deviceIdstr[0];
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.e(GeTui.VideoLog, "WelcomeActivity==>出异常了..........");
-                        }
-
-                        if (!TextUtils.isEmpty(sip_invite)) {
-                            //  String me= (String) SPUtils.get(gwid,"");
-                            gwid = (String) SPUtils.get(deviceid, "");
-                            String me = (String) SPUtils.get(gwid, "");
-                            String meUserName = null;
-                            String mePwd = null;
-                            if (!TextUtils.isEmpty(me) && me.contains("&")) {
-                                meUserName = me.split("&")[0];
-                                mePwd = me.split("&")[1];
-                            }
-                            //  mainIntent.putExtra(Constants.SIP_INVERT_PKG_INTENT,true);
-                            mainIntent.putExtra(Constants.IS_FROM_WEL_INTENT, true);
-                            SPUtils.put(Constants.IS_FROM_WEL_SP, true);
-                            MyApplication.getInstance().setFromWel(true);
-                            MyApplication.getInstance().setSip_package_invite(sip_invite);
-                            MyApplication.getInstance().setCurrentGeTuiMimiUserName(meUserName);
-                            MyApplication.getInstance().setCurrentGeTuiMImiPwd(mePwd);
-                            MyApplication.getInstance().setCurrentGwId(gwid);
-                            Log.e(GeTui.VideoLog, "WelcomeActivity==>sip的invite包:" + sip_invite);
-                            MyLog.getInstance().save("sip的invite包:" + sip_invite);
-                            Log.e(GeTui.VideoLog, "WelcomeActivity==>获取的deviceId:" + deviceid + "  gwid:" + gwid + " meUserName:" + meUserName + " mePwd:" + mePwd);
-                            MyLog.getInstance().save("获取的deviceId:" + deviceid + "  gwid:" + gwid + " meUserName:" + meUserName + " mePwd:" + mePwd);
-                        } else {
-                            Log.e(GeTui.VideoLog, "WelcomeActivity==>sip package是空");
-                        }
-                    }
-                    //Toast.makeText(WelcomeActivity.this,"收到的是:"+sip_invite,Toast.LENGTH_LONG).show();
-                }
+        Log.e(GeTui.VideoLog, "WelcomeActivity==>sip_package_json:" + sip_package);
+        if (sip_package.equals("openLock")) {
+            Log.e(GeTui.VideoLog, "WelcomeActivity======>普通密码开锁");
+        } else if (sip_package.equals("alarmOpenLockRisk")) {
+            Log.e(GeTui.VideoLog, "WelcomeActivity======>胁迫密码开锁");
+        } else if(sip_package.equals("{\"func\":\"alarm\"}")){
+            Log.e(GeTui.VideoLog, "WelcomeActivity======>wifi锁开锁");
+        }else if(sip_package.contains("\"func\":\"doorbell\"") && sip_package.contains("wifiSN")){
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(sip_package);
+                wifiSN = jsonObject.optString("wifiSN");
+                func = jsonObject.optString("func");
+                time = getIntent().getLongExtra("longType",0);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }

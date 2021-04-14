@@ -231,7 +231,7 @@ public class WifiVideoLockSafeModePresenter<T> extends BasePresenter<IWifiVideoL
                 .subscribe(new Consumer<CheckOTAResult>() {
                     @Override
                     public void accept(CheckOTAResult otaResult) throws Exception {
-                        LogUtils.e("检查OTA升级数据   " + otaResult.toString());
+                        LogUtils.d("检查OTA升级数据   " + otaResult.toString());
                         //200  成功  401  数据参数不对  102 SN格式不对  210 查无结果
                         if ("200".equals(otaResult.getCode())) {
                             if (isSafe()) {
@@ -262,7 +262,7 @@ public class WifiVideoLockSafeModePresenter<T> extends BasePresenter<IWifiVideoL
                         if (isSafe()) {
                             mViewRef.get().readInfoFailed(throwable);
                         }
-                        LogUtils.e("检查OTA升级数据 失败  " + throwable.getMessage());
+                        LogUtils.d("检查OTA升级数据 失败  " + throwable.getMessage());
                     }
                 });
         compositeDisposable.add(otaDisposable);

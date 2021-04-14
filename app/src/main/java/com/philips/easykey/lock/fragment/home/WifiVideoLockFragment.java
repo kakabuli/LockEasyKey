@@ -258,8 +258,8 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
     }
 
     public void changeLockStatus(int status) {
-        LogUtils.e("--kaadas--状态改变   " + status);
-        LogUtils.e("--kaadas--研发型号   " + wifiLockInfo.getProductModel());
+        LogUtils.d("--kaadas--状态改变   " + status);
+        LogUtils.d("--kaadas--研发型号   " + wifiLockInfo.getProductModel());
 
         if (!isAdded()) {
             return;
@@ -506,7 +506,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             if (eventparams.getEventType() == 0x01) { //操作类
 
                 if (eventparams.getEventCode() == 0x01) {  //上锁
-                    LogUtils.e("门锁状态上报  上锁" );
+                    LogUtils.d("门锁状态上报  上锁" );
                     isOpening = false;
                     wifiLockInfo.setOpenStatusTime(System.currentTimeMillis()/1000);
                     wifiLockInfo.setOpenStatus(1);
@@ -514,7 +514,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                     new WifiLockInfoManager().insertOrReplace(wifiLockInfo);
                 }
                 else if (eventparams.getEventCode() == 0x03) { //主锁舌伸出
-                    LogUtils.e("门锁状态上报  主锁舌伸出" );
+                    LogUtils.d("门锁状态上报  主锁舌伸出" );
                     isOpening = false;
                     wifiLockInfo.setOpenStatusTime(System.currentTimeMillis()/1000);
                     wifiLockInfo.setOpenStatus(3);
@@ -522,7 +522,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                     new WifiLockInfoManager().insertOrReplace(wifiLockInfo);
                 }
                 else if (eventparams.getEventCode() == 0x02) { //开锁
-                    LogUtils.e("门锁状态上报   开锁" );
+                    LogUtils.d("门锁状态上报   开锁" );
                     mPresenter.getOperationRecord(wifiLockInfo.getWifiSN(), false);
                     isOpening = true;
                     wifiLockInfo.setOpenStatus(2);
@@ -538,7 +538,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
     @Override
     public void onWifiLockActionUpdate() {
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiLockInfo.getWifiSN());
-        LogUtils.e("门锁状态上报   " );
+        LogUtils.d("门锁状态上报   " );
         initData();
     }
 

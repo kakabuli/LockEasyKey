@@ -38,7 +38,7 @@ public class GatewayPasswordAdapter extends BaseQuickAdapter<ForeverPassword, Ba
     @Override
     protected void convert(BaseViewHolder helper, ForeverPassword bean) {
         if (bean.getItems() != null) {
-            LogUtils.e("周计划是     " + Arrays.toString(bean.getItems().toArray()));
+            LogUtils.d("周计划是     " + Arrays.toString(bean.getItems().toArray()));
         }
 
         helper.setText(R.id.tv_num, bean.getNum());

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
 import butterknife.BindView;

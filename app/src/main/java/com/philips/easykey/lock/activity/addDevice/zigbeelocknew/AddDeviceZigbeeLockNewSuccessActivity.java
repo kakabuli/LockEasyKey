@@ -32,12 +32,9 @@ public class AddDeviceZigbeeLockNewSuccessActivity extends BaseAddToApplicationA
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
+            case R.id.button_next:
                 Intent backIntent = new Intent(this, MainActivity.class);
                 startActivity(backIntent);
-                break;
-            case R.id.button_next:
-                Intent finishIntent = new Intent(this, MainActivity.class);
-                startActivity(finishIntent);
                 break;
         }
     }

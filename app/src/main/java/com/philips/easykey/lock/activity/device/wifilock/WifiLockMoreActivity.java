@@ -167,7 +167,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
             try {
                 func = Integer.parseInt(functionSet);
             } catch (Exception e) {
-                LogUtils.e("" + e.getMessage());
+                LogUtils.d("" + e.getMessage());
             }
 
             if (BleLockUtils.isSupportAMModeShow(func)) {
@@ -313,7 +313,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
                 try {
                     func = Integer.parseInt(functionSet);
                 } catch (Exception e) {
-                    LogUtils.e("" + e.getMessage());
+                    LogUtils.d("" + e.getMessage());
                 }
                 switch (v.getId()) {
                     case R.id.back:  //返回
@@ -476,7 +476,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
                         break;*/
                 }
             } else {
-                LogUtils.e("--kaadas--取功能集为空");
+                LogUtils.d("--kaadas--取功能集为空");
 
             }
         }
@@ -533,7 +533,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
 //        ToastUtil.getInstance().showLong(R.string.delete_fialed);
         hiddenLoading();
@@ -541,7 +541,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         ToastUtil.getInstance().showLong(httpErrorCode);
         hiddenLoading();

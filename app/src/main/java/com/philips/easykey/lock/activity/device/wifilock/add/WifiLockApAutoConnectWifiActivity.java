@@ -77,7 +77,7 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
     private Runnable timeoutRunnable = new Runnable() {
         @Override
         public void run() {
-            LogUtils.e("连接失败");
+            LogUtils.d("连接失败");
             finish();
             Intent intent = new Intent(WifiLockApAutoConnectWifiActivity.this, WifiLockNoticeUserLinkWifiFirstActivity.class);
             startActivity(intent);
@@ -115,7 +115,7 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
                 || info.getNetworkId() == -1
                 || "<unknown ssid>".equals(info.getSSID());
         if (disconnected) {
-            LogUtils.e("网络切换   断开 ");
+            LogUtils.d("网络切换   断开 ");
         } else {
             String ssid = info.getSSID();
             if (TextUtils.isEmpty(ssid)) {
@@ -124,7 +124,7 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
 
             if ((ssid.equals("kaadas_AP"))) {
                 if (scanDisposable1!=null){

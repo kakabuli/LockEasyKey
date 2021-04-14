@@ -9,6 +9,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import com.philips.easykey.lock.shulan.config.ForegroundNotification;
 import com.philips.easykey.lock.shulan.config.KeepAliveConfig;
@@ -19,7 +20,6 @@ import com.philips.easykey.lock.shulan.service.JobHandlerService;
 import com.philips.easykey.lock.shulan.service.SLLocalService;
 import com.philips.easykey.lock.shulan.service.SLRemoteService;
 import com.philips.easykey.lock.shulan.utils.KeepAliveUtils;
-import com.philips.easykey.lock.shulan.utils.LogUtils;
 import com.philips.easykey.lock.shulan.utils.SPUtils;
 
 
@@ -27,7 +27,7 @@ import com.philips.easykey.lock.shulan.utils.SPUtils;
  * 进程保活管理
  */
 public class KeepAliveManager {
-    private static final String TAG = "KeepAliveManager";
+    private static final String TAG = "shulan keepAliveManager";
 
     /**
      * 启动保活
@@ -71,7 +71,7 @@ public class KeepAliveManager {
                 application.startService(new Intent(application, HideForegroundService.class));
             }
         } catch (Exception e) {
-            LogUtils.e("HideForegroundService--", e.getMessage());
+            Log.d("HideForegroundService--", e.getMessage());
 
         }
     }
@@ -90,7 +90,7 @@ public class KeepAliveManager {
 //            application.stopService(guardIntent);
             application.stopService(new Intent(application, JobHandlerService.class));
         } catch (Exception e) {
-            LogUtils.e(TAG + "stopWork-->" + e.getMessage());
+            Log.d(TAG , "stopWork-->" + e.getMessage());
         }
     }
 

@@ -256,9 +256,9 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                 func = 0x64;
             }
 
-            LogUtils.e("功能集是   " + func);
+            LogUtils.d("功能集是   " + func);
             supportFunctions = BleLockUtils.getWifiLockSupportFunction(func);
-            LogUtils.e("获取到的功能集是   " + supportFunctions.size());
+            LogUtils.d("获取到的功能集是   " + supportFunctions.size());
             if (wiFiLockPassword != null) {
                 for (WifiLockFunctionBean wifiLockFunctionBean : supportFunctions) {
                     switch (wifiLockFunctionBean.getType()) {
@@ -551,8 +551,8 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
     }
 
     public void changeLockStatus(int status) {
-        LogUtils.e("--kaadas--状态改变   " + status);
-        LogUtils.e("--kaadas--研发型号   " + wifiLockInfo.getProductModel());
+        LogUtils.d("--kaadas--状态改变   " + status);
+        LogUtils.d("--kaadas--研发型号   " + wifiLockInfo.getProductModel());
 
         if (!isAdded()) {
             return;
@@ -803,7 +803,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
         if (!TextUtils.isEmpty(wifiSN) && wifiLockInfo != null && wifiSN.equals(wifiLockInfo.getWifiSN())) {
             if (eventparams.getEventType() == 0x01) { //操作类
                 if (eventparams.getEventCode() == 0x01) {  //上锁
-                    LogUtils.e("门锁状态上报  上锁" );
+                    LogUtils.d("门锁状态上报  上锁" );
                     isOpening = false;
                     wifiLockInfo.setOpenStatusTime(System.currentTimeMillis()/1000);
                     wifiLockInfo.setOpenStatus(1);
@@ -811,7 +811,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                     new WifiLockInfoManager().insertOrReplace(wifiLockInfo);
                 }
                 else if (eventparams.getEventCode() == 0x03) { //主锁舌伸出
-                    LogUtils.e("门锁状态上报  主锁舌伸出" );
+                    LogUtils.d("门锁状态上报  主锁舌伸出" );
                     isOpening = false;
                     wifiLockInfo.setOpenStatusTime(System.currentTimeMillis()/1000);
                     wifiLockInfo.setOpenStatus(3);
@@ -819,7 +819,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                     new WifiLockInfoManager().insertOrReplace(wifiLockInfo);
                 }
                 else if (eventparams.getEventCode() == 0x02) { //开锁
-                    LogUtils.e("门锁状态上报   开锁" );
+                    LogUtils.d("门锁状态上报   开锁" );
                     mPresenter.getOperationRecord(wifiLockInfo.getWifiSN(), false);
                     isOpening = true;
                     wifiLockInfo.setOpenStatus(2);
@@ -835,7 +835,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
     @Override
     public void onWifiLockActionUpdate() {
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiLockInfo.getWifiSN());
-        LogUtils.e("门锁状态上报   " );
+        LogUtils.d("门锁状态上报   " );
         initData();
     }
 

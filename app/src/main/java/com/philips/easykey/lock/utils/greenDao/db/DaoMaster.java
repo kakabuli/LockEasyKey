@@ -24,9 +24,6 @@ public class DaoMaster extends AbstractDaoMaster {
         ProductInfoDao.createTable(db, ifNotExists);
         WifiLockInfoDao.createTable(db, ifNotExists);
         BleLockServiceInfoDao.createTable(db, ifNotExists);
-        CateEyeInfoBaseDao.createTable(db, ifNotExists);
-        CatEyeEventDao.createTable(db, ifNotExists);
-        CatEyeServiceInfoDao.createTable(db, ifNotExists);
         ClothesHangerMachineAllBeanDao.createTable(db, ifNotExists);
         DBOpenLockRecordDao.createTable(db, ifNotExists);
         DevicePowerDao.createTable(db, ifNotExists);
@@ -39,7 +36,6 @@ public class DaoMaster extends AbstractDaoMaster {
         GatewayPasswordPlanBeanDao.createTable(db, ifNotExists);
         GatewayServiceInfoDao.createTable(db, ifNotExists);
         HistoryInfoDao.createTable(db, ifNotExists);
-        PirDefaultDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -47,9 +43,6 @@ public class DaoMaster extends AbstractDaoMaster {
         ProductInfoDao.dropTable(db, ifExists);
         WifiLockInfoDao.dropTable(db, ifExists);
         BleLockServiceInfoDao.dropTable(db, ifExists);
-        CateEyeInfoBaseDao.dropTable(db, ifExists);
-        CatEyeEventDao.dropTable(db, ifExists);
-        CatEyeServiceInfoDao.dropTable(db, ifExists);
         ClothesHangerMachineAllBeanDao.dropTable(db, ifExists);
         DBOpenLockRecordDao.dropTable(db, ifExists);
         DevicePowerDao.dropTable(db, ifExists);
@@ -62,7 +55,6 @@ public class DaoMaster extends AbstractDaoMaster {
         GatewayPasswordPlanBeanDao.dropTable(db, ifExists);
         GatewayServiceInfoDao.dropTable(db, ifExists);
         HistoryInfoDao.dropTable(db, ifExists);
-        PirDefaultDao.dropTable(db, ifExists);
     }
 
     /**
@@ -84,9 +76,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ProductInfoDao.class);
         registerDaoClass(WifiLockInfoDao.class);
         registerDaoClass(BleLockServiceInfoDao.class);
-        registerDaoClass(CateEyeInfoBaseDao.class);
-        registerDaoClass(CatEyeEventDao.class);
-        registerDaoClass(CatEyeServiceInfoDao.class);
         registerDaoClass(ClothesHangerMachineAllBeanDao.class);
         registerDaoClass(DBOpenLockRecordDao.class);
         registerDaoClass(DevicePowerDao.class);
@@ -99,7 +88,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(GatewayPasswordPlanBeanDao.class);
         registerDaoClass(GatewayServiceInfoDao.class);
         registerDaoClass(HistoryInfoDao.class);
-        registerDaoClass(PirDefaultDao.class);
     }
 
     public DaoSession newSession() {

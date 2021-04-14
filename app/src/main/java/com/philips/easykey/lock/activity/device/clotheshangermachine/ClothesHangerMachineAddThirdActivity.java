@@ -199,7 +199,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
             return;
         }
         mDevices = devices;
-        LogUtils.e("shulan -------->" + mDevices.size());
+        LogUtils.d("shulan -------->" + mDevices.size());
         if (clothesHangerMachineBleWiFiSearchAdapter == null) {
             clothesHangerMachineBleWiFiSearchAdapter = new ClothesHangerMachineBleWiFiSearchAdapter(mDevices);
             clothesHangerMachineBleWiFiSearchAdapter.setBindClickListener(this);
@@ -214,7 +214,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
     @Override
     public void onStopScan() {
         if (mDevices == null || mDevices.size()==0){
-            LogUtils.e("--kaadas--mDevices=="+mDevices);
+            LogUtils.d("--kaadas--mDevices=="+mDevices);
             showNotScanDeviceDialog();
             return;
         }
@@ -297,7 +297,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
         intent.putExtra(KeyConstants.BLE_MAC, broadcastBean.getDeviceMAC());
         intent.putExtra(KeyConstants.DEVICE_NAME, broadcastBean.getDeviceName());
         startActivity(intent);
-        LogUtils.e("shulan broadcastBean.getDeviceSN()-->" + broadcastBean.getDeviceSN());
+        LogUtils.d("shulan broadcastBean.getDeviceSN()-->" + broadcastBean.getDeviceSN());
         finish();
     }
 

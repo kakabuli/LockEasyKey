@@ -42,7 +42,7 @@ public class HeaderInterceptor implements Interceptor {
             charset = contentType.charset(UTF8);
         }
         String bodyString = buffer.clone().readString(charset);
-        LogUtils.iTag(TAG,bodyString);
+        Log.d(TAG,bodyString);
         if (StringUtil.getJsonKeyStr(bodyString,"code").equals("21")) {
             Log.e("商城   ", "商城token过期");
             EventBus.getDefault().post(new EventCenter(MESSAGE_LOGINOUT,"relogin"));

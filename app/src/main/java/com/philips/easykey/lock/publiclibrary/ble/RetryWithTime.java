@@ -22,7 +22,7 @@ public class RetryWithTime implements Function<Observable<Throwable>, Observable
 
 
     public RetryWithTime() {
-//        LogUtils.e("重连");
+//        LogUtils.d("重连");
     }
 
     /**
@@ -40,7 +40,7 @@ public class RetryWithTime implements Function<Observable<Throwable>, Observable
             @Override
             public Observable<Long> apply(Throwable throwable) throws Exception {
                 ++current;
-                LogUtils.e("重连中   " + current);
+                LogUtils.d("重连中   " + current);
                 if (current < times) {
                     return Observable.timer(interval, TimeUnit.MILLISECONDS);
                 } else {

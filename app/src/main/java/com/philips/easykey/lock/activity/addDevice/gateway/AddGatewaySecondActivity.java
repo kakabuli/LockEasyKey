@@ -10,9 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeFirstActivity;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeScanFailActivity;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeSecondActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.QrCodeScanActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -68,13 +65,13 @@ public class AddGatewaySecondActivity extends BaseAddToApplicationActivity {
             switch (requestCode){
                 case KeyConstants.SCANGATEWAY_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e("扫描结果是   " + result);
+                    LogUtils.d("扫描结果是   " + result);
                     if (result.contains("SN-GW")&&result.contains("MAC-")&&result.contains(" ")){
                         String[] strs=result.split(" ");
                         String deviceSN=strs[0].replace("SN-","");
                         Intent scanSuccessIntent=new Intent(AddGatewaySecondActivity.this,AddGatewayThirdActivity.class);
                         scanSuccessIntent.putExtra("deviceSN",deviceSN);
-                        LogUtils.e("设备SN是   " + deviceSN);
+                        LogUtils.d("设备SN是   " + deviceSN);
                         startActivity(scanSuccessIntent);
                         finish();
                     }else{

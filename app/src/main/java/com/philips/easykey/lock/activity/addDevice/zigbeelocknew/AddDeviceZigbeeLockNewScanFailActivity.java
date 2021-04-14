@@ -41,6 +41,7 @@ public class AddDeviceZigbeeLockNewScanFailActivity extends BaseAddToApplication
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
+            case R.id.scan_cancel:
                 Intent backIntent=new Intent(this, DeviceAdd2Activity.class);
                 startActivity(backIntent);
                 finish();
@@ -54,12 +55,6 @@ public class AddDeviceZigbeeLockNewScanFailActivity extends BaseAddToApplication
                     Intent rescanIntent=new Intent(this,QrCodeScanActivity.class);
                     startActivityForResult(rescanIntent,KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
                 }
-
-                break;
-            case R.id.scan_cancel:
-                Intent scanCancelntent=new Intent(this, DeviceAdd2Activity.class);
-                startActivity(scanCancelntent);
-                finish();
                 break;
         }
     }
@@ -77,13 +72,13 @@ public class AddDeviceZigbeeLockNewScanFailActivity extends BaseAddToApplication
             switch (requestCode){
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e("扫描结果是   " + result);
+                    LogUtils.d("扫描结果是   " + result);
                     if (result.contains("SN-GW")&&result.contains("MAC-")&&result.contains(" ")){
                         String[] strs=result.split(" ");
                         String deviceSN=strs[0].replace("SN-","");
                         Intent scanSuccessIntent=new Intent(AddDeviceZigbeeLockNewScanFailActivity.this, AddDeviceZigbeeLockNewZeroActivity.class);
                         scanSuccessIntent.putExtra("deviceSN",deviceSN);
-                        LogUtils.e("设备SN是   " + deviceSN);
+                        LogUtils.d("设备SN是   " + deviceSN);
                         startActivity(scanSuccessIntent);
                         finish();
                     }

@@ -50,7 +50,7 @@ public class AddBluetoothSecondActivity extends BaseActivity<IBindBleSecondView,
 
 
 
-        LogUtils.e("第二步   " + password1 +"  设备SN    " + sn);
+        LogUtils.d("第二步   " + password1 +"  设备SN    " + sn);
         setContentView(R.layout.device_bluetooth_second);
         mPresenter.listenConnectState();
         ButterKnife.bind(this);

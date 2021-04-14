@@ -120,7 +120,7 @@ public class RetrofitServiceManager {
         @Override
         public void log(String message) {
             if(BuildConfig.DEBUG)
-                LogUtils.e("网络请求体   ", message);
+                LogUtils.d("网络请求体   ", message);
         }
     }
 
@@ -128,7 +128,7 @@ public class RetrofitServiceManager {
         @Override
         public void log(String message) {
             if(BuildConfig.DEBUG)
-                LogUtils.e("网络请求头   ", message);
+                LogUtils.d("网络请求头   ", message);
         }
     }
 

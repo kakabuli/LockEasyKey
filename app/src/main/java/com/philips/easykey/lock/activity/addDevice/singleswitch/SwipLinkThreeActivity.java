@@ -128,7 +128,7 @@ public class SwipLinkThreeActivity extends BaseActivity<SingleFireSwitchView, Si
 
     @Override
     public void addDeviceSuccess(AddSingleFireSwitchBean addSingleFireSwitchBean) {
-        LogUtils.e("--kaadas--添加成功");
+        LogUtils.d("--kaadas--添加成功");
         Intent intent = new Intent(SwipLinkThreeActivity.this,SwipLinkSucActivity.class);
         intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
         intent.putExtra(KeyConstants.SWITCH_MODEL, addSingleFireSwitchBean);
@@ -137,7 +137,7 @@ public class SwipLinkThreeActivity extends BaseActivity<SingleFireSwitchView, Si
 
     @Override
     public void addDeviceFail() {
-        LogUtils.e("--kaadas--添加失败");
+        LogUtils.d("--kaadas--添加失败");
         Intent intent=new Intent(SwipLinkThreeActivity.this,SwipLinkFailActivity.class);
         intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
         startActivity(intent);
@@ -145,7 +145,7 @@ public class SwipLinkThreeActivity extends BaseActivity<SingleFireSwitchView, Si
 
     @Override
     public void addDeviceThrowable() {
-        LogUtils.e("--kaadas--添加超时");
+        LogUtils.d("--kaadas--添加超时");
         Intent intent=new Intent(SwipLinkThreeActivity.this,SwipLinkFailActivity.class);
         intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
         startActivity(intent);

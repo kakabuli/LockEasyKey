@@ -92,7 +92,7 @@ public class BatteryView extends View {
         }else if (mColor==R.color.cFF3B30){
             paint.setColor(getResources().getColor(R.color.cFF3B30));
         }
-        //LogUtils.e(mColor+"mColor");
+        //LogUtils.d(mColor+"mColor");
         canvas.drawRect(r2, paint);
         //画电池头
         RectF r3 = new RectF(width - strokeWidth, height * 0.25f, width, height * 0.75f);

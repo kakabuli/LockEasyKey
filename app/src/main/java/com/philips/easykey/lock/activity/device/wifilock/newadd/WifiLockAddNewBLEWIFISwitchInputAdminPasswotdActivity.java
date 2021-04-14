@@ -70,7 +70,7 @@ public class WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity extends BaseA
 
         data =  getIntent().getByteArrayExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA);
         times =  getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES,1);
-        LogUtils.e("--Kaadas--管理员密码输入次数==check=="+times);
+        LogUtils.d("--Kaadas--管理员密码输入次数==check=="+times);
 
     }
 
@@ -95,7 +95,7 @@ public class WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity extends BaseA
                     return;
                 }
 
-                LogUtils.e(getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
+                LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
                 Intent intent = new Intent(this, WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD, adminPassword);
                 intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
@@ -259,7 +259,7 @@ public class WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity extends BaseA
             if (resultCode == RESULT_OK && data != null) {
                 times = data.getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, 1);
 
-                LogUtils.e("--Kaadas--onDecodeResult管理员密码输入次数==" + times);
+                LogUtils.d("--Kaadas--onDecodeResult管理员密码输入次数==" + times);
             }
         }
     }

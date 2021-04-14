@@ -202,7 +202,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
                 String countryCode = tvAreaCode.getText().toString().trim().replace("+", "");
                 mPresenter.resetPassword(countryCode + account, pwd,1, code);
             } else {
-                LogUtils.e("邮箱注册：" + DetectionEmailPhone.getInstance().isEmail(account));
+                LogUtils.d("邮箱注册：" + DetectionEmailPhone.getInstance().isEmail(account));
                 if (DetectionEmailPhone.getInstance().isEmail(account)) {
                     showLoading("");
                     mPresenter.resetPassword(account, pwd,2, code);
@@ -243,7 +243,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
 
     @Override
     public void senRandomSuccess() {
-        LogUtils.e("验证码发送成功");
+        LogUtils.d("验证码发送成功");
     }
 
     @Override
@@ -255,14 +255,14 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
 
     @Override
     public void sendRandomFailed(Throwable e) {
-        LogUtils.e("验证码发送失败");
+        LogUtils.d("验证码发送失败");
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 
     @Override
     public void resetPasswordFailed(Throwable e) {
         hiddenLoading();
-        LogUtils.e("密码重置失败");
+        LogUtils.d("密码重置失败");
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 

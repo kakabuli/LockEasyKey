@@ -62,7 +62,7 @@ public class WifiLockBleToWifiSetUpPresenter<T> extends BasePresenter<IWifiLockB
 //                .subscribe(new Consumer<Long>() {
 //                    @Override
 //                    public void accept(Long aLong) throws Exception {
-//                        LogUtils.e("第  " + aLong + "次访问");
+//                        LogUtils.d("第  " + aLong + "次访问");
 //                        times = aLong;
 //                        WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
 //                        if (wifiLockInfo != null && wifiLockInfo.getIsAdmin() == 1) {
@@ -167,7 +167,7 @@ public class WifiLockBleToWifiSetUpPresenter<T> extends BasePresenter<IWifiLockB
     }
 
     public void listenerCharacterNotify() {
-        LogUtils.e("--kaadas--listenerCharacterNotify");
+        LogUtils.d("--kaadas--listenerCharacterNotify");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -190,31 +190,31 @@ public class WifiLockBleToWifiSetUpPresenter<T> extends BasePresenter<IWifiLockB
                     public void accept(BleDataBean bleDataBean) throws Exception {
 
                         byte[] originalData = bleDataBean.getOriginalData();
-//                        LogUtils.e("--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
+//                        LogUtils.d("--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
 
                         if ((originalData[3] & 0xff) == 0x90) {
-                            LogUtils.e("--kaadas--锁收到SSID");
+                            LogUtils.d("--kaadas--锁收到SSID");
                             indexSSID ++;
                             sendSSID(indexSSID);
                             if (indexSSID == 3){
-                                LogUtils.e("--kaadas--发送SSID完成");
+                                LogUtils.d("--kaadas--发送SSID完成");
                                 indexSSID = -1;
                                 indexPWD = 0;
                                 sendPWD(indexPWD);
                             }
                         }
                         if ((originalData[3] & 0xff) == 0x91) {
-                            LogUtils.e("--kaadas--锁收到PSW");
+                            LogUtils.d("--kaadas--锁收到PSW");
                             indexPWD ++;
                             sendPWD(indexPWD);
                             if (indexPWD == 5){
                                 indexPWD = -1;
-                                LogUtils.e("--kaadas--发送PSW完成");
+                                LogUtils.d("--kaadas--发送PSW完成");
                                 mViewRef.get().onSendSuccess(2);
                             }
                         }
                         if ((originalData[3] & 0xff) == 0x93) {
-                            LogUtils.e("--kaadas--收到配网结果");
+                            LogUtils.d("--kaadas--收到配网结果");
                             if ((originalData[4] & 0xff) == 0x00){
                                 //配网成功
                                 mViewRef.get().onMatchingSuccess();
@@ -231,7 +231,7 @@ public class WifiLockBleToWifiSetUpPresenter<T> extends BasePresenter<IWifiLockB
 
     public void sendSSIDAndPWD(byte[] bSsid, byte[] bPwd) {
 
-        LogUtils.e("--kaadas--sendSSIDAndPWD");
+        LogUtils.d("--kaadas--sendSSIDAndPWD");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {

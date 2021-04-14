@@ -156,7 +156,7 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
 
     @Override
     public void onDeletePwdSuccess() {
-        LogUtils.e("删除锁上密码成功");
+        LogUtils.d("删除锁上密码成功");
     }
 
     @Override
@@ -167,7 +167,7 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
 
     @Override
     public void onDeleteServerPwdSuccess() {
-        LogUtils.e("删除服务器密码");
+        LogUtils.d("删除服务器密码");
         hiddenLoading();
         Intent intent = new Intent(this, FingerprintManagerActivity.class);
         startActivity(intent);
@@ -177,7 +177,7 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
     @Override
     public void onDeleteServerPwdFailed(Throwable throwable) {
         ToastUtil.getInstance().showShort( getString(R.string.lock_delete_success_please_sync) );
-        LogUtils.e("删除服务器密码失败   ");
+        LogUtils.d("删除服务器密码失败   ");
         hiddenLoading();
         finish();
     }

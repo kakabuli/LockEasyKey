@@ -360,7 +360,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
             if (REQUEST_CODE == requestCode) {
                 weekRule = data.getStringExtra(KeyConstants.WEEK_REPEAT_DATA);
                 days = data.getIntArrayExtra(KeyConstants.DAY_MASK);
-                LogUtils.e("收到的周计划是   " + Arrays.toString(days));
+                LogUtils.d("收到的周计划是   " + Arrays.toString(days));
                 tvRuleRepeat.setText(weekRule);
                 hintText();
             }
@@ -476,7 +476,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
     private void onFailed() {
         hiddenLoading();
         //密码添加异常
-        LogUtils.e("添加密码异常    ");
+        LogUtils.d("添加密码异常    ");
         AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getContext(), getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {

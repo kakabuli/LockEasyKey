@@ -83,7 +83,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
         initView();
         circleProgressBar.setValue(0);
         changeState(1); //初始状态
-        LogUtils.e("--Kaadas--"+getLocalClassName()+"次数是   " + times + "  passwordFactor 是否为空 " + (passwordFactor == null));
+        LogUtils.d("--Kaadas--"+getLocalClassName()+"次数是   " + times + "  passwordFactor 是否为空 " + (passwordFactor == null));
         mPresenter.listenConnectState();
         mPresenter.listenerCharacterNotify();
         //BLE&WIFI模组 读取功能集
@@ -505,7 +505,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
     @Override
     public void onDecodeResult(int index,OfflinePasswordFactorManager.OfflinePasswordFactorResult result) {
 
-        LogUtils.e("--kaadas--onDecodeResult    " +index);
+        LogUtils.d("--kaadas--onDecodeResult    " +index);
         if (result.result == 0) {
             wifiResult = result;
         }

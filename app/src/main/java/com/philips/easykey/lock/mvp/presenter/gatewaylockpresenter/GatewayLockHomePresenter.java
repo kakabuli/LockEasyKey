@@ -9,13 +9,10 @@ import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockHomeView;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.CatEyeEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayLockAlarmEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayLockInfoEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.OpenLockNotifyBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetDevicePowerBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetLockRecordTotal;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.OpenLockBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayStatusResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetLockRecordTotalResult;
@@ -25,8 +22,6 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.greenDao.bean.CatEyeEvent;
-import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockAlarmEventDao;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
 import org.json.JSONObject;
@@ -81,7 +76,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                             SelectOpenLockResultBean selectOpenLockResultBean = new Gson().fromJson(mqttData.getPayload(), SelectOpenLockResultBean.class);
                             if (selectOpenLockResultBean.getDeviceId().equals(deviceId)) {
                                 toDisposable(openLockRecordDisposable);
-                                LogUtils.e("请求开锁记录 设备id" + selectOpenLockResultBean.getDeviceId());
+                                LogUtils.d("请求开锁记录 设备id" + selectOpenLockResultBean.getDeviceId());
                                 if ("200".equals(selectOpenLockResultBean.getCode())) {
                                     if (isSafe()) {
                                         mViewRef.get().getOpenLockRecordSuccess(selectOpenLockResultBean.getData(), selectOpenLockResultBean.getDeviceId());
@@ -137,7 +132,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                         public void accept(MqttData mqttData) throws Exception {
                             if (mqttData != null) {
                                 GetBindGatewayStatusResult gatewayStatusResult = new Gson().fromJson(mqttData.getPayload(), GetBindGatewayStatusResult.class);
-                                LogUtils.e("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
+                                LogUtils.d("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
                                 if (gatewayStatusResult != null && gatewayStatusResult.getData().getState() != null) {
                                     if (isSafe()) {
                                         mViewRef.get().gatewayStatusChange(gatewayStatusResult.getDevuuid(), gatewayStatusResult.getData().getState());
@@ -229,7 +224,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                             OpenLockBean openLockBean = new Gson().fromJson(mqttData.getPayload(), OpenLockBean.class);
                             if ("200".equals(openLockBean.getReturnCode()) && openLockBean.getDeviceId().equals(deviceId)) {
                                 SPUtils.put(KeyConstants.SAVA_LOCK_PWD + deviceId, pwd);
-                                LogUtils.e("开锁成功");
+                                LogUtils.d("开锁成功");
                             } else {
                                 if (isSafe() && openLockBean.getDeviceId().equals(deviceId)) {
                                     mViewRef.get().openLockFailed();
@@ -263,11 +258,11 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                             if (mqttData.getFunc().equals(MqttConstant.GW_EVENT)) {
                                 OpenLockNotifyBean openLockNotifyBean = new Gson().fromJson(mqttData.getPayload(), OpenLockNotifyBean.class);
                                 int deviceCode = openLockNotifyBean.getEventparams().getDevecode();
-                                LogUtils.e("要进入开锁了");
+                                LogUtils.d("要进入开锁了");
                                 if ("kdszblock".equals(openLockNotifyBean.getDevtype()) && deviceId.equals(openLockNotifyBean.getDeviceId())) {
                                     if (deviceCode == 2) {
                                         //表示锁已开
-                                        LogUtils.e("已经开锁了");
+                                        LogUtils.d("已经开锁了");
                                         return true;
                                     }
 //                                    else if(deviceCode== 9  && openLockNotifyBean.getEventparams().getEventsource() ==2){
@@ -284,7 +279,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             toDisposable(closeLockNotifyDisposable);
-                            LogUtils.e("门锁打开上报");
+                            LogUtils.d("门锁打开上报");
                             if (isSafe()) {
                                 mViewRef.get().openLockSuccess();
                             }
@@ -320,7 +315,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                                         && deviceId.equals(openLockNotifyBean.getDeviceId())) {
                                     if (deviceCode == 10 || deviceCode == 1) {
                                         //表示锁已经关闭
-                                        LogUtils.e("");
+                                        LogUtils.d("");
                                         return true;
                                     }
                                 }
@@ -334,7 +329,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             toDisposable(lockCloseDisposable);
-                            LogUtils.e("门锁关闭 上报");
+                            LogUtils.d("门锁关闭 上报");
                             //关门
                             if (isSafe()) {
                                 mViewRef.get().lockCloseSuccess(deviceId);
@@ -451,7 +446,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("报警消息失败   " + throwable.getMessage());
+                            LogUtils.d("报警消息失败   " + throwable.getMessage());
                         }
                     });
             compositeDisposable.add(openLockEventDisposable);
@@ -521,7 +516,7 @@ public class GatewayLockHomePresenter<T> extends BasePresenter<IGatewayLockHomeV
                                         && deviceId.equals(openLockNotifyBean.getDeviceId())) {
                                     if (deviceCode == 10 || deviceCode == 1) {
                                         //表示锁已经关闭
-                                        LogUtils.e("");
+                                        LogUtils.d("");
                                         return true;
                                     }
                                 }

@@ -130,7 +130,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
     }
 
     private void initDialog() {
-        LogUtils.e("显示对话框");
+        LogUtils.d("显示对话框");
         if (alertDialog!=null&&!alertDialog.isShowing()){
             alertDialog.show();
         }else {
@@ -270,7 +270,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
 
         @Override
         public void onAuthenticationError(int errorCode, CharSequence errString) {
-            LogUtils.e("指纹识别码错误"+errorCode);
+            LogUtils.d("指纹识别码错误"+errorCode);
             if (alertDialog!=null){
                 alertDialog.dismiss();
             }

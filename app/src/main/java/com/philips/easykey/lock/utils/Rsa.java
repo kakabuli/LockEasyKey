@@ -171,7 +171,7 @@ public class Rsa {
             return result; // 加密
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e("walter 加密异常 :" + e.toString());
+            LogUtils.d("walter 加密异常 :" + e.toString());
         }
         return null;
     }
@@ -193,7 +193,7 @@ public class Rsa {
             return result; //
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e("解密异常 :" + e.toString());
+            LogUtils.d("解密异常 :" + e.toString());
         }
         return null;
     }

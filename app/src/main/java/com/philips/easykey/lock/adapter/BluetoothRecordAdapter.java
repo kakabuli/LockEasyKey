@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,15 +12,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothItemRecordBean;
 import com.philips.easykey.lock.bean.BluetoothRecordBean;
-import com.philips.easykey.lock.publiclibrary.ble.bean.OpenLockRecord;
-import com.philips.easykey.lock.publiclibrary.http.result.FamilyMemberBean;
-import com.philips.easykey.lock.utils.ftp.GeTui;
-
-
-import org.linphone.mediastream.Log;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

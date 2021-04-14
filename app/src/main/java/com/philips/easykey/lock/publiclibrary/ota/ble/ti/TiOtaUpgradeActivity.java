@@ -268,13 +268,13 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
             }
 
             otaService = gatt.getService(UUID.fromString(OAD_SERVICE));
-            LogUtils.e("OTA模式下");
+            LogUtils.d("OTA模式下");
             if (otaService != null) {  //OTA升级模式下的设备
                 isHand = true;
                 startUpdata(gatt.getDevice());
                 return;
             }
-            LogUtils.e("普通模式下");
+            LogUtils.d("普通模式下");
 
 
 
@@ -402,7 +402,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
     }
 
     public void downBinNew(String url, String path) {
-        LogUtils.e("开始下载  下载链接  " + url + "   保存地址  " + path);
+        LogUtils.d("开始下载  下载链接  " + url + "   保存地址  " + path);
         File file = new File(path);
         if (file.exists()) {
             Log.e(TAG, "文件已存在，不再下载");
@@ -418,20 +418,20 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //等待
                     @Override
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("开始下载   ");
+                        LogUtils.d("开始下载   ");
                     }
 
                     //下载进度回调
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("下载进度   " + (soFarBytes * 1.0 / 1.0 * totalBytes) * 100);
+                        LogUtils.d("下载进度   " + (soFarBytes * 1.0 / 1.0 * totalBytes) * 100);
                         mCircleProgress2.setValue(soFarBytes / totalBytes * 50);
                     }
 
                     //完成下载
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        LogUtils.e("下载成功");
+                        LogUtils.d("下载成功");
                         mutiProgress.setCurrNodeNO(1, false);
                         mCircleProgress2.setValue(50);
                         searchDeviceByMacAndConnect();
@@ -446,7 +446,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //下载出错
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        LogUtils.e("下载出错  " + e.getMessage());
+                        LogUtils.d("下载出错  " + e.getMessage());
                         ToastUtil.getInstance().showLong(R.string.down_failed);
                         mutiProgress.setCurrNodeNO(0, false);
                         mCircleProgress2.setValue(0);
@@ -456,7 +456,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //已存在相同下载
                     @Override
                     protected void warn(BaseDownloadTask task) {
-                        LogUtils.e("已存在   任务");
+                        LogUtils.d("已存在   任务");
                     }
                 }).start();
     }
@@ -509,7 +509,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
         }
 
         public void onScanFailed(int errorCode) {
-            LogUtils.e("已经启动了扫描设备    " + errorCode);
+            LogUtils.d("已经启动了扫描设备    " + errorCode);
         }
     };
 
@@ -584,11 +584,11 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                 handler.removeCallbacks(timeoutRunnable);
                 handler.postDelayed(timeoutRunnable, 10 * 1000);
                 final TIOADEoadDefinitions.oadStatusEnumeration finalStatus = status;
-                LogUtils.e("OTA升级  状态改变   " + TIOADEoadDefinitions.oadStatusEnumerationGetDescriptiveString(finalStatus));
+                LogUtils.d("OTA升级  状态改变   " + TIOADEoadDefinitions.oadStatusEnumerationGetDescriptiveString(finalStatus));
                 currentStatus = TIOADEoadDefinitions.oadStatusEnumerationGetDescriptiveString(status);
                 if (finalStatus == TIOADEoadDefinitions.oadStatusEnumeration.tiOADClientReady) {
                     //设备已经准备好    //在此处查看设备
-                    LogUtils.e("文件准备好了  ");
+                    LogUtils.d("文件准备好了  ");
                     client.start(filePath);
                 } else if (finalStatus == TIOADEoadDefinitions.oadStatusEnumeration.tiOADClientFileIsNotForDevice) {
                     //升级镜像与设备部匹配

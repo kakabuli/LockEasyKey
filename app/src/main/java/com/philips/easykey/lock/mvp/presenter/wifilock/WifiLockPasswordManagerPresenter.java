@@ -12,12 +12,9 @@ import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordListResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
-import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-
-import org.linphone.mediastream.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +53,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
 //                        cardNickname.add(new WiFiLockPassword.CardNicknameBean(1, "卡片2"));
 //                        wiFiLockPassword = new WiFiLockPassword( pwdList,  fingerprintList,  cardList,   pwdNickname,  fingerprintNickname,  cardNickname);
                         String object = new Gson().toJson(wiFiLockPassword);
-                        LogUtils.e("服务器数据是   " + object);
+                        LogUtils.d("服务器数据是   " + object);
 
                         SPUtils.put(KeyConstants.WIFI_LOCK_PASSWORD_LIST + wifiSn, object);
                         if (isSafe()) {
@@ -142,7 +139,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                 case 3:  //卡片
                     List<WiFiLockPassword.CardListBean> cardList = wiFiLockPassword.getCardList();
                     List<WiFiLockPassword.CardNicknameBean> cardNickname = wiFiLockPassword.getCardNickname();
-//                    LogUtils.e("服务器数量是  " + cardList.size());
+//                    LogUtils.d("服务器数量是  " + cardList.size());
                     if (cardList != null) {
                         for (WiFiLockPassword.CardListBean password : cardList) {
                             int num = password.getNum();
@@ -161,7 +158,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                     break;
             }
         }
-//        LogUtils.e("服务器数量是  " + passwords.size());
+//        LogUtils.d("服务器数量是  " + passwords.size());
         return passwords;
     }
 
@@ -175,7 +172,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
 //                        List<WiFiLockPassword.FaceListBean> pwdList = new ArrayList<>();
 //
 //                        String object = new Gson().toJson(wiFiLockPassword);
-//                        LogUtils.e("服务器数据是   " + object);
+//                        LogUtils.d("服务器数据是   " + object);
 //
 //                        SPUtils.put(KeyConstants.WIFI_LOCK_PASSWORD_LIST + wifiSn, object);
 //                        if (isSafe()) {
@@ -218,7 +215,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                     String sNum = num > 9 ? "" + num : "0" + num;
                     FacePassword facePassword = new FacePassword(sNum, sNum,
                             password.getCreateTime(), password.getType(), password.getStartTime(), password.getEndTime(), password.getItems());
-                    LogUtils.e("服务器数据是==faceNickname="+faceNickname);
+                    LogUtils.d("服务器数据是==faceNickname="+faceNickname);
                     if (faceNickname != null) {
                         for (WiFiLockPassword.FaceNicknameBean nickname : faceNickname) {
                             if (nickname.getNum() == num) {

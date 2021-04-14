@@ -100,7 +100,7 @@ public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
                 }
                 if (!TextUtils.isEmpty(name)) {
                     wifiBeanList.add(new WifiBean(imageid, name));
-//                LogUtils.e("--kaadas--name=="+ name);
+//                LogUtils.d("--kaadas--name=="+ name);
                 }
             }
             listView.setAdapter(new WiFiListAdapter(this,wifiBeanList));
@@ -128,7 +128,7 @@ public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
 
                 // 点击后返回
                 String wifiName = wifiBeanList.get(position).name;
-//                LogUtils.e("--kaadas--name=="+ name);
+//                LogUtils.d("--kaadas--name=="+ name);
                 Intent intent = new Intent();
                 intent.putExtra(KeyConstants.CHOOSE_WIFI_NAME, wifiName);
                 setResult(RESULT_OK, intent);

@@ -184,7 +184,7 @@ public class WifiLockAddNewToChooseActivity extends BaseActivity<WiFiLockChooseT
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e("扫描结果是   " + result);
+                    LogUtils.d("扫描结果是   " + result);
 
                     if ( (result.contains("_WiFi_"))){  //4-30新的配网流程
                         if(result.equals("kaadas_WiFi_camera")){

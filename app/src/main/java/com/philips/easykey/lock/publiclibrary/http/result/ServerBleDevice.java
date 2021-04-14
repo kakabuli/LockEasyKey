@@ -217,7 +217,7 @@ public class ServerBleDevice implements Serializable {
     }
 
     public String getFunctionSet() {
-        LogUtils.e("");
+        LogUtils.d("");
 
         if (TextUtils.isEmpty(functionSet)) {
             if (!"3".equals(bleVersion)){ //如果蓝牙版本号不是3

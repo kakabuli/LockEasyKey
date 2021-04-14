@@ -52,11 +52,11 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                 && bleService.getCurrentDevice().getName().equals(bleLockInfo.getServerLockInfo().getLockName())
                 ) {
             if (bleLockInfo.isAuth()) {  //如果已经鉴权   不管
-                LogUtils.e("服务中的数据是   " + bleLockInfo.isAuth());
+                LogUtils.d("服务中的数据是   " + bleLockInfo.isAuth());
                 return true;
             }
         }
-        LogUtils.e("判断如果没有鉴权成功   断开连接  不鉴权了");
+        LogUtils.d("判断如果没有鉴权成功   断开连接  不鉴权了");
         bleService.release();  //判断如果没有鉴权成功   断开连接  不鉴权了
         return false;
     }
@@ -131,14 +131,14 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                         }
                         bleNumber.clear();
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
 
                         getAllpasswordNumber(codeNumber, deValue);
-                        LogUtils.e("秘钥列表为   " + Arrays.toString(bleNumber.toArray()));
+                        LogUtils.d("秘钥列表为   " + Arrays.toString(bleNumber.toArray()));
                         //获取到编号
                         showList.clear();
                         morePwd.clear();
@@ -163,7 +163,7 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                             e.printStackTrace();
                         }
                         if (isSafe()) {
-                            LogUtils.e("同步锁密码  传递的密码是  " + Arrays.toString(showList.toArray()));
+                            LogUtils.d("同步锁密码  传递的密码是  " + Arrays.toString(showList.toArray()));
                             mViewRef.get().onSyncPasswordSuccess(showList);
                             mViewRef.get().endSync();
                         }
@@ -188,8 +188,8 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                                 morePwd.add(Integer.parseInt(password.getNum()));
                             }
                         }
-                        LogUtils.e("服务器多的数据是  " + Arrays.toString(morePwd.toArray()));
-                        LogUtils.e("服务器少的数据是  " + Arrays.toString(missPwd.toArray()));
+                        LogUtils.d("服务器多的数据是  " + Arrays.toString(morePwd.toArray()));
+                        LogUtils.d("服务器少的数据是  " + Arrays.toString(missPwd.toArray()));
                         addMiss(missPwd);  //添加锁上有的服务器没有的密码
                         deleteMore(morePwd); //添加锁上没有的服务器有的密码
                         toDisposable(syncPwdDisposable);
@@ -231,7 +231,7 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传秘钥昵称到服务器成功  " + result.toString());
+                        LogUtils.d("上传秘钥昵称到服务器成功  " + result.toString());
 //                        if (isSafe()) {
 //                            mViewRef.get().onUpLoadSuccess( );
 //                        }
@@ -240,12 +240,12 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传秘钥昵称到服务器失败  " + baseResult.toString());
+                        LogUtils.d("上传秘钥昵称到服务器失败  " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥昵称到服务器失败  " + throwable.getMessage());
+                        LogUtils.d("上传秘钥昵称到服务器失败  " + throwable.getMessage());
                     }
 
                     @Override
@@ -279,18 +279,18 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("删除秘钥 到成功   " + result.toString());
+                        LogUtils.d("删除秘钥 到成功   " + result.toString());
                         MyApplication.getInstance().passwordChangeListener().onNext(true);
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传秘钥 失败   " + baseResult.toString());
+                        LogUtils.d("上传秘钥 失败   " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥 失败   " + throwable.getMessage());
+                        LogUtils.d("上传秘钥 失败   " + throwable.getMessage());
                     }
 
                     @Override
@@ -313,7 +313,7 @@ public class FingerprintManagerPresenter<T> extends BlePresenter<IFingerprintMan
                 return;
             }
             for (int j = 0; j < 8 && index * 8 + j < codeNumber; j++) {
-                LogUtils.e("  (deValue[3 + index] & temp[j])  " + (deValue[3 + index] & temp[j]) + "   temp[j]   " + temp[j] + "  index * 8 + j  " + index * 8 + j);
+                LogUtils.d("  (deValue[3 + index] & temp[j])  " + (deValue[3 + index] & temp[j]) + "   temp[j]   " + temp[j] + "  index * 8 + j  " + index * 8 + j);
                 if (((deValue[3 + index] & temp[j])) == temp[j] && index * 8 + j < passwordNumber) {
                     bleNumber.add(index * 8 + j);
                 }

@@ -64,7 +64,7 @@ public class PersonalFAQPresenter<T> extends BasePresenter<IPersonalFAQView> {
                     }
                 } else {
                     if ("444".equals(getFAQResult.getCode())) { //Token过期
-                        LogUtils.e("token过期   " + Thread.currentThread().getName());
+                        LogUtils.d("token过期   " + Thread.currentThread().getName());
                         if (mqttService != null) {
                             mqttService.httpMqttDisconnect();
                         }

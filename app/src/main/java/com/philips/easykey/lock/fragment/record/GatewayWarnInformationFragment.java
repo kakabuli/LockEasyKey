@@ -115,7 +115,7 @@ public class GatewayWarnInformationFragment extends BaseFragment<GatewayLockAlra
     }
 
     private void initData() {
-        LogUtils.e("进入报警页面");
+        LogUtils.d("进入报警页面");
         Bundle bundle = getArguments();
         if (bundle != null) {
             gatewayId = bundle.getString(KeyConstants.GATEWAY_ID);
@@ -253,7 +253,7 @@ public class GatewayWarnInformationFragment extends BaseFragment<GatewayLockAlra
     @Override
     public void getLockAlarmSuccess(List<GatewayLockAlarmEventDao> alarmEventDaoList) {
         //获取开锁记录成功
-        LogUtils.e("获取到预警记录多少条  " + alarmEventDaoList.size());
+        LogUtils.d("获取到预警记录多少条  " + alarmEventDaoList.size());
         if (alarmEventDaoList.size()==0&&page==0){
             changeView(false);
         }

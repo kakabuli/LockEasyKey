@@ -82,7 +82,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         byte[] decrypt = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
                         int state = decrypt[4] & 0xff;
-                        LogUtils.e("收到ota状态上报   " + "  ota状态  " + state + "  number  " + number + "  otaType  " + otaType + Rsa.bytesToHexString(decrypt));
+                        LogUtils.d("收到ota状态上报   " + "  ota状态  " + state + "  number  " + number + "  otaType  " + otaType + Rsa.bytesToHexString(decrypt));
                         if ((decrypt[0] & 0xff) == number && (decrypt[1] & 0xff) == otaType) {
                             if (state == 0) {
 
@@ -104,7 +104,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("监听OTA状态错误  " + throwable.getMessage());
+                        LogUtils.d("监听OTA状态错误  " + throwable.getMessage());
                         if (isSafe()) {//不管OTA成功还是失败都不发发送文件的心跳
                             mViewRef.get().otaFailed(-6);
                         }
@@ -132,7 +132,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         byte[] decrypt = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
                         int state = decrypt[4] & 0xff;
-                        LogUtils.e("收到ota状态上报   " + "  ota状态  " + state + "  number  " + number + "  otaType  " + otaType + Rsa.bytesToHexString(decrypt));
+                        LogUtils.d("收到ota状态上报   " + "  ota状态  " + state + "  number  " + number + "  otaType  " + otaType + Rsa.bytesToHexString(decrypt));
                         if ((decrypt[0] & 0xff) == number && (decrypt[1] & 0xff) == otaType) {
                             if (state == 0) {
                                 if (isSafe()) {
@@ -145,7 +145,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("发送完文件监听OTA状态错误  " + throwable.getMessage());
+                        LogUtils.d("发送完文件监听OTA状态错误  " + throwable.getMessage());
                         if (isSafe()) {//不管OTA成功还是失败都不发发送文件的心跳
                             mViewRef.get().otaFailed(-8);
                         }
@@ -237,7 +237,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.isConfirm()) {
-                            LogUtils.e("结束OTA  回调   确认帧");
+                            LogUtils.d("结束OTA  回调   确认帧");
                             int state = bleDataBean.getPayload()[0] & 0xff;
                             if (isSafe()) {
                                 mViewRef.get().otaFailed(state);
@@ -248,7 +248,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                         if (command[3] != bleDataBean.getCmd()) {
                             return;
                         }
-                        LogUtils.e("关闭OTA  回调");
+                        LogUtils.d("关闭OTA  回调");
                         byte[] payload = bleDataBean.getPayload();
                         byte[] dePayload = Rsa.decrypt(payload, bleLockInfo.getAuthKey());
                         int state = dePayload[0] & 0xff;
@@ -274,7 +274,7 @@ public class FaceOtaPresenter<T> extends BlePresenter<IFaceOtaView> {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(@NonNull Long aLong) throws Exception {
-                        LogUtils.e("收到");
+                        LogUtils.d("收到");
                         sendingFile();
                     }
                 });

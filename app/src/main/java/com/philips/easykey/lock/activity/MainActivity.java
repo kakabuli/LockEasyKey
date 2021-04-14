@@ -32,12 +32,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.huawei.agconnect.config.AGConnectServicesConfig;
-import com.huawei.hms.aaid.HmsInstanceId;
-import com.huawei.hms.common.ApiException;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.cateye.VideoVActivity;
 import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PersonalCenterFragment;
 import com.philips.easykey.lock.fragment.device.DeviceFragment;
@@ -47,7 +43,6 @@ import com.philips.easykey.lock.mvp.presenter.MainActivityPresenter;
 import com.philips.easykey.lock.mvp.presenter.UpgradePresenter;
 import com.philips.easykey.lock.mvp.view.IMainActivityView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -67,27 +62,16 @@ import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.ftp.GeTui;
-import com.philips.easykey.lock.utils.greenDao.bean.CatEyeEvent;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
 import com.philips.easykey.lock.widget.NoScrollViewPager;
 import com.philips.easykey.push.xiaomi.SPUtils2;
 import com.philips.easykey.push.xiaomi.XiaoMiConstant;
 
-
-import net.sdvn.cmapi.CMAPI;
-import net.sdvn.cmapi.ConnectionService;
-
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -118,7 +102,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     private List<Fragment> fragments = new ArrayList<>();
     private boolean isOnBackground = false;
     private static MainActivity instance;
-    private static final int REQUEST_CODE_VPN_SERVICE = 11;
 
     public boolean isSelectHome = true;
     private NetWorkChangReceiver netWorkChangReceiver;
@@ -128,8 +111,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public static boolean isRunning = false;
 //    public static NetEvevt evevt;
     boolean isCreate = false;
-    String sip_pacage_invite = null;
-    boolean isFromWelCom = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +120,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        LogUtils.e("MainActivity启动 ");
+        LogUtils.d("MainActivity启动 ");
         ButterKnife.bind(this);
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
         isRunning = true;
@@ -152,7 +133,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             try {
                 connected = mqttService.getMqttClient().isConnected();
             } catch (Exception e) {
-                LogUtils.e("  获取连接状态失败  " + e.getMessage());
+                LogUtils.d("  获取连接状态失败  " + e.getMessage());
                 connected = false;
             }
             if (mqttService.getMqttClient() == null || !connected) {
@@ -182,10 +163,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         //首页的fragment不重新加载，导致各种问题
         homeViewPager.setOffscreenPageLimit(fragments.size());
 
-        //设置Linphone的监听
-
-        mPresenter.initLinphone();
-
 //        boolean isfromlogin= getIntent().getBooleanExtra(Constants.ISFROMLOGIN,false);
 //        boolean ispush= (boolean) SPUtils.get(Constants.PUSHID,false);
 //        Log.e(GeTui.VideoLog,"isfromlogin:"+isfromlogin);
@@ -196,12 +173,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //             mPresenter.uploadpushmethod();
 //        }
         registerNetwork();
-        sip_pacage_invite = MyApplication.getInstance().getSip_package_invite();
-        // if come from phone, dont to prompt update
-        if (!TextUtils.isEmpty(sip_pacage_invite)) {  // not null sip_package
-            startcallmethod(sip_pacage_invite);
-            return;
-        }
         // app update info
         initPackages(this);
         upgradePresenter = new UpgradePresenter();
@@ -246,7 +217,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
 //        RadioButton rb_shop = findViewById(R.id.rb_shop);
 //        rb_shop.setVisibility(View.GONE);
-        LogUtils.e("MainActivity启动完成 ");
+        LogUtils.d("MainActivity启动完成 ");
 
         checkNotificatoinEnabled();
     }
@@ -360,13 +331,13 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 || info.getNetworkId() == -1
                 || "<unknown ssid>".equals(info.getSSID());
         if (disconnected) {
-            LogUtils.e("切换wifi  断开连接 from MainActivity");
+            LogUtils.d("切换wifi  断开连接 from MainActivity");
         } else {
             String ssid = info.getSSID();
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
-            LogUtils.e("切换wifi  ssid " + ssid);
+            LogUtils.d("切换wifi  ssid " + ssid);
         }
     }
 
@@ -415,7 +386,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
         ispush = (boolean) SPUtils.get(Constants.PUSHID, false);
         if(ispush){
-            LogUtils.e("上传成功token...");
+            LogUtils.d("上传成功token...");
             return;
         }
         if (Rom.isEmui()) {
@@ -430,7 +401,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         } else if(Rom.isMiui()){
             String xiaoMiToken = (String) SPUtils2.get(MainActivity.this, XiaoMiConstant.XIAOMIKEY,"");
             uploadToken(4,xiaoMiToken);
-            LogUtils.e("shulan xiaoMiToken--->" + xiaoMiToken);
+            LogUtils.d("shulan xiaoMiToken--->" + xiaoMiToken);
         } else{
             // 使用个推
 //            if (!ispush) {
@@ -440,7 +411,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //                Log.e(GeTui.VideoLog, "getui upload to success");
 //            }
                 String JpushId = (String) SPUtils2.get(MyApplication.getInstance(), GeTui.JPUSH_ID, "");
-            LogUtils.e("shulan---JpushId-->---" + JpushId );
+            LogUtils.d("shulan---JpushId-->---" + JpushId );
                 uploadToken(2,JpushId);
         }
 
@@ -457,36 +428,9 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         String sip_package_json = getIntent().getStringExtra("stringType");
         Log.e(GeTui.VideoLog, "..........MainActivity.........:" + sip_package_json);
 
-        sip_pacage_invite = MyApplication.getInstance().getSip_package_invite();
-        // if come from phone, dont to prompt update
-//        if(TextUtils.isEmpty(sip_pacage_invite)){
-//            MyLog.getInstance().save("sip_package_invert..1");
-//            Log.e(GeTui.VideoLog,"sip_package_invert..1");
-//            sip_pacage_invite= getIntent().getStringExtra(Constants.SIP_INVERT_PKG_INTENT);
-//            if(TextUtils.isEmpty(sip_pacage_invite)){
-//                MyLog.getInstance().save("sip_package_invert..2");
-//                Log.e(GeTui.VideoLog,"sip_package_invert..2");
-//                sip_pacage_invite = (String) SPUtils.get(Constants.SIP_INVERT_PKG_SP,null);
-//            }
-//        }
-//        isFromWelCom= getIntent().getBooleanExtra(Constants.IS_FROM_WEL_INTENT,false);
-//        if(!isFromWelCom){
-//            MyLog.getInstance().save("isFromWelCom..1");
-//            Log.e(GeTui.VideoLog,"isFromWelCom..1");
-//              isFromWelCom= (boolean) SPUtils.get(Constants.IS_FROM_WEL_SP,false);
-//        }
-        isFromWelCom = MyApplication.getInstance().isFromWel();
-        MyLog.getInstance().save("MainAcvity...onResume.." + !isCreate + " invert_package:" + !TextUtils.isEmpty(sip_pacage_invite) + " isFromWelCom:" + isFromWelCom);
-        Log.e(GeTui.VideoLog, "MainAcvity...onResume.." + !isCreate + " invert_package:" + !TextUtils.isEmpty(sip_pacage_invite) + " isFromWelCom:" + isFromWelCom);
-
-        if (isFromWelCom && !isCreate && !TextUtils.isEmpty(sip_pacage_invite)) {
-            startcallmethod(sip_pacage_invite);  // 获取Linphone端口号
-        } else if (!isCreate && isFromWelCom && TextUtils.isEmpty(sip_pacage_invite)) {
-            Toast.makeText(MainActivity.this, getString(R.string.cateye_call_fail), Toast.LENGTH_SHORT).show();
-        }
-        isFromWelCom = false;
+        MyLog.getInstance().save("MainAcvity...onResume.." + !isCreate);
+        Log.e(GeTui.VideoLog, "MainAcvity...onResume.." + !isCreate);
         isCreate = false;
-        sip_pacage_invite = null;
 
         super.onResume();
     }
@@ -517,31 +461,11 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         super.onStop();
         Log.e(GeTui.VideoLog, "MainAcvity .. onStop..");
         MyLog.getInstance().save("MainAcvity .. onStop..");
-        SPUtils.remove(Constants.SIP_INVERT_PKG_SP);
-        SPUtils.remove(Constants.IS_FROM_WEL_SP);
-    }
-
-
-    //检查vpn授权
-    public void checkVpnService() {
-        Intent prepare = ConnectionService.prepare(this);
-        boolean resultvpn = prepare == null ? true : false;
-        net.sdvn.cmapi.util.LogUtils.d(resultvpn + " 已授权 " + " 未授权 ");
-        if (prepare != null) {
-            startActivityForResult(prepare, REQUEST_CODE_VPN_SERVICE);
-        } else {
-            onActivityResult(REQUEST_CODE_VPN_SERVICE, RESULT_OK, null);
-        }
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //  vpn  授权
-        if (requestCode == REQUEST_CODE_VPN_SERVICE) {
-            CMAPI.getInstance().onVpnPrepareResult(requestCode, resultCode);
-        }
     }
 
     @Override
@@ -583,55 +507,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         intent.setClass(MainActivity.this, OTADialogActivity.class);
         intent.putExtra(KeyConstants.BLE_DEVICE_INFO, bleLockInfo);  //需要使用
         startActivity(intent);
-    }
-
-    @Override
-    public void onCatEyeCallIn(CateEyeInfo cateEyeInfo) {
-        Log.e(GeTui.VideoLog, "MainActivity---->跳入=====>VideoVActivity:" + cateEyeInfo);
-        MyLog.getInstance().save("跳入=====>VideoVActivity:" + cateEyeInfo);
-        Intent intent = new Intent(this, VideoVActivity.class);
-        intent.putExtra(KeyConstants.IS_CALL_IN, true);
-        intent.putExtra(KeyConstants.CATE_INFO, cateEyeInfo);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onCatEyeCallFail() {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, getString(R.string.video_connection_fail), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void onGwEvent(int eventType, String deviceId, String gatewayId) {
-        GatewayInfo gatewayInfo = MyApplication.getInstance().getGatewayById(gatewayId);
-        if (gatewayInfo != null) {
-            String nickName = MyApplication.getInstance().getNickByDeviceId(deviceId);
-            String content = null;
-            switch (eventType) {
-                case CatEyeEvent.EVENT_PIR:
-                    content = String.format(getString(R.string.pir_notify), nickName);
-                    break;
-                case CatEyeEvent.EVENT_DOOR_BELL:
-//                content = String.format(getString(R.string.door_bell), nickName);
-//                ToastUtil.getInstance().showShort(content);
-                    break;
-                case CatEyeEvent.EVENT_HEAD_LOST:
-                    content = String.format(getString(R.string.head_lost_notify), nickName);
-                    break;
-                case CatEyeEvent.EVENT_HOST_LOST:
-                    content = String.format(getString(R.string.host_lost_notify), nickName);
-                    break;
-                case CatEyeEvent.EVENT_LOW_POWER:
-                    content = String.format(getString(R.string.low_power_notify), nickName);
-                    break;
-            }
-            ToastUtil.getInstance().showLong(content);
-            LogUtils.e("猫眼报警的内容为   " + content);
-        }
     }
 
     @Override
@@ -687,23 +562,8 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     }
 
     @Override
-    public void callError() {
-        Toast.makeText(this, getString(R.string.cateye_call_record), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void callErrorCateInfoEmpty() {
-        Toast.makeText(this, getString(R.string.call_error_cateInfoEmpty), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void callErrorCateInfoMimi() {
-        Toast.makeText(this, getString(R.string.call_error_mimi), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void gatewayNotifyOtaSuccess(GatewayOtaNotifyBean notifyBean) {
-        LogUtils.e("网关ota升级通知 gatewayNotifyOtaSuccess");
+        LogUtils.d("网关ota升级通知 gatewayNotifyOtaSuccess");
         //网关ota升级通知
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, GatewayOTADialogActivity.class);
@@ -762,12 +622,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void needCheckVpnService() {
-        checkVpnService();
-    }
-
-
     public NoScrollViewPager getViewPager() {
 
         return homeViewPager;
@@ -799,98 +653,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
     };
     int getPortTimes = 0;
-
-    private void startcallmethod(String sip_pacage_invite1) {
-
-        MyApplication.getInstance().setSip_package_invite(null); //制空
-        MyApplication.getInstance().setFromWel(false);
-
-        long startTime = 2500;
-        if (Rom.isFlyme()) {
-            startTime = 5000;
-        } else if (Rom.isMiui()) {
-            startTime = 3500;
-        }
-        final String Tag1 = "sip_kaidishi";
-        if (timer == null) {
-            timer = new Timer();
-            //           sip_pacage_invite = MyApplication.getInstance().getSip_package_invite();
-//            if(TextUtils.isEmpty(sip_pacage_invite)){
-//                sip_pacage_invite= getIntent().getStringExtra("invert");
-//            }
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    int linphone_port = MyApplication.getInstance().getLinphone_port();
-
-                    boolean isRegisterStatus = (boolean) SPUtils.get(Constants.LINPHONE_REGESTER_STATE, false);
-                    Log.e(GeTui.VideoLog, "MainActivity==>port:" + linphone_port + " sip_pkg:" + sip_pacage_invite1 + " isRegisterStatus:" + isRegisterStatus);
-//                    Log.e(GeTui.VideoLog,"sip_pacage_invite:"+sip_pacage_invite);
-                    MyLog.getInstance().save("prot:" + linphone_port + " sip_pkg:" + sip_pacage_invite1 + " isRegisterStatus:" + isRegisterStatus);
-
-                    if (!isRegisterStatus && linphone_port > 0) {
-                        SystemClock.sleep(3000);
-                        isRegisterStatus = (boolean) SPUtils.get(Constants.LINPHONE_REGESTER_STATE, false);
-                    }
-
-                    if (!isRegisterStatus && linphone_port > 0) {
-                        Log.e(GeTui.VideoLog, "MainActivity==>port:" + linphone_port + " isRegisterStatus:" + isRegisterStatus);
-                        errorHandler.sendEmptyMessage(ERROR_1);
-                        timer.cancel();
-                        timer = null;
-                        getPortTimes = 0;
-                        return;
-                    }
-                    if (linphone_port <= 0 && getPortTimes == 10) {
-                        Log.e(GeTui.VideoLog, "MainActivity==>getPortTimes:" + getPortTimes + " linphone_port:" + linphone_port);
-                        errorHandler.sendEmptyMessage(ERROR_1);
-                        timer.cancel();
-                        timer = null;
-                        getPortTimes = 0;
-                        return;
-                    }
-                    if (linphone_port > 0 && isRegisterStatus) {
-                        Log.e(GeTui.VideoLog, "MainActivity==>isRegisterStatus:" + isRegisterStatus + " linphone_port:" + linphone_port);
-                        timer.cancel();
-                        timer = null;
-                        getPortTimes = 0;
-                        try {
-                            //建立udp的服务
-                            DatagramSocket datagramSocket = new DatagramSocket();
-                            //准备数据，把数据封装到数据包中。
-                            //	String data = TestUdp.und_package;
-                            //创建了一个数据包
-                            InetAddress inetAddress = InetAddress.getLocalHost();
-                            String ipaddress = inetAddress.getHostAddress();
-                            DatagramPacket packet = new DatagramPacket(sip_pacage_invite1.getBytes(), sip_pacage_invite1.getBytes().length, inetAddress, linphone_port);
-                            //调用udp的服务发送数据包
-                            datagramSocket.send(packet);
-                            //关闭资源 ---实际上就是释放占用的端口号
-                            datagramSocket.close();
-                        } catch (SocketException e) {
-                            e.printStackTrace();
-                            Log.e(Tag1, "SocketException:" + e.getMessage());
-                            errorHandler.sendEmptyMessage(ERROR_2);
-                        }  /* catch (UnknownHostException e) {
-								e.printStackTrace();
-								Log.e(Tag1,"UnknownHostException"+e.getMessage());
-							}  */ catch (IOException e) {
-                            e.printStackTrace();
-                            Log.e(Tag1, "IOException" + e.getMessage());
-                            errorHandler.sendEmptyMessage(ERROR_3);
-                        }
-                    } else {
-                        Log.e(Tag1, "获取端口失败");
-                        getPortTimes++;
-//                            timer.cancel();
-//                            timer = null;
-                    }
-                    Log.e(Tag1, "获取的端口是:" + linphone_port);
-                }
-            }, startTime, 500);
-            // 2500
-        }
-    }
 
     private long mExitTime;
 
@@ -1063,7 +825,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        LogUtils.e("shulan ---requestCode-->" + requestCode);
+        LogUtils.d("shulan ---requestCode-->" + requestCode);
         switch (requestCode){
             case REQUEST_AUDIO_PERMISSION_REQUEST_CODE:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){//同意授权

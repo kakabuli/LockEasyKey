@@ -245,7 +245,7 @@ public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreV
                 startActivity(intent);
                 break;
             case R.id.rl_check_firmware_update:
-                LogUtils.e("");
+                LogUtils.d("");
                 showLoading(getString(R.string.is_check_vle_version));
                 if (mPresenter.isAuth(bleLockInfo, true)) {
                     mPresenter.readSerialNumber();
@@ -298,7 +298,7 @@ public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreV
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
 //        ToastUtil.getInstance().showLong(R.string.delete_fialed);
         hiddenLoading();
@@ -306,7 +306,7 @@ public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreV
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         ToastUtil.getInstance().showLong(httpErrorCode);
         hiddenLoading();

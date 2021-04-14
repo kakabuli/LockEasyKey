@@ -8,16 +8,11 @@ import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.gatewayView.IGatewaySharedView;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.BindMemeReuslt;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShareResultBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShareUserResultBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -124,49 +119,5 @@ public class GatewaySharedPresenter<T> extends BasePresenter<IGatewaySharedView>
         }
 
     }
-
-
-    //绑定咪咪网
-    public void bindMimi(String deviceSN, String gatewayId) {
-        MqttMessage mqttMessage = MqttCommandFactory.registerMemeAndBind(MyApplication.getInstance().getUid(), gatewayId, deviceSN);
-        bingMimiDisposable = mqttService.mqttPublish(MqttConstant.MQTT_REQUEST_APP, mqttMessage)
-                .compose(RxjavaHelper.observeOnMainThread())
-                .filter(new Predicate<MqttData>() {
-                    @Override
-                    public boolean test(MqttData mqttData) throws Exception {
-                        //TODO  以后改成根据  msgId 区分是不是当前消息的回调
-                        if (MqttConstant.REGISTER_MIMI_BIND.equals(mqttData.getFunc())) {
-                            return true;
-                        }
-                        return false;
-                    }
-                })
-                .subscribe(new Consumer<MqttData>() {
-                    @Override
-                    public void accept(MqttData mqttData) throws Exception {
-                        LogUtils.e("绑定咪咪回调" + mqttData.getPayload());
-                        BindMemeReuslt bindMemeReuslt = new Gson().fromJson(mqttData.getPayload(), BindMemeReuslt.class);
-                        LogUtils.e(bindMemeReuslt.getFunc());
-                        if ("200".equals(bindMemeReuslt.getCode())) {
-                            if (isSafe()) {
-                                mViewRef.get().bindMimiSuccess(deviceSN);
-                            }
-                        } else {
-                            if (isSafe()) {
-                                mViewRef.get().bindMimiFail(bindMemeReuslt.getCode(), bindMemeReuslt.getMsg());
-                            }
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        if (isSafe()) {
-                            mViewRef.get().bindMimiThrowable(throwable);
-                        }
-                    }
-                });
-        compositeDisposable.add(bingMimiDisposable);
-    }
-
 
 }

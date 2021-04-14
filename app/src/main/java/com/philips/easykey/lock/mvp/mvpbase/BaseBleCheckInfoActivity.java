@@ -77,7 +77,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
     @Override
     public void needUpdate(CheckOTAResult.UpdateFileInfo appInfo, String SN, String version, int type) {
         hiddenLoading();
-        LogUtils.e("只有一个固件需要升级");
+        LogUtils.d("只有一个固件需要升级");
         if (type == 1) {
             if (bleLockInfo.getBleType() == 1) { //Ti升级
 
@@ -113,7 +113,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
                             }
                             SPUtils.put(KeyConstants.DEVICE_SN + bleLockInfo.getServerLockInfo().getMacLock(), SN);    //Key
                             SPUtils.put(KeyConstants.BLE_VERSION + bleLockInfo.getServerLockInfo().getMacLock(), version); //Key
-                            LogUtils.e("升级的版本信息是   " + SN + "   下载链接是   " + appInfo.getFileUrl());
+                            LogUtils.d("升级的版本信息是   " + SN + "   下载链接是   " + appInfo.getFileUrl());
                             MyApplication.getInstance().getBleService().release();  //进入ota模式之前  需要断开连接
                             isEnterOta = true;
                             Intent intent = new Intent();
@@ -161,7 +161,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
     @Override
     public void needTwoUpdate(CheckOTAResult.UpdateFileInfo stackInfo, CheckOTAResult.UpdateFileInfo appInfo, String SN, String version) {
         hiddenLoading();
-        LogUtils.e("有两个固件需要升级");
+        LogUtils.d("有两个固件需要升级");
         if (bleLockInfo.getBleType() != 1) { //Ti升级
             ToastUtil.getInstance().showLong(getString(R.string.check_update_failed2) + bleLockInfo.getBleType());
             return;
@@ -182,7 +182,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
                         isEnterOta = true;
                         SPUtils.put(KeyConstants.DEVICE_SN + bleLockInfo.getServerLockInfo().getMacLock(), SN);    //Key
                         SPUtils.put(KeyConstants.BLE_VERSION + bleLockInfo.getServerLockInfo().getMacLock(), version); //Key
-                        LogUtils.e("升级的版本信息是   " + SN + "   下载链接是   " + appInfo.getFileUrl());
+                        LogUtils.d("升级的版本信息是   " + SN + "   下载链接是   " + appInfo.getFileUrl());
                         MyApplication.getInstance().getBleService().release();  //进入ota模式之前  需要断开连接
                         Intent intent = new Intent();
                         intent.putExtra(OtaConstants.bindUrl, stackInfo.getFileUrl());

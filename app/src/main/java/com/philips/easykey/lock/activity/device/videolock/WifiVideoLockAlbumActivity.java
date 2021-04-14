@@ -395,7 +395,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
         });
 
         for(FileItemBean item : files){
-            LogUtils.e(item.toString());
+            LogUtils.d(item.toString());
         }
 
         int times = 0;
@@ -425,7 +425,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
         });
 
         for(FileBean i : items){
-            LogUtils.e(i.toString());
+            LogUtils.d(i.toString());
         }
     }
 }

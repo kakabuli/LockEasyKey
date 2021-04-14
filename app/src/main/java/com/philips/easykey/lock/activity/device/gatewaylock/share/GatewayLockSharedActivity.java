@@ -225,11 +225,6 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
                         if ("6010".equals(model)){
                             if (!TextUtils.isEmpty(gatewayInfo.getServerInfo().getMeUsername()) && !TextUtils.isEmpty(gatewayInfo.getServerInfo().getMePwd())) {
                                 mPresenter.shareDevice(2, gatewayId, deviceId, uid, phone, "", 1);
-                            }else{
-                                LogUtils.e("咪咪网为空需要重新注册");
-                                String deviceSN = gatewayInfo.getServerInfo().getDeviceSN();
-                                mPresenter.bindMimi(deviceSN, deviceSN);
-                                ToastUtil.getInstance().showShort(getString(R.string.add_common_user_fail));
                             }
                         }else {
                             mPresenter.shareDevice(2, gatewayId, deviceId, uid, phone, "", 1);
@@ -298,16 +293,16 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
 
     @Override
     public void bindMimiSuccess(String deviceSN) {
-        LogUtils.e("绑定咪咪网成功");
+        LogUtils.d("绑定咪咪网成功");
     }
 
     @Override
     public void bindMimiFail(String code, String msg) {
-        LogUtils.e("绑定咪咪网失败");
+        LogUtils.d("绑定咪咪网失败");
     }
 
     @Override
     public void bindMimiThrowable(Throwable throwable) {
-        LogUtils.e("绑定咪咪网失败");
+        LogUtils.d("绑定咪咪网失败");
     }
 }

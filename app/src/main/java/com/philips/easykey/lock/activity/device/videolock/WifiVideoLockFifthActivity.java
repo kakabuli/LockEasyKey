@@ -176,7 +176,7 @@ public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifth
      */
     @Override
     public void onDeviceBinding(WifiLockVideoBindBean mWifiLockVideoBindBean) {
-        LogUtils.e("---------------------ss------------");
+        LogUtils.d("---------------------ss------------");
         if(!WifiVideoLockFifthActivity.this.isFinishing()){
             mPresenter.handler.post(new Runnable() {
                 @Override
@@ -191,7 +191,7 @@ public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifth
                     intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA ,mWifiLockVideoBindBean);
                     intent.putExtra("wifiModelType",wifiModelType);
                     startActivity(intent);
-                    LogUtils.e("---------------------aaa------------");
+                    LogUtils.d("---------------------aaa------------");
                     finish();
                 }
             });

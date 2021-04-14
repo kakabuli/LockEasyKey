@@ -50,7 +50,7 @@ public class AddDeviceZigbeeLockNewZeroActivity  extends BaseActivity<GatewayBin
             return;
         }
         if (NetUtil.isNetworkAvailable()) {
-            LogUtils.e("deviceSN    " + deviceSN);
+            LogUtils.d("deviceSN    " + deviceSN);
             mPresenter.bindGateway(deviceSN);
         } else {
             ToastUtil.getInstance().showShort(getString(R.string.network_exception));
@@ -92,7 +92,6 @@ public class AddDeviceZigbeeLockNewZeroActivity  extends BaseActivity<GatewayBin
         //绑定套装成功
         Intent intent = new Intent(this, AddDeviceZigbeeLockNewFirstActivity.class);
         intent.putExtra(KeyConstants.GATEWAY_ID, deviceSN);
-        intent.putExtra(KeyConstants.IS_BIND_MEME,isbindMeMe);
         startActivity(intent);
     }
 
@@ -127,24 +126,10 @@ public class AddDeviceZigbeeLockNewZeroActivity  extends BaseActivity<GatewayBin
 
     @Override
     public void bindGatewayThrowable(Throwable throwable) {
-        LogUtils.e("绑定网关异常" + throwable);
+        LogUtils.d("绑定网关异常" + throwable);
         Intent failIntent = new Intent(this, AddDeviceZigbeeLockNewScanFailActivity.class);
         startActivity(failIntent);
         finish();
     }
 
-    @Override
-    public void bindMimiSuccess() {
-        LogUtils.e("绑定咪咪网成功");
-    }
-
-    @Override
-    public void bindMimiFail(String code, String msg) {
-        LogUtils.e("绑定咪咪失败代号是"+code+"信息"+msg);
-    }
-
-    @Override
-    public void bindMimiThrowable(Throwable throwable) {
-        LogUtils.e("绑定咪咪网异常");
-    }
 }

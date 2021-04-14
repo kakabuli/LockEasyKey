@@ -54,14 +54,14 @@ public class BluetoothRecordActivity extends BaseBleActivity<IBleView, BlePresen
         bleLockInfo = mPresenter.getBleLockInfo();
         if(bleLockInfo!=null){
             int func = Integer.parseInt(bleLockInfo.getServerLockInfo().getFunctionSet());
-            LogUtils.e("是否支持操作记录   "+bleLockInfo.getServerLockInfo().getBleVersion() + "   " + bleLockInfo.getServerLockInfo().getFunctionSet());
+            LogUtils.d("是否支持操作记录   "+bleLockInfo.getServerLockInfo().getBleVersion() + "   " + bleLockInfo.getServerLockInfo().getFunctionSet());
             if ("3".equals(bleLockInfo.getServerLockInfo().getBleVersion())){
                 isSupportOperationRecord = BleLockUtils.isSupportOperationRecord(func);
             }else {
                 isSupportOperationRecord = false;
             }
         }
-        LogUtils.e("是否支持操作记录   ");
+        LogUtils.d("是否支持操作记录   ");
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.device_dynamic));

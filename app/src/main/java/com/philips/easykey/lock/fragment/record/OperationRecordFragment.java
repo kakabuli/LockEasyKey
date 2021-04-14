@@ -75,7 +75,7 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
             mView = inflater.inflate(R.layout.fragment_bluetooth_open_lock_record, container, false);
         }
         unbinder = ButterKnife.bind(this, mView);
-        LogUtils.e("当前类型是  " + type);
+        LogUtils.d("当前类型是  " + type);
         tvSynchronizedRecord.setOnClickListener(this);
         initRefresh();
         return mView;
@@ -131,7 +131,7 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
-                    LogUtils.e("同步开锁记录");
+                    LogUtils.d("同步开锁记录");
                     mPresenter.getOperationRecordFromBle();
                     showDatas.clear();
                     if (openLockRecordAdapter != null) {
@@ -164,7 +164,7 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
 
     @Override
     public void onLoadBleOperationRecord(List<OperationLockRecord> lockRecords) {
-        LogUtils.e("获取到一组操作记录   "+lockRecords.size());
+        LogUtils.d("获取到一组操作记录   "+lockRecords.size());
         //获取到蓝牙的开锁记录
         showList.clear();
         String lastTimeHead = "";
@@ -205,7 +205,7 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
 
     @Override
     public void onLoadServerOperationRecord(List<OperationLockRecord> lockRecords, int page) {
-        LogUtils.e("收到服务器数据  " + lockRecords.size());
+        LogUtils.d("收到服务器数据  " + lockRecords.size());
         currentPage = page + 1;
         showList.clear();
         String lastTimeHead = "";
@@ -268,14 +268,14 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
 
     @Override
     public void onUploadServerRecordSuccess() {
-        LogUtils.e("记录上传成功");
+        LogUtils.d("记录上传成功");
         ToastUtil.getInstance().showShort(R.string.lock_record_upload_success);
     }
 
     @Override
     public void onUploadServerRecordFailed(Throwable throwable) {
         ToastUtil.getInstance().showShort( HttpUtils.httpProtocolErrorCode(getActivity(),throwable));
-        LogUtils.e("记录上传失败");
+        LogUtils.d("记录上传失败");
 //        ToastUtil.getInstance().showShort(R.string.record_upload_failed);
     }
 

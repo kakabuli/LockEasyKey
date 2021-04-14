@@ -182,7 +182,7 @@ public class StatusBarUtils {
 		if (resourceId > 0) {
 			result = activity.getResources().getDimensionPixelSize(resourceId);
 		}
-		LogUtils.e("getStatusBarHeight", result + "");
+		LogUtils.d("getStatusBarHeight", result + "");
 		return result;
 	}
 

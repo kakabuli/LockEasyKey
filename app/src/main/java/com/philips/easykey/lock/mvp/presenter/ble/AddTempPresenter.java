@@ -68,7 +68,7 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
                 .subscribe(new Consumer<BleDataBean>() {
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
-                        LogUtils.e("收到设置密码ACK数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                        LogUtils.d("收到设置密码ACK数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                         if (bleDataBean.getOriginalData()[0] == 0) {  //设置密码成功
                             if (bleDataBean.getPayload()[0] == 0) {
                                 if (isSafe()) {
@@ -87,7 +87,7 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("设置密码失败   " + throwable.getMessage());
+                        LogUtils.d("设置密码失败   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().onSetPwdFailed(throwable);
                             mViewRef.get().onEndSetPwd();
@@ -99,7 +99,7 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
 
 
     public void uploadPasswordNickToServer(String deviceName, String nickName, String userNum) {
-        LogUtils.e("上传密码昵称到服务器   " + deviceName + "     " + nickName);
+        LogUtils.d("上传密码昵称到服务器   " + deviceName + "     " + nickName);
         List<AddPasswordBean.Password> passwords = new ArrayList<>();
         GetPasswordResult.DataBean.TempPassword tempPassword = new GetPasswordResult.DataBean.TempPassword(userNum, nickName, 0);
         passwords.add(new AddPasswordBean.Password(2, userNum, nickName, 1));
@@ -109,7 +109,7 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传秘钥昵称到服务器成功");
+                        LogUtils.d("上传秘钥昵称到服务器成功");
                         if (isSafe()) {
                             mViewRef.get().onUpLoadSuccess(strPwd, number > 9 ? "" + number : "0" + number, nickName);
                         }
@@ -126,7 +126,7 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥昵称到服务器失败");
+                        LogUtils.d("上传秘钥昵称到服务器失败");
                         if (isSafe()) {
                             mViewRef.get().onUploadFailed(throwable);
                             mViewRef.get().onEndSetPwd();
@@ -202,11 +202,11 @@ public class AddTempPresenter<T> extends BlePresenter<IAddTempView> {
                         }
                         bleNumber.clear();
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
 
                         getAllpasswordNumber(codeNumber, deValue);
 

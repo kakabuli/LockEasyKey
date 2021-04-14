@@ -74,7 +74,7 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
                          * bit12：人脸识别       =0：不支持      =1：支持
                          * bit13：安全模式       =0：不支持      =1：支持
                          */
-                        LogUtils.e("门锁功能  第一个字节  " + Integer.toBinaryString(deValue[0] & 0xff) + "   第二个字节  " + Integer.toBinaryString(deValue[1] & 0xff));
+                        LogUtils.d("门锁功能  第一个字节  " + Integer.toBinaryString(deValue[0] & 0xff) + "   第二个字节  " + Integer.toBinaryString(deValue[1] & 0xff));
 
 
                         /**
@@ -93,7 +93,7 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
 
                         int state5 = (lockState & 0b00100000) == 0b00100000 ? 1 : 0;
                         int state8 = (deValue[5] & 0b00000001) == 0b00000001 ? 1 : 0;
-                        LogUtils.e("布防状态为   " + state8 + "    " + "  安全模式  " + state5);
+                        LogUtils.d("布防状态为   " + state8 + "    " + "  安全模式  " + state5);
                         toDisposable(getDeviceInfoDisposable);
                         if (isSafe()) {
                             mViewRef.get().onGetStateSuccess(state5 == 1);
@@ -117,7 +117,7 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
      * @param isOpen 是否开启安全模式
      */
     public void realOpenSafeMode(boolean isOpen) {
-        LogUtils.e("开门方式    " + typeNumber);
+        LogUtils.d("开门方式    " + typeNumber);
         byte[] command = BleCommandFactory.setLockParamsCommand((byte) 0x08, new byte[]{(byte) (isOpen ? 1 : 0)}, bleLockInfo.getAuthKey());
         bleService.sendCommand(command);
         toDisposable(disposable);
@@ -133,16 +133,16 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
                 .subscribe(new Consumer<BleDataBean>() {
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
-                        LogUtils.e("收到锁警报信息   " + Rsa.toHexString(Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey())));
+                        LogUtils.d("收到锁警报信息   " + Rsa.toHexString(Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey())));
                         toDisposable(disposable);
                         if (bleDataBean.isConfirm()) {
                             if (bleDataBean.getOriginalData()[4] == 0) {
-                                LogUtils.e("设置安全模式成功");
+                                LogUtils.d("设置安全模式成功");
                                 if (isSafe()) {
                                     mViewRef.get().onSetSuccess(isOpen);
                                 }
                             } else {
-                                LogUtils.e("设置安全模式失败");
+                                LogUtils.d("设置安全模式失败");
                                 if (isSafe()) {
                                     mViewRef.get().onSetFailed(new BleProtocolFailedException((bleDataBean.getOriginalData()[4] & 0xff)));
                                 }
@@ -196,7 +196,7 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
                                 getNumber(3, isOpen);
                             } else if (type == 3) {
                                 if (typeNumber < 2) {  ///密码种类不够，提示用户添加密码
-                                    LogUtils.e("密码种类不够，提示用户添加密码");
+                                    LogUtils.d("密码种类不够，提示用户添加密码");
                                     if (isSafe()) {
                                         mViewRef.get().onPasswordTypeLess();
                                     }
@@ -212,13 +212,13 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
                             return;
                         }
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
                         int allpasswordNumber = getAllpasswordNumber(type, deValue);
-                        LogUtils.e("秘钥总数是   " + allpasswordNumber);
+                        LogUtils.d("秘钥总数是   " + allpasswordNumber);
                         if (allpasswordNumber > 0) {
                             typeNumber++;
                         }
@@ -281,7 +281,7 @@ public class SafeModePresenter<T> extends BlePresenter<ISafeModeView> {
             }
         }
 
-        LogUtils.e("获取的秘钥是   " + Arrays.toString(bleNumber.toArray()));
+        LogUtils.d("获取的秘钥是   " + Arrays.toString(bleNumber.toArray()));
         return bleNumber.size();
     }
 

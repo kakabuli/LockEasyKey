@@ -39,7 +39,7 @@ public class BluetoothSharedDeviceManagementPresenter<T> extends BasePresenter<I
                     }
                 } else {
                     if ("444".equals(bluetoothSharedDeviceBean.getCode())) { //Token过期
-                        LogUtils.e("token过期   " + Thread.currentThread().getName());
+                        LogUtils.d("token过期   " + Thread.currentThread().getName());
                         //退出mqtt
                         if (mqttService != null) {
                             mqttService.httpMqttDisconnect();

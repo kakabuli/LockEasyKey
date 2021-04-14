@@ -39,7 +39,7 @@ public class WifiVideoLockSixthPresenter<T> extends BasePresenter<IWifiLockVideo
 
         WiFiLockVideoBindBean bean = new WiFiLockVideoBindBean(wifiSN,lockNickName,uid,randomCode,wifiName,func,distributionNetwork,
                 device_sn,mac,device_did,p2p_password);
-        LogUtils.e("WifiLockVideoSixthPresenter WiFiLockVideoBindBean-->" + bean.toString());
+        LogUtils.d("WifiLockVideoSixthPresenter WiFiLockVideoBindBean-->" + bean.toString());
         XiaokaiNewServiceImp.wifiVideoLockBind(bean).subscribe(new BaseObserver<BaseResult>() {
             @Override
             public void onSuccess(BaseResult baseResult) {

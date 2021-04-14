@@ -102,7 +102,7 @@ public class GeTuiIntentService extends GTIntentService {
         String longString = "";
         String[] split = intentString.split(";");
         for (int i = 0; i < split.length;i++){
-            LogUtils.e(TAG+"shulan"+i+"-->" + split[i]);
+            LogUtils.d(TAG+"shulan"+i+"-->" + split[i]);
             if(split[i].contains("S.stringType=")){
                 intentString = split[i].split("S.stringType=")[1];
             }
@@ -111,9 +111,9 @@ public class GeTuiIntentService extends GTIntentService {
             }
         }
 
-        LogUtils.e(TAG+"shulan intentString-->" + intentString);
+        LogUtils.d(TAG+"shulan intentString-->" + intentString);
         intentString = new String(Base64.decode(intentString, Base64.DEFAULT));
-        LogUtils.e(TAG+"shulan intentString-->" + intentString);
+        LogUtils.d(TAG+"shulan intentString-->" + intentString);
         Intent intent;
         if(intentString.contains("\"func\":\"doorbell\"") && intentString.contains("wifiSN")){
             JSONObject jsonObject = null;
@@ -128,10 +128,10 @@ public class GeTuiIntentService extends GTIntentService {
             intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
             intent.putExtra("VIDEO_CALLING_IS_MAINACTIVITY",true);
             intent.putExtra(KeyConstants.WIFI_SN,wifiSN);
-            LogUtils.e(TAG+"shulan WifiVideoLockCallingActivity-->");
+            LogUtils.d(TAG+"shulan WifiVideoLockCallingActivity-->");
         }else{
             intent = new Intent(GeTuiIntentService.this, MainActivity.class);
-            LogUtils.e(TAG+"shulan MainActivity-->");
+            LogUtils.d(TAG+"shulan MainActivity-->");
         }
         long time = 0;
         try {
@@ -150,7 +150,7 @@ public class GeTuiIntentService extends GTIntentService {
     @Override
     public void onReceiveClientId(Context context, String clientid) {
         Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
-        LogUtils.e("shulan -- onReceiveClientId-->clientid=" + clientid);
+        LogUtils.d("shulan -- onReceiveClientId-->clientid=" + clientid);
 	//	SPUtils.put(context,"clientId_GetTui",clientid);
 		SPUtils2.put(context, GeTui.JPUSH_ID,clientid);
         sendMessage(clientid, 1);
@@ -159,13 +159,13 @@ public class GeTuiIntentService extends GTIntentService {
     @Override
     public void onReceiveOnlineState(Context context, boolean online) {
         Log.d(TAG, "onReceiveOnlineState -> " + (online ? "online" : "offline"));
-        LogUtils.e( "shulan onReceiveOnlineState -> " + (online ? "online" : "offline"));
+        LogUtils.d( "shulan onReceiveOnlineState -> " + (online ? "online" : "offline"));
     }
 
     @Override
     public void onReceiveCommandResult(Context context, GTCmdMessage cmdMessage) {
         Log.d(TAG, "onReceiveCommandResult -> " + cmdMessage);
-        LogUtils.e("shulan onReceiveCommandResult -> " + cmdMessage);
+        LogUtils.d("shulan onReceiveCommandResult -> " + cmdMessage);
 
         int action = cmdMessage.getAction();
 
@@ -187,7 +187,7 @@ public class GeTuiIntentService extends GTIntentService {
                         + message.getMessageId() + "\npkg = " + message.getPkgName() + "\ncid = " + message.getClientId() + "\ntitle = "
                         + message.getTitle() + "\ncontent = " + message.getContent());
 
-        LogUtils.e("shulan onNotificationMessageArrived -> " + "appid = " + message.getAppid() + "\ntaskid = " + message.getTaskId() + "\nmessageid = "
+        LogUtils.d("shulan onNotificationMessageArrived -> " + "appid = " + message.getAppid() + "\ntaskid = " + message.getTaskId() + "\nmessageid = "
                 + message.getMessageId() + "\npkg = " + message.getPkgName() + "\ncid = " + message.getClientId() + "\ntitle = "
                 + message.getTitle() + "\ncontent = " + message.getContent());
     }
@@ -197,7 +197,7 @@ public class GeTuiIntentService extends GTIntentService {
         Log.d(TAG, "onNotificationMessageClicked -> " + "appid = " + message.getAppid() + "\ntaskid = " + message.getTaskId() + "\nmessageid = "
                 + message.getMessageId() + "\npkg = " + message.getPkgName() + "\ncid = " + message.getClientId() + "\ntitle = "
                 + message.getTitle() + "\ncontent = " + message.getContent());
-        LogUtils.e("shulan onNotificationMessageClicked -> " + "appid = " + message.getAppid() + "\ntaskid = " + message.getTaskId() + "\nmessageid = "
+        LogUtils.d("shulan onNotificationMessageClicked -> " + "appid = " + message.getAppid() + "\ntaskid = " + message.getTaskId() + "\nmessageid = "
                 + message.getMessageId() + "\npkg = " + message.getPkgName() + "\ncid = " + message.getClientId() + "\ntitle = "
                 + message.getTitle() + "\ncontent = " + message.getContent());
     }

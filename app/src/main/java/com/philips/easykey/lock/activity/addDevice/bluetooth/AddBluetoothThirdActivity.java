@@ -64,7 +64,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
         mPresenter.listenConnectState();
         ButterKnife.bind(this);
 
-        LogUtils.e("是否绑定流程   " + isBind);
+        LogUtils.d("是否绑定流程   " + isBind);
 
         initView();
     }
@@ -116,7 +116,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
     public void onBindSuccess(String deviceName) {
         bindSuccess = true;
         this.deviceName = deviceName;
-        LogUtils.e("绑定成功   " + deviceName);
+        LogUtils.d("绑定成功   " + deviceName);
 //        alreadyPairNetwork.setTextColor(Color.parseColor("#1F96F7"));
 //        alreadyPairNetwork.setClickable(true);
 

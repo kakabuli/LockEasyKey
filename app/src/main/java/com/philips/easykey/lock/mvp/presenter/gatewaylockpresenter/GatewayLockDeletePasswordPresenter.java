@@ -41,7 +41,7 @@ public class GatewayLockDeletePasswordPresenter<T> extends BasePresenter<Gateway
                     .subscribe(new Consumer<MqttData>() {
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
-                            LogUtils.e("删除" + mqttData.getFunc());
+                            LogUtils.d("删除" + mqttData.getFunc());
                             toDisposable(deleteLockPwdDdisposable);
                             LockPwdFuncBean lockPwdFuncBean = new Gson().fromJson(mqttData.getPayload(), LockPwdFuncBean.class);
                             if ("200".equals(mqttData.getReturnCode()) &&

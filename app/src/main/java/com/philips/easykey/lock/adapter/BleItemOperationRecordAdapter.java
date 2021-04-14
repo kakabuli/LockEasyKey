@@ -47,7 +47,7 @@ public class BleItemOperationRecordAdapter extends BaseQuickAdapter<BluetoothIte
         tvContent.setText(bean.getNickName());
         TextView tvRight = helper.getView(R.id.tv_right);
         String strRight = bean.getStrRight();
-        LogUtils.e("Adapter 显示的   " + strRight);
+        LogUtils.d("Adapter 显示的   " + strRight);
         switch (strRight) {
             case BleUtil.PASSWORD:// "密码"  break;
                 strRight = mContext.getString(R.string.password_open);

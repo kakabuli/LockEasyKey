@@ -48,10 +48,9 @@ import com.philips.easykey.lock.utils.BatteryView;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import net.sdvn.cmapi.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +110,7 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
         ivDelete.setOnClickListener(this);
         showLockType();
         initListener();
-        LogUtils.e("授权界面");
+        LogUtils.d("授权界面");
         rlDeviceInformation.setVisibility(View.VISIBLE);
         try{
             dealWithPower(wifiLockInfo.getPower(), wifiLockInfo.getUpdateTime());
@@ -142,7 +141,7 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
                         return;
                     }
                 } catch (Exception e) {
-                    com.philips.easykey.lock.utils.LogUtils.e("--kaadas--:" + e.getMessage());
+                    com.philips.easykey.lock.utils.LogUtils.d("--kaadas--:" + e.getMessage());
                 }
             }
         }
@@ -177,7 +176,7 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
                             return;
                         }
                     } catch (Exception e) {
-                       LogUtils.e("--kaadas--:" + e.getMessage());
+                       LogUtils.d("--kaadas--:" + e.getMessage());
                     }
                 }
 //            }

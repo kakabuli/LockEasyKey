@@ -21,7 +21,6 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ftp.Result;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -145,7 +144,7 @@ public class ScanHttpDialogActivity extends BaseAddToApplicationActivity {
                 isFirst = false;
                 return;
             }
-            LogUtils.e("解析的数据是   " + sb.toString());
+            LogUtils.d("解析的数据是   " + sb.toString());
             Intent intent = new Intent();
             intent.putExtra(KeyConstants.URL_RESULT, sb.toString());
             setResult(RESULT_OK, intent);

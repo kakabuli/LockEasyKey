@@ -30,19 +30,19 @@ public class LoginPresenter<T> extends BasePresenter<ILoginView> {
 
 
     public void loginByPhone(String phone, String pwd, String noCounturyPhone) {
-        LogUtils.e("shulan -------------?loginByPhone");
+        LogUtils.d("shulan -------------?loginByPhone");
         XiaokaiNewServiceImp.loginByPhone(phone, pwd)
                 .subscribe(new LoginObserver<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         loginSuccess(loginResult, noCounturyPhone, pwd);
-                        LogUtils.e("shulan ---------->" + loginResult.toString());
+                        LogUtils.d("shulan ---------->" + loginResult.toString());
                     }
 
                     @Override
                     public void onAckErrorCode(LoginResult result) {
                         mViewRef.get().onLoginFailedServer(result);
-                        LogUtils.e("shulan ---------->登陆失败   " + result.toString());
+                        LogUtils.d("shulan ---------->登陆失败   " + result.toString());
                     }
 
                     @Override
@@ -68,7 +68,7 @@ public class LoginPresenter<T> extends BasePresenter<ILoginView> {
                     @Override
                     public void onAckErrorCode(LoginResult result) {
                         mViewRef.get().onLoginFailedServer(result);
-                        LogUtils.e("登陆失败   " + result.toString());
+                        LogUtils.d("登陆失败   " + result.toString());
                     }
 
                     @Override
@@ -119,7 +119,7 @@ public class LoginPresenter<T> extends BasePresenter<ILoginView> {
         if (mViewRef != null) {
             mViewRef.get().onLoginSuccess();
         }
-        LogUtils.e("登陆成功  数据是  " + loginResult.toString());
+        LogUtils.d("登陆成功  数据是  " + loginResult.toString());
         //保存数据到本地  以及 内存
 //        SPUtils.put(SPUtils.TOKEN, loginResult.getData().getToken());
 //        SPUtils.put(SPUtils.UID, loginResult.getData().getUid());

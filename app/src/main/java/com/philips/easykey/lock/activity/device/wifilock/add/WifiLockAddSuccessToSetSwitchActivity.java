@@ -116,7 +116,7 @@ public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLoc
 
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
         finish();
-        LogUtils.e("--kaadas--wifiLockInfo=="+wifiLockInfo);
+        LogUtils.d("--kaadas--wifiLockInfo=="+wifiLockInfo);
 
         if (wifiLockInfo != null){
             if (wifiLockInfo.getSingleFireSwitchInfo() != null) {

@@ -78,13 +78,13 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
             devices.clear();
             broadcastList.clear();//清空数据
             if (isSafe()) {
-                LogUtils.e("--kaadas--每次重新搜索都清空搜索到的设备");
+                LogUtils.d("--kaadas--每次重新搜索都清空搜索到的设备");
 //                mViewRef.get().loadDevices(devices);
                 mViewRef.get().loadBLEWiFiModelDevices(devices, broadcastList);
 
             }
         }
-        LogUtils.e("--kaadas--搜索设备    断开连接");
+        LogUtils.d("--kaadas--搜索设备    断开连接");
         bleService.release();  //搜索设备    断开连接
         handler.removeCallbacks(stopScanLe);
         handler.postDelayed(stopScanLe, 180 * 1000);
@@ -99,7 +99,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                         synchronized (this) {
                             for (BluetoothDevice bluetoothDevice : devices) {
                                 if (bluetoothDevice.getName().equals(device.getName())) {
-//                                    LogUtils.e("--kaadas--相同device   " + device.getName());
+//                                    LogUtils.d("--kaadas--相同device   " + device.getName());
                                     return false;
                                 }
                             }
@@ -115,8 +115,8 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                     @Override
                     public void accept(BluetoothLockBroadcastBean broadcastBean) throws Exception {
                         BluetoothDevice device = broadcastBean.getDevice();
-                        LogUtils.e("shulan broadcastBean.getDeviceSN()-->" + broadcastBean.getDeviceSN());
-                        LogUtils.e("--kaadas--搜索到设备   " + device.getName());
+                        LogUtils.d("shulan broadcastBean.getDeviceSN()-->" + broadcastBean.getDeviceSN());
+                        LogUtils.d("--kaadas--搜索到设备   " + device.getName());
                         devices.add(device);
                         broadcastItemList.add(broadcastBean);
                         broadcastList.add(new BluetoothLockBroadcastListBean(broadcastItemList, devices));
@@ -129,7 +129,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("--kaadas--throwable==" +throwable);
+                        LogUtils.d("--kaadas--throwable==" +throwable);
                         if (mViewRef != null) {
                             mViewRef.get().onScanDevicesFailed(throwable);
                         }
@@ -145,8 +145,8 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                 bleService.scanBleDevice(false);
                 if (mViewRef != null) {
                     if (isAttach) {
-                        LogUtils.e("--kaadas--设备停止扫描");
-                        LogUtils.e("--kaadas--mViewRef=="+mViewRef);
+                        LogUtils.d("--kaadas--设备停止扫描");
+                        LogUtils.d("--kaadas--mViewRef=="+mViewRef);
                         mViewRef.get().onStopScan();
                     }
                 }
@@ -166,7 +166,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
         handler.removeCallbacks(stopScanLe);
         if (bleService != null) { //停止扫描设备
             bleService.scanBleDevice(false);  //1
-            LogUtils.e("点击绑定设备   断开连接");
+            LogUtils.d("点击绑定设备   断开连接");
             bleService.release();  //点击绑定设备   断开连接
             if (mViewRef != null) {
                 mViewRef.get().onStopScan();
@@ -236,7 +236,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
     private Runnable releaseRunnable = new Runnable() {
         @Override
         public void run() {
-            LogUtils.e("延时断开连接  ");
+            LogUtils.d("延时断开连接  ");
             //如果此时没有连接上设备，那么结束连接   释放连接资源
             if (isSafe()) {
                 mViewRef.get().onConnectFailed();
@@ -248,7 +248,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                     bleService = MyApplication.getInstance().getBleService();
                 }
             }
-            LogUtils.e("搜索设备  连接蓝牙时的延时   断开连接");
+            LogUtils.d("搜索设备  连接蓝牙时的延时   断开连接");
             bleService.release();  //搜索设备  连接蓝牙时的延时   断开连接  1
         }
     };
@@ -261,7 +261,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                 bleService = MyApplication.getInstance().getBleService(); //判断
             }
         }
-        LogUtils.e("开始绑定");
+        LogUtils.d("开始绑定");
         this.isBind = isBind;
         this.device = device;
         if (connectTimes > 5) {
@@ -285,8 +285,8 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
                             handler.removeCallbacks(releaseRunnable);
                             toDisposable(bindDisposable);
                             if (bleStateBean.isConnected()) {
-                                LogUtils.e(ClothesHangerMachineAddThirdPresenter.class.getName() + "--kaadas--连接成功");
-                                LogUtils.e("shulan ------getBleVersion----->" + bleStateBean.getBleVersion());
+                                LogUtils.d(ClothesHangerMachineAddThirdPresenter.class.getName() + "--kaadas--连接成功");
+                                LogUtils.d("shulan ------getBleVersion----->" + bleStateBean.getBleVersion());
                                 if (bleStateBean.getBleVersion() == 4) {
 
                                     if (isSafe()) {
@@ -300,7 +300,7 @@ public class ClothesHangerMachineAddThirdPresenter<T> extends BasePresenter<IClo
 
                             }else {
                                 connectTimes++;
-                                LogUtils.e(ClothesHangerMachineAddThirdPresenter.class.getName() + "--kaadas--绑定界面连接失败");
+                                LogUtils.d(ClothesHangerMachineAddThirdPresenter.class.getName() + "--kaadas--绑定界面连接失败");
                                 bindDevice(device, isBind);
                             }
                         }

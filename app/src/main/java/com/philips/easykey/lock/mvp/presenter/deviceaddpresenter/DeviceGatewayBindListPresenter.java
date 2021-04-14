@@ -4,27 +4,16 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
-
-import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.MqttReturnCodeError;
-
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayStatusResult;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GwWiFiBaseInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceGatewayBindListView;
-import com.philips.easykey.lock.utils.LogUtils;
-
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 
 public class DeviceGatewayBindListPresenter<T> extends BasePresenter<DeviceGatewayBindListView> {
 
@@ -69,50 +58,5 @@ public class DeviceGatewayBindListPresenter<T> extends BasePresenter<DeviceGatew
             compositeDisposable.add(disposable);
         }
     }
-
-    //获取网关的wifi名称和网关的wifi密码
-    public void getGatewayWifiPwd(String gwId) {
-        MqttMessage wiFiBasic = MqttCommandFactory.getWiFiBasic(MyApplication.getInstance().getUid(), gwId, gwId);
-        if (mqttService != null) {
-            getWiFiBasicDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(MyApplication.getInstance().getUid()), wiFiBasic)
-                    .filter(new Predicate<MqttData>() {
-                        @Override
-                        public boolean test(MqttData mqttData) throws Exception {
-                            LogUtils.e("获取到的数据的messageId是   " + mqttData.getMessageId() + "   发送的messageId是  " + wiFiBasic.getId());
-                            return mqttData.isThisRequest(wiFiBasic.getId(), MqttConstant.GET_WIFI_BASIC);
-                        }
-                    })
-                    .timeout(10 * 1000, TimeUnit.MILLISECONDS)
-                    .compose(RxjavaHelper.observeOnMainThread())
-                    .subscribe(new Consumer<MqttData>() {
-                        @Override
-                        public void accept(MqttData mqttData) throws Exception {
-                            if ("200".equals(mqttData.getReturnCode())) { //请求成功
-                                GwWiFiBaseInfo wiFiBaseInfo = new Gson().fromJson(mqttData.getPayload(), GwWiFiBaseInfo.class);
-                                if (isSafe()) {
-                                    mViewRef.get().onGetWifiInfoSuccess(wiFiBaseInfo);
-                                }
-                            } else {
-                                if (isSafe()) {
-                                    mViewRef.get().onGetWifiInfoFailed(new MqttReturnCodeError(mqttData.getReturnCode()));
-                                }
-                            }
-                            toDisposable(getWiFiBasicDisposable);
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            if (isSafe()) {
-                                mViewRef.get().onGetWifiInfoFailed(throwable);
-                            }
-                        }
-                    });
-            compositeDisposable.add(getWiFiBasicDisposable);
-
-        }
-    }
-
-    //获取
-
 
 }

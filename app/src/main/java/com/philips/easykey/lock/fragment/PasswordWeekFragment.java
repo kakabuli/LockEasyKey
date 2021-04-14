@@ -364,7 +364,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
                 weekRule = data.getStringExtra(KeyConstants.WEEK_REPEAT_DATA);
 
                 days = data.getIntArrayExtra(KeyConstants.DAY_MASK);
-                LogUtils.e("收到的周计划是   " + Arrays.toString(days));
+                LogUtils.d("收到的周计划是   " + Arrays.toString(days));
                 tvRuleRepeat.setText(weekRule);
                 hintText();
             }
@@ -438,7 +438,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
 
     @Override
     public void onUploadPwdSuccess(String password, String number, String nickName) {
-        LogUtils.e("添加密码成功   " + password.toString());
+        LogUtils.d("添加密码成功   " + password.toString());
         //todo 获取到开始时间,结束时间 设置
         Intent intent = new Intent();
         intent.setClass(MyApplication.getInstance(), BluetoothPasswordShareActivity.class);

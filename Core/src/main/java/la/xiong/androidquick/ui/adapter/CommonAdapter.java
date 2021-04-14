@@ -2,6 +2,7 @@ package la.xiong.androidquick.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -68,7 +69,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     @Override
     public int getItemCount() {
-        LogUtils.iTag(TAG, "getItemCount() = " + mDatas.size());
+        Log.d(TAG, "getItemCount() = " + mDatas.size());
         return mDatas.size();
     }
 }

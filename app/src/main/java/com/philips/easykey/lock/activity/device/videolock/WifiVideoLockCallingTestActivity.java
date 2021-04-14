@@ -441,7 +441,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
             startActivity(new Intent(this, MainActivity.class));
         }
         super.finish();
-        LogUtils.e(this + "finish-----------");
+        LogUtils.d(this + "finish-----------");
         isCalling = 0;
         mPresenter.release();
     }
@@ -466,7 +466,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                     if(tvRefuse != null)
                         tvRefuse.setVisibility(View.GONE);*/
                     isConnect = false;
-                    LogUtils.e(this + "");
+                    LogUtils.d(this + "");
                     if(paramInt == -3){
                         creteDialog(getString(R.string.video_lock_xm_connect_time_out) + "");
                     }else{
@@ -777,7 +777,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                     System.arraycopy(digest, 0, temp, 0, 4);
                     long l = Rsa.getInt(temp);
                     String text = (l % 1000000) + "";
-                    LogUtils.e("--kaadas--转换之后的数据是     " + l + "    " + Rsa.bytes2Int(temp));
+                    LogUtils.d("--kaadas--转换之后的数据是     " + l + "    " + Rsa.bytes2Int(temp));
                     int offSet = (6 - text.length());
                     for (int i = 0; i < offSet; i++) {
                         text = "0" + text;
@@ -910,7 +910,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
 
     private WifiLockInfo searchVideoLock(String wifiSN){
         DaoSession daoSession = MyApplication.getInstance().getDaoWriteSession();
-        if (daoSession != null && daoSession.getCatEyeServiceInfoDao() != null) {
+        if (daoSession != null && daoSession.getWifiLockInfoDao() != null) {
             List<WifiLockInfo> wifiLockInfos = daoSession.getWifiLockInfoDao().loadAll();
             if (wifiLockInfos != null && wifiLockInfos.size() > 0) {
                 for (WifiLockInfo wifiLockInfo : wifiLockInfos) {

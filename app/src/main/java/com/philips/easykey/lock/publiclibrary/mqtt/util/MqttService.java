@@ -8,29 +8,21 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
-import com.philips.easykey.lock.bean.PirEventBus;
 import com.philips.easykey.lock.publiclibrary.NotificationManager;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.mqtt.PublishResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DoorbellingResult;
 import com.philips.easykey.lock.utils.AppUtil;
-import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.ToastUtil;
-import com.philips.easykey.lock.utils.ftp.FtpUtils;
-import com.philips.easykey.lock.utils.ftp.GeTui;
-import com.philips.easykey.lock.utils.greenDao.bean.HistoryInfo;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -44,11 +36,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
@@ -112,7 +99,7 @@ public class MqttService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        LogUtils.e("attachView   mqtt 启动了");
+        LogUtils.d("attachView   mqtt 启动了");
     }
 
     @Override
@@ -151,7 +138,7 @@ public class MqttService extends Service {
         if (!TextUtils.isEmpty(user_id)&&!TextUtils.isEmpty(user_token)) {
             connOpts.setUserName(user_id);
             connOpts.setPassword(user_token.toCharArray());
-            LogUtils.e("Mqtt设置token"+user_token+"     connopt"+connOpts.getPassword());
+            LogUtils.d("Mqtt设置token"+user_token+"     connopt"+connOpts.getPassword());
         }
         return connOpts;
     }
@@ -159,7 +146,7 @@ public class MqttService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.e("mqtt", "MqttService 被杀死");
+        LogUtils.d("mqtt", "MqttService 被杀死");
         //System.exit(0); 退出并没finish activity 因此增加了这一步
         MyApplication.getInstance().removeAllActivity();
         System.exit(0);
@@ -186,11 +173,11 @@ public class MqttService extends Service {
         //已经连接
         try {
             if (mqttClient.isConnected()) {
-                LogUtils.e("mqttConnection", "mqtt已连接");
+                LogUtils.d("mqttConnection", "mqtt已连接");
                 return;
             }
         }catch (Exception e){
-            LogUtils.e("获取客户端连接状况失败   " + e.getMessage());
+            LogUtils.d("获取客户端连接状况失败   " + e.getMessage());
             return;
         }
 
@@ -202,7 +189,7 @@ public class MqttService extends Service {
             @Override
             public void connectComplete(boolean reconnect, String serverURI) {
                 //连接完成
-                LogUtils.e("mqtt 连接完成");
+                LogUtils.d("mqtt 连接完成");
                 DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
                 disconnectedBufferOptions.setBufferEnabled(true);
                 disconnectedBufferOptions.setBufferSize(100);
@@ -226,12 +213,12 @@ public class MqttService extends Service {
                     return;
                 }
 //                //连接丢失--需要进行重连
-                LogUtils.e("connectionLost", "连接丢失需要重连");
+                LogUtils.d("connectionLost", "连接丢失需要重连");
                 String userId = MyApplication.getInstance().getUid();
                 String userToken = MyApplication.getInstance().getToken();
-                LogUtils.e(userId+"用户id"+"用户tonken"+userToken);
+                LogUtils.d(userId+"用户id"+"用户tonken"+userToken);
                 if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(userToken)) {
-                    LogUtils.e("connectionLost", "用户id或者token为空无法重连");
+                    LogUtils.d("connectionLost", "用户id或者token为空无法重连");
                     return;
                 }
                     MyApplication.getInstance().getMqttService().mqttConnection();
@@ -247,7 +234,7 @@ public class MqttService extends Service {
                 //收到消息
                 String payload = new String(message.getPayload());
                 if(BuildConfig.DEBUG)
-                LogUtils.e("收到mqtt消息111", payload + "---topic" + topic + "  messageID  " + message.getId());
+                LogUtils.d("收到mqtt消息111", payload + "---topic" + topic + "  messageID  " + message.getId());
                 //String func, String topic, String payload, MqttMessage mqttMessage
                 JSONObject jsonObject = new JSONObject(payload);
                 int messageId = -1;
@@ -279,7 +266,7 @@ public class MqttService extends Service {
 
                 onReceiverDataObservable.onNext(mqttData);
                 if (MqttConstant.GATEWAY_STATE.equals(mqttData.getFunc())) {
-                    LogUtils.e("网关状态上报");
+                    LogUtils.d("网关状态上报");
                     notifyDataObservable.onNext(mqttData);
                 }
 
@@ -292,17 +279,6 @@ public class MqttService extends Service {
                     executeDoorbellingFunction(jsonObject);
                 }
 
-
-                if(MqttConstant.GATEWAY_EVENT_NOTIFY.equals(mqttData.getFunc())){
-                    int code = jsonObject.getInt("eventcode");
-                    JSONObject eventparams = jsonObject.getJSONObject("eventparams");
-                    if(code==2){
-                        String devetype = eventparams.getString("devetype");
-                        if(devetype.equals("pir")){
-                            executePirFunction(jsonObject,eventparams);
-                        }
-                    }
-                }
             }
 
             @Override
@@ -314,7 +290,7 @@ public class MqttService extends Service {
             mqttClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    LogUtils.e("mqtt连接", "连接成功");
+                    LogUtils.d("mqtt连接", "连接成功");
 
                 }
 
@@ -322,7 +298,7 @@ public class MqttService extends Service {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     //可能出现无权连接（5）---用户在其他手机登录
                     if (reconnectionNum > 0) {
-                        LogUtils.e("mqtt连接", "连接失败1     " + exception.toString()+"token是"+token+"用户名"+userId);
+                        LogUtils.d("mqtt连接", "连接失败1     " + exception.toString()+"token是"+token+"用户名"+userId);
                         MqttExceptionHandle.onFail(MqttExceptionHandle.ConnectException, asyncActionToken, exception);
                         if (exception.toString().endsWith(" (5)")) {
                             // TODO: 2019/4/1  该用户在其他手机登录(清除所有数据）---暂时未处理
@@ -332,7 +308,7 @@ public class MqttService extends Service {
                             return;
                         }
                         if (exception.toString().endsWith(" (4)")) {
-                            LogUtils.e("mqtt的用户名或密码错误");
+                            LogUtils.d("mqtt的用户名或密码错误");
                             if (mqttClient!=null){
                                 mqttDisconnect();
                             }
@@ -359,7 +335,7 @@ public class MqttService extends Service {
                             return;
                         }
                         if ("错误的用户名或密码 (4)".equals(exception.toString())) {
-                            LogUtils.e("mqtt的用户名或密码错误");
+                            LogUtils.d("mqtt的用户名或密码错误");
                             if (mqttClient!=null){
                                 mqttDisconnect();
                             }
@@ -384,7 +360,7 @@ public class MqttService extends Service {
             ToastUtil.getInstance().showShort(getString(R.string.network_exception));
             return;
         }
-        LogUtils.e("订阅    "+topic +"   "+(mqttClient != null));
+        LogUtils.d("订阅    "+topic +"   "+(mqttClient != null));
         try {
             if (mqttClient != null) {
                 if (!TextUtils.isEmpty(topic) && mqttClient.isConnected()) {
@@ -393,7 +369,7 @@ public class MqttService extends Service {
                                 @Override
                                 public void onSuccess(IMqttToken asyncActionToken) {
                                     mSubscribe.onNext(true);
-                                    LogUtils.e("mqttSubscribe", "订阅成功");
+                                    LogUtils.d("mqttSubscribe", "订阅成功");
                                     //订阅成功，立即拿设备列表
                                     MyApplication.getInstance().getAllDevicesByMqtt(true);
 
@@ -402,7 +378,7 @@ public class MqttService extends Service {
                                 @Override
                                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                                     mSubscribe.onNext(false);
-                                    LogUtils.e("mqttSubscribe", "订阅失败");
+                                    LogUtils.d("mqttSubscribe", "订阅失败");
                                     MqttExceptionHandle.onFail(MqttExceptionHandle.SubscribeException, asyncActionToken, exception);
                                 }
                             });
@@ -423,17 +399,17 @@ public class MqttService extends Service {
     public Observable<MqttData> mqttPublish(String topic, MqttMessage mqttMessage) {
         try {
             if (mqttClient!=null&&mqttClient.isConnected()) {
-                LogUtils.e("发布mqtt消息", "topic: "+topic+"  mqttMessage: "+mqttMessage.toString());
+                LogUtils.d("发布mqtt消息", "topic: "+topic+"  mqttMessage: "+mqttMessage.toString());
                 mqttClient.publish(topic, mqttMessage, null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
-//                        LogUtils.e("发布消息成功  ", topic + "  消息Id  " + mqttMessage.getId() );
+//                        LogUtils.d("发布消息成功  ", topic + "  消息Id  " + mqttMessage.getId() );
                         publishObservable.onNext(new PublishResult(true, asyncActionToken, mqttMessage));
                     }
 
                     @Override
                     public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                        LogUtils.e("发布消息失败", topic + "    fail");
+                        LogUtils.d("发布消息失败", topic + "    fail");
                         MqttExceptionHandle.onFail(MqttExceptionHandle.PublishException, asyncActionToken, exception);
                         publishObservable.onNext(new PublishResult(false, asyncActionToken, mqttMessage));
                     }
@@ -452,7 +428,7 @@ public class MqttService extends Service {
         String token= MyApplication.getInstance().getToken();
         reconnectionNum = 10;
         if (mqttClient == null) {
-            LogUtils.e("mqttClient为空");
+            LogUtils.d("mqttClient为空");
             return;
         }
         if (TextUtils.isEmpty(token)){
@@ -465,17 +441,17 @@ public class MqttService extends Service {
                 mqttClient.disconnect(null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
-                        LogUtils.e("正在断开连接正常情况");
+                        LogUtils.d("正在断开连接正常情况");
                         mqttClient.unregisterResources();
                         mqttClient = null;
                         MyApplication.getInstance().tokenInvalid(true);
-                        LogUtils.e("mqttDisconnect", "断开连接成功");
+                        LogUtils.d("mqttDisconnect", "断开连接成功");
                         disconnectObservable.onNext(true);
                     }
 
                     @Override
                     public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                        LogUtils.e("正在断开连接失败");
+                        LogUtils.d("正在断开连接失败");
                         disconnectObservable.onNext(false);
                     }
                 });
@@ -484,7 +460,7 @@ public class MqttService extends Service {
             }
         } else {
             //被挤出
-                LogUtils.e("正在断开连接被挤出");
+                LogUtils.d("正在断开连接被挤出");
                 disconnectObservable.onNext(true);
                 mqttClient.unregisterResources();
                 mqttClient = null;
@@ -497,7 +473,7 @@ public class MqttService extends Service {
         String token= MyApplication.getInstance().getToken();
         reconnectionNum = 10;
         if (mqttClient == null) {
-            LogUtils.e("mqttClient为空");
+            LogUtils.d("mqttClient为空");
             return;
         }
         if (TextUtils.isEmpty(token)){
@@ -510,16 +486,16 @@ public class MqttService extends Service {
                 mqttClient.disconnect(null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
-                        LogUtils.e("正在断开连接正常情况");
+                        LogUtils.d("正在断开连接正常情况");
                         mqttClient.unregisterResources();
                         mqttClient = null;
-                        LogUtils.e("mqttDisconnect", "断开连接成功");
+                        LogUtils.d("mqttDisconnect", "断开连接成功");
                         disconnectObservable.onNext(true);
                     }
 
                     @Override
                     public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                        LogUtils.e("正在断开连接失败");
+                        LogUtils.d("正在断开连接失败");
                         disconnectObservable.onNext(false);
                     }
                 });
@@ -528,7 +504,7 @@ public class MqttService extends Service {
             }
         } else {
             //被挤出
-            LogUtils.e("正在断开连接被挤出");
+            LogUtils.d("正在断开连接被挤出");
             disconnectObservable.onNext(true);
             mqttClient.unregisterResources();
             mqttClient = null;
@@ -537,69 +513,6 @@ public class MqttService extends Service {
 
 
     }
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    String lastkey="";
-    String currentkey="";
-    public void executePirFunction(JSONObject jsonObject,JSONObject eventparams){
-        try {
-            JSONObject devinfo = eventparams.getJSONObject("devinfo");
-            JSONObject params = devinfo.getJSONObject("params");
-            String gwId = jsonObject.getString("gwId");
-            String url = params.getString("url");
-            String deviceId = jsonObject.getString("deviceId");
-            //		String str="/sdap0/storage/orangecat-20190315/1552636453_picture.jpg";
-            int i= url.lastIndexOf("/");
-            String fileName = url.substring(i+1,url.length());
-            String remoteRootPath =  fileName.split("_")[0];
-            Long remoteRootPathMillisecond = Long.parseLong(remoteRootPath.split("_")[0]);
-            Date remoteRootDate= null;
-            try {
-                remoteRootDate = simpleDateFormat.parse(simpleDateFormat.format(new Date(remoteRootPathMillisecond*1000)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-                Log.e(GeTui.VideoLog,"remoteRootDate异常...........");
-            }
-            Log.e(GeTui.VideoLog,"第一步:pir快照，下载地址url:"+url+" gwId网关Id:"+gwId+"保存时间:"+simpleDateFormat.format(remoteRootDate)+" deviceId:"+deviceId+" fileName:"+fileName);
-            Date today_date=null;
-            try {
-                today_date= simpleDateFormat.parse(simpleDateFormat.format(new Date()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            currentkey= deviceId+fileName;
-            if(!TextUtils.isEmpty(lastkey)&& lastkey.equals(currentkey)){
-                lastkey=currentkey;
-                return;
-            }
-            lastkey=currentkey;
-            HistoryInfo historyInfo=new HistoryInfo(null,deviceId,today_date,fileName);
-            long insertId = MyApplication.getInstance().getDaoWriteSession().getHistoryInfoDao().insert(historyInfo);
-            String key= deviceId+GeTui.CATEYE_KEY;
-            int catEyeCount= (int) SPUtils2.get(MyApplication.getInstance(),key,0);
-            catEyeCount++;
-            SPUtils2.put(MyApplication.getInstance(),key,catEyeCount);
-            PirEventBus pirEventBus=new PirEventBus(deviceId);
-            EventBus.getDefault().post(pirEventBus);
-            Log.e(GeTui.VideoLog,"insertId:"+insertId+"发送eventbus:"+pirEventBus);
-            String currentTimeFolder = FtpUtils.getCurrentDayFolder1(url);
-            String path = MyApplication.getInstance().getExternalFilesDir("").getAbsolutePath() + File.separator + Constants.DOWNLOAD_IMAGE_FOLDER_NAME+ File.separator + deviceId+File.separator+currentTimeFolder;
-            Log.e(GeTui.VideoLog,"路径是:"+path);
-            File file=new File(path);
-            if(!file.exists()){
-                boolean isMkdir= file.mkdir();
-                if(isMkdir){
-                    Log.e(GeTui.VideoLog,"MqttCallBack===>文件创建成功");
-                }else{
-                    Log.e(GeTui.VideoLog,"MqttCallBack===>文件创建成功");
-                }
-            }
-       //     Toast.makeText(MyApplication.getInstance(), MyApplication.getInstance().getString(R.string.pir_notify), Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     private void executeDoorbellingFunction(JSONObject jsonObject) {
         DoorbellingResult mDoorbellingResult = new Gson().fromJson(jsonObject.toString(), DoorbellingResult.class);

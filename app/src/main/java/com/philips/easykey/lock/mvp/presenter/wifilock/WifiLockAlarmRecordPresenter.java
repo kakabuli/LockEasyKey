@@ -11,7 +11,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockAlarmRecord
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;

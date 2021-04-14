@@ -91,7 +91,7 @@ public class MyAlbumPlayerPresenter<T> extends BasePresenter<IMyAlbumPlayerView>
     XMP2PManager.ConnectStatusListener listener = new XMP2PManager.ConnectStatusListener() {
         @Override
         public void onConnectFailed(int paramInt) {
-            LogUtils.e("shulan onConnectFailed------------------->" + paramInt);
+            LogUtils.d("shulan onConnectFailed------------------->" + paramInt);
             XMP2PManager.getInstance().stopCodec();//
             if(paramInt == XMP2PConnectError.XM_DYNAMIC_LIBRARY_NOT_INITIALIZED){
                 XMP2PManager.getInstance().initAPI(MyApplication.getInstance(),serviceString);
@@ -188,10 +188,10 @@ public class MyAlbumPlayerPresenter<T> extends BasePresenter<IMyAlbumPlayerView>
 
             @Override
             public void onVideoFrameUsed(H264Frame h264Frame) {
-                LogUtils.e("shulan onVideoFrameUsed------------->" +h264Frame.frameTimeStamp);
+                LogUtils.d("shulan onVideoFrameUsed------------->" +h264Frame.frameTimeStamp);
                 if(h264Frame.frameTimeStamp - time >= 1000){
 
-                    LogUtils.e("shulan onVideoFrameUsed"+"FrameTimeStamp = " + h264Frame.frameTimeStamp + "--FrameRate = " + n);
+                    LogUtils.d("shulan onVideoFrameUsed"+"FrameTimeStamp = " + h264Frame.frameTimeStamp + "--FrameRate = " + n);
                     n = 0;
                     time = h264Frame.frameTimeStamp;
                 }else{
@@ -204,7 +204,7 @@ public class MyAlbumPlayerPresenter<T> extends BasePresenter<IMyAlbumPlayerView>
 
             @Override
             public void onAudioFrameUsed(AudioFrame audioFrame) {
-                LogUtils.e("shulan onAudioFrameUsed------------->" + audioFrame.frameTimeStamp);
+                LogUtils.d("shulan onAudioFrameUsed------------->" + audioFrame.frameTimeStamp);
             }
 
             @Override
@@ -227,13 +227,13 @@ public class MyAlbumPlayerPresenter<T> extends BasePresenter<IMyAlbumPlayerView>
         XMP2PManager.getInstance().setOnPlayDeviceRecordVideo(new XMP2PManager.PlayDeviceRecordVideo() {
             @Override
             public void onPlayDeviceRecordVideoProcResult(JSONObject jsonObject) {
-                LogUtils.e("shulan onPlayDeviceRecordVideoProcResult------->" + jsonObject.toString());
+                LogUtils.d("shulan onPlayDeviceRecordVideoProcResult------->" + jsonObject.toString());
                 try {
                     if(jsonObject.getInt("errno") == XMP2PConnectJsonError.XM_JSON_ERROR_T21_INITIALIZED && times>0){
                         postHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                LogUtils.e("shulan 116");
+                                LogUtils.d("shulan 116");
                                 playDeviceRecordVideo(record,path);
                             }
                         },2000);
@@ -249,7 +249,7 @@ public class MyAlbumPlayerPresenter<T> extends BasePresenter<IMyAlbumPlayerView>
                     if(jsonObject.getString("result").equals("ok")){
 //                        startRecordMP4(path +  File.separator + id + ".mp4");
                         if(isSafe()){
-                            LogUtils.e("shulan onPlayDeviceRecordVideoProcResult------>onSuccessRecord");
+                            LogUtils.d("shulan onPlayDeviceRecordVideoProcResult------>onSuccessRecord");
                             mViewRef.get().onSuccessRecord(true);
                         }
                     }else if(jsonObject.getString("result").equals("fail")){

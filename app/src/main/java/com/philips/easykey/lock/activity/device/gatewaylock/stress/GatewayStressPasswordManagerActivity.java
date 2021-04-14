@@ -118,7 +118,7 @@ public class GatewayStressPasswordManagerActivity extends BaseAddToApplicationAc
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.e("密码管理界面  onResume()   ");
+        LogUtils.d("密码管理界面  onResume()   ");
     }
 
 

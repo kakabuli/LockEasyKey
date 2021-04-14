@@ -60,7 +60,7 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getOriginalData()[0] == 0) {
-                            LogUtils.e("收到设置指纹的回调数据   " + Rsa.toHexString(bleDataBean.getPayload()));
+                            LogUtils.d("收到设置指纹的回调数据   " + Rsa.toHexString(bleDataBean.getPayload()));
 
                             int firstPayload = bleDataBean.getPayload()[0] & 0xff;
                             if (firstPayload == 0 || firstPayload == 0xff) {  //正在添加锁  不处理
@@ -70,7 +70,7 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
                                 toDisposable(addFingerDisposable);
                             }
                         } else {
-                            LogUtils.e("收到设置指纹的回调数据   " + Rsa.toHexString(Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey())));
+                            LogUtils.d("收到设置指纹的回调数据   " + Rsa.toHexString(Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey())));
                             byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
                             int eventType = deValue[0] & 0xff;  //2
                             int eventSource = deValue[1] & 0xff;  //4
@@ -155,11 +155,11 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
                         }
                         bleNumber.clear();
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
 
                         getAllpasswordNumber(codeNumber, deValue);
 
@@ -200,7 +200,7 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
 
 
     public void uploadPasswordNickToServer(String deviceName, String nickName, String userNum) {
-        LogUtils.e("上传密码昵称到服务器   " + deviceName + "     " + nickName);
+        LogUtils.d("上传密码昵称到服务器   " + deviceName + "     " + nickName);
         List<AddPasswordBean.Password> passwords = new ArrayList<>();
         GetPasswordResult.DataBean.TempPassword tempPassword = new GetPasswordResult.DataBean.TempPassword(userNum, nickName, 0);
         passwords.add(new AddPasswordBean.Password(3, userNum, nickName, 1));
@@ -209,7 +209,7 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传秘钥昵称到服务器成功");
+                        LogUtils.d("上传秘钥昵称到服务器成功");
                         if (isSafe()) {
                             mViewRef.get().onUploadFingerSuccess(Integer.parseInt(userNum));
                         }
@@ -226,7 +226,7 @@ public class AddFingerprintEndPresenter<T> extends BlePresenter<IAddFingerprintE
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥昵称到服务器失败");
+                        LogUtils.d("上传秘钥昵称到服务器失败");
                         if (isSafe()) {
                             mViewRef.get().onUploadFingerFailed(throwable);
                         }

@@ -45,7 +45,7 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             SettingOpenDirectionResult settingOpenDirectionResult = new Gson().fromJson(mqttData.getPayload(), SettingOpenDirectionResult.class);
-                            LogUtils.e("shulan settingOpenDirectionResult-->" + settingOpenDirectionResult.toString());
+                            LogUtils.d("shulan settingOpenDirectionResult-->" + settingOpenDirectionResult.toString());
                             if(settingOpenDirectionResult != null && isSafe()){
                                 if("200".equals(settingOpenDirectionResult.getCode() + "")){
                                     mViewRef.get().settingSuccess(settingOpenDirectionResult.getParams().getOpenDirection());

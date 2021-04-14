@@ -12,7 +12,7 @@ import java.io.File;
 public abstract class OtaBaseActivity extends BaseAddToApplicationActivity {
 
     public void downFile(String url, String path) {
-        LogUtils.e("开始下载  下载链接  " + url + "   保存地址  " + path);
+        LogUtils.d("开始下载  下载链接  " + url + "   保存地址  " + path);
         File file = new File(path);
         if (file.exists()) {
             onFileExist(  url,   path);
@@ -25,20 +25,20 @@ public abstract class OtaBaseActivity extends BaseAddToApplicationActivity {
                     //等待
                     @Override
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("开始下载  l1 ");
+                        LogUtils.d("开始下载  l1 ");
                     }
 
                     //下载进度回调
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("下载进度   " + (soFarBytes * 1.0 / 1.0 * totalBytes) * 100);
+                        LogUtils.d("下载进度   " + (soFarBytes * 1.0 / 1.0 * totalBytes) * 100);
                         onDownProgressUpdate(url, path, (int) ((soFarBytes * 1.0 / 1.0 * totalBytes) * 100));
                     }
 
                     //完成下载
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        LogUtils.e("下载成功");
+                        LogUtils.d("下载成功");
                         onDownComplete(  url,   path);
 
 //                        searchDeviceByMacAndConnect();
@@ -53,14 +53,14 @@ public abstract class OtaBaseActivity extends BaseAddToApplicationActivity {
                     //下载出错
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        LogUtils.e("下载出错  " + e.getMessage());
+                        LogUtils.d("下载出错  " + e.getMessage());
                         onDownFailed(url, path, e);
                     }
 
                     //已存在相同下载
                     @Override
                     protected void warn(BaseDownloadTask task) {
-                        LogUtils.e("已存在   任务");
+                        LogUtils.d("已存在   任务");
                         onTaskExist(url, path);
                     }
                 }).start();

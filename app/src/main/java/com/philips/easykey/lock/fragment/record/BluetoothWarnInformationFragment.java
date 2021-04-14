@@ -199,7 +199,7 @@ public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRe
 
     @Override
     public void onLoadServerRecord(List<WarringRecord> warringRecords, int page) {
-        LogUtils.e("收到服务器数据  " + warringRecords.size());
+        LogUtils.d("收到服务器数据  " + warringRecords.size());
         currentPage = page + 1;
         groupData(warringRecords);
         bluetoothWarnMessageAdapter.notifyDataSetChanged();
@@ -294,7 +294,7 @@ public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRe
 
     @Override
     public void onUploadServerRecordSuccess() {
-        LogUtils.e("记录上传成功");
+        LogUtils.d("记录上传成功");
     }
 
     @Override
@@ -324,7 +324,7 @@ public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRe
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
-                    LogUtils.e("同步开锁记录");
+                    LogUtils.d("同步开锁记录");
                     mPresenter.getRecordFromBle();
                     list.clear();
                     if (bluetoothWarnMessageAdapter != null) {

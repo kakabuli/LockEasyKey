@@ -62,7 +62,7 @@ public class WifiLockRecordActivity extends BaseActivity<IWifiLockVideoRecordVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_equipment_dynamic);
-        LogUtils.e("是否支持操作记录   ");
+        LogUtils.d("是否支持操作记录   ");
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.device_dynamic));

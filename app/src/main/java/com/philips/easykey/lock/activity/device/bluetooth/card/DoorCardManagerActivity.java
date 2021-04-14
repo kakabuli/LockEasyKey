@@ -200,7 +200,7 @@ public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, C
 
     @Override
     public void onServerDataUpdate() {
-        LogUtils.e("卡片更新   ");
+        LogUtils.d("卡片更新   ");
         mPresenter.getAllPassword(bleLockInfo, true);
     }
 
@@ -268,7 +268,7 @@ public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, C
         } else {
             isNotData = false;
         }
-        LogUtils.e("卡片更新");
+        LogUtils.d("卡片更新");
         list = result.getData().getCardList();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             list.sort(Comparator.naturalOrder());

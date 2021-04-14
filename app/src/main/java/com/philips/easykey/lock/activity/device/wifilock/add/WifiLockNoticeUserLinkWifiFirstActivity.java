@@ -97,7 +97,7 @@ public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicatio
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, ssid);
         }
         byte[] ssidOriginalData = TouchNetUtil.getOriginalSsidBytes(info);
-        LogUtils.e("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
+        LogUtils.d("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
         if (Rsa.bytesToHexString(ssidOriginalData) == null) {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");
             return;
@@ -110,7 +110,7 @@ public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicatio
                 || info.getNetworkId() == -1
                 || "<unknown ssid>".equals(info.getSSID());
         if (disconnected) {
-            LogUtils.e("网络切换   断开 ");
+            LogUtils.d("网络切换   断开 ");
         } else {
             String ssid = info.getSSID();
             if (TextUtils.isEmpty(ssid)) {
@@ -119,7 +119,7 @@ public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicatio
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
             if ((ssid.equals("kaadas_AP")) && isFirst) {
                 isFirst = false;
                 startActivity(new Intent(WifiLockNoticeUserLinkWifiFirstActivity.this, WifiLockApInputAdminPasswordActivity.class));

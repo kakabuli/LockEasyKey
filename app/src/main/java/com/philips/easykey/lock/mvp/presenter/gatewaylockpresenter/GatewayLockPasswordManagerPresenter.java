@@ -22,7 +22,7 @@ public class GatewayLockPasswordManagerPresenter<T> extends GatewayLockPasswordP
                 planPasswordIndex.add(key);
             }
         }
-        LogUtils.e("策略密码的个数是   " + planPasswordIndex.size());
+        LogUtils.d("策略密码的个数是   " + planPasswordIndex.size());
         if (planPasswordIndex.size() > 0) {
             getPlan(deviceId, gatewayId, planPasswordIndex.get(0), planPasswordIndex.get(0), "year");
             if (isSafe()) {

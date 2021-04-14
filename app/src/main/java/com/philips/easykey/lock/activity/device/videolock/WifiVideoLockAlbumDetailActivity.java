@@ -32,9 +32,9 @@ import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.MyAlbumPlayerPr
 import com.philips.easykey.lock.mvp.view.wifilock.IMyAlbumPlayerView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.player.MediaPlayerWrapper;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.player.MediaStatus;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.player.StatusHelper;
+import com.philips.easykey.lock.publiclibrary.player.MediaPlayerWrapper;
+import com.philips.easykey.lock.publiclibrary.player.MediaStatus;
+import com.philips.easykey.lock.publiclibrary.player.StatusHelper;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectError;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -123,7 +123,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_album_detail);
         ButterKnife.bind(this);
-        LogUtils.e("shulan WifiVideoLockAlbumDetailActivity------------->onCreate");
+        LogUtils.d("shulan WifiVideoLockAlbumDetailActivity------------->onCreate");
         filepath = getIntent().getStringExtra(KeyConstants.VIDEO_PIC_PATH);
         String name = getIntent().getStringExtra("NAME");
 
@@ -334,7 +334,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.e("shulan WifiVideoLockAlbumDetailActivity------------->onDestroy");
+        LogUtils.d("shulan WifiVideoLockAlbumDetailActivity------------->onDestroy");
         stopRepeatTimer();
         if (mediaPlayer != null) {
             mediaPlayer.releaseResource();
@@ -347,7 +347,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
     @Override
     public void finish() {
         super.finish();
-        LogUtils.e("shulan WifiVideoLockAlbumDetailActivity------------->finish");
+        LogUtils.d("shulan WifiVideoLockAlbumDetailActivity------------->finish");
         mPresenter.release();
 
         try{
@@ -511,7 +511,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
 
     @Override
     public void onConnectFailed(int paramInt) {
-        LogUtils.e("shulan onConnectFailed-->" + paramInt);
+        LogUtils.d("shulan onConnectFailed-->" + paramInt);
         mPresenter.handler.post(new Runnable() {
             @Override
             public void run() {
@@ -553,7 +553,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
     @Override
     public void onVideoFrameUsed(H264Frame h264Frame) {
         if(h264Frame.getFrameTimeStamp() == 0){
-            LogUtils.e("shulan onVideoFrameUsed--------->h264Frame.getFrameTimeStamp() == 0");
+            LogUtils.d("shulan onVideoFrameUsed--------->h264Frame.getFrameTimeStamp() == 0");
             isRecordSuccess = true;
 //            mPresenter.release();
             runOnUiThread(new Runnable() {

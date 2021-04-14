@@ -89,7 +89,7 @@ public class AddTimeActivity extends BaseAddToApplicationActivity {
             if (REQUEST_CODE == requestCode) {
                 weekRule = data.getStringExtra(KeyConstants.WEEK_REPEAT_DATA);
                 days = data.getIntArrayExtra(KeyConstants.DAY_MASK);
-                LogUtils.e("收到的周计划是   " + Arrays.toString(days));
+                LogUtils.d("收到的周计划是   " + Arrays.toString(days));
                 tvRepeatRule.setText(weekRule);
             }
         }

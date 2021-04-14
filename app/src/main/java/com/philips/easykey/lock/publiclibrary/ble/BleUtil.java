@@ -273,7 +273,7 @@ public class BleUtil {
         String head = MyApplication.getInstance().getString(R.string.device) + " " + nickName + " ";
         StringBuffer buffer = new StringBuffer();
 
-        LogUtils.e("收到报警信息   " + Integer.toBinaryString(payload[4] & 0xff) + "   " + Integer.toBinaryString(payload[5] & 0xff));
+        LogUtils.d("收到报警信息   " + Integer.toBinaryString(payload[4] & 0xff) + "   " + Integer.toBinaryString(payload[5] & 0xff));
 
         int state0 = (payload[4] & 0b00000001) == 0b00000001 ? 1 : 0;
         if (state0 == 1) {
@@ -343,7 +343,7 @@ public class BleUtil {
         }
 
 
-        LogUtils.e("收到报警信息   " + buffer.toString());
+        LogUtils.d("收到报警信息   " + buffer.toString());
 
         if (TextUtils.isEmpty(buffer.toString())) {
             return null;
@@ -364,7 +364,7 @@ public class BleUtil {
          * 0x03：Alarm
          *type-source-code 都是int值 以中划线分割
          * */
-        LogUtils.e("eventType " + eventType + " index  " + index);
+        LogUtils.d("eventType " + eventType + " index  " + index);
         if (1 == eventType || 2 == eventType) {
             int eventSource1 = payload[6] & 0xff;
             int eventCode = payload[7] & 0xff;

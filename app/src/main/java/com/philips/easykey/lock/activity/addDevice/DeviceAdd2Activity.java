@@ -253,14 +253,14 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e("扫描结果是   " + result);
+                    LogUtils.d("扫描结果是   " + result);
 
                     if (result.contains("SN-GW") && result.contains("MAC-") && result.contains(" ")) {
                         String[] strs = result.split(" ");
                         String deviceSN = strs[0].replace("SN-", "");
                         Intent scanSuccessIntent = new Intent(DeviceAdd2Activity.this, AddDeviceZigbeeLockNewZeroActivity.class);
                         scanSuccessIntent.putExtra("deviceSN", deviceSN);
-                        LogUtils.e("设备SN是   " + deviceSN);
+                        LogUtils.d("设备SN是   " + deviceSN);
                         startActivity(scanSuccessIntent);
                         finish();
 //                    } else if ( (result.contains("_WiFi_1")||result.contains("_WiFi_master"))){  //老的4-1配网
@@ -337,7 +337,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
     @Override
     public void onDeviceRefresh(AllBindDevices allBindDevices) {
         if (allBindDevices != null) {
-            LogUtils.e("添加设备加入网关");
+            LogUtils.d("添加设备加入网关");
             List<HomeShowBean> gatewayList = mPresenter.getGatewayBindList();
             if (gatewayList != null) {
                 if (gatewayList.size() > 0) {

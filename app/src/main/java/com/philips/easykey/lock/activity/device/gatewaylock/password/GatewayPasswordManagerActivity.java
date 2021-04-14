@@ -162,7 +162,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.e("onPause");
+        LogUtils.d("onPause");
     }
 
     @Override
@@ -211,7 +211,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
             case R.id.ll_add_password:
                 //新版锁
                 String lockversion = lockInfo.getServerInfo().getLockversion();
-                LogUtils.e("获取到 版本信息是   " + lockversion);
+                LogUtils.d("获取到 版本信息是   " + lockversion);
                 if (!TextUtils.isEmpty(lockversion)) {
                     String lockModel = lockversion.split(";")[0];
                     if (!TextUtils.isEmpty(lockModel) &&( lockModel.equalsIgnoreCase("8100Z") ||  lockModel.equalsIgnoreCase("8100A"))) {
@@ -259,7 +259,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         gatewayModel =getIntent().getStringExtra(KeyConstants.GATEWAY_MODEL);
         //第一次进入该页面,由于锁上重置，删除，添加无法知道当前锁的信息所以只有第一次进入需要判断
 //        int firstIn = (int) SPUtils.get(KeyConstants.FIRST_IN_GATEWAY_LOCK + userId + deviceId, 0);
-//        LogUtils.e("是否是第一次进入   " + firstIn);
+//        LogUtils.d("是否是第一次进入   " + firstIn);
 //        if (firstIn == 0) { //默认是第一次进来
 //            mPresenter.syncPassword(gatewayId, deviceId);
 //            loadingDialog.show2(getString(R.string.get_gateway_lock_pwd_waiting));
@@ -291,7 +291,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         }
         //passwordPageChange(false);
         ToastUtil.getInstance().showShort(getString(R.string.get_lock_info_fail));
-        LogUtils.e("获取到锁信息失败   ");
+        LogUtils.d("获取到锁信息失败   ");
     }
 
     @Override
@@ -301,7 +301,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         }
         //passwordPageChange(false);
         ToastUtil.getInstance().showShort(getString(R.string.get_lock_info_fail));
-        LogUtils.e("获取到锁信息异常   " + throwable.getMessage());
+        LogUtils.d("获取到锁信息异常   " + throwable.getMessage());
     }
 
     @Override
@@ -315,7 +315,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         }
         SPUtils.put(KeyConstants.FIRST_IN_GATEWAY_LOCK + userId + deviceId, 1);
         List<GatewayPasswordPlanBean> gatewayPasswordPlanBeans = parsePassword(passwordPlanBeans);
-        LogUtils.e("获取全部密码  1  " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
+        LogUtils.d("获取全部密码  1  " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
         daoManager.insertAfterDelete(deviceId, MyApplication.getInstance().getUid(), gatewayId, gatewayPasswordPlanBeans);
         mList.clear();
         mList.addAll(gatewayPasswordPlanBeans);
@@ -333,7 +333,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
 
     @Override
     public void syncPasswordFailed(Throwable throwable) {
-        LogUtils.e("获取开锁密码异常   " + throwable.getMessage());
+        LogUtils.d("获取开锁密码异常   " + throwable.getMessage());
         loadingDialog.dismiss();
         ToastUtil.getInstance().showShort(R.string.get_lock_pwd_list_fail);
         passwordPageChange(false);
@@ -356,9 +356,9 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
 
     @Override
     public void onLoadPasswordPlan(Map<Integer, GatewayPasswordPlanBean> passwordPlanBeans) {
-        LogUtils.e("");
+        LogUtils.d("");
         List<GatewayPasswordPlanBean> gatewayPasswordPlanBeans = parsePassword(passwordPlanBeans);
-        LogUtils.e("获取全部密码   2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
+        LogUtils.d("获取全部密码   2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
         daoManager.insertAfterDelete(deviceId, MyApplication.getInstance().getUid(), gatewayId, gatewayPasswordPlanBeans);
         mList.clear();
         mList.addAll(gatewayPasswordPlanBeans);
@@ -375,7 +375,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     @Override
     public void onLoadPasswordPlanComplete(Map<Integer, GatewayPasswordPlanBean> passwordPlanBeans) {
         List<GatewayPasswordPlanBean> gatewayPasswordPlanBeans = parsePassword(passwordPlanBeans);
-        LogUtils.e("获取全部密码   2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
+        LogUtils.d("获取全部密码   2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
         daoManager.insertAfterDelete(deviceId, MyApplication.getInstance().getUid(), gatewayId, gatewayPasswordPlanBeans);
         mList.clear();
         mList.addAll(gatewayPasswordPlanBeans);

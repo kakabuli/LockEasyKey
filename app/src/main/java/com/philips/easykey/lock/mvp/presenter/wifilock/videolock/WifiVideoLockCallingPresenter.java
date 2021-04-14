@@ -118,12 +118,12 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
                 return;
             }
             if((startTime > 0 && System.currentTimeMillis() - startTime > OVER_TIME_SECONDS) || connectTimes > OVER_TIME_TIMES){
-                LogUtils.e("shulan 111---------->onConnectFailed=" + paramInt);
+                LogUtils.d("shulan 111---------->onConnectFailed=" + paramInt);
                 if(isSafe()){
                     mViewRef.get().onConnectFailed(paramInt);
                 }
             }else{
-                LogUtils.e("shulan 222---------->onConnectFailed=" + paramInt);
+                LogUtils.d("shulan 222---------->onConnectFailed=" + paramInt);
                 connectTimes++;
                 connectP2P();
             }
@@ -187,7 +187,7 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
         deviceInfo.setDeviceSn(sn);
         deviceInfo.setServiceString(serviceString);
         XMP2PManager.getInstance().setOnConnectStatusListener(listener);
-        LogUtils.e("shulan XMP2PManager.getInstance()------->" + XMP2PManager.getInstance());
+        LogUtils.d("shulan XMP2PManager.getInstance()------->" + XMP2PManager.getInstance());
         int param = XMP2PManager.getInstance().connectDevice(deviceInfo);
         return param;
     }
@@ -206,9 +206,9 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
     }
 
     public void startRealTimeVideo(SurfaceView surfaceView){
-        LogUtils.e("shulan isConnect--> " + XMP2PManager.getInstance().isConnected(-1));
+        LogUtils.d("shulan isConnect--> " + XMP2PManager.getInstance().isConnected(-1));
 //        if(XMP2PManager.getInstance().isConnected(-1)){
-            LogUtils.e("startRealTimeVideo");
+            LogUtils.d("startRealTimeVideo");
             XMP2PManager.getInstance().setRotate(XMP2PManager.SCREEN_ROTATE);
             try {
                 XMP2PManager.getInstance().setAudioFrame();
@@ -250,7 +250,7 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
 //                    MyLog.getInstance().save("xmtest"+"FrameTimeStamp = " + h264Frame.frameTimeStamp + "--FrameRate = " + h264Frame.getFrameRate());
                     if(h264Frame.frameTimeStamp - time >= 1000){
 
-                        LogUtils.e("xmtest"+"FrameTimeStamp = " + h264Frame.frameTimeStamp + "--FrameRate = " + n);
+                        LogUtils.d("xmtest"+"FrameTimeStamp = " + h264Frame.frameTimeStamp + "--FrameRate = " + n);
                         n = 0;
                         time = h264Frame.frameTimeStamp;
                     }else{

@@ -68,13 +68,13 @@ public class MyAlbumAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
             item.setFirst(false);
         }
         recyclerView.setLayoutManager(gridLayoutManager);
-        LogUtils.e("MyAlbumAdapter");
+        LogUtils.d("MyAlbumAdapter");
         MyAlbumItemAdapter adapter = new MyAlbumItemAdapter(data,context);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                LogUtils.e(data.get(position).getPath());
+                LogUtils.d(data.get(position).getPath());
                 if(listener != null){
                     listener.onMyAlbumItemClick((MyAlbumItemAdapter)adapter,(List<FileItemBean>)adapter.getData(),position);
                 }

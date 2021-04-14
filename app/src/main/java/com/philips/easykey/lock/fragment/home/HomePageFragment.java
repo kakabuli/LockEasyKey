@@ -26,13 +26,11 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.HomePreseneter;
 import com.philips.easykey.lock.mvp.view.IHomeView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
@@ -121,7 +119,7 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
         hasDevice = false;
         changePage();
         devices = MyApplication.getInstance().getHomeShowDevices();
-        LogUtils.e("shulan onCreateView 首页  设备个数是    " + devices.size());
+        LogUtils.d("shulan onCreateView 首页  设备个数是    " + devices.size());
         initView();
         initData(devices);
         getScrollViewWidth();
@@ -152,10 +150,10 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
 
                 //根据点击的radiobutton跳转至不同webview界面
                 if (viewPager.getCurrentItem()  != index){
-                    LogUtils.e("位置改变 1 getCurrentItem " + viewPager.getCurrentItem() + "  index  "+index);
+                    LogUtils.d("位置改变 1 getCurrentItem " + viewPager.getCurrentItem() + "  index  "+index);
                     viewPager.setCurrentItem(index);
                 }else{
-                    LogUtils.e("位置改变 2  不需要设置  getCurrentItem " + viewPager.getCurrentItem() + "  index  "+index);
+                    LogUtils.d("位置改变 2  不需要设置  getCurrentItem " + viewPager.getCurrentItem() + "  index  "+index);
                 }
 
             }
@@ -283,14 +281,6 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
                         fragments.add(bleLockFragment);
                     }
                     break;
-                case HomeShowBean.TYPE_CAT_EYE:
-                    rb.setCompoundDrawablesRelativeWithIntrinsicBounds(null, getContext().getDrawable(R.drawable.home_rb_cat_eye_drawable), null, null);
-                    CatEyeFragment catEyeFragment = new CatEyeFragment();
-                    Bundle catEyeBundle = new Bundle();
-                    catEyeBundle.putSerializable(KeyConstants.CATE_INFO, (CateEyeInfo) devices.get(i).getObject());
-                    catEyeFragment.setArguments(catEyeBundle);
-                    fragments.add(catEyeFragment);
-                    break;
                 case HomeShowBean.TYPE_GATEWAY_LOCK:
                     rb.setCompoundDrawablesRelativeWithIntrinsicBounds(null, getContext().getDrawable(R.drawable.home_rb_lock_drawable), null, null);
                     GatewayLockFragment gatewayLockFragment = new GatewayLockFragment();
@@ -355,7 +345,7 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
             mRadioGroup.addView(rb);
         }
 
-        LogUtils.e("首页Fragment数据是   " + Arrays.toString(fragments.toArray()));
+        LogUtils.d("首页Fragment数据是   " + Arrays.toString(fragments.toArray()));
         if (adapter == null) {
             adapter = new FragmentPagerAdapter(getChildFragmentManager()) {
                 @Override
@@ -382,7 +372,7 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
             viewPager.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
-            LogUtils.e("首页Fragment数据是     adapter.notifyDataSetChanged();");
+            LogUtils.d("首页Fragment数据是     adapter.notifyDataSetChanged();");
         }
         if (devices.size() == 0) {
             hasDevice = false;
@@ -406,7 +396,7 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
     @Override
     public void onDeviceRefresh(AllBindDevices allBindDevices) {
         devices = MyApplication.getInstance().getHomeShowDevices();
-        LogUtils.e("shulan onDeviceRefresh 首页  设备个数是    " + devices.size());
+        LogUtils.d("shulan onDeviceRefresh 首页  设备个数是    " + devices.size());
         initData(devices);
     }
 

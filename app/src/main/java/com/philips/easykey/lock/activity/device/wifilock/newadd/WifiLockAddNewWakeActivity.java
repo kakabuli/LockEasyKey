@@ -81,7 +81,7 @@ public class WifiLockAddNewWakeActivity extends BaseAddToApplicationActivity {
         if (!ssid.equals("kaadas_AP") && !"<unknown ssid>".equals(ssid)) {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, ssid);
             byte[] ssidOriginalData = TouchNetUtil.getOriginalSsidBytes(info);
-            LogUtils.e("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
+            LogUtils.d("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_ORIGINAL_DATA, Rsa.bytesToHexString(ssidOriginalData));
         }else {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
@@ -52,7 +51,7 @@ public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
                ToastUtil.getInstance().showShort(msg);
            }
 
-            LogUtils.e("网关绑定失败"+msg);
+            LogUtils.d("网关绑定失败"+msg);
         }
     }
 

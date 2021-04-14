@@ -230,7 +230,7 @@ public class GatewayLockTimePasswordPresenter<T> extends BasePresenter<IGatewayL
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("报警消息失败   " + throwable.getMessage());
+                            LogUtils.d("报警消息失败   " + throwable.getMessage());
                         }
                     });
             compositeDisposable.add(getLockPwdInfoEventDisposable);

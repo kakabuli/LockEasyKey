@@ -115,7 +115,7 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
         }
     };
     public void onSuccess() {
-        LogUtils.e("--kaadas--设置完成-onSuccess");
+        LogUtils.d("--kaadas--设置完成-onSuccess");
 //        finish();
         Intent intent;
         intent = new Intent(this, SwipchLinkActivity.class);
@@ -133,7 +133,7 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
 //        }
     }
     public void onFail() {
-        LogUtils.e("--kaadas--设置失败-onFail");
+        LogUtils.d("--kaadas--设置失败-onFail");
         Intent intent;
         intent = new Intent(this, SwipchLinkActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT, false);
@@ -152,13 +152,13 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
 
     @Override
     public void settingDeviceSuccess() {
-        LogUtils.e("--kaadas--设置成功-settingDeviceSuccess");
+        LogUtils.d("--kaadas--设置成功-settingDeviceSuccess");
         changeState(2); //
     }
 
     @Override
     public void settingDeviceFail() {
-        LogUtils.e("--kaadas--设置失败-settingDeviceFail");
+        LogUtils.d("--kaadas--设置失败-settingDeviceFail");
         handler.postDelayed(runnable1, 500);
 //        finish();
 //        Intent intent;
@@ -175,7 +175,7 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
 
     @Override
     public void settingDeviceThrowable() {
-        LogUtils.e("--kaadas--设置失败-settingDeviceThrowable");
+        LogUtils.d("--kaadas--设置失败-settingDeviceThrowable");
         handler.postDelayed(runnable1, 500);
 //        finish();
 //        Intent intent;

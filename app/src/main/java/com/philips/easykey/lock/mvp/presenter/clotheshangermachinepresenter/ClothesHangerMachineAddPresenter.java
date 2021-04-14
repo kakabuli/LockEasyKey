@@ -13,7 +13,7 @@ public class ClothesHangerMachineAddPresenter<T> extends BasePresenter<IClothesH
 
     public void searchClothesMachine(String Product) {
 
-        LogUtils.e("--kaadas--ClothesMachineUtil.pairMode(Product)=="+ ClothesHangerMachineUtil.pairMode(Product));
+        LogUtils.d("--kaadas--ClothesMachineUtil.pairMode(Product)=="+ ClothesHangerMachineUtil.pairMode(Product));
 
         //equalsIgnoreCase不区分大小写
         if (ClothesHangerMachineUtil.pairMode(Product).equals("WiFi")) {

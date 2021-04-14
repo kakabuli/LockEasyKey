@@ -199,7 +199,7 @@ public class LogUtils {
 			long currentTime = System.currentTimeMillis();
 			long elapsedTime = currentTime - mTimestamp;
 			mTimestamp = currentTime;
-			LogUtils.e("[Elapsed：" + elapsedTime + "]" + msg);
+			LogUtils.d("[Elapsed：" + elapsedTime + "]" + msg);
 		}
 	}
 

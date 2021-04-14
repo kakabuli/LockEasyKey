@@ -337,7 +337,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
 
     @Override
     public void onBindFailed(BaseResult baseResult) {
-        LogUtils.e("six-------" + baseResult.getCode());
+        LogUtils.d("six-------" + baseResult.getCode());
         mPresenter.unBindDeviceFail(wifiLockVideoBindBean.getWfId());
         mPresenter.handler.post(new Runnable() {
             @Override

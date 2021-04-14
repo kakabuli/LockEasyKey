@@ -271,13 +271,13 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
             otaService = gatt.getService(UUID.fromString(OAD_SERVICE));
 
             if (otaService != null) {  //OTA升级模式下的设备
-                LogUtils.e("OTA模式下");
+                LogUtils.d("OTA模式下");
                 isHand = true;
-                LogUtils.e("线程是   " + Thread.currentThread().getName());
+                LogUtils.d("线程是   " + Thread.currentThread().getName());
                 startUpdata(gatt.getDevice(), filePath);
                 return;
             }
-            LogUtils.e("普通模式下");
+            LogUtils.d("普通模式下");
 
 
             BluetoothGattService resetService = gatt.getService(UUID.fromString(OAD_RESET_SERVICE));
@@ -454,7 +454,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
         }
 
         public void onScanFailed(int errorCode) {
-            LogUtils.e("已经启动了扫描设备    " + errorCode);
+            LogUtils.d("已经启动了扫描设备    " + errorCode);
         }
     };
 
@@ -523,7 +523,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
 
             @Override
             public void oadStatusUpdate(TIOADEoadDefinitions.oadStatusEnumeration status) {
-                LogUtils.e("OTA升级  状态改变   " + TIOADEoadDefinitions.oadStatusEnumerationGetDescriptiveString(status));
+                LogUtils.d("OTA升级  状态改变   " + TIOADEoadDefinitions.oadStatusEnumerationGetDescriptiveString(status));
                 if (TIOADEoadDefinitions.oadStatusEnumeration.tiOADClientDeviceMTUSet != status
                        && isUpdating  ) {  //升级成功   不设置超时
                     handler.removeCallbacks(timeoutRunnable);
@@ -541,7 +541,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
                 }
                 if (status == TIOADEoadDefinitions.oadStatusEnumeration.tiOADClientReady) {
                     //设备已经准备好    //在此处查看设备
-                    LogUtils.e("文件准备好了  ");
+                    LogUtils.d("文件准备好了  ");
                     client.start(path);
                 } else if (status == TIOADEoadDefinitions.oadStatusEnumeration.tiOADClientFileIsNotForDevice) {
                     handler.removeCallbacks(timeoutRunnable);
@@ -580,7 +580,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
                                 client.release();
                                 client.abortProgramming();
                             }
-                            LogUtils.e("升级成功一个文件    " + "线程是   " + Thread.currentThread().getName());
+                            LogUtils.d("升级成功一个文件    " + "线程是   " + Thread.currentThread().getName());
                             startUpdata(device, filePath2);
 //                            client.start(filePath2);
                         }
@@ -662,7 +662,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
 
     @Override
     public void onDownFailed(String url, String path, Throwable throwable) {
-        LogUtils.e("下载出错  " + throwable.getMessage());
+        LogUtils.d("下载出错  " + throwable.getMessage());
         ToastUtil.getInstance().showLong(R.string.down_failed);
         mutiProgress.setCurrNodeNO(0, false);
         mCircleProgress2.setValue(0);

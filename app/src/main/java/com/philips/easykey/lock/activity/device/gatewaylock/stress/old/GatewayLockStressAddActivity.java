@@ -150,7 +150,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
     @Override
     public void addStressFail() {
         //密码添加失败
-        LogUtils.e("添加密码失败");
+        LogUtils.d("添加密码失败");
         if (takeEffect!=null){
             takeEffect.dismiss();
         }
@@ -177,7 +177,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
     @Override
     public void addStressThrowable(Throwable throwable) {
         //密码添加异常
-        LogUtils.e("添加密码异常    ");
+        LogUtils.d("添加密码异常    ");
         if (takeEffect!=null){
             takeEffect.dismiss();
         }

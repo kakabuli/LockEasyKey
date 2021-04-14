@@ -11,9 +11,6 @@ import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.LogUtils;
 
-
-import org.linphone.mediastream.Log;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,7 +51,7 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
         }
 
         if (bean.getItems() != null) {
-            LogUtils.e("周计划是     " + Arrays.toString(bean.getItems().toArray()));
+            LogUtils.d("周计划是     " + Arrays.toString(bean.getItems().toArray()));
         }
 
         helper.setText(R.id.tv_num, bean.getNum());

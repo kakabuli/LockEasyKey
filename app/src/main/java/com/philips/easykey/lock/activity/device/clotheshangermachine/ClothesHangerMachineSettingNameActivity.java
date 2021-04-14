@@ -100,7 +100,7 @@ public class ClothesHangerMachineSettingNameActivity extends BaseActivity<ICloth
             public void run() {
                 Intent data = new Intent(ClothesHangerMachineSettingNameActivity.this,ClothesHangerMachineDetailActivity.class);
                 data.putExtra("hanger_nick_name",etNickname.getText().toString().trim());
-                LogUtils.e("shulan hanger_nick_name-----> " +etNickname.getText().toString().trim());
+                LogUtils.d("shulan hanger_nick_name-----> " +etNickname.getText().toString().trim());
                 setResult(RESULT_OK,data);
                 hiddenLoading();
                 finish();

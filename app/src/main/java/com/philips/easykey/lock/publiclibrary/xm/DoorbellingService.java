@@ -59,7 +59,7 @@ public class DoorbellingService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtils.e("shulan DoorbellingService onCreate");
+        LogUtils.d("shulan DoorbellingService onCreate");
         listenerServiceConnect();
         getRecordNotification();
         getDoorbelling();
@@ -67,7 +67,7 @@ public class DoorbellingService extends Service {
 
     private void getRecordNotification() {
         if(MyApplication.getInstance().getMqttService() != null){
-            LogUtils.e("shulan 2----DoorbellingService----mqtt != null");
+            LogUtils.d("shulan 2----DoorbellingService----mqtt != null");
             toDisposable(recordDisposable);
             recordDisposable = MyApplication.getInstance().getMqttService().listenerDataBack()
                     .compose(RxjavaHelper.observeOnMainThread())
@@ -90,7 +90,7 @@ public class DoorbellingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtils.e("shulan DoorbellingService onStartCommand");
+        LogUtils.d("shulan DoorbellingService onStartCommand");
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -103,12 +103,12 @@ public class DoorbellingService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.e("shulan DoorbellingService onDestroy");
+        LogUtils.d("shulan DoorbellingService onDestroy");
     }
 
     public void getDoorbelling(){
         if(MyApplication.getInstance().getMqttService() != null) {
-            LogUtils.e("shulan 1----DoorbellingService----mqtt != null");
+            LogUtils.d("shulan 1----DoorbellingService----mqtt != null");
             toDisposable(doorbellingDisposable);
             doorbellingDisposable = MyApplication.getInstance().getMqttService().listenerDataBack()
                     .compose(RxjavaHelper.observeOnMainThread())
@@ -134,7 +134,7 @@ public class DoorbellingService extends Service {
                     });
             compositeDisposable.add(doorbellingDisposable);
         }else{
-            LogUtils.e("shulan ----DoorbellingService----mqtt null");
+            LogUtils.d("shulan ----DoorbellingService----mqtt null");
         }
     }
 
@@ -143,7 +143,7 @@ public class DoorbellingService extends Service {
             WifiLockRecordResult result = new Gson().fromJson(mqttData.getPayload(),WifiLockRecordResult.class);
             if(result != null){
                 if(result.getDevtype().equals(MqttConstant.WIFI_LOCK_DEVTYPE) && result.getEventtype().equals(MqttConstant.WIFI_LOCK_RECORD)){
-                    LogUtils.e("shulan doorbellingservice--sendRecordNotification-->" + result.toString());
+                    LogUtils.d("shulan doorbellingservice--sendRecordNotification-->" + result.toString());
                     Intent intent = new Intent(DoorbellingService.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     String title = "";
@@ -186,7 +186,7 @@ public class DoorbellingService extends Service {
                 String title = "";
                 String timestamp = "";
                 if(mDoorbellingResult.getEventtype().equals(MqttConstant.VIDEO_LOCK_DOORBELLING)){
-                    LogUtils.e("shulan doorbellingservice--sendAlarmNotification-->" + mDoorbellingResult.toString());
+                    LogUtils.d("shulan doorbellingservice--sendAlarmNotification-->" + mDoorbellingResult.toString());
                     title = BleUtil.getAlarmNotificationTitle(mDoorbellingResult.getEventparams().getAlarmCode(),DoorbellingService.this);
                     content = BleUtil.getAlarmNotificationContent(mDoorbellingResult.getEventparams().getAlarmCode(),DoorbellingService.this);
                     try {
@@ -263,7 +263,7 @@ public class DoorbellingService extends Service {
      *  开启蓝牙和Mqtt服务
      */
     private void initBleOrMqttService() {
-        LogUtils.e("shulan initBleOrMqttService");
+        LogUtils.d("shulan initBleOrMqttService");
         if(!ServiceAliveUtils.isServiceRunning(this,BleService.class.getName())){
             //        //启动bleService
             Intent bleServiceIntent = new Intent(this, BleService.class);
@@ -297,7 +297,7 @@ public class DoorbellingService extends Service {
             try {
                 connected = mqttService.getMqttClient().isConnected();
             } catch (Exception e) {
-                LogUtils.e("doorbellingservice  mqtt 获取连接状态失败  " + e.getMessage());
+                LogUtils.d("doorbellingservice  mqtt 获取连接状态失败  " + e.getMessage());
                 connected = false;
             }
             if (mqttService.getMqttClient() == null || !connected) {

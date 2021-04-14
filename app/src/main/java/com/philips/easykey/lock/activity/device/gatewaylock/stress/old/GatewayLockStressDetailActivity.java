@@ -153,7 +153,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.e("密码管理界面  onResume()   ");
+        LogUtils.d("密码管理界面  onResume()   ");
 
     }
 
@@ -309,7 +309,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         //获取异常
         ToastUtil.getInstance().showShort(R.string.get_stress_list_fail);
         passwordPageChange(false);
-        LogUtils.e("获取胁迫密码异常   " + throwable.getMessage());
+        LogUtils.d("获取胁迫密码异常   " + throwable.getMessage());
     }
 
     boolean isopenlockPushSwitch = true;

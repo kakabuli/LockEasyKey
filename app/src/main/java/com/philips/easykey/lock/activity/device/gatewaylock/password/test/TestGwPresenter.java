@@ -160,7 +160,7 @@ public class TestGwPresenter<T> extends BasePresenter<ITestGwTestView> {
                         LockPwdFuncBean lockPwdFuncBean = new Gson().fromJson(mqttData.getPayload(), LockPwdFuncBean.class);
                         if ("200".equals(lockPwdFuncBean.getReturnCode())) {
                             //设置用户类型成功
-                            LogUtils.e("设置用户类型成功");
+                            LogUtils.d("设置用户类型成功");
                             long startTime = (System.currentTimeMillis() / 1000) - BleCommandFactory.defineTime;
                             long endTime = ((System.currentTimeMillis() + 24 * 60 * 60 * 1000) / 1000) - BleCommandFactory.defineTime;
                             setPlan(deviceId, gwId,   "set", pwdId, "year", pwdId,  (int)endTime,  (int)startTime, 0, 0, 0, 0, 0);
@@ -207,7 +207,7 @@ public class TestGwPresenter<T> extends BasePresenter<ITestGwTestView> {
                         LockPwdFuncBean lockPwdFuncBean = new Gson().fromJson(mqttData.getPayload(), LockPwdFuncBean.class);
                         if ("200".equals(lockPwdFuncBean.getReturnCode())) {
                             //设置用户类型成功
-                            LogUtils.e("设置用户类型成功");
+                            LogUtils.d("设置用户类型成功");
                         } else {
 
                         }
@@ -247,7 +247,7 @@ public class TestGwPresenter<T> extends BasePresenter<ITestGwTestView> {
                         LockPwdFuncBean lockPwdFuncBean = new Gson().fromJson(mqttData.getPayload(), LockPwdFuncBean.class);
                         if ("200".equals(lockPwdFuncBean.getReturnCode())) {
                             //设置用户类型成功
-                            LogUtils.e("设置用户类型成功  ");
+                            LogUtils.d("设置用户类型成功  ");
                         } else {
 
                         }

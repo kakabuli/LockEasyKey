@@ -88,7 +88,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     private void checkVersion() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int i = checkSelfPermission(Manifest.permission.CAMERA);
-            LogUtils.e("权限是允许还是开启还是禁止" + i);
+            LogUtils.d("权限是允许还是开启还是禁止" + i);
             if (i == -1) {
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     //禁止该权限
@@ -156,7 +156,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     @Override
     public void onScanQRCodeSuccess(String result) {
         this.result = result;
-        LogUtils.e("shulan -->" + result);
+        LogUtils.d("shulan -->" + result);
         String[] str = result.split("_");
         if(str.length > 0){
             if(str.length >= 4){
@@ -194,7 +194,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
 
     @Override
     public void onScanQRCodeOpenCameraError() {
-        LogUtils.e("打开相机出错");
+        LogUtils.d("打开相机出错");
         finish();
         Toast.makeText(this, getString(R.string.open_camera_failed), Toast.LENGTH_SHORT).show();
     }

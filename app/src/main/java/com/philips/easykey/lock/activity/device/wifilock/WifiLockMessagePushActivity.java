@@ -19,12 +19,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
-import com.philips.easykey.lock.widget.BottomMenuDialog;
-import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
-
-import org.apache.commons.net.bsd.RLoginClient;
-
 import java.util.List;
 
 import butterknife.BindView;

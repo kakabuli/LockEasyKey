@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -42,11 +43,11 @@ public class NetStateReceiver extends BroadcastReceiver {
         mBroadcastReceiver = NetStateReceiver.this;
         if (intent.getAction().equalsIgnoreCase(ANDROID_NET_CHANGE_ACTION) || intent.getAction().equalsIgnoreCase(CUSTOM_ANDROID_NET_CHANGE_ACTION)) {
             if (!NetUtil.isNetworkAvailable(context)) {
-                LogUtils.iTag(TAG, "<--- network disconnected --->");
+                Log.d(TAG, "<--- network disconnected --->");
                 isNetAvailable = false;
                 EventBus.getDefault().post(new EventCenter(10001));
             } else {
-                LogUtils.iTag(TAG, "<--- network connected --->");
+                Log.d(TAG, "<--- network connected --->");
                 isNetAvailable = true;
                 mNetType = NetUtil.getAPNType(context);
                 EventBus.getDefault().post(new EventCenter(10002));
@@ -72,7 +73,7 @@ public class NetStateReceiver extends BroadcastReceiver {
             try {
                 mContext.getApplicationContext().unregisterReceiver(mBroadcastReceiver);
             } catch (Exception e) {
-                LogUtils.iTag(TAG, e.getMessage());
+                Log.d(TAG, e.getMessage());
             }
         }
 
