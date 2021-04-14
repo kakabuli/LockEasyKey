@@ -1,0 +1,25 @@
+package com.philips.easykey.lock.mvp.view.deviceaddview;
+
+import com.philips.easykey.lock.mvp.mvpbase.IBaseView;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.BindGatewayResultBean;
+
+import java.util.List;
+
+public interface WiFiLockChooseToAddView extends IBaseView {
+
+    //检索门锁型号成功：WiFi
+    void searchLockProductSuccessForWiFi(String pairMode);
+
+    //检索门锁型号成功：WiFi&BLE
+    void searchLockProductSuccessForWiFiAndBLE(String pairMode);
+
+    //检索门锁型号成功：WiFi&VIDEO
+    void searchLockProductSuccessForWiFiAndVideo(String pairMode);
+
+    //检索门锁型号异常
+    void searchLockProductThrowable();
+
+
+
+
+}

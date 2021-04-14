@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff">
+
+
+
+
+    <com.philips.easykey.lock.widget.NoScrollViewPager
+        android:id="@+id/home_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_52"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_one"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:drawableTop="@drawable/activity_main_radiobutton1"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_9"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="@string/home_page"
+                android:textColor="@drawable/activity_main_radiobutton_bottom_text"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/rb_two"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/activity_main_radiobutton2"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_9"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="@string/device"
+                android:textColor="@drawable/activity_main_radiobutton_bottom_text"
+                android:textSize="10sp" />
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rb_shop"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:button="@null"-->
+                <!--android:drawableTop="@drawable/activity_main_radiobutton_shop"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingTop="@dimen/dp_9"-->
+                <!--android:paddingBottom="@dimen/dp_5"-->
+                <!--android:text="@string/shop"-->
+                <!--android:textColor="@drawable/activity_main_radiobutton_bottom_text"-->
+                <!--android:textSize="10sp" />-->
+
+
+            <RadioButton
+                android:id="@+id/rb_three"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/activity_main_radiobutton3"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_9"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="@string/mine"
+                android:textColor="@drawable/activity_main_radiobutton_bottom_text"
+                android:textSize="10sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+</LinearLayout>

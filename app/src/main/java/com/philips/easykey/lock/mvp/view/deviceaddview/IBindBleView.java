@@ -1,0 +1,100 @@
+package com.philips.easykey.lock.mvp.view.deviceaddview;
+
+
+import com.philips.easykey.lock.mvp.mvpbase.IBaseView;
+import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleDataBean;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.utils.OfflinePasswordFactorManager;
+
+/**
+ * Create By lxj  on 2019/1/8
+ * Describe
+ */
+public interface IBindBleView extends IBaseView {
+    /**
+     * 绑定设备成功
+     */
+    void onBindSuccess(String deviceName);
+
+
+    /**
+     * 绑定设备失败
+     */
+    void onBindFailed(Throwable throwable);
+
+    /**
+     * 绑定设备失败
+     */
+    void onBindFailedServer(BaseResult result);
+
+    /**
+     * 收到入网信息  s收到pwd2
+     */
+    void onReceiveInNetInfo();
+
+
+    /**
+     * 收到退网信息
+     */
+    void onReceiveUnbind();
+
+    /**
+     * 解绑设备成功
+     */
+    void onUnbindSuccess();
+
+
+    /**
+     * 解绑设备失败
+     */
+    void onUnbindFailed(Throwable throwable);
+
+    /**
+     * 解绑设备失败  服务器返回错误码
+     */
+    void onUnbindFailedServer(BaseResult result);
+
+    /**
+     * 读取锁型号失败
+     */
+    void readLockTypeFailed(Throwable throwable);
+
+    /**
+     * 读取锁型号成功
+     */
+    void readLockTypeSucces();
+
+    void onDeviceStateChange(boolean isConnected);
+
+    /**
+     * 未知锁型号
+     */
+    void unknownFunctionSet(int functionSet);
+
+    /**
+     * 读取功能集成功
+     */
+    void readFunctionSetSuccess(int functionSet);
+
+    /**
+     * 读取功能集失败
+     */
+    void readFunctionSetFailed(Throwable throwable);
+
+    /**
+     * 剩余校验次数（配网通道）
+     */
+    void onlistenerLastNum(int lastNum);
+
+    /**
+     * 离线密码因子（配网通道）
+     */
+    void onlistenerPasswordFactor(byte[] originalData,int pswLen,int index);
+
+    /**
+     * 解密离线密码因子结果（配网通道）
+     */
+    void onDecodeResult(int index,OfflinePasswordFactorManager.OfflinePasswordFactorResult result);
+
+
+}

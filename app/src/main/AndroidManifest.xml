@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.philips.easykey.lock">
+    <!-- // 使用蓝牙设备的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 它可以监听用户的连接状态并在用户重新连接到网络时重启之前失败的请求 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /><!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <!--<uses-permission android:name="android.permission.READ_CONTACTS" /> --><!-- MQTT -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 微信分享 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+<!--    用于硬盘缓存和读取-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- iBeancon功能所需权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 个推3.0电子围栏功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" /><!-- OPPO辅助 SDK -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" /> <!-- 使用网络 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- android 10.0使用wifi api新添加的权限 -->
+
+
+    <!-- 魅族辅助 SDK -->
+    <permission
+        android:name="${applicationId}.push.permission.MESSAGE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="${applicationId}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="${applicationId}.push.permission.MESSAGE" />
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+
+    <!--<queries>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice" />
+        </intent>
+    </queries>-->
+
+    <meta-data
+        android:name="push_kit_auto_init_enabled"
+        android:value="true"/>
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:name,android:allowBackup">
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockCallingTestActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockAMModeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.x9.WifiLockOpenDirectionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.x9.WifiLockOpenForceActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.x9.WifiLockLockingMethodActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockSafeModeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockLanguageSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockDeviceRecordActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockPreViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockCameraVersionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFirwareNumberActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAlbumDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAlbumActivity"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeVideoActivity"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockCallingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockAddSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockScanFailedActivity"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockScanActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFourthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockFifthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockSixthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeWeekPeriodActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingJudgeTimeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingPIRSensitivityActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimePeriodActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.WifiLockMessagePushActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockRealTimeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.videolock.WifiVideoLockWanderingAlarmActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.addDevice.singleswitch.SwipchSeetingArgus"/>
+        <activity android:name=".activity.addDevice.singleswitch.SwipchLinkSettingActivity" />
+        <activity android:name=".activity.addDevice.singleswitch.SwipLinkSucActivity" />
+        <activity android:name=".activity.addDevice.singleswitch.SwipLinkFailActivity" />
+        <activity android:name=".activity.addDevice.singleswitch.SwipLinkThreeActivity" />
+        <activity android:name=".activity.addDevice.singleswitch.SwipLinkTwoActivity" />
+        <activity android:name=".activity.addDevice.singleswitch.SwipchLinkOne"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.addDevice.singleswitch.SwipchLinkNo"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.addDevice.singleswitch.SwipchLinkActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.device.wifilock.newadd.WifiLockAddToSetSwitchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.device.wifilock.newadd.WifiLockAddNewToChooseActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.device.wifilock.newadd.WifiLockWaitForSwitchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.clotheshangermachine.ClothesHangerMachineQrCodeScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddThirdFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddThirdSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddTourthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddFifthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddTourthFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineAddSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.clotheshangermachine.ClothesHangerMachineSettingNameActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".activity.choosecountry.CountryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.philips.easykey.lock.activity.WelcomeActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+             <intent-filter>
+             <category android:name="android.intent.category.DEFAULT" />
+
+
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+
+
+             <action android:name="android.intent.action.oppopush" />
+             </intent-filter>
+        </activity> <!-- 登录 -->
+        <activity
+            android:name=".activity.login.LoginActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 注册 -->
+        <activity
+            android:name=".activity.login.RegisterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 忘记密码 -->
+        <activity
+            android:name=".activity.login.ForgetPasswordActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 我的消息 -->
+        <activity
+            android:name=".activity.my.PersonalMessageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 消息详情 -->
+        <activity
+            android:name=".activity.my.PersonalMessageDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalUpdateHeadDataActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalUpdateNickNameActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalSecuritySettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalUpdateVerifyGesturePwd"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalUpdateGesturePwdActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.UserFeedbackActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalSystemSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalLanguageSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalUserAgreementActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.PersonalFAQActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.PersonalVerifyFingerPrintActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewayFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewayLightActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewaySecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewayThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewayScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewaySuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.gateway.AddGatewayFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothSearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceAddHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceAddCateyeHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceAddGatewayHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceAddActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothPairActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.addDevice.bluetooth.AddBluetoothPairFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceBindGatewayListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockFourthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockFifthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbee.AddZigbeeLockSuccessSaveActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeCheckWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeScanFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTranslucentTheme" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSaveNickNameActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.addDevice.cateye.AddDeviceCatEyeFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".publiclibrary.mqtt.util.MqttService" />
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity
+            android:name=".activity.my.AboutUsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.PersonalVerifyGesturePasswordActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.BleDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.BleAuthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BluetoothSharedDeviceManagementActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.AddBluetoothFamilyMemberActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.device.bluetooth.FamilyMemberDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BluetoothLockOTAUpgradeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.GuidePageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BluetoothMoreActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BluetoothSafeModeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BluetoothLockLanguageSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.password.BlePasswordManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.password.BluetoothPasswordManagerDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.password.BluetoothUserPasswordAddActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.device.bluetooth.password.CycleRulesActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.BleDeviceInfoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.password.BluetoothPasswordShareActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintManagerDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintLinkBluetoothActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintCollectionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintNoConnectBluetoothOneActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintNoConnectBluetoothTwoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.FingerprintNoConnectBluetoothCollectionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardNearDoorActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardConnectFailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardConnectSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardIdentificationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardNoConnectOneActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardNoConnectTwoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardNoConnectThreeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.DoorCardManagerDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.bluetooth.card.AddDoorCardSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.device.bluetooth.fingerprint.AddFingerprintSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.home.BluetoothRecordActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.oldbluetooth.OldBleDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.oldbluetooth.OldDeviceInfoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.GatewayEquipmentDynamicActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.CateyeEquipmentDynamicActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.GatewayLockFunctionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.GatewayLockAuthorizeFunctionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.password.GatewayPasswordManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.password.GatewayLockDeletePasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.password.GatewayLockPasswordShareActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.password.GatewayLockTempararyPwdAddActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.password.GatewayPasswordAddActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.fingerprint.GatewayFingerprintManagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.fingerprint.GatewayFingerprintManagerDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.card.GatewayDoorCardManagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.demo.GatewayLockSettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.card.GatewayDoorCardManagerDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.GatewayLockAuthorizationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.GatewayAuthorizationDeviceInformationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.OldBluetoothOpenLockRecordActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.more.GatewayMoreActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.GatewayDeviceInformationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.more.GatewayLockLanguageSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.share.AddGatewayLockShareActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.share.GatewayLockShareUserNumberActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.share.GatewayLockSharedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.GatewayStressPasswordManagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.GatewayStressPasswordAddActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.old.GatewayLockStressAddActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.old.GatewayLockStressDeleteActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.old.GatewayLockStressDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.old.GatewayLockStressShareActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.GatewayStressPasswordShareActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gatewaylock.stress.GatewayStressWarnDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.CateyeMoreDeviceInformationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CateyeMoreActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CateyeFunctionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CateyeAuthorizationFunctionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CatEyeResolutionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CatEyeRingNumberActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CatEyeVolumeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gateway.GatewayActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.gateway.GatewaySettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.QrCodeScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewScanFailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewZeroActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.cateye.VideoCallBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.cateye.PreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.cateye.VideoVActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".activity.cateye.MediaPlayerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoTitleFullscreen" />
+        <activity
+            android:name=".activity.cateye.CallComingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialogstyle" />
+        <activity
+            android:name=".activity.cateye.FtpDownLoadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.cateye.RecordingPreviewActivity"
+            android:screenOrientation="portrait" /> <!-- &lt;!&ndash; 配置SDK核心服务 &ndash;&gt; -->
+        <activity
+            android:name=".activity.device.cateye.more.SmartEyeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.cateye.more.CateDefaultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.zigbeelocknew.ProductActivationScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.my.BarCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".publiclibrary.ota.ble.ti.TiOtaUpgradeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".publiclibrary.ota.ble.p6.P6OtaUpgradeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".publiclibrary.ota.ble.OTADialogActivity"
+            android:theme="@style/gatewayDialog" />
+        <activity
+            android:name=".publiclibrary.ota.gatewayota.GatewayOTADialogActivity"
+            android:theme="@style/gatewayDialog" />
+        <activity
+            android:name=".activity.device.cateye.dialog.CatEyeNightSightDialogActivity"
+            android:theme="@style/gatewayDialog" />
+        <activity
+            android:name=".activity.addDevice.cateye.TurnOnCatEyeFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.TurnOnCatEyeSecondActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.CatEyeAddPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.cateye.QrcodePhoneAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".publiclibrary.ota.ble.ti.Ti2FileOtaUpgradeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockWifiDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAddSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAddBleSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAddSuccessToSetSwitchActivity"
+            android:theme="@style/DialogTransparent"
+            android:screenOrientation="portrait"
+        />
+
+        <activity android:name=".publiclibrary.ota.face.FaceOtaActivity" />
+        <activity android:name=".activity.device.gatewaylock.password.test.PasswordTestActivity" />
+
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockSetUpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAPAddFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApAddSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApAddThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLcokSupportWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WiFiLockDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAPAddFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockInputAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.password.AddWifiLockTempPasswordSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.password.WifiLockPasswordShareActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.password.WiFiLockPasswordManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.password.WifiLockPasswordDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.family.WifiLockFamilyManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.family.WiFiLockAddShareUserActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.family.WiFiLockShareUserDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockRecordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockMoreActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockMoreActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockDeviceInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockSafeModelActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockAuthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockNoticeUserLinkWifiFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.videolock.WifiVideoLockHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockHelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApInputAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApCheckAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApWifiSetUpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockSmartConfigActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockCheckAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApConnectDeviceActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAddFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockAddSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.add.WifiLockApAutoConnectWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.DeviceAdd2Activity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRG4300FirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.Rg4300HelpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.singleswitch.SingleSwitchDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.singleswitch.SingleSwichMoreActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.singleswitch.TimerManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.singleswitch.AddTimeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.singleswitch.AddDeviceActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRG4300ScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRg4300PairActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRg4300InputWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRG4300ConnectWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRg4300SuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRg4300FailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.rg4300.AddRg4300PairFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.singleswitch.AddSingleSwitchFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.singleswitch.AddSingleSwitchSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.singleswitch.AddSingleSwitchThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.singleswitch.AddSingleSwitchSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.doubleswitch.AddDoubleSwitchFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.doubleswitch.AddDoubleSwitchSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.doubleswitch.AddDoubleSwitchThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.doubleswitch.AddDoubleSwitchSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.pir.AddPirFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.pir.AddPirSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.pir.AddPirThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.addDevice.pir.AddPirSuccessActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockAuthDeviceInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockAMActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockPowerSaveActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.WifiLockFaceModelAMActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewThirdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewfourthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewFifthActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewScanBLEActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewNotActivateActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewWakeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewScanFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewWiFiScanBLEFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBLEWIFiSwitchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBLEWIFISwitchInputWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockScanWifiListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBLEWIFICSwitchCheckWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewInputAdminPasswotdActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewCheckAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewModifyPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewModifyPasswordDisconnectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewInputWifiActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewCheckWifiActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBindFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewBindSuccesssActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddNewThird2Activity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockChangeAdminPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockHasModifyPasswordAndDisconnectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddBLEFailedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockOldUserFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockOldUserSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddFaceFirstActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.wifilock.newadd.WifiLockAddFaceSecondActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.TestActivity" />
+        <activity
+            android:name=".activity.ScanHttpDialogActivity"
+            android:theme="@style/gatewayDialog" />
+        <activity
+            android:name=".activity.my.PrivacyActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <service android:name=".publiclibrary.xm.DoorbellingService"/>
+        <service android:name=".publiclibrary.ble.BleService" />
+        <service android:name=".publiclibrary.ota.ble.p6.BluetoothLeService" />
+        <service android:name=".publiclibrary.linphone.linphonenew.LinphoneService" />
+
+        <receiver android:name=".utils.networkListenerutil.NetWorkChangReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".publiclibrary.ota.ble.p6.OTAFirmwareUpdate.OTAResponseReceiver_v1"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.cysmart.bluetooth.le.ACTION_OTA_DATA_AVAILABLE_V1" />
+            </intent-filter>
+        </receiver>
+
+        <!-- &lt;!&ndash; process必须指定为":pushservice"，切勿随意更改 &ndash;&gt; -->
+        <service
+            android:name="com.philips.easykey.lock.push.GeTuiPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice" /> <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复 -->
+        <service
+            android:name="com.philips.easykey.lock.push.GeTuiIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 魅族辅助 SDK start -->
+        <meta-data
+            android:name="MEIZUPUSH_APPID"
+            android:value="MZ_${MEIZU_APP_ID}" />
+        <meta-data
+            android:name="MEIZUPUSH_APPKEY"
+            android:value="MZ_${MEIZU_APP_KEY}" />
+        <service
+            android:name="com.meizu.cloud.pushsdk.NotificationService"
+            android:exported="true"
+            android:process=":pushservice" />
+        <receiver
+            android:name="com.meizu.cloud.pushsdk.SystemReceiver"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.meizu.cloud.pushservice.action.PUSH_SERVICE_START" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.igexin.sdk.FlymePushReceiver"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+        <!-- 魅族辅助 SDK end -->
+        <!-- VIVO辅助 SDK start -->
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="${VIVO_APP_ID}" />
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="${VIVO_APP_KEY}" />
+
+        <service
+            android:name="com.vivo.push.sdk.service.CommandClientService"
+            android:exported="true"
+            android:process=":pushservice" />
+
+        <activity
+            android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+            android:exported="true"
+            android:process=":pushservice"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <receiver
+            android:name="com.igexin.sdk.VivoPushMessageReceiver"
+            android:process=":pushservice">
+            <intent-filter>
+
+                <!-- 接收 push 消息 -->
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <!-- VIVO辅助 SDK end -->
+        <!-- OPPO辅助 SDK start -->
+        <meta-data
+            android:name="OPPOPUSH_APPKEY"
+            android:value="OP_${OPPO_APP_KEY}" />
+        <meta-data
+            android:name="OPPOPUSH_APPSECRET"
+            android:value="OP_${OPPO_APP_SECRET}" />
+
+        <service
+            android:name="com.igexin.sdk.OppoPushService"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+        <!-- OPPO辅助 SDK end -->
+
+        <!--  华为core辅助  -->
+        <meta-data
+            android:name="com.huawei.hms.client.channel.androidMarket"
+            android:value="false" />
+        <service
+            android:name="com.philips.easykey.lock.push.HuaWeiPushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

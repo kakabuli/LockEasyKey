@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#f2f2f2"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical"
+    tools:context="com.philips.easykey.lock.activity.device.wifilock.WifiLockPowerSaveActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="#F8F8F8">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_5"
+            android:src="@mipmap/back_gray" />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/power_Save_mode"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_17"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical"
+    android:fadingEdge="vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical">
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/background_white_10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kaadas 2代操作菜单"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_power_status"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_23"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_24"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_25"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_26"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_27"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_28"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_close_power_status"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_23"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_24"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_25"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_26"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_27"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="@string/activity_wifi_lock_face_model_29"
+            android:textColor="#606060" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:background="@drawable/background_white_10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_16"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_power_status"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_18"
+            android:textColor="#606060" />
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_19"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_25"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_26"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_30"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_31"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_32"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_18"
+            android:textColor="#606060" />
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_19"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_33"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_26"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_34"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_31"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:textColor="#606060" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/background_white_10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_wifi_lock_face_model_35"
+            android:textStyle="bold"
+            android:textColor="#606060" />
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/activity_wifi_lock_face_model_36"
+            android:textColor="#606060" />
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="@string/activity_wifi_lock_face_model_37"
+            android:textColor="#606060" />
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>
+

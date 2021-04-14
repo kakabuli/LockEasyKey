@@ -1,0 +1,14 @@
+package com.philips.easykey.lock.mvp.view;
+
+
+import com.philips.easykey.lock.mvp.mvpbase.IBleView;
+
+/**
+ * Create By lxj  on 2019/3/7
+ * Describe
+ */
+public interface IAddPringerprintSearchView extends IBleView {
+
+
+
+}

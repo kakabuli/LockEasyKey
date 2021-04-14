@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_large_small">
+    <!--有设备-->
+    <LinearLayout
+        android:id="@+id/ll_has_device"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="6dp">
+
+        <HorizontalScrollView
+            android:id="@+id/sc_title"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:scrollbars="none">
+            <RadioGroup
+                android:id="@+id/rg_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_home"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <!--无设备-->
+    <LinearLayout
+        android:id="@+id/ll_no_device"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="118dp"
+                android:src="@mipmap/logo" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/home_page_element" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_60"
+                android:text="@string/guard_your_home"
+                android:textColor="#57D4FF"
+                android:textSize="@dimen/sp_12" />
+
+            <Button
+                android:id="@+id/btn_add_device"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:layout_marginLeft="@dimen/dp_55"
+                android:layout_marginTop="@dimen/dp_36"
+                android:layout_marginRight="@dimen/dp_55"
+                android:background="@drawable/login_button_shape_check"
+                android:gravity="center"
+                android:text="@string/click_add_device"
+                android:textColor="#1F96F7"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

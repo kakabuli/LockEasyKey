@@ -1,0 +1,46 @@
+package com.philips.easykey.lock.mvp.presenter.personalpresenter;
+
+
+import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
+import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
+import com.philips.easykey.lock.mvp.view.personalview.IPersonalUpdatePasswrodView;
+
+import io.reactivex.disposables.Disposable;
+
+public class PersonalUpdatePasswordPresenter<T> extends BasePresenter<IPersonalUpdatePasswrodView> {
+
+    //修改密码
+    public void updatePasswrod(String uid, String newpwd, String oldpwd) {
+        XiaokaiNewServiceImp.modifyPassword(uid, newpwd, oldpwd).subscribe(new BaseObserver<BaseResult>() {
+            @Override
+            public void onSuccess(BaseResult baseResult) {
+                if (isSafe()) {
+                    if ("200".equals(baseResult.getCode())) {
+                        mViewRef.get().updatePwdSuccess(newpwd);
+                    }
+                }
+            }
+
+            @Override
+            public void onAckErrorCode(BaseResult baseResult) {
+                if (isSafe()) {
+                    mViewRef.get().updatePwdFail(baseResult);
+                }
+            }
+
+            @Override
+            public void onFailed(Throwable throwable) {
+                if (isSafe()) {
+                    mViewRef.get().updatePwdError(throwable);
+                }
+            }
+
+            @Override
+            public void onSubscribe1(Disposable d) {
+                compositeDisposable.add(d);
+            }
+        });
+    }
+}

@@ -1,0 +1,277 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.huawei.agconnect'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'bugly'   //添加bugly的符号表
+apply plugin: 'com.mob.sdk'
+
+greendao {
+    schemaVersion 35// 数据库版本号
+    daoPackage 'com.philips.easykey.lock.utils.greenDao.db'//自动生成的dao的包名，包名默认是entity所在的包；
+    targetGenDir 'src/main/java'//生成数据库文件的目录
+}
+
+bugly {
+    appId = "3ac95f5a71"
+    appKey = "acc5719a-eb16-4bbb-90c9-d3c5d90934bd"
+    debug = true
+}
+
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.philips.easykey.lock"
+        minSdkVersion 22
+        targetSdkVersion 26
+        versionCode 202103231
+        versionName "4.3.8"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+        multiDexEnabled true
+        ndk { //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so） 去掉对X86的手机So的支持
+//            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "5zODhkZOQd66zCoOgxX152",
+                GETUI_APP_KEY   : "2MYvnQfX4k7JHqC7KNaCuA",
+                GETUI_APP_SECRET: "dePIsxVaor6Dibp8YMs8TA",
+
+//                HUAWEI_APP_ID   : "100038281",
+
+                XIAOMI_APP_ID   : "2882303761517594031",
+                XIAOMI_APP_KEY  : "5931759473031",
+
+                OPPO_APP_KEY    : "d96Ms9tgI2gwkcc0g4K8gWocc",
+                OPPO_APP_SECRET : "24205939F1fedeF4a5734af4cAB30612",
+
+                MEIZU_APP_ID    : "118878",
+                MEIZU_APP_KEY   : "6121ecee371449c2b536b58452d78cb8",
+
+                VIVO_APP_ID     : "18137",
+                VIVO_APP_KEY    : "11e24474-cf3b-447c-9052-feb08012f033"
+        ]
+
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+    //多渠道打包
+    productFlavors {
+        philips_easykey {
+            applicationId "com.philips.easykey.lock"
+            buildConfigField('String', 'HTTP_VERSION', '"1"')
+        }
+    }
+    signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        release {
+            storeFile
+            storePassword
+            keyAlias
+            keyPassword
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    //自定义输出包名的设置
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 输出apk名称为kaadas-1.0.apk
+            def fileName = "Philips_EasyKey-${defaultConfig.versionName}.apk"
+            outputFileName = fileName
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true  //启用debug的buildType配置
+        }
+    }
+
+    //输出类型
+    applicationVariants.all {
+        //判断是release还是debug版本
+        def buildType = it.buildType.name
+        //获取当前时间的"YYYY-MM-dd"格式。
+        def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+        //如果是正式包,将其输入到指定文件夹
+        if (buildType == "release") {
+            it.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/Philips EasyKey/release")
+        }
+    }
+
+    buildToolsVersion '28.0.3'
+    compileOptions {
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+
+        targetCompatibility JavaVersion.VERSION_1_8
+
+    }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+    task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+        destinationDir file("$projectDir/libs")
+        baseName "Native_Libs2"
+        extension "jar"
+        from fileTree(dir: "libs", include: "**/*.so")
+        into "lib"
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn(nativeLibsToJar)
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation files('libs\\Native_Libs2.jar')
+    implementation project(path: ':keep_alive')
+    implementation files('libs\\GetuiSDK-support-MZP-1.1.1.jar')
+    implementation files('libs\\GetuiSDK-support-STP-1.0.1.jar')
+
+//    implementation 'androidx.appcompat:appcompat:1.1.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //----------------------------网络请求依赖----------------------------------
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+
+    //Retrofit通过GSON将结果转换为Bean对象
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //okhttp拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    //图片加载框架
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Rxjava rx Android
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
+    implementation 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
+    implementation 'com.safframework.log:saf-logginginterceptor:1.3.3'
+
+    //----------------------------网络请求依赖----------------------------------
+    implementation 'com.polidea.rxandroidble2:rxandroidble:1.8.0'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'com.jakewharton.rx2:replaying-share:2.1.0'
+    implementation 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
+
+    implementation project(path: ':imagepicker')
+
+    //mqtt
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+
+    //zxing
+    implementation 'com.king.zxing:zxing-lite:1.1.1'
+    implementation 'com.android.support:design:28.0.0'
+
+    //linphone库
+    implementation project(path: ':linphoneLibrary')
+
+    //米米网库
+    implementation(name: 'cmapi_v2_0_0', ext: 'aar')
+    implementation 'com.github.razerdp:BasePopup:2.1.9'
+    implementation 'com.bm.photoview:library:1.4.1'
+    implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+    implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+
+    //微信分享
+
+//        implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'net.zetetic:android-database-sqlcipher:3.4.0@aar'
+    implementation 'com.getui:sdk:2.14.1.0'
+    implementation project(':imagepicker')
+    implementation project(':linphoneLibrary')
+    implementation project(':library:WheelPicker')
+    implementation project(':library:Common')
+
+    implementation files('libs/GetuiSDK-support-OPPO-1.0.7.jar')
+
+    //文件下载的SDK
+    implementation 'com.liulishuo.filedownloader:library:1.7.6'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    // 其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    implementation 'com.huawei.hms:push:5.1.1.301'
+//    implementation project(':push:pushsdk_huawei')
+    implementation project(':push:pushsdk_xiaomi')
+
+
+
+    implementation project(':Core')
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    implementation 'com.jakewharton:butterknife-compiler:8.4.0'
+//    implementation files('libs/esptouch.aar')
+    implementation(name: 'esptouch', ext: 'aar')
+    implementation files('libs/GetuiSDK-support-VIVO-1.0.5.jar')
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.3.7'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'com.yanzhenjie.recyclerview:support:1.3.2'
+    implementation 'ru.alexbykov:nopermission:1.1.2'
+
+//    androidTestImplementation 'androidx.test:runner:1.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation files('libs\\xm-codec.jar')
+    implementation files('libs\\xm-support.jar')
+//    implementation 'com.jaredrummler:material-spinner:1.3.1'
+    //okhttp
+//    implementation 'com.blankj:utilcodex:1.26.0'
+    implementation 'com.tencent:mmkv-static:1.2.7'
+
+
+}

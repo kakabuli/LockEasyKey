@@ -1,0 +1,65 @@
+package com.philips.easykey.lock.mvp.presenter.cateye;
+
+import com.google.gson.Gson;
+import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
+import com.philips.easykey.lock.mvp.view.cateye.ICatEyeRingNumberView;
+import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
+import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetCatEyeBellCountBean;
+import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
+import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
+
+public class CatEyeRingNumberPresenter<T> extends BasePresenter<ICatEyeRingNumberView> {
+    private Disposable setRingNumberDisposable;
+
+    //设置响铃次数
+    public void setRingNumber(String gatewayId, String deviceId, String uid, int number) {
+        toDisposable(setRingNumberDisposable);
+        if (mqttService != null) {
+            setRingNumberDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(uid), MqttCommandFactory.setCatEyeBellCount(gatewayId, deviceId, uid, number))
+                    .filter(new Predicate<MqttData>() {
+                        @Override
+                        public boolean test(MqttData mqttData) throws Exception {
+                            if (mqttData.getFunc().equals(MqttConstant.SET_BELL_COUNT)) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    })
+                    .timeout(10 * 1000, TimeUnit.MILLISECONDS)
+                    .compose(RxjavaHelper.observeOnMainThread())
+                    .subscribe(new Consumer<MqttData>() {
+                        @Override
+                        public void accept(MqttData mqttData) throws Exception {
+                            toDisposable(setRingNumberDisposable);
+                            SetCatEyeBellCountBean setCatEyeBellCount = new Gson().fromJson(mqttData.getPayload(), SetCatEyeBellCountBean.class);
+                            if ("200".equals(setCatEyeBellCount.getReturnCode())) {
+                                if (isSafe()) {
+                                    mViewRef.get().setRingNumberSuccess(number);
+                                }
+                            } else {
+                                if (isSafe()) {
+                                    mViewRef.get().setRingNumberFail();
+                                }
+                            }
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            if (isSafe()) {
+                                mViewRef.get().setRingNumberThrowable(throwable);
+                            }
+                        }
+                    });
+            compositeDisposable.add(setRingNumberDisposable);
+        }
+    }
+
+
+}
