@@ -1,10 +1,12 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.FacePassword;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class WifiLockFacePasswordAdapter extends BaseQuickAdapter<FacePassword, BaseViewHolder> {
 
-
+    private Context mContext;
     public WifiLockFacePasswordAdapter(@Nullable List<FacePassword> data, int layoutId) {
         super(layoutId, data);
         mContext = MyApplication.getInstance().getApplicationContext();

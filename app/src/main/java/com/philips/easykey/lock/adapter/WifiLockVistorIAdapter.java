@@ -1,6 +1,8 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -22,6 +24,7 @@ public class WifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmR
     List<WifiVideoLockAlarmRecord> data;
 
     private VideoRecordCallBackLinstener mListener;
+    private Context mContext;
     public interface VideoRecordCallBackLinstener{
         void onVideoRecordCallBackLinstener(WifiVideoLockAlarmRecord record);
     }

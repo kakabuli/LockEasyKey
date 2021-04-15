@@ -69,6 +69,7 @@ import com.tencent.mmkv.MMKV;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xm.sdk.log.XMLog;
 import com.xmitech.sdk.log.LogCodec;
+
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.greendao.database.Database;
 
@@ -146,8 +147,8 @@ public class MyApplication extends Application {
         // HuaWei phone
         if (Rom.isEmui()) {
             HmsMessaging.getInstance(this).setAutoInitEnabled(true);
-        }else if(Rom.isMiui()){
-                MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
+        } else if (Rom.isMiui()) {
+            MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
         }
         PushManager.getInstance().initialize(this);
         LogUtils.d("attachView  App启动完成 ");
@@ -158,15 +159,15 @@ public class MyApplication extends Application {
 
     private void initMMKV(MyApplication myApplication) {
         String rootDir = MMKV.initialize(myApplication);
-        if(BuildConfig.DEBUG)
-        LogUtils.d("shulan mmkv root: " + rootDir);
+        if (BuildConfig.DEBUG)
+            LogUtils.d("shulan mmkv root: " + rootDir);
     }
 
     private void initXMP2PManager() {
-        XMP2PManager.getInstance().initAPI(getApplicationContext(),XMP2PManager.serviceString);
+        XMP2PManager.getInstance().initAPI(getApplicationContext(), XMP2PManager.serviceString);
         XMP2PManager.getInstance().init(getApplicationContext());
-        XMLog.DEBUG=false;
-        LogCodec.DEBUG=false;
+        XMLog.DEBUG = false;
+        LogCodec.DEBUG = false;
     }
 
     private void regToWx() {
@@ -308,7 +309,7 @@ public class MyApplication extends Application {
     }
 
     public void initTokenAndUid() {
-        try{
+        try {
             token = MMKVUtils.getStringMMKV(SPUtils.TOKEN);
             uid = MMKVUtils.getStringMMKV(SPUtils.UID);
 //            token = (String) SPUtils.get(SPUtils.TOKEN, "");//类型转换有崩溃
@@ -375,7 +376,7 @@ public class MyApplication extends Application {
         productLists.clear();
 
         MyApplication.getInstance().initTokenAndUid();
-        SPUtils2.remove(this,Constants.PUSHID);
+        SPUtils2.remove(this, Constants.PUSHID);
         //清除数据库数据
         for (Activity activity : activities) {
             if (activity != null) {
@@ -535,7 +536,7 @@ public class MyApplication extends Application {
                         }
 
                         //使用服务器的数据
-                        if(!loclHomeShowDevices.isEmpty()){
+                        if (!loclHomeShowDevices.isEmpty()) {
                             loclHomeShowDevices.clear();
                         }
 
@@ -567,7 +568,7 @@ public class MyApplication extends Application {
                             }
 
                             //缓存晾衣机设备信息到Dao
-                            if(allBindDevices.getData() != null && allBindDevices.getData().getHangerList() != null){
+                            if (allBindDevices.getData() != null && allBindDevices.getData().getHangerList() != null) {
                                 List<ClothesHangerMachineAllBean> hangerList = allBindDevices.getData().getHangerList();
                                 ClothesHangerMachineAllBeanDao clothesHangerMachineAllBeanDao = getDaoWriteSession().getClothesHangerMachineAllBeanDao();
                                 clothesHangerMachineAllBeanDao.deleteAll();
@@ -593,8 +594,8 @@ public class MyApplication extends Application {
     }
 
     private void useHomeShowDeviceFromLocal() {
-        if(!loclHomeShowDevices.isEmpty()){
-            for(HomeShowBean bean : loclHomeShowDevices){
+        if (!loclHomeShowDevices.isEmpty()) {
+            for (HomeShowBean bean : loclHomeShowDevices) {
                 HomeShowBean newBean = new HomeShowBean(bean.getDeviceType(), bean.getDeviceId(), bean.getDeviceNickName(), bean.getObject());
                 homeShowDevices.add(newBean);
 
@@ -603,13 +604,13 @@ public class MyApplication extends Application {
         }
     }
 
-    public ClothesHangerMachineAllBean searchClothesHangerMachine(String wifiSn){
+    public ClothesHangerMachineAllBean searchClothesHangerMachine(String wifiSn) {
         DaoSession daoSession = MyApplication.getInstance().getDaoWriteSession();
-        if(daoSession != null && daoSession.getClothesHangerMachineAllBeanDao() != null){
+        if (daoSession != null && daoSession.getClothesHangerMachineAllBeanDao() != null) {
             List<ClothesHangerMachineAllBean> hangerList = daoSession.getClothesHangerMachineAllBeanDao().loadAll();
-            if(hangerList != null && hangerList.size() > 0){
-                for(ClothesHangerMachineAllBean bean : hangerList){
-                    if(bean.getWifiSN().equals(wifiSn)){
+            if (hangerList != null && hangerList.size() > 0) {
+                for (ClothesHangerMachineAllBean bean : hangerList) {
+                    if (bean.getWifiSN().equals(wifiSn)) {
                         return bean;
                     }
                 }
@@ -618,16 +619,16 @@ public class MyApplication extends Application {
         return null;
     }
 
-    public ClothesHangerMachineAllBean getClothesHangerMachineBySn(String sn){
-        if(sn.isEmpty()){
+    public ClothesHangerMachineAllBean getClothesHangerMachineBySn(String sn) {
+        if (sn.isEmpty()) {
             return null;
         }
-        if(homeShowDevices != null){
-            for(int i = homeShowDevices.size() -1; i >= 0; i--){
+        if (homeShowDevices != null) {
+            for (int i = homeShowDevices.size() - 1; i >= 0; i--) {
                 HomeShowBean homeShowBean = homeShowDevices.get(i);
-                if(homeShowBean.getDeviceType() == HomeShowBean.TYPE_CLOTHES_HANGER){
+                if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_CLOTHES_HANGER) {
                     ClothesHangerMachineAllBean bean = (ClothesHangerMachineAllBean) homeShowBean.getObject();
-                    if(bean.getWifiSN().equals(sn)){
+                    if (bean.getWifiSN().equals(sn)) {
                         return bean;
                     }
                 }
@@ -636,13 +637,13 @@ public class MyApplication extends Application {
         return null;
     }
 
-    public WifiLockInfo searchVideoLock(String wifiSN){
+    public WifiLockInfo searchVideoLock(String wifiSN) {
         DaoSession daoSession = MyApplication.getInstance().getDaoWriteSession();
         if (daoSession != null && daoSession.getWifiLockInfoDao() != null) {
             List<WifiLockInfo> wifiLockInfos = daoSession.getWifiLockInfoDao().loadAll();
             if (wifiLockInfos != null && wifiLockInfos.size() > 0) {
                 for (WifiLockInfo wifiLockInfo : wifiLockInfos) {
-                    if(wifiLockInfo.getWifiSN().equals(wifiSN)){
+                    if (wifiLockInfo.getWifiSN().equals(wifiSN)) {
                         return wifiLockInfo;
                     }
                 }
@@ -652,7 +653,7 @@ public class MyApplication extends Application {
     }
 
     public WifiLockInfo getWifiLockInfoBySn(String sn) {
-        if(sn.isEmpty()){
+        if (sn.isEmpty()) {
             return null;
         }
         if (homeShowDevices != null) {
@@ -669,11 +670,11 @@ public class MyApplication extends Application {
         return null;
     }
 
-    public int getWifiVideoLockTypeBySn(String sn){
-        if(homeShowDevices != null){
-            for(int i = homeShowDevices.size() - 1; i >= 0; i--){
+    public int getWifiVideoLockTypeBySn(String sn) {
+        if (homeShowDevices != null) {
+            for (int i = homeShowDevices.size() - 1; i >= 0; i--) {
                 HomeShowBean homeShowBean = homeShowDevices.get(i);
-                if(homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
+                if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK) {
                     WifiLockInfo wifiLockInfo = (WifiLockInfo) homeShowBean.getObject();
                     if (wifiLockInfo.getWifiSN().equals(sn)) {
                         return HomeShowBean.TYPE_WIFI_VIDEO_LOCK;
@@ -912,28 +913,28 @@ public class MyApplication extends Application {
                 });
     }
 
-    private void closeAndroidPDialog(){
-        try {
-            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
-            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
-            declaredConstructor.setAccessible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Class cls = Class.forName("android.app.ActivityThread");
-            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
-            declaredMethod.setAccessible(true);
-            Object activityThread = declaredMethod.invoke(null);
-            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
-            mHiddenApiWarningShown.setAccessible(true);
-            mHiddenApiWarningShown.setBoolean(activityThread, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void closeAndroidPDialog() {
+//        try {
+//            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
+//            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
+//            declaredConstructor.setAccessible(true);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            Class cls = Class.forName("android.app.ActivityThread");
+//            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
+//            declaredMethod.setAccessible(true);
+//            Object activityThread = declaredMethod.invoke(null);
+//            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
+//            mHiddenApiWarningShown.setAccessible(true);
+//            mHiddenApiWarningShown.setBoolean(activityThread, true);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
-    public void setProductInfos(List<ProductInfo> productList){
+    public void setProductInfos(List<ProductInfo> productList) {
         productLists = productList;
     }
 

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.gateway.AddGatewayFirstActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbee.AddZigbeeLockFirstActivity;
@@ -119,52 +120,52 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
                 public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                     boolean currentFlag=mList.get(position).isSelect();
 
-                    for (int i = 0; i < mList.size(); i++) {
-                        mList.get(i).setSelect(false);
-                    }
-                    zigbeeBindGatewayBeanSelect = mList.get(position);
-                    //离线
-                    if (zigbeeBindGatewayBeanSelect.getIsOnLine() == 0) {
-                        zigbeeBindGatewayBeanSelect=lastzigbeeBindGatewayBeanSelect;
-                        if(zigbeeBindGatewayBeanSelect!=null){
-                            zigbeeBindGatewayBeanSelect.setSelect(true);
-                        }
-                        ToastUtil.getInstance().showShort(getString(R.string.gateway_offline));
-                        return;
-                    }
-                    if (zigbeeBindGatewayBeanSelect.getIsAdmin()!=1){
-                        zigbeeBindGatewayBeanSelect=lastzigbeeBindGatewayBeanSelect;
-                        if(zigbeeBindGatewayBeanSelect!=null){
-                            zigbeeBindGatewayBeanSelect.setSelect(true);
-                        }
-                        ToastUtil.getInstance().showShort(R.string.gateway_is_authorization);
-                        return;
-                    }
-                    if (zigbeeBindGatewayBeanSelect.getModel() != null) {
-
-
-                        if ((zigbeeBindGatewayBeanSelect.getModel().equals(KeyConstants.SMALL_GW) && type == 2)
-                                || (zigbeeBindGatewayBeanSelect.getModel().equals(KeyConstants.SMALL_GW2) && type == 2)) {
-                            zigbeeBindGatewayBeanSelect = lastzigbeeBindGatewayBeanSelect;
-                            if (zigbeeBindGatewayBeanSelect != null) {
-                                zigbeeBindGatewayBeanSelect.setSelect(true);
-                            }
-                            ToastUtil.getInstance().showShort(R.string.gateway_no_support);
-                            return;
-                        }
-                    }
-                    else {
-                        ToastUtil.getInstance().showShort(R.string.gateway_confirm_version);
-                        return;
-                    }
-                    lastzigbeeBindGatewayBeanSelect= zigbeeBindGatewayBeanSelect;
-
-                    if (currentFlag){
-                        mList.get(position).setSelect(false);
-                        lastzigbeeBindGatewayBeanSelect=null;
-                    }else{
-                        mList.get(position).setSelect(true);
-                    }
+//                    for (int i = 0; i < mList.size(); i++) {
+//                        mList.get(i).setSelect(false);
+//                    }
+//                    zigbeeBindGatewayBeanSelect = mList.get(position);
+//                    //离线
+//                    if (zigbeeBindGatewayBeanSelect.getIsOnLine() == 0) {
+//                        zigbeeBindGatewayBeanSelect=lastzigbeeBindGatewayBeanSelect;
+//                        if(zigbeeBindGatewayBeanSelect!=null){
+//                            zigbeeBindGatewayBeanSelect.setSelect(true);
+//                        }
+//                        ToastUtil.getInstance().showShort(getString(R.string.gateway_offline));
+//                        return;
+//                    }
+//                    if (zigbeeBindGatewayBeanSelect.getIsAdmin()!=1){
+//                        zigbeeBindGatewayBeanSelect=lastzigbeeBindGatewayBeanSelect;
+//                        if(zigbeeBindGatewayBeanSelect!=null){
+//                            zigbeeBindGatewayBeanSelect.setSelect(true);
+//                        }
+//                        ToastUtil.getInstance().showShort(R.string.gateway_is_authorization);
+//                        return;
+//                    }
+//                    if (zigbeeBindGatewayBeanSelect.getModel() != null) {
+//
+//
+//                        if ((zigbeeBindGatewayBeanSelect.getModel().equals(KeyConstants.SMALL_GW) && type == 2)
+//                                || (zigbeeBindGatewayBeanSelect.getModel().equals(KeyConstants.SMALL_GW2) && type == 2)) {
+//                            zigbeeBindGatewayBeanSelect = lastzigbeeBindGatewayBeanSelect;
+//                            if (zigbeeBindGatewayBeanSelect != null) {
+//                                zigbeeBindGatewayBeanSelect.setSelect(true);
+//                            }
+//                            ToastUtil.getInstance().showShort(R.string.gateway_no_support);
+//                            return;
+//                        }
+//                    }
+//                    else {
+//                        ToastUtil.getInstance().showShort(R.string.gateway_confirm_version);
+//                        return;
+//                    }
+//                    lastzigbeeBindGatewayBeanSelect= zigbeeBindGatewayBeanSelect;
+//
+//                    if (currentFlag){
+//                        mList.get(position).setSelect(false);
+//                        lastzigbeeBindGatewayBeanSelect=null;
+//                    }else{
+//                        mList.get(position).setSelect(true);
+//                    }
 
                     addZigbeeBindGatewayAdapter.notifyDataSetChanged();
                 }

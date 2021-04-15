@@ -1,13 +1,15 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothItemRecordBean;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -22,13 +24,12 @@ import java.util.List;
 
 
 public class BluetoothItemRecordAdapter extends BaseQuickAdapter<BluetoothItemRecordBean, BaseViewHolder> {
+    private Context mContext;
+
     public BluetoothItemRecordAdapter(int layoutResId, @Nullable List<BluetoothItemRecordBean> data) {
         super(layoutResId, data);
     }
 
-    public BluetoothItemRecordAdapter(@Nullable List<BluetoothItemRecordBean> data) {
-        super(data);
-    }
 
     @Override
     protected void convert(BaseViewHolder helper, BluetoothItemRecordBean bean) {

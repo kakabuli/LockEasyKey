@@ -15,6 +15,8 @@ import androidx.annotation.AnimRes;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;

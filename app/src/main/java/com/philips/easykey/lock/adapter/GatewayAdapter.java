@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -70,7 +70,7 @@ public class GatewayAdapter extends BaseQuickAdapter<HomeShowBean, BaseViewHolde
         if ("online".equals(deviceStatus)) {
             helper.setImageResource(R.id.device_type_image, R.mipmap.wifi_connect);
             tvDeviceStatus.setText(R.string.online);
-            tvDeviceStatus.setTextColor(mContext.getResources().getColor(R.color.c1F96F7));
+            tvDeviceStatus.setTextColor(getContext().getResources().getColor(R.color.c1F96F7));
             if (realPw<=20){
                 batteryView.setColor(R.color.cFF3B30);
             }else{
@@ -81,7 +81,7 @@ public class GatewayAdapter extends BaseQuickAdapter<HomeShowBean, BaseViewHolde
         } else {
             helper.setImageResource(R.id.device_type_image, R.mipmap.wifi_disconnect);
             tvDeviceStatus.setText(R.string.offline);
-            tvDeviceStatus.setTextColor(mContext.getResources().getColor(R.color.c999999));
+            tvDeviceStatus.setTextColor(getContext().getResources().getColor(R.color.c999999));
             batteryView.setColor(R.color.cD6D6D6);
         }
 

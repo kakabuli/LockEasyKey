@@ -134,7 +134,7 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
         if (mList != null) {
             mAdapter = new AddBluetoothPairSuccessAdapter(mList);
             recycler.setAdapter(mAdapter);
-            mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            mAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     inputName.setCursorVisible(true);

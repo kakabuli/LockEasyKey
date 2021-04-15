@@ -1,13 +1,15 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -21,13 +23,11 @@ import java.util.List;
 
 
 public class WifiLockAlarmItemRecordAdapter extends BaseQuickAdapter<WifiLockAlarmRecord, BaseViewHolder> {
+    private Context mContext;
     public WifiLockAlarmItemRecordAdapter(int layoutResId, @Nullable List<WifiLockAlarmRecord> data) {
         super(layoutResId, data);
     }
 
-    public WifiLockAlarmItemRecordAdapter(@Nullable List<WifiLockAlarmRecord> data) {
-        super(data);
-    }
 
     @Override
     protected void convert(BaseViewHolder helper, WifiLockAlarmRecord bean) {

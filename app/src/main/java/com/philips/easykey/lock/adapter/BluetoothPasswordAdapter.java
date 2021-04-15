@@ -1,10 +1,12 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
@@ -26,7 +28,7 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
 
     public BluetoothPasswordAdapter(@Nullable List<ForeverPassword> data, int layoutId) {
         super(layoutId, data);
-        mContext = MyApplication.getInstance().getApplicationContext();
+        Context mContext = MyApplication.getInstance().getApplicationContext();
         weekdays = new String[]{
                 mContext.getString(R.string.week_day),
                 mContext.getString(R.string.monday),
@@ -76,6 +78,7 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
 
                 }
             }
+            Context mContext = MyApplication.getInstance().getApplicationContext();
             String startTime = getStartTime(bean);
             String endTime = getEndTime(bean);
             weeks = mContext.getString(R.string.pwd_will) + weeks + startTime + "-" + endTime + mContext.getString(R.string.force);

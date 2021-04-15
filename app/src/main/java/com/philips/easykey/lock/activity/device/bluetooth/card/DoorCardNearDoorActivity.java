@@ -3,6 +3,8 @@ package com.philips.easykey.lock.activity.device.bluetooth.card;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;

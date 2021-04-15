@@ -13,7 +13,6 @@ import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
-import com.philips.easykey.lock.publiclibrary.NotificationManager;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.mqtt.PublishResult;
@@ -33,7 +32,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -109,7 +107,6 @@ public class MqttService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        NotificationManager.silentForegroundNotification(this);
         return super.onStartCommand(intent, flags, startId);
     }
 

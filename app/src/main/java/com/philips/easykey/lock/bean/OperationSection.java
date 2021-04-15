@@ -1,6 +1,5 @@
 package com.philips.easykey.lock.bean;
 
-import com.chad.library.adapter.base.entity.SectionEntity;
 import com.philips.easykey.lock.publiclibrary.ble.bean.OperationLockRecord;
 
 public class OperationSection extends SectionEntity<OperationLockRecord> {

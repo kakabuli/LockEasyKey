@@ -15,7 +15,6 @@ import android.bluetooth.le.ScanSettings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Handler;
@@ -29,7 +28,6 @@ import android.widget.Toast;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
-import com.philips.easykey.lock.publiclibrary.NotificationManager;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.ble.bean.NewVersionBean;
 import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleDataBean;
@@ -242,8 +240,6 @@ public class BleService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        NotificationManager.silentForegroundNotification(this);
-
         return super.onStartCommand(intent, flags, startId);
     }
 

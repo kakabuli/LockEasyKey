@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.inf.OnBindClickListener;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
@@ -55,7 +55,7 @@ public class DeviceBleWiFiSearchAdapter extends BaseQuickAdapter<BluetoothDevice
                         helper.setVisible(R.id.device_bluetooth_sn,true);
                         helper.setText(R.id.device_bluetooth_sn,broadcastBean.getDeviceSN());
                         helper.setVisible(R.id.go_bind, true) ;
-                        helper.setOnClickListener(R.id.go_bind, new View.OnClickListener() {
+                        helper.getView(R.id.go_bind).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 bindClickListener.onItemClickListener(v,helper.getPosition(),item);

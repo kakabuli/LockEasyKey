@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import androidx.annotation.Nullable;
@@ -14,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -35,6 +36,8 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
 
     private List<ProductInfo> productList = new ArrayList<>();
     private RequestOptions options;
+
+    private Context mContext;
 
     public DeviceDetailAdapter(@Nullable List<HomeShowBean> data,List<ProductInfo> product) {
         super(R.layout.fragment_device_item, data);

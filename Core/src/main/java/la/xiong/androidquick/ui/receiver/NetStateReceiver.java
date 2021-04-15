@@ -9,7 +9,6 @@ import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 
-import la.xiong.androidquick.tool.LogUtils;
 import la.xiong.androidquick.tool.NetUtil;
 import la.xiong.androidquick.ui.eventbus.EventCenter;
 

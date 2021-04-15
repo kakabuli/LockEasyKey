@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import la.xiong.androidquick.R;
-import la.xiong.androidquick.tool.LogUtils;
 import la.xiong.androidquick.tool.SizeUtils;
 import la.xiong.androidquick.tool.StringUtil;
 

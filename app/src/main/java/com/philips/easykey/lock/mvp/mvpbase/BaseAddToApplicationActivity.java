@@ -34,7 +34,7 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
             KeepAliveManager.batteryOptimizations(getApplicationContext());
         }*/
 
-        startKeepAlive();
+//        startKeepAlive();
     }
 
     /**

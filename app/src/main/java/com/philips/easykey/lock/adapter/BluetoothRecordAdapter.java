@@ -3,12 +3,14 @@ package com.philips.easykey.lock.adapter;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothItemRecordBean;
 import com.philips.easykey.lock.bean.BluetoothRecordBean;
@@ -23,6 +25,7 @@ import java.util.List;
 
 public class BluetoothRecordAdapter extends BaseQuickAdapter<BluetoothRecordBean, BaseViewHolder> {
 
+    private Context mContext;
 
     public BluetoothRecordAdapter(@Nullable List<BluetoothRecordBean> data) {
         super(R.layout.item_bluetooth_record, data);

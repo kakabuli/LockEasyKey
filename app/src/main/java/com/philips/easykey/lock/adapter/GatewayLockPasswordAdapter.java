@@ -1,10 +1,12 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -24,6 +26,7 @@ public class GatewayLockPasswordAdapter extends BaseQuickAdapter<GatewayPassword
     @Override
     protected void convert(BaseViewHolder helper, GatewayPasswordPlanBean item) {
 
+        Context mContext = getContext();
         int position = helper.getPosition();
         helper.setText(R.id.tv_num, item.getPasswordNumber() + "");
 

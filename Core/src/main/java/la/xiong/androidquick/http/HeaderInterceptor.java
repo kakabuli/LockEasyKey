@@ -1,12 +1,10 @@
 package la.xiong.androidquick.http;
 
 
-import android.provider.SyncStateContract;
 import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 
-import la.xiong.androidquick.tool.LogUtils;
 import la.xiong.androidquick.tool.StringUtil;
 import la.xiong.androidquick.ui.eventbus.EventCenter;
 import okhttp3.*;

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.inf.OnBindClickListener;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
@@ -41,7 +41,7 @@ public class ClothesHangerMachineBleWiFiSearchAdapter extends BaseQuickAdapter<B
         helper.setVisible(R.id.device_bluetooth_name,true);
         helper.setText(R.id.device_bluetooth_name,item.getName());
 
-        helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+        helper.getView(R.id.root_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(bindClickListener != null){

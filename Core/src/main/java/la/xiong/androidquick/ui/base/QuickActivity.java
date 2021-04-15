@@ -24,6 +24,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,6 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import la.xiong.androidquick.R;
-import la.xiong.androidquick.tool.LogUtils;
 import la.xiong.androidquick.ui.eventbus.EventCenter;
 import la.xiong.androidquick.ui.manager.HttpSubRequest;
 import la.xiong.androidquick.ui.manager.QuickAppManager;
@@ -232,7 +232,7 @@ public abstract class QuickActivity extends AppCompatActivity implements EasyPer
         linback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.d("测试","点击返回");
+                Log.d("测试","点击返回");
                 finish();
                 onFinish();
             }
@@ -678,7 +678,7 @@ public abstract class QuickActivity extends AppCompatActivity implements EasyPer
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        LogUtils.d("测试","返回按钮");
+        Log.d("测试","返回按钮");
         onFinish();
     }
 }
