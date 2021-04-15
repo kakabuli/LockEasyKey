@@ -1,8 +1,8 @@
 // Generated code from Butter Knife. Do not modify!
 package com.philips.easykey.lock.activity.device.videolock;
 
-import android.support.annotation.CallSuper;
-import android.support.annotation.UiThread;
+import androidx.annotation.CallSuper;
+import androidx.annotation.UiThread;
 import android.view.View;
 import android.widget.ImageView;
 import butterknife.Unbinder;

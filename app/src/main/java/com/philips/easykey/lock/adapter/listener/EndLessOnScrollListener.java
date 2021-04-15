@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.adapter.listener;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class EndLessOnScrollListener extends RecyclerView.OnScrollListener {
 

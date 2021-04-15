@@ -3,9 +3,11 @@ package com.philips.easykey.lock.activity.device.gatewaylock.password;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.GatewayLockPasswordAdapter;
@@ -25,7 +28,6 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.greenDao.manager.GatewayLockPasswordManager;
 
@@ -42,7 +44,7 @@ import butterknife.ButterKnife;
  * Created by David
  */
 public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPasswordManagerView, GatewayLockPasswordManagerPresenter<IGatewayLockPasswordManagerView>>
-        implements IGatewayLockPasswordManagerView, BaseQuickAdapter.OnItemClickListener, View.OnClickListener {
+        implements IGatewayLockPasswordManagerView, View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -110,7 +112,19 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         gatewayLockPasswordAdapter = new GatewayLockPasswordAdapter(mList);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(gatewayLockPasswordAdapter);
-        gatewayLockPasswordAdapter.setOnItemClickListener(this);
+        gatewayLockPasswordAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent(GatewayPasswordManagerActivity.this, GatewayLockDeletePasswordActivity.class);
+                if (gatewayId != null && deviceId != null) {
+                    intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
+                    intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
+                    GatewayPasswordPlanBean item = (GatewayPasswordPlanBean) adapter.getItem(position);
+                    intent.putExtra(KeyConstants.GATEWAY_PASSWORD_BEAN, item);
+                    startActivityForResult(intent, KeyConstants.DELETE_PWD_REQUEST_CODE);
+                }
+            }
+        });
         tvSynchronizedRecord.setOnClickListener(this);
 
     }
@@ -173,18 +187,6 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(this, GatewayLockDeletePasswordActivity.class);
-        if (gatewayId != null && deviceId != null) {
-            intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
-            intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
-            GatewayPasswordPlanBean item = (GatewayPasswordPlanBean) adapter.getItem(position);
-            intent.putExtra(KeyConstants.GATEWAY_PASSWORD_BEAN, item);
-            startActivityForResult(intent, KeyConstants.DELETE_PWD_REQUEST_CODE);
-        }
     }
 
     public void passwordPageChange(boolean havePwd) {

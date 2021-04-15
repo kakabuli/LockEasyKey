@@ -1,17 +1,12 @@
 package com.philips.easykey.lock.activity.device.clotheshangermachine;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineDetailPresenter;
-import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineDetailView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

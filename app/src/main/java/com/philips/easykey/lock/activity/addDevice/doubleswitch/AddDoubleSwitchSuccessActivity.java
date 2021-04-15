@@ -1,8 +1,6 @@
 package com.philips.easykey.lock.activity.addDevice.doubleswitch;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,7 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.AddBluetoothPairSuccessAdapter;
 import com.philips.easykey.lock.bean.deviceAdd.AddBluetoothPairSuccessBean;
@@ -129,9 +132,9 @@ public class AddDoubleSwitchSuccessActivity   extends BaseAddToApplicationActivi
         if (nameList != null) {
             nameAdapter = new AddBluetoothPairSuccessAdapter(nameList);
             rvName.setAdapter(nameAdapter);
-            nameAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            nameAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                     inputName.setCursorVisible(true);
                     for (int i = 0; i < nameList.size(); i++) {
                         nameList.get(i).setSelected(false);
@@ -159,9 +162,9 @@ public class AddDoubleSwitchSuccessActivity   extends BaseAddToApplicationActivi
         if (positionList != null) {
             positionAdapter = new AddBluetoothPairSuccessAdapter(positionList);
             rvPosition.setAdapter(positionAdapter);
-            positionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            positionAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                     etPosition.setCursorVisible(true);
                     for (int i = 0; i < positionList.size(); i++) {
                         positionList.get(i).setSelected(false);

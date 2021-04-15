@@ -1,32 +1,21 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
+import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.espressif.iot.esptouch.util.TouchNetUtil;
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.singlefireswitchpresenter.SingleFireSwitchSettingPresenter;
 import com.philips.easykey.lock.mvp.view.singlefireswitchview.SingleFireSwitchView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.Rsa;
-import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SocketManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

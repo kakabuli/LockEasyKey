@@ -3,16 +3,17 @@ package com.philips.easykey.lock.activity.device.bluetooth.password;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.BluetoothPasswordAdapter;
@@ -42,7 +43,7 @@ import butterknife.ButterKnife;
  * Created by David
  */
 public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManagerView, PasswordManagerPresenter<IPasswordManagerView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, IPasswordManagerView {
+        implements View.OnClickListener, IPasswordManagerView {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -98,7 +99,24 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
         bluetoothPasswordAdapter = new BluetoothPasswordAdapter(list, R.layout.item_bluetooth_password);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(bluetoothPasswordAdapter);
-        bluetoothPasswordAdapter.setOnItemClickListener(this);
+        bluetoothPasswordAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent(BlePasswordManagerActivity.this, BluetoothPasswordManagerDetailActivity.class);
+                String num = list.get(position).getNum();
+                int number = Integer.parseInt(num);
+                int pwdType ;
+                if (number > 4 && number < 9) {
+                    pwdType = 2;
+                } else   {
+                    pwdType = 1;
+                }
+                AddPasswordBean.Password password = new AddPasswordBean.Password(pwdType, list.get(position));
+                intent.putExtra(KeyConstants.TO_PWD_DETAIL, password);
+                intent.putExtra(KeyConstants.CREATE_TIME, list.get(position).getCreateTime());
+                startActivity(intent);
+            }
+        });
     }
 
     private void initRefresh() {
@@ -124,23 +142,6 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
         mPresenter.isAuth(bleLockInfo, false); //查看是否需要重现连接
         mPresenter.getAllPassword(bleLockInfo, true);
         LogUtils.e("密码管理界面  onResume()   ");
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(this, BluetoothPasswordManagerDetailActivity.class);
-        String num = list.get(position).getNum();
-        int number = Integer.parseInt(num);
-        int pwdType ;
-        if (number > 4 && number < 9) {
-            pwdType = 2;
-        } else   {
-            pwdType = 1;
-        }
-        AddPasswordBean.Password password = new AddPasswordBean.Password(pwdType, list.get(position));
-        intent.putExtra(KeyConstants.TO_PWD_DETAIL, password);
-        intent.putExtra(KeyConstants.CREATE_TIME, list.get(position).getCreateTime());
-        startActivity(intent);
     }
 
     public void passwordPageChange() {

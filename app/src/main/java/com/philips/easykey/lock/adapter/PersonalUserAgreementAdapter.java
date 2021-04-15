@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
-import android.graphics.Color;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 

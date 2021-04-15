@@ -3,16 +3,13 @@ package com.philips.easykey.lock.activity.addDevice.gateway;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeFirstActivity;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeScanFailActivity;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeSecondActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.QrCodeScanActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;

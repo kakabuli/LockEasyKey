@@ -2,42 +2,20 @@ package com.philips.easykey.lock.activity.my;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.adapter.PersonalFAQAdapter;
 import com.philips.easykey.lock.fragment.help.PersonalFAQHangerHelpFragment;
 import com.philips.easykey.lock.fragment.help.PersonalFAQLockHelpFragment;
-import com.philips.easykey.lock.fragment.help.WifiVideoLockCommonProblemHelpFragment;
-import com.philips.easykey.lock.fragment.help.WifiVideoLockToConfigureHelpFragment;
-import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.bean.FAQBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalFAQPresenter;
-import com.philips.easykey.lock.publiclibrary.http.result.GetFAQResult;
-import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
-import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
-import com.philips.easykey.lock.utils.cachefloder.ACache;
-import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
-import com.philips.easykey.lock.mvp.view.personalview.IPersonalFAQView;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

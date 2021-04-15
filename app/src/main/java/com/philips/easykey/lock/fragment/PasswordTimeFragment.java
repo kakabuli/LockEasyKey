@@ -3,8 +3,10 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.bluetooth.password.BlePasswordManagerActivity;
@@ -55,7 +58,7 @@ import butterknife.ButterKnife;
  */
 
 public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, AddTimePasswordPresenter<IAddTimePasswprdView>>
-        implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, IAddTimePasswprdView, BaseQuickAdapter.OnItemClickListener {
+        implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, IAddTimePasswprdView {
     long startMilliseconds = 0;//开始毫秒数
     long endMilliseconds = 0;//结束毫秒数
     int timeStatus = 0;//时间策略
@@ -173,7 +176,23 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);
         recycleview.setLayoutManager(new GridLayoutManager(getActivity(), 6));
         recycleview.setAdapter(shiXiaoNameAdapter);
-        shiXiaoNameAdapter.setOnItemClickListener(this);
+        shiXiaoNameAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).setSelected(false);
+                }
+                ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+                String name = shiXiaoNameBean.getName();
+                etName.setText(name);
+                etName.setSelection(name.length());
+                etName.setFocusable(true);
+                etName.setFocusableInTouchMode(true);
+                etName.requestFocus();
+                list.get(position).setSelected(true);
+                shiXiaoNameAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -502,23 +521,6 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
     public void onTimePwdFull() {
         hiddenLoading();
         ToastUtil.getInstance().showLong(R.string.only_0to4);
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        String name = shiXiaoNameBean.getName();
-        etName.setText(name);
-        etName.setSelection(name.length());
-        etName.setFocusable(true);
-        etName.setFocusableInTouchMode(true);
-        etName.requestFocus();
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
-
     }
 
     @Override

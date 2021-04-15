@@ -1,30 +1,20 @@
 package com.philips.easykey.lock.activity.device.gatewaylock.password;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.bluetooth.password.BlePasswordManagerActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
-import com.philips.easykey.lock.mvp.presenter.ble.PasswordDetailPresenter;
 import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockPasswordSharePresenter;
-import com.philips.easykey.lock.mvp.view.IPasswordDetailView;
-import com.philips.easykey.lock.mvp.view.gatewayView.IGatewaySharedView;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordShareView;
-import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
-import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;

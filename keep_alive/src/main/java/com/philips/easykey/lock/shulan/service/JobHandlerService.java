@@ -8,8 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
+import androidx.annotation.RequiresApi;
 
 import com.philips.easykey.lock.shulan.config.KeepAliveConfig;
 import com.philips.easykey.lock.shulan.utils.KeepAliveUtils;

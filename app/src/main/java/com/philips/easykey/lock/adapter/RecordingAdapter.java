@@ -1,9 +1,8 @@
 package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,14 +11,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.utils.Constants;
-import com.philips.easykey.lock.utils.PirConst;
-import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.db.MediaItem;
-import com.philips.easykey.lock.widget.image.CircleTransform;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

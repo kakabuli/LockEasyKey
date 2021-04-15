@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddActivity;
 import com.philips.easykey.lock.activity.device.BleDetailActivity;
 import com.philips.easykey.lock.activity.device.BleAuthActivity;
 import com.philips.easykey.lock.activity.device.cateye.more.CateyeAuthorizationFunctionActivity;
@@ -53,7 +53,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.ServerBleDevice;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
@@ -92,7 +91,7 @@ import butterknife.Unbinder;
  * Created by asqw1 on 2018/3/14.
  */
 
-public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<IDeviceView>> implements BaseQuickAdapter.OnItemClickListener, IDeviceView {
+public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<IDeviceView>> implements IDeviceView {
     @BindView(R.id.no_device_image)
     ImageView noDeviceImage;
 
@@ -181,7 +180,134 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
             deviceDetailAdapter = new DeviceDetailAdapter(mDeviceList,productList);
 
             deviceRecycler.setAdapter(deviceDetailAdapter);
-            deviceDetailAdapter.setOnItemClickListener(this);
+            deviceDetailAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                    if (mDeviceList != null) {
+                        if (mDeviceList.size() > position) {
+                            LogUtils.e("设备总和  " + mDeviceList.size() + "位置  " + position);
+                            HomeShowBean deviceDetailBean = mDeviceList.get(position);
+                            switch (deviceDetailBean.getDeviceType()) {
+                                case HomeShowBean.TYPE_CAT_EYE:
+                                    //猫眼
+                                    CateEyeInfo cateEyeInfo = (CateEyeInfo) deviceDetailBean.getObject();
+                                    GatewayInfo cateGw = MyApplication.getInstance().getGatewayById(cateEyeInfo.getGwID());
+                                    if (cateGw != null && cateGw.getServerInfo().getIsAdmin() == 1) {
+                                        //管理员
+                                        Intent cateEyeInfoIntent = new Intent(getActivity(), CateyeFunctionActivity.class);
+                                        cateEyeInfoIntent.putExtra(KeyConstants.CATE_INFO, deviceDetailBean);
+                                        startActivity(cateEyeInfoIntent);
+                                    } else {
+                                        //授权
+                                        Intent cateEyeAuthorizationInfoIntent = new Intent(getActivity(), CateyeAuthorizationFunctionActivity.class);
+                                        cateEyeAuthorizationInfoIntent.putExtra(KeyConstants.CATE_INFO, deviceDetailBean);
+                                        startActivity(cateEyeAuthorizationInfoIntent);
+                                    }
+                                    break;
+                                case HomeShowBean.TYPE_GATEWAY_LOCK:
+                                    GwLockInfo lockInfo = (GwLockInfo) deviceDetailBean.getObject();
+                                    GatewayInfo gw = MyApplication.getInstance().getGatewayById(lockInfo.getGwID());
+                                    try{
+                                        String gatewayModel = gw.getServerInfo().getModel();   // 6032 网关
+                                        if (gw.getServerInfo().getIsAdmin() == 1) {
+                                            //网关锁
+                                            Intent gatewayLockintent = new Intent(getActivity(), GatewayLockFunctionActivity.class);
+                                            gatewayLockintent.putExtra(KeyConstants.GATEWAY_LOCK_INFO, deviceDetailBean);
+                                            gatewayLockintent.putExtra(KeyConstants.GATEWAY_MODEL,gatewayModel);
+                                            startActivity(gatewayLockintent);
+                                        } else {
+                                            //授权锁
+                                            //网关锁
+                                            Intent gatewayLockintent = new Intent(getActivity(), GatewayLockAuthorizeFunctionActivity.class);
+                                            gatewayLockintent.putExtra(KeyConstants.GATEWAY_LOCK_INFO, deviceDetailBean);
+                                            gatewayLockintent.putExtra(KeyConstants.GATEWAY_MODEL,gatewayModel);
+                                            startActivity(gatewayLockintent);
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+
+                                    break;
+                                case HomeShowBean.TYPE_GATEWAY:
+                                    //网关
+                                    Intent gatwayInfo = new Intent(getActivity(), GatewayActivity.class);
+                                    gatwayInfo.putExtra(KeyConstants.GATEWAY_INFO, deviceDetailBean);
+                                    startActivity(gatwayInfo);
+                                    break;
+                                case HomeShowBean.TYPE_BLE_LOCK:
+                                    //蓝牙
+                                    BleLockInfo bleLockInfo = (BleLockInfo) deviceDetailBean.getObject();
+                                    mPresenter.setBleLockInfo(bleLockInfo);
+                                    if (bleLockInfo.getServerLockInfo().getIs_admin() != null && bleLockInfo.getServerLockInfo().getIs_admin().equals("1")) {
+                                        if ("3".equals(bleLockInfo.getServerLockInfo().getBleVersion())) {
+                                            String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
+                                            LogUtils.e("蓝牙的功能集是   " + functionSet);
+                                            if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
+                                                LogUtils.e("跳转   老蓝牙");
+                                                Intent detailIntent = new Intent(getActivity(), OldBleDetailActivity.class);
+                                                String model = bleLockInfo.getServerLockInfo().getModel();
+                                                detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
+                                                startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
+                                            } else {
+                                                LogUtils.e("跳转   全功能  蓝牙");
+                                                Intent detailIntent = new Intent(getActivity(), BleDetailActivity.class);
+                                                String model = bleLockInfo.getServerLockInfo().getModel();
+                                                String deviceSN = bleLockInfo.getServerLockInfo().getDeviceSN();
+                                                detailIntent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
+                                                detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
+                                                startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
+                                            }
+                                        } else {
+                                            LogUtils.e("跳转   老蓝牙");
+                                            Intent detailIntent = new Intent(getActivity(), OldBleDetailActivity.class);
+                                            String model = bleLockInfo.getServerLockInfo().getModel();
+                                            detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
+                                            startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
+                                        }
+                                    } else {
+                                        LogUtils.e("跳转 授权  蓝牙");
+                                        Intent impowerIntent = new Intent(getActivity(), BleAuthActivity.class);
+                                        String model = bleLockInfo.getServerLockInfo().getModel();
+                                        String deviceSN = bleLockInfo.getServerLockInfo().getDeviceSN();
+
+                                        impowerIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
+                                        impowerIntent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
+
+                                        startActivityForResult(impowerIntent, KeyConstants.GET_BLE_POWER);
+                                    }
+                                    break;
+                                case HomeShowBean.TYPE_CLOTHES_HANGER:
+                                    ClothesHangerMachineAllBean hangerInfo = (ClothesHangerMachineAllBean) deviceDetailBean.getObject();
+                                    Intent clothesIntent = new Intent(getActivity(), ClothesHangerMachineDetailActivity.class);
+                                    clothesIntent.putExtra(KeyConstants.WIFI_SN,hangerInfo.getWifiSN());
+                                    startActivity(clothesIntent);
+                                    break;
+                                case HomeShowBean.TYPE_WIFI_LOCK:
+                                case HomeShowBean.TYPE_WIFI_VIDEO_LOCK:
+                                    WifiLockInfo wifiLockInfo = (WifiLockInfo) deviceDetailBean.getObject();
+                                    if (!TextUtils.isEmpty(wifiLockInfo.getFunctionSet())) {
+                                        if (wifiLockInfo.getIsAdmin() == 1) { //主用户
+                                            Intent intent = new Intent(getActivity(), WiFiLockDetailActivity.class);
+                                            intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
+                                            startActivity(intent);
+                                        } else { //分享用户
+                                            LogUtils.e("分享 wifi锁  用户  " + wifiLockInfo.toString());
+                                            Intent intent = new Intent(getActivity(), WifiLockAuthActivity.class);
+                                            intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
+                                            startActivity(intent);
+                                        }
+                                    } else {
+                                        ToastUtil.getInstance().showLong(R.string.lock_info_not_push);
+                                    }
+                                    break;
+                            }
+                        } else {
+                            ToastUtil.getInstance().showShort(R.string.please_refresh_page_get_newdata);
+                        }
+                    }
+                }
+            });
             for (int i = 0; i < mDeviceList.size(); i++) {
                 if (HomeShowBean.TYPE_GATEWAY == mDeviceList.get(i).getDeviceType()) {
                     Object obj = mDeviceList.get(i).getObject();
@@ -471,133 +597,6 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                 intent.setData(content_url);
                 startActivity(intent);
                 break;
-        }
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        if (mDeviceList != null) {
-            if (mDeviceList.size() > position) {
-                LogUtils.e("设备总和  " + mDeviceList.size() + "位置  " + position);
-                HomeShowBean deviceDetailBean = mDeviceList.get(position);
-                switch (deviceDetailBean.getDeviceType()) {
-                    case HomeShowBean.TYPE_CAT_EYE:
-                        //猫眼
-                        CateEyeInfo cateEyeInfo = (CateEyeInfo) deviceDetailBean.getObject();
-                        GatewayInfo cateGw = MyApplication.getInstance().getGatewayById(cateEyeInfo.getGwID());
-                        if (cateGw != null && cateGw.getServerInfo().getIsAdmin() == 1) {
-                            //管理员
-                            Intent cateEyeInfoIntent = new Intent(getActivity(), CateyeFunctionActivity.class);
-                            cateEyeInfoIntent.putExtra(KeyConstants.CATE_INFO, deviceDetailBean);
-                            startActivity(cateEyeInfoIntent);
-                        } else {
-                            //授权
-                            Intent cateEyeAuthorizationInfoIntent = new Intent(getActivity(), CateyeAuthorizationFunctionActivity.class);
-                            cateEyeAuthorizationInfoIntent.putExtra(KeyConstants.CATE_INFO, deviceDetailBean);
-                            startActivity(cateEyeAuthorizationInfoIntent);
-                        }
-                        break;
-                    case HomeShowBean.TYPE_GATEWAY_LOCK:
-                        GwLockInfo lockInfo = (GwLockInfo) deviceDetailBean.getObject();
-                        GatewayInfo gw = MyApplication.getInstance().getGatewayById(lockInfo.getGwID());
-                        try{
-                            String gatewayModel = gw.getServerInfo().getModel();   // 6032 网关
-                            if (gw.getServerInfo().getIsAdmin() == 1) {
-                                //网关锁
-                                Intent gatewayLockintent = new Intent(getActivity(), GatewayLockFunctionActivity.class);
-                                gatewayLockintent.putExtra(KeyConstants.GATEWAY_LOCK_INFO, deviceDetailBean);
-                                gatewayLockintent.putExtra(KeyConstants.GATEWAY_MODEL,gatewayModel);
-                                startActivity(gatewayLockintent);
-                            } else {
-                                //授权锁
-                                //网关锁
-                                Intent gatewayLockintent = new Intent(getActivity(), GatewayLockAuthorizeFunctionActivity.class);
-                                gatewayLockintent.putExtra(KeyConstants.GATEWAY_LOCK_INFO, deviceDetailBean);
-                                gatewayLockintent.putExtra(KeyConstants.GATEWAY_MODEL,gatewayModel);
-                                startActivity(gatewayLockintent);
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-
-                        break;
-                    case HomeShowBean.TYPE_GATEWAY:
-                        //网关
-                        Intent gatwayInfo = new Intent(getActivity(), GatewayActivity.class);
-                        gatwayInfo.putExtra(KeyConstants.GATEWAY_INFO, deviceDetailBean);
-                        startActivity(gatwayInfo);
-                        break;
-                    case HomeShowBean.TYPE_BLE_LOCK:
-                        //蓝牙
-                        BleLockInfo bleLockInfo = (BleLockInfo) deviceDetailBean.getObject();
-                        mPresenter.setBleLockInfo(bleLockInfo);
-                        if (bleLockInfo.getServerLockInfo().getIs_admin() != null && bleLockInfo.getServerLockInfo().getIs_admin().equals("1")) {
-                            if ("3".equals(bleLockInfo.getServerLockInfo().getBleVersion())) {
-                                String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
-                                LogUtils.e("蓝牙的功能集是   " + functionSet);
-                                if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
-                                    LogUtils.e("跳转   老蓝牙");
-                                    Intent detailIntent = new Intent(getActivity(), OldBleDetailActivity.class);
-                                    String model = bleLockInfo.getServerLockInfo().getModel();
-                                    detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
-                                    startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
-                                } else {
-                                    LogUtils.e("跳转   全功能  蓝牙");
-                                    Intent detailIntent = new Intent(getActivity(), BleDetailActivity.class);
-                                    String model = bleLockInfo.getServerLockInfo().getModel();
-                                    String deviceSN = bleLockInfo.getServerLockInfo().getDeviceSN();
-                                    detailIntent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
-                                    detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
-                                    startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
-                                }
-                            } else {
-                                LogUtils.e("跳转   老蓝牙");
-                                Intent detailIntent = new Intent(getActivity(), OldBleDetailActivity.class);
-                                String model = bleLockInfo.getServerLockInfo().getModel();
-                                detailIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
-                                startActivityForResult(detailIntent, KeyConstants.GET_BLE_POWER);
-                            }
-                        } else {
-                            LogUtils.e("跳转 授权  蓝牙");
-                            Intent impowerIntent = new Intent(getActivity(), BleAuthActivity.class);
-                            String model = bleLockInfo.getServerLockInfo().getModel();
-                            String deviceSN = bleLockInfo.getServerLockInfo().getDeviceSN();
-
-                            impowerIntent.putExtra(KeyConstants.DEVICE_TYPE, model);
-                            impowerIntent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
-
-                            startActivityForResult(impowerIntent, KeyConstants.GET_BLE_POWER);
-                        }
-                        break;
-                    case HomeShowBean.TYPE_CLOTHES_HANGER:
-                        ClothesHangerMachineAllBean hangerInfo = (ClothesHangerMachineAllBean) deviceDetailBean.getObject();
-                        Intent clothesIntent = new Intent(getActivity(), ClothesHangerMachineDetailActivity.class);
-                        clothesIntent.putExtra(KeyConstants.WIFI_SN,hangerInfo.getWifiSN());
-                        startActivity(clothesIntent);
-                        break;
-                    case HomeShowBean.TYPE_WIFI_LOCK:
-                    case HomeShowBean.TYPE_WIFI_VIDEO_LOCK:
-                        WifiLockInfo wifiLockInfo = (WifiLockInfo) deviceDetailBean.getObject();
-                        if (!TextUtils.isEmpty(wifiLockInfo.getFunctionSet())) {
-                            if (wifiLockInfo.getIsAdmin() == 1) { //主用户
-                                Intent intent = new Intent(getActivity(), WiFiLockDetailActivity.class);
-                                intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
-                                startActivity(intent);
-                            } else { //分享用户
-                                LogUtils.e("分享 wifi锁  用户  " + wifiLockInfo.toString());
-                                Intent intent = new Intent(getActivity(), WifiLockAuthActivity.class);
-                                intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
-                                startActivity(intent);
-                            }
-                        } else {
-                            ToastUtil.getInstance().showLong(R.string.lock_info_not_push);
-                        }
-                        break;
-                }
-            } else {
-                ToastUtil.getInstance().showShort(R.string.please_refresh_page_get_newdata);
-            }
         }
     }
 

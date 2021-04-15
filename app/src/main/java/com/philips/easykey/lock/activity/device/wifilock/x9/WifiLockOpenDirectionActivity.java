@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.device.wifilock.x9;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -11,9 +11,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockMoreActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockMorePresenter;
 import com.philips.easykey.lock.mvp.presenter.wifilock.x9.WifiLockOpenDirectionPresenter;
-import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockMoreView;
 import com.philips.easykey.lock.mvp.view.wifilock.x9.IWifiLockOpenDirectionView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;

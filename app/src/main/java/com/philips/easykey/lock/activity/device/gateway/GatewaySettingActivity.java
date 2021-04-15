@@ -3,15 +3,15 @@ package com.philips.easykey.lock.activity.device.gateway;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
-import android.text.InputType;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.gatewaylock.more.GatewayMoreActivity;
 import com.philips.easykey.lock.adapter.GatewaySettingAdapter;
 import com.philips.easykey.lock.bean.GatewaySettingItemBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -38,8 +38,6 @@ import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayBaseInfo;
 import com.philips.easykey.lock.utils.greenDao.db.CatEyeServiceInfoDao;
@@ -48,9 +46,6 @@ import com.philips.easykey.lock.utils.greenDao.db.GatewayBaseInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayServiceInfoDao;
 
-import org.w3c.dom.Text;
-
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +53,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, GatewaySettingPresenter<GatewaySettingView>> implements GatewaySettingView, BaseQuickAdapter.OnItemClickListener {
+public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, GatewaySettingPresenter<GatewaySettingView>> implements GatewaySettingView {
 
     @BindView(R.id.back)
     ImageView back;
@@ -215,183 +210,56 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         recycler.addItemDecoration(dividerItemDecoration);
         gatewaySettingAdapter=new GatewaySettingAdapter(gatewaySettingItemBeans);
         recycler.setAdapter(gatewaySettingAdapter);
-        gatewaySettingAdapter.setOnItemClickListener(this);
-    }
-
-    private void initGatewayData() {
-
-        uid=MyApplication.getInstance().getUid();
-        if (!TextUtils.isEmpty(gatewayId)){
-            //先读取数据库
-            GatewayBaseInfo gatewayBaseInfo=MyApplication.getInstance().getDaoWriteSession().getGatewayBaseInfoDao().queryBuilder().where(GatewayBaseInfoDao.Properties.GatewayId.eq(gatewayId), GatewayBaseInfoDao.Properties.Uid.eq(uid)).unique();
-            if (gatewayBaseInfo!=null){
-                setGatewayBaseInfo(gatewayBaseInfo);
-            }
-            mPresenter.getNetBasic(MyApplication.getInstance().getUid(),gatewayId,gatewayId);
-            loadingDialog.show(getString(R.string.get_gateway_info_waitting));
-        }
-
-    }
-
-    private void setGatewayBaseInfo(GatewayBaseInfo gatewayBaseInfo) {
-        if (gatewaySettingItemBeans!=null&&gatewaySettingItemBeans.size()>0){
-
-            if (TextUtils.isEmpty(gatewayNickName)){
-                gatewaySettingItemBeans.get(0).setContent(gatewayBaseInfo.getGatewayName());
-            }else{
-                //网关名称
-                gatewaySettingItemBeans.get(0).setContent(gatewayNickName);
-            }
-            //网关
-            gatewaySettingItemBeans.get(1).setContent(gatewayBaseInfo.getGatewayId());
-            //固件版本号
-            gatewaySettingItemBeans.get(2).setContent(gatewayBaseInfo.getSW());
-            if( (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW)) || (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW2)) ){
-
-            }else {
-                //局域网ip
-                gatewaySettingItemBeans.get(5).setContent(gatewayBaseInfo.getLanIp());
-                //广域网ip
-                gatewaySettingItemBeans.get(6).setContent(gatewayBaseInfo.getWanIp());
-                //局域网子网掩码
-                gatewaySettingItemBeans.get(7).setContent(gatewayBaseInfo.getLanNetmask());
-                //广域网子网掩码
-                gatewaySettingItemBeans.get(8).setContent(gatewayBaseInfo.getWanNetmask());
-                //网关广域网接入方式
-                gatewaySettingItemBeans.get(9).setContent(gatewayBaseInfo.getWanType());
-                gatewaySettingItemBeans.get(3).setContent(gatewayBaseInfo.getSsid());
-                gatewaySettingItemBeans.get(4).setContent(gatewayBaseInfo.getPwd());
-                gatewaySettingItemBeans.get(10).setContent(gatewayBaseInfo.getChannel());
-            }
-
-            if (gatewaySettingAdapter!=null){
-                gatewaySettingAdapter.notifyDataSetChanged();
-            }
-        }
-    }
-
-
-    @Override
-    protected GatewaySettingPresenter<GatewaySettingView> createPresent() {
-        return new GatewaySettingPresenter<>();
-    }
-
-
-    @OnClick({R.id.back, R.id.btn_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.btn_delete:
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-
-                        @Override
-                        public void right() {
-                            if (gatewayId != null) {
-                                mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayId);//正常解绑
-                                //mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(),gatewayId,gatewayId); //测试解绑
-                                deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
-                                deleteDialog.setCancelable(false);
+        gatewaySettingAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                // if (isAdmin == 1) {
+                switch (position) {
+                    case 0:
+                        //设备名字
+                        View mUpdateView = LayoutInflater.from(GatewaySettingActivity.this).inflate(R.layout.have_edit_dialog, null);
+                        TextView tvUpdateTitle = mUpdateView.findViewById(R.id.tv_title);
+                        EditText editUpdateText = mUpdateView.findViewById(R.id.et_name);
+                        TextView tv_updatecancel = mUpdateView.findViewById(R.id.tv_left);
+                        TextView tv_updatequery = mUpdateView.findViewById(R.id.tv_right);
+                        AlertDialog alertUpdateDialog = AlertDialogUtil.getInstance().common(GatewaySettingActivity.this, mUpdateView);
+                        tvUpdateTitle.setText(getString(R.string.input_device_name));
+                        //获取到设备名称设置
+                        editUpdateText.setText(gatewayNickName);
+                        editUpdateText.setSelection(gatewayNickName.length());
+                        editUpdateText.addTextChangedListener(new EditTextWatcher(GatewaySettingActivity.this,null,editUpdateText,50));
+                        tv_updatecancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertUpdateDialog.dismiss();
                             }
-
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                        }
-
-                        @Override
-                        public void afterTextChanged(String toString) {
-
-                        }
-                    });
-                /*else{
-                    //取消分享
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-                        @Override
-                        public void right() {
-                            if (gatewayId != null) {
-                                String phone= (String) SPUtils.get(SPUtils.PHONEN,"");
-                                if (!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(uid)){
-                                    mPresenter.deleteShareDevice(1,gatewayId,"",uid,"86"+phone,"",2);//正常解绑
-                                    deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
-                                    deleteDialog.setCancelable(false);
-                                }
-
-                            }
-
-                        }
-                    });
-
-
-
-
-
-                }*/
-
-
-                break;
-        }
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-       // if (isAdmin == 1) {
-            switch (position) {
-                case 0:
-                    //设备名字
-                    View mUpdateView = LayoutInflater.from(this).inflate(R.layout.have_edit_dialog, null);
-                    TextView tvUpdateTitle = mUpdateView.findViewById(R.id.tv_title);
-                    EditText editUpdateText = mUpdateView.findViewById(R.id.et_name);
-                    TextView tv_updatecancel = mUpdateView.findViewById(R.id.tv_left);
-                    TextView tv_updatequery = mUpdateView.findViewById(R.id.tv_right);
-                    AlertDialog alertUpdateDialog = AlertDialogUtil.getInstance().common(this, mUpdateView);
-                    tvUpdateTitle.setText(getString(R.string.input_device_name));
-                    //获取到设备名称设置
-                    editUpdateText.setText(gatewayNickName);
-                    editUpdateText.setSelection(gatewayNickName.length());
-                    editUpdateText.addTextChangedListener(new EditTextWatcher(this,null,editUpdateText,50));
-                    tv_updatecancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertUpdateDialog.dismiss();
-                        }
-                    });
-                    tv_updatequery.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String nickname = editUpdateText.getText().toString().trim();
-                            //todo 判断名称是否修改
-                            if (TextUtils.isEmpty(nickname)){
-                                ToastUtil.getInstance().showShort(getString(R.string.device_name_cannot_be_empty));
-                                return;
-                            }
-
-                            if (gatewayNickName != null) {
-                                if (gatewayNickName.equals(nickname)) {
-                                    ToastUtil.getInstance().showShort(getString(R.string.device_nick_name_no_update));
-                                    alertUpdateDialog.dismiss();
+                        });
+                        tv_updatequery.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String nickname = editUpdateText.getText().toString().trim();
+                                //todo 判断名称是否修改
+                                if (TextUtils.isEmpty(nickname)){
+                                    ToastUtil.getInstance().showShort(getString(R.string.device_name_cannot_be_empty));
                                     return;
                                 }
+
+                                if (gatewayNickName != null) {
+                                    if (gatewayNickName.equals(nickname)) {
+                                        ToastUtil.getInstance().showShort(getString(R.string.device_nick_name_no_update));
+                                        alertUpdateDialog.dismiss();
+                                        return;
+                                    }
+                                }
+                                if (gatewayId != null) {
+                                    mPresenter.updateGatewayName(gatewayId, MyApplication.getInstance().getUid(), nickname);
+                                }
+                                alertUpdateDialog.dismiss();
                             }
-                            if (gatewayId != null) {
-                                mPresenter.updateGatewayName(gatewayId, MyApplication.getInstance().getUid(), nickname);
-                            }
-                            alertUpdateDialog.dismiss();
-                        }
-                    });
+                        });
 
 
-                    break;
+                        break;
 
                /* case 3:
                     //wifi名称
@@ -582,8 +450,135 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
                     });
                     break;
 */
+                }
+                // }
             }
-       // }
+        });
+    }
+
+    private void initGatewayData() {
+
+        uid=MyApplication.getInstance().getUid();
+        if (!TextUtils.isEmpty(gatewayId)){
+            //先读取数据库
+            GatewayBaseInfo gatewayBaseInfo=MyApplication.getInstance().getDaoWriteSession().getGatewayBaseInfoDao().queryBuilder().where(GatewayBaseInfoDao.Properties.GatewayId.eq(gatewayId), GatewayBaseInfoDao.Properties.Uid.eq(uid)).unique();
+            if (gatewayBaseInfo!=null){
+                setGatewayBaseInfo(gatewayBaseInfo);
+            }
+            mPresenter.getNetBasic(MyApplication.getInstance().getUid(),gatewayId,gatewayId);
+            loadingDialog.show(getString(R.string.get_gateway_info_waitting));
+        }
+
+    }
+
+    private void setGatewayBaseInfo(GatewayBaseInfo gatewayBaseInfo) {
+        if (gatewaySettingItemBeans!=null&&gatewaySettingItemBeans.size()>0){
+
+            if (TextUtils.isEmpty(gatewayNickName)){
+                gatewaySettingItemBeans.get(0).setContent(gatewayBaseInfo.getGatewayName());
+            }else{
+                //网关名称
+                gatewaySettingItemBeans.get(0).setContent(gatewayNickName);
+            }
+            //网关
+            gatewaySettingItemBeans.get(1).setContent(gatewayBaseInfo.getGatewayId());
+            //固件版本号
+            gatewaySettingItemBeans.get(2).setContent(gatewayBaseInfo.getSW());
+            if( (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW)) || (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW2)) ){
+
+            }else {
+                //局域网ip
+                gatewaySettingItemBeans.get(5).setContent(gatewayBaseInfo.getLanIp());
+                //广域网ip
+                gatewaySettingItemBeans.get(6).setContent(gatewayBaseInfo.getWanIp());
+                //局域网子网掩码
+                gatewaySettingItemBeans.get(7).setContent(gatewayBaseInfo.getLanNetmask());
+                //广域网子网掩码
+                gatewaySettingItemBeans.get(8).setContent(gatewayBaseInfo.getWanNetmask());
+                //网关广域网接入方式
+                gatewaySettingItemBeans.get(9).setContent(gatewayBaseInfo.getWanType());
+                gatewaySettingItemBeans.get(3).setContent(gatewayBaseInfo.getSsid());
+                gatewaySettingItemBeans.get(4).setContent(gatewayBaseInfo.getPwd());
+                gatewaySettingItemBeans.get(10).setContent(gatewayBaseInfo.getChannel());
+            }
+
+            if (gatewaySettingAdapter!=null){
+                gatewaySettingAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+
+    @Override
+    protected GatewaySettingPresenter<GatewaySettingView> createPresent() {
+        return new GatewaySettingPresenter<>();
+    }
+
+
+    @OnClick({R.id.back, R.id.btn_delete})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                finish();
+                break;
+            case R.id.btn_delete:
+                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+
+                        @Override
+                        public void right() {
+                            if (gatewayId != null) {
+                                mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayId);//正常解绑
+                                //mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(),gatewayId,gatewayId); //测试解绑
+                                deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
+                                deleteDialog.setCancelable(false);
+                            }
+
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(String toString) {
+
+                        }
+                    });
+                /*else{
+                    //取消分享
+                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+                        @Override
+                        public void right() {
+                            if (gatewayId != null) {
+                                String phone= (String) SPUtils.get(SPUtils.PHONEN,"");
+                                if (!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(uid)){
+                                    mPresenter.deleteShareDevice(1,gatewayId,"",uid,"86"+phone,"",2);//正常解绑
+                                    deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
+                                    deleteDialog.setCancelable(false);
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+
+
+
+                }*/
+
+
+                break;
+        }
     }
 
     @Override

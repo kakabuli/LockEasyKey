@@ -1,8 +1,5 @@
 package com.philips.easykey.lock.bean.deviceAdd;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
 import java.io.Serializable;
 
 public class AddZigbeeDetailItemBean implements Serializable {

@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.addDevice.zigbee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.animation.Animation;
@@ -10,11 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceBindGatewayListActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddZigbeeLockPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IAddZigbeeLockView;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;

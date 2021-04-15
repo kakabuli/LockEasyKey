@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.activity.device.wifilock;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockMorePresenter;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockSafeModePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockSafeModeView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
@@ -23,8 +21,6 @@ import com.lzy.imagepicker.util.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class WifiLockSafeModelActivity extends BaseActivity<IWifiLockSafeModeView,WifiLockSafeModePresenter<IWifiLockSafeModeView>> implements
         View.OnClickListener,IWifiLockSafeModeView {

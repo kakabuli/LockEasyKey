@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.shulan.pro_sp;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;

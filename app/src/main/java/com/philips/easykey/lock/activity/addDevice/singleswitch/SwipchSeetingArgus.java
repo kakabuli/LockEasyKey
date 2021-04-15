@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.activity.addDevice.singleswitch;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,15 +22,12 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.ModifySwitchNickBean
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.DateFormatUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
 
 public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView  {
     TextView tv_content,swipch_link_text_one,swipch_link_text_two,swipch_link_text_three,tv_start,swipch_link_setting_mac,swipch_link_setting_binding_time;

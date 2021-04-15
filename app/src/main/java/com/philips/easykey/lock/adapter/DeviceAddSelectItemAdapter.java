@@ -1,12 +1,11 @@
 package com.philips.easykey.lock.adapter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.deviceAdd.AddSelectDeviceAddItemBean;
-import com.philips.easykey.lock.bean.deviceAdd.DeviceAddItemBean;
 
 import java.util.List;
 

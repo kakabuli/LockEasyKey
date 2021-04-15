@@ -3,32 +3,22 @@ package com.philips.easykey.lock.activity.device.clotheshangermachine;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
+import androidx.annotation.Nullable;
+
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddFifthPresenter;
-import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddTourthPresenter;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddFifthView;
-import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddTourthView;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.philips.easykey.lock.widget.DropEditText;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
 import java.util.concurrent.TimeUnit;

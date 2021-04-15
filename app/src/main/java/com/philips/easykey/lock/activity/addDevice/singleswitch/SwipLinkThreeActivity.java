@@ -1,11 +1,8 @@
 package com.philips.easykey.lock.activity.addDevice.singleswitch;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,14 +11,11 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.singlefireswitchpresenter.SingleFireSwitchSettingPresenter;
 import com.philips.easykey.lock.mvp.view.singlefireswitchview.SingleFireSwitchView;
-import com.philips.easykey.lock.publiclibrary.bean.SwitchNumberBean;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.widget.ScanDeviceRadarView;
-
-import java.util.List;
 
 public class SwipLinkThreeActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView{
     TextView tv_content;

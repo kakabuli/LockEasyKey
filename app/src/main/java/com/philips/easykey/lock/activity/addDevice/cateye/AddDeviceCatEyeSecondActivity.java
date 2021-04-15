@@ -2,36 +2,18 @@ package com.philips.easykey.lock.activity.addDevice.cateye;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import androidx.annotation.Nullable;
+
 import com.philips.easykey.lock.utils.LoadingDialog;
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.IBaseView;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddCatEyeSecondPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IAddCatEyeSecondView;
-import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.MqttReturnCodeError;
-import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
-import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 
 public class AddDeviceCatEyeSecondActivity extends BaseActivity<IAddCatEyeSecondView, AddCatEyeSecondPresenter<IAddCatEyeSecondView>>
         implements IAddCatEyeSecondView {

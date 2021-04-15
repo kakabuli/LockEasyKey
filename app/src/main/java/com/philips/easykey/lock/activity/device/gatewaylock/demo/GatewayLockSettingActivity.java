@@ -2,8 +2,8 @@ package com.philips.easykey.lock.activity.device.gatewaylock.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
+import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;

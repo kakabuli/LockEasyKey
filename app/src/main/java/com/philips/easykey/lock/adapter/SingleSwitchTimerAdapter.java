@@ -1,18 +1,15 @@
 package com.philips.easykey.lock.adapter;
 
-import android.support.annotation.Nullable;
-import android.view.View;
+import androidx.annotation.Nullable;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.BluetoothLockFunctionBean;
 import com.philips.easykey.lock.bean.SingleSwitchTimerShowBean;
 import com.philips.easykey.lock.utils.LogUtils;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

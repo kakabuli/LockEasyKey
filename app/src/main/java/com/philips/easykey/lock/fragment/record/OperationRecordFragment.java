@@ -1,15 +1,18 @@
 package com.philips.easykey.lock.fragment.record;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.home.BluetoothRecordActivity;
@@ -43,7 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class OperationRecordFragment extends BaseBleFragment<IOperationRecordView, OperationRecordPresenter<IOpenLockRecordView>>
-        implements View.OnClickListener, IOperationRecordView, BaseQuickAdapter.OnItemClickListener {
+        implements View.OnClickListener, IOperationRecordView {
     @BindView(R.id.recycleview)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
@@ -143,12 +146,6 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
     }
 
     @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//        ToastUtil.getInstance().showShort(" " + position);
-    }
-
-
-    @Override
     public void onLoseRecord(List<Integer> numbers) {
 
     }
@@ -183,7 +180,12 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
             openLockRecordAdapter = new BluetoothRecordAdapter(showDatas);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(openLockRecordAdapter);
-            openLockRecordAdapter.setOnItemClickListener(this);
+//            openLockRecordAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                @Override
+//                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+//
+//                }
+//            });
         } else {
             openLockRecordAdapter.notifyDataSetChanged();
         }
@@ -223,7 +225,12 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
             openLockRecordAdapter = new BluetoothRecordAdapter(showDatas);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(openLockRecordAdapter);
-            openLockRecordAdapter.setOnItemClickListener(this);
+//            openLockRecordAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                @Override
+//                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+//
+//                }
+//            });
         } else {
             openLockRecordAdapter.notifyDataSetChanged();
         }

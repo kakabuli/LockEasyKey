@@ -6,13 +6,11 @@ import android.app.NotificationChannel;
 import android.app.Service;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.utils.LogUtils;
-
-import org.linphone.mediastream.Log;
 
 public class NotificationManager {
     public static final int notificationId = 4685;

@@ -1,11 +1,9 @@
 package com.philips.easykey.lock.activity.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -16,20 +14,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.R;
 
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.activity.choosecountry.CountryActivity;
 import com.philips.easykey.lock.mvp.presenter.LoginPresenter;
-import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
-import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
-import com.philips.easykey.lock.publiclibrary.http.result.LoginErrorResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
-import com.philips.easykey.lock.utils.AES;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DetectionEmailPhone;
@@ -45,14 +37,6 @@ import com.philips.easykey.lock.mvp.view.ILoginView;
 
 import net.sdvn.cmapi.CMAPI;
 import net.sdvn.cmapi.ConnectionService;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.CompletableFuture;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

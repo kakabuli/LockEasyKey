@@ -2,10 +2,9 @@ package com.philips.easykey.lock.mvp.mvpbase;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;

@@ -6,19 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Handler;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
-import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewScanFailActivity;
-import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewZeroActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.QrCodeScanActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 
@@ -26,16 +22,11 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.WiFiLockChooseToAddPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.WiFiLockChooseToAddView;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
-import com.philips.easykey.lock.utils.dialog.InfoDialog;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.king.zxing.Intents;
-
-import java.util.Objects;
-import java.util.logging.LogRecord;
 
 import butterknife.ButterKnife;
 

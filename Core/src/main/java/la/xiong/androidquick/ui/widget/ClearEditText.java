@@ -16,7 +16,7 @@ import android.view.animation.TranslateAnimation;
 import la.xiong.androidquick.R;
 
 
-public class ClearEditText extends android.support.v7.widget.AppCompatEditText implements
+public class ClearEditText extends androidx.appcompat.widget.AppCompatEditText implements
         OnFocusChangeListener, TextWatcher {
 
     private OnKeyboardSearchKeyClickListener mSearchKeyListener;

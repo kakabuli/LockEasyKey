@@ -3,7 +3,7 @@ package com.philips.easykey.lock.activity.cateye;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

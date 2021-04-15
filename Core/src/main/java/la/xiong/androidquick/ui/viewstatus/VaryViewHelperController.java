@@ -2,8 +2,8 @@ package la.xiong.androidquick.ui.viewstatus;
 
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.text.TextUtils;
+import androidx.annotation.DrawableRes;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

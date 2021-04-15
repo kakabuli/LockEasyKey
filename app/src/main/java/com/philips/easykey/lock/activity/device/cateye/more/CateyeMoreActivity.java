@@ -5,8 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.InputFilter;
+import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +30,6 @@ import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.CatEyeInfoBeanPropertyResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.CatEyeInfoBeanResult;
-import com.philips.easykey.lock.publiclibrary.ota.gatewayota.GatewayOTADialogActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.EditTextWatcher;
@@ -44,12 +43,8 @@ import com.philips.easykey.lock.utils.greenDao.bean.CateEyeInfoBase;
 import com.philips.easykey.lock.utils.greenDao.db.CatEyeServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.CateEyeInfoBaseDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
-import com.philips.easykey.lock.utils.greenDao.db.HistoryInfoDao;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.device.cateye;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -10,25 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.CatEyeInfoBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.CatEyeInfoBeanResult;
-import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.greenDao.bean.CateEyeInfoBase;
-import com.philips.easykey.lock.utils.greenDao.db.CateEyeInfoBaseDao;
-import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 
-
-import java.security.Key;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by David

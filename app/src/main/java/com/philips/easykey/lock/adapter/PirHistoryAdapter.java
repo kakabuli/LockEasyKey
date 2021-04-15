@@ -1,16 +1,11 @@
 package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -23,12 +18,7 @@ import com.philips.easykey.lock.utils.PirConst;
 import com.philips.easykey.lock.utils.SPUtils2;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-
-import javax.microedition.khronos.opengles.GL;
 
 
 public class PirHistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

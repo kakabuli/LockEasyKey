@@ -1,9 +1,8 @@
 package com.philips.easykey.lock.adapter;
 
-import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -11,13 +10,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.bean.WifiLockAlarmRecordGroup;
 import com.philips.easykey.lock.bean.WifiLockOperationRecordGroup;
-import com.philips.easykey.lock.publiclibrary.bean.WifiLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 
@@ -49,7 +44,7 @@ public class WifiLockOperationGroupRecordAdapter extends BaseQuickAdapter<WifiLo
         String time = bean.getTime();
         if (!TextUtils.isEmpty(time)) {
             if (time.equals(DateUtils.getCurrentYMD())){
-                time = mContext.getString(R.string.today);
+                time = getContext().getString(R.string.today);
             }
             tvTitle.setText(time);
             tvTitle.setVisibility(View.VISIBLE);
@@ -62,7 +57,7 @@ public class WifiLockOperationGroupRecordAdapter extends BaseQuickAdapter<WifiLo
         RecyclerView recyclerView = helper.getView(R.id.item_recycleview);
         List<WifiLockOperationRecord> list = bean.getList();
         WifiLockOperationItemRecordAdapter bluetoothItemRecordAdapter = new WifiLockOperationItemRecordAdapter(R.layout.item_wifi_lock_operation_record,list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(bluetoothItemRecordAdapter);
         helper.getView(R.id.view_line).setVisibility(helper.getPosition() == getData().size()-1 ? View.INVISIBLE : View.VISIBLE);
         textView.setOnClickListener(new View.OnClickListener() {

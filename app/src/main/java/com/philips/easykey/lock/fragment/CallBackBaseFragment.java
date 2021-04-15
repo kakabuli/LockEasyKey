@@ -3,11 +3,12 @@ package com.philips.easykey.lock.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,9 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.TimeAdapter;
@@ -50,7 +51,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class CallBackBaseFragment<T extends IBaseView, V
-        extends BasePresenter<T>> extends Fragment  implements View.OnClickListener,IBaseView{
+        extends BasePresenter<T>> extends Fragment implements View.OnClickListener,IBaseView{
 
 
     Unbinder unbinder;
@@ -411,11 +412,10 @@ public abstract class CallBackBaseFragment<T extends IBaseView, V
         final int common_color= year_tv.getCurrentTextColor();
 
 
-        timeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        timeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-//                for (int i=0;i<myDateList.size();i++){
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                //                for (int i=0;i<myDateList.size();i++){
 //                    boolean isSelect= myDateList.get(0).isChecked();
 //                    if(isSelect){
 //                        myDateList.get(i).setChecked(false);
@@ -429,8 +429,8 @@ public abstract class CallBackBaseFragment<T extends IBaseView, V
 
                 }else {
                     Log.e(GeTui.VideoLog,"date_month:"+date_month+"month:"+month+" year:"+year+" date_year:"+date_year);
-                     for (int i=0;i<current_month_date.size();i++){
-                         current_month_date.get(i).setChecked(false);
+                    for (int i=0;i<current_month_date.size();i++){
+                        current_month_date.get(i).setChecked(false);
                     }
                 }
                 boolean isSelect= myDateList.get(0).isChecked();
@@ -463,7 +463,7 @@ public abstract class CallBackBaseFragment<T extends IBaseView, V
                 TextView bottom = view.findViewById(R.id.time_select_item_bottom);
                 bottom.setTextColor(Color.parseColor("#FFFFFF"));
 
-              //  Toast.makeText(getActivity(),myDateList.get(position).getDay()+"",Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(),myDateList.get(position).getDay()+"",Toast.LENGTH_SHORT).show();
 
                 lastView=childView;
                 lastTop= top;
@@ -471,7 +471,6 @@ public abstract class CallBackBaseFragment<T extends IBaseView, V
                 lastPosition=position;
 
                 getPirData(position);
-
             }
         });
         // time_select_rl.smoothScrollToPosition(myDateList.size());

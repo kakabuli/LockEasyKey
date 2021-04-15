@@ -2,10 +2,12 @@ package com.philips.easykey.lock.activity.addDevice.cateye;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.adapter.AddBluetoothPairSuccessAdapter;
@@ -39,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddDeviceCatEyeSaveNickNameActivity  extends BaseActivity<AddZigbeeLockSuccessSaveView, AddZigbeeLockSuccessSavePresenter<AddZigbeeLockSuccessSaveView>> implements BaseQuickAdapter.OnItemClickListener,AddZigbeeLockSuccessSaveView {
+public class AddDeviceCatEyeSaveNickNameActivity  extends BaseActivity<AddZigbeeLockSuccessSaveView, AddZigbeeLockSuccessSavePresenter<AddZigbeeLockSuccessSaveView>> implements AddZigbeeLockSuccessSaveView {
 
     @BindView(R.id.input_name)
     EditText inputName;
@@ -123,32 +126,29 @@ public class AddDeviceCatEyeSaveNickNameActivity  extends BaseActivity<AddZigbee
         if (mList != null) {
             mAdapter = new AddBluetoothPairSuccessAdapter(mList);
             recycler.setAdapter(mAdapter);
-            mAdapter.setOnItemClickListener(this);
+            mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                    for (int i = 0; i < mList.size(); i++) {
+                        mList.get(i).setSelected(false);
+                    }
+                    AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
+                    String name = addBluetoothPairSuccessBean.getName();
+                    inputName.setText(name);
+                    if (name != null) {
+                        inputName.setSelection(name.length());
+                    }
+                    inputName.setFocusable(true);
+                    inputName.setFocusableInTouchMode(true);
+                    inputName.requestFocus();
+                    mList.get(position).setSelected(true);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
         }
         lock.setImageResource(R.mipmap.add_cateye_success_small);
 
     }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-        for (int i = 0; i < mList.size(); i++) {
-            mList.get(i).setSelected(false);
-        }
-        AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
-        String name = addBluetoothPairSuccessBean.getName();
-        inputName.setText(name);
-        if (name != null) {
-            inputName.setSelection(name.length());
-        }
-        inputName.setFocusable(true);
-        inputName.setFocusableInTouchMode(true);
-        inputName.requestFocus();
-        mList.get(position).setSelected(true);
-        mAdapter.notifyDataSetChanged();
-    }
-
 
     @OnClick(R.id.save)
     public void onViewClicked(View view) {

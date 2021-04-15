@@ -3,7 +3,7 @@ package com.philips.easykey.lock.mvp.presenter.personalpresenter;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import com.philips.easykey.lock.MyApplication;

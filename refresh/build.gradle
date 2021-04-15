@@ -3,10 +3,10 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 26
+        minSdkVersion 26
+        targetSdkVersion 30
         versionCode 201909250
         versionName "3.4.8"
         multiDexEnabled true
@@ -25,18 +25,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
     //noinspection GradleDependency
-    compileOnly 'com.android.support:support-annotations:25.1.0'
+    compileOnly 'androidx.annotation:annotation:1.0.0'
     //noinspection GradleDependency,GradleCompatible
-    compileOnly 'com.android.support:support-v4:22.1.0'
+    compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
     //noinspection GradleDependency,GradleCompatible
-    compileOnly 'com.android.support:recyclerview-v7:28.0.0'
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     //noinspection GradleDependency,GradleCompatible
-    compileOnly 'com.android.support:design:28.0.0'
+    compileOnly 'com.google.android.material:material:1.0.0'
 
 }
 

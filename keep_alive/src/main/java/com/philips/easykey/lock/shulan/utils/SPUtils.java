@@ -4,7 +4,7 @@ package com.philips.easykey.lock.shulan.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.philips.easykey.lock.shulan.R;
 import com.philips.easykey.lock.shulan.pro_sp.PreferenceUtil;

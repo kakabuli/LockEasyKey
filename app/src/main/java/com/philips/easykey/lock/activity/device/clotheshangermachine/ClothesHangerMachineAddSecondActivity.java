@@ -1,32 +1,22 @@
 package com.philips.easykey.lock.activity.device.clotheshangermachine;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddSecondPresenter;
-import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.DeviceZigBeeDetailPresenter;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddSecondView;
-import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceZigBeeDetailView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.GpsUtil;
-import com.philips.easykey.lock.utils.WifiUtils;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.disposables.Disposable;
 
 public class ClothesHangerMachineAddSecondActivity extends BaseActivity<IClothesHangerMachineAddSecondView,
         ClothesHangerMachineAddSecondPresenter<IClothesHangerMachineAddSecondView>> implements IClothesHangerMachineAddSecondView {

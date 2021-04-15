@@ -2,17 +2,14 @@ package com.philips.easykey.lock.activity.addDevice.singleswitch;
 
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAddSuccessToSetSwitchActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

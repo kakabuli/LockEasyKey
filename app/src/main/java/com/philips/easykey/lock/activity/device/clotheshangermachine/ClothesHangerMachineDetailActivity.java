@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.device.clotheshangermachine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,9 +13,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddPresenter;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineDetailPresenter;
-import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddView;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineDetailView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;

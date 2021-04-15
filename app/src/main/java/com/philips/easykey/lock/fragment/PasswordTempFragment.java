@@ -2,10 +2,10 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.bluetooth.password.BlePasswordManagerActivity;
@@ -46,7 +47,7 @@ import butterknife.ButterKnife;
  */
 
 public class PasswordTempFragment extends BaseBleFragment<IAddTempView, AddTempPresenter<IAddTempView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, IAddTempView {
+        implements View.OnClickListener, IAddTempView {
     @BindView(R.id.recycleview)
     RecyclerView recyclerView;
     @BindView(R.id.et_name)
@@ -120,20 +121,20 @@ public class PasswordTempFragment extends BaseBleFragment<IAddTempView, AddTempP
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 6));
         recyclerView.setAdapter(shiXiaoNameAdapter);
-        shiXiaoNameAdapter.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        String name = shiXiaoNameBean.getName();
-        etName.setText(name);
-        etName.setSelection(name.length());
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
+        shiXiaoNameAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).setSelected(false);
+                }
+                ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+                String name = shiXiaoNameBean.getName();
+                etName.setText(name);
+                etName.setSelection(name.length());
+                list.get(position).setSelected(true);
+                shiXiaoNameAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

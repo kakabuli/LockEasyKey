@@ -2,10 +2,11 @@ package com.philips.easykey.lock.activity.device.gatewaylock.stress;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.GatewayStressFingerprintAdapter;
 import com.philips.easykey.lock.adapter.GatewayStressPasswordAdapter;
@@ -90,9 +92,9 @@ public class GatewayStressPasswordManagerActivity extends BaseAddToApplicationAc
         gatewayStressPasswordAdapter = new GatewayStressPasswordAdapter(pwdList, R.layout.item_gateway_stress_password);
         recycleviewPassword.setLayoutManager(new LinearLayoutManager(this));
         recycleviewPassword.setAdapter(gatewayStressPasswordAdapter);
-        gatewayStressPasswordAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        gatewayStressPasswordAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent(GatewayStressPasswordManagerActivity.this, GatewayStressWarnDetailActivity.class);
                 AddPasswordBean.Password password = new AddPasswordBean.Password(1, pwdList.get(position));
                 intent.putExtra(KeyConstants.TO_PWD_DETAIL, password);
@@ -104,9 +106,9 @@ public class GatewayStressPasswordManagerActivity extends BaseAddToApplicationAc
         gatewayStressFingerprintAdapter = new GatewayStressFingerprintAdapter(finperprintList, R.layout.item_gateway_stress_fingerprint);
         recycleviewFingerprint.setLayoutManager(new LinearLayoutManager(this));
         recycleviewFingerprint.setAdapter(gatewayStressFingerprintAdapter);
-        gatewayStressFingerprintAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        gatewayStressFingerprintAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent(GatewayStressPasswordManagerActivity.this, GatewayStressWarnDetailActivity.class);
                 intent.putExtra(KeyConstants.PASSWORD_NICK, finperprintList.get(position));
                 startActivity(intent);

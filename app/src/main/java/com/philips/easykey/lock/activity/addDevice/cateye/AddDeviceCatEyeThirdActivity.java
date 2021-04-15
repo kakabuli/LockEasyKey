@@ -1,11 +1,9 @@
 package com.philips.easykey.lock.activity.addDevice.cateye;
 
 import android.content.Intent;
-import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,33 +11,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.hisilicon.hisilink.MessageSend;
-import com.hisilicon.hisilink.OnlineReciever;
-import com.hisilicon.hisilink.WiFiAdmin;
 import com.hisilicon.hisilinkapi.HisiLibApi;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.addDevice.DeviceBindGatewayListActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddCatEyePresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IAddCatEyeView;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.CatEyeInfoBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.AlertDialogUtil.ClickListener;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

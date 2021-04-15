@@ -2,8 +2,8 @@ package com.philips.easykey.lock.activity.addDevice.singleswitch;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,7 +20,6 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.singlefireswitchpresenter.SingleFireSwitchSettingPresenter;
 import com.philips.easykey.lock.mvp.view.singlefireswitchview.SingleFireSwitchView;
 import com.philips.easykey.lock.publiclibrary.bean.SingleFireSwitchInfo;
-import com.philips.easykey.lock.publiclibrary.bean.SwitchNumberBean;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
@@ -32,10 +31,6 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.TimeUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import java.util.List;
-
-import butterknife.BindView;
 
 public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView{
     // 1 表示全天

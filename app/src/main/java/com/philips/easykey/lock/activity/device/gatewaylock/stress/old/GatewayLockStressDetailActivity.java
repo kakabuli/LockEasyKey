@@ -3,9 +3,11 @@ package com.philips.easykey.lock.activity.device.gatewaylock.stress.old;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.GatewayLockStressPasswordAdapter;
@@ -44,7 +47,7 @@ import butterknife.OnClick;
 /**
  * Created by David
  */
-public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockStressDetailView, GatewayLockStressDetailPresenter<IGatewayLockStressDetailView>> implements BaseQuickAdapter.OnItemClickListener, IGatewayLockStressDetailView {
+public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockStressDetailView, GatewayLockStressDetailPresenter<IGatewayLockStressDetailView>> implements IGatewayLockStressDetailView {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.head_title)
@@ -146,7 +149,16 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         gatewayLockStressPasswordAdapter = new GatewayLockStressPasswordAdapter(pwdList, R.layout.item_gateway_stress_password);
         recycleviewPassword.setLayoutManager(new LinearLayoutManager(this));
         recycleviewPassword.setAdapter(gatewayLockStressPasswordAdapter);
-        gatewayLockStressPasswordAdapter.setOnItemClickListener(this);
+        gatewayLockStressPasswordAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent(GatewayLockStressDetailActivity.this, GatewayLockStressDeleteActivity.class);
+                intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
+                intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
+                intent.putExtra(KeyConstants.LOCK_PWD_NUMBER, "09");
+                startActivityForResult(intent, KeyConstants.DELETE_PWD_REQUEST_CODE);
+            }
+        });
     }
 
 
@@ -240,16 +252,6 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
 //                appNotificationStatus = !appNotificationStatus;
                 break;
         }
-    }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(this, GatewayLockStressDeleteActivity.class);
-        intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
-        intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
-        intent.putExtra(KeyConstants.LOCK_PWD_NUMBER, "09");
-        startActivityForResult(intent, KeyConstants.DELETE_PWD_REQUEST_CODE);
     }
 
     @Override

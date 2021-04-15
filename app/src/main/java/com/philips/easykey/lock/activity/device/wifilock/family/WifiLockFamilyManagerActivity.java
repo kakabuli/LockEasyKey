@@ -1,18 +1,19 @@
 package com.philips.easykey.lock.activity.device.wifilock.family;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.WifiLockShareUserAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -36,7 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyManagerView,
-        WifiLockFamilyManagerPresenter<IWifiLockFamilyManagerView>> implements IWifiLockFamilyManagerView, BaseQuickAdapter.OnItemClickListener, View.OnClickListener {
+        WifiLockFamilyManagerPresenter<IWifiLockFamilyManagerView>> implements IWifiLockFamilyManagerView, View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -73,7 +74,15 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
         wifiLockShareUserAdapter = new WifiLockShareUserAdapter(shareUsers, R.layout.item_has_bluetooth_shared_device);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(wifiLockShareUserAdapter);
-        wifiLockShareUserAdapter.setOnItemClickListener(this);
+        wifiLockShareUserAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                WifiLockShareResult.WifiLockShareUser wifiLockShareUser = shareUsers.get(position);
+                Intent intent = new Intent(WifiLockFamilyManagerActivity.this, WiFiLockShareUserDetailActivity.class);
+                intent.putExtra(KeyConstants.SHARE_USER_INFO, wifiLockShareUser);
+                startActivity(intent);
+            }
+        });
 
 
         ivBack.setOnClickListener(this);
@@ -115,15 +124,6 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
         } else {
             ToastUtil.getInstance().showShort(R.string.noNet);
         }
-    }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        WifiLockShareResult.WifiLockShareUser wifiLockShareUser = shareUsers.get(position);
-        Intent intent = new Intent(this, WiFiLockShareUserDetailActivity.class);
-        intent.putExtra(KeyConstants.SHARE_USER_INFO, wifiLockShareUser);
-        startActivity(intent);
     }
 
     public void pageChange() {

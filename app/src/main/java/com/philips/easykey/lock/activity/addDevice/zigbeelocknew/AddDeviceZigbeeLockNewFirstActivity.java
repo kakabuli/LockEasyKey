@@ -2,17 +2,15 @@ package com.philips.easykey.lock.activity.addDevice.zigbeelocknew;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.gateway.AddGatewaySuccessActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddDeviceCatEyeSuitPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.AddDeviceCatEyeSuitView;

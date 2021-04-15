@@ -1,11 +1,10 @@
 package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.media.MediaMetadataRetriever;
-import android.provider.MediaStore;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,16 +12,10 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.FileBean;
 import com.philips.easykey.lock.bean.FileItemBean;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.LogUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class MyAlbumItemAdapter extends BaseQuickAdapter<FileItemBean, BaseViewHolder> {

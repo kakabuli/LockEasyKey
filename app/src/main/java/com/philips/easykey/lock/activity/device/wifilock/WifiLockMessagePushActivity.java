@@ -1,16 +1,13 @@
 package com.philips.easykey.lock.activity.device.wifilock;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
-import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockMorePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockMoreView;
@@ -19,11 +16,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
-import com.philips.easykey.lock.widget.BottomMenuDialog;
-import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
-
-import org.apache.commons.net.bsd.RLoginClient;
 
 import java.util.List;
 

@@ -1,19 +1,12 @@
 package com.philips.easykey.lock.activity.addDevice.singleswitch;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddBLEFailedActivity;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewBLEWIFICSwitchCheckWifiActivity;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewCheckWifiActivity;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddToSetSwitchActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.singlefireswitchpresenter.SingleFireSwitchSettingPresenter;
@@ -27,11 +20,8 @@ import com.philips.easykey.lock.utils.CloneObjectUtils;
 import com.philips.easykey.lock.utils.DensityUtil;
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,9 +35,6 @@ import com.philips.easykey.lock.utils.dialog.InfoDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView {
 

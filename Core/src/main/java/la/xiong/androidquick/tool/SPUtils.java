@@ -2,8 +2,8 @@ package la.xiong.androidquick.tool;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.annotation.NonNull;
+import androidx.collection.SimpleArrayMap;
 
 import java.util.Collections;
 import java.util.Map;

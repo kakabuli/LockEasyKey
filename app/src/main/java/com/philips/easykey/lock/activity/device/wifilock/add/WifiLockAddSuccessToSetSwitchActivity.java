@@ -3,7 +3,7 @@ package com.philips.easykey.lock.activity.device.wifilock.add;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLockAddSuccessView
-        , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView, BaseQuickAdapter.OnItemClickListener {
+        , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView {
 
     @BindView(R.id.tv_right_now_set)
     TextView right_now_set;
@@ -143,10 +143,6 @@ public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLoc
             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
             startActivity(intent);
         }
-    }
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
     }
 
     @Override

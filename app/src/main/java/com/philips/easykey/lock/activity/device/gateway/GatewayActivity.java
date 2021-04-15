@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -32,7 +30,6 @@ import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 
-import java.security.Key;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created by David on 2019/4/25
  */
-public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<GatewayView>> implements BaseQuickAdapter.OnItemClickListener, GatewayView {
+public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<GatewayView>> implements GatewayView {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -158,7 +155,7 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
             gatewayAdapter = new GatewayAdapter(homeShowBeans);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(gatewayAdapter);
-            gatewayAdapter.setOnItemClickListener(this);
+//            gatewayAdapter.setOnItemClickListener(this);
         }else{
             changeView(false);
         }
@@ -180,12 +177,6 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
 
     }
 
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-
-    }
 
     @Override
     public void getPowerDataSuccess(String deviceId, int power) {

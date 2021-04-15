@@ -1,21 +1,23 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
@@ -39,7 +41,7 @@ import butterknife.OnClick;
 
 //activity_wifi_lock_add_new_bind_successs
 public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAddSuccessView
-        , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView, BaseQuickAdapter.OnItemClickListener {
+        , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView {
 
     @BindView(R.id.input_name)
     EditText inputName;
@@ -110,32 +112,31 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
         if (mList != null) {
             mAdapter = new AddBluetoothPairSuccessAdapter(mList);
             recycler.setAdapter(mAdapter);
-            mAdapter.setOnItemClickListener(this);
+            mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                    inputName.setCursorVisible(true);
+                    for (int i = 0; i < mList.size(); i++) {
+                        mList.get(i).setSelected(false);
+                    }
+                    AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
+                    String name = addBluetoothPairSuccessBean.getName();
+                    inputName.setText(name);
+                    if (name != null) {
+                        inputName.setSelection(name.length());
+                    }
+                    inputName.setFocusable(true);
+                    inputName.setFocusableInTouchMode(true);
+                    inputName.requestFocus();
+                    mList.get(position).setSelected(true);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
         }
         String name = inputName.getText().toString().trim();
         if (name != null) {
             inputName.setCursorVisible(false);
         }
-    }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        inputName.setCursorVisible(true);
-        for (int i = 0; i < mList.size(); i++) {
-            mList.get(i).setSelected(false);
-        }
-        AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
-        String name = addBluetoothPairSuccessBean.getName();
-        inputName.setText(name);
-        if (name != null) {
-            inputName.setSelection(name.length());
-        }
-        inputName.setFocusable(true);
-        inputName.setFocusableInTouchMode(true);
-        inputName.requestFocus();
-        mList.get(position).setSelected(true);
-        mAdapter.notifyDataSetChanged();
     }
 
     @OnClick({R.id.save, R.id.back})

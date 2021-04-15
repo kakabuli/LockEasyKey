@@ -2,16 +2,20 @@ package com.philips.easykey.lock.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.DateAdapter;
 
@@ -53,12 +57,12 @@ public class GravityPopup extends BasePopupWindow implements View.OnClickListene
 
     @Override
     protected Animation onCreateShowAnimation() {
-        return getDefaultScaleAnimation();
+        return getDefaultShowScaleAnimation();
     }
 
     @Override
     protected Animation onCreateDismissAnimation() {
-        return getDefaultScaleAnimation(false);
+        return getDefaultDismissScaleAnimation();
     }
 
     @Override
@@ -83,31 +87,30 @@ public class GravityPopup extends BasePopupWindow implements View.OnClickListene
         dateAdapter=new DateAdapter(data);
         date_select_rl.setAdapter(dateAdapter);
 
-        dateAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        dateAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Log.e("denganzhi1","lastSelect:"+lastSelect);
 
-                 TextView date_select_tv=view.findViewById(R.id.date_select_item_tv);
+                TextView date_select_tv=view.findViewById(R.id.date_select_item_tv);
 
-                 if(lastSelect!=-1){
-                     lastView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                     TextView last_tv= lastView.findViewById(R.id.date_select_item_tv);
-                     last_tv.setTextColor(Color.parseColor("#333333"));
-                 }
+                if(lastSelect!=-1){
+                    lastView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                    TextView last_tv= lastView.findViewById(R.id.date_select_item_tv);
+                    last_tv.setTextColor(Color.parseColor("#333333"));
+                }
 
-                  view.setBackgroundColor(Color.parseColor("#5EB7FF"));
+                view.setBackgroundColor(Color.parseColor("#5EB7FF"));
 
-                  date_select_tv.setTextColor(Color.parseColor("#FFFFFF"));
+                date_select_tv.setTextColor(Color.parseColor("#FFFFFF"));
 
-                  if(hidePopup!=null){
-                      String select= data.get(position);
-                      hidePopup.hidepopupMethod(select);
-                  }
+                if(hidePopup!=null){
+                    String select= data.get(position);
+                    hidePopup.hidepopupMethod(select);
+                }
 
-                  lastSelect= position;
-                  lastView=view;
+                lastSelect= position;
+                lastView=view;
 
 //                view.setBackgroundColor(Color.parseColor("#FFFFFF"));
 //                date_select_tv=view.findViewById(R.id.date_select_item_tv);
@@ -118,8 +121,8 @@ public class GravityPopup extends BasePopupWindow implements View.OnClickListene
 
     @Override
     public void showPopupWindow() {
-        setShowAnimation(getDefaultScaleAnimation());
-        setDismissAnimation(getDefaultScaleAnimation(false));
+        setShowAnimation(getDefaultShowScaleAnimation());
+        setDismissAnimation(getDefaultDismissScaleAnimation());
         super.showPopupWindow();
     }
 
@@ -129,10 +132,9 @@ public class GravityPopup extends BasePopupWindow implements View.OnClickListene
             isFlag=false;
             dateAdapter=new DateAdapter(data);
             date_select_rl.setAdapter(dateAdapter);
-            dateAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            dateAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                     Log.e("denganzhi1","lastSelect:"+lastSelect);
 
                     TextView date_select_tv=view.findViewById(R.id.date_select_item_tv);
@@ -163,6 +165,18 @@ public class GravityPopup extends BasePopupWindow implements View.OnClickListene
         }
         initAnimate();
         super.showPopupWindow(anchorView);
+    }
+
+    private Animation getDefaultShowScaleAnimation() {
+        Animation showAnimation = new ScaleAnimation(0, 1f, 0, 1f);
+        showAnimation.setDuration(500);
+        return showAnimation;
+    }
+
+    private Animation getDefaultDismissScaleAnimation() {
+        Animation showAnimation = new ScaleAnimation(1f, 0, 1f, 0);
+        showAnimation.setDuration(500);
+        return showAnimation;
     }
 
     private void initAnimate() {

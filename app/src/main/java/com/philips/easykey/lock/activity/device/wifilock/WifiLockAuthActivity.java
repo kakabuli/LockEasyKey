@@ -1,22 +1,14 @@
 package com.philips.easykey.lock.activity.device.wifilock;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Vibrator;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,22 +19,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.bluetooth.BleDeviceInfoActivity;
-import com.philips.easykey.lock.activity.device.oldbluetooth.OldDeviceInfoActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
-import com.philips.easykey.lock.mvp.presenter.ble.OldAndAuthBleDetailPresenter;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockAuthPresenter;
-import com.philips.easykey.lock.mvp.view.IOldBleDetailView;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockAuthView;
-import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
-import com.philips.easykey.lock.publiclibrary.ble.BleProtocolFailedException;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
-import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BatteryView;
 import com.philips.easykey.lock.utils.BleLockUtils;
@@ -55,7 +38,6 @@ import net.sdvn.cmapi.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -2,10 +2,10 @@ package com.philips.easykey.lock.activity.device.gatewaylock.share;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,22 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.bluetooth.FamilyMemberDetailActivity;
 import com.philips.easykey.lock.adapter.DeviceShareAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.gatewaypresenter.GatewaySharedPresenter;
 import com.philips.easykey.lock.mvp.view.gatewayView.IGatewaySharedView;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
-import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShareResultBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShareUserResultBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -43,7 +41,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David
  */
-public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, GatewaySharedPresenter<IGatewaySharedView>> implements IGatewaySharedView,View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
+public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, GatewaySharedPresenter<IGatewaySharedView>> implements IGatewaySharedView,View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -102,7 +100,17 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
         ivBack.setOnClickListener(this);
         llAddUser.setOnClickListener(this);
         if (shareAdapter!=null){
-            shareAdapter.setOnItemClickListener(this);
+            shareAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                    DeviceShareUserResultBean.DataBean shareResultBean = shareData.get(position);
+                    Intent intent = new Intent(GatewayLockSharedActivity.this, GatewayLockShareUserNumberActivity.class);
+                    intent.putExtra(KeyConstants.GATEWAY_SHARE_USER, shareResultBean);
+                    intent.putExtra(KeyConstants.GATEWAY_ID,gatewayId);
+                    intent.putExtra(KeyConstants.DEVICE_ID,deviceId);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -141,20 +149,6 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
         if (gatewayId!=null&&deviceId!=null){
             mPresenter.getShareDeviceUser(gatewayId,deviceId,uid);
         }
-    }
-
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-            DeviceShareUserResultBean.DataBean shareResultBean = shareData.get(position);
-            Intent intent = new Intent(this, GatewayLockShareUserNumberActivity.class);
-            intent.putExtra(KeyConstants.GATEWAY_SHARE_USER, shareResultBean);
-            intent.putExtra(KeyConstants.GATEWAY_ID,gatewayId);
-            intent.putExtra(KeyConstants.DEVICE_ID,deviceId);
-            startActivity(intent);
-
-
     }
 
     public void pageChange(boolean isNotData) {

@@ -2,11 +2,7 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.cateye.MediaPlayerActivity;
-import com.philips.easykey.lock.activity.cateye.PreviewActivity;
 import com.philips.easykey.lock.activity.cateye.RecordingPreviewActivity;
-import com.philips.easykey.lock.adapter.PirHistoryAdapter;
 import com.philips.easykey.lock.adapter.RecordingAdapter;
 import com.philips.easykey.lock.mvp.presenter.RecordingPresenter;
-import com.philips.easykey.lock.mvp.presenter.SnapPresenter;
 import com.philips.easykey.lock.mvp.view.IRecordingView;
-import com.philips.easykey.lock.mvp.view.ISnapShotView;
 import com.philips.easykey.lock.utils.Constants;
-import com.philips.easykey.lock.utils.PirConst;
 import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.db.MediaItem;
 import com.philips.easykey.lock.utils.ftp.GeTui;
@@ -112,10 +107,9 @@ public class RecordingFragment extends CallBackBaseFragment <IRecordingView, Rec
         mPresenter.fetchVideoAndImage(deviceId,getActivity());
 
 
-        recordingAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        recordingAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 int mediaType = currentDateItem.get(position).getMediaType();
                 String name= currentDateItem.get(position).getName();
                 String path=currentDateItem.get(position).getPath();

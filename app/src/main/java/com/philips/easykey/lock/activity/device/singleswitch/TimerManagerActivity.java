@@ -2,9 +2,10 @@ package com.philips.easykey.lock.activity.device.singleswitch;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.SingleSwitchTimerAdapter;
 import com.philips.easykey.lock.bean.SingleSwitchTimerShowBean;
@@ -67,9 +69,9 @@ public class TimerManagerActivity extends BaseAddToApplicationActivity {
 
     public void initRecycleView(){
         adapter = new SingleSwitchTimerAdapter(singleSwitchTimerShowBeans);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 SingleSwitchTimerShowBean switchTimerShowBean = (SingleSwitchTimerShowBean) adapter.getData().get(position);
             }
         });

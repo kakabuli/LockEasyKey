@@ -16,7 +16,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.publiclibrary.ota.OtaBaseActivity;
 import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
@@ -36,8 +35,6 @@ import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.widget.CircleProgress;
 import com.philips.easykey.lock.widget.OtaMutiProgress;
-import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;

@@ -3,9 +3,9 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,7 +55,7 @@ import butterknife.ButterKnife;
  */
 
 public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswordYearView, GatewayLockPasswordYearPresenter<IGatewayLockPasswordYearView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, IGatewayLockPasswordYearView {
+        implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, IGatewayLockPasswordYearView {
     long startMilliseconds = 0;//开始毫秒数
     long endMilliseconds = 0;//结束毫秒数
     int timeStatus = 0;//时间策略
@@ -522,11 +522,6 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
 
     @Override
     public void deletePasswordFailed(Throwable throwable) {
-
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
     }
 

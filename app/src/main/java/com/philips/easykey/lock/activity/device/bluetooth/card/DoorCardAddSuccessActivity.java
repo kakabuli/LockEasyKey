@@ -2,9 +2,11 @@ package com.philips.easykey.lock.activity.device.bluetooth.card;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.bluetooth.fingerprint.FingerprintManagerActivity;
 import com.philips.easykey.lock.adapter.ShiXiaoNameAdapter;
 import com.philips.easykey.lock.bean.ShiXiaoNameBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by David on 2019/4/18
  */
 //todo 这个不用
-public class DoorCardAddSuccessActivity extends BaseAddToApplicationActivity implements View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
+public class DoorCardAddSuccessActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_content)
@@ -67,7 +69,20 @@ public class DoorCardAddSuccessActivity extends BaseAddToApplicationActivity imp
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);
         recycleview.setLayoutManager(new GridLayoutManager(this, 6));
         recycleview.setAdapter(shiXiaoNameAdapter);
-        shiXiaoNameAdapter.setOnItemClickListener(this);
+        shiXiaoNameAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).setSelected(false);
+                }
+                ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+                String name = shiXiaoNameBean.getName();
+                etName.setText(name);
+                etName.setSelection(name.length());
+                list.get(position).setSelected(true);
+                shiXiaoNameAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -84,16 +99,4 @@ public class DoorCardAddSuccessActivity extends BaseAddToApplicationActivity imp
         }
     }
 
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        String name = shiXiaoNameBean.getName();
-        etName.setText(name);
-        etName.setSelection(name.length());
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
-    }
 }

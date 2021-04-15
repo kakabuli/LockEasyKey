@@ -3,9 +3,11 @@ package com.philips.easykey.lock.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,14 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.cateye.PreviewActivity;
-import com.philips.easykey.lock.adapter.DateAdapter;
 import com.philips.easykey.lock.adapter.PirHistoryAdapter;
 import com.philips.easykey.lock.adapter.TimeAdapter;
 import com.philips.easykey.lock.bean.MyDate;
 import com.philips.easykey.lock.widget.GravityPopup;
-import com.philips.easykey.lock.widget.GravityPopup.HidePopup;
 
 
 import java.text.SimpleDateFormat;
@@ -287,10 +288,9 @@ public class SnapshotFragment extends Fragment implements View.OnClickListener{
         final int common_color= year_tv.getCurrentTextColor();
 
 
-        timeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        timeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 if(lastView!=null){
                     lastView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 }
@@ -323,7 +323,6 @@ public class SnapshotFragment extends Fragment implements View.OnClickListener{
                 lastTop= top;
                 lastBottom=bottom;
                 lastPosition=position;
-
             }
         });
         // time_select_rl.smoothScrollToPosition(myDateList.size());
@@ -404,9 +403,9 @@ public class SnapshotFragment extends Fragment implements View.OnClickListener{
         history_rv_ff.setLayoutManager(new LinearLayoutManager(getActivity()));
         history_rv_ff.setAdapter(pirHistoryAdapter);
 
-        pirHistoryAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        pirHistoryAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent=new Intent(getActivity(), PreviewActivity.class);
                 startActivity(intent);
             }

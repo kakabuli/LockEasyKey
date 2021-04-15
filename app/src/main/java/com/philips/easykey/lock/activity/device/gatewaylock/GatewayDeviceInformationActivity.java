@@ -1,10 +1,9 @@
 package com.philips.easykey.lock.activity.device.gatewaylock;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.gatewaylock.more.GatewayMoreActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockInformationPresenter;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockInformationView;

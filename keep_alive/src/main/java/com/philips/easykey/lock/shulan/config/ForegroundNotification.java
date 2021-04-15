@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.shulan.config;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 

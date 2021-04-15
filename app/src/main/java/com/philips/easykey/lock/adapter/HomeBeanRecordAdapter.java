@@ -1,8 +1,8 @@
 package com.philips.easykey.lock.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -58,7 +58,7 @@ public class HomeBeanRecordAdapter extends BaseQuickAdapter<BluetoothRecordBean,
         if(data != null && data.size() > 0){
 
             BluetoothItemRecordAdapter bluetoothItemRecordAdapter = new BluetoothItemRecordAdapter(R.layout.item_item_bluetooth_record,data);
-            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(bluetoothItemRecordAdapter);
         }
     /*    if (bluetoothItemRecordAdapter!=null){

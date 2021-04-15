@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -16,7 +16,6 @@ import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivit
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.BindBleWiFiSwitchPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IBindBleView;
-import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;

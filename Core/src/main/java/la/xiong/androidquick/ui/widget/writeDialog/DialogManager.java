@@ -2,7 +2,6 @@ package la.xiong.androidquick.ui.widget.writeDialog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -10,6 +9,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentManager;
+
 import la.xiong.androidquick.R;
 import la.xiong.androidquick.tool.ToastUtil;
 

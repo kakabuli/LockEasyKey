@@ -5,19 +5,17 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewWiFiScanBLEFailedActivity;
 import com.philips.easykey.lock.adapter.ClothesHangerMachineBleWiFiSearchAdapter;
-import com.philips.easykey.lock.adapter.DeviceBleWiFiSearchAdapter;
 import com.philips.easykey.lock.adapter.inf.OnBindClickListener;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastListBean;
@@ -25,9 +23,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddThirdPresenter;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddThirdView;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
-import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.AnimationsContainer;
 import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
@@ -36,14 +32,10 @@ import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesHangerMachineAddThirdView,
         ClothesHangerMachineAddThirdPresenter<IClothesHangerMachineAddThirdView>> implements IClothesHangerMachineAddThirdView, OnBindClickListener {

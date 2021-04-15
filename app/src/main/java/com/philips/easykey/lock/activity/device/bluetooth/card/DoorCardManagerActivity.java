@@ -3,16 +3,17 @@ package com.philips.easykey.lock.activity.device.bluetooth.card;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.DoorCardManagerAdapter;
@@ -41,7 +42,7 @@ import butterknife.ButterKnife;
  * Created by David
  */
 public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, CardManagerPresenter<ICardManagerView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, ICardManagerView {
+        implements View.OnClickListener, ICardManagerView {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -127,20 +128,20 @@ public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, C
         doorCardManagerAdapter = new DoorCardManagerAdapter(list, R.layout.item_door_card_manager);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(doorCardManagerAdapter);
-        doorCardManagerAdapter.setOnItemClickListener(this);
+        doorCardManagerAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent(DoorCardManagerActivity.this, DoorCardManagerDetailActivity.class);
+                intent.putExtra(KeyConstants.TO_PWD_DETAIL, list.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(this, DoorCardManagerDetailActivity.class);
-        intent.putExtra(KeyConstants.TO_PWD_DETAIL, list.get(position));
-        startActivity(intent);
     }
 
     public void pageChange() {

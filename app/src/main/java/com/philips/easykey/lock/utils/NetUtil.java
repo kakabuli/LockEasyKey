@@ -1,5 +1,4 @@
 package com.philips.easykey.lock.utils;
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -8,8 +7,6 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
 import com.philips.easykey.lock.MyApplication;
-
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 
 public class NetUtil {

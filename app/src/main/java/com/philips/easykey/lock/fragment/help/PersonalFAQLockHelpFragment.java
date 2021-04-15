@@ -1,25 +1,21 @@
 package com.philips.easykey.lock.fragment.help;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.PersonalFAQAdapter;
 import com.philips.easykey.lock.bean.FAQBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
-import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockPasswordWeekPresenter;
 import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalFAQPresenter;
-import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordWeekView;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalFAQView;
 import com.philips.easykey.lock.publiclibrary.http.result.GetFAQResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;

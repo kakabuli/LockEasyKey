@@ -2,10 +2,10 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.bluetooth.password.CycleRulesActivity;
@@ -29,7 +30,6 @@ import com.philips.easykey.lock.bean.ShiXiaoNameBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockPasswordWeekPresenter;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordWeekView;
-import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateFormatUtils;
 import com.philips.easykey.lock.utils.DateUtils;
@@ -60,7 +60,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswordWeekView, GatewayLockPasswordWeekPresenter<IGatewayLockPasswordWeekView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, IGatewayLockPasswordWeekView {
+        implements View.OnClickListener, IGatewayLockPasswordWeekView {
     @BindView(R.id.recycleview)
     RecyclerView recyclerView;
     @BindView(R.id.et_name)
@@ -194,17 +194,17 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 6));
         recyclerView.setAdapter(shiXiaoNameAdapter);
-        shiXiaoNameAdapter.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
+        shiXiaoNameAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).setSelected(false);
+                }
+                ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+                list.get(position).setSelected(true);
+                shiXiaoNameAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

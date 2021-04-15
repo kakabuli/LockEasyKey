@@ -3,8 +3,6 @@ package com.philips.easykey.lock.activity.addDevice.cateye;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -16,17 +14,12 @@ import android.widget.ImageView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAddCateyeHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddCatEyePresenter;
 import com.philips.easykey.lock.mvp.presenter.qrcodePhoneAddPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IAddCatEyeView;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.king.zxing.util.CodeUtils;
 
-
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -2,15 +2,18 @@ package com.philips.easykey.lock.activity.device.gatewaylock.card;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.GatewayDoorCardManagerAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -29,7 +32,7 @@ import butterknife.ButterKnife;
  * Created by David
  */
 public class GatewayDoorCardManagerActivity extends BaseAddToApplicationActivity
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener {
+        implements View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -66,20 +69,20 @@ public class GatewayDoorCardManagerActivity extends BaseAddToApplicationActivity
         gatewayDoorCardManagerAdapter = new GatewayDoorCardManagerAdapter(list, R.layout.item_gateway_door_card_manager);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(gatewayDoorCardManagerAdapter);
-        gatewayDoorCardManagerAdapter.setOnItemClickListener(this);
+        gatewayDoorCardManagerAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent(GatewayDoorCardManagerActivity.this, GatewayDoorCardManagerDetailActivity.class);
+                intent.putExtra(KeyConstants.TO_PWD_DETAIL, list.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(this, GatewayDoorCardManagerDetailActivity.class);
-        intent.putExtra(KeyConstants.TO_PWD_DETAIL, list.get(position));
-        startActivity(intent);
     }
 
     public void pageChange() {

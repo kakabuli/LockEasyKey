@@ -3,13 +3,15 @@ package com.philips.easykey.lock.adapter;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
+
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.FileBean;
@@ -45,7 +47,7 @@ public class MyAlbumAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
 
         RecyclerView recyclerView = helper.getView(R.id.recycleview);
         List<FileItemBean> data = item.getItem();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         if(item.isFirst()){
             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -73,7 +75,7 @@ public class MyAlbumAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 LogUtils.e(data.get(position).getPath());
                 if(listener != null){
                     listener.onMyAlbumItemClick((MyAlbumItemAdapter)adapter,(List<FileItemBean>)adapter.getData(),position);

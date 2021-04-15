@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.shulan.utils;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.philips.easykey.lock.shulan.BuildConfig;
 

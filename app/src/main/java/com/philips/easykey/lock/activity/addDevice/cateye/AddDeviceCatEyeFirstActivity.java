@@ -3,7 +3,7 @@ package com.philips.easykey.lock.activity.addDevice.cateye;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,17 +13,13 @@ import android.widget.Toast;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAddCateyeHelpActivity;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddHelpActivity;
 import com.philips.easykey.lock.activity.addDevice.DeviceBindGatewayListActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.QrCodeScanActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
-import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.king.zxing.Intents;
-
-import org.linphone.mediastream.Log;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

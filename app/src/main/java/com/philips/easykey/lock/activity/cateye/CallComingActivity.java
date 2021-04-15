@@ -2,14 +2,9 @@ package com.philips.easykey.lock.activity.cateye;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -34,8 +29,6 @@ import org.linphone.core.LinphoneCall;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import retrofit2.http.GET;
 
 public class CallComingActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 

@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.utils;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.philips.easykey.lock.BuildConfig;
 

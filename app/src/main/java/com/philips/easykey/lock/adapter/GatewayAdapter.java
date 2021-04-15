@@ -1,6 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,15 +9,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.DeviceDetailBean;
-import com.philips.easykey.lock.bean.GatewayDeviceDetailBean;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.BatteryView;
-import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 

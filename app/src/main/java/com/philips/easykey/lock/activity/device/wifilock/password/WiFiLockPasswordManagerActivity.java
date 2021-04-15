@@ -2,22 +2,20 @@ package com.philips.easykey.lock.activity.device.wifilock.password;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAddSecondActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddFaceFirstActivity;
 import com.philips.easykey.lock.adapter.WifiLockCardAndFingerAdapter;
 import com.philips.easykey.lock.adapter.WifiLockFacePasswordAdapter;
@@ -31,7 +29,6 @@ import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -192,9 +189,9 @@ public class WiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPassw
         passwordAdapter = new WifiLockPasswordAdapter(passwordList, R.layout.item_bluetooth_password);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(passwordAdapter);
-        passwordAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        passwordAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent(WiFiLockPasswordManagerActivity.this, WifiLockPasswordDetailActivity.class);
                 ForeverPassword foreverPassword = passwordList.get(position);
                 //输入密码类型
@@ -210,9 +207,9 @@ public class WiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPassw
         wifiLockCardAndFingerAdapter = new WifiLockCardAndFingerAdapter(cardAndFingerList, R.layout.item_door_card_manager);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(wifiLockCardAndFingerAdapter);
-        wifiLockCardAndFingerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        wifiLockCardAndFingerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent(WiFiLockPasswordManagerActivity.this, WifiLockPasswordDetailActivity.class);
                 WiFiLockCardAndFingerShowBean wiFiLockCardAndFingerShowBean = cardAndFingerList.get(position);
                 //输入密码类型
@@ -228,9 +225,9 @@ public class WiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPassw
         facepasswordAdapter = new WifiLockFacePasswordAdapter(facepasswordList, R.layout.item_bluetooth_password);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(facepasswordAdapter);
-        facepasswordAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        facepasswordAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent(WiFiLockPasswordManagerActivity.this, WifiLockPasswordDetailActivity.class);
                 FacePassword facePassword = facepasswordList.get(position);
                 //输入密码类型

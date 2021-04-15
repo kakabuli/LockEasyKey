@@ -4,14 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,19 +21,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.cateye.PreviewActivity;
 import com.philips.easykey.lock.adapter.PirHistoryAdapter;
-import com.philips.easykey.lock.adapter.TimeAdapter;
 import com.philips.easykey.lock.bean.MyDate;
 import com.philips.easykey.lock.bean.PirEventBus;
 import com.philips.easykey.lock.mvp.presenter.SnapPresenter;
 import com.philips.easykey.lock.mvp.view.ISnapShotView;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.FtpEnable;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayListResult;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.PirConst;
 import com.philips.easykey.lock.utils.SPUtils2;
@@ -42,13 +41,10 @@ import com.philips.easykey.lock.utils.ftp.FtpUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.greenDao.bean.HistoryInfo;
 import com.philips.easykey.lock.utils.greenDao.db.HistoryInfoDao;
-import com.philips.easykey.lock.widget.GravityPopup;
-import com.philips.easykey.lock.widget.GravityPopup.HidePopup;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -63,7 +59,6 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -71,9 +66,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import retrofit2.http.GET;
 
 //<ISnapShotView, SnapPresenter<ISnapShotView>>
 //implements ISnapShotView
@@ -255,9 +247,9 @@ public class SnapshotFragment1 extends CallBackBaseFragment<ISnapShotView, SnapP
 
         showDataFirst();
 
-        pirHistoryAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        pirHistoryAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 if(isFresh){
                     return;
                 }

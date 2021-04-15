@@ -2,10 +2,11 @@ package com.philips.easykey.lock.activity.device.gatewaylock.stress;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.ShiXiaoNameAdapter;
 import com.philips.easykey.lock.bean.ShiXiaoNameBean;
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David on 2019/4/25
  */
-public class GatewayStressPasswordAddActivity extends BaseAddToApplicationActivity implements View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
+public class GatewayStressPasswordAddActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
     @BindView(R.id.recycleview)
     RecyclerView recyclerView;
     @BindView(R.id.et_name)
@@ -72,22 +74,21 @@ public class GatewayStressPasswordAddActivity extends BaseAddToApplicationActivi
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setAdapter(shiXiaoNameAdapter);
-        shiXiaoNameAdapter.setOnItemClickListener(this);
+        shiXiaoNameAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).setSelected(false);
+                }
+                ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+                String name = shiXiaoNameBean.getName();
+                etName.setText(name);
+                etName.setSelection(name.length());
+                list.get(position).setSelected(true);
+                shiXiaoNameAdapter.notifyDataSetChanged();
+            }
+        });
     }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        String name = shiXiaoNameBean.getName();
-        etName.setText(name);
-        etName.setSelection(name.length());
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
-    }
-
 
     @Override
     public void onClick(View v) {

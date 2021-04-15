@@ -2,9 +2,9 @@ package com.philips.easykey.lock.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +47,7 @@ import butterknife.ButterKnife;
 
 public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockPasswordTempView,
         GatewayLockPasswordTempPresenter<IGatewayLockPasswordTempView>>
-        implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener, IGatewayLockPasswordTempView {
+        implements View.OnClickListener, IGatewayLockPasswordTempView {
     @BindView(R.id.recycleview)
     RecyclerView recyclerView;
     @BindView(R.id.et_name)
@@ -101,15 +101,15 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
     }
 
 
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSelected(false);
-        }
-        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
-        list.get(position).setSelected(true);
-        shiXiaoNameAdapter.notifyDataSetChanged();
-    }
+//    @Override
+//    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//        for (int i = 0; i < list.size(); i++) {
+//            list.get(i).setSelected(false);
+//        }
+//        ShiXiaoNameBean shiXiaoNameBean = list.get(position);
+//        list.get(position).setSelected(true);
+//        shiXiaoNameAdapter.notifyDataSetChanged();
+//    }
 
     @Override
     public void onDestroyView() {

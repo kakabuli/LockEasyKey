@@ -2,16 +2,18 @@ package com.philips.easykey.lock.activity.device.bluetooth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.BluetoothSharedDeviceManagementAdapter;
@@ -40,7 +42,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David
  */
-public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluetoothSharedDeviceManagementView, BluetoothSharedDeviceManagementPresenter<IBluetoothSharedDeviceManagementView>> implements IBluetoothSharedDeviceManagementView, BaseQuickAdapter.OnItemClickListener, View.OnClickListener {
+public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluetoothSharedDeviceManagementView, BluetoothSharedDeviceManagementPresenter<IBluetoothSharedDeviceManagementView>> implements IBluetoothSharedDeviceManagementView, View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
     @BindView(R.id.tv_content)
@@ -73,7 +75,15 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
         bluetoothSharedDeviceManagementAdapter = new BluetoothSharedDeviceManagementAdapter(list, R.layout.item_has_bluetooth_shared_device);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(bluetoothSharedDeviceManagementAdapter);
-        bluetoothSharedDeviceManagementAdapter.setOnItemClickListener(this);
+        bluetoothSharedDeviceManagementAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                BluetoothSharedDeviceBean.DataBean dataBean = list.get(position);
+                Intent intent = new Intent(BluetoothSharedDeviceManagementActivity.this, FamilyMemberDetailActivity.class);
+                intent.putExtra(KeyConstants.COMMON_FAMILY_MEMBER_DATA, dataBean);
+                startActivity(intent);
+            }
+        });
         ivBack.setOnClickListener(this);
         llAddUser.setOnClickListener(this);
         tvContent.setText(getString(R.string.user_manage));
@@ -122,14 +132,6 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
         }
     }
 
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        BluetoothSharedDeviceBean.DataBean dataBean = list.get(position);
-        Intent intent = new Intent(this, FamilyMemberDetailActivity.class);
-        intent.putExtra(KeyConstants.COMMON_FAMILY_MEMBER_DATA, dataBean);
-        startActivity(intent);
-    }
 
     public void pageChange() {
         if (isNotData) {

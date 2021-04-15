@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.BluetoothLockFunctionBean;
 import com.philips.easykey.lock.bean.WifiLockFunctionBean;
-import com.philips.easykey.lock.mvp.view.IFaceOtaView;
 
 import java.util.List;
 

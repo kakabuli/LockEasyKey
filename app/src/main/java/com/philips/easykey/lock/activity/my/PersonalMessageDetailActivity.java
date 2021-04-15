@@ -2,7 +2,7 @@ package com.philips.easykey.lock.activity.my;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +14,6 @@ import com.philips.easykey.lock.utils.KeyConstants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PersonalMessageDetailActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
