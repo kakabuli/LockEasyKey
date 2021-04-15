@@ -20,7 +20,9 @@
 /app/kaadas
 /app/bugly
 /app/build
-/app/src/main/java/com/philips/easykey/lock/greenDao/db/
+/app/src/main/java/com/philips/easykey/lock/utils/greenDao/db
+app/src/main/java/com/philips/easykey/lock/utils/greenDao/db/
+/app/src/main/java/com/philips/easykey/lock/utils/greenDao/db/
 /Core/build
 /countdownview/build
 /imagepicker/build
@@ -29,6 +31,7 @@
 /pickerview/build
 /refresh/build
 /keep_alive/build
+/linphoneLibrary
 /linphoneLibrary/build/
 /tmpmob/ShareSDK/assets/
 /imagepicker/build/
