@@ -15,9 +15,8 @@ import com.philips.easykey.lock.mvp.view.IAddPringerprintSearchView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import net.sdvn.cmapi.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,7 +101,7 @@ public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerpr
     @Override
     public void authResult(boolean isSuccess) {
         if (isSuccess) {
-            LogUtils.e("鉴权成功");
+            LogUtils.d("鉴权成功");
             //跳转到添加界面
             Intent intent = new Intent(this, FingerprintCollectionActivity.class);
             startActivity(intent);

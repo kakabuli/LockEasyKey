@@ -15,6 +15,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.philips.easykey.lock.shulan.KeepAliveAIDL;
 import com.philips.easykey.lock.shulan.KeepAliveRuning;
@@ -24,7 +25,6 @@ import com.philips.easykey.lock.shulan.config.NotificationUtils;
 import com.philips.easykey.lock.shulan.config.RunMode;
 import com.philips.easykey.lock.shulan.receive.NotificationClickReceiver;
 import com.philips.easykey.lock.shulan.receive.OnepxReceiver;
-import com.philips.easykey.lock.shulan.utils.LogUtils;
 import com.philips.easykey.lock.shulan.utils.SPUtils;
 
 
@@ -35,13 +35,13 @@ public class SLLocalService extends Service {
     private MediaPlayer mediaPlayer;
     private SLLocalBinder mBilder;
     private Handler handler;
-    private String TAG = getClass().getSimpleName();
+    private String TAG = "shulan";
     private KeepAliveRuning mKeepAliveRuning;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtils.e("本地服务"+ "：本地服务启动成功");
+        Log.d(TAG,"本地服务"+ "：本地服务启动成功");
         if (mBilder == null) {
 //            mBilder = new SLLocalBinder();
         }
@@ -60,7 +60,7 @@ public class SLLocalService extends Service {
     }
 
     private void play() {
-        LogUtils.e(TAG+ "播放音乐");
+        Log.d(TAG, "播放音乐");
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         }
@@ -76,14 +76,14 @@ public class SLLocalService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //播放无声音乐
         KeepAliveConfig.runMode = SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getInt(KeepAliveConfig.RUN_MODE);
-        LogUtils.e(TAG+ "运行模式：" + KeepAliveConfig.runMode);
+        Log.d(TAG, "运行模式：" + KeepAliveConfig.runMode);
         if (mediaPlayer == null && KeepAliveConfig.runMode == RunMode.HIGH_POWER_CONSUMPTION) {
             mediaPlayer = MediaPlayer.create(this, R.raw.novioce);
             mediaPlayer.setVolume(0f, 0f);
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
-                    LogUtils.e(TAG+"循环播放音乐");
+                    Log.d(TAG,"循环播放音乐");
                     play();
                 }
             });

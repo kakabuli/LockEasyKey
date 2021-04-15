@@ -175,7 +175,7 @@ public class SwipLinkSucActivity  extends BaseActivity<SingleFireSwitchView, Sin
 //        }
 
         for (int i = 1 ; i <= link ; i++){
-            LogUtils.e("--kaadas--SwitchNumberBean--==" + new SwitchNumberBean(i,0,0,0,0,i==1?switchNumberNickName1:i==2?switchNumberNickName2:switchNumberNickName3));
+            LogUtils.d("--kaadas--SwitchNumberBean--==" + new SwitchNumberBean(i,0,0,0,0,i==1?switchNumberNickName1:i==2?switchNumberNickName2:switchNumberNickName3));
             switchNumber.add(new SwitchNumberBean(i,0,0,0,0,i==1?switchNumberNickName1:i==2?switchNumberNickName2:switchNumberNickName3));
 
             switchNickname.add(new ModifySwitchNickBean.nickname(i==1?switchNumberNickName1:i==2?switchNumberNickName2:switchNumberNickName3,i));

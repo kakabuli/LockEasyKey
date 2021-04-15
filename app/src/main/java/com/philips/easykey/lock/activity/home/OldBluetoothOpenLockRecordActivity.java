@@ -219,7 +219,7 @@ public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLoc
 
     @Override
     public void onLoadServerRecord(List<OpenLockRecord> lockRecords, int page) {
-        LogUtils.e("收到服务器数据  " + lockRecords.size());
+        LogUtils.d("收到服务器数据  " + lockRecords.size());
         currentPage = page + 1;
         groupData(lockRecords);
         LogUtils.d("davi list " + list.toString());
@@ -244,7 +244,7 @@ public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLoc
                 timeHead = record.getOpen_time().substring(0, 10);
                 hourSecond = record.getOpen_time().substring(11, 16);
             }catch (Exception e){
-                LogUtils.e("获取时间错误    " +  record.getOpen_time());
+                LogUtils.d("获取时间错误    " +  record.getOpen_time());
             }
 
             GetPasswordResult passwordResult = MyApplication.getInstance().getPasswordResults(bleLockInfo.getServerLockInfo().getLockName());
@@ -317,14 +317,14 @@ public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLoc
 
     @Override
     public void onUploadServerRecordSuccess() {
-        LogUtils.e("记录上传成功");
+        LogUtils.d("记录上传成功");
         ToastUtil.getInstance().showShort(R.string.lock_record_upload_success);
     }
 
     @Override
     public void onUploadServerRecordFailed(Throwable throwable) {
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
-        LogUtils.e("记录上传失败");
+        LogUtils.d("记录上传失败");
     }
 
     @Override
@@ -349,7 +349,7 @@ public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLoc
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
-                    LogUtils.e("同步开锁记录");
+                    LogUtils.d("同步开锁记录");
                     mPresenter.allSyncRecord();
                     list.clear();
                     if (bluetoothRecordAdapter != null) {

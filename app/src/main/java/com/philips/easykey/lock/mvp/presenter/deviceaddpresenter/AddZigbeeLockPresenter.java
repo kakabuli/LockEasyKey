@@ -98,7 +98,7 @@ public class AddZigbeeLockPresenter<T> extends BasePresenter<IAddZigbeeLockView>
                             if (gwId.equals(deviceOnLineBean.getGwId()) && MqttConstant.ON_LINE.equals(deviceOnLineBean.getEventparams().getEvent_str()) && deviceOnLineBean.getEventparams().getDevice_type().equals("zigbee")) {
                                 //设备信息匹配成功  且是上线上报
                                 if (isSafe()) {
-                                    LogUtils.e("添加网关成功");
+                                    LogUtils.d("添加网关成功");
                                     mViewRef.get().addZigbeeSuccess(deviceOnLineBean);
                                     MyApplication.getInstance().getAllDevicesByMqtt(true);
                                     SPUtils.remove(KeyConstants.SAVA_LOCK_PWD + deviceOnLineBean.getDeviceId());

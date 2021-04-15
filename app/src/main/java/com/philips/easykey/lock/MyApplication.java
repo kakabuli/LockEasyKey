@@ -18,7 +18,6 @@ import com.igexin.sdk.PushManager;
 import com.philips.easykey.lock.activity.login.LoginActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockActionBean;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
@@ -26,12 +25,10 @@ import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
-import com.philips.easykey.lock.publiclibrary.linphone.MemeManager;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.util.RetrofitServiceManager;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.util.LinphoneHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
@@ -56,7 +53,6 @@ import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.ProductInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.WifiLockInfoDao;
 import com.philips.easykey.lock.utils.greenDao.manager.WifiLockInfoManager;
-import com.philips.easykey.lock.push.GeTuiPushService;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -73,13 +69,6 @@ import com.tencent.mmkv.MMKV;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xm.sdk.log.XMLog;
 import com.xmitech.sdk.log.LogCodec;
-
-/*import com.uuzuche.lib_zxing.activity.ZXingLibrary;*/
-
-
-import net.sdvn.cmapi.CMAPI;
-import net.sdvn.cmapi.Config;
-
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.greendao.database.Database;
 
@@ -139,20 +128,17 @@ public class MyApplication extends Application {
         super.onCreate();
 //        initALog();
         MyLog.getInstance().init(this);
-        LogUtils.e("attachView  App启动 ");
+        LogUtils.d("attachView  App启动 ");
         instance = this;
         CrashReport.initCrashReport(getApplicationContext(), "3ac95f5a71", true);
         initBleService();
         initMqttService();//启动MqttService
         initMMKV(this);
-//        SPUtils.init(this);  //初始化SPUtils  传递Context进去  不需要每次都传递Context
         ToastUtil.init(this); //初始化ToastUtil 传递Context进去  不需要每次都传递
-        SPUtils.remove(Constants.LINPHONE_REGESTER_STATE);
         initTokenAndUid();  //获取本地UUID
         listenerAppBackOrForge();
         //扫描二维码初始化
         /* ZXingLibrary.initDisplayOpinion(this);*/
-        initMeme();
         initXMP2PManager();
         regToWx();
         //配置数据库
@@ -163,13 +149,8 @@ public class MyApplication extends Application {
         }else if(Rom.isMiui()){
                 MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
         }
-//        PushManager.getInstance().initialize(this, userPushService);
         PushManager.getInstance().initialize(this);
-        // 注册 intentService 后 PushDemoReceiver 无效, sdk 会使用 DemoIntentService 传递数据,
-        // AndroidManifest 对应保留一个即可(如果注册 DemoIntentService, 可以去掉 PushDemoReceiver, 如果注册了
-        // IntentService, 必须在 AndroidManifest 中声明)
-//        PushManager.getInstance().registerPushIntentService(this, GeTuiIntentService.class);
-        LogUtils.e("attachView  App启动完成 ");
+        LogUtils.d("attachView  App启动完成 ");
         //去掉在Android 9以上调用反射警告提醒弹窗 （Detected problems with API compatibility(visit g.co/dev/appcompat for more info)
         closeAndroidPDialog();
         setRxJavaErrorHandler();
@@ -178,7 +159,7 @@ public class MyApplication extends Application {
     private void initMMKV(MyApplication myApplication) {
         String rootDir = MMKV.initialize(myApplication);
         if(BuildConfig.DEBUG)
-        LogUtils.e("shulan mmkv root: " + rootDir);
+        LogUtils.d("shulan mmkv root: " + rootDir);
     }
 
     private void initXMP2PManager() {
@@ -199,21 +180,6 @@ public class MyApplication extends Application {
         return api;
     }
 
-    private void initMeme() {
-        //设置配置项
-        Config config = new Config(true);
-        if (BuildConfig.DEBUG) {
-            config.setLogLevel(5);
-        } else {
-            config.setLogLevel(0);
-        }
-        CMAPI.getInstance().setConfig(config);
-        CMAPI.getInstance().init(this, MqttConstant.APP_ID, MqttConstant.PARTERN_ID, MqttConstant.DC_TEST);
-
-        MemeManager.getInstance().init();
-    }
-
-
     /**
      * 启动蓝牙服务
      */
@@ -231,7 +197,7 @@ public class MyApplication extends Application {
                     if (listService == 2) {
                         listService = 0;
                     }
-                    LogUtils.e("服务启动成功    " + (bleService == null) + "当前服务中编号是多少 " + listService);
+                    LogUtils.d("服务启动成功    " + (bleService == null) + "当前服务中编号是多少 " + listService);
                 }
             }
 
@@ -258,9 +224,8 @@ public class MyApplication extends Application {
             @Override
             public void onActivityStopped(Activity activity) {
                 count--;
-//                LogUtils.e("程序切换", activity + "onActivityStopped  "+count);
                 if (count == 0) {
-                    LogUtils.e("程序切换", ">>>>>>>>>>>>>>>>>>>切到后台  lifecycle");
+                    LogUtils.d("程序切换", ">>>>>>>>>>>>>>>>>>>切到后台  lifecycle");
                     listenerAppChange.onNext(true);
                 }
 
@@ -272,24 +237,24 @@ public class MyApplication extends Application {
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-//                LogUtils.e("程序切换", activity + "onActivitySaveInstanceState");
+//                LogUtils.d("程序切换", activity + "onActivitySaveInstanceState");
             }
 
             @Override
             public void onActivityResumed(Activity activity) {
-//                LogUtils.e("程序切换", activity + "onActivityResumed");
+//                LogUtils.d("程序切换", activity + "onActivityResumed");
                 if (count == 0) {
-                    LogUtils.e("程序切换", ">>>>>>>>>>>>>>>>>>>切到前台  lifecycle");
+                    LogUtils.d("程序切换", ">>>>>>>>>>>>>>>>>>>切到前台  lifecycle");
                     //是不是
                     listenerAppChange.onNext(false);
                 }
                 count++;
-//                LogUtils.e("程序切换", activity + "onActivityStarted  " + count);
+//                LogUtils.d("程序切换", activity + "onActivityStarted  " + count);
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-//                LogUtils.e("程序切换", activity + "onActivityPaused");
+//                LogUtils.d("程序切换", activity + "onActivityPaused");
 
             }
 
@@ -300,7 +265,7 @@ public class MyApplication extends Application {
 
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-//                LogUtils.e("viclee", activity + "onActivityCreated");
+//                LogUtils.d("viclee", activity + "onActivityCreated");
             }
         });
 
@@ -322,7 +287,7 @@ public class MyApplication extends Application {
                     if (listService == 2) {
                         listService = 0;
                     }
-                    LogUtils.e("attachView service启动" + (mqttService == null) + "当前服务中编号是多少  " + listService);
+                    LogUtils.d("attachView service启动" + (mqttService == null) + "当前服务中编号是多少  " + listService);
                 }
             }
 
@@ -386,7 +351,7 @@ public class MyApplication extends Application {
     public void tokenInvalid(boolean isShowDialog) {
         deleSQL();  //清除数据库数据
         ActivityCollectorUtil.finishAllActivity();
-        LogUtils.e("token过期   ");
+        LogUtils.d("token过期   ");
         SPUtils.put(KeyConstants.HEAD_PATH, "");
         boolean alreadyStart = false;
         Boolean appUpdate = (Boolean) SPUtils.get(SPUtils.APPUPDATE, false);
@@ -402,7 +367,7 @@ public class MyApplication extends Application {
         }
         //清除内存中缓存的数据
         if (bleService != null) {
-            LogUtils.e("token过期   断开连接  ");
+            LogUtils.d("token过期   断开连接  ");
             bleService.release();  //token过期   断开连接
             bleService.removeBleLockInfo();
         }
@@ -410,10 +375,6 @@ public class MyApplication extends Application {
         productLists.clear();
 
         MyApplication.getInstance().initTokenAndUid();
-        //退出linphone
-        LinphoneHelper.deleteUser();
-        //退出meme网
-        MemeManager.getInstance().videoActivityDisconnectMeme();
         SPUtils2.remove(this,Constants.PUSHID);
         //清除数据库数据
         for (Activity activity : activities) {
@@ -479,7 +440,7 @@ public class MyApplication extends Application {
     private Map<String, GetPasswordResult> passwordResults = new HashMap();
 
     public void setPasswordResults(String deviceName, GetPasswordResult passwordList, boolean isNotify) {
-        LogUtils.e("设置数据  密码列表  " + deviceName + (passwordList.getData() == null));
+        LogUtils.d("设置数据  密码列表  " + deviceName + (passwordList.getData() == null));
         passwordResults.put(deviceName, passwordList);
         if (isNotify) {
             passwordLoaded.onNext(true);
@@ -518,12 +479,12 @@ public class MyApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         //程序终止时
-        LogUtils.e("程序终止了");
+        LogUtils.d("程序终止了");
     }
 
     //清除所有与的Actvity
     public void removeAllActivity() {
-        LogUtils.e("清除所有的Activity");
+        LogUtils.d("清除所有的Activity");
         for (Activity activity : activities) {
             if (activity != null) {
                 activity.finish();
@@ -568,7 +529,7 @@ public class MyApplication extends Application {
                         allBindDevices = new Gson().fromJson(payload, AllBindDevices.class);
 
                         if (!"200".equals(allBindDevices.getCode())) {  ///服务器获取设备列表失败
-                            LogUtils.e("   获取列表失败  " + allBindDevices.getCode());
+                            LogUtils.d("   获取列表失败  " + allBindDevices.getCode());
                             useHomeShowDeviceFromLocal();
                             return;
                         }
@@ -593,12 +554,12 @@ public class MyApplication extends Application {
 
                         if (allBindDevices != null) {
                             homeShowDevices = allBindDevices.getHomeShow();
-                            LogUtils.e("设备更新  application");
+                            LogUtils.d("设备更新  application");
                             getDevicesFromServer.onNext(allBindDevices);
 
                             //缓存WiFi锁设备信息 到Dao
                             if (allBindDevices.getData() != null && allBindDevices.getData().getWifiList() != null) {
-//                                LogUtils.e("--kaadas--allBindDevices.getData().getWifiList=="+allBindDevices.getData().getWifiList());
+//                                LogUtils.d("--kaadas--allBindDevices.getData().getWifiList=="+allBindDevices.getData().getWifiList());
                                 List<WifiLockInfo> wifiList = allBindDevices.getData().getWifiList();
                                 WifiLockInfoDao wifiLockInfoDao = getDaoWriteSession().getWifiLockInfoDao();
                                 wifiLockInfoDao.deleteAll();
@@ -616,7 +577,7 @@ public class MyApplication extends Application {
                             //缓存产品型号信息列表 到Dao，主要是图片下载地址（下载过的图片不再下载）
                             if (allBindDevices.getData() != null && allBindDevices.getData().getProductInfoList() != null) {
                                 productLists = allBindDevices.getData().getProductInfoList();
-//                                LogUtils.e("--kaadas--productLists=="+productLists);
+//                                LogUtils.d("--kaadas--productLists=="+productLists);
                                 ProductInfoDao productInfoDao = getDaoWriteSession().getProductInfoDao();
                                 productInfoDao.deleteAll();
                                 productInfoDao.insertInTx(productLists);
@@ -749,7 +710,7 @@ public class MyApplication extends Application {
                         wifiLockInfo.setPowerSave(actionBean.getEventparams().getPowerSave());
                         wifiLockInfo.setFaceStatus(actionBean.getEventparams().getFaceStatus());
                         long updateTime = Long.parseLong(actionBean.getTimestamp());
-                        LogUtils.e("更新的时间为   " + DateUtils.getDateTimeFromMillisecond(updateTime * 1000));
+                        LogUtils.d("更新的时间为   " + DateUtils.getDateTimeFromMillisecond(updateTime * 1000));
                         wifiLockInfo.setUpdateTime(updateTime);
                     }
                     new WifiLockInfoManager().insertOrReplace(wifiLockInfo);
@@ -771,7 +732,7 @@ public class MyApplication extends Application {
 
     public void setAllBindDevices(AllBindDevices allBindDevices) {
         homeShowDevices = allBindDevices.getHomeShow();
-        LogUtils.e("获取到的首页设备个数是   " + homeShowDevices.size());
+        LogUtils.d("获取到的首页设备个数是   " + homeShowDevices.size());
         getDevicesFromServer.onNext(allBindDevices);
     }
 
@@ -836,11 +797,6 @@ public class MyApplication extends Application {
                 if (gwLockInfo.getGwID().equals(gatewayId)) {
                     gatewayBindList.add(homeShowBean);
                 }
-            } else if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_CAT_EYE) {
-                CateEyeInfo cateEyeInfo = (CateEyeInfo) homeShowBean.getObject();
-                if (cateEyeInfo.getGwID().equals(gatewayId)) {
-                    gatewayBindList.add(homeShowBean);
-                }
             }
         }
         return gatewayBindList;
@@ -890,80 +846,6 @@ public class MyApplication extends Application {
         return getServiceConnected;
     }
 
-
-    private long isComingTime;
-
-    /**
-     * 获取  呼进来的时间
-     *
-     * @return
-     */
-    public long getIsComingTime() {
-        return isComingTime;
-    }
-
-    public void setIsComingTime(long isComingTime) {
-        this.isComingTime = isComingTime;
-    }
-
-
-    private int linphone_port;
-
-    /**
-     * 获取 linphone的端口号
-     *
-     * @return
-     */
-    public int getLinphone_port() {
-        return linphone_port;
-    }
-
-    public void setLinphone_port(int linphone_port) {
-        this.linphone_port = linphone_port;
-    }
-
-
-    private boolean isVideoActivityRun = false;
-
-    public boolean isVideoActivityRun() {
-        return isVideoActivityRun;
-    }
-
-    public void setVideoActivityRun(boolean videoActivityRun) {
-        isVideoActivityRun = videoActivityRun;
-    }
-
-    // 快照图片
-    private LinkedList<String> pirListImg;
-
-    public LinkedList<String> getPirListImg() {
-        return pirListImg;
-    }
-
-    public void setPirListImg(LinkedList<String> pirListImg) {
-        this.pirListImg = pirListImg;
-    }
-
-    boolean isPreviewActivity = false;
-
-    public boolean isPreviewActivity() {
-        return isPreviewActivity;
-    }
-
-    public void setPreviewActivity(boolean previewActivity) {
-        isPreviewActivity = previewActivity;
-    }
-
-    boolean isMediaPlayerActivity = false;
-
-    public boolean isMediaPlayerActivity() {
-        return isMediaPlayerActivity;
-    }
-
-    public void setMediaPlayerActivity(boolean mediaPlayerActivity) {
-        isMediaPlayerActivity = mediaPlayerActivity;
-    }
-
     private static DaoSession daoWriteSession;
     private DaoManager manager;
 
@@ -976,70 +858,6 @@ public class MyApplication extends Application {
         return daoWriteSession;
     }
 
-    // DemoPushService.class 自定义服务名称, 核心服务
-    private Class userPushService = GeTuiPushService.class;
-
-    String currentGeTuiMimiUserName;
-    String currentGeTuiMImiPwd;
-
-    public String getCurrentGeTuiMimiUserName() {
-        return currentGeTuiMimiUserName;
-    }
-
-    public void setCurrentGeTuiMimiUserName(String currentGeTuiMimiUserName) {
-        this.currentGeTuiMimiUserName = currentGeTuiMimiUserName;
-    }
-
-    public String getCurrentGeTuiMImiPwd() {
-        return currentGeTuiMImiPwd;
-    }
-
-    public void setCurrentGeTuiMImiPwd(String currentGeTuiMImiPwd) {
-        this.currentGeTuiMImiPwd = currentGeTuiMImiPwd;
-    }
-
-    String sip_package_invite;
-
-    public String getSip_package_invite() {
-        return sip_package_invite;
-    }
-
-    public void setSip_package_invite(String sip_package_invite) {
-        this.sip_package_invite = sip_package_invite;
-    }
-
-    public String currentGwId;
-
-    public String getCurrentGwId() {
-        return currentGwId;
-    }
-
-    public void setCurrentGwId(String currentGwId) {
-        this.currentGwId = currentGwId;
-    }
-
-    boolean isFromWel = false;
-
-    public boolean isFromWel() {
-        return isFromWel;
-    }
-
-    public void setFromWel(boolean fromWel) {
-        isFromWel = fromWel;
-    }
-
-    int pirEnableStates = 1;
-
-    public int getPirEnableStates() {
-        return pirEnableStates;
-    }
-
-    public void setPirEnableStates(int pirEnableStates) {
-        this.pirEnableStates = pirEnableStates;
-    }
-
-    boolean isPopDialog = false;
-
     public void reStartApp() {
         Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
         PendingIntent restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -1047,35 +865,6 @@ public class MyApplication extends Application {
         mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 1秒钟后重启应用
         System.exit(0);
     }
-
-    // startSendFile it in ur application
-   /* public void initALog() {
-        ALog.Config config = ALog.init(this)
-                .setLogSwitch(BuildConfig.DEBUG)// 设置log总开关，包括输出到控制台和文件，默认开
-                .setConsoleSwitch(BuildConfig.DEBUG)// 设置是否输出到控制台开关，默认开
-                .setGlobalTag(null)// 设置log全局标签，默认为空
-                // 当全局标签不为空时，我们输出的log全部为该tag，
-                // 为空时，如果传入的tag为空那就显示类名，否则显示tag
-                .setLogHeadSwitch(false)// 设置log头信息开关，默认为开
-                .setLog2FileSwitch(true)// 打印log时是否存到文件的开关，默认关
-                .setDir(new File(getExternalFilesDir("").getAbsolutePath() + File.separator + "", "LogFile").getPath())// 当自定义路径为空时，写入应用的/cache/log/目录中
-                .setFilePrefix("kaadas-ALog-")// 当文件前缀为空时，默认为"alog"，即写入文件为"alog-MM-dd.txt"
-                .setBorderSwitch(false)// 输出日志是否带边框开关，默认开
-                .setSingleTagSwitch(false)// 一条日志仅输出一条，默认开，为美化 AS 3.1.0 的 Logcat
-                .setConsoleFilter(ALog.V)// log的控制台过滤器，和logcat过滤器同理，默认Verbose
-                .setFileFilter(ALog.V)// log文件过滤器，和logcat过滤器同理，默认Verbose
-                .setStackDeep(1)// log 栈深度，默认为 1
-                .setStackOffset(0)// 设置栈偏移，比如二次封装的话就需要设置，默认为 0
-                .setSaveDays(3)// 设置日志可保留天数，默认为 -1 表示无限时长
-                // 新增 ArrayList 格式化器，默认已支持 Array, Throwable, Bundle, Intent 的格式化输出
-                .addFormatter(new ALog.IFormatter<ArrayList>() {
-                    @Override
-                    public String format(ArrayList list) {
-                        return "ALog Formatter ArrayList { " + list.toString() + " }";
-                    }
-                });
-        ALog.e(config.toString());
-    }*/
 
     private void setRxJavaErrorHandler() {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
@@ -1103,17 +892,17 @@ public class MyApplication extends Application {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult baseResult) {
-                        LogUtils.e("上传OTA结果成功    " + baseResult.toString());
+                        LogUtils.d("上传OTA结果成功    " + baseResult.toString());
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传OTA结果失败    " + baseResult.toString());
+                        LogUtils.d("上传OTA结果失败    " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传OTA结果失败    " + throwable.getMessage());
+                        LogUtils.d("上传OTA结果失败    " + throwable.getMessage());
                     }
 
                     @Override

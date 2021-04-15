@@ -19,10 +19,8 @@ import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-
-import net.sdvn.cmapi.util.LogUtils;
-
 import java.util.Locale;
 
 import butterknife.BindView;

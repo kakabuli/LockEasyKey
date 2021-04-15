@@ -12,10 +12,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetJoinAllowBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
@@ -45,7 +42,7 @@ public class SingleFireSwitchSettingPresenter<T> extends BasePresenter<SingleFir
         toDisposable(settingDeviceDisposable);
         if (mqttService != null && mqttService.getMqttClient() != null && mqttService.getMqttClient().isConnected()) {
             MqttMessage mqttMessage = MqttCommandFactory.setSingleFireSwitch(MyApplication.getInstance().getUid(), wifiLockInfo.getWifiSN(), wifiLockInfo.getSingleFireSwitchInfo());
-//            LogUtils.e("--kaadas--设置单火开关mqttMessage=="+mqttMessage);
+//            LogUtils.d("--kaadas--设置单火开关mqttMessage=="+mqttMessage);
             settingDeviceDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(MyApplication.getInstance().getUid()), mqttMessage)
                     .filter(new Predicate<MqttData>() {
                         @Override
@@ -63,7 +60,7 @@ public class SingleFireSwitchSettingPresenter<T> extends BasePresenter<SingleFir
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             toDisposable(settingDeviceDisposable);
-                            LogUtils.e("--kaadas--设置单火开关==",mqttData.getPayload());
+                            LogUtils.d("--kaadas--设置单火开关==",mqttData.getPayload());
 
                             SetSingleFireSwitchBean setSingleFireSwitchBean = new Gson().fromJson(mqttData.getPayload(), SetSingleFireSwitchBean.class);
                             if (setSingleFireSwitchBean != null) {
@@ -117,7 +114,7 @@ public class SingleFireSwitchSettingPresenter<T> extends BasePresenter<SingleFir
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             toDisposable(addDeviceDisposable);
-                            LogUtils.e("--kaadas--添加单火开关==",mqttData.getPayload());
+                            LogUtils.d("--kaadas--添加单火开关==",mqttData.getPayload());
                             AddSingleFireSwitchBean addSingleFireSwitchBean = new Gson().fromJson(mqttData.getPayload(), AddSingleFireSwitchBean.class);
                             if (addSingleFireSwitchBean != null) {
                                 if ("200".equals(addSingleFireSwitchBean.getCode())) {//添加锁外围（开关）成功

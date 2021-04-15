@@ -133,7 +133,7 @@ public class WifiLockAddNewThirdActivity extends BaseAddToApplicationActivity {
         WifiManager wifiMgr = (WifiManager) MyApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifiMgr.getConnectionInfo();
         String ssid = info != null ? info.getSSID() : null;
-        LogUtils.e("--Kaadas--获取到的ssid：" + ssid);
+        LogUtils.d("--Kaadas--获取到的ssid：" + ssid);
         if (TextUtils.isEmpty(ssid)) {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");
             return;
@@ -144,7 +144,7 @@ public class WifiLockAddNewThirdActivity extends BaseAddToApplicationActivity {
         if (!ssid.equals("kaadas_AP") && !"<unknown ssid>".equals(ssid)) {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, ssid);
             byte[] ssidOriginalData = TouchNetUtil.getOriginalSsidBytes(info);
-            LogUtils.e("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
+            LogUtils.d("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_ORIGINAL_DATA, Rsa.bytesToHexString(ssidOriginalData));
         }
         else if(ssid.equals("kaadas_AP")){

@@ -103,7 +103,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
         initRecycleView();
         initListener();
         initData();
-        LogUtils.e("fragment onCreateView");
+        LogUtils.d("fragment onCreateView");
         return view;
     }
 
@@ -115,7 +115,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
 
     private void initData() {
         gatewayLockInfo = (GwLockInfo) getArguments().getSerializable(KeyConstants.GATEWAY_LOCK_INFO);
-        LogUtils.e("fragment gatewayId"+gatewayLockInfo.getGwID()+"fragment device Id"  +gatewayLockInfo.getServerInfo().getDeviceId());
+        LogUtils.d("fragment gatewayId"+gatewayLockInfo.getGwID()+"fragment device Id"  +gatewayLockInfo.getServerInfo().getDeviceId());
         if (gatewayLockInfo != null) {
             gatewayId = gatewayLockInfo.getGwID();
             deviceId = gatewayLockInfo.getServerInfo().getDeviceId();
@@ -151,13 +151,13 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
             mPresenter.listenerDeviceOnline();//设备上线下线
             //mPresenter.getPower();
             String time = gatewayLockInfo.getServerInfo().getTime();
-            LogUtils.e(time + "网关时间");
+            LogUtils.d(time + "网关时间");
             if (!TextUtils.isEmpty(time)) {
                 long saveTime = DateUtils.standardTimeChangeTimestamp(time) / 1000;
-                LogUtils.e("zigb守护时间"+saveTime);
+                LogUtils.d("zigb守护时间"+saveTime);
                 long serverTime = (long) SPUtils.get(KeyConstants.SERVER_CURRENT_TIME, Long.parseLong("0"));
                 //设置守护时间
-                LogUtils.e("zigb守护时间"+saveTime+"服务器时间"+serverTime/1000);
+                LogUtils.d("zigb守护时间"+saveTime+"服务器时间"+serverTime/1000);
                 long day = ((serverTime / 1000) - saveTime) / (60 * 24 * 60);
                 if (day>0){
                     this.createTime.setText(day + "");
@@ -211,25 +211,25 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
     @Override
     public void onStart() {
         super.onStart();
-        LogUtils.e("fragment onStart");
+        LogUtils.d("fragment onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.e("fragment OnResume");
+        LogUtils.d("fragment OnResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.e("fragment onPause");
+        LogUtils.d("fragment onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtils.e("fragment onStop");
+        LogUtils.d("fragment onStop");
     }
 
     @Override
@@ -582,7 +582,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
 
     @Override
     public void getOpenLockRecordSuccess(List<SelectOpenLockResultBean.DataBean> mOpenLockRecordList,String devId) {
-        LogUtils.e("请求到的数据是"+devId);
+        LogUtils.d("请求到的数据是"+devId);
         if (gatewayId!=null&&deviceId!=null) {
             if (deviceId.equals(devId)) {
                 if(mOpenLockRecordList != null){
@@ -595,7 +595,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
                     changePage(false);
                 }
                 groupData(mOpenLockRecordList);
-                LogUtils.e("请求到数据是。。。。" + mOpenLockRecordList.size());
+                LogUtils.d("请求到数据是。。。。" + mOpenLockRecordList.size());
                 if (openLockRecordAdapter != null) {
                     openLockRecordAdapter.notifyDataSetChanged();
                 }
@@ -630,7 +630,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
 
     @Override
     public void gatewayStatusChange(String gatewayId, String eventStr) {
-        LogUtils.e("网关变化"+gatewayId+"在线还是离线"+eventStr);
+        LogUtils.d("网关变化"+gatewayId+"在线还是离线"+eventStr);
         if (gatewayLockInfo != null) {
             if (gatewayLockInfo.getGwID().equals(gatewayId)) {
                 //当前猫眼所属的网关是上下线的网关
@@ -766,7 +766,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
             changeOpenLockStatus(5);
         }
         ToastUtil.getInstance().showShort(getString(R.string.open_lock_fail));
-        LogUtils.e("开锁异常");
+        LogUtils.d("开锁异常");
     }
 
     @Override
@@ -900,7 +900,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
 
     @Override
     public void getLockRecordTotalSuccess(int count,String devId) {
-        LogUtils.e("开锁记录总次数是"+count+"设备id"+devId);
+        LogUtils.d("开锁记录总次数是"+count+"设备id"+devId);
         if (tvOpenLockTimes!=null){
             if (deviceId.equals(devId)){
                 tvOpenLockTimes.setText(count+"");
@@ -1121,7 +1121,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
                         }
                     }
                 }else{
-                    LogUtils.e("离线状态");
+                    LogUtils.d("离线状态");
                     changeOpenLockStatus(1);
                     if (deviceState != null) {
                         deviceState.setText(getString(R.string.offline));
@@ -1131,7 +1131,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
             if (NetUtil.isNetworkAvailable()) {
                 if (gatewayLockInfo!=null) {
                     if (!TextUtils.isEmpty(gatewayId) && !TextUtils.isEmpty(deviceId)) {
-                        LogUtils.e("请求开锁记录   网关id  " + gatewayId + " 设备ID" + deviceId);
+                        LogUtils.d("请求开锁记录   网关id  " + gatewayId + " 设备ID" + deviceId);
                         mPresenter.openGatewayLockRecord(gatewayId, deviceId, MyApplication.getInstance().getUid(), 1, 3);
                         mPresenter.getGatewayLockOpenRecord(MyApplication.getInstance().getUid(), gatewayId, deviceId);//开锁次数
                     }

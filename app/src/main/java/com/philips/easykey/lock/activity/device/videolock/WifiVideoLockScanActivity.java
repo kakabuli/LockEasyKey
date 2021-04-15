@@ -159,7 +159,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
             WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
             assert wifiManager != null;
             WifiInfo info = wifiManager.getConnectionInfo();
-            LogUtils.e("网络切换   断开 from info---" + info);
+            LogUtils.d("网络切换   断开 from info---" + info);
 
             onWifiChanged(wifiManager.getConnectionInfo());
         }
@@ -167,13 +167,13 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
 
 
     private void onWifiChanged(WifiInfo info) {
-        LogUtils.e("网络切换   断开 from info===" + info.getSSID());
+        LogUtils.d("网络切换   断开 from info===" + info.getSSID());
 
         boolean disconnected = info == null
                 || info.getNetworkId() == -1
                 || "<unknown ssid>".equals(info.getSSID());
         if (disconnected) {
-            LogUtils.e("网络切换  from WifiLockAddNewScanActivity");
+            LogUtils.d("网络切换  from WifiLockAddNewScanActivity");
             String ssid = info.getSSID();
             if ((ssid.equals("kaadas_AP"))) {
                 handler.removeCallbacks(runnable);
@@ -181,7 +181,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
                 handler.removeCallbacks(timeoutRunnable);
                 finish();
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
         } else {
             String ssid = info.getSSID();
             if (TextUtils.isEmpty(ssid)) {
@@ -190,7 +190,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
             if ((ssid.equals("kaadas_AP"))) {
                 handler.removeCallbacks(runnable);
 //                onScanSuccess();
@@ -284,7 +284,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
         public void run() {
             super.run();
             if (socketManager.isStart()) { //连接成功
-                LogUtils.e("连接成功");
+                LogUtils.d("连接成功");
                 byte[] bSsid ;
                 byte[] bPwd = sPassword.getBytes();
                 String wifiName = (String) SPUtils.get(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");
@@ -300,11 +300,11 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
                 System.arraycopy(bPwd, 0, data, 32, bPwd.length);
                 int writeResult = socketManager.writeData(data);
                 if (writeResult == 0) {
-                    LogUtils.e("发送账号密码成功   开始读取数据");
+                    LogUtils.d("发送账号密码成功   开始读取数据");
                     SocketManager.ReadResult readResult = socketManager.readWifiDataTimeout(60 * 1000);
                     if (readResult.resultCode >= 0) { //读取成功
                         String sResult = new String(readResult.data);
-                        LogUtils.e("读取成功   " + sResult);
+                        LogUtils.d("读取成功   " + sResult);
                         if (!TextUtils.isEmpty(sResult) && sResult.startsWith("APSuccess")) {
                             onSuccess();
                             isSuccess = true;
@@ -340,14 +340,14 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
                         }
                     } else {
                         onError(socketManager, -1);
-                        LogUtils.e("读数据失败   " + writeResult);
+                        LogUtils.d("读数据失败   " + writeResult);
                     }
                 } else { //写数据失败
-                    LogUtils.e("写数据失败   " + writeResult);
+                    LogUtils.d("写数据失败   " + writeResult);
                     onError(socketManager, -4);
                 }
             } else {  //连接失败
-                LogUtils.e("连接失败");
+                LogUtils.d("连接失败");
                 onError(socketManager, -2);
             }
         }
@@ -405,7 +405,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
      * @param errorCode     -1 读取失败  -2 连接失败  -3 校验失败
      */
     public void onError(SocketManager socketManager, int errorCode) {
-        LogUtils.e("---------onError-------");
+        LogUtils.d("---------onError-------");
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -146,10 +146,10 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
         public void run() {
             super.run();
             int result = socketManager.startServer();
-            LogUtils.e("连接结果   " + result);
+            LogUtils.d("连接结果   " + result);
             if (result == 0) { //连接成功
                 SocketManager.ReadResult readResult = socketManager.readWifiData();
-                LogUtils.e("读取结果2   " + readResult.toString());
+                LogUtils.d("读取结果2   " + readResult.toString());
                 if (readResult.resultCode >= 0) {
                     if (readResult.dataLen < 46) {//读取数据字数不够
                         onError(socketManager, -1);
@@ -170,7 +170,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
     };
 
     public void reInputAdminPassword() {
-        LogUtils.e("重新输入管理员密码2 ");
+        LogUtils.d("重新输入管理员密码2 ");
         View mView = LayoutInflater.from(WifiLockApCheckAdminPasswordActivity.this).inflate(R.layout.have_edit_dialog, null);
         TextView tvTitle = mView.findViewById(R.id.tv_title);
         EditText editText = mView.findViewById(R.id.et_name);
@@ -202,7 +202,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
                 alertDialog.dismiss();
             }
         });
-        LogUtils.e("重新输入管理员密码  3");
+        LogUtils.d("重新输入管理员密码  3");
         alertDialog.show();
     }
 
@@ -243,7 +243,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("异常   " + throwable);
+                            LogUtils.d("异常   " + throwable);
                             socketManager.destroy();
                             finish();
                             startActivity(new Intent(WifiLockApCheckAdminPasswordActivity.this, WifiLockApAddThirdActivity.class));
@@ -260,10 +260,10 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
                     public void run() {
                         super.run();
                         int writeResult = socketManager.writeData(("CRCError\r").getBytes());
-                        LogUtils.e("写 CRC Error  结果为   " + writeResult);
+                        LogUtils.d("写 CRC Error  结果为   " + writeResult);
                     }
                 }.start();
-                LogUtils.e("重新输入管理员密码");
+                LogUtils.d("重新输入管理员密码");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

@@ -109,7 +109,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
         lockRunnable = new Runnable() {
             @Override
             public void run() {
-                LogUtils.e(" 首页锁状态  反锁状态   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
+                LogUtils.d(" 首页锁状态  反锁状态   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
                 isOpening = false;
                 changeOpenLockStatus(8);
                 if (bleLockInfo.getBackLock() == 0) {  //等于0时是反锁状态
@@ -148,7 +148,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 if (!mPresenter.isAttach()) {
                     mPresenter.attachView(OldBleLockFragment.this);
                 }
-                LogUtils.e("setBleLockInfo    52   "+bleLockInfo.getServerLockInfo().getLockNickName());
+                LogUtils.d("setBleLockInfo    52   "+bleLockInfo.getServerLockInfo().getLockNickName());
                 mPresenter.setBleLockInfo(bleLockInfo);
                 mPresenter.getOpenRecordFromServer(1, bleLockInfo);
                 boolean auth = mPresenter.isAuth(bleLockInfo, true);
@@ -157,8 +157,8 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 } else {
 //                                changeOpenLockStatus(12);
                 }
-                LogUtils.e("切换到当前界面 52  设备 isdestroy  " + isDestroy + auth);
-                LogUtils.e(this + "   设置设备52  " + bleLockInfo.getServerLockInfo().toString());
+                LogUtils.d("切换到当前界面 52  设备 isdestroy  " + isDestroy + auth);
+                LogUtils.d(this + "   设置设备52  " + bleLockInfo.getServerLockInfo().toString());
                 onChangeInitView();
 
                 mPresenter.getOpenRecordFromServer(1, bleLockInfo);
@@ -167,7 +167,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     }
 
     private void initView() {
-        LogUtils.e("设备  HomeLockFragment  " + this);
+        LogUtils.d("设备  HomeLockFragment  " + this);
         homeFragment = (HomePageFragment) getParentFragment();
         //切换到当前页面
         listener = new HomePageFragment.ISelectChangeListener() {
@@ -179,14 +179,14 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                         isOpening = false;
                     }
                 } else {
-                    LogUtils.e("切换到当前界面  设备22  isdestroy  " + isDestroy + this + isCurrentFragment);
+                    LogUtils.d("切换到当前界面  设备22  isdestroy  " + isDestroy + this + isCurrentFragment);
                     //切换到当前页面
                     if (!isDestroy) {
                         if (isCurrentFragment) {
                             if (!mPresenter.isAttach()) {
                                 mPresenter.attachView(OldBleLockFragment.this);
                             }
-                            LogUtils.e("setBleLockInfo   34352   "+bleLockInfo.getServerLockInfo().getLockNickName());
+                            LogUtils.d("setBleLockInfo   34352   "+bleLockInfo.getServerLockInfo().getLockNickName());
                             mPresenter.setBleLockInfo(bleLockInfo);
                             mPresenter.getOpenRecordFromServer(1, bleLockInfo);
                             boolean auth = mPresenter.isAuth(bleLockInfo, true);
@@ -195,8 +195,8 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                             } else {
 //                                changeOpenLockStatus(12);
                             }
-                            LogUtils.e("切换到当前界面 12  设备 isdestroy  " + isDestroy + auth);
-                            LogUtils.e(this + "   设置设备2  " + bleLockInfo.getServerLockInfo().toString());
+                            LogUtils.d("切换到当前界面 12  设备 isdestroy  " + isDestroy + auth);
+                            LogUtils.d(this + "   设置设备2  " + bleLockInfo.getServerLockInfo().toString());
                             mPresenter.getAllPassword(bleLockInfo, true);
                             isCurrentFragment = true;
                             onChangeInitView();
@@ -220,10 +220,10 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 if (i == position) {
                     if (homeFragment.isSelectHome && !isDestroy) {
                         mPresenter.attachView(OldBleLockFragment.this);
-                        LogUtils.e("setBleLockInfo    136 5  "+bleLockInfo.getServerLockInfo().getLockNickName());
+                        LogUtils.d("setBleLockInfo    136 5  "+bleLockInfo.getServerLockInfo().getLockNickName());
                         mPresenter.setBleLockInfo(bleLockInfo);
                         mPresenter.getOpenRecordFromServer(1, bleLockInfo);
-                        LogUtils.e(this + "   设置设备1  " + bleLockInfo.getServerLockInfo().toString());
+                        LogUtils.d(this + "   设置设备1  " + bleLockInfo.getServerLockInfo().toString());
                         boolean auth = mPresenter.isAuth(bleLockInfo, true);
                         if (auth) {
                             changeOpenLockStatus(8);
@@ -247,12 +247,12 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
             }
         });
-        LogUtils.e("设备position " + position + "    " + homeFragment.getCurrentPosition() + "     " + homeFragment.isSelectHome);
+        LogUtils.d("设备position " + position + "    " + homeFragment.getCurrentPosition() + "     " + homeFragment.isSelectHome);
         if (position == 0 && position == homeFragment.getCurrentPosition() && homeFragment.isSelectHome && !isDestroy && homeFragment.isResumed()) {
             if (!mPresenter.isAttach()) {
                 mPresenter.attachView(this);
             }
-            LogUtils.e("setBleLockInfo    684   "+bleLockInfo.getServerLockInfo().getLockNickName());
+            LogUtils.d("setBleLockInfo    684   "+bleLockInfo.getServerLockInfo().getLockNickName());
             mPresenter.setBleLockInfo(bleLockInfo);
             mPresenter.getOpenRecordFromServer(1, bleLockInfo);
             boolean auth = mPresenter.isAuth(bleLockInfo, true);
@@ -261,7 +261,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
             } else {
 //                changeOpenLockStatus(12);
             }
-            LogUtils.e(this + "  设置设备3  " + bleLockInfo.getServerLockInfo().toString());
+            LogUtils.d(this + "  设置设备3  " + bleLockInfo.getServerLockInfo().toString());
             mPresenter.getAllPassword(bleLockInfo, true);
         } else {
             if (mPresenter.isAttach()) {
@@ -283,7 +283,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 if (!isConnectingDevice && !bleLockInfo.isAuth() && !isDestroy) {  //如果没有正在连接设备
                     //连接设备
                     mPresenter.attachView(OldBleLockFragment.this);
-                    LogUtils.e("setBleLockInfo    23   "+bleLockInfo.getServerLockInfo().getLockNickName());
+                    LogUtils.d("setBleLockInfo    23   "+bleLockInfo.getServerLockInfo().getLockNickName());
                     mPresenter.setBleLockInfo(bleLockInfo);
                     mPresenter.isAuth(bleLockInfo, true);
                     mPresenter.getAllPassword(bleLockInfo, true);
@@ -296,7 +296,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
             @Override
             public boolean onLongClick(View v) {
                 if (isOpening) {
-                    LogUtils.e("长按  但是当前正在开锁状态   ");
+                    LogUtils.d("长按  但是当前正在开锁状态   ");
                     return false;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
@@ -356,13 +356,13 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        LogUtils.e("Fragment    onAttach");
+        LogUtils.d("Fragment    onAttach");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        LogUtils.e("Fragment    onDetach");
+        LogUtils.d("Fragment    onDetach");
     }
 
     public void changeOpenLockStatus(int status) {
@@ -589,7 +589,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
-                    LogUtils.e("同步开锁记录");
+                    LogUtils.d("同步开锁记录");
                     mPresenter.syncRecord();
                     list.clear();
                     if (bluetoothRecordAdapter != null) {
@@ -604,7 +604,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     /////////////////////////////////////////        回调           //////////////////////////////////////
     @Override
     public void onDeviceStateChange(boolean isConnected) {
-        LogUtils.e("连接状态改变   " + isConnected);
+        LogUtils.d("连接状态改变   " + isConnected);
         if (isConnected) {
 
         } else {
@@ -624,7 +624,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void onStartSearchDevice() {
-        LogUtils.e("开始搜索   ");
+        LogUtils.d("开始搜索   ");
         changeOpenLockStatus(2);
     }
 
@@ -872,7 +872,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void openLockFailed(Throwable throwable) {
-        LogUtils.e("开锁失败   "  + throwable.getMessage());
+        LogUtils.d("开锁失败   "  + throwable.getMessage());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -979,7 +979,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 timeHead = record.getOpen_time().substring(0, 10);
                 hourSecond = record.getOpen_time().substring(11, 16);
             }catch (Exception e){
-                LogUtils.e("获取时间错误    " +  record.getOpen_time());
+                LogUtils.d("获取时间错误    " +  record.getOpen_time());
             }
 
             GetPasswordResult passwordResult = MyApplication.getInstance().getPasswordResults(bleLockInfo.getServerLockInfo().getLockName());
@@ -1057,7 +1057,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void onLoadServerRecord(List<OpenLockRecord> lockRecords, int page) {
-        LogUtils.e("收到服务器数据  " + lockRecords.size());
+        LogUtils.d("收到服务器数据  " + lockRecords.size());
         groupData(lockRecords);
         LogUtils.d("davi showDatas " + list.toString());
         bluetoothRecordAdapter.notifyDataSetChanged();
@@ -1089,14 +1089,14 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void onUploadServerRecordSuccess() {
-        LogUtils.e("记录上传成功");
+        LogUtils.d("记录上传成功");
 //        ToastUtil.getInstance().showShort(R.string.lock_record_upload_success);
     }
 
     @Override
     public void onUploadServerRecordFailed(Throwable throwable) {
 //        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
-        LogUtils.e("记录上传失败");
+        LogUtils.d("记录上传失败");
     }
 
     @Override
@@ -1177,8 +1177,8 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     private void onChangeInitView() {
         if (mPresenter.isAuth(bleLockInfo, true)) {
-            LogUtils.e("设备内容更新，  " + bleLockInfo.getBattery());
-            LogUtils.e("锁状态改变1   反锁模式  " + bleLockInfo.getBackLock() + "  布防模式   " + bleLockInfo.getArmMode()
+            LogUtils.d("设备内容更新，  " + bleLockInfo.getBattery());
+            LogUtils.d("锁状态改变1   反锁模式  " + bleLockInfo.getBackLock() + "  布防模式   " + bleLockInfo.getArmMode()
                     + "   安全模式  " + bleLockInfo.getSafeMode() + "   管理模式  " + bleLockInfo.getAdminMode()
                     + "   动/自动模式  " + bleLockInfo.getAutoMode());
             changeOpenLockStatus(8);  //鉴权成功之后没有特殊状态

@@ -308,7 +308,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                 telephoneRegister = true;
                 mPresenter.registerByPhone(countryCode + account, pwd, code);
             } else {
-                LogUtils.e("邮箱注册：" + DetectionEmailPhone.getInstance().isEmail(account));
+                LogUtils.d("邮箱注册：" + DetectionEmailPhone.getInstance().isEmail(account));
                 if (DetectionEmailPhone.getInstance().isEmail(account)) {
                     // sendEmailClick(phone);
                     showLoading("");
@@ -387,14 +387,14 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
     @Override
     public void sendRandomSuccess() { //发送验证码成功
-        LogUtils.e("发送验证码成功");
+        LogUtils.d("发送验证码成功");
 
     }
 
     @Override
     public void registerSuccess() { //注册成功
         hiddenLoading();
-        LogUtils.e("注册成功");
+        LogUtils.d("注册成功");
         ToastUtil.getInstance().showLong(R.string.register_success);
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         intent.putExtra(KeyConstants.AREA_CODE, countryNumber);

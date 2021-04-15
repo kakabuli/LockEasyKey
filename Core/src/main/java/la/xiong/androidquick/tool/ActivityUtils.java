@@ -59,7 +59,7 @@ public final class ActivityUtils {
             ActivityManager.RunningServiceInfo serviceInfo = serviceList.get(i);
             ComponentName serviceName = serviceInfo.service;
             if (serviceName.getClassName().contains(serName)) {
-                LogUtils.iTag("serviceInfor",serviceName.getClassName());
+                Log.d("serviceInfor",serviceName.getClassName());
                 return true;
             }
         }

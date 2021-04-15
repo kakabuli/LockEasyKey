@@ -91,7 +91,7 @@ public class WifiUtils {
      * @param pws
      */
     public void connectWifiPws(String ssid, String pws){
-        LogUtils.e("连接wifi   " +ssid);
+        LogUtils.d("连接wifi   " +ssid);
         if (android.os.Build.VERSION.SDK_INT >= /*android.os.Build.VERSION_CODES.Q*/50) {
             NetworkSpecifier specifier = new WifiNetworkSpecifier.Builder()
                     .setSsidPattern(new PatternMatcher(ssid, PatternMatcher.PATTERN_PREFIX))
@@ -131,7 +131,7 @@ public class WifiUtils {
      * 关闭当前wifi
      */
     public void disableWiFi( ){
-        LogUtils.e("连接wifi   " );
+        LogUtils.d("连接wifi   " );
         wifiManager.disableNetwork(wifiManager.getConnectionInfo().getNetworkId());
     }
 
@@ -140,7 +140,7 @@ public class WifiUtils {
      * @param ssid
      */
     public void connectWifiNoPws(String ssid){
-        LogUtils.e("连接wifi   " +ssid);
+        LogUtils.d("连接wifi   " +ssid);
         wifiManager.disableNetwork(wifiManager.getConnectionInfo().getNetworkId());
         int netId = wifiManager.addNetwork(getWifiConfig(ssid, "", false));
         wifiManager.enableNetwork(netId, true);

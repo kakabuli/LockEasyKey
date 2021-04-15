@@ -35,10 +35,10 @@ import com.philips.easykey.lock.utils.BatteryView;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
 
-import net.sdvn.cmapi.util.LogUtils;
 
 import java.util.concurrent.TimeoutException;
 
@@ -167,7 +167,7 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
         super.onResume();
         showData();
         if (mPresenter.getBleLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName() != null) {
-            LogUtils.e("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
+            LogUtils.d("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
             tvBluetoothName.setText(mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
         }
     }
@@ -287,7 +287,7 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
 //        ToastUtil.getInstance().showLong(R.string.delete_fialed);
         hiddenLoading();
@@ -295,7 +295,7 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         ToastUtil.getInstance().showLong(httpErrorCode);
         hiddenLoading();
@@ -393,7 +393,7 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
             case R.id.tv_open_clock:
                 //开锁
                 if (isOpening) {
-                    LogUtils.e("长按  但是当前正在开锁状态   ");
+                    LogUtils.d("长按  但是当前正在开锁状态   ");
                     ToastUtil.getInstance().showLong(R.string.is_openning);
                     return;
                 }
@@ -412,13 +412,13 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
                 vibrate(this, 150);
                 break;
             case R.id.rl_device_information:
-                LogUtils.e("点击设备详情   ");
+                LogUtils.d("点击设备详情   ");
                 Intent intent = new Intent(this, OldDeviceInfoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_device_share:
             case R.id.rl_bluetooth_17:
-                LogUtils.e("点击分享   ");
+                LogUtils.d("点击分享   ");
                 intent = new Intent(this, BluetoothSharedDeviceManagementActivity.class);
                 startActivity(intent);
                 break;

@@ -5,11 +5,6 @@ import java.io.Serializable;
 public class  HomeShowBean implements Serializable {
 
     /**
-     * 设备类型  猫眼
-     */
-    public static final int TYPE_CAT_EYE = 0;
-
-    /**
      * 设备类型  网关锁
      */
     public static final int TYPE_GATEWAY_LOCK = 1;

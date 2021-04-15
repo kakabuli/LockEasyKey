@@ -390,10 +390,6 @@ public class KeyConstants {
      * 传递当前位置
      */
     public static final String FRAGMENT_POSITION = "fragmentPosition";
-    /**
-     * 传递猫眼数据
-     */
-    public static final String CATE_INFO = "cateInfo";
 
     /**
      * 传递网关数据
@@ -436,8 +432,6 @@ public class KeyConstants {
     //获取猫眼信息
     public static final String GET_CAT_EYE_INFO = "getCatEyeInfo";
 
-    //上报类型为猫眼
-    public static final String DEV_TYPE_CAT_EYE = "kdscateye";
 
     /**
      * 上报类型为网关锁
@@ -446,12 +440,6 @@ public class KeyConstants {
 
     //蓝牙电量信息
     public static final String BLE_INTO = "bleInfo";
-
-    //响铃次数
-    public static final String CAT_EYE_RING_NUMBER = "catEyeRingNumber";
-
-    //分辨率
-    public static final String CAT_EYE_RESOLUTION = "catEyeResolution";
 
     //账号
     public static final String ACCOUNT = "account";
@@ -469,13 +457,6 @@ public class KeyConstants {
      * 锁型号
      */
     public static final String LOCK_MODEL = "lock_model";
-
-    //是否绑定了咪咪网
-    public static final String IS_BIND_MEME = "isbindMeme";
-
-
-    //获取猫眼信息
-    public static final String GET_CAT_EYE_INFO_BASE = "GET_CAT_EYE_INFO_BASE";
 
     //获取第一次进入锁密码
     public static final String FIRST_IN_GATEWAY_LOCK = "firstInGatewayLock2";

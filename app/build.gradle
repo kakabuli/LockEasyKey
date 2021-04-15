@@ -3,7 +3,6 @@ apply plugin: 'com.huawei.agconnect'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'bugly'   //添加bugly的符号表
 apply plugin: 'com.mob.sdk'
-apply plugin: 'com.jakewharton.butterknife'
 
 greendao {
     schemaVersion 1// 数据库版本号
@@ -208,12 +207,7 @@ dependencies {
     implementation 'com.king.zxing:zxing-lite:1.1.1'
     implementation 'com.google.android.material:material:1.3.0'
 
-    //linphone库
-    implementation project(path: ':linphoneLibrary')
-
-    //米米网库
-    implementation(name: 'cmapi_v2_0_0', ext: 'aar')
-    implementation 'com.github.razerdp:BasePopup:2.2.20'
+    implementation 'com.github.razerdp:BasePopup:2.1.9'
     implementation 'com.bm.photoview:library:1.4.1'
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
@@ -225,7 +219,6 @@ dependencies {
     implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
     implementation 'com.getui:sdk:2.14.1.0'
     implementation project(':imagepicker')
-    implementation project(':linphoneLibrary')
     implementation project(':library:WheelPicker')
     implementation project(':library:Common')
 

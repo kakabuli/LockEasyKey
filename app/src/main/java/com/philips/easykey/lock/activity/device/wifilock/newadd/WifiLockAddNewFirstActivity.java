@@ -117,7 +117,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
 //                    Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                LogUtils.e("--Kaadas--wifiModelType=="+wifiModelType);
+                LogUtils.d("--Kaadas--wifiModelType=="+wifiModelType);
 //                startActivity(new Intent(this,WifiLockAddNewSecondActivity.class));
                 Intent wifiIntent = new Intent(this, WifiLockAddNewSecondActivity.class);
                 wifiIntent.putExtra("wifiModelType", wifiModelType);

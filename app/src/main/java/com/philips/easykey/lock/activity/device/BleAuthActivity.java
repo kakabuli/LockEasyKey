@@ -41,11 +41,9 @@ import com.philips.easykey.lock.utils.BatteryView;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
-
-import net.sdvn.cmapi.util.LogUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -107,11 +105,11 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
         ivDelete.setOnClickListener(this);
         showLockType();
         initListener();
-        LogUtils.e("授权界面");
+        LogUtils.d("授权界面");
         lockRunnable = new Runnable() {
             @Override
             public void run() {
-                LogUtils.e(" 首页锁状态  反锁状态   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
+                LogUtils.d(" 首页锁状态  反锁状态   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
                 isOpening = false;
                 if (bleLockInfo.isAuth()) {
                     changLockStatus(0);
@@ -211,7 +209,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
         super.onResume();
         showData();
         if (mPresenter.getBleLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName() != null) {
-            LogUtils.e("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
+            LogUtils.d("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
             tvBluetoothName.setText(mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
         }
     }
@@ -334,14 +332,14 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
         hiddenLoading();
     }
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         ToastUtil.getInstance().showLong(httpErrorCode);
         hiddenLoading();
@@ -441,7 +439,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
             case R.id.tv_open_clock:
                 //开锁
                 if (isOpening) {
-                    LogUtils.e("长按  但是当前正在开锁状态   ");
+                    LogUtils.d("长按  但是当前正在开锁状态   ");
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
@@ -454,7 +452,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                         }
                         return;
                     }
-                    LogUtils.e("开锁   ");
+                    LogUtils.d("开锁   ");
                     mPresenter.openLock();
                 }
                 vibrate(this, 150);
@@ -472,11 +470,11 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                         "3".equals(bleLockInfo.getServerLockInfo().getBleVersion())) {
                     String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
                     if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
-                        com.philips.easykey.lock.utils.LogUtils.e("跳转   老蓝牙  设备信息");
+                        com.philips.easykey.lock.utils.LogUtils.d("跳转   老蓝牙  设备信息");
                         Intent intent = new Intent(this, OldDeviceInfoActivity.class);
                         startActivity(intent);
                     } else {
-                        com.philips.easykey.lock.utils.LogUtils.e("跳转   全功能  蓝牙   设备信息");
+                        com.philips.easykey.lock.utils.LogUtils.d("跳转   全功能  蓝牙   设备信息");
                         Intent intent = new Intent(this, BleDeviceInfoActivity.class);
                         startActivity(intent);
                     }
@@ -487,11 +485,11 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                     } else if (mPresenter.getBleVersion() == 3) {
                         String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
                         if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
-                            com.philips.easykey.lock.utils.LogUtils.e("跳转   老蓝牙  设备信息");
+                            com.philips.easykey.lock.utils.LogUtils.d("跳转   老蓝牙  设备信息");
                             Intent intent = new Intent(this, OldDeviceInfoActivity.class);
                             startActivity(intent);
                         } else {
-                            com.philips.easykey.lock.utils.LogUtils.e("跳转   全功能  蓝牙   设备信息");
+                            com.philips.easykey.lock.utils.LogUtils.d("跳转   全功能  蓝牙   设备信息");
                             Intent intent = new Intent(this, BleDeviceInfoActivity.class);
                             startActivity(intent);
                         }

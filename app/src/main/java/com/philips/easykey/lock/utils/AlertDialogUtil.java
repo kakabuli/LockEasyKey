@@ -327,11 +327,11 @@ public class AlertDialogUtil {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                LogUtils.e("--kaadas--","输入后字符串 [ " + s.toString() + " ] 起始光标 [ " + start + " ] 输入数量 [ " + count+" ]");
+//                LogUtils.d("--kaadas--","输入后字符串 [ " + s.toString() + " ] 起始光标 [ " + start + " ] 输入数量 [ " + count+" ]");
             }
             @Override
             public void afterTextChanged(Editable s) {
-//                LogUtils.e("--kaadas--","输入结束后的内容为 [" + s.toString()+" ] 即将显示在屏幕上");
+//                LogUtils.d("--kaadas--","输入结束后的内容为 [" + s.toString()+" ] 即将显示在屏幕上");
                 if (clickListener != null) {
                     clickListener.afterTextChanged(s.toString());
                 }

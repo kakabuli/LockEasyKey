@@ -167,7 +167,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
     @Override
     public void getOpenLockRecordSuccess(List<SelectOpenLockResultBean.DataBean> mOpenLockRecordList) {
         //获取开锁记录成功
-        LogUtils.e("获取到开锁记录多少条  " + mOpenLockRecordList.size());
+        LogUtils.d("获取到开锁记录多少条  " + mOpenLockRecordList.size());
         String uid=MyApplication.getInstance().getUid();
         if (mOpenLockRecordList.size()==0&&page==1){
             changeView(false);
@@ -227,7 +227,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
         }
-        LogUtils.e("获取开锁记录异常  网关锁");
+        LogUtils.d("获取开锁记录异常  网关锁");
         ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
         changeView(false);
     }
@@ -241,11 +241,11 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             SelectOpenLockResultBean.DataBean dataBean = mOpenLockRecordList.get(i);
             //获取开锁时间的毫秒数
             long openTime = Long.parseLong(dataBean.getOpen_time()); //开锁毫秒时间
-            LogUtils.e("网关的开锁毫秒时间"+openTime);
+            LogUtils.d("网关的开锁毫秒时间"+openTime);
             List<BluetoothItemRecordBean> itemList = new ArrayList<>();
 
             String open_time = DateUtils.getDateTimeFromMillisecond(openTime);//将毫秒时间转换成功年月日时分秒的格式
-            LogUtils.e("网关的开锁毫秒时间"+open_time);
+            LogUtils.d("网关的开锁毫秒时间"+open_time);
             //获取开锁时间的毫秒数
             String timeHead = open_time.substring(0, 10);
             String hourSecond = open_time.substring(11, 16);
@@ -312,7 +312,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             if (!timeHead.equals(lastDayTime)) { //添加头
                 lastDayTime = timeHead;
                 titleTime = DateUtils.getDayTimeFromMillisecond(openTime); //转换成功顶部的时间
-                LogUtils.e("开锁记录昵称"+dataBean.getNickName());
+                LogUtils.d("开锁记录昵称"+dataBean.getNickName());
                 itemList.add(new BluetoothItemRecordBean(name, openType, KeyConstants.BLUETOOTH_RECORD_COMMON,
                         hourSecond, false, false));
                 mOpenLockList.add(new BluetoothRecordBean(titleTime, itemList, false));

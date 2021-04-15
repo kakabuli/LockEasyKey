@@ -571,7 +571,7 @@ public class TIOADEoadClient {
 
         @Override
         public void mtuValueChanged(int mtu) {
-            LogUtils.e("mtu 改变   " + mtu);
+            LogUtils.d("mtu 改变   " + mtu);
             myMTU = mtu;
         }
     };

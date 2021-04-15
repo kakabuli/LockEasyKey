@@ -214,7 +214,7 @@ public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesH
 
     @Override
     public void onBindDeviceSuccess() {
-        LogUtils.e("shulan ----------onBindDeviceSuccess");
+        LogUtils.d("shulan ----------onBindDeviceSuccess");
         Intent intent = new Intent(ClothesHangerMachineAddFifthActivity.this,ClothesHangerMachineAddSuccessActivity.class);
         startActivity(intent);
         finish();

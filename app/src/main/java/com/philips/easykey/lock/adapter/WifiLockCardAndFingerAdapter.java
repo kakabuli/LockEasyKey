@@ -21,14 +21,14 @@ public class WifiLockCardAndFingerAdapter extends BaseQuickAdapter<WiFiLockCardA
 
     public WifiLockCardAndFingerAdapter(@Nullable List<WiFiLockCardAndFingerShowBean> data, int layoutId) {
         super(layoutId, data);
-        LogUtils.e("初始化了    "+data.size());
+        LogUtils.d("初始化了    "+data.size());
     }
 
     @Override
     protected void convert(BaseViewHolder helper, WiFiLockCardAndFingerShowBean bean) {
         List<WiFiLockCardAndFingerShowBean> data = getData();
         int itemCount = data.size();
-        LogUtils.e("数据个数 是"  + itemCount);
+        LogUtils.d("数据个数 是"  + itemCount);
         int pos = helper.getPosition();
         if (pos == itemCount - 1) {
             View view = helper.getView(R.id.my_view);

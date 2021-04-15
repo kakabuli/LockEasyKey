@@ -60,7 +60,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
     }
 
     private void readSoftwareRev() {
-        LogUtils.e("设备连接成功     ");
+        LogUtils.d("设备连接成功     ");
         toDisposable(readSoftwareRevDisposable);
         readSoftwareRevDisposable =
                 Observable.just(0)
@@ -86,7 +86,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(ReadInfoBean readInfoBean) throws Exception {
                                 readHardwareRev();
-                                LogUtils.e("   读取SoftwareRev成功 " + readInfoBean.data);  //进行下一步
+                                LogUtils.d("   读取SoftwareRev成功 " + readInfoBean.data);  //进行下一步
                                 bleLockInfo.setSoftware((String) readInfoBean.data);
                                 if (isSafe()) {
                                     mViewRef.get().SoftwareRevDataSuccess((String) readInfoBean.data);
@@ -97,7 +97,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 readHardwareRev();
-                                LogUtils.e("   读取SoftwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                                LogUtils.d("   读取SoftwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                                 if (isSafe()) {
                                     mViewRef.get().SoftwareRevDataError(throwable);
                                 }
@@ -134,7 +134,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(ReadInfoBean readInfoBean) throws Exception {
                                 readFirmwareRev();
-                                LogUtils.e("   读取HardwareRev成功 " + readInfoBean.data);  //进行下一步
+                                LogUtils.d("   读取HardwareRev成功 " + readInfoBean.data);  //进行下一步
                                 bleLockInfo.setHardware((String) readInfoBean.data);
                                 if (isSafe()) {
                                     mViewRef.get().HardwareRevDataSuccess((String) readInfoBean.data);
@@ -145,7 +145,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 readFirmwareRev();
-                                LogUtils.e("   读取HardwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                                LogUtils.d("   读取HardwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                                 if (isSafe()) {
                                     mViewRef.get().HardwareRevDataError(throwable);
                                 }
@@ -183,7 +183,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(ReadInfoBean readInfoBean) throws Exception {
                                 readSerialNumber();
-                                LogUtils.e(" davi 读取FirmwareRev成功 " + readInfoBean.data);  //进行下一步
+                                LogUtils.d(" davi 读取FirmwareRev成功 " + readInfoBean.data);  //进行下一步
                                 bleLockInfo.setFirmware((String) readInfoBean.data);
                                 if (isSafe()) {
                                     mViewRef.get().FirmwareRevDataSuccess((String) readInfoBean.data);
@@ -194,7 +194,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 readSerialNumber();
-                                LogUtils.e(" davi 读取FirmwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                                LogUtils.d(" davi 读取FirmwareRev失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                                 if (isSafe()) {
                                     mViewRef.get().FirmwareRevDataError(throwable);
                                 }
@@ -206,7 +206,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
     }
 
     private void readSerialNumber() {
-        LogUtils.e("读取       ");
+        LogUtils.d("读取       ");
         toDisposable(readSerialNumberDisposable);
         readSerialNumberDisposable =
                 Observable.just(0)
@@ -233,7 +233,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             public void accept(ReadInfoBean readInfoBean) throws Exception {
 
 
-                                LogUtils.e(" davi 读取SerialNumber成功 " + readInfoBean.data);  //进行下一步
+                                LogUtils.d(" davi 读取SerialNumber成功 " + readInfoBean.data);  //进行下一步
                                 bleLockInfo.setSerialNumber((String) readInfoBean.data);
                                 if (isSafe()) {
                                     mViewRef.get().SerialNumberDataSuccess((String) readInfoBean.data);
@@ -251,7 +251,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                LogUtils.e("   读取SerialNumber失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
+                                LogUtils.d("   读取SerialNumber失败  " + (throwable instanceof TimeOutException) + "   " + throwable.getMessage());
                                 boolean supportFace = BleLockUtils.isSupportFace(bleLockInfo.getServerLockInfo().getFunctionSet());
                                 if (supportFace) {
                                     checkModuleNumber();
@@ -319,16 +319,16 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getOriginalData()[0] == 0) {  //如果是确认帧
-                            LogUtils.e("返回确认帧   " + Rsa.byteToHexString(bleDataBean.getOriginalData()[0]));
+                            LogUtils.d("返回确认帧   " + Rsa.byteToHexString(bleDataBean.getOriginalData()[0]));
                             return;
                         }
                         if (command[3] != bleDataBean.getCmd()) {
                             return;
                         }
 
-                        LogUtils.e("查询字模块列表  原始数据是  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "   key是  " + Rsa.bytesToHexString(bleLockInfo.getAuthKey()));
+                        LogUtils.d("查询字模块列表  原始数据是  " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "   key是  " + Rsa.bytesToHexString(bleLockInfo.getAuthKey()));
                         byte[] deData = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("查询子模块数据是   " + Rsa.bytesToHexString(deData));
+                        LogUtils.d("查询子模块数据是   " + Rsa.bytesToHexString(deData));
                         int total = deData[0] & 0xff;
                         List<Integer> numbers = new ArrayList<>();
                         for (int i = 0; i < total; i++) {
@@ -340,7 +340,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             }
                             return;
                         }
-                        LogUtils.e("获取模块列表是   " + Arrays.toString(numbers.toArray()));
+                        LogUtils.d("获取模块列表是   " + Arrays.toString(numbers.toArray()));
                         checkModuleVersion(numbers, 0);
                     }
                 }, new Consumer<Throwable>() {
@@ -373,14 +373,14 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getOriginalData()[0] == 0) {  //如果是确认帧
-                            LogUtils.e("返回确认帧   " + Rsa.byteToHexString(bleDataBean.getOriginalData()[0]));
+                            LogUtils.d("返回确认帧   " + Rsa.byteToHexString(bleDataBean.getOriginalData()[0]));
                             return;
                         }
                         if (command[3] != bleDataBean.getCmd()) {
                             return;
                         }
                         byte[] deData = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("解密之后的数据是   " + Rsa.bytesToHexString(deData));
+                        LogUtils.d("解密之后的数据是   " + Rsa.bytesToHexString(deData));
                         int number = deData[0] & 0xff;
                         int otaType = deData[1] & 0xff;
                         byte[] versionBytes = new byte[13];
@@ -397,7 +397,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                             }
                         }
                         version = sb.toString();
-                        LogUtils.e("获取模块版本信息是  number " + number + "  otaType " + otaType + "  version  " + version);
+                        LogUtils.d("获取模块版本信息是  number " + number + "  otaType " + otaType + "  version  " + version);
                         if (position + 1 == numbers.size()) {
                             if (isSafe()) {
                                 mViewRef.get().readDeviceInfoEnd();
@@ -444,7 +444,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.isConfirm()) {
-                            LogUtils.e("开启OTA  回调   确认帧");
+                            LogUtils.d("开启OTA  回调   确认帧");
                             if (bleDataBean.getPayload()[0] != 0) {
                                 //OTA返回出错
                                 if (isSafe()) {
@@ -457,7 +457,7 @@ public class BleDeviceInfoPresenter extends BleCheckOTAPresenter<IDeviceInfoView
                         if (command[3] != bleDataBean.getCmd()) {
                             return;
                         }
-                        LogUtils.e("开启OTA  回调");
+                        LogUtils.d("开启OTA  回调");
                         byte[] payload = bleDataBean.getPayload();
                         byte[] dePayload = Rsa.decrypt(payload, bleLockInfo.getAuthKey());
                         byte[] bWifi = new byte[7];

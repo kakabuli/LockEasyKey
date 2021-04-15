@@ -45,7 +45,7 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
                     serverSocket.setSoTimeout(15 * 1000);
 
                     socket = serverSocket.accept();
-                    LogUtils.e("连接成功   ");
+                    LogUtils.d("连接成功   ");
                     tempData = null;
                     reTryTimes = 0;
                     readWifiData(socket);
@@ -61,10 +61,10 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
                         return;
                     }
 
-                    LogUtils.e("收到的数据是   hex  " + Rsa.bytesToHexString(tempData));
-                    LogUtils.e("收到的数据是   string  " + new String(tempData));
+                    LogUtils.d("收到的数据是   hex  " + Rsa.bytesToHexString(tempData));
+                    LogUtils.d("收到的数据是   string  " + new String(tempData));
                     if (tempData.length < MaxLength) { //
-                        LogUtils.e("字节不够   " + tempData.length);
+                        LogUtils.d("字节不够   " + tempData.length);
                         if (isSafe()) {
                             handler.post(new Runnable() {
                                 @Override
@@ -94,17 +94,17 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
                     outputStream.write("Success\r".getBytes());
                     outputStream.flush();
                     String randomCode = Rsa.bytesToHexString(wifiResult.password);
-                    LogUtils.e("设备返回的随机码是  16进制 " + Rsa.bytesToHexString(wifiResult.password));
-                    LogUtils.e("设备返回的随机码是   长度是 " + randomCode.length() + "  字符串  " + randomCode);
+                    LogUtils.d("设备返回的随机码是  16进制 " + Rsa.bytesToHexString(wifiResult.password));
+                    LogUtils.d("设备返回的随机码是   长度是 " + randomCode.length() + "  字符串  " + randomCode);
                     WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
                     if (wifiLockInfo != null && wifiLockInfo.getIsAdmin() == 1) {
                         update(wifiSn, randomCode, wifiName, wifiResult.func);
                     } else {
                         bindDevice(wifiSn, wifiSn, MyApplication.getInstance().getUid(), randomCode, wifiName, wifiResult.func ,2 );
                     }
-                    LogUtils.e("读取数据成功");
+                    LogUtils.d("读取数据成功");
                 } catch (IOException e) {
-                    LogUtils.e("读取数据失败   " + e.getMessage());
+                    LogUtils.d("读取数据失败   " + e.getMessage());
                     e.printStackTrace();
                     handler.post(new Runnable() {
                         @Override
@@ -250,7 +250,7 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
         }
         messageDigest.update(t);
         byte[] adminKey = messageDigest.digest();
-        LogUtils.e("管理密码管理  Sha256之后是 " + Rsa.bytesToHexString(adminKey));
+        LogUtils.d("管理密码管理  Sha256之后是 " + Rsa.bytesToHexString(adminKey));
 
         byte[] content = new byte[32];
         byte[] sn = new byte[13];
@@ -259,7 +259,7 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
         System.arraycopy(data, 32, sn, 0, sn.length);
 
         byte[] decrypt = Rsa.decrypt(content, adminKey);
-        LogUtils.e("解密之后的数据是  " + Rsa.bytesToHexString(adminKey));
+        LogUtils.d("解密之后的数据是  " + Rsa.bytesToHexString(adminKey));
 
         byte[] pwd = new byte[28];
         byte[] crc = new byte[4];
@@ -267,13 +267,13 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
         System.arraycopy(decrypt, 0, pwd, 0, pwd.length);
         System.arraycopy(decrypt, 28, crc, 0, crc.length);
 
-        LogUtils.e("随机数明文是  " + Rsa.bytesToHexString(pwd));
-        LogUtils.e("RCR明文是  " + Rsa.bytesToHexString(crc));
+        LogUtils.d("随机数明文是  " + Rsa.bytesToHexString(pwd));
+        LogUtils.d("RCR明文是  " + Rsa.bytesToHexString(crc));
         CRC32 crc32 = new CRC32();
         crc32.update(pwd);
         long localCrc = crc32.getValue();
         byte[] bytes = Rsa.int2BytesArray((int) localCrc);
-        LogUtils.e("校验和 本地CRC  " + Rsa.bytesToHexString(bytes) + "   锁端CRC  " + Rsa.bytesToHexString(crc));
+        LogUtils.d("校验和 本地CRC  " + Rsa.bytesToHexString(bytes) + "   锁端CRC  " + Rsa.bytesToHexString(crc));
         if (bytes[0] != crc[0] || bytes[1] != crc[1] || bytes[2] != crc[2] || bytes[3] != crc[3]) { //校验失败
             if (isSafe()) {
                 handler.post(new Runnable() {
@@ -301,12 +301,12 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
     private int reTryTimes = 0;
 
     private void readWifiData(Socket socket) throws IOException {
-        LogUtils.e("开始读取数据  第   " + reTryTimes + "  次读取数据 ");
+        LogUtils.d("开始读取数据  第   " + reTryTimes + "  次读取数据 ");
         socket.setSoTimeout(10 * 1000);
-        LogUtils.e("开始读取数据  第   " + reTryTimes + "  次  " + System.currentTimeMillis());
+        LogUtils.d("开始读取数据  第   " + reTryTimes + "  次  " + System.currentTimeMillis());
         inputStream = socket.getInputStream();
         //连接成功
-        LogUtils.e("结束读取数据1   " + System.currentTimeMillis());
+        LogUtils.d("结束读取数据1   " + System.currentTimeMillis());
         byte[] data = new byte[64];
         int size = 0;
         try {
@@ -315,8 +315,8 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
             e.printStackTrace();
             sendData("TimeOut\r");
         }
-        LogUtils.e("结束读取数据2   次数" + size + "   " + System.currentTimeMillis());
-        LogUtils.e("读取到的数据是  " + Rsa.bytesToHexString(data));
+        LogUtils.d("结束读取数据2   次数" + size + "   " + System.currentTimeMillis());
+        LogUtils.d("读取到的数据是  " + Rsa.bytesToHexString(data));
         if (size < 46) {
             sendData("Error\r");
             readWifiData(socket);
@@ -328,7 +328,7 @@ public class BleWifiSwitchSetUpPresenter<T> extends BasePresenter<IWifiSetUpView
     }
 
     public void sendData(String content) throws IOException {
-        LogUtils.e("发送数据    " + content);
+        LogUtils.d("发送数据    " + content);
         if (socket != null) {
             outputStream = socket.getOutputStream();
             outputStream.write(content.getBytes());

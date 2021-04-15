@@ -212,7 +212,7 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
                 }
                 String deviceBssid = firstResult.getBssid();
                 String hostAddress = firstResult.getInetAddress().getHostAddress();
-                LogUtils.e("配置成功   deviceBssid   " + deviceBssid + "   hostAddress   " + hostAddress);
+                LogUtils.d("配置成功   deviceBssid   " + deviceBssid + "   hostAddress   " + hostAddress);
                 setUpResult.onSetUpSuccess(hostAddress);
             }
         }

@@ -293,7 +293,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                                 Glide.with(this).load(productInfo.getAdminUrl()).apply(options).into(ivBigHeadPic);
                             }
                         } catch (Exception e) {
-                            LogUtils.e("--kaadas--:" + e.getMessage());
+                            LogUtils.d("--kaadas--:" + e.getMessage());
                         }
                     }
                 }
@@ -577,7 +577,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                     }
                     if(tvTips != null)
                         tvTips.setVisibility(View.GONE);
-                    LogUtils.e("shulan"+this + " paramInt=" + paramInt);
+                    LogUtils.d("shulan"+this + " paramInt=" + paramInt);
                     String errorStringWithCode;
                     if(paramInt >0){
                         errorStringWithCode = XMP2PConnectJsonError.checkP2PJSONErrorStringWithCode(WifiVideoLockCallingActivity.this,paramInt);

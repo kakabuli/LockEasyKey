@@ -110,13 +110,13 @@ public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockP
                 if ("year".equals(planType)) {
                     long startTime = gatewayPasswordPlanBean.getZigBeeLocalStartTime();
                     long endTime = gatewayPasswordPlanBean.getZigBeeLocalEndTime();
-                    LogUtils.e("  startTime  "+startTime+"  endTime  "+endTime);
+                    LogUtils.d("  startTime  "+startTime+"  endTime  "+endTime);
                     long startSeconds = startTime + BleCommandFactory.defineTime;
                     String start = DateUtils.getDateTimeFromMillisecond(startSeconds * 1000);//要上传的开锁时间
                     long endSeconds = endTime + BleCommandFactory.defineTime;
                     String end = DateUtils.getDateTimeFromMillisecond(endSeconds * 1000);//要上传的开锁时间
                     notice =  getString(R.string.password_valid_shi_xiao) + "  " + start + "~" + end;
-                    LogUtils.e("显示的内容是   "  +notice );
+                    LogUtils.d("显示的内容是   "  +notice );
                     if (endTime - startTime == 24 * 60 * 60) {
                         notice =  getString(R.string.password_one_day_valid);
                     }
@@ -136,7 +136,7 @@ public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockP
                     notice = String.format( getString(R.string.week_hint), weeks,
                             gatewayPasswordPlanBean.getStartHour() + ":" + gatewayPasswordPlanBean.getStartMinute(),
                             gatewayPasswordPlanBean.getEndHour() + ":" + gatewayPasswordPlanBean.getEndMinute());
-                    LogUtils.e("重复的天数是   " + Arrays.toString(days));
+                    LogUtils.d("重复的天数是   " + Arrays.toString(days));
                 } else {
                     notice =  getString(R.string.permanent_validity);
                 }

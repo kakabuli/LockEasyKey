@@ -51,7 +51,7 @@ public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
                ToastUtil.getInstance().showShort(msg);
            }
 
-            LogUtils.e("网关绑定失败"+msg);
+            LogUtils.d("网关绑定失败"+msg);
         }
     }
 

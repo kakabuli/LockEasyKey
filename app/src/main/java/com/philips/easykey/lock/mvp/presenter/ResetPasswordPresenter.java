@@ -95,7 +95,7 @@ public class ResetPasswordPresenter<T> extends BasePresenter<IResetPasswordView>
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("发送验证码成功  " + result.toString());
+                        LogUtils.d("发送验证码成功  " + result.toString());
                         //todo 需要缓存返回来的token,用户id，和手机号码，服务器还未处理
                         resetPasswordSuccess();
                     }

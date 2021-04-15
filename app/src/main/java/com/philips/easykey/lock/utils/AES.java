@@ -2,17 +2,8 @@ package com.philips.easykey.lock.utils;
 
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.res.Resources;
-
 import android.net.Uri;
-
-
 import com.philips.easykey.lock.BuildConfig;
-import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.R;
-
-import org.apache.commons.net.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -30,13 +21,13 @@ public class AES {
     public static String Encrypt(String sSrc, String sKey) throws Exception {
         if (sKey == null) {
             if(BuildConfig.DEBUG)
-                LogUtils.e("shulan Key为空null");
+                LogUtils.d("shulan Key为空null");
             return null;
         }
         // 判断Key是否为16位
         if (sKey.length() != 16) {
             if(BuildConfig.DEBUG)
-                LogUtils.e("shulan Key长度不是16位");
+                LogUtils.d("shulan Key长度不是16位");
             return null;
         }
         byte[] raw = sKey.getBytes("utf-8");
@@ -45,7 +36,7 @@ public class AES {
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
         if(BuildConfig.DEBUG)
-            LogUtils.e("shulan encrypted---->" + encrypted.toString());
+            LogUtils.d("shulan encrypted---->" + encrypted.toString());
 
         return Base64Utils.getEncoder().encodeToString(encrypted);
 //        return Rsa.parseByte2HexStr(encrypted);
@@ -56,12 +47,12 @@ public class AES {
         try {
             // 判断Key是否正确
             if (sKey == null) {
-                LogUtils.e("shulan Key为空null");
+                LogUtils.d("shulan Key为空null");
                 return null;
             }
             // 判断Key是否为16位
             if (sKey.length() != 16) {
-                LogUtils.e("shulan Key长度不是16位");
+                LogUtils.d("shulan Key长度不是16位");
                 return null;
             }
             byte[] raw = sKey.getBytes("utf-8");
@@ -72,7 +63,7 @@ public class AES {
 //            byte[] encrypted1 = new Base64().decode(sSrc);//先用base64解密
 //            byte[] encrypted1 = Rsa.parseHexStr2Byte(sSrc);
             if(BuildConfig.DEBUG)
-            LogUtils.e("shulan Decrypt---->" + encrypted1.toString());
+            LogUtils.d("shulan Decrypt---->" + encrypted1.toString());
             try {
                 byte[] original = cipher.doFinal(encrypted1);
                 String originalString = new String(original, "utf-8");
@@ -94,7 +85,7 @@ public class AES {
                 .append(key.substring(4, 8)).append(token.substring(token.length() - 2))
                 .append(timeStamp.substring(timeStamp.length() - 2));
         if(BuildConfig.DEBUG)
-        LogUtils.e("shulan keyForToken--->" + stringBuilder);
+        LogUtils.d("shulan keyForToken--->" + stringBuilder);
         return stringBuilder.toString();
     }
 
@@ -103,7 +94,7 @@ public class AES {
         stringBuilder.append(key.substring(0, 5)).append(timeStamp.substring(timeStamp.length() - 6, timeStamp.length() - 3))
                 .append(key.substring(5, 10)).append(timeStamp.substring(timeStamp.length() - 3));
         if(BuildConfig.DEBUG)
-        LogUtils.e("shulan keyNoToken--->" + stringBuilder);
+        LogUtils.d("shulan keyNoToken--->" + stringBuilder);
         return stringBuilder.toString();
     }
 
@@ -124,8 +115,8 @@ public class AES {
         }
         outStream.close();
         fs.close();
-        LogUtils.e("shulan buffer--------->" + buffer);
-        LogUtils.e("shulan Base64--------->" + Base64Utils.getEncoder().encodeToString(buffer));
+        LogUtils.d("shulan buffer--------->" + buffer);
+        LogUtils.d("shulan Base64--------->" + Base64Utils.getEncoder().encodeToString(buffer));
         return Base64Utils.getEncoder().encodeToString(buffer);
     }
 
@@ -148,7 +139,7 @@ public class AES {
                 resources.getResourcePackageName(id) + "/" +
                 resources.getResourceTypeName(id) + "/" +
                 resources.getResourceEntryName(id);
-        LogUtils.e("shulan uriPath--------->"  + uriPath);
+        LogUtils.d("shulan uriPath--------->"  + uriPath);
         return uriPath;
     }*/
 

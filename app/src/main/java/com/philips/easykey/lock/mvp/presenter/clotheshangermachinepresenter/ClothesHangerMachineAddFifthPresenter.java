@@ -73,7 +73,7 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
                     public void accept(BleStateBean bleStateBean) throws Exception {
                         if (isSafe()) {
                             if(!isConnected){
-                                LogUtils.e("shulan isConnected------->" + isConnected);
+                                LogUtils.d("shulan isConnected------->" + isConnected);
                                 mViewRef.get().onDeviceStateChange(bleStateBean.isConnected());
                             }
                         }
@@ -121,7 +121,7 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
     }
 
     public void listenerCharacterNotify() {
-        LogUtils.e("shulan --kaadas--listenerCharacterNotify");
+        LogUtils.d("shulan --kaadas--listenerCharacterNotify");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -144,14 +144,14 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
                     public void accept(BleDataBean bleDataBean) throws Exception {
 
                         byte[] originalData = bleDataBean.getOriginalData();
-                        LogUtils.e("shulan--kaadas--收到晾衣架的配网数据" + Rsa.bytesToHexString(originalData));
+                        LogUtils.d("shulan--kaadas--收到晾衣架的配网数据" + Rsa.bytesToHexString(originalData));
 
                         if ((originalData[3] & 0xff) == 0x90) {
-                            LogUtils.e("shulan--kaadas--晾衣架收到SSID");
+                            LogUtils.d("shulan--kaadas--晾衣架收到SSID");
                             indexSSID ++;
                             sendSSID(indexSSID);
                             if (indexSSID == 3){
-                                LogUtils.e("shulan--kaadas--发送SSID完成");
+                                LogUtils.d("shulan--kaadas--发送SSID完成");
                                 indexSSID = -1;
                                 indexPWD = 0;
                                 if(isSafe()){
@@ -161,12 +161,12 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
                             }
                         }
                         if ((originalData[3] & 0xff) == 0x91) {
-                            LogUtils.e("shulan--kaadas--晾衣架收到PSW");
+                            LogUtils.d("shulan--kaadas--晾衣架收到PSW");
                             indexPWD ++;
                             sendPWD(indexPWD);
                             if (indexPWD == 5){
                                 indexPWD = -1;
-                                LogUtils.e("shulan--kaadas--发送PSW完成");
+                                LogUtils.d("shulan--kaadas--发送PSW完成");
                                 if(isSafe()){
                                     mViewRef.get().onSendSuccess(2);
 
@@ -174,8 +174,8 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
                             }
                         }
                         if ((originalData[3] & 0xff) == 0x93) {
-                            LogUtils.e("shulan--kaadas--收到配网结果");
-                            LogUtils.e("shulan--kaadas--originalData[4]-->" + originalData[4]);
+                            LogUtils.d("shulan--kaadas--收到配网结果");
+                            LogUtils.d("shulan--kaadas--originalData[4]-->" + originalData[4]);
                             if ((originalData[4] & 0xff) == 0x00){
                                 isConnected = true;
                                 //配网成功
@@ -191,8 +191,8 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
                         }
 
                         if((originalData[3] & 0xff) == 0x97){
-                            LogUtils.e("shulan--kaadas--收到Mqtt连接指令");
-                            LogUtils.e("shulan--kaadas--originalData[4]-->" + originalData[4]);
+                            LogUtils.d("shulan--kaadas--收到Mqtt连接指令");
+                            LogUtils.d("shulan--kaadas--originalData[4]-->" + originalData[4]);
                             if ((originalData[4] & 0xff) == 0x00){
                                 isConnected = true;
                                 //配网成功
@@ -213,7 +213,7 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
 
     public void sendSSIDAndPWD(byte[] bSsid, byte[] bPwd) {
 
-        LogUtils.e("shulan--kaadas--sendSSIDAndPWD");
+        LogUtils.d("shulan--kaadas--sendSSIDAndPWD");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -287,11 +287,11 @@ public class ClothesHangerMachineAddFifthPresenter<T> extends BasePresenter<IClo
     }
 
     public void bindDevice(String wifiSN) {
-        LogUtils.e("shulan ----------bindDevice");
+        LogUtils.d("shulan ----------bindDevice");
         XiaokaiNewServiceImp.clothesHangerMachineBind(wifiSN).subscribe(new BaseObserver<ClothesHangerMachineBindResult>() {
             @Override
             public void onSuccess(ClothesHangerMachineBindResult clothesHangerMachineBindResult) {
-                LogUtils.e("shulan clothesHangerMachineBind---");
+                LogUtils.d("shulan clothesHangerMachineBind---");
                 if(clothesHangerMachineBindResult.getCode().equals("200") || clothesHangerMachineBindResult.getCode().equals("202")){
                     if(isSafe()){
                         mViewRef.get().onBindDeviceSuccess();

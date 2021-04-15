@@ -267,13 +267,13 @@ public class OldDeviceInfoActivity extends BaseBleCheckInfoActivity<IOldDeviceIn
     @Override
     public void onUpdateSoftFailed(Throwable throwable) {
         hiddenLoading();
-        LogUtils.e(getString(R.string.update_ble_version_failed));
+        LogUtils.d(getString(R.string.update_ble_version_failed));
     }
 
     @Override
     public void onUpdateSoftFailedServer(BaseResult baseResult) {
         hiddenLoading();
-        LogUtils.e(getString(R.string.update_ble_version_failed));
+        LogUtils.d(getString(R.string.update_ble_version_failed));
     }
 
     @Override

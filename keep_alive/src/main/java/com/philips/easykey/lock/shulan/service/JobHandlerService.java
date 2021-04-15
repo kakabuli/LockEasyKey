@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi;
 
 import com.philips.easykey.lock.shulan.config.KeepAliveConfig;
 import com.philips.easykey.lock.shulan.utils.KeepAliveUtils;
-import com.philips.easykey.lock.shulan.utils.LogUtils;
 
 /**
  * 定时器
@@ -49,7 +48,7 @@ public class JobHandlerService extends JobService {
             mJobScheduler.schedule(builder.build());
 
         } catch (Exception e) {
-            LogUtils.e("startJob->", e.getMessage());
+            Log.d("startJob->", e.getMessage());
         }
     }
 
@@ -62,7 +61,7 @@ public class JobHandlerService extends JobService {
 
     private void startService(Context context) {
         try {
-            LogUtils.e(TAG, "---》启动双进程保活服务");
+            Log.d(TAG, "---》启动双进程保活服务");
             //启动本地服务
             Intent localIntent = new Intent(context, SLLocalService.class);
             //启动守护进程
@@ -75,7 +74,7 @@ public class JobHandlerService extends JobService {
 //                startService(guardIntent);
             }
         } catch (Exception e) {
-            LogUtils.e(TAG, e.getMessage());
+            Log.d(TAG, e.getMessage());
         }
     }
 
@@ -83,25 +82,25 @@ public class JobHandlerService extends JobService {
     public boolean onStartJob(JobParameters jobParameters) {
         try {
             ++EXECUTE_COUNT;
-            LogUtils.e("JOB-->", " Job 执行 " + EXECUTE_COUNT);
+            Log.d("JOB-->", " Job 执行 " + EXECUTE_COUNT);
             //7.0以上轮询
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 startJob(this);
             }
             if (!KeepAliveUtils.isServiceRunning(JobHandlerService.this, getPackageName() + ":sllocal")
                     || !KeepAliveUtils.isRunningTaskExist(JobHandlerService.this, getPackageName() + ":slremote")) {
-                LogUtils.e("JOB-->", " 重新开启了 服务 ");
+                Log.d("JOB-->", " 重新开启了 服务 ");
                 startService(this);
             }
         } catch (Exception e) {
-            LogUtils.e(TAG, e.getMessage());
+            Log.d(TAG, e.getMessage());
         }
         return false;
     }
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        LogUtils.e("JOB-->", " Job 停止");
+        Log.d("JOB-->", " Job 停止");
         if (!KeepAliveUtils.isServiceRunning(JobHandlerService.this, getPackageName() + ":sllocal")
                 || !KeepAliveUtils.isRunningTaskExist(JobHandlerService.this, getPackageName() + ":slremote")) {
             startService(this);

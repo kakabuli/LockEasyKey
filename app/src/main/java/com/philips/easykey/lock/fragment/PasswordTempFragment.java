@@ -238,7 +238,7 @@ public class PasswordTempFragment extends BaseBleFragment<IAddTempView, AddTempP
     @Override
     public void onUpLoadSuccess(String password, String number, String nickName) {
         hiddenLoading();
-        LogUtils.e("添加密码成功   " + password.toString());
+        LogUtils.d("添加密码成功   " + password.toString());
         Intent intent = new Intent();
         intent.setClass(MyApplication.getInstance(), BluetoothPasswordShareActivity.class);
         intent.putExtra(KeyConstants.TO_DETAIL_NUMBER, number);

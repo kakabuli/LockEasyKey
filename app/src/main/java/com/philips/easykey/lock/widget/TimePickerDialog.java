@@ -10,16 +10,12 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.FAQBean;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.util.DateUtil;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

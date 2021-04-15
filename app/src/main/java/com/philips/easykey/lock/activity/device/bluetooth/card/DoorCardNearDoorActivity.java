@@ -18,8 +18,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.utils.ToastUtil;
 
-import net.sdvn.cmapi.util.LogUtils;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -136,7 +134,7 @@ public class DoorCardNearDoorActivity extends BaseActivity<IBleView, BlePresente
     @Override
     public void authResult(boolean isSuccess) {
         if (isSuccess) {
-            LogUtils.e("鉴权成功");
+            Log.d("shulan","鉴权成功");
             bluetoothConnectStatus=bluetoothConnectSuccess;
             changeBluetoothStatus();
 

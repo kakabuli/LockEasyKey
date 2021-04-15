@@ -28,9 +28,9 @@ public class HttpUtils<T> {
         String contentType = "application/json; charset=utf-8";
         if(Integer.parseInt(BuildConfig.HTTP_VERSION) > 0){
             if(BuildConfig.DEBUG)
-            LogUtils.e("shulan getBodyToken http body 加密前--->" + obj);
+            LogUtils.d("shulan getBodyToken http body 加密前--->" + obj);
             if(BuildConfig.DEBUG)
-            LogUtils.e("shulan getBodyToken timestamp--->" + timestamp);
+            LogUtils.d("shulan getBodyToken timestamp--->" + timestamp);
             try {
                 if (!TextUtils.isEmpty(MyApplication.getInstance().getToken())) {
                     obj = AES.Encrypt(obj,AES.keyForToken(MyApplication.getInstance().getToken(),AES.key,timestamp));
@@ -40,9 +40,9 @@ public class HttpUtils<T> {
                 if(!TextUtils.isEmpty(obj))
                     contentType = "text/plain; charset=utf-8";
                 if(BuildConfig.DEBUG)
-                LogUtils.e("shulan getBodyToken http body 加密后--->" + obj);
+                LogUtils.d("shulan getBodyToken http body 加密后--->" + obj);
                 if(BuildConfig.DEBUG)
-                LogUtils.e("shulan getBodyToken http body 解密后后--->" + AES.Decrypt(obj,AES.keyForToken(MyApplication.getInstance().getToken(),AES.key,timestamp)));
+                LogUtils.d("shulan getBodyToken http body 解密后后--->" + AES.Decrypt(obj,AES.keyForToken(MyApplication.getInstance().getToken(),AES.key,timestamp)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -56,17 +56,17 @@ public class HttpUtils<T> {
         String contentType = "application/json; charset=utf-8";
         if(Integer.parseInt(BuildConfig.HTTP_VERSION) > 0){
             if(BuildConfig.DEBUG)
-            LogUtils.e("shulan getBodyNoToken http body 加密前--->" + obj);
+            LogUtils.d("shulan getBodyNoToken http body 加密前--->" + obj);
             if(BuildConfig.DEBUG)
-            LogUtils.e("shulan getBodyNoToken timestamp--->" + timestamp);
+            LogUtils.d("shulan getBodyNoToken timestamp--->" + timestamp);
             try {
                 obj = AES.Encrypt(obj,AES.keyNoToken(AES.key,timestamp));
                 if(!TextUtils.isEmpty(obj))
                     contentType = "text/plain; charset=utf-8";
                 if(BuildConfig.DEBUG)
-                LogUtils.e("shulan getBodyNoToken http body 加密后--->" + obj);
+                LogUtils.d("shulan getBodyNoToken http body 加密后--->" + obj);
                 if(BuildConfig.DEBUG)
-                LogUtils.e("shulan getBodyNoToken http body 解密后后--->" + AES.Decrypt(obj,AES.keyNoToken(AES.key,timestamp)));
+                LogUtils.d("shulan getBodyNoToken http body 解密后后--->" + AES.Decrypt(obj,AES.keyNoToken(AES.key,timestamp)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -290,7 +290,7 @@ public class HttpUtils<T> {
             /** 网络正常，http 请求成功，服务器返回逻辑错误  接口返回的别的状态码处理*/
             OtherException otherException = (OtherException) e;
             if (otherException.getResponse().getCode() == 444) { //Token过期
-                LogUtils.e("token过期   " + Thread.currentThread().getName());
+                LogUtils.d("token过期   " + Thread.currentThread().getName());
                 if (MyApplication.getInstance().getMqttService()!=null){
                     MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                 }
@@ -316,7 +316,7 @@ public class HttpUtils<T> {
             /** 其他未知错误 */
             errorMsg = !TextUtils.isEmpty(e.getMessage()) ? e.getMessage() : "unknown error";
         }
-        LogUtils.e("  网络请求   " + errorMsg);
+        LogUtils.d("  网络请求   " + errorMsg);
         return errorMsg;
     }
 }

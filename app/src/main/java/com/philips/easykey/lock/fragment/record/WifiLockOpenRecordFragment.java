@@ -138,7 +138,7 @@ public class WifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpenRecord
 
     @Override
     public void onLoadServerRecord(List<WifiLockOperationRecord> lockRecords, int page) {
-        LogUtils.e("收到服务器数据  " + lockRecords.size());
+        LogUtils.d("收到服务器数据  " + lockRecords.size());
         tvNoMore.setVisibility(View.GONE);
         if (page == 1) {
             records.clear();

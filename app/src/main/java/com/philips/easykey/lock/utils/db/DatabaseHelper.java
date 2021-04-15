@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        LogUtils.e("數據建立");
+        LogUtils.d("數據建立");
         db.execSQL(DBTableConfig.MediaFile.CREATE_TABLE_MEDIA);
         db.execSQL(DBTableConfig.CatEyeInfo.CREATE_TABLE_CATEYE);
         db.execSQL(DBTableConfig.OpenLockRecord.CREATE_TABLE_ZIGBEE);
@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteSqlDB() {
-        LogUtils.e("數據刪除");
+        LogUtils.d("數據刪除");
         //TABLE_NAME 是要删除的数据库的名字
         getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + DBTableConfig.DATABASE_NAME);
     }

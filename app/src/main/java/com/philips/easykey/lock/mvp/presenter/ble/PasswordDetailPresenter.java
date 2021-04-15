@@ -66,7 +66,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                 .subscribe(new Consumer<BleDataBean>() {
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
-                        LogUtils.e("收到原始数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                        LogUtils.d("收到原始数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                         if (bleDataBean.getOriginalData()[0] == 0) {
                             if (bleDataBean.getPayload()[0] == 0) {
                                 if (isSafe()) {
@@ -180,7 +180,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
      */
 
     public void getNumber(int serverType, int serverNumber, int blePwdType, boolean isDetail) {
-        LogUtils.e("服务器数据是   serverNumber   " + serverNumber);
+        LogUtils.d("服务器数据是   serverNumber   " + serverNumber);
         byte[] command = BleCommandFactory.syncLockPasswordCommand((byte) blePwdType, bleLockInfo.getAuthKey()); //7
         bleService.sendCommand(command);
         toDisposable(syncPwdDisposable);
@@ -199,7 +199,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                         toDisposable(syncPwdDisposable);
                         byte[] originalData = bleDataBean.getOriginalData();
                         if (originalData[0] == 0) {
-                            LogUtils.e("同步锁上的编号失败    不加密的数据   收到的数据为   " + Rsa.bytesToHexString(originalData));
+                            LogUtils.d("同步锁上的编号失败    不加密的数据   收到的数据为   " + Rsa.bytesToHexString(originalData));
                             if (isSafe()) {
                                 mViewRef.get().onGetLockNumberFailed(new BleProtocolFailedException(originalData[4] & 0xff));
                             }
@@ -210,13 +210,13 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                             return;
                         }
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
                         List<Integer> bleNumber = getAllpasswordNumber(blePwdType, deValue);
-                        LogUtils.e("同步的秘钥列表是   " + Arrays.toString(bleNumber.toArray()));
+                        LogUtils.d("同步的秘钥列表是   " + Arrays.toString(bleNumber.toArray()));
                         List<Integer> serverNumbers = new ArrayList<>();
                         List<Integer> morePwd = new ArrayList<>();
                         if (serverType == 1) { //普通密码
@@ -266,7 +266,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                             }
                         }
                         for (int number : bleNumber) {
-                            LogUtils.e("   ");
+                            LogUtils.d("   ");
                             if (serverNumber == number) {
                                 //锁上有该编号的密码   删除
                                 isLockHaveThisNumber = true;
@@ -282,7 +282,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("同步锁上的编号失败    " + throwable.getMessage());
+                        LogUtils.d("同步锁上的编号失败    " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().onGetLockNumberFailed(throwable);
                         }
@@ -342,7 +342,7 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("删除秘钥 到成功   " + result.toString());
+                        LogUtils.d("删除秘钥 到成功   " + result.toString());
                         if (isSafe()) {
                             mViewRef.get().onDeleteServerPwdSuccess();
                         }
@@ -351,12 +351,12 @@ public class PasswordDetailPresenter<T> extends BlePresenter<IPasswordDetailView
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传秘钥 失败   " + baseResult.toString());
+                        LogUtils.d("上传秘钥 失败   " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥 失败   " + throwable.getMessage());
+                        LogUtils.d("上传秘钥 失败   " + throwable.getMessage());
                     }
 
                     @Override

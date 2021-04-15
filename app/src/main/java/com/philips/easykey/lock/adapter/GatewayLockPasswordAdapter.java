@@ -42,13 +42,13 @@ public class GatewayLockPasswordAdapter extends BaseQuickAdapter<GatewayPassword
                 if ("year".equals(planType)) {
                     long startTime = item.getZigBeeLocalStartTime();
                     long endTime = item.getZigBeeLocalEndTime();
-                    LogUtils.e("  startTime  "+startTime+"  endTime  "+endTime);
+                    LogUtils.d("  startTime  "+startTime+"  endTime  "+endTime);
                     long startSeconds = startTime + BleCommandFactory.defineTime;
                     String start = DateUtils.getDateTimeFromMillisecond(startSeconds * 1000);//要上传的开锁时间
                     long endSeconds = endTime + BleCommandFactory.defineTime;
                     String end = DateUtils.getDateTimeFromMillisecond(endSeconds * 1000);//要上传的开锁时间
                     String content = mContext.getString(R.string.password_valid_shi_xiao) + "  " + start + "~" + end;
-                    LogUtils.e("显示的内容是   "  +content );
+                    LogUtils.d("显示的内容是   "  +content );
                     helper.setText(R.id.tv_time, content);
 //                    if (endTime - startTime == 24 * 60 * 60) {
 //                        helper.setText(R.id.tv_time, mContext.getString(R.string.password_one_day_valid));
@@ -69,7 +69,7 @@ public class GatewayLockPasswordAdapter extends BaseQuickAdapter<GatewayPassword
                     String days = BleUtil.getStringByMask(mask, weekdays);
                     String strHint = String.format(mContext.getString(R.string.week_hint), days,
                             item.getStartHour() + ":" + item.getStartMinute(), item.getEndHour() + ":" + item.getEndMinute());
-                    LogUtils.e("重复的天数是   " +days);
+                    LogUtils.d("重复的天数是   " +days);
                     helper.setText(R.id.tv_time, strHint);
                 } else {
                     helper.setText(R.id.tv_time, R.string.permanent_validity);

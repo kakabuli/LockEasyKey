@@ -249,14 +249,14 @@ public class BluetoothPasswordShareActivity extends BaseBleActivity<IPasswordDet
 
     @Override
     public void onDeleteServerPwdFailed(Throwable throwable) {
-        LogUtils.e("删除失败  " + throwable.getMessage());
+        LogUtils.d("删除失败  " + throwable.getMessage());
         ToastUtil.getInstance().showShort(R.string.delete_fialed);
         hiddenLoading();
     }
 
     @Override
     public void onDeleteServerPwdFailedServer(BaseResult result) {
-        LogUtils.e("删除失败  " + result.toString());
+        LogUtils.d("删除失败  " + result.toString());
         ToastUtil.getInstance().showShort(R.string.delete_fialed);
         hiddenLoading();
     }

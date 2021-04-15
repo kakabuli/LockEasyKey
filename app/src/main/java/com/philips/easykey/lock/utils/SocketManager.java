@@ -29,7 +29,7 @@ public class SocketManager {
     public static SocketManager getInstance() {
         if (instance == null) {
             instance = new SocketManager();
-            LogUtils.e("--Kaadas--初始化SocketManager");
+            LogUtils.d("--Kaadas--初始化SocketManager");
         }
         return instance;
     }
@@ -45,37 +45,37 @@ public class SocketManager {
         try {
                 if (serverSocket == null){
                 serverSocket = new ServerSocket(PORT);
-                LogUtils.e("--Kaadas--打开socket端口：56789");
+                LogUtils.d("--Kaadas--打开socket端口：56789");
             }
             else {
-                LogUtils.e("--Kaadas--已存在socket端口：56789");
+                LogUtils.d("--Kaadas--已存在socket端口：56789");
             }
 
         } catch (IOException e) {
-               LogUtils.e("--Kaadas--打开socket失败  " + e.getMessage());
+               LogUtils.d("--Kaadas--打开socket失败  " + e.getMessage());
                 e.printStackTrace();
                 release();
                 return -1;
         }
         try {
             serverSocket.setSoTimeout(30 * 1000);
-            LogUtils.e("--Kaadas--设置socket连接30s超时");
+            LogUtils.d("--Kaadas--设置socket连接30s超时");
 
         } catch (SocketException e) {
             e.printStackTrace();
             release();
-            LogUtils.e("--Kaadas--等待客户accept连接socket超时  " + e.getMessage());
+            LogUtils.d("--Kaadas--等待客户accept连接socket超时  " + e.getMessage());
             return -2;
         }
         try {
             socket = serverSocket.accept();
-            LogUtils.e("--Kaadas--socket等待连接");
+            LogUtils.d("--Kaadas--socket等待连接");
 
         } catch (IOException e) {
             e.printStackTrace();
             release();
-            LogUtils.e("--Kaadas--socket.accept连接失败 ： " + e.getMessage());
-            LogUtils.e("--Kaadas--socket.accept连接失败  == " + e);
+            LogUtils.d("--Kaadas--socket.accept连接失败 ： " + e.getMessage());
+            LogUtils.d("--Kaadas--socket.accept连接失败  == " + e);
 
             return -3;
         }
@@ -83,15 +83,15 @@ public class SocketManager {
     }
 
     public boolean isConnected(){
-        LogUtils.e("serverSocket  是否为空   " + (serverSocket == null ) + "socket  是否为空   " + (socket == null ));
+        LogUtils.d("serverSocket  是否为空   " + (serverSocket == null ) + "socket  是否为空   " + (socket == null ));
         if (serverSocket!=null && socket!=null &&!serverSocket.isClosed() && socket.isConnected()){
             return true;
         }
         if (serverSocket!=null   ){
-            LogUtils.e("serverSocket状态  isClosed " + serverSocket.isClosed());
+            LogUtils.d("serverSocket状态  isClosed " + serverSocket.isClosed());
         }
         if (socket!=null){
-            LogUtils.e("socket状态  isClosed " + socket.isClosed());
+            LogUtils.d("socket状态  isClosed " + socket.isClosed());
         }
         return false;
     }
@@ -111,7 +111,7 @@ public class SocketManager {
             e.printStackTrace();
             release();
             readResult.resultCode = -1;
-            LogUtils.e("读取数据超时   -1 " + e.getMessage());
+            LogUtils.d("读取数据超时   -1 " + e.getMessage());
             return readResult;
         }
         try {
@@ -120,7 +120,7 @@ public class SocketManager {
             e.printStackTrace();
             release();
             readResult.resultCode = -2;
-            LogUtils.e("读取数据超时   -2 " + e.getMessage());
+            LogUtils.d("读取数据超时   -2 " + e.getMessage());
             return readResult;
         }
         int size = 0;
@@ -161,7 +161,7 @@ public class SocketManager {
             e.printStackTrace();
             release();
             readResult.resultCode = -1;
-            LogUtils.e("读取数据超时   -1 " + e.getMessage());
+            LogUtils.d("读取数据超时   -1 " + e.getMessage());
             return readResult;
         }
         try {
@@ -170,7 +170,7 @@ public class SocketManager {
             e.printStackTrace();
             release();
             readResult.resultCode = -2;
-            LogUtils.e("读取数据超时   -2 " + e.getMessage());
+            LogUtils.d("读取数据超时   -2 " + e.getMessage());
             return readResult;
         }
         int size = 0;
@@ -216,25 +216,25 @@ public class SocketManager {
     public int writeData(byte[] data) {
         if (socket != null) {
             try {
-                LogUtils.e("发送数据  " + new String(data));
+                LogUtils.d("发送数据  " + new String(data));
                 outputStream = socket.getOutputStream();
                 outputStream.write(data);
                 outputStream.flush();
             } catch (IOException e) {
                 e.printStackTrace();
-                LogUtils.e("发送数据失败   " + e.getMessage());
+                LogUtils.d("发送数据失败   " + e.getMessage());
                 release();
                 return -1;
             }
         } else {
-            LogUtils.e("发送数据失败   socket 为空 "  );
+            LogUtils.d("发送数据失败   socket 为空 "  );
             return -99;
         }
         return 0;
     }
 
     private void release(  ) {
-        LogUtils.e("--Kaadas--释放Socket  " );
+        LogUtils.d("--Kaadas--释放Socket  " );
         try {
             if (serverSocket != null) {
                 serverSocket.close();
@@ -278,7 +278,7 @@ public class SocketManager {
         }
         messageDigest.update(t);
         byte[] adminKey = messageDigest.digest();
-        LogUtils.e("管理密码管理  Sha256之后是 " + Rsa.bytesToHexString(adminKey));
+        LogUtils.d("管理密码管理  Sha256之后是 " + Rsa.bytesToHexString(adminKey));
 
         byte[] content = new byte[32];
         byte[] sn = new byte[13];
@@ -287,7 +287,7 @@ public class SocketManager {
         System.arraycopy(data, 32, sn, 0, sn.length);
 
         byte[] decrypt = Rsa.decrypt(content, adminKey);
-        LogUtils.e("解密之后的数据是  " + Rsa.bytesToHexString(adminKey));
+        LogUtils.d("解密之后的数据是  " + Rsa.bytesToHexString(adminKey));
 
         byte[] pwd = new byte[28];
         byte[] crc = new byte[4];
@@ -295,13 +295,13 @@ public class SocketManager {
         System.arraycopy(decrypt, 0, pwd, 0, pwd.length);
         System.arraycopy(decrypt, 28, crc, 0, crc.length);
 
-        LogUtils.e("随机数明文是  " + Rsa.bytesToHexString(pwd));
-        LogUtils.e("RCR明文是  " + Rsa.bytesToHexString(crc));
+        LogUtils.d("随机数明文是  " + Rsa.bytesToHexString(pwd));
+        LogUtils.d("RCR明文是  " + Rsa.bytesToHexString(crc));
         CRC32 crc32 = new CRC32();
         crc32.update(pwd);
         long localCrc = crc32.getValue();
         byte[] bytes = Rsa.int2BytesArray((int) localCrc);
-        LogUtils.e("校验和 本地CRC  " + Rsa.bytesToHexString(bytes) + "   锁端CRC  " + Rsa.bytesToHexString(crc));
+        LogUtils.d("校验和 本地CRC  " + Rsa.bytesToHexString(bytes) + "   锁端CRC  " + Rsa.bytesToHexString(crc));
         if (bytes[0] != crc[0] || bytes[1] != crc[1] || bytes[2] != crc[2] || bytes[3] != crc[3]) { //校验失败
             wifiResult.result = -2;
             return wifiResult;

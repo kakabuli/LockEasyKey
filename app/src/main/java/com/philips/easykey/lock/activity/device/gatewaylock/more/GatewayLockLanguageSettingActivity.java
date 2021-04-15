@@ -128,7 +128,7 @@ public class GatewayLockLanguageSettingActivity extends BaseActivity<GatewayLock
 
     @Override
     public void getLockLangSuccess(String lang) {
-        LogUtils.e("获取到的语言是"+lang);
+        LogUtils.d("获取到的语言是"+lang);
         loadingDialog.dismiss();
         if ("zh".equals(lang)){
             zhImg.setChecked(true);
@@ -153,7 +153,7 @@ public class GatewayLockLanguageSettingActivity extends BaseActivity<GatewayLock
     @Override
     public void getLockLangThrowable(Throwable throwable) {
         loadingDialog.dismiss();
-        LogUtils.e("获取锁的语言异常      "+throwable.getMessage());
+        LogUtils.d("获取锁的语言异常      "+throwable.getMessage());
     }
 
     @Override
@@ -171,6 +171,6 @@ public class GatewayLockLanguageSettingActivity extends BaseActivity<GatewayLock
 
     @Override
     public void setLockLangThrowable(Throwable throwable) {
-        LogUtils.e("设置锁的语言异常    "+throwable.getMessage());
+        LogUtils.d("设置锁的语言异常    "+throwable.getMessage());
     }
 }

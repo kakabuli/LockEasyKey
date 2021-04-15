@@ -277,7 +277,7 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
 
     public void onScanSuccess() {
 //        finish();
-        LogUtils.e("--Kaadas--onScanSuccess  from WifiLockAddNewScanActivity");
+        LogUtils.d("--Kaadas--onScanSuccess  from WifiLockAddNewScanActivity");
         Intent nextIntent = new Intent(this, WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity.class);
         nextIntent.putExtra(KeyConstants.BLE_VERSION, bleVersion);
         nextIntent.putExtra(KeyConstants.BLE_DEVICE_SN, sn);
@@ -294,7 +294,7 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
      * 剩余校验次数（配网通道）
      */
     public void onlistenerLastNum(int lastNum) {
-        LogUtils.e("--Kaadas--管理员密码输入次数=="+lastNum);
+        LogUtils.d("--Kaadas--管理员密码输入次数=="+lastNum);
         lastTimes = 6-lastNum;
         firstThread.start();
     }
@@ -346,12 +346,12 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
                     changeState(5);
                     handler.postDelayed(runnable, 2000);
 //                    MyLog.getInstance().save("--kaadas调试--蓝牙0x92命令交互完成后的合并的密码因子数据==" + Rsa.bytesToHexString(passwordFactor));
-//                    LogUtils.e("--kaadas--合并密码因子数据==    " + Rsa.bytesToHexString(passwordFactor));
+//                    LogUtils.d("--kaadas--合并密码因子数据==    " + Rsa.bytesToHexString(passwordFactor));
                     break;
 //                case 4:
 //
 //                    System.arraycopy(originalData, 0, passwordFactor, copyLocation, copyLength);
-//                    LogUtils.e("--kaadas--合并密码因子数据==    " + Rsa.bytesToHexString(passwordFactor));
+//                    LogUtils.d("--kaadas--合并密码因子数据==    " + Rsa.bytesToHexString(passwordFactor));
 ////                    sixthThread.start();
 //                    handler.postDelayed(runnable, 1000);
 //                    break;

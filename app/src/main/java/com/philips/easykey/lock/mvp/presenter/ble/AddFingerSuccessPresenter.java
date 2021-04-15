@@ -22,7 +22,7 @@ import io.reactivex.disposables.Disposable;
 public class AddFingerSuccessPresenter<T> extends BasePresenter<IAddFingerSuccessView> {
 
     public void uploadPasswordNickToServer(int type, String deviceName, String nickName, String userNum) {
-        LogUtils.e("上传密码昵称到服务器   " + deviceName + "     " + nickName);
+        LogUtils.d("上传密码昵称到服务器   " + deviceName + "     " + nickName);
         List<AddPasswordBean.Password> passwords = new ArrayList<>();
         passwords.add(new AddPasswordBean.Password(type, userNum, nickName, 1));
         XiaokaiNewServiceImp.addPassword(MyApplication.getInstance().getUid()
@@ -30,7 +30,7 @@ public class AddFingerSuccessPresenter<T> extends BasePresenter<IAddFingerSucces
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("davi 上传秘钥昵称到服务器成功");
+                        LogUtils.d("davi 上传秘钥昵称到服务器成功");
                         // TODO: 2019/3/8   通知更新秘钥列表   从服务器拿
                         if (isSafe()) {
                             mViewRef.get().onUploadSuccess();
@@ -47,7 +47,7 @@ public class AddFingerSuccessPresenter<T> extends BasePresenter<IAddFingerSucces
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥昵称到服务器失败");
+                        LogUtils.d("上传秘钥昵称到服务器失败");
                         if (isSafe()) {
                             mViewRef.get().onUploadFailed(throwable);
                         }

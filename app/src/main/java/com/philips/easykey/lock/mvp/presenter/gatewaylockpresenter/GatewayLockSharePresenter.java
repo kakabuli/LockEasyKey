@@ -12,9 +12,6 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockPwd;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockPwdDao;
-
-import org.linphone.mediastream.Log;
-
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
@@ -32,7 +29,7 @@ public class GatewayLockSharePresenter<T> extends BasePresenter<GatewayLockShare
                     .filter(new Predicate<MqttData>() {
                         @Override
                         public boolean test(MqttData mqttData) throws Exception {
-                            LogUtils.e("删除锁消息");
+                            LogUtils.d("删除锁消息");
                             if (MqttConstant.SET_PWD.equals(mqttData.getFunc())) {
                                 return true;
                             }
@@ -44,7 +41,7 @@ public class GatewayLockSharePresenter<T> extends BasePresenter<GatewayLockShare
                     .subscribe(new Consumer<MqttData>() {
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
-                            LogUtils.e("删除....." + mqttData.getFunc());
+                            LogUtils.d("删除....." + mqttData.getFunc());
                             toDisposable(shareDeleteDisposable);
                             LockPwdFuncBean lockPwdFuncBean = new Gson().fromJson(mqttData.getPayload(), LockPwdFuncBean.class);
                             if ("200".equals(mqttData.getReturnCode())) {

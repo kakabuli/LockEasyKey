@@ -44,7 +44,7 @@ public class WifiLockOpenForcePresenter<T> extends BasePresenter<IWifiLockOpenFo
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             SettingOpenForceResult settingOpenForce = new Gson().fromJson(mqttData.getPayload(), SettingOpenForceResult.class);
-                            LogUtils.e("shulan settingOpenForce-->" + settingOpenForce.toString());
+                            LogUtils.d("shulan settingOpenForce-->" + settingOpenForce.toString());
                             if(settingOpenForce != null && isSafe()){
                                 if("200".equals(settingOpenForce.getCode() + "")){
                                     mViewRef.get().settingSuccess(settingOpenForce.getParams().getOpenForce());

@@ -24,7 +24,6 @@ import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.gatewaypresenter.GatewayPresenter;
 import com.philips.easykey.lock.mvp.view.gatewayView.GatewayView;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -181,30 +180,19 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
     @Override
     public void getPowerDataSuccess(String deviceId, int power) {
         //获取到电量
-        LogUtils.e("设备名称   " + deviceId + "   电量   " + power);
+        LogUtils.d("设备名称   " + deviceId + "   电量   " + power);
         if (power < 0) {
             power = 0;
         }
 
         if (homeShowBeans != null && homeShowBeans.size() > 0) {
             for (HomeShowBean device : homeShowBeans) {
-                //猫眼
-                if (HomeShowBean.TYPE_CAT_EYE == device.getDeviceType()) {
-                    if (device.getDeviceId().equals(deviceId)) {
-                        CateEyeInfo cateEyeInfo = (CateEyeInfo) device.getObject();
-                        cateEyeInfo.setPower(power);
-                        LogUtils.e("设置猫眼电量成功" + power);
-                        if (gatewayAdapter != null) {
-                            gatewayAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
                 //网关锁
-                else if (HomeShowBean.TYPE_GATEWAY_LOCK == device.getDeviceType()) {
+                if (HomeShowBean.TYPE_GATEWAY_LOCK == device.getDeviceType()) {
                     if (device.getDeviceId().equals(device)) {
                         GwLockInfo gwLockInfo = (GwLockInfo) device.getObject();
                         gwLockInfo.setPower(power / 2);
-                        LogUtils.e("设置zigbee电量成功" + power);
+                        LogUtils.d("设置zigbee电量成功" + power);
                         if (gatewayAdapter != null) {
                             gatewayAdapter.notifyDataSetChanged();
                         }
@@ -224,18 +212,7 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
        /* //获取电量失败
         if (homeShowBeans != null && homeShowBeans.size() > 0) {
             for (HomeShowBean device : homeShowBeans) {
-                //猫眼电量
-                if (HomeShowBean.TYPE_CAT_EYE == device.getDeviceType()) {
-                    if (device.getDeviceId().equals(deviceId)) {
-                        CateEyeInfo cateEyeInfo = (CateEyeInfo) device.getObject();
-                        if ("online".equals(cateEyeInfo.getServerInfo().getEvent_str())) {
-                            cateEyeInfo.getServerInfo().setEvent_str("offline");
-                            if (gatewayAdapter != null) {
-                                gatewayAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-                } else if (HomeShowBean.TYPE_GATEWAY_LOCK == device.getDeviceType()) {
+                if (HomeShowBean.TYPE_GATEWAY_LOCK == device.getDeviceType()) {
                     if (device.getDeviceId().equals(deviceId)) {
                         GwLockInfo gwLockInfo = (GwLockInfo) device.getObject();
                         if ("online".equals(gwLockInfo.getServerInfo().getEvent_str())) {
@@ -260,12 +237,12 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
     @Override
     public void gatewayStatusChange(String gatewayId, String eventStr) {
         //网关状态发生改变
-        LogUtils.e("GatewayActivity网关状态发生改变");
+        LogUtils.d("GatewayActivity网关状态发生改变");
         //当前网关
-        LogUtils.e("改变网关id是  " + gatewayId + "当前的网关id是  " + gatewayInfo.getServerInfo().getDeviceSN());
+        LogUtils.d("改变网关id是  " + gatewayId + "当前的网关id是  " + gatewayInfo.getServerInfo().getDeviceSN());
         if (gatewayInfo != null) {
             if (gatewayInfo.getServerInfo().getDeviceSN().equals(gatewayId)) {
-                LogUtils.e("监听网关Device的状态      " + gatewayId);
+                LogUtils.d("监听网关Device的状态      " + gatewayId);
                 gatewayInfo.setEvent_str(eventStr);
                 changeGatewayStatus(eventStr);
                 //获取网关下绑定的设备,把网关下的设备设置为离线.网关离线设备也离线
@@ -273,11 +250,6 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
                     if (homeShowBeans != null && homeShowBeans.size() > 0) {
                         for (HomeShowBean gatewayBind : homeShowBeans) {
                             switch (gatewayBind.getDeviceType()) {
-                                //猫眼
-                                case HomeShowBean.TYPE_CAT_EYE:
-                                    CateEyeInfo cateEyeInfo = (CateEyeInfo) gatewayBind.getObject();
-                                    cateEyeInfo.getServerInfo().setEvent_str("offline");
-                                    break;
                                 //网关锁
                                 case HomeShowBean.TYPE_GATEWAY_LOCK:
                                     GwLockInfo gwLockInfo = (GwLockInfo) gatewayBind.getObject();
@@ -299,26 +271,11 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
     @Override
     public void deviceStatusChange(String gatewayId, String deviceId, String eventStr) {
 //网关状态发生改变
-        LogUtils.e("Gateway设备状态发生改变");
+        LogUtils.d("Gateway设备状态发生改变");
         if (homeShowBeans != null && homeShowBeans.size() > 0) {
             for (HomeShowBean homeShowBean : homeShowBeans) {
                 if (deviceId.equals(homeShowBean.getDeviceId())) {
                     switch (homeShowBean.getDeviceType()) {
-                        //猫眼上线
-                        case HomeShowBean.TYPE_CAT_EYE:
-                            CateEyeInfo cateEyeInfo = (CateEyeInfo) homeShowBean.getObject();
-                            if (cateEyeInfo.getGwID().equals(gatewayId)) {
-                                if ("online".equals(eventStr)) {
-                                    cateEyeInfo.getServerInfo().setEvent_str("online");
-                                } else {
-                                    cateEyeInfo.getServerInfo().setEvent_str("offline");
-                                }
-                                if (gatewayAdapter != null) {
-                                    gatewayAdapter.notifyDataSetChanged();
-                                }
-                                LogUtils.e("猫眼上线下线了   " + eventStr + "猫眼的设备id  " + deviceId);
-                            }
-                            break;
                         //网关锁上线
                         case HomeShowBean.TYPE_GATEWAY_LOCK:
                             GwLockInfo gwLockInfo = (GwLockInfo) homeShowBean.getObject();
@@ -331,7 +288,7 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
                                 if (gatewayAdapter != null) {
                                     gatewayAdapter.notifyDataSetChanged();
                                 }
-                                LogUtils.e("网关锁上线下线了   " + eventStr + "网关的设备id  " + deviceId);
+                                LogUtils.d("网关锁上线下线了   " + eventStr + "网关的设备id  " + deviceId);
                             }
                             break;
                     }

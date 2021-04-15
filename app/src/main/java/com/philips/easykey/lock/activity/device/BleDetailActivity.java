@@ -161,7 +161,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
         public void run() {
             isOpening = false;
             boolean auth = mPresenter.isAuth(bleLockInfo, false);
-            LogUtils.e(" 首页锁状态  反锁状态   " + auth + "   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
+            LogUtils.d(" 首页锁状态  反锁状态   " + auth + "   " + bleLockInfo.getBackLock() + "    安全模式    " + bleLockInfo.getSafeMode() + "   布防模式   " + bleLockInfo.getArmMode());
             if (auth) {
                 onElectricUpdata(bleLockInfo.getBattery());
                 changLockStatus(0);
@@ -180,14 +180,14 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        LogUtils.e("全功能界面   1");
+        LogUtils.d("全功能界面   1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_lock_function);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        LogUtils.e("全功能界面  2 ");
+        LogUtils.d("全功能界面  2 ");
         ButterKnife.bind(this);
         productList = MyApplication.getInstance().getProductInfos();
 
@@ -240,7 +240,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 
     private void changeLockIcon(Intent intent) {
         String model = intent.getStringExtra(KeyConstants.DEVICE_TYPE);
-        LogUtils.e("获取到的设备型号是   "+ model);
+        LogUtils.d("获取到的设备型号是   "+ model);
         String deviceSN = intent.getStringExtra(KeyConstants.BLE_DEVICE_SN);
         if (model != null && deviceSN != null) {
         //本地图片有对应的产品则不获取缓存的产品型号图片，缓存没有则选择尝试下载
@@ -257,8 +257,8 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 //                if (productInfo.getDevelopmentModel().contentEquals(model)){
                 if (productInfo.getSnHead().equals(deviceSN.substring(0,3))) {
 
-                    //LogUtils.e("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
-                    //LogUtils.e("--kaadas--productList.DeviceListUrl==" + productInfo.getAdminUrl());
+                    //LogUtils.d("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
+                    //LogUtils.d("--kaadas--productList.DeviceListUrl==" + productInfo.getAdminUrl());
                     //匹配型号获取下载地址
                     Glide.with(this).load(productInfo.getAdminUrl()).apply(options).into(ivLockIcon);
                     return;
@@ -296,7 +296,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
         //每次显示界面都重新设置状态和电量
         showData();
         if (mPresenter.getBleLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo() != null && mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName() != null) {
-            LogUtils.e("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
+            LogUtils.d("设备昵称是   " + mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
             tvBluetoothName.setText(mPresenter.getBleLockInfo().getServerLockInfo().getLockNickName());
         }
     }
@@ -378,9 +378,9 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
             try {
                 String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet(); //锁功能集
                 int func = Integer.parseInt(functionSet);
-                LogUtils.e("功能集是   " + func);
+                LogUtils.d("功能集是   " + func);
                 List<BluetoothLockFunctionBean> supportFunction = BleLockUtils.getSupportFunction(func);
-                LogUtils.e("获取到的功能集是   " + supportFunction.size());
+                LogUtils.d("获取到的功能集是   " + supportFunction.size());
                 MyGridItemDecoration dividerItemDecoration;
                 if (supportFunction.size() <= 2) {
                     detailFunctionOnLine.setLayoutManager(new GridLayoutManager(this, 2));
@@ -438,7 +438,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                     @Override
                     public void onItemClick(int position, BluetoothLockFunctionBean bluetoothLockFunctionBean) {
                         Intent intent;
-                        LogUtils.e("点击类型是    " + bluetoothLockFunctionBean.getType());
+                        LogUtils.d("点击类型是    " + bluetoothLockFunctionBean.getType());
                         switch (bluetoothLockFunctionBean.getType()) {
                             case BleLockUtils.TYPE_PASSWORD:
                                 intent = new Intent(BleDetailActivity.this, BlePasswordManagerActivity.class);
@@ -453,12 +453,12 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                                 startActivity(intent);
                                 break;
                             case BleLockUtils.TYPE_SHARE:
-                                LogUtils.e("分享   ");
+                                LogUtils.d("分享   ");
                                 intent = new Intent(BleDetailActivity.this, BluetoothSharedDeviceManagementActivity.class);
                                 startActivity(intent);
                                 break;
                             case BleLockUtils.TYPE_MORE:
-                                LogUtils.e("更多   ");  //这是老模块的  跳转地方
+                                LogUtils.d("更多   ");  //这是老模块的  跳转地方
                                 intent = new Intent(BleDetailActivity.this, OldDeviceInfoActivity.class);
                                 startActivityForResult(intent, TO_MORE_REQUEST_CODE);
                                 break;
@@ -469,7 +469,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                 detailFunctionOnLine.setAdapter(oneLineAdapater);
             }
             catch (Exception e) {
-                LogUtils.e("--kaadas--:" + e.getMessage());
+                LogUtils.d("--kaadas--:" + e.getMessage());
             }
         }
 
@@ -485,7 +485,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
             case R.id.tv_open_clock:
                 //开锁
                 if (isOpening) {
-                    LogUtils.e("长按  但是当前正在开锁状态   ");
+                    LogUtils.d("长按  但是当前正在开锁状态   ");
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
@@ -593,7 +593,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 
     @Override
     public void onDeviceInfoLoaded() {
-        LogUtils.e("获取到设备信息");
+        LogUtils.d("获取到设备信息");
         if (!isOpening){
             lockRunnable.run();
         }

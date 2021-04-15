@@ -67,7 +67,7 @@ public class DateUtils {
     public static String getStrFromMillisecond2(Long millisecond) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateStr = simpleDateFormat.format(millisecond);
-        LogUtils.e(millisecond + "    " + System.currentTimeMillis() + "   转换的时间为   " + dateStr);
+        LogUtils.d(millisecond + "    " + System.currentTimeMillis() + "   转换的时间为   " + dateStr);
         return dateStr;
     }
 

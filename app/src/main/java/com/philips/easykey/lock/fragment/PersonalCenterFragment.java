@@ -244,7 +244,7 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
             switch (requestCode){
                 case KeyConstants.SCANPRODUCT_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e(result+"     产品激活");
+                    LogUtils.d(result+"     产品激活");
                     if(result.contains(" ")){
                         result=result.replace(" ","%20");
                     }

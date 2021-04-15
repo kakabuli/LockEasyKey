@@ -88,7 +88,7 @@ public class WifiLockAuthDeviceInfoActivity extends BaseActivity<IWifiLockMoreVi
                         tvDeviceModel.setText(productInfo.getProductModel());
                     }
                 } catch (Exception e) {
-                    LogUtils.e("--kaadas--:" + e.getMessage());
+                    LogUtils.d("--kaadas--:" + e.getMessage());
                 }
             }
             tvSerialNumber.setText(TextUtils.isEmpty(wifiLockInfo.getWifiSN()) ? "" : wifiLockInfo.getWifiSN());

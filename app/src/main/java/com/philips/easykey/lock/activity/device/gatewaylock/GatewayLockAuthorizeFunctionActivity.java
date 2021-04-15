@@ -531,7 +531,7 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
         };
         mHandler.postDelayed(reconncetRunnable, 3000);
 
-        LogUtils.e("开锁异常   " + throwable.getMessage());
+        LogUtils.d("开锁异常   " + throwable.getMessage());
 
     }
 
@@ -549,7 +549,7 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
 
     @Override
     public void lockHasBeenThrowable(Throwable throwable) {
-        LogUtils.e("门锁上报信息出现异常" + throwable.getMessage());
+        LogUtils.d("门锁上报信息出现异常" + throwable.getMessage());
     }
 
     @Override

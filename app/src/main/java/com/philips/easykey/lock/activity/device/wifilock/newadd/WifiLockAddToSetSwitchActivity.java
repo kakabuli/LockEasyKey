@@ -89,7 +89,7 @@ public class WifiLockAddToSetSwitchActivity extends BaseActivity<SingleFireSwitc
 
         if (requestCode == TO_SET_ALL_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-//                LogUtils.e("--kaadas--11111WIFI_LOCK_INFO_CHANGE_RESULT=="+data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));
+//                LogUtils.d("--kaadas--11111WIFI_LOCK_INFO_CHANGE_RESULT=="+data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));
 //                Intent intent;
 //                intent = new Intent(this, SwipchLinkActivity.class);
 //                intent.putExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT, data.getBooleanExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE_RESULT,false));

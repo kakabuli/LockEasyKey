@@ -162,7 +162,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("获取 开锁记录  失败   " + baseResult.getMsg() + "  " + baseResult.getCode());
+                        LogUtils.d("获取 开锁记录  失败   " + baseResult.getMsg() + "  " + baseResult.getCode());
                         if (isSafe()) {  //
                             mViewRef.get().onLoadServerRecordFailedServer(baseResult);
                         }
@@ -170,7 +170,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("获取 开锁记录  失败   " + throwable.getMessage());
+                        LogUtils.d("获取 开锁记录  失败   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().onLoadServerRecordFailed(throwable);
                         }
@@ -216,7 +216,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
 
         operationStartIndex = 0;
         operationEndIndex = 20;
-        LogUtils.e("重试次数   " + operationRetryTimes + "    " + operationCurrentPage);
+        LogUtils.d("重试次数   " + operationRetryTimes + "    " + operationCurrentPage);
         if (operationRetryTimes > 2) { //已经重试了两次，即请求过三次
             //当前组数据已经查询完  不管查到的是什么结果  都显示给用户
             //看还有下一组数据没有   如果没有那么所有的数据都查询完了  不管之前查询到的是什么结果，都上传到服务器
@@ -277,7 +277,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                             public void accept(BleDataBean bleDataBean) throws Exception {
                                 if (bleDataBean.isConfirm()) {
                                     if (0x8b == (bleDataBean.getPayload()[0] & 0xff) && isFirst) {  //没有数据
-                                        LogUtils.e("锁上   没有开锁记录  ");
+                                        LogUtils.d("锁上   没有开锁记录  ");
                                         if (isSafe()) {
                                             mViewRef.get().noData();
                                         }
@@ -291,17 +291,17 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 }
                                 isFirst = false;
                                 byte[] deVaule = Rsa.decrypt(bleDataBean.getPayload(), bleService.getBleLockInfo().getAuthKey());
-                                LogUtils.e("获取操作记录   解码之后的数据是   " + Rsa.bytesToHexString(deVaule) + "原始数据是   " + Rsa.toHexString(bleDataBean.getOriginalData()));
+                                LogUtils.d("获取操作记录   解码之后的数据是   " + Rsa.bytesToHexString(deVaule) + "原始数据是   " + Rsa.toHexString(bleDataBean.getOriginalData()));
 //                                OpenLockRecord openLockRecord = BleUtil.parseLockRecord(deVaule);
                                 OperationLockRecord operationLockRecord = BleUtil.parseOperationRecord(deVaule);
-                                LogUtils.e("获取操作记录是   " + operationLockRecord.toString());
+                                LogUtils.d("获取操作记录是   " + operationLockRecord.toString());
                                 if (operationLockRecords == null) {
                                     byte[] totalByte = new byte[2];
                                     System.arraycopy(deVaule, 0, totalByte, 0, 2);
                                     operationTotal = Rsa.bytesToInt(totalByte);
                                     operationLockRecords = new OperationLockRecord[operationTotal];
                                     operationMaxPage = (int) Math.ceil(operationTotal * 1.0 / 20.0);
-                                    LogUtils.e(" 总个数   " + operationTotal + "  最大页数  " + operationMaxPage);
+                                    LogUtils.d(" 总个数   " + operationTotal + "  最大页数  " + operationMaxPage);
                                 }
                                 byte[] byteIndex = new byte[2];
                                 System.arraycopy(deVaule, 2, byteIndex, 0, 2);
@@ -352,7 +352,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                                 , bleService.getBleLockInfo().getServerLockInfo().getLockNickName()
                                                 , getOperationRecordToServer(), MyApplication.getInstance().getUid());
                                     } else {  //如果后面还有
-                                        LogUtils.e("收到一组完整的数据");
+                                        LogUtils.d("收到一组完整的数据");
                                         operationCurrentPage++;  //下一组数据
                                         operationRetryTimes = 0; //重试次数
                                         getOperationRecordByPage();  //获取数据
@@ -362,14 +362,14 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                LogUtils.e("取消订阅了吗   " + operationDisposable.isDisposed() + "   " + throwable.getMessage());
+                                LogUtils.d("取消订阅了吗   " + operationDisposable.isDisposed() + "   " + throwable.getMessage());
 //                                if (throwable instanceof TimeoutException) {  //5秒没有收到数据
                                 if (operationLockRecords == null) {  //一个数据都没有收到  重试
                                     operationRetryTimes++;
                                     getOperationRecordByPage();
                                     return;
                                 }
-                                LogUtils.e("获取数据  超时   数据完成");
+                                LogUtils.d("获取数据  超时   数据完成");
 
                                 // TODO: 2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
@@ -384,7 +384,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 // TODO: 2019/3/7  开锁记录测试
                                 for (int i = operationStartIndex; i < operationEndIndex && i < operationTotal; i++) {
                                     if (operationLockRecords[i] == null) { //数据不全
-                                        LogUtils.e("数据不全  " + operationRetryTimes);
+                                        LogUtils.d("数据不全  " + operationRetryTimes);
                                         operationRetryTimes++;
                                         if (operationRetryTimes > 2) {  //如果已经尝试了三次  那么先显示数据
                                             if (isSafe()) {
@@ -425,14 +425,14 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
     public void upLoadOperationRecord(String device_name, String device_nickname, List<UploadOperationRecordBean.OperationListBean> openLockList, String user_id) {
 
         for (UploadOperationRecordBean.OperationListBean bleRecord : openLockList) {
-            LogUtils.e("上传的数据是    " + bleRecord.toString());
+            LogUtils.d("上传的数据是    " + bleRecord.toString());
         }
-        LogUtils.e("数据获取完成   operationTotal" + operationTotal + "  获取到的个数是  " + openLockList.size());
+        LogUtils.d("数据获取完成   operationTotal" + operationTotal + "  获取到的个数是  " + openLockList.size());
         XiaokaiNewServiceImp.uploadOperationRecord(device_name, openLockList)
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传操作记录成功");
+                        LogUtils.d("上传操作记录成功");
                         if (isSafe()) {
                             mViewRef.get().onUploadServerRecordSuccess();
                         }
@@ -447,7 +447,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传开锁记录失败");
+                        LogUtils.d("上传开锁记录失败");
                         if (isSafe()) {
                             mViewRef.get().onUploadServerRecordFailed(throwable);
                         }

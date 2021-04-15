@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.MimeTypeMap;
@@ -101,7 +102,7 @@ public class FileUtil {
         File file = new File(path);
         //如果path是传递过来的参数，可以做一个非目录的判断
         if (file.isDirectory()) {
-            LogUtils.d(TAG, "The File doesn't not exist.");
+            Log.d(TAG, "The File doesn't not exist.");
         } else {
             try {
                 InputStream instream = new FileInputStream(file);
@@ -116,9 +117,9 @@ public class FileUtil {
                     instream.close();
                 }
             } catch (java.io.FileNotFoundException e) {
-                LogUtils.d(TAG, "The File doesn't not exist.");
+                Log.d(TAG, "The File doesn't not exist.");
             } catch (IOException e) {
-                LogUtils.d(TAG, e.getMessage());
+                Log.d(TAG, e.getMessage());
             }
         }
         String[] contents = content.split("\n");
@@ -144,7 +145,7 @@ public class FileUtil {
         File file = new File(path);
         //如果path是传递过来的参数，可以做一个非目录的判断
         if (file.isDirectory()) {
-            LogUtils.d("TestFile", "The File doesn't not exist.");
+            Log.d("TestFile", "The File doesn't not exist.");
         } else {
             try {
                 InputStream instream = new FileInputStream(file);
@@ -159,9 +160,9 @@ public class FileUtil {
                     instream.close();
                 }
             } catch (java.io.FileNotFoundException e) {
-                LogUtils.d(TAG, "The File doesn't not exist.");
+                Log.d(TAG, "The File doesn't not exist.");
             } catch (IOException e) {
-                LogUtils.d(TAG, e.getMessage());
+                Log.d(TAG, e.getMessage());
             }
         }
 
@@ -176,7 +177,7 @@ public class FileUtil {
      * 安装APK文件
      */
     public static void installApk(Context context, String savePath) {
-        LogUtils.d(TAG, "savePath " + savePath);
+        Log.d(TAG, "savePath " + savePath);
         File apkfile = new File(savePath);
         if (!apkfile.exists()) {
             return;
@@ -215,7 +216,7 @@ public class FileUtil {
     public static void assetsDataToSD(Context context, String assetsDataName, String fileName) throws IOException {
         InputStream myInput;
         //文件夹
-        LogUtils.d(TAG, "path--> " + fileName);
+        Log.d(TAG, "path--> " + fileName);
         if (!new File(fileName).getParentFile().exists()) {
             new File(fileName).getParentFile().mkdirs();
         }

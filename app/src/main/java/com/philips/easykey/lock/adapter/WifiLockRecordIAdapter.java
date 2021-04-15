@@ -251,7 +251,7 @@ public class WifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOperationRe
             tvRight.setText(right+"");
         }
 
-        LogUtils.e("denganzhi","left:"+left+ "right:"+right);
+        LogUtils.d("denganzhi","left:"+left+ "right:"+right);
 
     }
 }

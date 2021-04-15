@@ -180,10 +180,10 @@ public class XMP2PManager extends StreamListener  {
     }
 
     public synchronized int connectDevice(DeviceInfo paramDeviceInfo){
-        LogUtils.e("connectDevice: did=" + paramDeviceInfo.getDeviceDid());
-        LogUtils.e("connectDevice: serverString=" + paramDeviceInfo.getServiceString());
-        LogUtils.e("connectDevice: sn=" + paramDeviceInfo.getDeviceSn());
-        LogUtils.e("connectDevice: p2pPassword=" + paramDeviceInfo.getP2pPassword());
+        LogUtils.d("connectDevice: did=" + paramDeviceInfo.getDeviceDid());
+        LogUtils.d("connectDevice: serverString=" + paramDeviceInfo.getServiceString());
+        LogUtils.d("connectDevice: sn=" + paramDeviceInfo.getDeviceSn());
+        LogUtils.d("connectDevice: p2pPassword=" + paramDeviceInfo.getP2pPassword());
         if(currentDid!=null&&currentDid.equals(paramDeviceInfo.getDeviceDid())){
             if(getInstanceP2P().isConnected(handleSession)) {
                 // 已经连接，可用的session
@@ -196,7 +196,7 @@ public class XMP2PManager extends StreamListener  {
                 getInstanceP2P().stopConnectDevice();
             }*/
         }
-        LogUtils.e( "shulan connectDevice: ====================");
+        LogUtils.d( "shulan connectDevice: ====================");
         // 创建相关信息
         ParamConnectDev paramConnectDev = new ParamConnectDev();
         // 通道 默认是0
@@ -223,14 +223,14 @@ public class XMP2PManager extends StreamListener  {
         paramConnectP2P.setServiceString(paramDeviceInfo.getServiceString());
         // 监听各个p2p 函数调用 数据回调
         getInstanceP2P().setStreamListener(this);
-        LogUtils.e("shulan getInstanceP2P()--->" + getInstanceP2P());
+        LogUtils.d("shulan getInstanceP2P()--->" + getInstanceP2P());
         // 开始连接
         handleSession = getInstanceP2P().startConnectDevice(paramConnectDev, paramConnectP2P);
-        LogUtils.e("handleSession==" + handleSession);
+        LogUtils.d("handleSession==" + handleSession);
         // session>0时，则建立成功
         if(handleSession<0){
             currentDid=null;
-            LogUtils.e("shulan--------------111");
+            LogUtils.d("shulan--------------111");
             /*if(mConnectListener != null)
                 mConnectListener.onConnectFailed(handleSession);*/
         }else {
@@ -257,7 +257,7 @@ public class XMP2PManager extends StreamListener  {
     @Override
     public void onStartConnect(JSONObject paramJSONObject) {
         super.onStartConnect(paramJSONObject);
-        LogUtils.e("onStartConnect--" + paramJSONObject.toString());
+        LogUtils.d("onStartConnect--" + paramJSONObject.toString());
         try {
             // 反馈 通知层
             sendP2PResult(paramJSONObject,FUNCTION_START_CONNECT);
@@ -275,7 +275,7 @@ public class XMP2PManager extends StreamListener  {
 
     @Override
     public void onConnectfailed(int paramInt) {
-        LogUtils.e("shulan--------------222");
+        LogUtils.d("shulan--------------222");
         if(mConnectListener != null)
             mConnectListener.onConnectFailed(paramInt);
     }
@@ -314,7 +314,7 @@ public class XMP2PManager extends StreamListener  {
     public void onNotifyGateWayNewVersionProcResult(JSONObject paramJSONObject)
     {
         super.onNotifyGateWayNewVersionProcResult(paramJSONObject);
-        LogUtils.e("shulan onNotifyGateWayNewVersionProcResult--"+paramJSONObject.toString());
+        LogUtils.d("shulan onNotifyGateWayNewVersionProcResult--"+paramJSONObject.toString());
         sendP2PResult(paramJSONObject, FUNCTION_GATEWAY_UPDATE);
     }
 
@@ -336,7 +336,7 @@ public class XMP2PManager extends StreamListener  {
     @Override
     public void onStartAudioStreamProcResult(JSONObject paramJSONObject) {
         super.onStartAudioStreamProcResult(paramJSONObject);
-        LogUtils.e("shulan onStartAudioStreamProcResult-->" + paramJSONObject.toString());
+        LogUtils.d("shulan onStartAudioStreamProcResult-->" + paramJSONObject.toString());
 
     }
 
@@ -347,7 +347,7 @@ public class XMP2PManager extends StreamListener  {
     @Override
     public void onStopAudioStreamProcResult(JSONObject paramJSONObject) {
         super.onStopAudioStreamProcResult(paramJSONObject);
-        LogUtils.e("shulan onStopAudioStreamProcResult-->" + paramJSONObject.toString());
+        LogUtils.d("shulan onStopAudioStreamProcResult-->" + paramJSONObject.toString());
     }
 
     /**
@@ -428,7 +428,7 @@ public class XMP2PManager extends StreamListener  {
      */
     public void stopConnect()
     {
-        LogUtils.e("shulan connectDevice -----> stopConnect");
+        LogUtils.d("shulan connectDevice -----> stopConnect");
         getInstanceP2P().stopConnectDevice();
         currentDid=null;
     }
@@ -443,7 +443,7 @@ public class XMP2PManager extends StreamListener  {
             getCodecInstance().stopRecordToMP4();
         }
         getCodecInstance().stop();
-        LogUtils.e("shulan --------stopCodec");
+        LogUtils.d("shulan --------stopCodec");
     }
 
     /**
@@ -459,7 +459,7 @@ public class XMP2PManager extends StreamListener  {
      * @param avFilterListener
      */
     public void setAVFilterListener(AVFilterListener avFilterListener){
-        LogUtils.e("shulan setAVFilterListener");
+        LogUtils.d("shulan setAVFilterListener");
         getCodecInstance().setFilterListener(avFilterListener);
     }
 
@@ -493,23 +493,23 @@ public class XMP2PManager extends StreamListener  {
     private void sessionStatus() {
         st_PPCS_Session st_ppcs_session = getInstanceP2P().getSeesionInfo();
         if (st_ppcs_session == null) {
-            LogUtils.e( "----->连接信息=NULL");
+            LogUtils.d( "----->连接信息=NULL");
             return;
         }
 
-        LogUtils.e("p2p----->DID=" + st_ppcs_session.getDID());
-        LogUtils.e("p2p----->Mode=" + st_ppcs_session.getMode());
-        LogUtils.e("p2p----->MyLocal IP=" + st_ppcs_session.getMyLocalIP());
-        LogUtils.e("p2p----->MyWan IP=" + st_ppcs_session.getMyWanIP());
-        LogUtils.e("p2p----->Remote IP=" + st_ppcs_session.getRemoteIP());
-        LogUtils.e("p2p----->Remote Port =" + st_ppcs_session.getRemotePort());
-        LogUtils.e("p2p------>Connect Time="+st_ppcs_session.getConnectTime());
-        LogUtils.e("p2p------>Skt="+st_ppcs_session.getSkt());
+        LogUtils.d("p2p----->DID=" + st_ppcs_session.getDID());
+        LogUtils.d("p2p----->Mode=" + st_ppcs_session.getMode());
+        LogUtils.d("p2p----->MyLocal IP=" + st_ppcs_session.getMyLocalIP());
+        LogUtils.d("p2p----->MyWan IP=" + st_ppcs_session.getMyWanIP());
+        LogUtils.d("p2p----->Remote IP=" + st_ppcs_session.getRemoteIP());
+        LogUtils.d("p2p----->Remote Port =" + st_ppcs_session.getRemotePort());
+        LogUtils.d("p2p------>Connect Time="+st_ppcs_session.getConnectTime());
+        LogUtils.d("p2p------>Skt="+st_ppcs_session.getSkt());
         int m_Mode = st_ppcs_session.getMode();
         if (m_Mode == 0) {
-            LogUtils.e("P2P---->");
+            LogUtils.d("P2P---->");
         } else {
-            LogUtils.e("Relay---->");
+            LogUtils.d("Relay---->");
         }
     }
 
@@ -539,7 +539,7 @@ public class XMP2PManager extends StreamListener  {
                     }
                 }
 
-                LogUtils.e("----->code");
+                LogUtils.d("----->code");
                 return;
             }
             if (paramJSONObject.getInt("errno") == XMP2PConnectJsonError.XM_JSON_ERROR_T21_INITIALIZED)
@@ -582,13 +582,13 @@ public class XMP2PManager extends StreamListener  {
      * @param rotate 旋转角度 0，90，180，270
      */
     public void startRecordMP4(String filePath, int width, int height, int Rate,int rotate){
-        LogUtils.e("shulan startRecordMP4---------------->filePath=" + filePath);
+        LogUtils.d("shulan startRecordMP4---------------->filePath=" + filePath);
         getCodecInstance().startRecordToMP4(filePath, width, height, Rate,rotate);
 
     }
 
     public void stopRecordMP4(){
-        LogUtils.e("shulan stopRecordMP4----------------");
+        LogUtils.d("shulan stopRecordMP4----------------");
         getCodecInstance().stopRecordToMP4();
     }
 
@@ -677,7 +677,7 @@ public class XMP2PManager extends StreamListener  {
     public void onStartTalkbackProcResult(JSONObject jsonObject) {
         super.onStartTalkbackProcResult(jsonObject);
         //打开对讲语音的结果回调
-        LogUtils.e("shulan onStartTalkbackProcResult--" + jsonObject.toString());
+        LogUtils.d("shulan onStartTalkbackProcResult--" + jsonObject.toString());
         if(mConnectListener != null)
             mConnectListener.onErrorMessage(jsonObject.toString());
     }
@@ -694,7 +694,7 @@ public class XMP2PManager extends StreamListener  {
     public void onStopTalkbackProcResult(JSONObject jsonObject) {
         super.onStopTalkbackProcResult(jsonObject);
         // 关闭对讲语音的结果回调
-        LogUtils.e("shulan onStopTalkbackProcResult--" + jsonObject.toString());
+        LogUtils.d("shulan onStopTalkbackProcResult--" + jsonObject.toString());
     }
 
     public int sendTalkBackAudioData(AudioFrame audioFrame){
@@ -753,7 +753,7 @@ public class XMP2PManager extends StreamListener  {
     @Override
     public void onPushCmdRet(int i, JSONObject jsonObject) {
         super.onPushCmdRet(i, jsonObject);
-        LogUtils.e("shulan onPushCmdRet--i=" + i + "--jsonObject->" + jsonObject.toString());
+        LogUtils.d("shulan onPushCmdRet--i=" + i + "--jsonObject->" + jsonObject.toString());
         if(mPlayDeviceRecordVideoListener != null){
             this.mPlayDeviceRecordVideoListener.onPushCmdRet(i,jsonObject);
         }
@@ -763,7 +763,7 @@ public class XMP2PManager extends StreamListener  {
     public void onSearchRecordFileListProcResult(JSONObject jsonObject) {
         super.onSearchRecordFileListProcResult(jsonObject);
 
-        LogUtils.e("shulan --onSearchRecordFileListProcResult--jsonObject--" + jsonObject.toString());
+        LogUtils.d("shulan --onSearchRecordFileListProcResult--jsonObject--" + jsonObject.toString());
     }
 
     /**
@@ -785,7 +785,7 @@ public class XMP2PManager extends StreamListener  {
     public void onPlayRecViewCtrlProcResult(JSONObject jsonObject) {
         super.onPlayRecViewCtrlProcResult(jsonObject);
         //发送控制录像回放数据传输回调
-        LogUtils.e("shulan onPlayRecViewCtrlProcResult");
+        LogUtils.d("shulan onPlayRecViewCtrlProcResult");
         if(mPlayDeviceRecordVideoListener != null){
             this.mPlayDeviceRecordVideoListener.onPlayRecViewCtrlResult(jsonObject);
         }
@@ -799,7 +799,7 @@ public class XMP2PManager extends StreamListener  {
     public void onMqttCtrlProResult(JSONObject jsonObject) {
         super.onMqttCtrlProResult(jsonObject);
         //设备响应操作mqtt动作，动作结果会在onPushCmdRet返回
-        LogUtils.e("shulan onMqttCtrlProResult-->"+jsonObject.toString());
+        LogUtils.d("shulan onMqttCtrlProResult-->"+jsonObject.toString());
         if(mXMP2PMqttCtrlListener != null){
             this.mXMP2PMqttCtrlListener.onMqttCtrl(jsonObject);
         }

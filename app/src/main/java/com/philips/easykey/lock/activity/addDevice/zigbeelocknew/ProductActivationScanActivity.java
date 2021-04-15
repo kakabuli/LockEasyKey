@@ -114,7 +114,7 @@ public class ProductActivationScanActivity extends CaptureActivity {
 
     //打开手电筒
     private void openFlashLight(boolean highlight) {
-        LogUtils.e("开启闪光灯");
+        LogUtils.d("开启闪光灯");
         if (getCameraManager().getOpenCamera()!=null) {
             camera = getCameraManager().getOpenCamera().getCamera();
             parameter = camera.getParameters();

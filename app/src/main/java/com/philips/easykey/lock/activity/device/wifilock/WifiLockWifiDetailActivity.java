@@ -73,7 +73,7 @@ public class WifiLockWifiDetailActivity extends BaseAddToApplicationActivity {
                 break;
             case R.id.rl_replace_wifi:
                 //老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2
-                LogUtils.e("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
+                LogUtils.d("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
                 if (TextUtils.isEmpty(String.valueOf(wifiLockInfo.getDistributionNetwork()))) {
                     Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
                     String wifiModelType = "WiFi";
@@ -93,7 +93,7 @@ public class WifiLockWifiDetailActivity extends BaseAddToApplicationActivity {
                 } else if(wifiLockInfo.getDistributionNetwork() == 3){
                     showWifiDialog();
                 }else {
-                    LogUtils.e("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
+                    LogUtils.d("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
 
                 }
                 break;

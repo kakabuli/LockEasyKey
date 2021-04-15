@@ -47,15 +47,15 @@ public class OTADialogActivity extends BaseBleCheckInfoActivity<IOtaView, OtaPre
         sn = bleLockInfo.getServerLockInfo().getDeviceSN();
         version = bleLockInfo.getServerLockInfo().getSoftwareVersion();
 
-        LogUtils.e("获取版本号的KEy  server  " + sn);
-        LogUtils.e("获取版本号是 server " + version);
+        LogUtils.d("获取版本号的KEy  server  " + sn);
+        LogUtils.d("获取版本号是 server " + version);
 
         if (TextUtils.isEmpty(sn) || TextUtils.isEmpty(version)){
             sn = (String) SPUtils.get(KeyConstants.DEVICE_SN + bleLockInfo.getServerLockInfo().getMacLock(), ""); //Key
             version = (String) SPUtils.get(KeyConstants.BLE_VERSION + bleLockInfo.getServerLockInfo().getMacLock(), ""); //Key
 
-            LogUtils.e("获取版本号的KEy  local  " + sn);
-            LogUtils.e("获取版本号是 local " + version);
+            LogUtils.d("获取版本号的KEy  local  " + sn);
+            LogUtils.d("获取版本号是 local " + version);
         }
 
         tvRight.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class OTADialogActivity extends BaseBleCheckInfoActivity<IOtaView, OtaPre
 
                 mPresenter.checkOTAInfo(sn,version,1);
 //                mPresenter.checkOtaInfo("K901192210013","1.01.007");
-                LogUtils.e("OTA  升级  断开连接");
+                LogUtils.d("OTA  升级  断开连接");
                 MyApplication.getInstance().getBleService().release();  // OTA  升级  断开连接"
             }
         });

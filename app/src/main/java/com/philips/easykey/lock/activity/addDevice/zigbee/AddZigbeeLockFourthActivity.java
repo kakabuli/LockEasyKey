@@ -48,7 +48,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
     private void initData() {
        gatewayId= (String) SPUtils.getProtect(Constants.GATEWAYID,"");
         if (!TextUtils.isEmpty(gatewayId)){
-            LogUtils.e("允许设备入网的网关id",gatewayId);
+            LogUtils.d("允许设备入网的网关id",gatewayId);
             mPresenter.openJoinAllow(gatewayId);
         }
     }
@@ -121,7 +121,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
         Intent failIntent=new Intent(this,AddZigbeeLockFailActivity.class);
         startActivity(failIntent);
         finish();
-        LogUtils.e("设备入网失败");
+        LogUtils.d("设备入网失败");
     }
 
     @Override
@@ -129,7 +129,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
         Intent failIntent=new Intent(this,AddZigbeeLockFailActivity.class);
         startActivity(failIntent);
         finish();
-        LogUtils.e("设备入网异常");
+        LogUtils.d("设备入网异常");
     }
 
     @Override
@@ -143,7 +143,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
         //清除锁上的密码
         startActivity(successIntent);
         finish();
-        LogUtils.e("设备添加成功");
+        LogUtils.d("设备添加成功");
     }
 
     @Override
@@ -151,7 +151,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
         Intent failIntent=new Intent(this,AddZigbeeLockFailActivity.class);
         startActivity(failIntent);
         finish();
-        LogUtils.e("设备添加异常");
+        LogUtils.d("设备添加异常");
     }
 
     @Override
@@ -159,7 +159,7 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
         Intent failIntent=new Intent(this,AddZigbeeLockFailActivity.class);
         startActivity(failIntent);
         finish();
-        LogUtils.e("设备添加异常");
+        LogUtils.d("设备添加异常");
     }
 
     @Override

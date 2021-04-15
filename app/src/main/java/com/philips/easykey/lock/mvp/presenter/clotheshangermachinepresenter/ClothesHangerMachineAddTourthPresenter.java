@@ -56,7 +56,7 @@ public class ClothesHangerMachineAddTourthPresenter<T> extends BasePresenter<ICl
                     public void accept(BleStateBean bleStateBean) throws Exception {
                         if (isSafe()) {
                             if(!isConnected){
-                                LogUtils.e("shulan isConnected------->" + isConnected);
+                                LogUtils.d("shulan isConnected------->" + isConnected);
                                 mViewRef.get().onDeviceStateChange(bleStateBean.isConnected());
                             }
                         }
@@ -72,7 +72,7 @@ public class ClothesHangerMachineAddTourthPresenter<T> extends BasePresenter<ICl
     }
 
     public void listenerCharacterNotify() {
-        LogUtils.e("shulan --kaadas--listenerCharacterNotify");
+        LogUtils.d("shulan --kaadas--listenerCharacterNotify");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -95,10 +95,10 @@ public class ClothesHangerMachineAddTourthPresenter<T> extends BasePresenter<ICl
                     public void accept(BleDataBean bleDataBean) throws Exception {
 
                         byte[] originalData = bleDataBean.getOriginalData();
-                        LogUtils.e("shulan--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
+                        LogUtils.d("shulan--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
 
                         if ((originalData[3] & 0xff) == 0x93) {
-                            LogUtils.e("shulan--kaadas--收到配网结果");
+                            LogUtils.d("shulan--kaadas--收到配网结果");
                             if ((originalData[4] & 0xff) == 0x00){
                                 //配网成功
                                 isConnected = true;
@@ -107,7 +107,7 @@ public class ClothesHangerMachineAddTourthPresenter<T> extends BasePresenter<ICl
                             }
 
                             if((originalData[3] & 0xff) == 0x97){
-                                LogUtils.e("shulan--kaadas--收到Mqtt连接指令");
+                                LogUtils.d("shulan--kaadas--收到Mqtt连接指令");
                                 if ((originalData[4] & 0xff) == 0x00){
                                     //配网成功
                                     isConnected = true;

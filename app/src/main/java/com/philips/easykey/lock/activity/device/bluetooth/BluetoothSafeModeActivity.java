@@ -155,7 +155,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
 
     @Override
     public void onSetSuccess(boolean isOpen) {
-        LogUtils.e("设置安全模式成功   " + isOpen);
+        LogUtils.d("设置安全模式成功   " + isOpen);
         if (isOpen) {
             ivSafeMode.setImageResource(R.mipmap.iv_open);
             safeModeStatus = true;
@@ -187,7 +187,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
     public void onGetStateFailed(Throwable throwable) {
         hiddenLoading();
         ToastUtil.getInstance().showShort(getString(R.string.get_lock_state_fail));
-        LogUtils.e("获取门锁状态失败   " + throwable.getMessage());
+        LogUtils.d("获取门锁状态失败   " + throwable.getMessage());
     }
 
     @Override

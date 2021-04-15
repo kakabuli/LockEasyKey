@@ -3,21 +3,15 @@ package com.philips.easykey.lock.mvp.presenter;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.IDeviceView;
-import com.philips.easykey.lock.mvp.view.IHomeView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
-import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
-import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.ServerBleDevice;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetDevicePowerBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.BindMemeReuslt;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayStatusResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
@@ -28,7 +22,6 @@ import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
@@ -86,7 +79,7 @@ public class DevicePresenter<T> extends BasePresenter<IDeviceView> {
                             toDisposable(allBindDeviceDisposable);
                             String payload = mqttData.getPayload();
                             if(BuildConfig.DEBUG)
-                            LogUtils.e("--kaadas--payload=="+payload);
+                            LogUtils.d("--kaadas--payload=="+payload);
 
                             AllBindDevices allBindDevices = new Gson().fromJson(payload, AllBindDevices.class);
                             if (allBindDevices != null) {
@@ -124,19 +117,19 @@ public class DevicePresenter<T> extends BasePresenter<IDeviceView> {
             }
         }
         //如果service中有bleLockInfo  并且deviceName一致，就不重新设置。
-        LogUtils.e("设置的  设备信息为  " + bleLockInfo.getServerLockInfo().toString());
+        LogUtils.d("设置的  设备信息为  " + bleLockInfo.getServerLockInfo().toString());
         if (bleService.getBleLockInfo() != null
                 && bleService.getBleLockInfo().getServerLockInfo().getLockName().equals(bleLockInfo.getServerLockInfo().getLockName())) { //1
             ServerBleDevice serviceLockInfo = bleService.getBleLockInfo().getServerLockInfo(); //1
             ServerBleDevice serverLockInfo = bleLockInfo.getServerLockInfo();
             if (serverLockInfo.getPassword1() != null && serverLockInfo.getPassword2() != null) {
                 if (serverLockInfo.getPassword1().equals(serviceLockInfo.getPassword1()) && serverLockInfo.getPassword2().equals(serviceLockInfo.getPassword2())) {
-                    LogUtils.e("进来了  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
+                    LogUtils.d("进来了  设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
                     return;
                 }
             } else {
                 if ((serviceLockInfo.getPassword1() == null && serverLockInfo.getPassword1() == null) && (serviceLockInfo.getPassword2() == null && serverLockInfo.getPassword2() == null)) {
-                    LogUtils.e("进来了 密码为空 设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
+                    LogUtils.d("进来了 密码为空 设备  数据一致   " + bleService.getBleLockInfo().getServerLockInfo().toString()); //1
                     return;
                 }
             }
@@ -202,7 +195,7 @@ public class DevicePresenter<T> extends BasePresenter<IDeviceView> {
                         public void accept(MqttData mqttData) throws Exception {
                             if (mqttData != null) {
                                 GetBindGatewayStatusResult gatewayStatusResult = new Gson().fromJson(mqttData.getPayload(), GetBindGatewayStatusResult.class);
-                                LogUtils.e("监听网关的Device状态" + gatewayStatusResult.getDevuuid() + " mqttData:" + mqttData);
+                                LogUtils.d("监听网关的Device状态" + gatewayStatusResult.getDevuuid() + " mqttData:" + mqttData);
                                 if (gatewayStatusResult != null && gatewayStatusResult.getData().getState() != null) {
                                     if (isSafe()) {
                                         mViewRef.get().gatewayStatusChange(gatewayStatusResult.getDevuuid(), gatewayStatusResult.getData().getState());
@@ -268,52 +261,6 @@ public class DevicePresenter<T> extends BasePresenter<IDeviceView> {
             }
         });
         compositeDisposable.add(networkChangeDisposable);
-    }
-
-    //绑定咪咪网
-    public void bindMimi(String deviceSN, String gatewayId) {
-        if (mqttService != null) {
-            toDisposable(bingMimiDisposable);
-            MqttMessage mqttMessage = MqttCommandFactory.registerMemeAndBind(MyApplication.getInstance().getUid(), gatewayId, deviceSN);
-            bingMimiDisposable = mqttService.mqttPublish(MqttConstant.MQTT_REQUEST_APP, mqttMessage)
-                    .compose(RxjavaHelper.observeOnMainThread())
-                    .filter(new Predicate<MqttData>() {
-                        @Override
-                        public boolean test(MqttData mqttData) throws Exception {
-                            //TODO  以后改成根据  msgId 区分是不是当前消息的回调
-                            if (MqttConstant.REGISTER_MIMI_BIND.equals(mqttData.getFunc())) {
-                                return true;
-                            }
-                            return false;
-                        }
-                    })
-                    .subscribe(new Consumer<MqttData>() {
-                        @Override
-                        public void accept(MqttData mqttData) throws Exception {
-                            LogUtils.e("绑定咪咪回调" + mqttData.getPayload());
-                            BindMemeReuslt bindMemeReuslt = new Gson().fromJson(mqttData.getPayload(), BindMemeReuslt.class);
-                            LogUtils.e(bindMemeReuslt.getFunc());
-                            if ("200".equals(bindMemeReuslt.getCode())) {
-                                if (isSafe()) {
-                                    mViewRef.get().bindMimiSuccess(deviceSN);
-                                }
-                            } else {
-                                if (isSafe()) {
-                                    mViewRef.get().bindMimiFail(bindMemeReuslt.getCode(), bindMemeReuslt.getMsg());
-                                }
-                            }
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            if (isSafe()) {
-                                mViewRef.get().bindMimiThrowable(throwable);
-                            }
-                        }
-                    });
-            compositeDisposable.add(bingMimiDisposable);
-        }
-
     }
 
 

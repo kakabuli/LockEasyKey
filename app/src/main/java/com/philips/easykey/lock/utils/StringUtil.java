@@ -106,7 +106,7 @@ public class StringUtil {
     public static int groupPsw(char s) {
         int temp = Integer.valueOf(s);
         int temp2 = 0;
-        LogUtils.e("groupPsw:" + temp);
+        LogUtils.d("groupPsw:" + temp);
         switch (temp) {
             case 0:
                 temp2 = 30;

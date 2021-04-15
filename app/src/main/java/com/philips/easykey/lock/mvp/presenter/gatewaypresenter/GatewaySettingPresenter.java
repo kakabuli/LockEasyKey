@@ -99,7 +99,7 @@ public class GatewaySettingPresenter<T> extends BasePresenter<GatewaySettingView
                     .filter(new Predicate<MqttData>() {
                         @Override
                         public boolean test(MqttData mqttData) throws Exception {
-                            LogUtils.e("获取到的数据的messageId是   " + mqttData.getMessageId() + "   发送的messageId是  " + wiFiBasic.getId());
+                            LogUtils.d("获取到的数据的messageId是   " + mqttData.getMessageId() + "   发送的messageId是  " + wiFiBasic.getId());
                             return mqttData.isThisRequest(wiFiBasic.getId(), MqttConstant.GET_WIFI_BASIC);
                         }
                     })

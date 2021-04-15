@@ -27,7 +27,7 @@ public class MqttExceptionHandle {
 			return;
 		}
 		final int result = asyncActionToken.getException().getReasonCode();
-		LogUtils.e("mqtt发生异常"+exception.toString()+"类型是"+type);
+		LogUtils.d("mqtt发生异常"+exception.toString()+"类型是"+type);
 		switch (result) {
 			//客户端遇到异常。使用{@link #getCause()}方法获取底层原因。
 			case 0:

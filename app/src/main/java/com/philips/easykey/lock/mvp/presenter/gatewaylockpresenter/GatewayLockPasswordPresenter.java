@@ -82,7 +82,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                   @Override
                            public void accept(String baseResult) throws Exception {
 
-                                      LogUtils.e("服务器http返回数据:"+ baseResult);
+                                      LogUtils.d("服务器http返回数据:"+ baseResult);
 
                                       GateWay6032Result  gateWay6032Result=new Gson().fromJson(baseResult,GateWay6032Result.class);
                                       int  maxCount=0;
@@ -101,7 +101,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                           }
                                       }
                                       if(gateWay6032Result.getData()==null || gateWay6032Result.getData().getPwdList()==null){
-                                          LogUtils.e("获取数据失败:"+ baseResult);
+                                          LogUtils.d("获取数据失败:"+ baseResult);
                                           mViewRef.get().syncPasswordComplete(null);
                                           return;
                                       }
@@ -252,16 +252,16 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                                       gateWayArgsBean.getEndMinute());
                                           }
                                       }
-                               //       LogUtils.e("获取全部密码 -http    2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
+                               //       LogUtils.d("获取全部密码 -http    2 " + Arrays.toString(gatewayPasswordPlanBeans.toArray()));
 
 
-                             //  LogUtils.e("http:"+baseResult);
+                             //  LogUtils.d("http:"+baseResult);
                         }
                      },
                 new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("error:"+throwable);
+                        LogUtils.d("error:"+throwable);
 
                         mViewRef.get().syncPasswordFailed(throwable);
                     }
@@ -315,7 +315,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
 
                                 startSyncPassword(gatewayId, deviceId, 0, pwdId, pwdValue, pwdType, zLocalEndT, zLocalStartT, dayMaskBits, endHour, endMinute, startHour, startMinute);
                             } else {
-                                LogUtils.e("获取锁信息失败   " + returnCode);
+                                LogUtils.d("获取锁信息失败   " + returnCode);
                                 if (isSafe()) {
                                     mViewRef.get().getLockInfoFail();
                                 }
@@ -324,7 +324,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("获取锁信息失败   " + throwable.getMessage());
+                            LogUtils.d("获取锁信息失败   " + throwable.getMessage());
                             if (isSafe()) {
                                 mViewRef.get().getLockInfoThrowable(throwable);
                             }
@@ -354,7 +354,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                 }
             }
         }
-        LogUtils.e("initValidIndex："+ validIndex + "syncType :" + syncType );
+        LogUtils.d("initValidIndex："+ validIndex + "syncType :" + syncType );
 
     }
 
@@ -389,10 +389,10 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                 try {
                                     id = Integer.parseInt(lockPwdFuncBean.getParams().getPwdid());
                                 } catch (Exception e) {
-                                    LogUtils.e(e.getMessage());
+                                    LogUtils.d(e.getMessage());
                                 }
                                 if (currentNum != id) {
-                                    LogUtils.e("返回的不是查询的数据");
+                                    LogUtils.d("返回的不是查询的数据");
                                     return;
                                 }
                                 toDisposable(getLockPwdDisposable);
@@ -406,7 +406,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                     passwordPlanBeans.put(currentNum, gatewayPasswordPlanBean);
                                 }
                                 if (currentIndex >= validIndex.size() - 1) {  //全部获取完
-                                    LogUtils.e("获取的密码列表是    " + pwds.size());
+                                    LogUtils.d("获取的密码列表是    " + pwds.size());
                                     if (isSafe()) {
                                         mViewRef.get().syncPasswordComplete(passwordPlanBeans);
                                     }
@@ -418,7 +418,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                 }
                             } else {
                                 toDisposable(getLockPwdDisposable);
-                                LogUtils.e("获取密码列表失败   returnCode   " + returnCode);
+                                LogUtils.d("获取密码列表失败   returnCode   " + returnCode);
                                 if (isSafe()) {
                                     mViewRef.get().syncPasswordFailed(new MqttBackCodeException(returnCode));
                                 }
@@ -427,7 +427,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("获取密码列表失败      " + throwable.getMessage());
+                            LogUtils.d("获取密码列表失败      " + throwable.getMessage());
                             if (isSafe()) {
                                 mViewRef.get().syncPasswordFailed(throwable);
                             }
@@ -529,20 +529,20 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                             int status = lockPwdFuncBean.getReturnData().getStatus();
                             if (status == 0) {
                                 //设置用户类型成功
-                                LogUtils.e("设置用户类型成功");
+                                LogUtils.d("设置用户类型成功");
 
                                 managerDao.insertOrReplace(deviceId, MyApplication.getInstance().getUid(), gwId, gatewayPasswordPlanBean);
                                 if (isSafe()) {
                                     mViewRef.get().setUserTypeSuccess(pwdValue, gatewayPasswordPlanBean);
                                 }
                             } else {
-                                LogUtils.e("设置用户类型失败1   " + status);
+                                LogUtils.d("设置用户类型失败1   " + status);
                                 if (isSafe()) {
                                     mViewRef.get().setUserTypeFailed(new MqttStatusException(status));
                                 }
                             }
                         } else {
-                            LogUtils.e("设置用户类型失败2   " + returnCode);
+                            LogUtils.d("设置用户类型失败2   " + returnCode);
                             if (isSafe()) {
                                 mViewRef.get().setUserTypeFailed(new MqttReturnCodeError(returnCode));
                             }
@@ -551,7 +551,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("设置用户类型失败   " + throwable.getMessage());
+                        LogUtils.d("设置用户类型失败   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().setUserTypeFailed(throwable);
                         }
@@ -563,7 +563,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
     public void setPlan(String deviceId, String gwId,
                         String action, int scheduleId, String type, int pwdId, long zLocalEndT, long zLocalStartT,
                         int dayMaskBits, int endHour, int endMinute, int startHour, int startMinute) {
-        LogUtils.e("设置用户策略   zLocalEndT " + zLocalEndT + "  zLocalStartT " + zLocalStartT +
+        LogUtils.d("设置用户策略   zLocalEndT " + zLocalEndT + "  zLocalStartT " + zLocalStartT +
                 "  对象的数据是    zLocalEndT " + zLocalEndT + "  zLocalStartT " + zLocalStartT);
         toDisposable(setPlanDisposable1);
         //设置用户类型成功
@@ -594,7 +594,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                             int status = setPlanResultBean.getReturnData().getStatus();
                             if (status == 0) {
                                 //设置用户类型成功
-                                LogUtils.e("设置策略成功   ");
+                                LogUtils.d("设置策略成功   ");
                                 if (isSafe()) {
                                     mViewRef.get().setPlanSuccess(pwdValue, gatewayPasswordPlanBean);
                                 }
@@ -606,14 +606,14 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                 }
                                 setUserType(deviceId, gwId, pwdId, pwdType, zLocalEndT, zLocalStartT, dayMaskBits, endHour, endMinute, startHour, startMinute);
                             } else {
-                                LogUtils.e("设置策略失败  status " + status);
+                                LogUtils.d("设置策略失败  status " + status);
                                 if (isSafe()) {
                                     mViewRef.get().setPlanFailed(new MqttStatusException(status));
                                 }
                             }
                         } else {
 
-                            LogUtils.e("设置策略失败  returnCode " + returnCode);
+                            LogUtils.d("设置策略失败  returnCode " + returnCode);
                             if (isSafe()) {
                                 mViewRef.get().setPlanFailed(new MqttReturnCodeError(returnCode));
                             }
@@ -622,7 +622,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("设置策略失败    " + throwable.getMessage());
+                        LogUtils.d("设置策略失败    " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().setPlanFailed(throwable);
                         }
@@ -655,9 +655,9 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                     public void accept(MqttData mqttData) throws Exception {
 
                         GatewayPasswordResultBean gatewayPasswordResultBean = new Gson().fromJson(mqttData.getPayload(), GatewayPasswordResultBean.class);
-                        LogUtils.e("获取策略 返回数据  " + gatewayPasswordResultBean.toString());
+                        LogUtils.d("获取策略 返回数据  " + gatewayPasswordResultBean.toString());
                         String returnCode = gatewayPasswordResultBean.getReturnCode();
-                        LogUtils.e("获取策略 返回数据  " + returnCode);
+                        LogUtils.d("获取策略 返回数据  " + returnCode);
                         if ("200".equals(returnCode)) {
                             //设置用户类型成功
                             int id = gatewayPasswordResultBean.getReturnData().getScheduleID();
@@ -667,9 +667,9 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                             toDisposable(getPlanDisposable);
                             int scheduleStatus = gatewayPasswordResultBean.getReturnData().getScheduleStatus();
                             int index = planPasswordIndex.indexOf(scheduleId);
-                            LogUtils.e("获取策略 返回数据  scheduleStatus " + scheduleStatus);
+                            LogUtils.d("获取策略 返回数据  scheduleStatus " + scheduleStatus);
                             if (scheduleStatus == 0) {
-                                LogUtils.e("获取策略成功  ");
+                                LogUtils.d("获取策略成功  ");
                                 GatewayPasswordPlanBean gatewayPasswordPlanBean = passwordPlanBeans.get(scheduleId);
                                 gatewayPasswordPlanBean.setPlanType(planType);
                                 GatewayPasswordResultBean.ReturnDataBean returnData = gatewayPasswordResultBean.getReturnData();
@@ -688,7 +688,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                 for (Integer key : passwordPlanBeans.keySet()) {
                                     list.add(passwordPlanBeans.get(key));
                                 }
-                                LogUtils.e("index 是  " + index);
+                                LogUtils.d("index 是  " + index);
                                 if (planPasswordIndex.size() - 1 <= index) { //所有密码策略获取完
                                     mViewRef.get().onLoadPasswordPlanComplete(passwordPlanBeans);
                                     managerDao.insertAfterDelete(deviceId, MyApplication.getInstance().getUid(), gwId, list);
@@ -728,7 +728,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
     public void addLockPwd(String gatewayiId, String deviceId, int pwdId, String pwdValue, int pwdType,
                            long zLocalEndT, long zLocalStartT, int dayMaskBits, int endHour, int endMinute,
                            int startHour, int startMinute) {
-        LogUtils.e("开始添加密码   " + "  gatewayiId  " + gatewayiId + "  deviceId  " + deviceId + "  pwdId  " + pwdId
+        LogUtils.d("开始添加密码   " + "  gatewayiId  " + gatewayiId + "  deviceId  " + deviceId + "  pwdId  " + pwdId
                 + "  pwdValue  " + pwdValue + "  pwdType  " + pwdType + "  zLocalEndT  " + zLocalEndT + "  zLocalStartT  " + zLocalStartT
                 + "  dayMaskBits  " + dayMaskBits + "  endHour  " + endHour + "  endMinute  " + endMinute + "  startHour  " + startHour
                 + "  startMinute  " + startMinute);
@@ -778,7 +778,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                         managerDao.insertOrReplace(deviceId, MyApplication.getInstance().getUid(), gatewayiId, gatewayPasswordPlanBean);
                                         return;
                                     }
-                                    LogUtils.e("添加密码成功  开始设置策略  " + pwdType);
+                                    LogUtils.d("添加密码成功  开始设置策略  " + pwdType);
                                     String type = "";
                                     if (pwdType == 1) {
                                         type = "year";
@@ -922,10 +922,10 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                                 try {
                                     id = Integer.parseInt(lockPwdFuncBean.getParams().getPwdid());
                                 } catch (Exception e) {
-                                    LogUtils.e(e.getMessage());
+                                    LogUtils.d(e.getMessage());
                                 }
                                 if (localData.index != id) {
-                                    LogUtils.e("返回的不是查询的数据");
+                                    LogUtils.d("返回的不是查询的数据");
                                     return;
                                 }
                                 int status = lockPwdFuncBean.getReturnData().getStatus();
@@ -953,7 +953,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("获取密码出错    " + throwable.getMessage() + "  第多少个数据  " + localData.index);
+                            LogUtils.d("获取密码出错    " + throwable.getMessage() + "  第多少个数据  " + localData.index);
                             if (localData.retryTimes >1){ //已经重试了三次
                                 localData.status = 3;
                                 checkStatus(localData);
@@ -971,7 +971,7 @@ public abstract class GatewayLockPasswordPresenter<T extends IGatewayLockPasswor
 
 
     private void checkStatus(LocalData localData) {
-//        LogUtils.e("秘钥数据是   " +   Arrays.toString(localDatas));
+//        LogUtils.d("秘钥数据是   " +   Arrays.toString(localDatas));
         boolean isComplete = true;
         for (int i = 0; i < localDatas.length; i++) {
             if (localDatas[i].status == 0) {

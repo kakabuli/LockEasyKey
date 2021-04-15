@@ -3,6 +3,7 @@ package la.xiong.androidquick.ui.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -97,7 +98,7 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
 
     public void setValue(String title, String info, String confirmBtn, String cancelBtn, String doNotShowAgain,
                          DialogCallback callback,int okColor,int cancleColor,boolean showBottom) {
-        LogUtils.iTag(TAG, "dialog title:" + title + "  mes:0" + info + " positiveBtn:" + confirmBtn + " negativeBtn:" + cancelBtn + " not_tip:" + doNotShowAgain + " callback" + callback);
+        Log.d(TAG, "dialog title:" + title + "  mes:0" + info + " positiveBtn:" + confirmBtn + " negativeBtn:" + cancelBtn + " not_tip:" + doNotShowAgain + " callback" + callback);
         mTitle = title;
         mInfoText = info;
         mConfirmText = confirmBtn;
@@ -264,7 +265,7 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
          * 每次调用该函数，都会根据之前设置的各项成熟，生成一个新的 commonDialog 对象作为返回, 该dialog 默认show
          **/
         public CommonDialog show() {
-            LogUtils.iTag(TAG, " title " + mTitle + " message" + mInfoText + "  show()  to be invoked");
+            Log.d(TAG, " title " + mTitle + " message" + mInfoText + "  show()  to be invoked");
             CommonDialog dialog = create();
             dialog.show();
             dialog.setCancelable(mCancelable);

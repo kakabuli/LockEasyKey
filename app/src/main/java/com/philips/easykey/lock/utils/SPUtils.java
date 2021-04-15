@@ -265,11 +265,11 @@ public class SPUtils {
                     return;
                 }
             } catch (IllegalArgumentException e) {
-                LogUtils.e("缓存失败   " + e.getMessage());
+                LogUtils.d("缓存失败   " + e.getMessage());
             } catch (IllegalAccessException e) {
-                LogUtils.e("缓存失败   " + e.getMessage());
+                LogUtils.d("缓存失败   " + e.getMessage());
             } catch (InvocationTargetException e) {
-                LogUtils.e("缓存失败   " + e.getMessage());
+                LogUtils.d("缓存失败   " + e.getMessage());
             }
 
             editor.commit();

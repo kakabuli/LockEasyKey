@@ -5,19 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.publiclibrary.bean.SingleFireSwitchInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AllowCateyeJoinBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindGatewayBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindGatewayMemeBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.CatEyeInfoBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.CatEyeInfoBeanProperty;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.CateEyeInfoBeanPropertyUpdate;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.ClothesHangerMachineBean.GetHangerAllStatus;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.ClothesHangerMachineBean.SetHangerLightingBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.ClothesHangerMachineBean.SetHangerMotorBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.DeleteGatewayLockDeviceBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.DeviceShareBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.DeviceShareUserBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.FtpEnableBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GatewayComfirmOtaUpgradeBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetAMBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetAlarmListBean;
@@ -29,7 +23,6 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetGatewayLockInf
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetLockLang;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetLockRecordTotal;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetNetBasicBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetPirSlientBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetSoundVolume;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetWifiBasicBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetZbChannelBean;
@@ -39,18 +32,12 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.OpenLockBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SelectOpenLockRecordBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetAMBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetArmLockedBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetCatEyeBellCountBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetCatEyeBellVolume;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetJoinAllowBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetLockLang;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetNetBasicBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetPasswordPlanBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetPirEnableBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetPirSlientBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetPirWanderBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetUserTypeBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetVedioResBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetVideoLockAmMode;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetVideoLockLang;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetVideoLockSafeMode;
@@ -66,15 +53,12 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UnBindGatewayBean
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UpdateDevNickNameBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UpdateDevPushSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UpdateGatewayNickNameBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.WakeupCameraBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GatewayOtaNotifyBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.LogUtils;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class MqttCommandFactory {
 
@@ -98,20 +82,6 @@ public class MqttCommandFactory {
         BindGatewayBean bindGatewayBean = new BindGatewayBean(messageId, uid, MqttConstant.BIND_GATEWAY, Sn);
         return getMessage(bindGatewayBean, messageId);
     }
-
-    /**
-     * 绑定咪咪网
-     *
-     * @param uid
-     * @param Sn
-     * @return
-     */
-    public static MqttMessage registerMemeAndBind(String uid, String gatewayId, String Sn) {
-        int messageId = getMessageId();
-        BindGatewayMemeBean bindGatewayMemeBean = new BindGatewayMemeBean(messageId, MqttConstant.REGISTER_MIMI_BIND, uid, gatewayId, Sn);
-        return getMessage(bindGatewayMemeBean, messageId);
-    }
-
 
     /**
      * 获取绑定网关的列表
@@ -140,17 +110,6 @@ public class MqttCommandFactory {
         return getMessage(getWifiBasicBean, messageId);
     }
 
-    /**
-     * @param userId
-     * @param gwId
-     * @return
-     */
-    public static MqttMessage allowCateyeJoin(String userId, String gwId, String SN, String mac, int timeout) {
-        int messageId = getMessageId();
-        AllowCateyeJoinBean getWifiBasicBean = new AllowCateyeJoinBean("request", userId, messageId,
-                gwId, MqttConstant.ALLOW_GATEWAY_JOIN, SN, mac, timeout, 0, "0");
-        return getMessage(getWifiBasicBean, messageId);
-    }
 
     /**
      * 设置让猫眼入网
@@ -368,22 +327,6 @@ public class MqttCommandFactory {
     }
 
     /**
-     * 唤醒FTP
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @returne
-     */
-    public static MqttMessage setEnableFTP(String gatewayId, String deviceId) {
-        int messageId = getMessageId();
-
-        //(String msgtype, String userId, int msgId, String gwId, String deviceId, String func, ParamsBean params, String returnCode, ReturnDataBean returnData, String timestamp)
-        FtpEnableBean ftpEnableBean = new FtpEnableBean(MqttConstant.MSG_TYPE_REQUEST, MyApplication.getInstance().getUid(), messageId, gatewayId, deviceId, MqttConstant.SET_FTP_ENABLE, new FtpEnableBean.ParamsBean(), "0", new FtpEnableBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(ftpEnableBean, messageId);
-    }
-
-
-    /**
      * 获取网关锁信息
      *
      * @param gatewayId
@@ -395,159 +338,6 @@ public class MqttCommandFactory {
         GetGatewayLockInfoBean getGatewayLockInfoBean = new GetGatewayLockInfoBean(MqttConstant.MSG_TYPE_REQUEST, MyApplication.getInstance().getUid(),
                 messageId, gatewayId, deviceId, MqttConstant.GET_LOCK_INFO, new GetGatewayLockInfoBean.ParamsBean(), "0", new GetGatewayLockInfoBean.ReturnDataBean(), System.currentTimeMillis() + "");
         return getMessage(getGatewayLockInfoBean, messageId);
-    }
-
-
-    /**
-     * 唤醒猫眼
-     *
-     * @param deviceId
-     * @param gwId
-     * @param uid
-     * @return
-     */
-    public static MqttMessage wakeupCamera(String deviceId, String gwId, String uid) {
-        int messageId = getMessageId();
-        WakeupCameraBean.ReturnDataBean returnDataBean = new WakeupCameraBean.ReturnDataBean();
-        WakeupCameraBean.ParamsBean paramsBean = new WakeupCameraBean.ParamsBean();
-        //(String deviceId, String func, String gwId, int msgId, String msgtype, ParamsBean params, int returnCode, ReturnDataBean returnData, String timestamp, String userId) {
-
-        WakeupCameraBean getGatewayLockInfoBean = new WakeupCameraBean(deviceId, MqttConstant.WAKEUP_CAMERA,
-                gwId, messageId, MqttConstant.MSG_TYPE_REQUEST, paramsBean, 0, returnDataBean, "" + System.currentTimeMillis(), uid);
-        return getMessage(getGatewayLockInfoBean, messageId);
-    }
-
-    /**
-     * 获取猫眼基本信息
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @return
-     */
-
-    public static MqttMessage getCatEyeInfo(String gatewayId, String deviceId, String uid) {
-        int messageId = getMessageId();
-        CatEyeInfoBean catEyeInfoBean = new CatEyeInfoBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.BASIC_INFO, new CatEyeInfoBean.ParamsBean(), "0", new CatEyeInfoBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(catEyeInfoBean, messageId);
-
-    }
-
-    /**
-     * 获取猫眼夜市功能
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @return
-     */
-
-    public static MqttMessage getCatNightSight(String gatewayId, String deviceId, String uid) {
-        int messageId = getMessageId();
-        //  CatEyeInfoBean catEyeInfoBean=new CatEyeInfoBean(MqttConstant.MSG_TYPE_REQUEST,uid,messageId,gatewayId,deviceId,MqttConstant.CATEYE_NIGHT_SIGHT,new CatEyeInfoBean.ParamsBean(),"0",new CatEyeInfoBean.ReturnDataBean(),System.currentTimeMillis()+"");
-
-        //  (String msgtype, String userId, String msgId, String gwId, String deviceId, String func, ParamsEntity params, int returnCode, ReturnDataEntity returnData, String timestamp)
-        CatEyeInfoBeanProperty.ParamsEntity paramsEntity = new CatEyeInfoBeanProperty.ParamsEntity();
-        List<String> result = Arrays.asList("CamInfrared");
-        paramsEntity.setPropertys(result);
-        CatEyeInfoBeanProperty catEyeInfoBean = new CatEyeInfoBeanProperty(MqttConstant.MSG_TYPE_REQUEST, uid, messageId + "", gatewayId, deviceId, MqttConstant.CATEYE_NIGHT_SIGHT, paramsEntity, 0, new CatEyeInfoBeanProperty.ReturnDataEntity(), System.currentTimeMillis() + "");
-        return getMessage(catEyeInfoBean, messageId);
-
-    }
-
-
-    /**
-     * 更新猫眼夜市功能
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @return
-     */
-
-    public static MqttMessage updateCatNightSight(String gatewayId, String deviceId, String uid, List<String> values) {
-        int messageId = getMessageId();
-        //  CatEyeInfoBean catEyeInfoBean=new CatEyeInfoBean(MqttConstant.MSG_TYPE_REQUEST,uid,messageId,gatewayId,deviceId,MqttConstant.CATEYE_NIGHT_SIGHT,new CatEyeInfoBean.ParamsBean(),"0",new CatEyeInfoBean.ReturnDataBean(),System.currentTimeMillis()+"");
-
-        //  (String msgtype, String userId, String msgId, String gwId, String deviceId, String func, ParamsEntity params, int returnCode, ReturnDataEntity returnData, String timestamp)
-        CateEyeInfoBeanPropertyUpdate.ParamsEntity paramsEntity = new CateEyeInfoBeanPropertyUpdate.ParamsEntity();
-        List<String> result = Arrays.asList("CamInfrared");
-        paramsEntity.setPropertys(result);
-        paramsEntity.setValues(values);
-        //(int returnCode, String func, ReturnDataEntity returnData, String msgId, String gwId, ParamsEntity params, String msgtype, String userId, String deviceId, String timestamp)
-        CateEyeInfoBeanPropertyUpdate cateEyeInfoBeanPropertyUpdate = new CateEyeInfoBeanPropertyUpdate(0, MqttConstant.SET_NIGHT_SIGHT, new CateEyeInfoBeanPropertyUpdate.ReturnDataEntity(), messageId, gatewayId, paramsEntity, MqttConstant.MSG_TYPE_REQUEST, uid, deviceId, System.currentTimeMillis() + "");
-        //  CateEyeInfoBeanPropertyUpdate catEyeInfoBean=new CateEyeInfoBeanPropertyUpdate(MqttConstant.MSG_TYPE_REQUEST,uid,messageId+"",gatewayId,deviceId,MqttConstant.SET_NIGHT_SIGHT,paramsEntity,0,new CatEyeInfoBeanProperty.ReturnDataEntity(),System.currentTimeMillis()+"");
-        return getMessage(cateEyeInfoBeanPropertyUpdate, messageId);
-
-    }
-
-    /**
-     * 设置智能监测
-     *
-     * @param gatewayId
-     * @param deivceId
-     * @param uid
-     * @param status
-     * @return
-     */
-    public static MqttMessage setPirEnable(String gatewayId, String deivceId, String uid, int status) {
-        int messageId = getMessageId();
-        SetPirEnableBean.ParamsBean paramsBean = new SetPirEnableBean.ParamsBean();
-        paramsBean.setPirStatus(status);
-        SetPirEnableBean setPirEnableBean = new SetPirEnableBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deivceId, MqttConstant.SET_PIR_ENABLE, paramsBean, "0", new SetPirEnableBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setPirEnableBean, messageId);
-    }
-
-    /**
-     * 设置响铃次数
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @param number
-     * @return
-     */
-    public static MqttMessage setCatEyeBellCount(String gatewayId, String deviceId, String uid, int number) {
-        int messageId = getMessageId();
-        SetCatEyeBellCountBean.ParamsBean paramsBean = new SetCatEyeBellCountBean.ParamsBean();
-        paramsBean.setBellCount(number);
-        SetCatEyeBellCountBean setCatEyeBellCount = new SetCatEyeBellCountBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.SET_BELL_COUNT, paramsBean, "0", new SetCatEyeBellCountBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setCatEyeBellCount, messageId);
-    }
-
-    /**
-     * 设置猫眼的分辨率
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @param resolution
-     * @return
-     */
-    public static MqttMessage setVedioRes(String gatewayId, String deviceId, String uid, String resolution) {
-        int messageId = getMessageId();
-        SetVedioResBean.ParamsBean paramsBean = new SetVedioResBean.ParamsBean();
-        paramsBean.setResolution(resolution);
-        SetVedioResBean setVedioResBean = new SetVedioResBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.SET_VEDIO_RES, paramsBean, "0", new SetVedioResBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setVedioResBean, messageId);
-    }
-
-    /**
-     * 设置铃声音量
-     *
-     * @param gatewayId
-     * @param deviceId
-     * @param uid
-     * @param bellVolume
-     * @return
-     */
-
-    public static MqttMessage setBellVolume(String gatewayId, String deviceId, String uid, int bellVolume) {
-        int messageId = getMessageId();
-        SetCatEyeBellVolume.ParamsBean paramsBean = new SetCatEyeBellVolume.ParamsBean();
-        paramsBean.setBellVolume(bellVolume);
-        SetCatEyeBellVolume setCatEyeBellVolume = new SetCatEyeBellVolume(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.SET_BELL_VOLUME, paramsBean, "0", new SetCatEyeBellVolume.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setCatEyeBellVolume, messageId);
     }
 
     /**
@@ -584,64 +374,6 @@ public class MqttCommandFactory {
         GetAlarmListBean selectOpenLockRecordBean = new GetAlarmListBean(messageId, "request",MqttConstant.GET_ALARM_LIST  , userId, gwId, deviceId, pageNum);
         return getMessage(selectOpenLockRecordBean, messageId);
 
-    }
-
-    /**
-     * pir徘徊监测
-     *
-     * @param uid
-     * @param gatewayId
-     * @param deviceId
-     * @param wander
-     * @return
-     */
-    public static MqttMessage setPirWander(String uid, String gatewayId, String deviceId, String wander) {
-        int messageId = getMessageId();
-        SetPirWanderBean.ParamsBean paramsBean = new SetPirWanderBean.ParamsBean();
-        paramsBean.setWander(wander);
-        SetPirWanderBean setPirWanderBean = new SetPirWanderBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.SET_PIR_WANDER, paramsBean, "0", new SetPirWanderBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setPirWanderBean, messageId);
-    }
-
-    /**
-     * 获取静默参数
-     *
-     * @param uid
-     * @param gatewayId
-     * @param deviceId
-     * @return
-     */
-    public static MqttMessage getPirSlient(String uid, String gatewayId, String deviceId) {
-        int messageId = getMessageId();
-        GetPirSlientBean getPirSlientBean = new GetPirSlientBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.GET_PIR_SLIENT, "0", null, System.currentTimeMillis() + "");
-        return getMessage(getPirSlientBean, messageId);
-    }
-
-    /**
-     * 设置静默参数
-     *
-     * @param uid
-     * @param gatewayId
-     * @param deviceId
-     * @param ust
-     * @param enable
-     * @param maxprohibition
-     * @param periodtime
-     * @param protecttime
-     * @param threshold
-     * @return
-     */
-    public static MqttMessage setPirSlient(String uid, String gatewayId, String deviceId, int ust, int enable, int maxprohibition, int periodtime, int protecttime, int threshold) {
-        int messageId = getMessageId();
-        SetPirSlientBean.ParamsBean paramsBean = new SetPirSlientBean.ParamsBean();
-        paramsBean.setUst(ust);
-        paramsBean.setEnable(enable);
-        paramsBean.setMaxprohibition(maxprohibition);
-        paramsBean.setPeriodtime(periodtime);
-        paramsBean.setProtecttime(protecttime);
-        paramsBean.setThreshold(threshold);
-        SetPirSlientBean setPirSlientBean = new SetPirSlientBean(MqttConstant.MSG_TYPE_REQUEST, uid, messageId, gatewayId, deviceId, MqttConstant.SET_PIR_SLIENT, paramsBean, "0", new SetPirSlientBean.ReturnDataBean(), System.currentTimeMillis() + "");
-        return getMessage(setPirSlientBean, messageId);
     }
 
     /**
@@ -844,10 +576,10 @@ public class MqttCommandFactory {
     public static MqttMessage gatewayOtaUpgrade(GatewayOtaNotifyBean notifyBean, String uid) {
         int messageId = getMessageId();
         GatewayOtaNotifyBean.ParamsBean notifyParamsBean = notifyBean.getParams();
-        LogUtils.e("ota升级地址" + notifyParamsBean.getFileUrl());
+        LogUtils.d("ota升级地址" + notifyParamsBean.getFileUrl());
         GatewayComfirmOtaUpgradeBean.ParamsBean paramsBean = new GatewayComfirmOtaUpgradeBean.ParamsBean(notifyParamsBean.getModelCode(), notifyParamsBean.getChildCode(), notifyParamsBean.getFileUrl(), notifyParamsBean.getSW(), notifyParamsBean.getFileMd5(), notifyParamsBean.getFileLen(), notifyParamsBean.getOtaType(), 1, notifyParamsBean.getDeviceList(), notifyParamsBean.getDevNum());
         GatewayComfirmOtaUpgradeBean otaUpgradeBean = new GatewayComfirmOtaUpgradeBean(MqttConstant.CONFIRM_GATEWAY_OTA, notifyBean.getGwId(), notifyBean.getDeviceId(), System.currentTimeMillis(), messageId, uid, uid, paramsBean);
-        LogUtils.e("ota升级地址" + paramsBean.getFileUrl());
+        LogUtils.d("ota升级地址" + paramsBean.getFileUrl());
         return getMe(otaUpgradeBean, messageId);
     }
 

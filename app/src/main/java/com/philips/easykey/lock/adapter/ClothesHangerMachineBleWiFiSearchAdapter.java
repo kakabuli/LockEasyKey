@@ -37,7 +37,7 @@ public class ClothesHangerMachineBleWiFiSearchAdapter extends BaseQuickAdapter<B
     protected void convert(BaseViewHolder helper, BluetoothDevice item) {
         helper.setVisible(R.id.device_bluetooth_name,false);
 
-        LogUtils.e("shulan broadcastBean.getDeviceName-->" + item.getName());
+        LogUtils.d("shulan broadcastBean.getDeviceName-->" + item.getName());
         helper.setVisible(R.id.device_bluetooth_name,true);
         helper.setText(R.id.device_bluetooth_name,item.getName());
 

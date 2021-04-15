@@ -44,7 +44,7 @@ public class GatewayOTADialogActivity extends BaseActivity<GatewayOTAView, Gatew
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e("网关ota升级通知 GatewayOTADialogActivity ");
+        LogUtils.d("网关ota升级通知 GatewayOTADialogActivity ");
         setContentView(R.layout.activity_otadialog1);
         ButterKnife.bind(this);
         initData();

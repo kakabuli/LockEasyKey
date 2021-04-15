@@ -244,7 +244,7 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
     public void getLockInfoThrowable(Throwable throwable) {
         loadingDialog.dismiss();
         ToastUtil.getInstance().showShort(R.string.get_lock_info_fail);
-        LogUtils.e("获取锁信息出现异常    " + throwable.getMessage());
+        LogUtils.d("获取锁信息出现异常    " + throwable.getMessage());
     }
 
     @Override

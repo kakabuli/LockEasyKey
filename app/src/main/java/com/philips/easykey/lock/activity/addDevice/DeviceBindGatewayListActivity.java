@@ -14,10 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.cateye.AddDeviceCatEyeCheckWifiActivity;
-import com.philips.easykey.lock.activity.addDevice.cateye.TurnOnCatEyeFirstActivity;
 import com.philips.easykey.lock.activity.addDevice.gateway.AddGatewayFirstActivity;
 import com.philips.easykey.lock.activity.addDevice.zigbee.AddZigbeeLockFirstActivity;
 import com.philips.easykey.lock.adapter.AddZigbeeBindGatewayAdapter;
@@ -176,46 +173,10 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
     }
 
 
-    @OnClick({R.id.back, R.id.add_gateway, R.id.button_next})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.add_gateway:
-                //跳转到添加网关
-                Intent addGateway = new Intent(this, AddGatewayFirstActivity.class);
-                startActivity(addGateway);
-                break;
-            case R.id.button_next:
-                if (zigbeeBindGatewayBeanSelect == null||zigbeeBindGatewayBeanSelect.isSelect()==false) {
-                    ToastUtil.getInstance().showShort(getString(R.string.select_bindgateway));
-                } else {
-                        if (type == 2) {
-                            //跳转猫眼流程,需要网络
-                            if (NetUtil.isNetworkAvailable()){
-
-                                showLoading(getString(R.string.getting_wifi_info));
-                                mPresenter.getGatewayWifiPwd(zigbeeBindGatewayBeanSelect.getGatewayId());
-                            }else{
-                                ToastUtil.getInstance().showShort(R.string.network_exception);
-                            }
-                        } else if (type == 3) {
-                            //跳转zigbee锁流程
-                            String gatewayId=zigbeeBindGatewayBeanSelect.getGatewayId();
-                            Intent intent = new Intent(this, AddZigbeeLockFirstActivity.class);
-                            SPUtils.putProtect(Constants.GATEWAYID,gatewayId);
-                            startActivity(intent);
-                        }
-                    }
-                break;
-        }
-    }
-    private AddZigbeeBindGatewayBean lastzigbeeBindGatewayBeanSelect;
 
     @Override
     public void getGatewayStateSuccess(String deviceId,String gatewayState) {
-       LogUtils.e("绑定网关页面，接收到上报的网关状态");
+       LogUtils.d("绑定网关页面，接收到上报的网关状态");
        //通知网关状态改变了
         //需要修改
         if (mList!=null&&mList.size()>0){
@@ -235,60 +196,5 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
              }
         }
     }
-
-    @Override
-    public void getGatewayStateFail() {
-
-    }
-
-    @Override
-    public void onGetWifiInfoSuccess(GwWiFiBaseInfo gwWiFiBaseInfo) {
-        hiddenLoading();
-        String ssid = gwWiFiBaseInfo.getReturnData().getSsid();
-        String pwd = gwWiFiBaseInfo.getReturnData().getPwd();
-        if (NetUtil.isWifi()){
-            //获取wifi的名称
-            String wifiName = NetUtil.getWifiName();
-            LogUtils.e("获取到的WiFi名称是    " + wifiName+"  网关的WiFi名称是  "+ssid+"   ");
-            if (TextUtils.isEmpty(wifiName)){//如果获取到的WiFi名称是空的话
-                LogUtils.e("获取到的WiFi名称是    为空" );
-                Intent wifiIntent=new Intent(this, AddDeviceCatEyeCheckWifiActivity.class);
-                wifiIntent.putExtra(KeyConstants.GW_WIFI_SSID, ssid);
-                wifiIntent.putExtra(KeyConstants.GW_WIFI_PWD, pwd);
-                wifiIntent.putExtra(KeyConstants.GW_SN, zigbeeBindGatewayBeanSelect.getGatewayId());
-                startActivity(wifiIntent);
-            }else {  //查看是否是网关的WiFi
-                wifiName =wifiName.replaceAll("\"", "");
-                LogUtils.e("获取到的WiFi名称是    " + wifiName+"  网关的WiFi名称是  "+ssid+"   ");
-                if (wifiName.equals(ssid)){
-                   // Intent catEyeIntent = new Intent(this, AddDeviceCatEyeFirstActivity.class);
-                    Intent catEyeIntent = new Intent(this, TurnOnCatEyeFirstActivity.class);
-                    catEyeIntent.putExtra(KeyConstants.GW_WIFI_SSID, ssid);
-                    catEyeIntent.putExtra(KeyConstants.GW_WIFI_PWD, pwd);
-                    catEyeIntent.putExtra(KeyConstants.GW_SN, zigbeeBindGatewayBeanSelect.getGatewayId());
-                    startActivity(catEyeIntent);
-                }else {
-                    Intent wifiIntent=new Intent(this, AddDeviceCatEyeCheckWifiActivity.class);
-                    wifiIntent.putExtra(KeyConstants.GW_WIFI_SSID, ssid);
-                    wifiIntent.putExtra(KeyConstants.GW_WIFI_PWD, pwd);
-                    wifiIntent.putExtra(KeyConstants.GW_SN, zigbeeBindGatewayBeanSelect.getGatewayId());
-                    startActivity(wifiIntent);
-                }
-            }
-        }else{
-            Intent wifiIntent=new Intent(this, AddDeviceCatEyeCheckWifiActivity.class);
-            wifiIntent.putExtra(KeyConstants.GW_WIFI_SSID, ssid);
-            wifiIntent.putExtra(KeyConstants.GW_WIFI_PWD, pwd);
-            wifiIntent.putExtra(KeyConstants.GW_SN, zigbeeBindGatewayBeanSelect.getGatewayId());
-            startActivity(wifiIntent);
-        }
-    }
-
-    @Override
-    public void onGetWifiInfoFailed(Throwable throwable) {
-        hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.get_wifi_info_failed);
-    }
-
 
 }

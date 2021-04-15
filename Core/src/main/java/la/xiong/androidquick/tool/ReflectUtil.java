@@ -1,5 +1,7 @@
 package la.xiong.androidquick.tool;
 
+import android.util.Log;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -14,11 +16,11 @@ public class ReflectUtil {
 	public static Class<?> getClass(String className) {
 		try {
 			Class<?> cls = Class.forName(className);
-			LogUtils.d(TAG, "getClass->cls:" + cls);
+			Log.d(TAG, "getClass->cls:" + cls);
 
 			return cls;
 		} catch (ClassNotFoundException e) {
-			LogUtils.d(TAG, "getClass->className:" + className
+			Log.d(TAG, "getClass->className:" + className
 					+ "," + LOG_FAIL_REASON + e);
 			e.printStackTrace();
 			return null;
@@ -29,14 +31,14 @@ public class ReflectUtil {
 	public static Class<?> getClass(Class<?> cls, String className) {
 		Class<?>[] classes = cls.getClasses();
 		for (Class<?> clas : classes) {
-			LogUtils.d(TAG, "getClass->getClasses " + clas.toString());
+			Log.d(TAG, "getClass->getClasses " + clas.toString());
 			if (clas.getName().equals(className)) {
 				return clas;
 			}
 		}
 		classes = cls.getDeclaredClasses();
 		for (Class<?> clas : classes) {
-			LogUtils.d(TAG, "getClass->getDeclaredClasses " + clas.toString());
+			Log.d(TAG, "getClass->getDeclaredClasses " + clas.toString());
 			if (clas.getName().equals(className)) {
 				return clas;
 			}
@@ -46,7 +48,7 @@ public class ReflectUtil {
 
 	public static Method getMethod(Class<?> cls, String funcName) {
 		Method[] methods = cls.getDeclaredMethods();
-		LogUtils.d(TAG, "getMethod->getMethodsDeclared " + methods.toString());
+		Log.d(TAG, "getMethod->getMethodsDeclared " + methods.toString());
 		for (Method method : methods) {
 			// GaramutHelperLog.log(TAG, "getMethod", "getMethodDeclared " +
 			// method.toString());
@@ -56,7 +58,7 @@ public class ReflectUtil {
 		}
 
 		methods = cls.getMethods();
-		LogUtils.d(TAG, "getMethod->getMethodsBase " + methods.toString());
+		Log.d(TAG, "getMethod->getMethodsBase " + methods.toString());
 		for (Method method : methods) {
 			// GaramutHelperLog.log(TAG, "getMethod", "getMethodBase " +
 			// method.toString());
@@ -65,7 +67,7 @@ public class ReflectUtil {
 			}
 		}
 
-		LogUtils.d(TAG, "getMethod->fail");
+		Log.d(TAG, "getMethod->fail");
 		return null;
 	}
 
@@ -74,7 +76,7 @@ public class ReflectUtil {
 		try {
 			return owner.getDeclaredMethod(funcName, paramTypes);
 		} catch (NoSuchMethodException e) {
-			LogUtils.d(TAG, "getMethod->fail " + LOG_FAIL_REASON + e.toString());
+			Log.d(TAG, "getMethod->fail " + LOG_FAIL_REASON + e.toString());
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,16 +94,16 @@ public class ReflectUtil {
 			return cls.newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
-			LogUtils.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
+			Log.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			LogUtils.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
+			Log.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-			LogUtils.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
+			Log.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtils.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
+			Log.d(TAG, "getObject->fail " + LOG_FAIL_REASON + e.toString());
 		}
 		return null;
 	}

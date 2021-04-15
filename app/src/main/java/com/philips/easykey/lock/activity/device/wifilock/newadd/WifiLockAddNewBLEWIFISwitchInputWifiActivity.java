@@ -205,14 +205,14 @@ public class WifiLockAddNewBLEWIFISwitchInputWifiActivity extends BaseActivity<I
             if (resultCode == RESULT_OK && data != null) {
                 times = data.getIntExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, 1);
 
-                LogUtils.e("--Kaadas--onDecodeResult wifi和密码输入次数==" + times);
+                LogUtils.d("--Kaadas--onDecodeResult wifi和密码输入次数==" + times);
             }
         }
         if (requestCode == TO_CHOOSE_WIFI_PASSWORD ) {
 
             if (resultCode == RESULT_OK && data != null) {
                 apSsidText.setText(data.getStringExtra(KeyConstants.CHOOSE_WIFI_NAME));
-                LogUtils.e("--Kaadas--更换的wifi名称==" + data.getStringExtra(KeyConstants.CHOOSE_WIFI_NAME));
+                LogUtils.d("--Kaadas--更换的wifi名称==" + data.getStringExtra(KeyConstants.CHOOSE_WIFI_NAME));
             }
         }
 

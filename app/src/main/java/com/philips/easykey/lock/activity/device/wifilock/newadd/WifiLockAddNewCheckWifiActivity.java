@@ -81,7 +81,7 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
         times = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, 1);
         Log.e("凯迪仕", "onCreate: sSsid " + sSsid + "   sPassword " + sPassword);
         thread.start();
-        LogUtils.e("数据是 2 randomCode " + randomCode);
+        LogUtils.d("数据是 2 randomCode " + randomCode);
 
         circleProgressBar2.setValue(0);
 
@@ -124,7 +124,7 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
         public void run() {
             super.run();
             if (socketManager.isStart()) { //连接成功
-                LogUtils.e("连接成功");
+                LogUtils.d("连接成功");
                 byte[] bSsid ;
                 byte[] bPwd = sPassword.getBytes();
                 String wifiName = (String) SPUtils.get(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");
@@ -140,11 +140,11 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
                 System.arraycopy(bPwd, 0, data, 32, bPwd.length);
                 int writeResult = socketManager.writeData(data);
                 if (writeResult == 0) {
-                    LogUtils.e("发送账号密码成功   开始读取数据");
+                    LogUtils.d("发送账号密码成功   开始读取数据");
                     SocketManager.ReadResult readResult = socketManager.readWifiDataTimeout(60 * 1000);
                     if (readResult.resultCode >= 0) { //读取成功
                         String sResult = new String(readResult.data);
-                        LogUtils.e("读取成功   " + sResult);
+                        LogUtils.d("读取成功   " + sResult);
                         if (!TextUtils.isEmpty(sResult) && sResult.startsWith("APSuccess")) {
                             changeState(2);
                             onSuccess();
@@ -181,14 +181,14 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
                         }
                     } else {
                         onError(socketManager, -1);
-                        LogUtils.e("读数据失败   " + writeResult);
+                        LogUtils.d("读数据失败   " + writeResult);
                     }
                 } else { //写数据失败
-                    LogUtils.e("写数据失败   " + writeResult);
+                    LogUtils.d("写数据失败   " + writeResult);
                     onError(socketManager, -4);
                 }
             } else {  //连接失败
-                LogUtils.e("连接失败");
+                LogUtils.d("连接失败");
                 onError(socketManager, -2);
             }
         }

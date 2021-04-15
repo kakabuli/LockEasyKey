@@ -232,7 +232,7 @@ public abstract class QuickActivity extends AppCompatActivity implements EasyPer
         linback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.e("测试","点击返回");
+                LogUtils.d("测试","点击返回");
                 finish();
                 onFinish();
             }
@@ -678,7 +678,7 @@ public abstract class QuickActivity extends AppCompatActivity implements EasyPer
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        LogUtils.e("测试","返回按钮");
+        LogUtils.d("测试","返回按钮");
         onFinish();
     }
 }

@@ -73,13 +73,13 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
             devices.clear();
             broadcastList.clear();//清空数据
             if (isSafe()) {
-                LogUtils.e("--kaadas--每次重新搜索都清空搜索到的设备");
+                LogUtils.d("--kaadas--每次重新搜索都清空搜索到的设备");
 //                mViewRef.get().loadDevices(devices);
                 mViewRef.get().loadBLEWiFiModelDevices(devices, broadcastList);
 
             }
         }
-        LogUtils.e("--kaadas--搜索设备    断开连接");
+        LogUtils.d("--kaadas--搜索设备    断开连接");
         bleService.release();  //搜索设备    断开连接
         handler.removeCallbacks(stopScanLe);
         handler.postDelayed(stopScanLe, 10 * 1000);
@@ -93,7 +93,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                         synchronized (this) {
                             for (BluetoothDevice bluetoothDevice : devices) {
                                 if (bluetoothDevice.getName().equals(device.getName())) {
-//                                    LogUtils.e("--kaadas--相同device   " + device.getName());
+//                                    LogUtils.d("--kaadas--相同device   " + device.getName());
                                     return false;
                                 }
                             }
@@ -118,7 +118,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                                 && !devices.contains(device)
                         ) {
 
-                                LogUtils.e("--kaadas--过滤掉非BLE&WiFi设备   " + device.getName());
+                                LogUtils.d("--kaadas--过滤掉非BLE&WiFi设备   " + device.getName());
 
                                 devices.add(device);
                             broadcastItemList.add(broadcastBean);
@@ -133,7 +133,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("--kaadas--throwable==" +throwable);
+                        LogUtils.d("--kaadas--throwable==" +throwable);
                         if (mViewRef != null) {
                             mViewRef.get().onScanFailed(throwable);
                         }
@@ -149,9 +149,9 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                 bleService.scanBleDevice(false);
                 if (mViewRef != null) {
                     if (isAttach) {
-                        LogUtils.e("--kaadas--设备停止扫描");
-                        LogUtils.e("--kaadas--mViewRef=="+mViewRef);
-                        LogUtils.e("--kaadas--mViewRef.get()=="+mViewRef.get());
+                        LogUtils.d("--kaadas--设备停止扫描");
+                        LogUtils.d("--kaadas--mViewRef=="+mViewRef);
+                        LogUtils.d("--kaadas--mViewRef.get()=="+mViewRef.get());
                         mViewRef.get().onStopScan();
                     }
                 }
@@ -171,7 +171,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
         handler.removeCallbacks(stopScanLe);
         if (bleService != null) { //停止扫描设备
             bleService.scanBleDevice(false);  //1
-            LogUtils.e("点击绑定设备   断开连接");
+            LogUtils.d("点击绑定设备   断开连接");
             bleService.release();  //点击绑定设备   断开连接
             if (mViewRef != null) {
                 mViewRef.get().onStopScan();
@@ -265,7 +265,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
     private Runnable releaseRunnable = new Runnable() {
         @Override
         public void run() {
-            LogUtils.e("延时断开连接  ");
+            LogUtils.d("延时断开连接  ");
             //如果此时没有连接上设备，那么结束连接   释放连接资源
             if (isSafe()) {
                 mViewRef.get().onConnectFailed();
@@ -277,7 +277,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                     bleService = MyApplication.getInstance().getBleService();
                 }
             }
-            LogUtils.e("搜索设备  连接蓝牙时的延时   断开连接");
+            LogUtils.d("搜索设备  连接蓝牙时的延时   断开连接");
             bleService.release();  //搜索设备  连接蓝牙时的延时   断开连接  1
         }
     };
@@ -291,7 +291,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                 bleService = MyApplication.getInstance().getBleService(); //判断
             }
         }
-        LogUtils.e("开始绑定");
+        LogUtils.d("开始绑定");
         this.isBind = isBind;
         this.device = device;
         if (connectTimes > 2) {
@@ -317,7 +317,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                             handler.removeCallbacks(releaseRunnable);
                             toDisposable(bindDisposable);
                             if (bleStateBean.isConnected()) {
-                                LogUtils.e(SearchBleWiFiDevicePresenter.class.getName() + "--kaadas--连接成功");
+                                LogUtils.d(SearchBleWiFiDevicePresenter.class.getName() + "--kaadas--连接成功");
                                 if (bleStateBean.getBleVersion() == 4) {
                                     if (isSafe()) {
                                         for (BluetoothLockBroadcastBean broadcastBean : broadcastItemList)
@@ -342,7 +342,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                                 }
                             } else {
                                 connectTimes++;
-                                LogUtils.e(SearchBleWiFiDevicePresenter.class.getName() + "--kaadas--绑定界面连接失败");
+                                LogUtils.d(SearchBleWiFiDevicePresenter.class.getName() + "--kaadas--绑定界面连接失败");
                                 bindDevice(device, isBind);
                             }
                         }
@@ -363,7 +363,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
             }
         }
         toDisposable(snDisposable);
-        LogUtils.e("第" + readSnTimes + "次读取SN");
+        LogUtils.d("第" + readSnTimes + "次读取SN");
         if (readSnTimes > 2) {
             if (isSafe()) {
                 mViewRef.get().readSNFailed();
@@ -382,14 +382,14 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                 .subscribe(new Consumer<ReadInfoBean>() {
                     @Override
                     public void accept(ReadInfoBean readInfoBean) throws Exception {
-                        LogUtils.e("读取SN成功  " + readInfoBean.data);
+                        LogUtils.d("读取SN成功  " + readInfoBean.data);
                         toDisposable(snDisposable);
                         getPwd1((String) readInfoBean.data, version, mac, deviceName);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("读取SN失败  " + throwable.getMessage());
+                        LogUtils.d("读取SN失败  " + throwable.getMessage());
                         readSnTimes++;
                         readSn(version, mac, deviceName);
                     }
@@ -411,7 +411,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
                 .subscribe(new BaseObserver<GetPwdBySnResult>() {
                     @Override
                     public void onSuccess(GetPwdBySnResult getPwdBySnResult) {
-                        LogUtils.e("根据SN 获取pwd1    " + getPwdBySnResult.getData().getPassword1());
+                        LogUtils.d("根据SN 获取pwd1    " + getPwdBySnResult.getData().getPassword1());
                         if ("200".equals(getPwdBySnResult.getCode())) { //获取pwd1成功
                             pwd1 = getPwdBySnResult.getData().getPassword1();
                             if (TextUtils.isEmpty(pwd1)) {
@@ -426,16 +426,16 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("获取pwd1失败 " + baseResult.getCode());
+                        LogUtils.d("获取pwd1失败 " + baseResult.getCode());
                         if ("419".equals(baseResult.getCode())) {  //此SN在服务器没有找到
-                            LogUtils.e("获取pwd1失败   服务器没有该SN  将Mac地址转换成pwd");
+                            LogUtils.d("获取pwd1失败   服务器没有该SN  将Mac地址转换成pwd");
                             bPwd1 = device.getAddress().replace(":", "").getBytes();
                             System.arraycopy(bPwd1, 0, password_1, 0, bPwd1.length);
                             pwd1 = Rsa.bytesToHexString(bPwd1);
                             if (isSafe()) {
 //                                mViewRef.get().getPwd1Success(pwd1, isBind,version,sn,mac,deviceName);
                                 if (bleService != null) {  //1
-                                    LogUtils.e("设备未经过产测   断开连接");
+                                    LogUtils.d("设备未经过产测   断开连接");
                                     bleService.release(); //设备未经过产测   断开连接
                                 }
                                 mViewRef.get().notice419();
@@ -450,7 +450,7 @@ public class SearchBleWiFiDevicePresenter<T> extends BasePresenter<ISearchDevice
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("获取pwd1失败");
+                        LogUtils.d("获取pwd1失败");
                         if (isSafe()) {
                             mViewRef.get().getPwd1Failed(throwable);
                         }

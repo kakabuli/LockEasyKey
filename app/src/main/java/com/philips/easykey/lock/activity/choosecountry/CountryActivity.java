@@ -57,7 +57,7 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e("CountryActivity启动 ");
+        LogUtils.d("CountryActivity启动 ");
 
         setContentView(R.layout.activity_country_choose);
         ButterKnife.bind(this);
@@ -65,7 +65,7 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
         init();
         setListener();
         getCountryList();
-        LogUtils.e("CountryActivity启动完成 ");
+        LogUtils.d("CountryActivity启动完成 ");
 
     }
 

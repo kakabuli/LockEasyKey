@@ -309,7 +309,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
 
             @Override
             public void onDownFailed(String url, String path, Throwable throwable) {
-                LogUtils.e("下载文件失败，  " + throwable.getMessage());
+                LogUtils.d("下载文件失败，  " + throwable.getMessage());
                 hiddenLoading();
                 ToastUtil.getInstance().showLong(R.string.down_file_failed_please_retry);
             }
@@ -404,7 +404,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
             if (resultCode == RESULT_OK){
                 if(mPresenter.isAuth(bleLockInfo,true)){
                     mPresenter.checkModuleNumber();
-                    LogUtils.e("升级成功   重新获取");
+                    LogUtils.d("升级成功   重新获取");
                 }
             }
         }

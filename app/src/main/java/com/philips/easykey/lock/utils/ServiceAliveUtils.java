@@ -18,7 +18,7 @@ public class ServiceAliveUtils {
         if (manager == null) {
             return true;
         }
-        LogUtils.e("shulan-----------" + clazz.getName());
+        LogUtils.d("shulan-----------" + clazz.getName());
         for(ActivityManager.RunningServiceInfo servicer : manager.getRunningServices(Integer.MAX_VALUE)){
             if (clazz.getName().equals(servicer.service.getClassName())) {
                 isServiceRunning = true;

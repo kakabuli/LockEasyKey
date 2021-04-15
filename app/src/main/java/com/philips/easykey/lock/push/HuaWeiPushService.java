@@ -68,7 +68,7 @@ public class HuaWeiPushService extends HmsMessageService {
                     if (task.isSuccessful()) {
                         LogUtils.i(TAG, "turnOnPush Complete");
                     } else {
-                        LogUtils.e(TAG, "turnOnPush failed: ret=" + task.getException().getMessage());
+                        LogUtils.d(TAG, "turnOnPush failed: ret=" + task.getException().getMessage());
                     }
                 }
             });
@@ -80,7 +80,7 @@ public class HuaWeiPushService extends HmsMessageService {
                     if (task.isSuccessful()) {
                         LogUtils.i(TAG, "turnOnPush Complete");
                     } else {
-                        LogUtils.e(TAG, "turnOnPush failed: ret=" + task.getException().getMessage());
+                        LogUtils.d(TAG, "turnOnPush failed: ret=" + task.getException().getMessage());
                     }
                 }
             });
@@ -103,7 +103,7 @@ public class HuaWeiPushService extends HmsMessageService {
     public void onMessageReceived(RemoteMessage message) {
         LogUtils.d(TAG, "onMessageReceived is called");
         if (message == null) {
-            LogUtils.e(TAG, "Received message entity is null!");
+            LogUtils.d(TAG, "Received message entity is null!");
             return;
         }
         // getCollapseKey() Obtains the classification identifier (collapse key) of a message.
@@ -223,12 +223,12 @@ public class HuaWeiPushService extends HmsMessageService {
 
                 @Override
                 public void onAckErrorCode(BaseResult baseResult) {
-                    LogUtils.e(GeTui.VideoLog, "pushid上传失败,服务返回:" + baseResult);
+                    LogUtils.d(GeTui.VideoLog, "pushid上传失败,服务返回:" + baseResult);
                 }
 
                 @Override
                 public void onFailed(Throwable throwable) {
-                    LogUtils.e(GeTui.VideoLog, "pushid上传失败");
+                    LogUtils.d(GeTui.VideoLog, "pushid上传失败");
                 }
 
                 @Override
@@ -236,7 +236,7 @@ public class HuaWeiPushService extends HmsMessageService {
                 }
             });
         }else {
-            LogUtils.e("jpushid上传失败");
+            LogUtils.d("jpushid上传失败");
         }
 
     }

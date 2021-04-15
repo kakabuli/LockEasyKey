@@ -77,7 +77,7 @@ public class SocketOtaUtil {
             sendData();
         } catch (IOException e) {
             e.printStackTrace();
-            LogUtils.e("socket  连接出错   " + e.getMessage());
+            LogUtils.d("socket  连接出错   " + e.getMessage());
             onError(-7, e);
         }
     }
@@ -126,7 +126,7 @@ public class SocketOtaUtil {
                                 long interval =  System.currentTimeMillis() -currentTimeMillis ;
                                 if (interval>1000 && listener!=null){
                                     listener.sendTimeOut(interval,currentPackage);
-                                    LogUtils.e("写入数据包 超时   " + interval);
+                                    LogUtils.d("写入数据包 超时   " + interval);
                                 }
                                 Log.e(TAG, "写入数据包  "+ currentPackage +"  interval " +interval+ "  结果 " + packageCommandResult);
                                 if (packageCommandResult == 0) {  //写入数据成功

@@ -189,7 +189,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
             try {
                 func = Integer.parseInt(functionSet);
             } catch (Exception e) {
-                LogUtils.e("" + e.getMessage());
+                LogUtils.d("" + e.getMessage());
             }
 
             if (BleLockUtils.isSupportAMModeSet(func)) {
@@ -279,7 +279,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                 try {
                     func = Integer.parseInt(functionSet);
                 } catch (Exception e) {
-                    LogUtils.e("" + e.getMessage());
+                    LogUtils.d("" + e.getMessage());
                 }
                 switch (v.getId()) {
                     case R.id.back:  //返回
@@ -443,7 +443,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                         break;
                     case R.id.rl_wifi_name: //WiFi名称
                         //老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2
-                        LogUtils.e("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
+                        LogUtils.d("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
                         if (TextUtils.isEmpty(String.valueOf(wifiLockInfo.getDistributionNetwork()))) {
                             Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
                             String wifiModelType = "WiFi";
@@ -463,7 +463,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                         } else if(wifiLockInfo.getDistributionNetwork() == 3){
                             showWifiDialog();
                         }else {
-                            LogUtils.e("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
+                            LogUtils.d("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
 
                         }
                         mPresenter.release();
@@ -498,7 +498,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                         break;
                 }
             } else {
-                LogUtils.e("--kaadas--取功能集为空");
+                LogUtils.d("--kaadas--取功能集为空");
 
             }
         }
@@ -649,7 +649,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
         ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
 //        ToastUtil.getInstance().showLong(R.string.delete_fialed);
         hiddenLoading();
@@ -657,7 +657,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         ToastUtil.getInstance().showLong(httpErrorCode);
         hiddenLoading();

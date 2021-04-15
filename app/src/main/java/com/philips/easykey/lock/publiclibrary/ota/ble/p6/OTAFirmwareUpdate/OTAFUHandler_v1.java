@@ -83,7 +83,7 @@ public class OTAFUHandler_v1 extends OTAFUHandlerBase {
     public void prepareFileWrite() {
         mOtaFirmwareWrite = new OTAFirmwareWrite_v1(mOtaCharacteristic);
         File file = new File(mFilepath);
-        LogUtils.e("文件时否存在   " + file.exists() + "  文件地址   " + mFilepath);
+        LogUtils.d("文件时否存在   " + file.exists() + "  文件地址   " + mFilepath);
         final CustomFileReader_v1 customFileReader = new CustomFileReader_v1(mFilepath);
         /**
          * Reads the file content and provides a 1 second delay
@@ -115,7 +115,7 @@ public class OTAFUHandler_v1 extends OTAFUHandlerBase {
         this.mActiveApp = headerRow.mAppId;
 
         //Send Enter Bootloader command
-        LogUtils.e("  文件数据是2    mProductId  " + Rsa.bytesToHexString(headerRow.mProductId) +"    mAppId    "  + Rsa.byteToHexString(mActiveApp)+"   mCheckSumType " +Rsa.byteToHexString(mCheckSumType));
+        LogUtils.d("  文件数据是2    mProductId  " + Rsa.bytesToHexString(headerRow.mProductId) +"    mAppId    "  + Rsa.byteToHexString(mActiveApp)+"   mCheckSumType " +Rsa.byteToHexString(mCheckSumType));
         mOtaFirmwareWrite.OTAEnterBootLoaderCmd(mCheckSumType, headerRow.mProductId);
         postTimeout();
         // 升级状态    执行Enter引导加载程序命令
@@ -148,11 +148,11 @@ public class OTAFUHandler_v1 extends OTAFUHandlerBase {
                 if (nowRowPos == 0) {
                     Utils.setIntSharedPreference(getmActivity(), Constants.PREF_PROGRAM_ROW_NO + BluetoothLeService.mBluetoothDeviceAddress, oldRowNum);
                 }
-                LogUtils.e("新的行   " + nowRowNum + "  新的pos  " + nowRowPos + " 旧的行  " + oldRowNum + "   旧的pos   " + oldRowPos);
+                LogUtils.d("新的行   " + nowRowNum + "  新的pos  " + nowRowPos + " 旧的行  " + oldRowNum + "   旧的pos   " + oldRowPos);
                 Utils.setIntSharedPreference(getmActivity(), Constants.PREF_PROGRAM_ROW_START_POS + BluetoothLeService.mBluetoothDeviceAddress, 0);
                 Utils.setIntSharedPreference(getmActivity(), Constants.PREF_PROGRAM_ROW_NO + BluetoothLeService.mBluetoothDeviceAddress, nowRowNum);
                 Utils.setStringSharedPreference(getmActivity(), Constants.PREF_BOOTLOADER_STATE + BluetoothLeService.mBluetoothDeviceAddress, "" + BootLoaderCommands_v1.ENTER_BOOTLOADER);
-                LogUtils.e("  文件数据是1    mProductId  " + Rsa.bytesToHexString(headerRow.mProductId) +"    mAppId    "  + Rsa.byteToHexString(mActiveApp)+"   mCheckSumType " +Rsa.byteToHexString(mCheckSumType));
+                LogUtils.d("  文件数据是1    mProductId  " + Rsa.bytesToHexString(headerRow.mProductId) +"    mAppId    "  + Rsa.byteToHexString(mActiveApp)+"   mCheckSumType " +Rsa.byteToHexString(mCheckSumType));
                 mOtaFirmwareWrite.OTAEnterBootLoaderCmd(mCheckSumType, headerRow.mProductId);
                 postTimeout();
             }

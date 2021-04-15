@@ -63,12 +63,12 @@ public abstract class BaseObserver<T> implements Observer<T>, Disposable {
     @Override
     public void onNext(T t) {
         BaseResult result = (BaseResult) t;
-        LogUtils.e("请求的数据是  code " + result.getCode() +"   " +result.isSuccess() +"    " +("200".equals(result.getCode())));
+        LogUtils.d("请求的数据是  code " + result.getCode() +"   " +result.isSuccess() +"    " +("200".equals(result.getCode())));
         if (result.isSuccess()) { //如果请求成功
             onSuccess(t);
         } else {
             if ("444".equals(result.getCode())) { //Token过期
-                LogUtils.e("token过期   " + Thread.currentThread().getName());
+                LogUtils.d("token过期   " + Thread.currentThread().getName());
                 //退出mqtt
                 if (MyApplication.getInstance().getMqttService()!=null){
                     MyApplication.getInstance().getMqttService().httpMqttDisconnect();
@@ -99,7 +99,7 @@ public abstract class BaseObserver<T> implements Observer<T>, Disposable {
             /** 网络正常，http 请求成功，服务器返回逻辑错误  接口返回的别的状态码处理*/
             OtherException otherException = (OtherException) e;
             if (otherException.getResponse().getCode() == 444) { //Token过期
-                LogUtils.e("token过期   " + Thread.currentThread().getName());
+                LogUtils.d("token过期   " + Thread.currentThread().getName());
                 if (MyApplication.getInstance().getMqttService()!=null) {
                     MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                 }
@@ -121,7 +121,7 @@ public abstract class BaseObserver<T> implements Observer<T>, Disposable {
             /** 其他未知错误 */
             errorMsg = !TextUtils.isEmpty(e.getMessage()) ? e.getMessage() : "unknown error";
         }
-        LogUtils.e("  网络请求   " + errorMsg);
+        LogUtils.d("  网络请求   " + errorMsg);
     }
 
 

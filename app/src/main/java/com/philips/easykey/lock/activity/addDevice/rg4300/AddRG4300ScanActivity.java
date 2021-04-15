@@ -283,7 +283,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
 
     @Override
     public void onAlreadyBind(BluetoothDevice device,String uName) {
-        LogUtils.e("设备名是1   " + uName);
+        LogUtils.d("设备名是1   " + uName);
         String name = "";
         if (!TextUtils.isEmpty(uName)){
             if (uName.contains("@")){ //邮箱用户
@@ -304,7 +304,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
                 }
             }
         }
-        LogUtils.e("设备名是   " + name);
+        LogUtils.d("设备名是   " + name);
         binding(device, false,  String.format(getResources().getString(R.string.this_device_already_bind_reset),name ));
     }
 
@@ -440,7 +440,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
 
     @Override
     public void getPwd1Success(String pwd1, boolean isBind,int version,String DeviceSn,String mac,String deviceName) {
-        LogUtils.e("获取到pwd1   传递给下一个界面" + pwd1+"  SN " + DeviceSn);
+        LogUtils.d("获取到pwd1   传递给下一个界面" + pwd1+"  SN " + DeviceSn);
         Intent nextIntent = new Intent(this, AddBluetoothSecondActivity.class);
 //        nextIntent.putExtra(KeyConstants.DEVICE_TYPE, type);  //传递设备类型过去
         nextIntent.putExtra(KeyConstants.PASSWORD1, pwd1);  //

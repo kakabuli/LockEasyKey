@@ -3,10 +3,8 @@ package com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockAlramView;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayLockAlarmEventBean;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockAlarmEventDao;
-import com.philips.easykey.lock.utils.greenDao.db.CatEyeEventDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockAlarmEventDaoDao;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class GatewayLockAlarmPresenter<T> extends BasePresenter<GatewayLockAlram
 
     //获取数据库的门锁报警信息
     public void getLockAlarm(int page, int pageNum, String gatewayId, String deviceId) {
-        LogUtils.e("访问数据库的门锁信息");
+        LogUtils.d("访问数据库的门锁信息");
         List<GatewayLockAlarmEventDao> alarmEventBeansList = MyApplication.getInstance().getDaoWriteSession().queryBuilder(GatewayLockAlarmEventDao.class).orderDesc(GatewayLockAlarmEventDaoDao.Properties.TimeStamp).offset(page * pageNum).limit(pageNum).list();
         if (alarmEventBeansList != null && alarmEventBeansList.size() > 0) {
             for (GatewayLockAlarmEventDao gatewayLockAlarmEventDao : alarmEventBeansList) {

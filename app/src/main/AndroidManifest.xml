@@ -368,15 +368,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.addDevice.DeviceAddCateyeHelpActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.addDevice.DeviceAddGatewayHelpActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.DeviceAddActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
@@ -437,44 +429,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeCheckWifiActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeFirstActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeScanActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeScanFailActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSecondActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTranslucentTheme" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeThirdActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSuccessActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeSaveNickNameActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.addDevice.cateye.AddDeviceCatEyeFailActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
 
         <service android:name=".publiclibrary.mqtt.util.MqttService" />
         <service android:name="org.eclipse.paho.android.service.MqttService" />
@@ -645,10 +599,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.home.CateyeEquipmentDynamicActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.device.gatewaylock.GatewayLockFunctionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -765,34 +715,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.cateye.CateyeMoreDeviceInformationActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CateyeMoreActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CateyeFunctionActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CateyeAuthorizationFunctionActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CatEyeResolutionActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CatEyeRingNumberActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CatEyeVolumeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.device.gateway.GatewayActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -824,38 +746,7 @@
             android:name=".activity.addDevice.zigbeelocknew.AddDeviceZigbeeLockNewZeroActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.cateye.VideoCallBackActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.cateye.PreviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.cateye.VideoVActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".activity.cateye.MediaPlayerActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/NoTitleFullscreen" />
-        <activity
-            android:name=".activity.cateye.CallComingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/dialogstyle" />
-        <activity
-            android:name=".activity.cateye.FtpDownLoadActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.cateye.RecordingPreviewActivity"
-            android:screenOrientation="portrait" /> <!-- &lt;!&ndash; 配置SDK核心服务 &ndash;&gt; -->
-        <activity
-            android:name=".activity.device.cateye.more.SmartEyeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.cateye.more.CateDefaultActivity"
-            android:screenOrientation="portrait" />
+        <!-- &lt;!&ndash; 配置SDK核心服务 &ndash;&gt; -->
         <activity
             android:name=".activity.addDevice.zigbeelocknew.ProductActivationScanActivity"
             android:launchMode="singleTask"
@@ -875,22 +766,6 @@
         <activity
             android:name=".publiclibrary.ota.gatewayota.GatewayOTADialogActivity"
             android:theme="@style/gatewayDialog" />
-        <activity
-            android:name=".activity.device.cateye.dialog.CatEyeNightSightDialogActivity"
-            android:theme="@style/gatewayDialog" />
-        <activity
-            android:name=".activity.addDevice.cateye.TurnOnCatEyeFirstActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.TurnOnCatEyeSecondActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.CatEyeAddPhoneActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.cateye.QrcodePhoneAddActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".publiclibrary.ota.ble.ti.Ti2FileOtaUpgradeActivity"
             android:screenOrientation="portrait" />
@@ -1140,22 +1015,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.addDevice.pir.AddPirFirstActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.pir.AddPirSecondActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.pir.AddPirThirdActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.addDevice.pir.AddPirSuccessActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.device.wifilock.WifiLockAuthDeviceInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -1314,7 +1173,6 @@
         <service android:name=".publiclibrary.xm.DoorbellingService"/>
         <service android:name=".publiclibrary.ble.BleService" />
         <service android:name=".publiclibrary.ota.ble.p6.BluetoothLeService" />
-        <service android:name=".publiclibrary.linphone.linphonenew.LinphoneService" />
 
         <receiver android:name=".utils.networkListenerutil.NetWorkChangReceiver">
             <intent-filter>

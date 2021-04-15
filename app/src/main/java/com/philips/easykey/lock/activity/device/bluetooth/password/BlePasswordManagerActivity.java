@@ -138,10 +138,10 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.e("密码管理界面  onResume()   ");
+        LogUtils.d("密码管理界面  onResume()   ");
         mPresenter.isAuth(bleLockInfo, false); //查看是否需要重现连接
         mPresenter.getAllPassword(bleLockInfo, true);
-        LogUtils.e("密码管理界面  onResume()   ");
+        LogUtils.d("密码管理界面  onResume()   ");
     }
 
     public void passwordPageChange() {
@@ -194,7 +194,7 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
         passwordPageChange();
 //        bluetoothPasswordAdapter.notifyDataSetChanged();
         initRecycleview();
-        LogUtils.e("收到  同步的锁的密码   " + list.toString());
+        LogUtils.d("收到  同步的锁的密码   " + list.toString());
     }
 
     private void processType(List<ForeverPassword> pwdList) {
@@ -241,7 +241,7 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
 
     @Override
     public void onServerDataUpdate() {
-        LogUtils.e("密码管理   服务器数据更新   ");
+        LogUtils.d("密码管理   服务器数据更新   ");
         mPresenter.getAllPassword(bleLockInfo, true);
     }
 
@@ -293,7 +293,7 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
         }
 
         processType(list);
-        LogUtils.e("获取到的结果，    " + result.getData().getPwdList().toString());
+        LogUtils.d("获取到的结果，    " + result.getData().getPwdList().toString());
         initRecycleview();
         if (result.getData().getPwdList().size() > 0) {
             isNotPassword = false;

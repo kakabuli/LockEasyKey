@@ -105,15 +105,15 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                         }
                         bleNumber.clear();
                         byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                        LogUtils.e("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
+                        LogUtils.d("同步秘钥解码数据是   " + Rsa.toHexString(deValue));
                         int index = deValue[0] & 0xff;
                         int codeType = deValue[1] & 0xff;
                         int codeNumber = deValue[2] & 0xff;
-                        LogUtils.e("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
+                        LogUtils.d("秘钥的帧数是  " + index + " 秘钥类型是  " + codeType + "  秘钥总数是   " + codeNumber);
                         getAllpasswordNumber(deValue);
-                        LogUtils.e("秘钥列表为   " + Arrays.toString(bleNumber.toArray()));
-                        LogUtils.e(" 服务器数据 " + passwordResults.getData());
-                        LogUtils.e("服务器密码列表   " + pwdList);
+                        LogUtils.d("秘钥列表为   " + Arrays.toString(bleNumber.toArray()));
+                        LogUtils.d(" 服务器数据 " + passwordResults.getData());
+                        LogUtils.d("服务器密码列表   " + pwdList);
                         //获取到编号
                         showList.clear();
                         morePwd.clear();
@@ -138,7 +138,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                             e.printStackTrace();
                         }
                         if (isSafe()) {
-                            LogUtils.e("同步锁密码  传递的密码是  " + Arrays.toString(showList.toArray()));
+                            LogUtils.d("同步锁密码  传递的密码是  " + Arrays.toString(showList.toArray()));
                             mViewRef.get().onSyncPasswordSuccess(showList);
                         }
                         //服务器匹配锁上数据   锁上没有的密码  删除
@@ -162,8 +162,8 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                                 morePwd.add(Integer.parseInt(password.getNum()));
                             }
                         }
-                        LogUtils.e("服务器多的数据是  " + Arrays.toString(morePwd.toArray()));
-                        LogUtils.e("服务器少的数据是  " + Arrays.toString(missPwd.toArray()));
+                        LogUtils.d("服务器多的数据是  " + Arrays.toString(morePwd.toArray()));
+                        LogUtils.d("服务器少的数据是  " + Arrays.toString(missPwd.toArray()));
                         addMiss(missPwd);  //添加锁上有的服务器没有的密码
                         deleteMore(morePwd); //添加锁上没有的服务器有的密码
                         //获取锁的时间计划
@@ -174,7 +174,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("同步密码失败   " + throwable.getMessage());
+                        LogUtils.d("同步密码失败   " + throwable.getMessage());
                         if (isSafe()) {
                             mViewRef.get().onSyncPasswordFailed(throwable);
                             mViewRef.get().endSync();
@@ -234,18 +234,18 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传秘钥昵称到服务器成功  " + result.toString());
+                        LogUtils.d("上传秘钥昵称到服务器成功  " + result.toString());
                         getAllPassword(bleLockInfo, false);
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传秘钥昵称到服务器失败  " + baseResult.toString());
+                        LogUtils.d("上传秘钥昵称到服务器失败  " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥昵称到服务器失败  " + throwable.getMessage());
+                        LogUtils.d("上传秘钥昵称到服务器失败  " + throwable.getMessage());
                     }
 
                     @Override
@@ -285,18 +285,18 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("删除秘钥 到成功   " + result.toString());
+                        LogUtils.d("删除秘钥 到成功   " + result.toString());
                         getAllPassword(bleLockInfo, false);
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("上传秘钥 失败   " + baseResult.toString());
+                        LogUtils.d("上传秘钥 失败   " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传秘钥 失败   " + throwable.getMessage());
+                        LogUtils.d("上传秘钥 失败   " + throwable.getMessage());
                     }
 
                     @Override
@@ -325,7 +325,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
         if (!NetUtil.isNetworkAvailable()) {
             return;
         }
-        LogUtils.e(Thread.currentThread().getName() + " manager  密码是  " + foreverPassword.toString());
+        LogUtils.d(Thread.currentThread().getName() + " manager  密码是  " + foreverPassword.toString());
         List<AddPasswordBean.Password> passwords = new ArrayList<>();
         passwords.add(new AddPasswordBean.Password(1, foreverPassword));
         XiaokaiNewServiceImp
@@ -335,7 +335,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("上传密码添加成功  ");
+                        LogUtils.d("上传密码添加成功  ");
                         getAllPassword(bleLockInfo, false);
                     }
 
@@ -346,7 +346,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("上传密码失败  ");
+                        LogUtils.d("上传密码失败  ");
                         getAllPassword(bleLockInfo, false);
                     }
 
@@ -367,7 +367,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
 
     public void queryWeekPlan() {
         int id = bleNumber.get(position);
-        LogUtils.e("查询周计划   " + id);
+        LogUtils.d("查询周计划   " + id);
         //查询周计划
         byte[] command = BleCommandFactory.queryWeekPlanCommand((byte) id, bleLockInfo.getAuthKey());
         bleService.sendCommand(command);
@@ -385,11 +385,11 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         //解析周计划
-                        LogUtils.e("周计划查询的返回数据   " + (bleDataBean.getOriginalData()[0] == 0 ? Rsa.bytesToHexString(bleDataBean.getPayload()) :
+                        LogUtils.d("周计划查询的返回数据   " + (bleDataBean.getOriginalData()[0] == 0 ? Rsa.bytesToHexString(bleDataBean.getPayload()) :
                                 Rsa.toHexString(Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey()))
                         ));
                         if (bleDataBean.isConfirm()) {
-                            LogUtils.e("确认帧    ");
+                            LogUtils.d("确认帧    ");
                             return;
                         }
                         //判断是否是当前指令
@@ -416,7 +416,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                                     strWeeks[i] = "1";
                                 }
                             }
-                            LogUtils.e("查询到的周计划是   " + id + "   " + Arrays.toString(strWeeks));
+                            LogUtils.d("查询到的周计划是   " + id + "   " + Arrays.toString(strWeeks));
                             //周期密码
                             showList.get(position).setType(3);
                             showList.get(position).setItems(Arrays.asList(strWeeks));
@@ -433,7 +433,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                             searchUserType();
                         } else if (bleDataBean.getCmd() == 0x0f) {
                             //获取年计划成功
-                            LogUtils.e("收到年计划查询的回调   解码数据是   " + Rsa.toHexString(payload));
+                            LogUtils.d("收到年计划查询的回调   解码数据是   " + Rsa.toHexString(payload));
                             int scheduleId = payload[0] & 0xff;
                             int userId = payload[1] & 0xff;
                             int codeType = payload[2] & 0xff;
@@ -445,7 +445,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
 
                             long startTime = (Rsa.bytes2Int(sTime) + BleUtil.DEFINE_TIME) * 1000;
                             long endTime = (Rsa.bytes2Int(eTime) + BleUtil.DEFINE_TIME) * 1000;
-                            LogUtils.e("查到年计划   scheduleId " + scheduleId + "  userId  " + userId + "  codeType  " + codeType + "   " +
+                            LogUtils.d("查到年计划   scheduleId " + scheduleId + "  userId  " + userId + "  codeType  " + codeType + "   " +
                                     "开始时间  " + DateUtils.getDateTimeFromMillisecond(startTime) + "  结束时间  " + DateUtils.getDateTimeFromMillisecond(endTime)
                             );
                             showList.get(position).setType(2);
@@ -477,7 +477,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
         //如果查询的位置到了最后   那么不再查询
         //查询年计划
         int id = bleNumber.get(position);
-        LogUtils.e("查询年计划   " + id);
+        LogUtils.d("查询年计划   " + id);
         byte[] command = BleCommandFactory.queryYearPlanCommand((byte) id, bleLockInfo.getAuthKey());
         bleService.sendCommand(command);
         queryYearPlanDisposable = bleService.listeneDataChange()
@@ -492,7 +492,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                 .subscribe(new Consumer<BleDataBean>() {
                     @Override
                     public void accept(BleDataBean bleDataBean) throws Exception {
-                        LogUtils.e("收到年计划查询数据  " + Rsa.toHexString(bleDataBean.getOriginalData()));
+                        LogUtils.d("收到年计划查询数据  " + Rsa.toHexString(bleDataBean.getOriginalData()));
                         if (bleDataBean.isConfirm()) {
                             return;
                         }
@@ -503,7 +503,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                         if (bleDataBean.getOriginalData()[0] == 1) {
                             //获取年计划成功
                             byte[] payload = Rsa.decrypt(bleDataBean.getPayload(), bleLockInfo.getAuthKey());
-                            LogUtils.e("收到年计划查询的回调   解码数据是   " + Rsa.toHexString(payload));
+                            LogUtils.d("收到年计划查询的回调   解码数据是   " + Rsa.toHexString(payload));
                             int scheduleId = payload[0] & 0xff;
                             int userId = payload[1] & 0xff;
                             int codeType = payload[2] & 0xff;
@@ -515,7 +515,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
 
                             long startTime = (Rsa.bytes2Int(sTime) + BleUtil.DEFINE_TIME) * 1000;
                             long endTime = (Rsa.bytes2Int(eTime) + BleUtil.DEFINE_TIME) * 1000;
-                            LogUtils.e("查到年计划   scheduleId " + scheduleId + "  userId  " + userId + "  codeType  " + codeType + "   " +
+                            LogUtils.d("查到年计划   scheduleId " + scheduleId + "  userId  " + userId + "  codeType  " + codeType + "   " +
                                     "开始时间  " + DateUtils.getDateTimeFromMillisecond(startTime) + "  结束时间  " + DateUtils.getDateTimeFromMillisecond(endTime)
                             );
                             showList.get(position).setType(2);
@@ -548,7 +548,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
 
 
     public void searchUserType() {
-        LogUtils.e("bleNumber的个数是   " + bleNumber.size() + "  position  " + position);
+        LogUtils.d("bleNumber的个数是   " + bleNumber.size() + "  position  " + position);
         if (position >= bleNumber.size()) {  //查询完了
             if (isSafe()) {
                 mViewRef.get().endSync();
@@ -563,7 +563,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
             return;
 
         }
-        LogUtils.e("查询用户类型   " + id);
+        LogUtils.d("查询用户类型   " + id);
         //  查询秘钥
         byte[] searchCommand = BleCommandFactory.queryUserTypeCommand((byte) 0x01, (byte) id, bleLockInfo.getAuthKey());
         bleService.sendCommand(searchCommand);
@@ -594,7 +594,7 @@ public class PasswordManagerPresenter<T> extends BlePresenter<IPasswordManagerVi
                         int codeType = payload[0] & 0xff;
                         int userId = payload[1] & 0xff;
                         int userType = payload[2] & 0xff;
-                        LogUtils.e("获取到的用户类型是  " + userType);
+                        LogUtils.d("获取到的用户类型是  " + userType);
                         if (userType == 0) {  //永久用户   永久用户类型，不用管。
                             showList.get(position).setType(1);
                             uploadPassword(showList.get(position));

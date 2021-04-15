@@ -1,24 +1,16 @@
 package com.philips.easykey.lock.mvp.presenter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.cateye.VideoVActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockActionBean;
 import com.philips.easykey.lock.mvp.mvpbase.BlePresenter;
 import com.philips.easykey.lock.mvp.view.IMainActivityView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
@@ -33,20 +25,11 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.ServerBleDevice;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.publiclibrary.linphone.MemeManager;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.callback.PhoneCallback;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.callback.RegistrationCallback;
-import com.philips.easykey.lock.publiclibrary.linphone.linphone.util.LinphoneHelper;
-import com.philips.easykey.lock.publiclibrary.linphone.linphonenew.LinphoneManager;
-import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.CatEyeEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeleteDeviceLockBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayLockAlarmEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayLockInfoEventBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.GatewayResetBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.WifiLockAlarmBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GatewayComfirmOtaResultBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GatewayOtaNotifyBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayStatusResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
@@ -55,16 +38,10 @@ import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
-import com.philips.easykey.lock.utils.MyLog;
-import com.philips.easykey.lock.utils.RecordTools;
-import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.greenDao.bean.BleLockServiceInfo;
-import com.philips.easykey.lock.utils.greenDao.bean.CatEyeEvent;
-import com.philips.easykey.lock.utils.greenDao.bean.CatEyeServiceInfo;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockAlarmEventDao;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockPwd;
@@ -72,7 +49,6 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockServiceInfo;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayServiceInfo;
 import com.philips.easykey.lock.utils.greenDao.db.BleLockServiceInfoDao;
-import com.philips.easykey.lock.utils.greenDao.db.CatEyeServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockAlarmEventDaoDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockPwdDao;
@@ -80,23 +56,17 @@ import com.philips.easykey.lock.utils.greenDao.db.GatewayLockServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.manager.GatewayLockPasswordManager;
 
-import net.sdvn.cmapi.Device;
 
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.linphone.core.LinphoneCall;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
-import retrofit2.http.GET;
 
 /**
  * Create By lxj  on 2019/3/18
@@ -107,9 +77,6 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
     private Disposable warringDisposable;
     private Disposable deviceInBootDisposable;
     private Disposable disposable;
-    private Disposable memeDisposable;
-    private Disposable deviceChangeDisposable;
-    private CateEyeInfo callInCatEyeInfo;  //呼叫进来的猫眼信息
     private Disposable catEyeEventDisposable;
     private Disposable listerBleVersionDisposable;
     private Disposable listenerGatewayOtaDisposable;
@@ -152,23 +119,6 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
         getLockPwdInfoEvent();
         //监听wifi锁  报警信息
         listenWifiLockStatus();
-        //监听设备变化
-        listenerDeviceChange();
-    }
-
-    private void listenerDeviceChange(){
-        allDeviceDisposable = MyApplication.getInstance().listenerAllDevices().subscribe(new Consumer<AllBindDevices>() {
-            @Override
-            public void accept(AllBindDevices allBindDevices) throws Exception {
-                List<CateEyeInfo> cateEyes = allBindDevices.getCateEyes();
-                if (cateEyes!=null && cateEyes.size()>0 && isSafe()){
-                    mViewRef.get().needCheckVpnService();
-                }
-            }
-        });
-        compositeDisposable.add(allDeviceDisposable);
-
-
     }
 
     /**
@@ -238,13 +188,13 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                         @Override
                         public void accept(BleDataBean bleDataBean) throws Exception {
                             if (!MyApplication.getInstance().getBleService().getBleLockInfo().isAuth() || MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey() == null || MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey().length == 0) {
-                                LogUtils.e("收到报警记录，但是鉴权帧为空");
+                                LogUtils.d("收到报警记录，但是鉴权帧为空");
                                 return;
                             }
                             bleDataBean.getDevice().getName();
                             bleDataBean.getCmd();
                             byte[] deValue = Rsa.decrypt(bleDataBean.getPayload(), MyApplication.getInstance().getBleService().getBleLockInfo().getAuthKey());
-                            LogUtils.e("收到报警上报    " + Rsa.toHexString(deValue));
+                            LogUtils.d("收到报警上报    " + Rsa.toHexString(deValue));
                             String nickNameByDeviceName = getNickNameByDeviceName(bleDataBean.getDevice().getName());
                             int state9 = (deValue[5] & 0b00000010) == 0b00000010 ? 1 : 0;
                             MyApplication.getInstance().getBleService().getBleLockInfo().setSafeMode(state9);
@@ -254,7 +204,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                                     mViewRef.get().onWarringUp(warringContent);
                                 }
                             } else {
-                                LogUtils.e("收到报警记录，但是缓存信息中没有该设备  ");
+                                LogUtils.d("收到报警记录，但是缓存信息中没有该设备  ");
                             }
                         }
                     }, new Consumer<Throwable>() {
@@ -272,7 +222,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                     .subscribe(new Consumer<BleLockInfo>() {
                         @Override
                         public void accept(BleLockInfo bleLockInfo) throws Exception {
-                            LogUtils.e("设备  正在升级模式   " + bleLockInfo.getServerLockInfo().toString());
+                            LogUtils.d("设备  正在升级模式   " + bleLockInfo.getServerLockInfo().toString());
                             if (isSafe()) {
                                 mViewRef.get().onDeviceInBoot(bleLockInfo);
                             }
@@ -280,7 +230,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("设备   正在升级模式   监听失败    " + bleLockInfo.getServerLockInfo().toString());
+                            LogUtils.d("设备   正在升级模式   监听失败    " + bleLockInfo.getServerLockInfo().toString());
                         }
                     });
             compositeDisposable.add(deviceInBootDisposable);
@@ -293,17 +243,17 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult baseResult) {
-                        LogUtils.e("更新版本号成功   " + baseResult.toString());
+                        LogUtils.d("更新版本号成功   " + baseResult.toString());
                     }
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-                        LogUtils.e("更新版本号失败   " + baseResult.toString());
+                        LogUtils.d("更新版本号失败   " + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("更新版本号失败   " + throwable.getMessage());
+                        LogUtils.d("更新版本号失败   " + throwable.getMessage());
                     }
 
                     @Override
@@ -339,7 +289,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                             if (mqttData != null) {
                                 if (MqttConstant.GATEWAY_STATE.equals(mqttData.getFunc())) {
                                     GetBindGatewayStatusResult gatewayStatusResult = new Gson().fromJson(mqttData.getPayload(), GetBindGatewayStatusResult.class);
-                                    LogUtils.e("监听网关的状态" + gatewayStatusResult.getDevuuid());
+                                    LogUtils.d("监听网关的状态" + gatewayStatusResult.getDevuuid());
                                     if (gatewayStatusResult != null) {
                                         List<HomeShowBean> homeShowBeans = MyApplication.getInstance().getAllDevices();
                                         SPUtils.put(gatewayStatusResult.getDevuuid(), gatewayStatusResult.getData().getState());
@@ -377,40 +327,8 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                             if (TextUtils.isEmpty(devtype)) { //devtype为空   无法处理数据
                                 return;
                             }
-                            // TODO: 2019/5/14 处理猫眼动态和锁上报的信息分别放在不同的表中
-                            /**
-                             * 猫眼信息上报
-                             */
-                            if (devtype.equals(KeyConstants.DEV_TYPE_CAT_EYE)) {
-                                CatEyeEventBean catEyeEventBean = new Gson().fromJson(mqttData.getPayload(), CatEyeEventBean.class);
-                                int eventType = -1;
-                                CatEyeEvent catEyeEvent = new CatEyeEvent();
-                                catEyeEvent.setDeviceId(catEyeEventBean.getDeviceId());
-                                catEyeEvent.setDeviceType(CatEyeEvent.DEVICE_CAT_EYE);
-                                catEyeEvent.setEventTime(Long.parseLong(catEyeEventBean.getTimestamp()));
-                                if ("pir".equals(catEyeEventBean.getEventparams().getDevetype())) {
-                                    eventType = CatEyeEvent.EVENT_PIR;
-                                } else if ("headLost".equals(catEyeEventBean.getEventparams().getDevetype())) {
-                                    eventType = CatEyeEvent.EVENT_HEAD_LOST;
-//                        }else if ("doorBell".equals(catEyeEventBean.getEventparams().getDevetype())){
-//                            eventType = CatEyeEvent.EVENT_DOOR_BELL;
-                                } else if ("lowPower".equals(catEyeEventBean.getEventparams().getDevetype())) {
-                                    eventType = CatEyeEvent.EVENT_LOW_POWER;
-                                } else if ("hostLost".equals(catEyeEventBean.getEventparams().getDevetype())) {
-                                    eventType = CatEyeEvent.EVENT_HOST_LOST;
-                                }
-                                if (eventType == -1) {
-                                    return;
-                                }
-                                catEyeEvent.setEventType(eventType);
-                                catEyeEvent.setGatewayId(catEyeEventBean.getGwId());
-                                //   保存到数据库
-                                MyApplication.getInstance().getDaoWriteSession().getCatEyeEventDao().insert(catEyeEvent);
-                                if (isSafe()) {
-                                    mViewRef.get().onGwEvent(eventType, catEyeEventBean.getDeviceId(), catEyeEventBean.getGwId());
-                                }
-                                //网关锁信息上报
-                            } else if (KeyConstants.DEV_TYPE_LOCK.equals(devtype)) {
+
+                            if (KeyConstants.DEV_TYPE_LOCK.equals(devtype)) {
                                 //保存告警信息
                                 if ("alarm".equals(eventtype)) {
                                     GatewayLockAlarmEventBean gatewayLockAlarmEventBean = new Gson().fromJson(mqttData.getPayload(), GatewayLockAlarmEventBean.class);
@@ -467,22 +385,22 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                                         deleteOnePwd(gatewayId, deviceId, uid, "0" + num);
                                         //添加
                                         AddOnePwd(gatewayId, deviceId, uid, "0" + num);
-                                        LogUtils.e("单个添加");
+                                        LogUtils.d("单个添加");
                                     } else if (eventParmDeveType.equals("lockprom") && devecode == 3 && num == 255 && pin == 255) {
                                         //全部删除
                                         deleteAllPwd(gatewayId, deviceId, uid);
-                                        LogUtils.e("全部删除");
+                                        LogUtils.d("全部删除");
                                     } else if (eventParmDeveType.equals("lockprom") && devecode == 3 && pin == 255) {
                                         //删除单个密码
                                         deleteOnePwd(gatewayId, deviceId, uid, "0" + num);
-                                        LogUtils.e("删除单个密码");
+                                        LogUtils.d("删除单个密码");
                                     } else if (eventParmDeveType.equals("lockop") && devecode == 2 && pin == 255) {
                                         //使用一次性开锁密码
                                         if (num > 4 && num <= 8) {
                                             deleteOnePwd(gatewayId, deviceId, uid, "0" + num);
-                                            LogUtils.e("使用一次性开锁");
+                                            LogUtils.d("使用一次性开锁");
                                         }
-                                        LogUtils.e("开锁上报");
+                                        LogUtils.d("开锁上报");
                                     }
                                 }
                             }
@@ -490,7 +408,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("报警消息失败   " + throwable.getMessage());
+                            LogUtils.d("报警消息失败   " + throwable.getMessage());
                         }
                     });
             compositeDisposable.add(catEyeEventDisposable);
@@ -502,304 +420,6 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
         if (gatewayInfo != null) {
             MyApplication.getInstance().getAllDevicesByMqtt(true);
         }
-    }
-
-    public void initLinphone() {
-        String gwId = MyApplication.getInstance().getCurrentGwId();
-        String key = Constants.RELAYTYPE + gwId;
-        int replay = (int) SPUtils.get(key, 0);
-        if (replay == 1) {
-            LinphoneManager.switchRelay(true);
-            MyApplication.getInstance().setCurrentGwId("");
-        } else if (replay == 0) {
-            LinphoneManager.switchRelay(false);
-        }
-
-//        LinphoneManager.switchRelay(true);
-        if (!TextUtils.isEmpty(MyApplication.getInstance().getToken()) && !TextUtils.isEmpty(MyApplication.getInstance().getUid())) {
-            LinphoneHelper.setAccount(MyApplication.getInstance().getUid(), "12345678Bm", MqttConstant.LINPHONE_URL);
-            LogUtils.e("设置LinPhone  监听  ");
-            MyLog.getInstance().save("initLinphone ");
-            LinphoneHelper.addCallback(new RegistrationCallback() {
-                @Override
-                public void registrationNone() {
-                    super.registrationNone();
-                }
-
-                @Override
-                public void registrationProgress() {
-                    super.registrationProgress();
-                }
-
-                @Override
-                public void registrationOk() {
-                    super.registrationOk();
-               //     LogUtils.e("Linphone注册成功     ");
-                    //  MyLog.getInstance().save("Linphone注册成功     ");
-                    SPUtils.put(Constants.LINPHONE_REGESTER_STATE, true);
-                }
-
-                @Override
-                public void registrationCleared() {
-                    super.registrationCleared();
-                }
-
-                @Override
-                public void registrationFailed() {
-                    super.registrationFailed();
-                    LogUtils.e("Linphone注册失败     ");
-                    //   MyLog.getInstance().save("Linphone注册失败...");
-                    SPUtils.put(Constants.LINPHONE_REGESTER_STATE, false);
-                }
-            }, new PhoneCallback() {
-                @Override
-                public void incomingCall(LinphoneCall linphoneCall) {
-                    //收到来电通知
-                    LogUtils.e("Linphone  收到来电     ");
-//                    if(VideoVActivity.isRunning && isFront){
-//                          Toast.makeText(mContext,mContext.getString(R.string.video_desotry),Toast.LENGTH_LONG).show();
-//                    }
-                    MyLog.getInstance().save("Linphone  收到来电     ");
-                    if (VideoVActivity.isRunning) {
-                        LogUtils.e("Linphone  收到来电   VideoActivity已经运行  不出来  ");
-                        MyLog.getInstance().save("Linphone  收到来电   VideoActivity已经运行  不出来  ");
-                        return;
-                    }
-
-
-//                        Log.e(GeTui.VideoLog,"麦克风状态:"+!RecordTools.validateMicAvailability());
-//                        if (!RecordTools.validateMicAvailability()) {  //打开false,没有打开true
-//                            if (mViewRef != null && isSafe()) {
-//                                mViewRef.get().callError();
-//                            }
-//                            return;
-//                        }
-
-                    //设置呼叫进来的时间
-                    MyApplication.getInstance().setIsComingTime(System.currentTimeMillis());
-                    //获取linphone的地址
-                    String linphoneSn = linphoneCall.getRemoteAddress().getUserName();
-                    LogUtils.e("Linphone   呼叫过来的linphoneSn   " + linphoneSn);
-                    Log.e(GeTui.VideoLog, "  linphoneSn:" + linphoneSn);
-                    String gwId = "";
-                    GatewayInfo gatewayInfo = null;
-                    Log.e(GeTui.VideoLog, "获取网关列表前");
-                    AllBindDevices allBindDevices = MyApplication.getInstance().getAllBindDevices();
-                    if (allBindDevices == null) {
-
-                        String payload = (String) SPUtils.get(Constants.ALL_DEVICES_DATA, "");
-                        allBindDevices = new Gson().fromJson(payload, AllBindDevices.class);
-
-                        if (TextUtils.isEmpty(payload) || allBindDevices == null) {
-                            Log.e(GeTui.VideoLog, "allBindDevices为null...payload:" + payload);
-                            if (mViewRef != null && isSafe()) {
-                                mViewRef.get().callErrorCateInfoEmpty();
-                            }
-                            return;
-                        }
-                    }
-                    List<CateEyeInfo> cateEyes = allBindDevices.getCateEyes();
-                    //List<CateEyeInfo> cateEyes = MyApplication.getInstance().getAllBindDevices().getCateEyes();
-                    if (cateEyes == null) {
-                        Log.e(GeTui.VideoLog, "cateEyes为null");
-                        if (isSafe()) {
-                            mViewRef.get().callErrorCateInfoEmpty();
-                        }
-                        return;
-                    }
-                    Log.e(GeTui.VideoLog, "cateEyes的大小:" + cateEyes.size());
-                    for (CateEyeInfo cateEyeInfo : cateEyes) {
-                        LogUtils.e("猫眼的  getDeviceId  " + cateEyeInfo.getServerInfo().getDeviceId());
-                        if (linphoneSn.equalsIgnoreCase(cateEyeInfo.getServerInfo().getDeviceId())) {
-                            LogUtils.e("获取到网关Id为  " + cateEyeInfo.getGwID());
-                            gwId = cateEyeInfo.getGwID();
-                            List<GatewayInfo> allGateway = MyApplication.getInstance().getAllGateway();
-                            for (GatewayInfo info : allGateway) {
-                                if (cateEyeInfo.getGwID().equals(info.getServerInfo().getDeviceSN())) {
-                                    gatewayInfo = info;
-                                    break;
-                                }
-                            }
-                            callInCatEyeInfo = cateEyeInfo;
-                        }
-                    }
-                    //如果网关Id为空    不朝下走了
-                    if (TextUtils.isEmpty(gwId) || gatewayInfo == null) {
-                        Log.e(GeTui.VideoLog, "gwid为null");
-                        if (isSafe()) {
-                            mViewRef.get().callErrorCateInfoEmpty();
-                        }
-                        return;
-                    }
-
-                    String key = Constants.RELAYTYPE + gwId;
-                    int replay = (int) SPUtils.get(key, 0);
-                    if (replay == 1) {
-                        //        LinphoneManager.switchRelay(true);
-                        if (isSafe()) {
-                            mViewRef.get().onCatEyeCallIn(callInCatEyeInfo);
-                        }
-                        return;
-                    }
-
-
-                    //获取米米网账号情况
-                    int meBindState = gatewayInfo.getServerInfo().getMeBindState();
-                    String mePwd = gatewayInfo.getServerInfo().getMePwd();
-                    String meUsername = gatewayInfo.getServerInfo().getMeUsername();
-                    if (TextUtils.isEmpty(meUsername) || TextUtils.isEmpty(mePwd)) {
-                        //如果账号或者密码有一个为空  直接退出
-                        Log.e(GeTui.VideoLog, "咪咪网账号为null");
-                        if (isSafe()) {
-                            mViewRef.get().callErrorCateInfoMimi();
-                        }
-                        return;
-                    }
-                    Log.e(GeTui.VideoLog, "MainActivityPresenter--> next..." + meUsername + " " + mePwd);
-                    if (MemeManager.getInstance().isConnected()) { //meme网已经连接
-                        //如果meme网登陆的账号密码为当前的账号密码，直接发起通信
-                        if (meUsername.equals(MemeManager.getInstance().getCurrentAccount())
-                                && mePwd.equals(MemeManager.getInstance().getCurrentPassword())) {
-                            //查看是否有设备在线   如果有  弹出来电框
-                            if (MemeManager.getInstance().getGwDevices().size() > 0) {
-                                if (isSafe()) {
-                                    mViewRef.get().onCatEyeCallIn(callInCatEyeInfo);
-                                }
-                            } else {  //本地登录了米米网账号且是当前猫眼的meme网昂好   但是没有本地设备在线  等待五秒
-                                listDeviceChange();
-                            }
-                        } else {  //本地登录的meme网账号不是呼叫进来猫眼的meme网账号   不处理
-
-                        }
-                    } else { //meme网没有连接
-                        Log.e(GeTui.VideoLog, "MainPresenter------>登录 mimi");
-                        MyLog.getInstance().save("MainPresenter------>登录 mimi ");
-                        loginMeme(meUsername, mePwd);
-                    }
-                }
-
-                @Override
-                public void outgoingInit() {
-                    super.outgoingInit();
-                }
-
-                @Override
-                public void callConnected() {
-                    super.callConnected();
-                    LogUtils.e("Linphone  通话连接成功   ");
-                    // 视频通话默认免提，语音通话默认非免提
-//                    LinphoneHelper.toggleSpeaker(true);
-//                    // 所有通话默认非静音
-//                    LinphoneHelper.toggleMicro(false);
-                }
-
-                @Override
-                public void callEnd() {
-                    super.callEnd();
-
-                    LogUtils.e("Linphone  通话结束   ");
-                }
-            });
-            LogUtils.e("登录linphone   UID   " + MyApplication.getInstance().getUid());
-            LinphoneHelper.login();
-        } else {
-            LogUtils.e("登录linphone   失败   uid或者token为空   ");
-        }
-
-    }
-
-    /**
-     * 登录米米网
-     *
-     * @param meUsername
-     * @param mePwd
-     */
-    private void loginMeme(String meUsername, String mePwd) {
-        //获取到设备列表
-        if (memeDisposable != null && !memeDisposable.isDisposed()) {
-            memeDisposable.dispose();
-        }
-        Observable<Boolean> loginMeme = MemeManager.getInstance().LoginMeme(meUsername, mePwd, MyApplication.getInstance());
-        Observable<List<Device>> devicesChange = MemeManager.getInstance().listDevicesChange();
-        memeDisposable = Observable.zip(loginMeme, devicesChange,
-                new BiFunction<Boolean, List<Device>, Boolean>() {
-                    @Override
-                    public Boolean apply(Boolean aBoolean, List<Device> devices) throws Exception {
-                        LogUtils.e("米米网登陆成功  且网关在线");
-                        Log.e(GeTui.VideoLog, "米米网登陆成功  且网关在线 aBoolean:" + aBoolean + " devices.size:" + devices);
-                        if (aBoolean && devices.size() > 0) { //米米网登陆成功且网关在线  正常到此处，那么都应该是成功的
-                            return true;
-                        }
-                        MyLog.getInstance().save("米米网登录失败...网关获取为空");
-                        return false;
-                    }
-                })
-                .compose(RxjavaHelper.observeOnMainThread())
-                .timeout(8 * 1000, TimeUnit.MILLISECONDS)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        if (memeDisposable != null && !memeDisposable.isDisposed()) {
-                            memeDisposable.dispose();
-                        }
-                        if (aBoolean) { // 米米网登陆成功且网关在线
-                            LogUtils.e("米米网  登陆成功   弹出来电框");
-                            Log.e(GeTui.VideoLog, "米米网  登陆成功   弹出来电框");
-                            if (isSafe()) {
-                                mViewRef.get().onCatEyeCallIn(callInCatEyeInfo);
-                            }
-                        } else { //米米网登陆失败或者网关不在线   不做处理
-                            if (isSafe()) {
-                                mViewRef.get().onCatEyeCallFail();
-                            }
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("登录米米网失败或者设备部在线");
-                        Log.e(GeTui.VideoLog, "登录米米网失败或者设备部在线:" + throwable.getMessage());
-                        MyLog.getInstance().save("猫眼呼叫来电失败,通道建立失败:" + throwable.getMessage());
-//                        if(mViewRef!=null && mViewRef.get()!=null){
-//                            Log.e(GeTui.VideoLog,"MainAcvitiyPresenter===>失败");
-//                            mViewRef.get().onCatEyeCallFail();
-//                        }
-                        if (mContext instanceof Activity) {
-                            Activity mainActivity = (Activity) mContext;
-                            mainActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(mContext, mContext.getString(R.string.video_connection_fail), Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    }
-                });
-    }
-
-
-    private void listDeviceChange() {
-        toDisposable(deviceChangeDisposable);
-        deviceChangeDisposable = MemeManager.getInstance().listDevicesChange()
-                .compose(RxjavaHelper.observeOnMainThread())
-                .timeout(5 * 1000, TimeUnit.MILLISECONDS)
-                .subscribe(new Consumer<List<Device>>() {
-                    @Override
-                    public void accept(List<Device> devices) throws Exception {
-                        toDisposable(deviceChangeDisposable);
-                        if (devices.size() > 1) {
-                            if (isSafe()) {
-                                mViewRef.get().onCatEyeCallIn(callInCatEyeInfo);
-                            }
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-
-                    }
-                });
-        compositeDisposable.add(deviceChangeDisposable);
     }
 
     // 个推 2
@@ -825,8 +445,8 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
 //            }
 //        }
        // Log.e(GeTui.VideoLog, "MainActivityPresenter-->phoneType:" + phoneType + " uid:" + uid + " jpushid:" + JpushId + " token:" + MyApplication.getInstance().getToken());
-        LogUtils.e(GeTui.VideoLog, "uid:" + uid + " JpushId:" + JpushId);
-        LogUtils.e("shulan------"+ "uid:" + uid + " JpushId:" + JpushId);
+        LogUtils.d(GeTui.VideoLog, "uid:" + uid + " JpushId:" + JpushId);
+        LogUtils.d("shulan------"+ "uid:" + uid + " JpushId:" + JpushId);
         if (!TextUtils.isEmpty(uid) && !TextUtils.isEmpty(JpushId)) {
             XiaokaiNewServiceImp.uploadPushId(uid, JpushId, type).subscribe(new BaseObserver<BaseResult>() {
                 @Override
@@ -853,7 +473,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                 }
             });
         }else {
-            LogUtils.e("jpushid上传失败");
+            LogUtils.d("jpushid上传失败");
         }
 
     }
@@ -900,9 +520,8 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
     @Override
     public void detachView() {
         super.detachView();
-        LinphoneHelper.deleteUser();
         if (bleService != null) {
-            LogUtils.e("MainActivity 退出界面   斷開連接");
+            LogUtils.d("MainActivity 退出界面   斷開連接");
             bleService.release();  //MainActivity 退出界面   斷開連接
         }
         handler.removeCallbacksAndMessages(null);
@@ -970,7 +589,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
         String uid = MyApplication.getInstance().getUid();
         List<HomeShowBean> homeShowBeans = new ArrayList<>();
         //获取WiFi锁
-        if (daoSession != null && daoSession.getCatEyeServiceInfoDao() != null) {
+        if (daoSession != null && daoSession.getWifiLockInfoDao() != null) {
             List<WifiLockInfo> wifiLockInfos = daoSession.getWifiLockInfoDao().loadAll();
             if (wifiLockInfos != null && wifiLockInfos.size() > 0) {
                 for (WifiLockInfo wifiLockInfo : wifiLockInfos) {
@@ -992,24 +611,6 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                 for(ClothesHangerMachineAllBean clothesHangerMachineAllBean : clothesHangerMachineAllBeans){
                     homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_CLOTHES_HANGER,clothesHangerMachineAllBean.getWifiSN(),
                             clothesHangerMachineAllBean.getHangerNickName(),clothesHangerMachineAllBean));
-                }
-            }
-        }
-        //获取猫眼
-        if (daoSession != null && daoSession.getCatEyeServiceInfoDao() != null) {
-            List<CatEyeServiceInfo> catEyeServiceList = daoSession.getCatEyeServiceInfoDao().queryBuilder().where(CatEyeServiceInfoDao.Properties.Uid.eq(uid)).list();
-            if (catEyeServiceList != null && catEyeServiceList.size() > 0) {
-                for (CatEyeServiceInfo catEyeService : catEyeServiceList) {
-                    CateEyeInfo cateEyeInfo = new CateEyeInfo(catEyeService.getGatewayId(),
-                            new ServerGwDevice(catEyeService.getSW(), catEyeService.getDeviceId(),
-                                    catEyeService.getDevice_type(), catEyeService.getEvent_str(), catEyeService.getIpaddr(),
-                                    catEyeService.getMacaddr(), catEyeService.getNickName(), catEyeService.getTime()
-                                    , "", catEyeService.getDelectTime(), catEyeService.getLockversion(), catEyeService.getModuletype()
-                                    , catEyeService.getNwaddr(), catEyeService.getOfflineTime(), catEyeService.getOnlineTime(), catEyeService.getShareFlag()
-                                    , catEyeService.getPushSwitch()
-                            ));
-                    homeShowBeans.add(new HomeShowBean(HomeShowBean.TYPE_CAT_EYE, catEyeService.getDeviceId(),
-                            catEyeService.getNickName(), cateEyeInfo));
                 }
             }
         }
@@ -1079,7 +680,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
     public void setProductInfo() {
         DaoSession daoSession = MyApplication.getInstance().getDaoWriteSession();
         //获取产品型号信息列表
-        if (daoSession != null && daoSession.getCatEyeServiceInfoDao() != null) {
+        if (daoSession != null && daoSession.getProductInfoDao() != null) {
             List<ProductInfo> ProductInfoList = daoSession.getProductInfoDao().loadAll();
             if (ProductInfoList != null && ProductInfoList.size() > 0) {
                 MyApplication.getInstance().setProductInfos(ProductInfoList);
@@ -1163,21 +764,21 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                                     int pin = gatewayLockInfoEventBean.getEventparams().getPin();
                                     if (eventParmDeveType.equals("lockprom") && devecode == 2 && pin == 255) {
 //                                         //添加单个密码
-                                        LogUtils.e("添加单个密码   ");
+                                        LogUtils.d("添加单个密码   ");
                                         manager.insertWhenNoExist(deviceId, MyApplication.getInstance().getUid(), gatewayId,
                                                 new GatewayPasswordPlanBean(deviceId, gatewayId, MyApplication.getInstance().getUid(), num)
                                         );
                                     } else if (eventParmDeveType.equals("lockprom") && devecode == 3 && num == 255 && pin == 255) {
 //                                         //全部删除
-                                        LogUtils.e("全部删除   ");
+                                        LogUtils.d("全部删除   ");
                                         manager.deleteAll(deviceId, MyApplication.getInstance().getUid(), gatewayId);
                                     } else if (eventParmDeveType.equals("lockprom") && devecode == 3 && pin == 255) {
 //                                         //删除单个密码
-                                        LogUtils.e("删除单个密码   ");
+                                        LogUtils.d("删除单个密码   ");
                                         manager.deleteByNumber(deviceId, MyApplication.getInstance().getUid(), gatewayId, num);
                                     } else if (eventParmDeveType.equals("lockop") && devecode == 2 && pin == 255) {
 //                                         //使用一次性开锁密码
-                                        LogUtils.e("使用一次性开锁密码   ");
+                                        LogUtils.d("使用一次性开锁密码   ");
                                         if (num > 4 && num < 9) {
                                             manager.deleteByNumber(deviceId, MyApplication.getInstance().getUid(), gatewayId, num);
                                         }
@@ -1188,7 +789,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            LogUtils.e("报警消息失败   " + throwable.getMessage());
+                            LogUtils.d("报警消息失败   " + throwable.getMessage());
                         }
                     });
             compositeDisposable.add(getLockPwdInfoEventDisposable);

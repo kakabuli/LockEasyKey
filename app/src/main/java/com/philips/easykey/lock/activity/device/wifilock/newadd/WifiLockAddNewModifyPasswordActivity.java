@@ -50,19 +50,19 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
             int ret = 0;
             try {
                 ret =socketManager.writeData("PinSimple".getBytes());
-                LogUtils.e("写入状态  PinSimple  "+ret);
+                LogUtils.d("写入状态  PinSimple  "+ret);
                 Thread.sleep(89 * 1000);
                 ret = socketManager.writeData("APError".getBytes());
-                LogUtils.e("写入状态  APError1  "+ret);
+                LogUtils.d("写入状态  APError1  "+ret);
                 Thread.sleep(89 * 1000);
                 ret = socketManager.writeData("APError".getBytes());
-                LogUtils.e("写入状态  APError2  "+ret);
+                LogUtils.d("写入状态  APError2  "+ret);
                 Thread.sleep(89 * 1000);
                 ret = socketManager.writeData("APError".getBytes());
-                LogUtils.e("写入状态   APError3 "+ret);
+                LogUtils.d("写入状态   APError3 "+ret);
                 Thread.sleep(89 * 1000);
                 ret = socketManager.writeData("ApClose".getBytes());
-                LogUtils.e("写入状态  APError4·  "+ret);
+                LogUtils.d("写入状态  APError4·  "+ret);
                 Thread.sleep(1000);
                 socketManager.destroy();
             } catch (InterruptedException e) {
@@ -82,7 +82,7 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
                 break;
             case R.id.continue_check:
                 String wifiName = NetUtil.getWifiName();
-                LogUtils.e("连接状态  wifiName   " +wifiName+"  isConnected " +SocketManager.getInstance().isConnected());
+                LogUtils.d("连接状态  wifiName   " +wifiName+"  isConnected " +SocketManager.getInstance().isConnected());
                 if (!(!TextUtils.isEmpty(wifiName ) && wifiName.contains("kaadas_AP")) || !SocketManager.getInstance().isConnected()){
                     Toast.makeText(this, "连接断开，请重新开始", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this,WifiLockAddNewModifyPasswordDisconnectActivity.class));
@@ -90,7 +90,7 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
                     return;
                 }
                 Intent intent = new Intent(this, WifiLockAddNewInputAdminPasswotdActivity.class);
-                LogUtils.e(getLocalClassName()+"次数是   " + times + "  data 是否为空 "  );
+                LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 "  );
                 intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
                 startActivity(intent);
                 finish();

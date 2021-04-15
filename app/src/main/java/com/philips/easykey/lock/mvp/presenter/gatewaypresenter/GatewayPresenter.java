@@ -2,11 +2,9 @@ package com.philips.easykey.lock.mvp.presenter.gatewaypresenter;
 
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.bean.GatewayDeviceDetailBean;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.gatewayView.GatewayView;
-import com.philips.easykey.lock.publiclibrary.bean.CateEyeInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
@@ -16,7 +14,6 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UnBindGatewayBean
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GetBindGatewayStatusResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
@@ -47,11 +44,6 @@ public class GatewayPresenter<T> extends BasePresenter<GatewayView> {
                 if (gwLockInfo.getGwID().equals(gatewayID)) {
                     gatewayBindList.add(homeShowBean);
                 }
-            } else if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_CAT_EYE) {
-                CateEyeInfo cateEyeInfo = (CateEyeInfo) homeShowBean.getObject();
-                if (cateEyeInfo.getGwID().equals(gatewayID)) {
-                    gatewayBindList.add(homeShowBean);
-                }
             }
         }
         return gatewayBindList;
@@ -59,7 +51,7 @@ public class GatewayPresenter<T> extends BasePresenter<GatewayView> {
 
     //监听电量情况
     public void getPowerData(String gatewayId) {
-        LogUtils.e("进入获取电量。。。");
+        LogUtils.d("进入获取电量。。。");
         if (mqttService != null) {
             getPowerDataDisposable = mqttService.getPowerData()
                     .filter(new Predicate<MqttData>() {
@@ -67,10 +59,10 @@ public class GatewayPresenter<T> extends BasePresenter<GatewayView> {
                         public boolean test(MqttData mqttData) throws Exception {
                             if (mqttData != null) {
                                 //过滤
-                                LogUtils.e("过滤电量的值");
+                                LogUtils.d("过滤电量的值");
                                 GetDevicePowerBean powerBean = new Gson().fromJson(mqttData.getPayload(), GetDevicePowerBean.class);
                                 if (gatewayId.equals(powerBean.getGwId())) {
-                                    LogUtils.e("过滤成功值");
+                                    LogUtils.d("过滤成功值");
 
                                     return true;
                                 }
@@ -117,7 +109,7 @@ public class GatewayPresenter<T> extends BasePresenter<GatewayView> {
                         public void accept(MqttData mqttData) throws Exception {
                             if (mqttData != null) {
                                 GetBindGatewayStatusResult gatewayStatusResult = new Gson().fromJson(mqttData.getPayload(), GetBindGatewayStatusResult.class);
-                                LogUtils.e("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
+                                LogUtils.d("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
                                 if (gatewayStatusResult != null && gatewayStatusResult.getData().getState() != null) {
                                     if (isSafe()) {
                                         mViewRef.get().gatewayStatusChange(gatewayStatusResult.getDevuuid(), gatewayStatusResult.getData().getState());

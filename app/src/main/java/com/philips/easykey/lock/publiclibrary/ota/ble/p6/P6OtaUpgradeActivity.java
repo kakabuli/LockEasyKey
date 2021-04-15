@@ -136,25 +136,25 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         /**
          * Shared preference to hold the state of the bootloader
          */
-        LogUtils.e("收到数据  ", " action 为 " + intent.getAction());
+        LogUtils.d("收到数据  ", " action 为 " + intent.getAction());
         final String bootloaderState = Utils.getStringSharedPreference(this, Constants.PREF_BOOTLOADER_STATE + BluetoothLeService.mBluetoothDeviceAddress);
         final String action = intent.getAction();
         final Bundle extras = intent.getExtras();
         if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
             if (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1) == BluetoothAdapter.STATE_OFF) {
-                LogUtils.e(TAG, "蓝牙关闭");
+                LogUtils.d(TAG, "蓝牙关闭");
             } else if (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1) == BluetoothAdapter.STATE_ON) {
-                LogUtils.e(TAG, "蓝牙打开");
+                LogUtils.d(TAG, "蓝牙打开");
             }
         }
         if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {  //连接成功
-            LogUtils.e(TAG, "连接成功  发现服务");
+            LogUtils.d(TAG, "连接成功  发现服务");
             handler.removeCallbacks(disconnectedRunnable);
             BluetoothLeService.discoverServices();
             Utils.setIntSharedPreference(P6OtaUpgradeActivity.this, Constants.PREF_PROGRAM_ROW_START_POS + BluetoothLeService.mBluetoothDeviceAddress, 0);
             handler.postDelayed(disconnectedRunnable, 10 * 1000);  //如果五秒之内没有发现服务，那么断开连接
         } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {  //断开连接
-            LogUtils.e(TAG, "断开连接");
+            LogUtils.d(TAG, "断开连接");
             BluetoothLeService.refreshDeviceCache(BluetoothLeService.getmBluetoothGatt());
             new Thread(){
                 @Override
@@ -173,12 +173,12 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                 }
             }.start();
         } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //发现服务
-            LogUtils.e(TAG, "发现服务");
+            LogUtils.d(TAG, "发现服务");
             List<BluetoothGattService> supportedGattServices = BluetoothLeService.getSupportedGattServices();
             for (BluetoothGattService services : supportedGattServices) {
-                LogUtils.e(TAG, "服务UUID  " + services.getUuid().toString());
+                LogUtils.d(TAG, "服务UUID  " + services.getUuid().toString());
                 for (BluetoothGattCharacteristic bluetoothGattCharacteristic : services.getCharacteristics()) {
-                    LogUtils.e(TAG, "    特征UUID  " + bluetoothGattCharacteristic.getUuid().toString());
+                    LogUtils.d(TAG, "    特征UUID  " + bluetoothGattCharacteristic.getUuid().toString());
                 }
             }
             handler.removeCallbacks(disconnectedRunnable);
@@ -191,7 +191,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     public void parseService(List<BluetoothGattService> bluetoothGattServices) {
         final BluetoothGattCharacteristic otaChar = getOtaChar(bluetoothGattServices);
         if (otaChar != null) {
-            LogUtils.e(TAG, "发现OTA特征值   ");
+            LogUtils.d(TAG, "发现OTA特征值   ");
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -243,7 +243,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         Intent intent = getIntent();
             fileName = intent.getStringExtra(OtaConstants.fileName);
             binDownUrl = intent.getStringExtra(OtaConstants.bindUrl);
-            LogUtils.e("获取到的URL是   " +binDownUrl );
+            LogUtils.d("获取到的URL是   " +binDownUrl );
             mac = intent.getStringExtra(OtaConstants.deviceMac);
             password1 = intent.getStringExtra(OtaConstants.password1);
             password2 = intent.getStringExtra(OtaConstants.password2);
@@ -300,10 +300,10 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
 
     public void downFile(String url, String path) {
 
-        LogUtils.e("开始下载  下载链接  " + url + "   保存地址  " + path);
+        LogUtils.d("开始下载  下载链接  " + url + "   保存地址  " + path);
         File file = new File(path);
         if (file.exists()) {
-            LogUtils.e(TAG, "文件已存在，不再下载");
+            LogUtils.d(TAG, "文件已存在，不再下载");
             mutiProgress.setCurrNodeNO(1, false);
             mCircleProgress2.setValue(50);
             scanDevices();
@@ -316,20 +316,20 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //等待
                     @Override
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("开始下载   ");
+                        LogUtils.d("开始下载   ");
                     }
 
                     //下载进度回调
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        LogUtils.e("下载进度   " + soFarBytes);
+                        LogUtils.d("下载进度   " + soFarBytes);
                         mCircleProgress2.setValue(soFarBytes / totalBytes * 50);
                     }
 
                     //完成下载
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        LogUtils.e("下载成功");
+                        LogUtils.d("下载成功");
                         mutiProgress.setCurrNodeNO(1, false);
                         mCircleProgress2.setValue(50);
                         scanDevices();
@@ -344,7 +344,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //下载出错
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        LogUtils.e("下载出错  " + e.getMessage());
+                        LogUtils.d("下载出错  " + e.getMessage());
                         ToastUtil.getInstance().showLong(R.string.down_failed);
                         mutiProgress.setCurrNodeNO(0, false);
                         mCircleProgress2.setValue(0);
@@ -353,7 +353,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     //已存在相同下载
                     @Override
                     protected void warn(BaseDownloadTask task) {
-                        LogUtils.e("已存在   任务");
+                        LogUtils.d("已存在   任务");
                     }
                 }).start();
     }
@@ -439,7 +439,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     public void scanDevices() {
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!defaultAdapter.isEnabled()){
-            LogUtils.e("蓝牙未打开");
+            LogUtils.d("蓝牙未打开");
             ToastUtil.getInstance().showLong(R.string.please_open_ble);
             if (isUpdating){
                 finish();
@@ -453,8 +453,8 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
             ToastUtil.getInstance().showLong(getString(R.string.check_phone_not_open_gps_please_open));
             return;
         }
-        LogUtils.e("OTA  升级  断开连接");
-        MyApplication.getInstance().getBleService().release();  //                LogUtils.e("OTA  升级  断开连接");
+        LogUtils.d("OTA  升级  断开连接");
+        MyApplication.getInstance().getBleService().release();  //                LogUtils.d("OTA  升级  断开连接");
         BluetoothLeService.disconnect();
         ScanSettings scanSettings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
         bluetoothLeScanner.startScan(null, scanSettings, newScanBleCallback);
@@ -490,7 +490,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        LogUtils.e(TAG, "连接设备");
+                        LogUtils.d(TAG, "连接设备");
                         handler.postDelayed(disconnectedRunnable, 10 * 1000);
                         BluetoothLeService.connect(device, P6OtaUpgradeActivity.this);
                     }
@@ -498,11 +498,11 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
             } else {
                 return;
             }
-            LogUtils.e(TAG, "搜索到设备" + device.getName());
+            LogUtils.d(TAG, "搜索到设备" + device.getName());
         }
 
         public void onScanFailed(int errorCode) {
-            LogUtils.e(TAG, "已经启动了扫描设备    " + errorCode);
+            LogUtils.d(TAG, "已经启动了扫描设备    " + errorCode);
         }
     };
 
@@ -536,7 +536,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     }
 
     public void startUpgrade(BluetoothGattCharacteristic updateChar) {
-        LogUtils.e(TAG, "开始升级   " + updateChar.getUuid());
+        LogUtils.d(TAG, "开始升级   " + updateChar.getUuid());
         //todo 测试地址
         mOTAFUHandler = createOTAFUHandler(updateChar, filePath);
         new Thread() {
@@ -551,7 +551,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     @Nullable
     private OTAFUHandler createOTAFUHandler(BluetoothGattCharacteristic otaCharacteristic, String filepath) {
         File file = new File(filepath);
-        LogUtils.e(TAG, "文件存在   " + file.exists());
+        LogUtils.d(TAG, "文件存在   " + file.exists());
         OTAFUHandler handler = DUMMY_HANDLER;
         handler = new OTAFUHandler_v1(P6OtaUpgradeActivity.this, listener, otaCharacteristic, filepath, callback);
         return handler;
@@ -565,36 +565,36 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     private IUpdateStatusListener listener = new IUpdateStatusListener() {
         @Override
         public void onProcessChange(float currentLine, float totalLine) {
-            LogUtils.e(TAG, "进度改变1   " + (currentLine / totalLine) * 100);
+            LogUtils.d(TAG, "进度改变1   " + (currentLine / totalLine) * 100);
             mCircleProgress2.setValue(50 + ((currentLine / totalLine) * 50));
         }
 
         @Override
         public void onFileReadComplete() {
-            LogUtils.e(TAG, "文件读取完成   ");
+            LogUtils.d(TAG, "文件读取完成   ");
 
         }
 
         @Override
         public void otaEnterBootloader() {
-            LogUtils.e(TAG, "启动升级引导文件   ");
+            LogUtils.d(TAG, "启动升级引导文件   ");
 
         }
 
         @Override
         public void otaSetApplicationMetadata() {
-            LogUtils.e(TAG, "设置程序元数据   ");
+            LogUtils.d(TAG, "设置程序元数据   ");
 
         }
 
         @Override
         public void otaVerifyApplication() {
-            LogUtils.e(TAG, "验证程序   ");
+            LogUtils.d(TAG, "验证程序   ");
         }
 
         @Override
         public void otaEndBootloader() {
-            LogUtils.e(TAG, "写入完成数据   ");
+            LogUtils.d(TAG, "写入完成数据   ");
             Utils.setStringSharedPreference(P6OtaUpgradeActivity.this, Constants.PREF_BOOTLOADER_STATE + BluetoothLeService.mBluetoothDeviceAddress, "Default");
             Utils.setIntSharedPreference(P6OtaUpgradeActivity.this, Constants.PREF_PROGRAM_ROW_NO + BluetoothLeService.mBluetoothDeviceAddress, 0);
             Utils.setIntSharedPreference(P6OtaUpgradeActivity.this, Constants.PREF_PROGRAM_ROW_START_POS + BluetoothLeService.mBluetoothDeviceAddress, 0);
@@ -606,18 +606,18 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
 
         @Override
         public void upgradeCompleted() {
-            LogUtils.e(TAG, "更新完成   ");
+            LogUtils.d(TAG, "更新完成   ");
 
         }
 
         @Override
         public void onProcessing() {
-            LogUtils.e(TAG, "正在升级1   ");
+            LogUtils.d(TAG, "正在升级1   ");
         }
 
         @Override
         public void otaSetEiv() {
-            LogUtils.e(TAG, "设置EIV   ");
+            LogUtils.d(TAG, "设置EIV   ");
         }
     };
 
@@ -625,7 +625,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     private OTAFUHandlerCallback callback = new OTAFUHandlerCallback() {
         @Override
         public void showErrorDialogMessage(String tag, String errorMessage, boolean stayOnPage) {
-            LogUtils.e(TAG, "  tag  " + tag + "  错误消息  " + errorMessage);
+            LogUtils.d(TAG, "  tag  " + tag + "  错误消息  " + errorMessage);
             //发生错误
             otaFailed(tag);
         }
@@ -637,7 +637,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
 
         @Override
         public void setFileUpgradeStarted(boolean status) {
-            LogUtils.e(TAG, "callback   开始升级   " + status);
+            LogUtils.d(TAG, "callback   开始升级   " + status);
 
         }
 

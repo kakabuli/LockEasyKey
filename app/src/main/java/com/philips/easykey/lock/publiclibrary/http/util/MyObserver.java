@@ -69,9 +69,9 @@ public abstract class MyObserver<T> implements Observer<BaseResponse<String>>, D
 
     @Override
     public void onNext(BaseResponse<String> response) {
-        LogUtils.e("请求的数据是  code " + response.getCode()  + MyApplication.getInstance().getToken() );
+        LogUtils.d("请求的数据是  code " + response.getCode()  + MyApplication.getInstance().getToken() );
         if (response.isSuccess()) { //如果请求成功
-            LogUtils.e("请求到的数据体是  " + response.getData());
+            LogUtils.d("请求到的数据体是  " + response.getData());
             if (response.getData() == null) {
                 onSuccess(new BaseResponse<T>(response.getCode(), response.getMsg(), null));
                 return;
@@ -81,7 +81,7 @@ public abstract class MyObserver<T> implements Observer<BaseResponse<String>>, D
             } else if (response.getData().startsWith("[")) { //是数组
                 response.setData(" { \"data\":" + response.getData() + " }");
             }
-            LogUtils.e("data数据是  " + response.getData());
+            LogUtils.d("data数据是  " + response.getData());
             onSuccess(new BaseResponse<T>(response.getCode(), response.getMsg(), new Gson().fromJson(response.getData(), mClass)));
         } else {
             OtherException exception = new OtherException(response);
@@ -107,7 +107,7 @@ public abstract class MyObserver<T> implements Observer<BaseResponse<String>>, D
             /** 网络正常，http 请求成功，服务器返回逻辑错误  接口返回的别的状态码处理*/
             OtherException otherException = (OtherException) e;
             if (otherException.getResponse().getCode() == 444 ){ //Token过期
-                LogUtils.e("token过期   "+ Thread.currentThread().getName());
+                LogUtils.d("token过期   "+ Thread.currentThread().getName());
                 if (MyApplication.getInstance().getMqttService()!=null){
                     MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                 }
@@ -129,7 +129,7 @@ public abstract class MyObserver<T> implements Observer<BaseResponse<String>>, D
             /** 其他未知错误 */
             errorMsg = !TextUtils.isEmpty(e.getMessage()) ? e.getMessage() : "unknown error";
         }
-        LogUtils.e("  网络请求   " + errorMsg);
+        LogUtils.d("  网络请求   " + errorMsg);
     }
 
 

@@ -131,7 +131,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && data != null){
             if(requestCode == SETTING_NICKNAME_REQUSE){
-                LogUtils.e("shulan hanger_nick_name-----> " +data.getStringExtra("hanger_nick_name"));
+                LogUtils.d("shulan hanger_nick_name-----> " +data.getStringExtra("hanger_nick_name"));
                 tvDeviceName.setText(data.getStringExtra("hanger_nick_name") + "");
             }
         }
@@ -196,7 +196,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
 
     @Override
     public void needUpdate(List<MultiCheckOTAResult.UpgradeTask> upgradeTasks) {
-        LogUtils.e("shulan needUpdate");
+        LogUtils.d("shulan needUpdate");
         showCheckVersion(upgradeTasks);
     }
 
@@ -241,7 +241,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
 
     @Override
     public void onDeleteDeviceFailed(BaseResult result) {
-        LogUtils.e("删除失败   " + result.toString());
+        LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
         showShort(httpErrorCode);
         hiddenLoading();
@@ -249,7 +249,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
 
     @Override
     public void onDeleteDeviceThrowable(Throwable throwable) {
-        LogUtils.e("删除失败   " + throwable.getMessage());
+        LogUtils.d("删除失败   " + throwable.getMessage());
        showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
 //        ToastUtil.getInstance().showLong(R.string.delete_fialed);
         hiddenLoading();

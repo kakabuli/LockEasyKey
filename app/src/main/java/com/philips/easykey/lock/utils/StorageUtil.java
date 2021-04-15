@@ -35,7 +35,7 @@ public class StorageUtil {
             SPUtils.put(KeyConstants.HEAD_PATH, photoPath);
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e("写入图片异常：" + e.toString());
+            LogUtils.d("写入图片异常：" + e.toString());
         } finally {
             try {
                 // 关闭流

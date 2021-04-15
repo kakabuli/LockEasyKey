@@ -60,7 +60,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
 
         error_log = findViewById(R.id.error_log);
 
-        LogUtils.e("传递过来的信息为    " + "   filePath " + filePath
+        LogUtils.d("传递过来的信息为    " + "   filePath " + filePath
                 + "   wifiSSid " + wifiSSid
                 + "   wifiPassword " + wifiPassword
                 + "   otaType " + otaType
@@ -290,7 +290,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
         @Override
         public void onReceive(Context context, Intent intent) {
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            LogUtils.e("当前网络状态   是否连接WiFi  " + NetUtil.isWifi());
+            LogUtils.d("当前网络状态   是否连接WiFi  " + NetUtil.isWifi());
         }
     };
 

@@ -104,10 +104,10 @@ public class GatewayLockDetailPresenter<T> extends BasePresenter<GatewayLockDeta
                     .subscribe(new Consumer<MqttData>() {
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
-                            LogUtils.e(mqttData.getPayload() + "收到上报消息  ");
+                            LogUtils.d(mqttData.getPayload() + "收到上报消息  ");
                             OpenLockNotifyBean openLockNotifyBean = new Gson().fromJson(mqttData.getPayload(), OpenLockNotifyBean.class);
                             int deviceCode = openLockNotifyBean.getEventparams().getDevecode();
-                            LogUtils.e(mqttData.getPayload() + "收到处理");
+                            LogUtils.d(mqttData.getPayload() + "收到处理");
                             if ("kdszblock".equals(openLockNotifyBean.getDevtype()) && deviceId.equals(openLockNotifyBean.getDeviceId())) {
                                 if (deviceCode == 2) {
                                     //表示锁已开
@@ -137,7 +137,7 @@ public class GatewayLockDetailPresenter<T> extends BasePresenter<GatewayLockDeta
 
     //监听电量的变化
     public void getPowerData(String gatewayId, String deviceId) {
-        LogUtils.e("进入获取电量。。。");
+        LogUtils.d("进入获取电量。。。");
         if (mqttService != null) {
             getPowerDataDisposable = mqttService.getPowerData()
                     .filter(new Predicate<MqttData>() {
@@ -147,7 +147,7 @@ public class GatewayLockDetailPresenter<T> extends BasePresenter<GatewayLockDeta
                                 //过滤
                                 GetDevicePowerBean powerBean = new Gson().fromJson(mqttData.getPayload(), GetDevicePowerBean.class);
                                 if (gatewayId.equals(powerBean.getGwId()) && deviceId.equals(powerBean.getDeviceId())) {
-                                    LogUtils.e("过滤成功值");
+                                    LogUtils.d("过滤成功值");
                                     return true;
                                 }
                             }
@@ -193,7 +193,7 @@ public class GatewayLockDetailPresenter<T> extends BasePresenter<GatewayLockDeta
                         public void accept(MqttData mqttData) throws Exception {
                             if (mqttData != null) {
                                 GetBindGatewayStatusResult gatewayStatusResult = new Gson().fromJson(mqttData.getPayload(), GetBindGatewayStatusResult.class);
-                                LogUtils.e("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
+                                LogUtils.d("监听网关GatewayActivity" + gatewayStatusResult.getDevuuid());
                                 if (gatewayStatusResult != null && gatewayStatusResult.getData().getState() != null) {
                                     if (isSafe()) {
                                         mViewRef.get().gatewayStatusChange(gatewayStatusResult.getDevuuid(), gatewayStatusResult.getData().getState());

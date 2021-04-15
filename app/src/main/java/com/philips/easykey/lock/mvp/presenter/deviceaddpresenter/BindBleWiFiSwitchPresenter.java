@@ -54,7 +54,7 @@ public class BindBleWiFiSwitchPresenter<T> extends BasePresenter<IBindBleView> {
     private int index;//命令包序号
 
     public void listenerCharacterNotify() {
-        LogUtils.e("--kaadas--listenerCharacterNotify");
+        LogUtils.d("--kaadas--listenerCharacterNotify");
 
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
@@ -77,7 +77,7 @@ public class BindBleWiFiSwitchPresenter<T> extends BasePresenter<IBindBleView> {
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         //收到入网数据
                         byte[] originalData = bleDataBean.getOriginalData();
-//                        LogUtils.e("--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
+//                        LogUtils.d("--kaadas--收到锁的配网数据" + Rsa.bytesToHexString(originalData));
                         if ((originalData[3] & 0xff) == 0x95) {//接到剩余校验次数
                             mViewRef.get().onlistenerLastNum(originalData[4] & 0xFF);
                         }
@@ -89,12 +89,12 @@ public class BindBleWiFiSwitchPresenter<T> extends BasePresenter<IBindBleView> {
                             byte[] passwordFactor = new byte[originalData.length-6];
                             //从原始数组4位置开始截取后面所有
                             System.arraycopy(originalData, 6, passwordFactor, 0, originalData.length-6);
-//                            LogUtils.e("--kaadas--密码因子分包数据==    " + Rsa.bytesToHexString(passwordFactor));
+//                            LogUtils.d("--kaadas--密码因子分包数据==    " + Rsa.bytesToHexString(passwordFactor));
                             mViewRef.get().onlistenerPasswordFactor(passwordFactor, pswLen, index);
 
                         }
                         if ((originalData[3] & 0xff) == 0x94){//收到解密结果
-//                            LogUtils.e("--kaadas--收到解密结果");
+//                            LogUtils.d("--kaadas--收到解密结果");
                             checkAdminPassWordResult();
 
                         }
@@ -106,7 +106,7 @@ public class BindBleWiFiSwitchPresenter<T> extends BasePresenter<IBindBleView> {
 
     public void parsePasswordFactorData(String adminPassword, byte[] data) {
         wifiResult = OfflinePasswordFactorManager.parseOfflinePasswordFactorData(adminPassword, data);
-        LogUtils.e("--Kaadas--wifiResult："+wifiResult.result);
+        LogUtils.d("--Kaadas--wifiResult："+wifiResult.result);
 
         //发送0x94下发密码因子校验结果 通知锁端
         if (wifiResult.result == 0){
@@ -151,7 +151,7 @@ public class BindBleWiFiSwitchPresenter<T> extends BasePresenter<IBindBleView> {
                         toDisposable(featureSetDisposable);
 
                         int functionSet = (int) readInfoBean.data;
-                        LogUtils.e("--kaadas--BLE&wifi锁功能集==" + functionSet);
+                        LogUtils.d("--kaadas--BLE&wifi锁功能集==" + functionSet);
                         if (isSafe()) {
                             mViewRef.get().readFunctionSetSuccess(functionSet);
                         }

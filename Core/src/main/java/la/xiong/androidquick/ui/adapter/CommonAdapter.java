@@ -69,7 +69,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     @Override
     public int getItemCount() {
-        LogUtils.iTag(TAG, "getItemCount() = " + mDatas.size());
+        Log.d(TAG, "getItemCount() = " + mDatas.size());
         return mDatas.size();
     }
 }

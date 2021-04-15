@@ -35,9 +35,6 @@ import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.philips.easykey.lock.mvp.view.ILoginView;
 
-import net.sdvn.cmapi.CMAPI;
-import net.sdvn.cmapi.ConnectionService;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -65,12 +62,10 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
 
     private boolean isShowDialog = false;
 
-    private static final int REQUEST_CODE_VPN_SERVICE = 11;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e("shulan LoginActivity启动 ");
+        LogUtils.d("shulan LoginActivity启动 ");
 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
@@ -80,7 +75,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
         checkVersion();
         initView();
 //        checkVpnService();
-        LogUtils.e("LoginActivity启动完成 ");
+        LogUtils.d("LoginActivity启动完成 ");
         StatusBarUtils.setWindowStatusBarColor(this,R.color.app_main_status_bar1);
     }
 
@@ -293,11 +288,6 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //  vpn  授权
-        if (requestCode == REQUEST_CODE_VPN_SERVICE) {
-            CMAPI.getInstance().onVpnPrepareResult(requestCode, resultCode);
-        }
-
         switch (requestCode) {
             case 12:
                 if (resultCode == RESULT_OK) {
@@ -316,7 +306,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
     @Override
     public void onLoginSuccess() {
         hiddenLoading();
-        LogUtils.e("登陆成功");
+        LogUtils.d("登陆成功");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(Constants.ISFROMLOGIN,true);
         startActivity(intent);
@@ -349,18 +339,4 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
         }
     }
 
-
-
-
-    //检查vpn授权
-    public void checkVpnService() {
-        Intent prepare = ConnectionService.prepare(this);
-        boolean resultvpn = prepare == null ? true : false;
-        net.sdvn.cmapi.util.LogUtils.d(resultvpn + " 已授权 " + " 未授权 ");
-        if (prepare != null) {
-            startActivityForResult(prepare, REQUEST_CODE_VPN_SERVICE);
-        } else {
-            onActivityResult(REQUEST_CODE_VPN_SERVICE, RESULT_OK, null);
-        }
-    }
 }

@@ -308,7 +308,7 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void settingDeviceSuccess() {
-        LogUtils.e("--kaadas--设置成功");
+        LogUtils.d("--kaadas--设置成功");
 //        params = wifiLockInfoChange.getSingleFireSwitchInfo();
 //        bindingSingleFireSwitchBean = new BindingSingleFireSwitchBean(wifiSn,wifiLockInfoChange.getUid(),wifiLockInfoChange.getLockNickname(),params);
 //        mPresenter.bindingAndModifyDevice(bindingSingleFireSwitchBean);
@@ -316,14 +316,14 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void settingDeviceFail() {
-//        LogUtils.e("--kaadas--设置失败");
+//        LogUtils.d("--kaadas--设置失败");
         Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void settingDeviceThrowable() {
         Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
-//        LogUtils.e("--kaadas--设置超时");
+//        LogUtils.d("--kaadas--设置超时");
     }
 
     @Override

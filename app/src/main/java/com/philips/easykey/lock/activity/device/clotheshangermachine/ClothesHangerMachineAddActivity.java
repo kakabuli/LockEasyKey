@@ -101,7 +101,7 @@ public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHanger
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.e("扫描结果是   " + result);
+                    LogUtils.d("扫描结果是   " + result);
                     if(result.contains("_WiFi&BLE_")){
                         String[] str = result.split("_");
                         if(str.length > 0){

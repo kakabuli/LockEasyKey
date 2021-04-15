@@ -35,7 +35,7 @@ public class HomePreseneter<T> extends BasePresenter<IHomeView> {
                 .subscribe(new Consumer<AllBindDevices>() {
                     @Override
                     public void accept(AllBindDevices allBindDevices) throws Exception {
-                        LogUtils.e("设备更新   homePresenter");
+                        LogUtils.d("设备更新   homePresenter");
                         if (isSafe()) {
                             mViewRef.get().onDeviceRefresh(allBindDevices);
                         }

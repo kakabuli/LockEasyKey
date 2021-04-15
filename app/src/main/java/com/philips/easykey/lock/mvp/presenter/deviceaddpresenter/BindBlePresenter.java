@@ -60,7 +60,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
     private int functionSet = -1;
 
     public void setPwd1(String pwd1, boolean isBind, int version, String deviceSn, String mac, String deviceName) {
-        LogUtils.e("密码1是   " + pwd1);
+        LogUtils.d("密码1是   " + pwd1);
         this.isBind = isBind;
         this.pwd1 = pwd1;
         this.version = version;
@@ -72,7 +72,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
         } else {
             //将pwd1转换成字节数组
             bPwd1 = Rsa.hex2byte(pwd1);
-            LogUtils.e("获取的密码1是   " + Rsa.bytesToHexString(bPwd1));
+            LogUtils.d("获取的密码1是   " + Rsa.bytesToHexString(bPwd1));
             System.arraycopy(bPwd1, 0, password_1, 0, bPwd1.length);
             listenerPwd2(version, deviceSn);
         }
@@ -107,7 +107,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         //收到入网数据
                         byte[] originalData = bleDataBean.getOriginalData();
-                        LogUtils.e("收到最老的锁入网数据" + Rsa.bytesToHexString(originalData));
+                        LogUtils.d("收到最老的锁入网数据" + Rsa.bytesToHexString(originalData));
                         if (isBind) {
                             if ((originalData[5] & 0xff) == 0x00) { //绑定
                                 sendConfirmData(version, isBind);
@@ -246,7 +246,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                 byte[] bytes = bleDataBean.getOriginalData();
                 byte[] password_2de = Rsa.decrypt(payload, password_1);
 
-                LogUtils.e("获取到秘钥上报数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "  解密后的数据是   " + Rsa.bytesToHexString(password_2de));
+                LogUtils.d("获取到秘钥上报数据   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()) + "  解密后的数据是   " + Rsa.bytesToHexString(password_2de));
 
                 byte checkNum = 0;
                 for (int i = 0; i < password_2de.length; i++) {
@@ -326,7 +326,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                         }
 
                         String mode = (String) readInfoBean.data;
-                        LogUtils.e("收到锁型号   " + mode);
+                        LogUtils.d("收到锁型号   " + mode);
                         if (bleService.getBleVersion() == 3) {  //最近版本才读取锁功能集
                             bindDevice(pwd1, pwd2, mode, version + "", deviceSn, "" + functionSet);
                         } else {
@@ -371,7 +371,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                                 mViewRef.get().readFunctionSetSuccess(funcSet);
                             }
 
-                            LogUtils.e("--kaadas--收到锁功能集   " + Rsa.byteToHexString((byte) funcSet));
+                            LogUtils.d("--kaadas--收到锁功能集   " + Rsa.byteToHexString((byte) funcSet));
                             if (BleLockUtils.isExistFunctionSet(funcSet)) {
                                 functionSet = funcSet;
                                 if (funcSet == 0xff) {
@@ -411,7 +411,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
     }
 
     public void bindDevice(String pwd1, String pwd2, String model, String bleVersion, String deviceSn, String functionSet) {
-        LogUtils.e("绑定设备   gi功能集是   " + functionSet);
+        LogUtils.d("绑定设备   gi功能集是   " + functionSet);
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
                 return;
@@ -425,7 +425,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("绑定成功");
+                        LogUtils.d("绑定成功");
                         //清除保存的密码
                         SPUtils.remove(KeyConstants.SAVE_PWD_HEARD + mac); //14绑定成功
                         if ("1".equals(bleVersion)) {
@@ -433,7 +433,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    LogUtils.e("绑定成功   断开连接");
+                                    LogUtils.d("绑定成功   断开连接");
                                     bleService.release();//绑定蓝牙界面  15
                                     MyApplication.getInstance().getAllDevicesByMqtt(true);
                                 }
@@ -442,7 +442,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                             if (isSafe()) {
                                 mViewRef.get().onBindSuccess(deviceName);  //16
                             }
-                            LogUtils.e("绑定成功   断开连接");
+                            LogUtils.d("绑定成功   断开连接");
                             bleService.release();//绑定蓝牙界面  //17
                             MyApplication.getInstance().getAllDevicesByMqtt(true);
                         }
@@ -460,7 +460,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("绑定失败");
+                        LogUtils.d("绑定失败");
                         if ("1".equals(bleVersion)) {
                             sendResponseData(false);
                         }
@@ -484,7 +484,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        LogUtils.e("解绑成功");
+                        LogUtils.d("解绑成功");
                         if (isSafe()) {
                             mViewRef.get().onUnbindSuccess();
                         }
@@ -511,7 +511,7 @@ public class BindBlePresenter<T> extends BasePresenter<IBindBleView> {
 
                     @Override
                     public void onFailed(Throwable throwable) {
-                        LogUtils.e("解绑失败");
+                        LogUtils.d("解绑失败");
                         if (isSafe()) {
                             mViewRef.get().onUnbindFailed(throwable);
                         }

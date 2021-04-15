@@ -95,7 +95,7 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
                     }
                 });
         WifiUtil.getIns().init(getApplicationContext());
-        LogUtils.e("开始搜索Kaadas_Ap热点");
+        LogUtils.d("开始搜索Kaadas_Ap热点");
         WifiUtil.getIns().changeToWifi("kaadas_AP", "88888888");
     }
 
@@ -129,7 +129,7 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
             WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
             assert wifiManager != null;
             WifiInfo info = wifiManager.getConnectionInfo();
-            LogUtils.e("网络切换   断开 from info---" + info);
+            LogUtils.d("网络切换   断开 from info---" + info);
 
             onWifiChanged(wifiManager.getConnectionInfo());
         }
@@ -137,13 +137,13 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
 
 
     private void onWifiChanged(WifiInfo info) {
-        LogUtils.e("网络切换   断开 from info===" + info.getSSID());
+        LogUtils.d("网络切换   断开 from info===" + info.getSSID());
 
         boolean disconnected = info == null
                 || info.getNetworkId() == -1
                 || "<unknown ssid>".equals(info.getSSID());
         if (disconnected) {
-            LogUtils.e("网络切换  from WifiLockAddNewScanActivity");
+            LogUtils.d("网络切换  from WifiLockAddNewScanActivity");
             String ssid = info.getSSID();
             if ((ssid.equals("kaadas_AP"))) {
                 handler.removeCallbacks(runnable);
@@ -151,7 +151,7 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
                 handler.removeCallbacks(timeoutRunnable);
                 finish();
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
         } else {
             String ssid = info.getSSID();
             if (TextUtils.isEmpty(ssid)) {
@@ -160,7 +160,7 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
-            LogUtils.e("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
+            LogUtils.d("网络切换    " + ssid + "   " + "网络可用   " + NetUtil.isNetworkAvailable());
             if ((ssid.equals("kaadas_AP"))) {
                 handler.removeCallbacks(runnable);
                 onScanSuccess();
@@ -206,7 +206,7 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
 
     public void onScanSuccess() {
         finish();
-        LogUtils.e("onScanSuccess  from WifiLockAddNewScanActivity");
+        LogUtils.d("onScanSuccess  from WifiLockAddNewScanActivity");
         startActivity(new Intent(this, WifiLockAddNewInputAdminPasswotdActivity.class));
     }
 

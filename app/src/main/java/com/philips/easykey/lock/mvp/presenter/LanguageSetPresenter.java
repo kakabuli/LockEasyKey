@@ -118,7 +118,7 @@ public class LanguageSetPresenter<T> extends BlePresenter<ILanguageSetView> {
                                     mViewRef.get().onSetLangSuccess(language);
                                 }
                             }
-                            LogUtils.e("收到原始数据是   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
+                            LogUtils.d("收到原始数据是   " + Rsa.bytesToHexString(bleDataBean.getOriginalData()));
                             toDisposable(setLangDisposable);
                         }
                     }

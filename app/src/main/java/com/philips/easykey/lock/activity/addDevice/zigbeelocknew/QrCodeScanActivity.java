@@ -20,10 +20,6 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.ToastUtil;
 import com.king.zxing.Intents;
-/*
-import com.uuzuche.lib_zxing.activity.CaptureFragment;
-import com.uuzuche.lib_zxing.activity.CodeUtils;
-*/
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,7 +81,7 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
     private void checkVersion() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int i = checkSelfPermission(Manifest.permission.CAMERA);
-            LogUtils.e("权限是允许还是开启还是禁止" + i);
+            LogUtils.d("权限是允许还是开启还是禁止" + i);
             if (i == -1) {
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     //禁止该权限
@@ -188,7 +184,7 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
 
     @Override
     public void onScanQRCodeOpenCameraError() {
-        LogUtils.e("打开相机出错");
+        LogUtils.d("打开相机出错");
         finish();
         Toast.makeText(this, getString(R.string.open_camera_failed), Toast.LENGTH_SHORT).show();
     }

@@ -149,7 +149,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
     protected void onStop() {
         super.onStop();
         if (!goToHelpActivity){
-            LogUtils.e("--kaadas--onStop--detachView");
+            LogUtils.d("--kaadas--onStop--detachView");
             mPresenter.detachView();
         }
     }
@@ -315,7 +315,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 
     @Override
     public void onAlreadyBind(BluetoothDevice device,String uName) {
-        LogUtils.e("设备名是1   " + uName);
+        LogUtils.d("设备名是1   " + uName);
         String name = "";
         if (!TextUtils.isEmpty(uName)){
             if (uName.contains("@")){ //邮箱用户
@@ -336,7 +336,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
                 }
             }
         }
-        LogUtils.e("设备名是   " + name);
+        LogUtils.d("设备名是   " + name);
         binding(device, false,  String.format(getResources().getString(R.string.this_device_already_bind_reset),name ));
     }
 
@@ -406,10 +406,10 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
     public void onStopScan() {
         stopAnimation();
 //        tvIsSearching.setVisibility(View.INVISIBLE);
-        LogUtils.e("--kaadas--onStopScan()");
+        LogUtils.d("--kaadas--onStopScan()");
 
         if (mDevices == null || mDevices.size()==0){
-            LogUtils.e("--kaadas--mDevices=="+mDevices);
+            LogUtils.d("--kaadas--mDevices=="+mDevices);
             showRecycler(false);
             showNotScanDeviceDialog();
             return;
@@ -429,7 +429,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 
     @Override
     public void onConnectBLEWIFISuccess(BluetoothLockBroadcastBean broadcastBean,int version) {
-        LogUtils.e("shulan onConnectBLEWIFISuccess");
+        LogUtils.d("shulan onConnectBLEWIFISuccess");
         hiddenLoading();
         Intent nextIntent = new Intent(this, WifiLockAddNewBLEWIFiSwitchActivity.class);
         nextIntent.putExtra(KeyConstants.BLE_VERSION, version);
@@ -478,7 +478,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 
     @Override
     public void getPwd1Success(String pwd1, boolean isBind,int version,String DeviceSn,String mac,String deviceName) {
-        LogUtils.e("获取到pwd1   传递给下一个界面" + pwd1+"  SN " + DeviceSn);
+        LogUtils.d("获取到pwd1   传递给下一个界面" + pwd1+"  SN " + DeviceSn);
         Intent nextIntent = new Intent(this, AddBluetoothSecondActivity.class);
 //        nextIntent.putExtra(KeyConstants.DEVICE_TYPE, type);  //传递设备类型过去
         nextIntent.putExtra(KeyConstants.PASSWORD1, pwd1);  //

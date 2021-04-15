@@ -236,11 +236,11 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                     }else{
                         mPresenter.setPassword(deviceId, gatewayId, strPassword);
                     }
-                    LogUtils.e("点击添加密码  永久 ");
+                    LogUtils.d("点击添加密码  永久 ");
                     //永久
                 } else if (KeyConstants.ONE_DAY == timeStatus) {
                     //一天.
-                    LogUtils.e("点击添加密码  一天 ");
+                    LogUtils.d("点击添加密码  一天 ");
 //                    if (mPresenter.isAuth(bleLockInfo, true)) {
 //                        mPresenter.setPwd(strPassword, 2, nickName, System.currentTimeMillis(), System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 //                    }
@@ -277,9 +277,9 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                         ToastUtil.getInstance().showShort(R.string.end_time_must_bigger_end_time);
                         return;
                     }
-                    LogUtils.e("开始时间   " + DateUtils.getDateTimeFromMillisecond(startMilliseconds));
-                    LogUtils.e("结束时间   " + DateUtils.getDateTimeFromMillisecond(endMilliseconds));
-                    LogUtils.e("当前时间   " + DateUtils.getDateTimeFromMillisecond(System.currentTimeMillis()));
+                    LogUtils.d("开始时间   " + DateUtils.getDateTimeFromMillisecond(startMilliseconds));
+                    LogUtils.d("结束时间   " + DateUtils.getDateTimeFromMillisecond(endMilliseconds));
+                    LogUtils.d("当前时间   " + DateUtils.getDateTimeFromMillisecond(System.currentTimeMillis()));
 //                    if (mPresenter.isAuth(bleLockInfo, true)) {
 //                        mPresenter.setPwd(strPassword, 4, nickName, startMilliseconds, endMilliseconds);
 //                    }
@@ -528,7 +528,7 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
     private void onFailed() {
         hiddenLoading();
         //密码添加异常
-        LogUtils.e("添加密码异常    ");
+        LogUtils.d("添加密码异常    ");
         AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getContext(), getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
