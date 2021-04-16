@@ -25,7 +25,6 @@ import java.util.List;
 
 public class WifiLockAlarmGroupRecordAdapter extends BaseQuickAdapter<WifiLockAlarmRecordGroup, BaseViewHolder> {
 
-    private Context mContext;
     public WifiLockAlarmGroupRecordAdapter(@Nullable List<WifiLockAlarmRecordGroup> data) {
         super(R.layout.item_bluetooth_record, data);
     }
@@ -38,7 +37,7 @@ public class WifiLockAlarmGroupRecordAdapter extends BaseQuickAdapter<WifiLockAl
         String time = bean.getTime();
         if (!TextUtils.isEmpty(time)) {
             if (time.equals(DateUtils.getCurrentYMD())){
-                time = mContext.getString(R.string.today);
+                time = tvTitle.getContext().getString(R.string.today);
             }
             tvTitle.setText(time);
             tvTitle.setVisibility(View.VISIBLE);
@@ -48,7 +47,7 @@ public class WifiLockAlarmGroupRecordAdapter extends BaseQuickAdapter<WifiLockAl
         RecyclerView recyclerView = helper.getView(R.id.item_recycleview);
         List<WifiLockAlarmRecord> list = bean.getList();
         WifiLockAlarmItemRecordAdapter bluetoothItemRecordAdapter = new WifiLockAlarmItemRecordAdapter(R.layout.item_wifi_lock_alram,list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(bluetoothItemRecordAdapter);
         helper.getView(R.id.view_line).setVisibility(helper.getPosition() == getData().size()-1 ? View.INVISIBLE : View.VISIBLE);
     }

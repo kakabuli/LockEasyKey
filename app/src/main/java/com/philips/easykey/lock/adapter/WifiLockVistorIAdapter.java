@@ -24,7 +24,6 @@ public class WifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmR
     List<WifiVideoLockAlarmRecord> data;
 
     private VideoRecordCallBackLinstener mListener;
-    private Context mContext;
     public interface VideoRecordCallBackLinstener{
         void onVideoRecordCallBackLinstener(WifiVideoLockAlarmRecord record);
     }
@@ -56,7 +55,7 @@ public class WifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmR
         String dayTime = record.getDayTime();
         if (!TextUtils.isEmpty(dayTime)) {
             if (dayTime.equals(DateUtils.getCurrentYMD())) {
-                dayTime = mContext.getString(R.string.today);
+                dayTime = tvDayTime.getContext().getString(R.string.today);
             }
             tvDayTime.setText(dayTime+"");
 
@@ -70,11 +69,11 @@ public class WifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmR
         ImageView ivPlay = helper.getView(R.id.iv_paly);
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
-            Glide.with(mContext).load(record.getThumbUrl())
+            Glide.with(ivContent.getContext()).load(record.getThumbUrl())
                     .apply(new RequestOptions().error(R.mipmap.img_video_lock_default).placeholder(R.mipmap.img_video_lock_default).dontAnimate()
                             .transform(new RotateTransformation(90f))).into(ivContent);
         }else{
-            Glide.with(mContext).load(R.mipmap.img_video_lock_default).into(ivContent);
+            Glide.with(ivContent.getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
         }
 
         if(record.isThumbState() && record.getFileName() != null){
@@ -83,9 +82,8 @@ public class WifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmR
             ivPlay.setVisibility(View.GONE);
         }
 
-
-        String content = BleUtil.getVideoAlarmByType(record.getType(), mContext);
         TextView tvRight = helper.getView(R.id.tv_right);
+        String content = BleUtil.getVideoAlarmByType(record.getType(), tvRight.getContext());
         tvRight.setText(content + "");
 
         ivContent.setOnClickListener(new View.OnClickListener() {

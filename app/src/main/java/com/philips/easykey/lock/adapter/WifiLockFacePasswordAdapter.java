@@ -21,11 +21,8 @@ import java.util.List;
 
 public class WifiLockFacePasswordAdapter extends BaseQuickAdapter<FacePassword, BaseViewHolder> {
 
-    private Context mContext;
     public WifiLockFacePasswordAdapter(@Nullable List<FacePassword> data, int layoutId) {
         super(layoutId, data);
-        mContext = MyApplication.getInstance().getApplicationContext();
-
     }
 
     @Override
