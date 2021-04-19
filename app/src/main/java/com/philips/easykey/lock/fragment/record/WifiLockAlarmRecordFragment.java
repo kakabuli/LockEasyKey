@@ -104,7 +104,7 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((ViewGroup) view.getParent()).removeView(view);
+//        ((ViewGroup) view.getParent()).removeView(view);
         unbinder.unbind();
     }
 

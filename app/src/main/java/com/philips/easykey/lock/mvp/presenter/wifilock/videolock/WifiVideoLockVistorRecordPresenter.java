@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 
@@ -37,7 +38,9 @@ public class WifiVideoLockVistorRecordPresenter<T> extends BasePresenter<IWifiLo
 
 
     public void getWifiVideoLockGetAlarmList(int page, String wifiSn) {
-        XiaokaiNewServiceImp.wifiVideoLockGetDoorbellList(wifiSn,page).subscribe(new BaseObserver<GetWifiVideoLockAlarmRecordResult>() {
+        XiaokaiNewServiceImp.wifiVideoLockGetDoorbellList(wifiSn,page)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
+                .subscribe(new BaseObserver<GetWifiVideoLockAlarmRecordResult>() {
             @Override
             public void onSuccess(GetWifiVideoLockAlarmRecordResult getWifiVideoLockAlarmRecordResult) {
                 List<WifiVideoLockAlarmRecord> alarmRecords = getWifiVideoLockAlarmRecordResult.getData();

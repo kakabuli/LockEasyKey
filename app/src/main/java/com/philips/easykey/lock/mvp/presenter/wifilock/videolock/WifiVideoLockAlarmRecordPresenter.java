@@ -12,6 +12,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 
@@ -22,7 +23,9 @@ public class WifiVideoLockAlarmRecordPresenter<T> extends BasePresenter<IWifiVid
 
     public void getWifiVideoLockGetAlarmList(int page, String wifiSn) {
 
-        XiaokaiNewServiceImp.wifiVideoLockGetAlarmList(wifiSn,page).subscribe(new BaseObserver<GetWifiVideoLockAlarmRecordResult>() {
+        XiaokaiNewServiceImp.wifiVideoLockGetAlarmList(wifiSn,page)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
+                .subscribe(new BaseObserver<GetWifiVideoLockAlarmRecordResult>() {
             @Override
             public void onSuccess(GetWifiVideoLockAlarmRecordResult getWifiVideoLockAlarmRecordResult) {
                 List<WifiVideoLockAlarmRecord> alarmRecords = getWifiVideoLockAlarmRecordResult.getData();

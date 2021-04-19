@@ -13,6 +13,7 @@ import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 
@@ -24,6 +25,7 @@ public class WifiLockOpenRecordPresenter<T> extends BasePresenter<IWifiLockOpenR
 //            wifiLockOperationRecords.clear();
 //        }
         XiaokaiNewServiceImp.wifiLockGetOperationList(wifiSn, page)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
                 .subscribe(new BaseObserver<GetWifiLockOperationRecordResult>() {
                     @Override
                     public void onSuccess(GetWifiLockOperationRecordResult operationRecordResult) {

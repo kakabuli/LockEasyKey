@@ -430,6 +430,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                         llyRecord.setVisibility(View.VISIBLE);
                         if(wifiLockInfo != null){
                             String filePath = FileTool.getVideoLockPath(this,wifiLockInfo.getWifiSN()).getPath() + File.separator +System.currentTimeMillis()+".mp4"  ;
+                            LogUtils.d("shulan videocalling filepath-->" + filePath);
                             mPresenter.startRecordMP4(filePath);
                             showShort(getString(R.string.wifi_video_lock_screen_recording_enable));
                         }
