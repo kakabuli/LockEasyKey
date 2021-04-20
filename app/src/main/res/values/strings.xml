@@ -47,6 +47,7 @@
     <string name="account_message_not_empty">账户信息不能为空</string>
     <string name="home_page">首页</string>
     <string name="device">设备</string>
+    <string name="message">消息</string>
     <string name="mine">我的</string>
     <string name="guard_your_home">守护您的家</string>
     <string name="click_add_device">点击添加设备</string>
@@ -624,6 +625,7 @@
     <string name="day">天</string>
     <string name="guard_number">守护次数</string>
     <string name="ci">次</string>
+    <string name="bar">条</string>
     <string name="equipment_dynamic">设备动态</string>
     <string name="bluetooth_synchronized_door_lock_status">蓝牙同步操作记录</string>
     <string name="synchronized_record">同步记录</string>
@@ -2137,6 +2139,12 @@
     <string name="activity_wifi_lock_wifi_detail_name">Wi-Fi名称</string>
     <string name="activity_wifi_lock_wifi_detail_strength">Wi-Fi强度</string>
 
+    <string name="door_lock_message">门锁消息</string>
+    <string name="system_message">系统消息</string>
+    <string name="today_lock_statistics">今日门锁统计</string>
+    <string name="today_lock_message">今日门锁消息</string>
+    <string name="seven_day_data_statistics">近7天数据统计</string>
+    <string name="warning_message_inform">预警消息通知</string>
 
 
 

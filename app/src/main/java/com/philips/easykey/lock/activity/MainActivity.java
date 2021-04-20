@@ -38,6 +38,7 @@ import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PersonalCenterFragment;
 import com.philips.easykey.lock.fragment.device.DeviceFragment;
 import com.philips.easykey.lock.fragment.home.HomePageFragment;
+import com.philips.easykey.lock.fragment.message.MessageFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
 import com.philips.easykey.lock.mvp.presenter.MainActivityPresenter;
 import com.philips.easykey.lock.mvp.presenter.UpgradePresenter;
@@ -142,7 +143,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
         fragments.add(new HomePageFragment());
-        fragments.add(new DeviceFragment());
+        fragments.add(new MessageFragment());
 //        fragments.add(new ShopFragment());
         fragments.add(new PersonalCenterFragment());
 //        evevt = this;
