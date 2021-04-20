@@ -1,9 +1,12 @@
 package com.philips.easykey.lock.fragment.message;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.message.DeviceSelectDialogActivity;
 import com.philips.easykey.lock.adapter.SevendayDataStatisticsAdapter;
 import com.philips.easykey.lock.adapter.TodayLockStatisticsAdapter;
 import com.philips.easykey.lock.adapter.VideoLockWarningInformAdapter;
+import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.SevendayDataStatisticsBean;
 import com.philips.easykey.lock.bean.TodayLockStatisticsBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
@@ -27,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, DoorLockMessageFragmentPresenter<IDoorLockMessageView>> implements IDoorLockMessageView {
@@ -37,9 +43,14 @@ public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, 
     RecyclerView rcvTodayLockStatistics;
     @BindView(R.id.rcv_seven_day_data_statistics)
     RecyclerView rcvSevenDayDataStatistics;
+    @BindView(R.id.tv_lock_name)
+    TextView tvLockName;
+    @BindView(R.id.ll_video_lock_msg)
+    LinearLayout llVideoLockMsg;
     private VideoLockWarningInformAdapter videoLockWarningInformAdapter;
     private TodayLockStatisticsAdapter lockStatisticsAdapter;
     private SevendayDataStatisticsAdapter sevendayDataStatisticsAdapter;
+    private int RESULT_OK = 100;
     private View mView;
     private Unbinder unbinder;
 
@@ -110,6 +121,31 @@ public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, 
         rcvSevenDayDataStatistics.addItemDecoration(new SpacesItemDecoration(0, 0, 40, 0));
         rcvSevenDayDataStatistics.setLayoutManager(verticalLayoutManager);
         rcvSevenDayDataStatistics.setAdapter(sevendayDataStatisticsAdapter);
+    }
+
+    private void refreshLayoutData(HomeShowBean homeShowBean) {
+        tvLockName.setText(homeShowBean.getDeviceNickName());
+        if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_LOCK) {
+            llVideoLockMsg.setVisibility(View.GONE);
+        } else if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK) {
+            llVideoLockMsg.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @OnClick(R.id.tv_lock_name)
+    public void onViewClicked() {
+        Intent intent = new Intent(getContext(), DeviceSelectDialogActivity.class);
+        startActivityForResult(intent, RESULT_OK);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            HomeShowBean homeShowBean = (HomeShowBean) data.getSerializableExtra("homeShowBean");
+            refreshLayoutData(homeShowBean);
+        }
     }
 
     @Override

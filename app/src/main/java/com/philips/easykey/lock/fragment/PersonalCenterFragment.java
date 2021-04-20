@@ -56,8 +56,6 @@ import static android.app.Activity.RESULT_OK;
  * created at 2019/2/25 14:47
  */
 public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView, View.OnClickListener {
-    @BindView(R.id.message_layout)
-    RelativeLayout messageLayout;
     @BindView(R.id.security_setting_layout)
     RelativeLayout securitySettingLayout;
     @BindView(R.id.faq_layout)
@@ -143,13 +141,9 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
         unbinder.unbind();
     }
 
-    @OnClick({R.id.message_layout, R.id.security_setting_layout, R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second,R.id.product_activition})
+    @OnClick({R.id.security_setting_layout, R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second,R.id.product_activition})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.message_layout:
-                Intent mMessageIntent = new Intent(getActivity(), PersonalMessageActivity.class);
-                startActivity(mMessageIntent);
-                break;
             case R.id.security_setting_layout:
                 Intent mSercurityIntent = new Intent(getActivity(), PersonalSecuritySettingActivity.class);
                 startActivity(mSercurityIntent);

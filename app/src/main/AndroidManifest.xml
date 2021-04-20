@@ -1171,6 +1171,12 @@
             android:name=".activity.my.PrivacyActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.message.DeviceSelectDialogActivity"
+            android:theme="@style/DialogTransparent"
+            android:screenOrientation="portrait"
+            />
         <service android:name=".publiclibrary.xm.DoorbellingService"/>
         <service android:name=".publiclibrary.ble.BleService" />
         <service android:name=".publiclibrary.ota.ble.p6.BluetoothLeService" />
