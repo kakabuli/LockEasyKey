@@ -25,8 +25,6 @@ import java.util.List;
 
 public class BluetoothRecordAdapter extends BaseQuickAdapter<BluetoothRecordBean, BaseViewHolder> {
 
-    private Context mContext;
-
     public BluetoothRecordAdapter(@Nullable List<BluetoothRecordBean> data) {
         super(R.layout.item_bluetooth_record, data);
     }
@@ -49,7 +47,7 @@ public class BluetoothRecordAdapter extends BaseQuickAdapter<BluetoothRecordBean
         if(data != null && data.size() > 0){
 
             BluetoothItemRecordAdapter bluetoothItemRecordAdapter = new BluetoothItemRecordAdapter(R.layout.item_item_bluetooth_record,data);
-            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
             recyclerView.setAdapter(bluetoothItemRecordAdapter);
         }
     /*    if (bluetoothItemRecordAdapter!=null){

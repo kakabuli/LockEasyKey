@@ -26,9 +26,10 @@ public class GatewayLockPasswordAdapter extends BaseQuickAdapter<GatewayPassword
     @Override
     protected void convert(BaseViewHolder helper, GatewayPasswordPlanBean item) {
 
-        Context mContext = getContext();
         int position = helper.getPosition();
         helper.setText(R.id.tv_num, item.getPasswordNumber() + "");
+        View view = helper.findView(R.id.my_view);
+        Context mContext = view.getContext();
 
         int num = item.getPasswordNumber();
         if (num > 4 && num < 9) {  //临时密码
@@ -80,9 +81,9 @@ public class GatewayLockPasswordAdapter extends BaseQuickAdapter<GatewayPassword
             }
         }
         if (getData() != null && getData().size() == position + 1) {
-            helper.getView(R.id.my_view).setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         } else {
-            helper.getView(R.id.my_view).setVisibility(View.VISIBLE);
+            view.setVisibility(View.VISIBLE);
         }
 
 

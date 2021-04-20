@@ -74,7 +74,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
         ButterKnife.bind(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         String filePath = FileTool.getVideoLockPath(this,wifiSn).getPath();
-
+        LogUtils.d("shulan  filePath-->" + filePath);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,6 +83,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
             }
         }).start();
 
+        initRecycleView();
     }
 
     private void initRecycleView() {
@@ -416,13 +417,6 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
                 times++;
             }
         }
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleView();
-            }
-        });
 
         for(FileBean i : items){
             LogUtils.d(i.toString());

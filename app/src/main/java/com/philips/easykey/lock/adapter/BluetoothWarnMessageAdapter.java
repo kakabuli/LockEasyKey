@@ -24,8 +24,6 @@ import java.util.List;
 
 public class BluetoothWarnMessageAdapter extends BaseQuickAdapter<BluetoothRecordBean, BaseViewHolder> {
 
-    private Context mContext;
-
     public BluetoothWarnMessageAdapter(@Nullable List<BluetoothRecordBean> data) {
         super(R.layout.item_bluetooth_record, data);
     }
@@ -44,7 +42,7 @@ public class BluetoothWarnMessageAdapter extends BaseQuickAdapter<BluetoothRecor
         RecyclerView recyclerView = helper.getView(R.id.item_recycleview);
         List<BluetoothItemRecordBean> data = bean.getList();
         BluetoothItemRecordAdapter bluetoothItemRecordAdapter = new BluetoothItemRecordAdapter(R.layout.item_item_warn_record,data);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(bluetoothItemRecordAdapter);
         helper.getView(R.id.view_line).setVisibility(bean.isLastData() == true ? View.INVISIBLE : View.VISIBLE);
     }

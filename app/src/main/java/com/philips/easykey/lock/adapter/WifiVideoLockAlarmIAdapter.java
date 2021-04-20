@@ -28,7 +28,6 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
     List<WifiVideoLockAlarmRecord> data;
 
     private VideoRecordCallBackLinstener mListener;
-    private Context mContext;
     public interface VideoRecordCallBackLinstener{
         void onVideoRecordCallBackLinstener(WifiVideoLockAlarmRecord record);
     }
@@ -62,7 +61,7 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
         String dayTime = record.getDayTime();
         if (!TextUtils.isEmpty(dayTime)) {
             if (dayTime.equals(DateUtils.getCurrentYMD())) {
-                dayTime = mContext.getString(R.string.today);
+                dayTime = tvDayTime.getContext().getString(R.string.today);
             }
             tvDayTime.setText(dayTime+"");
 
@@ -107,32 +106,32 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
 
         switch (record.getType()){
             case 0x10://您的智能门锁低电量，请及时更换
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ mContext.getText(R.string.wifi_lock_alarm_low_power) +"</font>" + "<br><font color='#999999'>已自动开启节能模式（视频功能已关闭）</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvRight.getContext().getText(R.string.wifi_lock_alarm_low_power) +"</font>" + "<br><font color='#999999'>已自动开启节能模式（视频功能已关闭）</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_battery);
                 rlPic.setVisibility(View.GONE);
                 break;
             case 0x20:// 您的门锁有故障，请注意
-                tvRight.setText(mContext.getText(R.string.wifi_lock_alarm_problem));
+                tvRight.setText(tvRight.getContext().getText(R.string.wifi_lock_alarm_problem));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_fault);
                 break;
             case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
-                tvRight.setText(mContext.getText(R.string.wifi_lock_alarm_lock_5min_1));
+                tvRight.setText(tvRight.getContext().getText(R.string.wifi_lock_alarm_lock_5min_1));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_error);
                 break;
             case 0x08:// 门锁正在被机械方式开启，请回家或联系保安查看
-                tvRight.setText(mContext.getText(R.string.wifi_lock_alarm_opens));
+                tvRight.setText(tvDayTime.getContext().getText(R.string.wifi_lock_alarm_opens));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_prylock);
                 break;
             case 0x04:// 已监测到您的门锁被撬，请联系家人或小区保安
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ mContext.getText(R.string.pick_proof) +"</font>" + "<br><font color='#999999'>已监测到您的门锁异常</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getText(R.string.pick_proof) +"</font>" + "<br><font color='#999999'>已监测到您的门锁异常</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_prylock);
                 break;
             case 0x70:// 徘徊报警
-                tvRight.setText(mContext.getText(R.string.wandering_alarm));
+                tvRight.setText(tvDayTime.getContext().getText(R.string.wandering_alarm));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_alert);
                 break;
             case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
-                tvRight.setText(mContext.getText(R.string.wifi_lock_alarm_hijack));
+                tvRight.setText(tvDayTime.getContext().getText(R.string.wifi_lock_alarm_hijack));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_warning);
                 break;
             case 0x01:// 锁定报警
@@ -140,17 +139,17 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_locking);
                 break;
             case 0x40:// 布防报警
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ mContext.getText(R.string.warring_defence) +"</font>" + "<br><font color='#999999'>您的门锁有从门内开锁情况</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getText(R.string.warring_defence) +"</font>" + "<br><font color='#999999'>您的门锁有从门内开锁情况</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_protection);
                 break;
         }
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
-            Glide.with(mContext).load(record.getThumbUrl())
+            Glide.with(ivContent.getContext()).load(record.getThumbUrl())
                     .apply(new RequestOptions().error(R.mipmap.img_video_lock_default).placeholder(R.mipmap.img_video_lock_default).dontAnimate()
                             .transform(new RotateTransformation(90f))).into(ivContent);
         }else{
-            Glide.with(mContext).load(R.mipmap.img_video_lock_default).into(ivContent);
+            Glide.with(ivContent.getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
         }
 
         if(record.isThumbState() && record.getFileName() != null){

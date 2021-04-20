@@ -23,7 +23,6 @@ import java.util.List;
 
 
 public class WifiLockAlarmItemRecordAdapter extends BaseQuickAdapter<WifiLockAlarmRecord, BaseViewHolder> {
-    private Context mContext;
     public WifiLockAlarmItemRecordAdapter(int layoutResId, @Nullable List<WifiLockAlarmRecord> data) {
         super(layoutResId, data);
     }
@@ -43,7 +42,7 @@ public class WifiLockAlarmItemRecordAdapter extends BaseQuickAdapter<WifiLockAla
         ImageView iv = helper.getView(R.id.iv);
         iv.setImageResource(R.mipmap.bluetooth_warn_icon);
         TextView tvContent = helper.getView(R.id.tv_content);
-        String content = BleUtil.getAlarmByType(bean.getType(),mContext);
+        String content = BleUtil.getAlarmByType(bean.getType(),tvContent.getContext());
 
          // 机械开锁/APP开锁/自动开锁/密码开锁/门卡开锁/指纹开锁
         tvContent.setText(content);

@@ -24,19 +24,10 @@ import java.util.List;
 
 public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, BaseViewHolder> {
 
-    private final String[] weekdays;
+    private String[] weekdays;
 
     public BluetoothPasswordAdapter(@Nullable List<ForeverPassword> data, int layoutId) {
         super(layoutId, data);
-        Context mContext = MyApplication.getInstance().getApplicationContext();
-        weekdays = new String[]{
-                mContext.getString(R.string.week_day),
-                mContext.getString(R.string.monday),
-                mContext.getString(R.string.tuesday),
-                mContext.getString(R.string.wedensday),
-                mContext.getString(R.string.thursday),
-                mContext.getString(R.string.friday),
-                mContext.getString(R.string.saturday)};
     }
 
     @Override
@@ -45,17 +36,19 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
         int itemCount=data.size();
         int pos=helper.getPosition();
         LogUtils.d(" itemCount "+itemCount+"----------pos "+pos);
+        View view= helper.getView(R.id.my_view);
         if (pos==itemCount-1){
-           View view= helper.getView(R.id.my_view);
             view.setVisibility(View.GONE);
         }else {
-            View view= helper.getView(R.id.my_view);
             view.setVisibility(View.VISIBLE);
         }
 
         if (bean.getItems() != null) {
             LogUtils.d("周计划是     " + Arrays.toString(bean.getItems().toArray()));
         }
+
+        weekdays = view.getContext().getResources().getStringArray(R.array.bluetooth_password_adapter_week);
+        Context mContext = view.getContext();
 
         helper.setText(R.id.tv_num, bean.getNum());
         helper.setText(R.id.tv_nick, bean.getNickName());
@@ -78,7 +71,6 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
 
                 }
             }
-            Context mContext = MyApplication.getInstance().getApplicationContext();
             String startTime = getStartTime(bean);
             String endTime = getEndTime(bean);
             weeks = mContext.getString(R.string.pwd_will) + weeks + startTime + "-" + endTime + mContext.getString(R.string.force);
@@ -91,6 +83,7 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
         if ("09".equals(bean.getNum())){
             helper.setText(R.id.tv_time, MyApplication.getInstance().getString(R.string.stress_password));
         }
+
     }
 
     private String getEndTime(ForeverPassword bean) {

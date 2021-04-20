@@ -37,8 +37,6 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
     private List<ProductInfo> productList = new ArrayList<>();
     private RequestOptions options;
 
-    private Context mContext;
-
     public DeviceDetailAdapter(@Nullable List<HomeShowBean> data,List<ProductInfo> product) {
         super(R.layout.fragment_device_item, data);
         productList = product;
@@ -167,7 +165,7 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
 //                                LogUtils.d("--kaadas--productList.getDevelopmentModel==" + productInfo.getDevelopmentModel());
                                 //匹配型号获取下载地址
 //                                Glide.with(mContext).load(productInfo.getDeviceListUrl()).into((ImageView) helper.getView(R.id.device_image));
-                                Glide.with(mContext).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
+                                Glide.with(textView.getContext()).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
                                 return;
                             }
                         }
@@ -210,7 +208,7 @@ public class DeviceDetailAdapter extends BaseQuickAdapter<HomeShowBean, BaseView
 //                                LogUtils.d("--kaadas--productList.DeviceListUrl==" + productInfo.getDeviceListUrl());
                                         //匹配型号获取下载地址
 //                                Glide.with(mContext).load(productInfo.getDeviceListUrl()).into((ImageView) helper.getView(R.id.device_image));
-                                        Glide.with(mContext).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
+                                        Glide.with(textView.getContext()).load(productInfo.getDeviceListUrl()).apply(options).into((ImageView) helper.getView(R.id.device_image));
                                         return;
                                     }
                                 } catch (Exception e) {

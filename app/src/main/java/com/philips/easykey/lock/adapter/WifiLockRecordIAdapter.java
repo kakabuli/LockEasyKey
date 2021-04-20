@@ -19,8 +19,6 @@ import java.util.List;
 
 public class WifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOperationRecord, BaseViewHolder> {
 
-    private Context mContext;
-
     public WifiLockRecordIAdapter(@Nullable List<WifiLockOperationRecord> data) {
         super(R.layout.item_wifi_lock_record_layout,data);
     }
@@ -41,7 +39,7 @@ public class WifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOperationRe
         String dayTime = record.getDayTime();
         if (!TextUtils.isEmpty(dayTime)) {
             if (dayTime.equals(DateUtils.getCurrentYMD())) {
-                dayTime = mContext.getString(R.string.today);
+                dayTime = tvDayTime.getContext().getString(R.string.today);
             }
             tvDayTime.setText(dayTime+"");
         }
@@ -53,7 +51,7 @@ public class WifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOperationRe
 //        helper.getView(R.id.view_bottom).setVisibility( ? View.INVISIBLE : View.VISIBLE);
         helper.getView(R.id.view_bottom).setVisibility((position == size -1 || last) ? View.INVISIBLE : View.VISIBLE);
         TextView tvContent = helper.getView(R.id.tv_content);
-        String content = BleUtil.getAlarmByType(record.getType(), mContext);
+        String content = BleUtil.getAlarmByType(record.getType(), tvContent.getContext());
         TextView tvRight = helper.getView(R.id.tv_right);
         int type = record.getType();
         //1开锁 2关锁 3添加密钥 4删除密钥 5修改管理员密码 6自动模式 7手动模式 8安全模式切换 9常用模式切换 10反锁模式 11布防模式
@@ -61,7 +59,8 @@ public class WifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOperationRe
         String right = "";
         String shareUserNickname;
         int pwdType = record.getPwdType();
-        String sNum = mContext.getString(R.string.number)+(record.getPwdNum() > 9 ? ""+ record.getPwdNum() : "0"+ record.getPwdNum());
+        String sNum = tvRight.getContext().getString(R.string.number)+(record.getPwdNum() > 9 ? ""+ record.getPwdNum() : "0"+ record.getPwdNum());
+        Context mContext = tvRight.getContext();
         switch (type) {
             case 1: //开锁
                 left = record.getUserNickname();

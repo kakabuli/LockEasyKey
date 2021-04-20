@@ -18,9 +18,7 @@ import java.util.List;
 public class ClothesHangerMachineBleWiFiSearchAdapter extends BaseQuickAdapter<BluetoothDevice, BaseViewHolder> {
 
     private OnBindClickListener bindClickListener;
-//    BluetoothLockBroadcastBean mBroadcastBean = new BluetoothLockBroadcastBean();
     List<BluetoothLockBroadcastListBean> mBroadcastList = new ArrayList<>();
-    List<BluetoothLockBroadcastBean> mItemList = new ArrayList<>();
 
     public void setBluetoothLockBroadcast(List<BluetoothLockBroadcastListBean> broadcastList) {
         this.mBroadcastList = broadcastList;

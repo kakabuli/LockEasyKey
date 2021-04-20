@@ -24,8 +24,6 @@ import java.util.List;
 
 
 public class BluetoothItemRecordAdapter extends BaseQuickAdapter<BluetoothItemRecordBean, BaseViewHolder> {
-    private Context mContext;
-
     public BluetoothItemRecordAdapter(int layoutResId, @Nullable List<BluetoothItemRecordBean> data) {
         super(layoutResId, data);
     }
@@ -51,37 +49,37 @@ public class BluetoothItemRecordAdapter extends BaseQuickAdapter<BluetoothItemRe
         LogUtils.d("Adapter 显示的   " + strRight);
         switch (strRight) {
             case BleUtil.PASSWORD:// "密码"  break;
-                strRight = mContext.getString(R.string.password_open);
+                strRight = tvRight.getContext().getString(R.string.password_open);
                 break;
             case BleUtil.RF:// "遥控";  break;
-                strRight = mContext.getString(R.string.rf_open);
+                strRight = tvRight.getContext().getString(R.string.rf_open);
                 break;
             case BleUtil.MANUAL:// = "手动";  break;
-                strRight = mContext.getString(R.string.manual_open);
+                strRight = tvRight.getContext().getString(R.string.manual_open);
                 break;
             case BleUtil.RFID://= "卡片";  break;
-                strRight = mContext.getString(R.string.rfid_open);
+                strRight = tvRight.getContext().getString(R.string.rfid_open);
                 break;
             case BleUtil.FINGERPRINT://= "指纹";  break;
-                strRight = mContext.getString(R.string.fingerprint_open);
+                strRight = tvRight.getContext().getString(R.string.fingerprint_open);
                 break;
             case BleUtil.VOICE://= "语音";  break;
-                strRight = mContext.getString(R.string.voice_open);
+                strRight = tvRight.getContext().getString(R.string.voice_open);
                 break;
             case BleUtil.FINGER_VEIN:// = "静脉";  break;
-                strRight = mContext.getString(R.string.finger_vein_open);
+                strRight = tvRight.getContext().getString(R.string.finger_vein_open);
                 break;
             case BleUtil.FACE_RECOGNITION:// = "人脸";  break;
-                strRight = mContext.getString(R.string.face_recognition_open);
+                strRight = tvRight.getContext().getString(R.string.face_recognition_open);
                 break;
             case BleUtil.PHONE://= "手机";  break;
-                strRight = mContext.getString(R.string.app_open);
+                strRight = tvRight.getContext().getString(R.string.app_open);
                 break;
             case BleUtil.ONE_KEY_OPEN:
-                strRight = mContext.getString(R.string.one_key_open);
+                strRight = tvRight.getContext().getString(R.string.one_key_open);
                 break;
             case BleUtil.UNKNOWN_OPEN:
-                strRight = mContext.getString(R.string.unknown_open);
+                strRight = tvRight.getContext().getString(R.string.unknown_open);
                 break;
         }
         // 机械开锁/APP开锁/自动开锁/密码开锁/门卡开锁/指纹开锁

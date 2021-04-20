@@ -180,7 +180,7 @@ public class WifiLockVistorRecordFragment extends BaseFragment<IWifiLockVistorRe
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((ViewGroup) view.getParent()).removeView(view);
+//        ((ViewGroup) view.getParent()).removeView(view);
         unbinder.unbind();
     }
 

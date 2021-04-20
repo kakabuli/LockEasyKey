@@ -22,11 +22,8 @@ import java.util.List;
 
 public class WifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPassword, BaseViewHolder> {
 
-    private Context mContext;
-
     public WifiLockPasswordAdapter(@Nullable List<ForeverPassword> data, int layoutId) {
         super(layoutId, data);
-        mContext = MyApplication.getInstance().getApplicationContext();
 
     }
 
@@ -36,11 +33,10 @@ public class WifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPassword, B
         int itemCount = data.size();
         int pos = helper.getPosition();
         LogUtils.d(" itemCount " + itemCount + "----------pos " + pos);
+        View view = helper.getView(R.id.my_view);
         if (pos == itemCount - 1) {
-            View view = helper.getView(R.id.my_view);
             view.setVisibility(View.GONE);
         } else {
-            View view = helper.getView(R.id.my_view);
             view.setVisibility(View.VISIBLE);
         }
 
@@ -53,7 +49,7 @@ public class WifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPassword, B
         //0永久秘钥 1策略秘钥 2胁迫秘钥 3管理员秘钥 4无权限秘钥 254 一次性秘钥 255 无效值
         switch (bean.getType()) {
             case 0:
-                helper.setText(R.id.tv_time, mContext.getString(R.string.foever_able));
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.foever_able));
                 break;
             case 1:
                 helper.setText(R.id.tv_time, "策略密码");

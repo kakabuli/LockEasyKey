@@ -20,11 +20,8 @@ import java.util.List;
 
 public class GatewayStressPasswordAdapter extends BaseQuickAdapter<ForeverPassword, BaseViewHolder> {
 
-    private Context mContext;
-
     public GatewayStressPasswordAdapter(@Nullable List<ForeverPassword> data, int layoutId) {
         super(layoutId, data);
-        mContext = MyApplication.getInstance().getApplicationContext();
 
     }
 

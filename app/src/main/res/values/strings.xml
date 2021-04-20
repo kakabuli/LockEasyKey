@@ -169,6 +169,7 @@
     <string name="help_four">您需要确保您的设备处于待添加的状态下具体方法如下：</string>
     <string name="help_four_one">对于没有任何按键的设备，您可以尝试以 1 秒为间隙，反复对设备进行上电操作。</string>
     <string name="bluetooth_first_text">确保门锁已安装好，并装上电池</string>
+    <string name="bluetooth_first_text1">确保%1$s锁已安装好，%2$s并装上电池%3$s</string>
     <string name="bluetooth_user_pwd">初始用户管理密码：12345678</string>
     <string name="help_four_two">对于有一个按键或有重置孔的设备，您可以尝试长按按键或双击重置孔。进入待添加状态后，通常会有一个特殊的指示灯效果。</string>
     <string name="bluetooth_two_text">触摸按键区域唤醒面板</string>
@@ -492,6 +493,17 @@
     <string-array name="gateway_lock_pwd_top">
         <item>永久</item>
         <item>临时</item>
+    </string-array>
+
+
+    <string-array name="bluetooth_password_adapter_week">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
     </string-array>
 
     <string name="user_pwd_time1">请打开手机蓝牙在门锁附近设置密码</string>

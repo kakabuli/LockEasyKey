@@ -23,7 +23,6 @@ import java.util.List;
 
 public class WifiLockOperationItemRecordAdapter extends BaseQuickAdapter<WifiLockOperationRecord, BaseViewHolder> {
 
-    private Context mContext;
     public WifiLockOperationItemRecordAdapter(int layoutResId, @Nullable List<WifiLockOperationRecord> data) {
         super(layoutResId, data);
     }
@@ -42,6 +41,7 @@ public class WifiLockOperationItemRecordAdapter extends BaseQuickAdapter<WifiLoc
 
 
         TextView tvContent = helper.getView(R.id.tv_content);
+        Context mContext = tvContent.getContext();
         String content = BleUtil.getAlarmByType(record.getType(), mContext);
         TextView tvRight = helper.getView(R.id.tv_right);
         int type = record.getType();

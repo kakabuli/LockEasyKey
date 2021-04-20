@@ -712,6 +712,50 @@ public class BleUtil {
     }
 
     /**
+     * @param type  	报警类型：1锁定 2劫持 3三次错误 4防撬 8机械方式报警 16低电压 32锁体异常 64布防 128低电量关人脸 96门铃 112pir报警
+     * @return
+     */
+    public static int getAlarmByType(int type) {
+        int content = -1;
+        switch (type) {
+            case LOCK_WARRING: //锁定
+                content = R.string.wifi_lock_alarm_lock_5min;
+                break;
+            case HIJACK: //2劫持
+                content = R.string.wifi_lock_alarm_hijack;
+                break;
+            case THREE_TIMES_ERROR: //3三次错误
+                content = R.string.wifi_lock_alarm_many_failed;
+                break;
+            case BROKEN: //4防撬
+                content = R.string.wifi_lock_alarm_lock_broken;
+                break;
+            case MECHANICAL_KEY://8机械方式报警
+                content = R.string.wifi_lock_alarm_opens;
+                break;
+            case LOW_POWER://16低电压
+                content = R.string.wifi_lock_alarm_low_power;
+                break;
+            case DOOR_NOT_LOCK: //32锁体异常
+                content = R.string.alarm_notification_content_32;
+                break;
+            case ARM://64布防
+                content = R.string.wifi_lock_alarm_safe;
+                break;
+            case CLOSE_FACE://128低电量关人脸
+                content = R.string.wifi_lock_alarm_lower_power_close_face;
+                break;
+            case PIR_ALARM:
+                content = R.string.wandering_alarm;
+                break;
+            default:
+                content = R.string.warring_unkonw;
+                break;
+        }
+        return content;
+    }
+
+    /**
             * @param type  	报警类型：1锁定 2劫持 3三次错误 4防撬 8机械方式报警 16低电压 32锁体异常 64布防 128低电量关人脸 96门铃
      * @return
      */
