@@ -24,7 +24,7 @@ import com.philips.easykey.lock.mvp.view.deviceaddview.WiFiLockChooseToAddView;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.king.zxing.Intents;
 
@@ -112,11 +112,11 @@ public class WifiLockAddNewToChooseActivity extends BaseActivity<WiFiLockChooseT
             case R.id.add:
                 String name = wifi_lock_choose_to_input.getText().toString().trim();
                 if (TextUtils.isEmpty(name)) {
-                    ToastUtil.getInstance().showShort(R.string.not_empty);
+                    ToastUtils.showShort(R.string.not_empty);
                     return;
                 }
                 if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(R.string.nickname_verify_error);
                     return;
                 }
                 mPresenter.searchLockProduct(name);

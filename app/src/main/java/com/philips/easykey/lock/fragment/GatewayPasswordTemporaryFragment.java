@@ -30,7 +30,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 
 import java.util.ArrayList;
@@ -126,13 +126,13 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
                 break;
             case R.id.btn_confirm_generation:
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtil.getInstance().showShort(R.string.please_have_net_add_temp_pwd);
+                    ToastUtils.showShort(R.string.please_have_net_add_temp_pwd);
                     return;
                 }
                 String strTemporaryPassword = etPassword.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strTemporaryPassword)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strTemporaryPassword)) {
@@ -208,7 +208,7 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
 
     @Override
     public void addLockPwdSuccess(GatewayPasswordPlanBean gatewayPasswordPlanBean, String pwdValue) {
-        ToastUtil.getInstance().showLong(getString(R.string.set_success));
+        ToastUtils.showLong(getString(R.string.set_success));
         hiddenLoading();
 
         //跳转到分享页面

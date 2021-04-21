@@ -15,7 +15,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,12 +84,12 @@ public class GatewayDoorCardManagerDetailActivity extends BaseAddToApplicationAc
                     public void onClick(View v) {
                         String name = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(name)) {
-                            ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(R.string.nickname_verify_error);
                             return;
                         }
                         //TODO 获取卡昵称判断
                       /*  if (StringUtil.judgeNicknameWhetherSame(card.getNickName(),name)){
-                            ToastUtil.getInstance().showShort(R.string.nickname_not_modify);
+                            ToastUtils.showShort(R.string.nickname_not_modify);
                             alertDialog.dismiss();
                             return;
                         }*/
@@ -122,7 +122,7 @@ public class GatewayDoorCardManagerDetailActivity extends BaseAddToApplicationAc
                         }
                     });
                 } else {
-                    ToastUtil.getInstance().showShort(getString(R.string.network_exception));
+                    ToastUtils.showShort(getString(R.string.network_exception));
                 }
                 break;
         }

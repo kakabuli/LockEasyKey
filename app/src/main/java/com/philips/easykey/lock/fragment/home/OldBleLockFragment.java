@@ -46,7 +46,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -302,9 +302,9 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 if (mPresenter.isAuth(bleLockInfo, true)) {
                     if (bleLockInfo.getBackLock() == 0 || bleLockInfo.getSafeMode() == 1) {  //反锁状态下或者安全模式下  长按不操作
                         if (bleLockInfo.getSafeMode() == 1) {
-                            ToastUtil.getInstance().showLong(R.string.safe_mode_can_not_open);
+                            ToastUtils.showLong(R.string.safe_mode_can_not_open);
                         } else if (bleLockInfo.getBackLock() == 0) {
-                            ToastUtil.getInstance().showLong(R.string.back_lock_can_not_open);
+                            ToastUtils.showLong(R.string.back_lock_can_not_open);
                         }
                         return false;
                     }
@@ -585,7 +585,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
                 break;
             case R.id.tv_synchronized_record:
                 if (isLoadingBleRecord) { //如果正在加载锁上数据  不让用户再次点击
-                    ToastUtil.getInstance().showShort(R.string.is_loading_lock_record);
+                    ToastUtils.showShort(R.string.is_loading_lock_record);
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
@@ -661,8 +661,8 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void onElectricUpdataFailed(Throwable throwable) {
-//        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
-//        ToastUtil.getInstance().showShort(getText(R.string.not_power_was_received) + " " + throwable.toString());
+//        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+//        ToastUtils.showShort(getText(R.string.not_power_was_received) + " " + throwable.toString());
     }
 
     @Override
@@ -681,14 +681,14 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void onGetOpenNumberFailed(Throwable throwable) { //获取开锁次数失败
-//        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
-//        ToastUtil.getInstance().showShort(getText(R.string.fail_get_open_lock_number) + " " + throwable.toString());
+//        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+//        ToastUtils.showShort(getText(R.string.fail_get_open_lock_number) + " " + throwable.toString());
 
     }
 
     @Override
     public void notAdminMustHaveNet() {  //不是管理员开锁必须要有网络
-        ToastUtil.getInstance().showLong(R.string.not_admin_must_have_net);
+        ToastUtils.showLong(R.string.not_admin_must_have_net);
     }
 
     @Override
@@ -712,7 +712,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(name)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 mPresenter.realOpenLock(name, false);
@@ -723,7 +723,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void authFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
 
     }
 
@@ -877,12 +877,12 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
             @Override
             public void run() {
                 if (throwable instanceof TimeoutException) {
-                    ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+                    ToastUtils.showShort(getString(R.string.open_lock_failed));
                 } else if (throwable instanceof BleProtocolFailedException) {
                     BleProtocolFailedException bleProtocolFailedException = (BleProtocolFailedException) throwable;
-                    ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+                    ToastUtils.showShort(getString(R.string.open_lock_failed));
                 } else {
-                    ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+                    ToastUtils.showShort(getString(R.string.open_lock_failed));
                 }
                 lockRunnable.run();
                 stopOpenLockAnimator();
@@ -1029,7 +1029,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
 
     @Override
     public void noData() {
-        ToastUtil.getInstance().showShort(R.string.lock_no_record);
+        ToastUtils.showShort(R.string.lock_no_record);
         hiddenLoading();
         isLoadingBleRecord = false;
     }
@@ -1046,9 +1046,9 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     @Override
     public void onLoadBleRecordFinish(boolean isComplete) {
         if (isComplete) {
-            ToastUtil.getInstance().showShort(R.string.sync_success);
+            ToastUtils.showShort(R.string.sync_success);
         } else {
-            ToastUtil.getInstance().showShort(R.string.get_record_failed_please_wait);
+            ToastUtils.showShort(R.string.get_record_failed_please_wait);
             hiddenLoading();
         }
         //加载完了   设置正在加载数据
@@ -1066,12 +1066,12 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     @Override
     public void onLoadServerRecordFailed(Throwable throwable) {
         //加载服务器开锁记录失败
-//        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+//        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
     }
 
     @Override
     public void onLoadServerRecordFailedServer(BaseResult result) {
-//        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
+//        ToastUtils.showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
     }
 
     @Override
@@ -1079,29 +1079,29 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
         hasData = false;
         changePage();
         //服务器没有开锁记录
-//        ToastUtil.getInstance().showShort(R.string.server_no_data);
+//        ToastUtils.showShort(R.string.server_no_data);
     }
 
     @Override
     public void noMoreData() {
-//        ToastUtil.getInstance().showShort(R.string.no_more_data);
+//        ToastUtils.showShort(R.string.no_more_data);
     }
 
     @Override
     public void onUploadServerRecordSuccess() {
         LogUtils.d("记录上传成功");
-//        ToastUtil.getInstance().showShort(R.string.lock_record_upload_success);
+//        ToastUtils.showShort(R.string.lock_record_upload_success);
     }
 
     @Override
     public void onUploadServerRecordFailed(Throwable throwable) {
-//        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+//        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
         LogUtils.d("记录上传失败");
     }
 
     @Override
     public void onUploadServerRecordFailedServer(BaseResult result) {
-//        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
+//        ToastUtils.showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
     }
 
     @Override
@@ -1163,7 +1163,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     @Override
     public void noPermissions() {
         PermissionUtil.getInstance().requestPermission(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, getActivity());
-        ToastUtil.getInstance().showLong(R.string.please_allow_ble_permission);
+        ToastUtils.showLong(R.string.please_allow_ble_permission);
         changeOpenLockStatus(12);
     }
 
@@ -1172,7 +1172,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
      */
     @Override
     public void noOpenGps() {
-        ToastUtil.getInstance().showLong(R.string.check_phone_not_open_gps_please_open);
+        ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
     }
 
     private void onChangeInitView() {

@@ -56,7 +56,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.MyGridItemDecoration;
 
 import java.util.ArrayList;
@@ -491,9 +491,9 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                 if (mPresenter.isAuth(bleLockInfo, true)) {
                     if (bleLockInfo.getBackLock() == 0 || bleLockInfo.getSafeMode() == 1) {  //反锁状态下或者安全模式下  长按不操作
                         if (bleLockInfo.getSafeMode() == 1) {
-                            ToastUtil.getInstance().showLong(R.string.safe_mode_can_not_open);
+                            ToastUtils.showLong(R.string.safe_mode_can_not_open);
                         } else if (bleLockInfo.getBackLock() == 0) {
-                            ToastUtil.getInstance().showLong(R.string.back_lock_can_not_open);
+                            ToastUtils.showLong(R.string.back_lock_can_not_open);
                             changLockStatus(2);
                         }
                         return;
@@ -601,7 +601,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 
     @Override
     public void notAdminMustHaveNet() {
-        ToastUtil.getInstance().showLong(R.string.not_admin_must_have_net);
+        ToastUtils.showLong(R.string.not_admin_must_have_net);
     }
 
     @Override
@@ -625,7 +625,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(name)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 mPresenter.realOpenLock(name, false);
@@ -636,7 +636,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
 
     @Override
     public void authFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
@@ -667,12 +667,12 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
     public void openLockFailed(Throwable throwable) {
         changLockStatus(5);
         if (throwable instanceof TimeoutException) {
-            ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+            ToastUtils.showShort(getString(R.string.open_lock_failed));
         } else if (throwable instanceof BleProtocolFailedException) {
             BleProtocolFailedException bleProtocolFailedException = (BleProtocolFailedException) throwable;
-            ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+            ToastUtils.showShort(getString(R.string.open_lock_failed));
         } else {
-            ToastUtil.getInstance().showShort(getString(R.string.open_lock_failed));
+            ToastUtils.showShort(getString(R.string.open_lock_failed));
         }
         handler.postDelayed(lockRunnable, 3000);
     }

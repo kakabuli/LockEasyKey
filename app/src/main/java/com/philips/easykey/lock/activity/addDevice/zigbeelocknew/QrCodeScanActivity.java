@@ -18,7 +18,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.Intents;
 
 import butterknife.BindView;
@@ -85,12 +85,12 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
             if (i == -1) {
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     //禁止该权限
-                    ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
                     finish();
                     return;
                 } else {
                     //询问该权限
-                    ToastUtil.getInstance().showShort(getString(R.string.inquire_camera_permission));
+                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
                     finish();
                     return;
                 }
@@ -99,7 +99,7 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
         //版本为22 5.1
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
             if (!isCameraCanUse()) {
-                ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
             }

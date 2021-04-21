@@ -40,7 +40,7 @@ import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -308,12 +308,12 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                             public void onClick(View v) {
                                 name = editText.getText().toString().trim();
                                 if (!StringUtil.nicknameJudge(name)) {
-                                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                                    ToastUtils.showShort(R.string.nickname_verify_error);
                                     return;
                                 }
                                 if (deviceNickname != null) {
                                     if (deviceNickname.equals(name)) {
-                                        ToastUtil.getInstance().showShort(getString(R.string.device_nick_name_no_update));
+                                        ToastUtils.showShort(getString(R.string.device_nick_name_no_update));
                                         alertDialog.dismiss();
                                         return;
                                     }
@@ -640,7 +640,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
 
     @Override
     public void onDeleteDeviceSuccess() {
-        ToastUtil.getInstance().showLong(R.string.delete_success);
+        ToastUtils.showLong(R.string.delete_success);
         hiddenLoading();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -650,8 +650,8 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
         LogUtils.d("删除失败   " + throwable.getMessage());
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
-//        ToastUtil.getInstance().showLong(R.string.delete_fialed);
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+//        ToastUtils.showLong(R.string.delete_fialed);
         hiddenLoading();
     }
 
@@ -659,7 +659,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
     public void onDeleteDeviceFailedServer(BaseResult result) {
         LogUtils.d("删除失败   " + result.toString());
         String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
-        ToastUtil.getInstance().showLong(httpErrorCode);
+        ToastUtils.showLong(httpErrorCode);
         hiddenLoading();
     }
 
@@ -668,7 +668,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
         hiddenLoading();
         tvDeviceName.setText(name);
         wifiLockInfo.setLockNickname(name);
-        ToastUtil.getInstance().showLong(R.string.device_nick_name_update_success);
+        ToastUtils.showLong(R.string.device_nick_name_update_success);
         Intent intent = new Intent();
         intent.putExtra(KeyConstants.WIFI_LOCK_NEW_NAME, name);
         setResult(RESULT_OK, intent);
@@ -677,13 +677,13 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
     @Override
     public void modifyDeviceNicknameError(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void modifyDeviceNicknameFail(BaseResult baseResult) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showLong(HttpUtils.httpErrorCode(this, baseResult.getCode()));
     }
 
     @Override
@@ -700,13 +700,13 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
     @Override
     public void onUpdatePushStatusFailed(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.set_failed);
+        ToastUtils.showLong(R.string.set_failed);
     }
 
     @Override
     public void onUpdatePushStatusThrowable(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.set_failed);
+        ToastUtils.showLong(R.string.set_failed);
     }
 
     @Override
@@ -804,7 +804,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                 @Override
                 public void run() {
                     if(flag){
-                        ToastUtil.getInstance().showShort(getString(R.string.modify_success));
+                        ToastUtils.showShort(getString(R.string.modify_success));
                         if(code == 1){
                             ivSilentMode.setSelected(true);
                         }else{
@@ -812,7 +812,7 @@ public class WifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreVi
                         }
                     }else{
                         setVolume = code;
-                        ToastUtil.getInstance().showShort(getString(R.string.modify_failed));
+                        ToastUtils.showShort(getString(R.string.modify_failed));
                     }
                     if(avi!=null){
                         tvTips.setVisibility(View.GONE);

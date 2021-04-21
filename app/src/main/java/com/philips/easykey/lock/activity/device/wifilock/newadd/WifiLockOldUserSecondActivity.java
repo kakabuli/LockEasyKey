@@ -20,7 +20,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,7 +77,7 @@ public class WifiLockOldUserSecondActivity extends BaseAddToApplicationActivity 
                     startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
                 }
                 else {
-                    ToastUtil.getInstance().showShort("未知模组类型");
+                    ToastUtils.showShort("未知模组类型");
                 }
                 break;
         }

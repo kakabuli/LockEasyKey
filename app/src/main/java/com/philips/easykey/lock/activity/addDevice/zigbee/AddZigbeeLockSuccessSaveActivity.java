@@ -29,7 +29,7 @@ import com.philips.easykey.lock.mvp.view.deviceaddview.AddZigbeeLockSuccessSaveV
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,13 +162,13 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
                 //保存
                 String name = inputName.getText().toString().trim();
                 if (TextUtils.isEmpty(name)) {
-                    ToastUtil.getInstance().showShort(getString(R.string.nickname_not_null));
+                    ToastUtils.showShort(getString(R.string.nickname_not_null));
                     return;
                 }
                 if (!TextUtils.isEmpty(deviceId) && !TextUtils.isEmpty(gatewayId)) {
                     mPresenter.updateZigbeeLockName(gatewayId, deviceId, name);
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.gateway_or_device_null);
+                    ToastUtils.showShort(R.string.gateway_or_device_null);
                 }
 
                 break;
@@ -198,13 +198,13 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
 
     @Override
     public void updateDevNickNameFail() {
-        ToastUtil.getInstance().showShort(R.string.update_nickname_fail);
+        ToastUtils.showShort(R.string.update_nickname_fail);
     }
 
     @Override
     public void updateDevNickNameThrowable(Throwable throwable) {
         LogUtils.d("修改名称出现异常" + throwable.getMessage());
-        ToastUtil.getInstance().showShort(R.string.update_nickname_exception);
+        ToastUtils.showShort(R.string.update_nickname_exception);
     }
 
 

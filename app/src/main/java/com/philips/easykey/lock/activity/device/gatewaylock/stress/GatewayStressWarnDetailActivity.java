@@ -15,7 +15,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,12 +81,12 @@ public class GatewayStressWarnDetailActivity extends BaseAddToApplicationActivit
                     public void onClick(View v) {
                         String name = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(name)) {
-                            ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(R.string.nickname_verify_error);
                             return;
                         }
                         //todo 获取到密码对比
                   /*      if (StringUtil.judgeNicknameWhetherSame(password.getNickName(),name)){
-                            ToastUtil.getInstance().showShort(R.string.nickname_not_modify);
+                            ToastUtils.showShort(R.string.nickname_not_modify);
                             alertDialog.dismiss();
                             return;
                         }*/

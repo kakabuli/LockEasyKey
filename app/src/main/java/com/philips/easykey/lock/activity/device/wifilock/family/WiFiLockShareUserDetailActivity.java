@@ -25,7 +25,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,7 +121,7 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
                         }
                     });
                 } else {
-                    ToastUtil.getInstance().showLong(R.string.network_exception);
+                    ToastUtils.showLong(R.string.network_exception);
                 }
                 break;
             case R.id.iv_editor:
@@ -148,11 +148,11 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
                     public void onClick(View v) {
                         data = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(data)) {
-                            ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(R.string.nickname_verify_error);
                             return;
                         }
                         if (!TextUtils.isEmpty(shareUser.getUserNickname()) && shareUser.getUserNickname().equals(data)) {
-                            ToastUtil.getInstance().showShort(getString(R.string.user_nickname_no_update));
+                            ToastUtils.showShort(getString(R.string.user_nickname_no_update));
                             return;
                         }
                         showLoading(getString(R.string.is_modifing));
@@ -168,19 +168,19 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
 
     @Override
     public void deleteCommonUserListSuccess(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(R.string.delete_common_user_success);
+        ToastUtils.showShort(R.string.delete_common_user_success);
         finish();
     }
 
     @Override
     public void deleteCommonUserListFail(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
         hiddenLoading();
     }
 
     @Override
     public void deleteCommonUserListError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
         hiddenLoading();
     }
 
@@ -189,19 +189,19 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
         nickname = data;
         tvName.setText(nickname);
         shareUser.setUserNickname(nickname);
-        ToastUtil.getInstance().showShort(R.string.modify_user_nickname_success);
+        ToastUtils.showShort(R.string.modify_user_nickname_success);
         hiddenLoading();
     }
 
     @Override
     public void modifyCommonUserNicknameFail(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
         hiddenLoading();
     }
 
     @Override
     public void modifyCommonUserNicknameError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
         hiddenLoading();
     }
 }

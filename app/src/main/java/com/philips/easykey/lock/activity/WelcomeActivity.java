@@ -30,7 +30,7 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ServiceUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 import com.philips.easykey.lock.mvp.view.ISplashView;
@@ -140,7 +140,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
         if (NetUtil.isNetworkAvailable()) {
 //            mPresenter.getAppVersion();
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 

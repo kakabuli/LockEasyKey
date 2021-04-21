@@ -15,7 +15,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.Intents;
 
 import butterknife.BindView;
@@ -75,7 +75,7 @@ public class AddGatewaySecondActivity extends BaseAddToApplicationActivity {
                         startActivity(scanSuccessIntent);
                         finish();
                     }else{
-                        ToastUtil.getInstance().showShort(getString(R.string.please_use_gateway_qr_code));
+                        ToastUtils.showShort(getString(R.string.please_use_gateway_qr_code));
                     }
                     break;
             }

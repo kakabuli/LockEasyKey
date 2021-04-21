@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureActivity;
 /*import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;*/
 
@@ -73,11 +73,11 @@ public class AddGatewayScanActivity extends CaptureActivity {
             int i = checkSelfPermission(Manifest.permission.CAMERA);
             if (i == -1) {
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
                     finish();
                     return;
                 }else{
-                    ToastUtil.getInstance().showShort(getString(R.string.inquire_camera_permission));
+                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
                     finish();
                     return;
                 }
@@ -86,7 +86,7 @@ public class AddGatewayScanActivity extends CaptureActivity {
         //版本为22 5.1
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
             if (!isCameraCanUse()) {
-                ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
             }
@@ -167,7 +167,7 @@ public class AddGatewayScanActivity extends CaptureActivity {
             }else{
                 Intent scanSuccessIntent=new Intent(context,AddGatewaySecondActivity.class);
                 startActivity(scanSuccessIntent);
-                ToastUtil.getInstance().showShort(getString(R.string.please_use_gateway_qr_code));
+                ToastUtils.showShort(getString(R.string.please_use_gateway_qr_code));
             }
 
         }
@@ -175,7 +175,7 @@ public class AddGatewayScanActivity extends CaptureActivity {
 
         @Override
         public void onAnalyzeFailed() {
-            ToastUtil.getInstance().showShort(getString(R.string.scan_qr_failed));
+            ToastUtils.showShort(getString(R.string.scan_qr_failed));
         }
     };*/
 

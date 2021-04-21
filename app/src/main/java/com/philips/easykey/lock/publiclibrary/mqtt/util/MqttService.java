@@ -21,7 +21,7 @@ import com.philips.easykey.lock.utils.AppUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -322,7 +322,7 @@ public class MqttService extends Service {
                         mHandler.postDelayed(reconncetRunnable, 6000);
 
                     } else {
-//                        ToastUtil.getInstance().showShort(R.string.mqtt_connection_fail);
+//                        ToastUtils.showShort(R.string.mqtt_connection_fail);
 
                         if (exception.toString().equals("无权连接 (5)")) {
                             // TODO: 2019/4/1  该用户在其他手机登录(清除所有数据）---暂时未处理
@@ -354,7 +354,7 @@ public class MqttService extends Service {
     //订阅
     private void mqttSubscribe(MqttAndroidClient mqttClient, String topic, int qos) {
         if (!NetUtil.isNetworkAvailable()) {
-            ToastUtil.getInstance().showShort(getString(R.string.network_exception));
+            ToastUtils.showShort(getString(R.string.network_exception));
             return;
         }
         LogUtils.d("订阅    "+topic +"   "+(mqttClient != null));

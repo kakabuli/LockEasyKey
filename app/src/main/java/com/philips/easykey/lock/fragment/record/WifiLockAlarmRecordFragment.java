@@ -24,7 +24,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -151,7 +151,7 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
 
     @Override
     public void onLoadServerRecordFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
         //加载服务器开锁记录失败
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
@@ -159,7 +159,7 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
 
     @Override
     public void onLoadServerRecordFailedServer(BaseResult result) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
     }
@@ -169,12 +169,12 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
         //服务器没有开锁记录
         refreshLayout.finishRefresh();
         refreshLayout.setEnableLoadMore(false);  //服务器没有数据时，不让上拉加载更多
-        ToastUtil.getInstance().showShort(R.string.server_no_data_2);
+        ToastUtils.showShort(R.string.server_no_data_2);
     }
 
     @Override
     public void noMoreData() {
-        ToastUtil.getInstance().showShort(R.string.no_more_data);
+        ToastUtils.showShort(R.string.no_more_data);
         refreshLayout.finishLoadMore();
         refreshLayout.setEnableLoadMore(false);
     }

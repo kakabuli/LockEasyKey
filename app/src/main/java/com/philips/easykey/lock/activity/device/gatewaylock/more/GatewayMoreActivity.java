@@ -30,7 +30,7 @@ import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockServiceInfoDao;
 
@@ -188,13 +188,13 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
                         name = editText.getText().toString().trim();
                         //todo 判断名称是否修改
                         if (TextUtils.isEmpty(name)) {
-                            ToastUtil.getInstance().showShort(getString(R.string.device_name_cannot_be_empty));
+                            ToastUtils.showShort(getString(R.string.device_name_cannot_be_empty));
                             return;
                         }
 
                         if (deviceNickname != null) {
                             if (deviceNickname.equals(name)) {
-                                ToastUtil.getInstance().showShort(getString(R.string.device_nick_name_no_update));
+                                ToastUtils.showShort(getString(R.string.device_nick_name_no_update));
                                 alertDialog.dismiss();
                                 return;
                             }
@@ -233,7 +233,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
                     }
                     rlSilentMode.setEnabled(false);
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.get_sound_volme_no_fun);
+                    ToastUtils.showShort(R.string.get_sound_volme_no_fun);
                 }
                 break;
             case R.id.rl_device_information:
@@ -260,10 +260,10 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
                         }
 
                     } else {
-                        ToastUtil.getInstance().showShort(getString(R.string.get_am_fail));
+                        ToastUtils.showShort(getString(R.string.get_am_fail));
                     }
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.get_am_status);
+                    ToastUtils.showShort(R.string.get_am_status);
                 }
 
                 break;
@@ -305,12 +305,12 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         intent.putExtra(KeyConstants.NAME, name);
         //设置返回数据
         GatewayMoreActivity.this.setResult(RESULT_OK, intent);
-        ToastUtil.getInstance().showShort(getString(R.string.update_nick_name));
+        ToastUtils.showShort(getString(R.string.update_nick_name));
     }
 
     @Override
     public void updateDevNickNameFail() {
-        ToastUtil.getInstance().showShort(getString(R.string.update_nickname_fail));
+        ToastUtils.showShort(getString(R.string.update_nickname_fail));
     }
 
     @Override
@@ -347,7 +347,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
-        ToastUtil.getInstance().showShort("获取失败");
+        ToastUtils.showShort("获取失败");
 
     }
 
@@ -359,7 +359,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
-        ToastUtil.getInstance().showShort("获取失败");
+        ToastUtils.showShort("获取失败");
         LogUtils.d("获取音量异常   " + throwable.getMessage());
     }
 
@@ -383,7 +383,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         //设置失败
         loadingDialog.dismiss();
         rlSilentMode.setEnabled(true);
-        ToastUtil.getInstance().showShort(getString(R.string.set_failed));
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override
@@ -413,7 +413,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             deleteDialog.dismiss();
         }
         //删除失败
-        ToastUtil.getInstance().showShort(getString(R.string.delete_fialed));
+        ToastUtils.showShort(getString(R.string.delete_fialed));
     }
 
     @Override
@@ -421,7 +421,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (deleteDialog != null) {
             deleteDialog.dismiss();
         }
-        ToastUtil.getInstance().showShort(getString(R.string.delete_fialed));
+        ToastUtils.showShort(getString(R.string.delete_fialed));
         LogUtils.d("删除异常   " + throwable.getMessage());
     }
 
@@ -444,9 +444,9 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             loadingDialog.dismiss();
         }
         if ("405".equals(code)) {
-            ToastUtil.getInstance().showShort(R.string.the_lock_no_support_func);
+            ToastUtils.showShort(R.string.the_lock_no_support_func);
         } else {
-            ToastUtil.getInstance().showShort(R.string.set_failed);
+            ToastUtils.showShort(R.string.set_failed);
         }
     }
 
@@ -455,7 +455,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
-        ToastUtil.getInstance().showShort(R.string.set_failed);
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
@@ -480,7 +480,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             getAutoLockSuccess = true;
         } else {
             getAutoLockSuccess = false;
-            ToastUtil.getInstance().showShort("获取失败");
+            ToastUtils.showShort("获取失败");
         }
 
     }
@@ -490,7 +490,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         loadingDialog.dismiss();
         getAutoLockSuccess = false;
         flagAM = true;
-        ToastUtil.getInstance().showShort("获取失败");
+        ToastUtils.showShort("获取失败");
     }
 
     @Override

@@ -28,7 +28,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.manager.GatewayLockPasswordManager;
 
 import java.util.ArrayList;
@@ -292,7 +292,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
             loadingDialog.dismiss();
         }
         //passwordPageChange(false);
-        ToastUtil.getInstance().showShort(getString(R.string.get_lock_info_fail));
+        ToastUtils.showShort(getString(R.string.get_lock_info_fail));
         LogUtils.d("获取到锁信息失败   ");
     }
 
@@ -302,7 +302,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
             loadingDialog.dismiss();
         }
         //passwordPageChange(false);
-        ToastUtil.getInstance().showShort(getString(R.string.get_lock_info_fail));
+        ToastUtils.showShort(getString(R.string.get_lock_info_fail));
         LogUtils.d("获取到锁信息异常   " + throwable.getMessage());
     }
 
@@ -312,7 +312,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
             loadingDialog.dismiss();
         }
         if(passwordPlanBeans==null){
-            ToastUtil.getInstance().showLong(getString(R.string.pwd_list_null));
+            ToastUtils.showLong(getString(R.string.pwd_list_null));
             return;
         }
         SPUtils.put(KeyConstants.FIRST_IN_GATEWAY_LOCK + userId + deviceId, 1);
@@ -337,7 +337,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     public void syncPasswordFailed(Throwable throwable) {
         LogUtils.d("获取开锁密码异常   " + throwable.getMessage());
         loadingDialog.dismiss();
-        ToastUtil.getInstance().showShort(R.string.get_lock_pwd_list_fail);
+        ToastUtils.showShort(R.string.get_lock_pwd_list_fail);
         passwordPageChange(false);
     }
 
@@ -370,7 +370,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     @Override
     public void onLoadPasswordPlanFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.synv_failed);
+        ToastUtils.showLong(R.string.synv_failed);
 
     }
 

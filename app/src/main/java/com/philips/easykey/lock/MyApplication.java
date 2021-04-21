@@ -44,7 +44,7 @@ import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import com.philips.easykey.lock.utils.greenDao.db.ClothesHangerMachineAllBeanDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoManager;
@@ -131,11 +131,10 @@ public class MyApplication extends Application {
         MyLog.getInstance().init(this);
         LogUtils.d("attachView  App启动 ");
         instance = this;
-        CrashReport.initCrashReport(getApplicationContext(), "3ac95f5a71", true);
+//        CrashReport.initCrashReport(getApplicationContext(), "3ac95f5a71", true);
         initBleService();
         initMqttService();//启动MqttService
         initMMKV(this);
-        ToastUtil.init(this); //初始化ToastUtil 传递Context进去  不需要每次都传递
         initTokenAndUid();  //获取本地UUID
         listenerAppBackOrForge();
         //扫描二维码初始化
@@ -386,7 +385,7 @@ public class MyApplication extends Application {
                     intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
                     activity.startActivity(intent);
                     /*if (isShowDialog) {  //
-                        ToastUtil.getInstance().showShort(R.string.token_invalid_relogin_please);
+                        ToastUtils.showShort(R.string.token_invalid_relogin_please);
                     }*/
                 }
                 activity.finish();

@@ -133,7 +133,7 @@ public class WifiLockMessagePushActivity extends BaseActivity<IWifiLockMoreView,
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-//                    ToastUtil.getInstance().showShort(getString(R.string.modify_success));
+//                    ToastUtils.showShort(getString(R.string.modify_success));
                     if(status == 2){
                         ivMessageFree.setSelected(true);
                     }else {
@@ -151,7 +151,7 @@ public class WifiLockMessagePushActivity extends BaseActivity<IWifiLockMoreView,
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtil.getInstance().showShort(getString(R.string.modify_failed));
+                    ToastUtils.showShort(getString(R.string.modify_failed));
                 }
             });
         }*/

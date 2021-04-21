@@ -24,7 +24,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockRecord;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockRecordDao;
@@ -217,7 +217,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
         }
-        ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.get_open_lock_record_fail);
         changeView(false);
     }
 
@@ -228,7 +228,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             refreshLayout.finishLoadMore();
         }
         LogUtils.d("获取开锁记录异常  网关锁");
-        ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.get_open_lock_record_fail);
         changeView(false);
     }
 

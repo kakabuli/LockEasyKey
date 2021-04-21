@@ -18,7 +18,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.db.BleLockServiceInfoDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import java.util.concurrent.TimeUnit;

@@ -32,7 +32,7 @@ import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.ILoginView;
 
 import butterknife.BindView;
@@ -240,7 +240,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
                 return;
             }
             if (StringUtil.judgeSpecialCharacter(pwd)) {
-                ToastUtil.getInstance().showShort(R.string.not_input_special_symbol);
+                ToastUtils.showShort(R.string.not_input_special_symbol);
                 return;
             }
             if (StringUtil.isNumeric(phone)) {
@@ -276,7 +276,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
             }
 
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 
@@ -317,7 +317,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
     public void onLoginFailed(Throwable e) {
         btnLogin.setBackgroundResource(R.drawable.login_button_shape);
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 
     @Override
@@ -335,7 +335,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
             }
         }else {
-            ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+            ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
         }
     }
 

@@ -19,7 +19,7 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,7 +72,7 @@ public class AddGatewayLockShareActivity extends BaseAddToApplicationActivity im
 
                 if (myPhone != null) {
                     if (myPhone.equals(phone)) {
-                        ToastUtil.getInstance().showShort(R.string.no_add_my);
+                        ToastUtils.showShort(R.string.no_add_my);
                         return;
                     }
                 }
@@ -105,7 +105,7 @@ public class AddGatewayLockShareActivity extends BaseAddToApplicationActivity im
                     }
 
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.noNet);
+                    ToastUtils.showShort(R.string.noNet);
                 }
 
                 break;

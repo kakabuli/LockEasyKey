@@ -42,7 +42,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.TimeUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -239,14 +239,14 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
                 break;
             case R.id.btn_confirm_generation:
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtil.getInstance().showShort(R.string.please_have_net_add_pwd);
+                    ToastUtils.showShort(R.string.please_have_net_add_pwd);
                     return;
                 }
                 String strPassword = etPassword.getText().toString().trim();
                 String nickName = etName.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {
@@ -272,24 +272,24 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
                     return;
                 }
                 if (TextUtils.isEmpty(nickName)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_not_empty);
+                    ToastUtils.showShort(R.string.nickname_not_empty);
                     return;
                 }
 
                 if (TextUtils.isEmpty(strStart)) {
-                    ToastUtil.getInstance().showShort(R.string.select_start_time);
+                    ToastUtils.showShort(R.string.select_start_time);
                     return;
                 }
                 if (TextUtils.isEmpty(strEnd)) {
-                    ToastUtil.getInstance().showShort(R.string.select_end_time);
+                    ToastUtils.showShort(R.string.select_end_time);
                     return;
                 }
                 if (DateFormatUtils.hourMinuteChangeMillisecond(strEnd) <= DateFormatUtils.hourMinuteChangeMillisecond(strStart)) {
-                    ToastUtil.getInstance().showShort(R.string.end_time_great_start_time);
+                    ToastUtils.showShort(R.string.end_time_great_start_time);
                     return;
                 }
                 if (TextUtils.isEmpty(weekRule)) {
-                    ToastUtil.getInstance().showShort(R.string.select_repeat_rule);
+                    ToastUtils.showShort(R.string.select_repeat_rule);
                     return;
                 }
                 if (mPresenter.isAuth(bleLockInfo, true)) {
@@ -412,7 +412,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
 
     @Override
     public void onSetPasswordFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(R.string.set_failed);
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
@@ -422,7 +422,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
 
     @Override
     public void setWeekPlanFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(R.string.set_failed);
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
@@ -432,7 +432,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
 
     @Override
     public void setUserTypeFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(R.string.set_failed);
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
@@ -454,14 +454,14 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
 
     @Override
     public void onUploadPwdFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(R.string.lock_set_success_please_sync);
         startActivity(new Intent(getContext(), BlePasswordManagerActivity.class));
         getActivity().finish();
     }
 
     @Override
     public void onUploadPwdFailedServer(BaseResult result) {
-        ToastUtil.getInstance().showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(R.string.lock_set_success_please_sync);
         startActivity(new Intent(getContext(), BlePasswordManagerActivity.class));
         getActivity().finish();
     }
@@ -469,12 +469,12 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
     @Override
     public void onSyncPasswordFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.set_failed));
+        ToastUtils.showLong(getString(R.string.set_failed));
     }
 
     @Override
     public void onTimePwdFull() {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.only_0to4);
+        ToastUtils.showLong(R.string.only_0to4);
     }
 }

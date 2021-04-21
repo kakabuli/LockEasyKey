@@ -17,7 +17,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
@@ -222,11 +222,11 @@ public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesH
 
     @Override
     public void onBindDeviceFailed() {
-        ToastUtil.getInstance().showLong(R.string.network_exception);
+        ToastUtils.showLong(R.string.network_exception);
     }
 
     @Override
     public void onBindDeviceFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(getString(R.string.bind_failed) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.bind_failed) + HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 }

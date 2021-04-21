@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureActivity;
 
 import butterknife.BindView;
@@ -58,11 +58,11 @@ public class ProductActivationScanActivity extends CaptureActivity {
             int i=checkSelfPermission(Manifest.permission.CAMERA);
             if (i==-1){
                 if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
-                    ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
                     finish();
                     return;
                 }else{
-                    ToastUtil.getInstance().showShort(getString(R.string.inquire_camera_permission));
+                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
                     finish();
                     return;
                 }
@@ -71,7 +71,7 @@ public class ProductActivationScanActivity extends CaptureActivity {
         //版本为22 5.1
         if (Build.VERSION.SDK_INT==Build.VERSION_CODES.LOLLIPOP_MR1){
             if (!isCameraCanUse()){
-                ToastUtil.getInstance().showShort(getString(R.string.ban_camera_permission));
+                ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
             }
@@ -177,7 +177,7 @@ public class ProductActivationScanActivity extends CaptureActivity {
 
         @Override
         public void onAnalyzeFailed() {
-            ToastUtil.getInstance().showShort(getString(R.string.bar_code_scan_qr_failed));
+            ToastUtils.showShort(getString(R.string.bar_code_scan_qr_failed));
         }
     };*/
 }

@@ -16,7 +16,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +79,7 @@ public class GatewayFingerprintManagerDetailActivity extends BaseAddToApplicatio
                         }
                     });
                 } else {
-                    ToastUtil.getInstance().showLong(R.string.network_exception);
+                    ToastUtils.showLong(R.string.network_exception);
                 }
                 break;
             case R.id.iv_editor:
@@ -106,12 +106,12 @@ public class GatewayFingerprintManagerDetailActivity extends BaseAddToApplicatio
                     public void onClick(View v) {
                         String name = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(name)) {
-                            ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(R.string.nickname_verify_error);
                             return;
                         }
                         //TODO 获取到指纹判断
                        /* if (StringUtil.judgeNicknameWhetherSame(fingerprint.getNickName(),name)){
-                            ToastUtil.getInstance().showShort(R.string.nickname_not_modify);
+                            ToastUtils.showShort(R.string.nickname_not_modify);
                             alertDialog.dismiss();
                             return;
                         }*/

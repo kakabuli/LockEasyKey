@@ -28,7 +28,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.ISystemSettingView;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
@@ -138,7 +138,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
             @Override
             public void right() {
                 //清除缓存数据，关闭会话。
-                ToastUtil.getInstance().showShort(R.string.delete_cache_data_success);
+                ToastUtils.showShort(R.string.delete_cache_data_success);
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -191,14 +191,14 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
     @Override
     public void onLoginOutFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.logout_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
         LogUtils.d("退出失败  " + throwable.getMessage());
     }
 
     @Override
     public void onLoginOutFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
         LogUtils.d("退出失败  " + result.getMsg());
     }
 
@@ -214,7 +214,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
 //        if (updateFalg == true) {
 //            appUpdateDialog();
 //        } else {
-//            ToastUtil.getInstance().showShort(R.string.new_version);
+//            ToastUtils.showShort(R.string.new_version);
 //        }
         upgradePresenter.getUpgreadJson(new UpgradePresenter.IUpgradePresenter() {
             @Override
@@ -235,7 +235,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
                                   SelectMarket(isForced,upgradeBean);
 
                             }else {
-                                ToastUtil.getInstance().showShort(R.string.new_version);
+                                ToastUtils.showShort(R.string.new_version);
                             }
                       //  }
                         Log.e(GeTui.VideoLog,"currentCode:"+cuurentversioncode+" servercode:"+upgradeBean.getVersionCode());
@@ -248,14 +248,14 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
 
                 }else {
                     Log.e(GeTui.VideoLog,"update.....获取数据为null");
-                    ToastUtil.getInstance().showShort(R.string.get_version_code_fail);
+                    ToastUtils.showShort(R.string.get_version_code_fail);
                 }
             }
 
             @Override
             public void ShowUpgradePresenterFail() {
                 Log.e(GeTui.VideoLog,"update.....fail.......失败");
-                ToastUtil.getInstance().showShort(R.string.get_version_code_fail);
+                ToastUtils.showShort(R.string.get_version_code_fail);
             }
         });
     }

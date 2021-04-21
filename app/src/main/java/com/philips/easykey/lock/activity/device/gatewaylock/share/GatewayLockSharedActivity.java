@@ -27,7 +27,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -197,7 +197,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
                         });
                     }
                 }else {
-                    ToastUtil.getInstance().showShort(R.string.query_fail_requery);
+                    ToastUtils.showShort(R.string.query_fail_requery);
                 }
                 break;
 
@@ -237,17 +237,17 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
         if (gatewayId!=null&&deviceId!=null&&uid!=null){
             mPresenter.getShareDeviceUser(gatewayId,deviceId,uid);
         }
-        ToastUtil.getInstance().showShort(R.string.add_common_user_success);
+        ToastUtils.showShort(R.string.add_common_user_success);
     }
 
     @Override
     public void shareDeviceFail() {
-        ToastUtil.getInstance().showShort(R.string.add_common_user_fail);
+        ToastUtils.showShort(R.string.add_common_user_fail);
     }
 
     @Override
     public void shareDeviceThrowable() {
-        ToastUtil.getInstance().showShort(R.string.add_common_user_fail);
+        ToastUtils.showShort(R.string.add_common_user_fail);
     }
 
     @Override
@@ -273,7 +273,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
             refreshLayout.finishRefresh();
         }
         pageChange(true);
-        ToastUtil.getInstance().showShort(R.string.get_share_user_fail);
+        ToastUtils.showShort(R.string.get_share_user_fail);
     }
 
     @Override
@@ -282,7 +282,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
             refreshLayout.finishRefresh();
         }
         pageChange(true);
-        ToastUtil.getInstance().showShort(R.string.get_share_user_fail);
+        ToastUtils.showShort(R.string.get_share_user_fail);
     }
 
     @Override

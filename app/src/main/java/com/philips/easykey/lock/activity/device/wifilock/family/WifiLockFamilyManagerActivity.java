@@ -25,7 +25,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -122,7 +122,7 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
         if (NetUtil.isNetworkAvailable()) {
             mPresenter.queryUserList(wifiSn);
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 
@@ -208,7 +208,7 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
         querySuccess = false;
         //刷新完成
         refreshLayout.finishRefresh();
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 
     @Override
@@ -216,6 +216,6 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
         querySuccess = false;
         //刷新完成
         refreshLayout.finishRefresh();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 }
