@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 
 import java.io.UnsupportedEncodingException;
