@@ -15,8 +15,6 @@ import com.philips.easykey.lock.publiclibrary.ble.responsebean.ReadInfoBean;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
-import com.philips.easykey.lock.publiclibrary.http.temp.ILockService;
-import com.philips.easykey.lock.publiclibrary.http.temp.postbean.CheckBind;
 import com.philips.easykey.lock.publiclibrary.http.temp.resultbean.CheckBindResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.OtherException;
