@@ -24,7 +24,7 @@ import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockBaseInfo;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockBaseInfoDao;
@@ -139,13 +139,13 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
                         name = editText.getText().toString().trim();
                         //todo 判断名称是否修改
                         if (TextUtils.isEmpty(name)) {
-                            ToastUtil.getInstance().showShort(getString(R.string.device_name_cannot_be_empty));
+                            ToastUtils.showShort(getString(R.string.device_name_cannot_be_empty));
                             return;
                         }
 
                         if (deviceNickname != null) {
                             if (deviceNickname.equals(name)) {
-                                ToastUtil.getInstance().showShort(getString(R.string.device_nick_name_no_update));
+                                ToastUtils.showShort(getString(R.string.device_nick_name_no_update));
                                 alertDialog.dismiss();
                                 return;
                             }
@@ -237,13 +237,13 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
     @Override
     public void getLcokInfoFail() {
         loadingDialog.dismiss();
-        ToastUtil.getInstance().showShort(R.string.get_lock_info_fail);
+        ToastUtils.showShort(R.string.get_lock_info_fail);
     }
 
     @Override
     public void getLockInfoThrowable(Throwable throwable) {
         loadingDialog.dismiss();
-        ToastUtil.getInstance().showShort(R.string.get_lock_info_fail);
+        ToastUtils.showShort(R.string.get_lock_info_fail);
         LogUtils.d("获取锁信息出现异常    " + throwable.getMessage());
     }
 
@@ -256,19 +256,19 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
         intent.putExtra(KeyConstants.DEVICE_NICKNAME, name);
         //设置返回数据
         setResult(RESULT_OK, intent);
-        //    ToastUtil.getInstance().showShort(getString(R.string.update_nick_name));
+        //    ToastUtils.showShort(getString(R.string.update_nick_name));
         Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nick_name), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void updateDevNickNameFail() {
-        //  ToastUtil.getInstance().showShort(getString(R.string.update_nickname_fail));
+        //  ToastUtils.showShort(getString(R.string.update_nickname_fail));
         Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nickname_fail), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void updateDevNickNameThrowable(Throwable throwable) {
-        // ToastUtil.getInstance().showShort(getString(R.string.update_nickname_exception));
+        // ToastUtils.showShort(getString(R.string.update_nickname_exception));
         Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nickname_exception), Toast.LENGTH_SHORT).show();
     }
 

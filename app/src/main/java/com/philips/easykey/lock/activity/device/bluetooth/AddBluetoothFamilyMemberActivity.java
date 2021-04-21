@@ -20,7 +20,7 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,13 +62,13 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
 
                 if (myPhone != null) {
                     if (myPhone.equals(phone)) {
-                        ToastUtil.getInstance().showShort(R.string.no_add_my);
+                        ToastUtils.showShort(R.string.no_add_my);
                         return;
                     }
                 }
                 if (NetUtil.isNetworkAvailable()) {
                     if (TextUtils.isEmpty(phone)) {
-//                ToastUtil.getInstance().showShort(R.string.input_telephone_or_rmail);
+//                ToastUtils.showShort(R.string.input_telephone_or_rmail);
                         AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
                         return;
                     }
@@ -87,7 +87,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                         }
                     } else {
                         if (!DetectionEmailPhone.isEmail(phone)) {
-//                    ToastUtil.getInstance().showShort(R.string.email_not_right);
+//                    ToastUtils.showShort(R.string.email_not_right);
                             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                             return;
                         } else {
@@ -99,7 +99,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                     }
 
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.noNet);
+                    ToastUtils.showShort(R.string.noNet);
                 }
 
                 break;

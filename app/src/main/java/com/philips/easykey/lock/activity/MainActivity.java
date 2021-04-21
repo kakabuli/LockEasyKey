@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -31,6 +32,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -61,7 +63,7 @@ import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
@@ -125,7 +127,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         ButterKnife.bind(this);
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
         isRunning = true;
-        ToastUtil.init(this); //初始化ToastUtil 传递Context进去  不需要每次都传递
         EventBus.getDefault().register(this);
         rg.setOnCheckedChangeListener(this);
         MqttService mqttService = MyApplication.getInstance().getMqttService();
@@ -221,6 +222,11 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         LogUtils.d("MainActivity启动完成 ");
 
         checkNotificatoinEnabled();
+    }
+
+    @Override
+    public Resources getResources() {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
     }
 
     private void checkNotificatoinEnabled() {
@@ -498,7 +504,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     @Override
     public void onWarringUp(String warringContent) {
         Toast.makeText(this, warringContent, Toast.LENGTH_LONG).show();
-//        ToastUtil.getInstance().showLong(warringContent);
+//        ToastUtils.showLong(warringContent);
     }
 
     @Override
@@ -531,23 +537,23 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 switch (alarmCode) {
                     case 0:    //门锁堵转报警
                         str = String.format(getString(R.string.lock_blocked_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                     case 1:
                         str = String.format(getString(R.string.lock_resect_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                     case 4:
                         str = String.format(getString(R.string.lock_system_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                     case 6:
                         str = String.format(getString(R.string.lock_pick_proof_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                     case 9:
                         str = String.format(getString(R.string.lock_stress_alarm_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                 }
                 //电量
@@ -555,7 +561,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 switch (alarmCode) {
                     case 16:
                         str = String.format(getString(R.string.low_power_notify), nickName);
-                        ToastUtil.getInstance().showShort(str);
+                        ToastUtils.showShort(str);
                         break;
                 }
             }
@@ -574,7 +580,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     @Override
     public void gatewayResetSuccess(String gatewayId) {
-        ToastUtil.getInstance().showShort(gatewayId + "网关:" + getString(R.string.gateway_reset_unbind));
+        ToastUtils.showShort(gatewayId + "网关:" + getString(R.string.gateway_reset_unbind));
     }
 
     @Override
@@ -832,7 +838,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){//同意授权
 
                 }else {
-                    ToastUtil.getInstance().showShort("请先获取麦克风权限");
+                    ToastUtils.showShort("请先获取麦克风权限");
                 }
                 break;
         }

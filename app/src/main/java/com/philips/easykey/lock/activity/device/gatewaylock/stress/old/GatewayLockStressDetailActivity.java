@@ -30,7 +30,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockPwd;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockPwdDao;
@@ -190,10 +190,10 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
                 break;
             case R.id.ll_add_password:
                 if (isAddLockPwd == 0) {
-                    ToastUtil.getInstance().showShort(R.string.be_beging_get_lock_pwd_no_add_pwd);
+                    ToastUtils.showShort(R.string.be_beging_get_lock_pwd_no_add_pwd);
                     return;
                 } else if (isAddLockPwd == 1) {
-                    ToastUtil.getInstance().showShort(R.string.get_lock_pwd_throwable);
+                    ToastUtils.showShort(R.string.get_lock_pwd_throwable);
                     return;
                 } else if (isAddLockPwd == 2) {
                     if (pwdList.size() < 1) {
@@ -269,7 +269,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         }else{
             passwordPageChange(false);
         }
-        ToastUtil.getInstance().showShort(R.string.get_stress_list_success);
+        ToastUtils.showShort(R.string.get_stress_list_success);
     }
 
     @Override
@@ -287,7 +287,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         }else{
             passwordPageChange(false);
         }
-        ToastUtil.getInstance().showShort(R.string.get_stress_list_success_no);
+        ToastUtils.showShort(R.string.get_stress_list_success_no);
     }
 
     @Override
@@ -298,7 +298,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         isAddLockPwd = 1;
         passwordPageChange(false);
         //获取失败
-        ToastUtil.getInstance().showShort(R.string.get_stress_list_fail);
+        ToastUtils.showShort(R.string.get_stress_list_fail);
 
     }
 
@@ -309,7 +309,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         }
         isAddLockPwd = 1;
         //获取异常
-        ToastUtil.getInstance().showShort(R.string.get_stress_list_fail);
+        ToastUtils.showShort(R.string.get_stress_list_fail);
         passwordPageChange(false);
         LogUtils.d("获取胁迫密码异常   " + throwable.getMessage());
     }

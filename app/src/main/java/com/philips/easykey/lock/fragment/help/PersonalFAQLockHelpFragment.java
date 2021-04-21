@@ -20,7 +20,7 @@ import com.philips.easykey.lock.mvp.view.personalview.IPersonalFAQView;
 import com.philips.easykey.lock.publiclibrary.http.result.GetFAQResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -77,7 +77,7 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
                 //todo 国际化的时候记得传入此时的语言类型
                 mPresenter.getFAQList(1);
             } else {
-                ToastUtil.getInstance().showShort(R.string.noNet);
+                ToastUtils.showShort(R.string.noNet);
             }
         }
     }
@@ -95,7 +95,7 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
                     //todo 国际化的时候记得传入此时的语言类型
                     mPresenter.getFAQList(1);
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.noNet);
+                    ToastUtils.showShort(R.string.noNet);
                 }
                 refreshLayout.finishRefresh(2000);
             }
@@ -130,12 +130,12 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
 
     @Override
     public void getFAQError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(getActivity(), throwable));
     }
 
     @Override
     public void getFAQFail(GetFAQResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(getActivity(), baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(getActivity(), baseResult.getCode()));
     }
 
     private void getData(List<GetFAQResult.DataBean> dataBeans) {

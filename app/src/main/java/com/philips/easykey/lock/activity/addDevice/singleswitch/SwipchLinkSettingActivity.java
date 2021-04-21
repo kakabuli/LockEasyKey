@@ -30,7 +30,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.TimeUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView{
     // 1 表示全天
@@ -143,7 +143,7 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
          case R.id.btn_next:
              if (!NetUtil.isNetworkAvailable()) {
-                 ToastUtil.getInstance().showShort(R.string.please_have_net_add_pwd);
+                 ToastUtils.showShort(R.string.please_have_net_add_pwd);
                  return;
              }
              // 非全天
@@ -164,11 +164,11 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
                                  public void afterTextChanged(String toString) {
                                  }
                              }).show();
-                //     ToastUtil.getInstance().showShort(R.string.select_start_time);
+                //     ToastUtils.showShort(R.string.select_start_time);
                      return;
                  }
                  if (TextUtils.isEmpty(strEnd)) {
-                  //   ToastUtil.getInstance().showShort(R.string.select_end_time);
+                  //   ToastUtils.showShort(R.string.select_end_time);
                      AlertDialogUtil.getInstance().singleButtonNoTitleDialogNoLine(this, getString(R.string.swipch_link_setting_end_no),
                              getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {
                                  @Override
@@ -187,7 +187,7 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
                      return;
                  }
                  if (DateFormatUtils.hourMinuteChangeMillisecond(strEnd) <= DateFormatUtils.hourMinuteChangeMillisecond(strStart)) {
-                   //  ToastUtil.getInstance().showShort(R.string.end_time_great_start_time);
+                   //  ToastUtils.showShort(R.string.end_time_great_start_time);
 
                      AlertDialogUtil.getInstance().singleButtonNoTitleDialogNoLine(this, getString(R.string.swipch_link_setting_start_dayu_end),
                              getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {

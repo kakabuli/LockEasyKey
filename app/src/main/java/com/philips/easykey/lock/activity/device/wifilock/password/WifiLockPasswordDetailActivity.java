@@ -24,7 +24,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -211,11 +211,11 @@ public class WifiLockPasswordDetailActivity extends BaseActivity<IWifiLockNickNa
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(R.string.nickname_verify_error);
                     return;
                 }
                 if (StringUtil.judgeNicknameWhetherSame(nickName, name)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_not_modify);
+                    ToastUtils.showShort(R.string.nickname_not_modify);
                     alertDialog.dismiss();
                     return;
                 }
@@ -230,7 +230,7 @@ public class WifiLockPasswordDetailActivity extends BaseActivity<IWifiLockNickNa
     @Override
     public void onUpdateNickSuccess() {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.modify_success);
+        ToastUtils.showLong(R.string.modify_success);
         setResult(RESULT_OK);
         finish();
     }
@@ -238,12 +238,12 @@ public class WifiLockPasswordDetailActivity extends BaseActivity<IWifiLockNickNa
     @Override
     public void onUpdateNickFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.modify_failed);
+        ToastUtils.showLong(R.string.modify_failed);
     }
 
     @Override
     public void onUpdateNickFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.modify_failed);
+        ToastUtils.showLong(R.string.modify_failed);
     }
 }

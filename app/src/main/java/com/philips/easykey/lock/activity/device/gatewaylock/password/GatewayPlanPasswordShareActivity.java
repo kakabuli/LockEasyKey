@@ -20,7 +20,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SharedUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 
 import java.util.Arrays;
@@ -185,7 +185,7 @@ public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockP
                 if (SharedUtil.isWeixinAvilible(this)) {
                     SharedUtil.getInstance().sendWeiXin(message);
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.telephone_not_install_wechat);
+                    ToastUtils.showShort(R.string.telephone_not_install_wechat);
                 }
                 break;
             case R.id.tv_copy:
@@ -270,13 +270,13 @@ public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockP
     @Override
     public void deletePasswordSuccess() {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.delete_success));
+        ToastUtils.showLong(getString(R.string.delete_success));
     }
 
     @Override
     public void deletePasswordFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.delete_fialed));
+        ToastUtils.showLong(getString(R.string.delete_fialed));
     }
 
     @Override

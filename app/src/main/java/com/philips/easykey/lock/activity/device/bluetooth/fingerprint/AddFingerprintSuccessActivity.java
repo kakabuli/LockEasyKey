@@ -28,7 +28,7 @@ import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 import java.util.ArrayList;
@@ -112,7 +112,7 @@ public class AddFingerprintSuccessActivity extends BaseActivity<IAddFingerSucces
             case R.id.btn_save:
                 String strFingerprintName = etFingerprintName.getText().toString();
                 if (!StringUtil.nicknameJudge(strFingerprintName)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(R.string.nickname_verify_error);
                     return;
                 }
                 showLoading(getString(R.string.is_savving));
@@ -166,12 +166,12 @@ public class AddFingerprintSuccessActivity extends BaseActivity<IAddFingerSucces
     @Override
     public void onUploadFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.save_failed);
+        ToastUtils.showLong(R.string.save_failed);
     }
 
     @Override
     public void onUploadFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.save_failed);
+        ToastUtils.showLong(R.string.save_failed);
     }
 }

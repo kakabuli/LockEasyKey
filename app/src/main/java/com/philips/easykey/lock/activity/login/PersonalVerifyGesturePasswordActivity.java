@@ -16,7 +16,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 import com.philips.easykey.lock.utils.handPwdUtil.GestureContentView;
@@ -113,7 +113,7 @@ public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationA
     public void onBackPressed() {
         if (System.currentTimeMillis() - lastClickBackTime > 2000) {
             lastClickBackTime = System.currentTimeMillis();
-            ToastUtil.getInstance().showLong(R.string.exit);
+            ToastUtils.showLong(R.string.exit);
         } else {
             System.exit(0);
         }

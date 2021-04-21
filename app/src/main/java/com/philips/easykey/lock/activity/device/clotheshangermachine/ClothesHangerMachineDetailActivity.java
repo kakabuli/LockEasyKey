@@ -251,7 +251,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     public void onDeleteDeviceThrowable(Throwable throwable) {
         LogUtils.d("删除失败   " + throwable.getMessage());
        showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
-//        ToastUtil.getInstance().showLong(R.string.delete_fialed);
+//        ToastUtils.showLong(R.string.delete_fialed);
         hiddenLoading();
     }
 }

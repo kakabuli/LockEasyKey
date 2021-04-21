@@ -36,7 +36,7 @@ import com.philips.easykey.lock.publiclibrary.ble.responsebean.ReadInfoBean;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -180,7 +180,7 @@ public class BleService extends Service {
         if (bluetoothAdapter == null) {
             //不支持
             //设备不支持蓝牙    此种情况很少出现
-            ToastUtil.getInstance().showLong(R.string.device_no_support_ble);
+            ToastUtils.showLong(R.string.device_no_support_ble);
             return;
         }
 

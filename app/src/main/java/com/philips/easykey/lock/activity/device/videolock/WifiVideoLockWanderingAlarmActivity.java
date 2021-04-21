@@ -23,7 +23,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -465,12 +465,12 @@ public class WifiVideoLockWanderingAlarmActivity extends BaseActivity<IWifiVideo
                 @Override
                 public void run() {
                     if(flag){
-                        ToastUtil.getInstance().showLong(getString(R.string.modify_success));
+                        ToastUtils.showLong(getString(R.string.modify_success));
                         Intent intent = new Intent();
                         intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_WANDERING_ALARM,stayStatus);
                         setResult(RESULT_OK,intent);
                     }else{
-                        ToastUtil.getInstance().showLong(getString(R.string.modify_failed));
+                        ToastUtils.showLong(getString(R.string.modify_failed));
                     }
                     finish();
                 }

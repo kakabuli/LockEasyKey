@@ -37,7 +37,7 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.p6.OTAFirmwareUpdate.OTAFU
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.CircleProgress;
 import com.philips.easykey.lock.widget.OtaMutiProgress;
 import com.liulishuo.filedownloader.BaseDownloadTask;
@@ -264,7 +264,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
     @Override
     public void onBackPressed() {
         if (isUpdating){
-            ToastUtil.getInstance().showLong(R.string.isupdating_can_not_back);
+            ToastUtils.showLong(R.string.isupdating_can_not_back);
         }else {
             finish();
         }
@@ -275,7 +275,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         switch (view.getId()) {
             case R.id.iv_back:
                 if (isUpdating){
-                   ToastUtil.getInstance().showLong(R.string.isupdating_can_not_back);
+                   ToastUtils.showLong(R.string.isupdating_can_not_back);
                 }else {
                     finish();
                 }
@@ -286,7 +286,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                 break;
             case R.id.start_upgrade:
                 if (isUpdating){
-                    ToastUtil.getInstance().showLong(R.string.isupdating_can_not_back);
+                    ToastUtils.showLong(R.string.isupdating_can_not_back);
                     break;
                 }
                 isUpdating = true;
@@ -345,7 +345,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
                         LogUtils.d("下载出错  " + e.getMessage());
-                        ToastUtil.getInstance().showLong(R.string.down_failed);
+                        ToastUtils.showLong(R.string.down_failed);
                         mutiProgress.setCurrNodeNO(0, false);
                         mCircleProgress2.setValue(0);
                         otaFailed("下载出错   "+e.getMessage());
@@ -440,7 +440,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!defaultAdapter.isEnabled()){
             LogUtils.d("蓝牙未打开");
-            ToastUtil.getInstance().showLong(R.string.please_open_ble);
+            ToastUtils.showLong(R.string.please_open_ble);
             if (isUpdating){
                 finish();
             }
@@ -450,7 +450,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
 
         if (!GpsUtil.isOPen(this)){
             isUpdating = false;
-            ToastUtil.getInstance().showLong(getString(R.string.check_phone_not_open_gps_please_open));
+            ToastUtils.showLong(getString(R.string.check_phone_not_open_gps_please_open));
             return;
         }
         LogUtils.d("OTA  升级  断开连接");
@@ -466,7 +466,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         @Override
         public void run() {
             bluetoothLeScanner.stopScan(newScanBleCallback);
-            ToastUtil.getInstance().showLong(R.string.please_near_lock);
+            ToastUtils.showLong(R.string.please_near_lock);
             otaFailed("设备未搜索到   ");
         }
     };

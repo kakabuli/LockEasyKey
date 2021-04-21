@@ -17,7 +17,7 @@ import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockDe
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockDeleteStressPasswordView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,7 +130,7 @@ public class GatewayLockStressDeleteActivity extends BaseActivity<IGatewayLockDe
             alertDialog.dismiss();
         }
         //删除异常
-        ToastUtil.getInstance().showShort(getString(R.string.delete_fialed));
+        ToastUtils.showShort(getString(R.string.delete_fialed));
 
     }
 }

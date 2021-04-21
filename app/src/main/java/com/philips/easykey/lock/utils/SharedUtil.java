@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -100,7 +101,7 @@ public class SharedUtil {
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData mClipData = ClipData.newPlainText("Label", text);
         cm.setPrimaryClip(mClipData);
-        ToastUtil.getInstance().showShort(R.string.copy_success);
+        ToastUtils.showShort(R.string.copy_success);
     }
     /**
      * 拨打电话

@@ -56,7 +56,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.BleLockServiceInfo;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import com.philips.easykey.lock.utils.greenDao.bean.DevicePower;
@@ -275,12 +275,12 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                                             startActivity(intent);
                                         }
                                     } else {
-                                        ToastUtil.getInstance().showLong(R.string.lock_info_not_push);
+                                        ToastUtils.showLong(R.string.lock_info_not_push);
                                     }
                                     break;
                             }
                         } else {
-                            ToastUtil.getInstance().showShort(R.string.please_refresh_page_get_newdata);
+                            ToastUtils.showShort(R.string.please_refresh_page_get_newdata);
                         }
                     }
                 }
@@ -466,7 +466,7 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                         deviceDetailAdapter.notifyDataSetChanged();
                     }
                 } else {
-                    ToastUtil.getInstance().showShort(getString(R.string.network_exception));
+                    ToastUtils.showShort(getString(R.string.network_exception));
                     refreshLayout.finishRefresh();
                 }
 
@@ -518,14 +518,14 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
     public void deviceDataRefreshFail() {
         LogUtils.d("刷新页面失败");
         refresh.finishRefresh();
-        ToastUtil.getInstance().showShort(R.string.refresh_data_fail);
+        ToastUtils.showShort(R.string.refresh_data_fail);
     }
 
     @Override
     public void deviceDataRefreshThrowable(Throwable throwable) {
         //刷新页面异常
         refresh.finishRefresh();
-        ToastUtil.getInstance().showShort(R.string.refresh_data_fail);
+        ToastUtils.showShort(R.string.refresh_data_fail);
         LogUtils.d("刷新页面异常");
     }
 
@@ -665,7 +665,7 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                 if (mqttService != null && mqttService.getMqttClient() != null && !mqttService.getMqttClient().isConnected()) {
                     LogUtils.d("重连次数" + mqttService.reconnectionNum);
                     if (mqttService.reconnectionNum == 0) {
-                        ToastUtil.getInstance().showShort(getString(R.string.mqtt_already_disconnect_refresh));
+                        ToastUtils.showShort(getString(R.string.mqtt_already_disconnect_refresh));
                     }
                 }
                 if (deviceDetailAdapter != null) {

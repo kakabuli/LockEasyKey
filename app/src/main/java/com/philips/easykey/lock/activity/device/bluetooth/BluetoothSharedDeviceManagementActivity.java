@@ -27,7 +27,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.IBluetoothSharedDeviceManagementView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -126,7 +126,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
             if (NetUtil.isNetworkAvailable()) {
                 mPresenter.queryUserList(MyApplication.getInstance().getUid(), bleLockInfo.getServerLockInfo().getLockName());
             } else {
-                ToastUtil.getInstance().showShort(R.string.noNet);
+                ToastUtils.showShort(R.string.noNet);
             }
 
         }
@@ -177,7 +177,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
                     }
 
                 } else {
-                    ToastUtil.getInstance().showShort(R.string.query_fail_requery);
+                    ToastUtils.showShort(R.string.query_fail_requery);
                 }
                 break;
 
@@ -210,7 +210,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
         querySuccess = false;
         //刷新完成
         refreshLayout.finishRefresh();
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, bluetoothSharedDeviceBean.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, bluetoothSharedDeviceBean.getCode()));
     }
 
     @Override
@@ -218,23 +218,23 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
         querySuccess = false;
         //刷新完成
         refreshLayout.finishRefresh();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void addCommonUserSuccess(BaseResult baseResult) {
         queryUser();
-        ToastUtil.getInstance().showShort(R.string.add_common_user_success);
+        ToastUtils.showShort(R.string.add_common_user_success);
     }
 
     @Override
     public void addCommonUserFail(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
     }
 
     @Override
     public void addCommonUserError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override

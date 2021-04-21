@@ -16,7 +16,7 @@ import com.philips.easykey.lock.mvp.view.wifilock.x9.IWifiLockOpenDirectionView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,21 +124,21 @@ public class WifiLockOpenDirectionActivity extends BaseActivity<IWifiLockOpenDir
     @Override
     public void settingThrowable(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.modify_failed));
+        ToastUtils.showShort(getString(R.string.modify_failed));
         finish();
     }
 
     @Override
     public void settingFailed() {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.modify_failed));
+        ToastUtils.showShort(getString(R.string.modify_failed));
         finish();
     }
 
     @Override
     public void settingSuccess(int openDirection) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.modify_success));
+        ToastUtils.showShort(getString(R.string.modify_success));
         Intent intent = new Intent(this, WifiLockMoreActivity.class);
         intent.putExtra(MqttConstant.SET_OPEN_DIRECTION,openDirection);
         setResult(RESULT_OK,intent);

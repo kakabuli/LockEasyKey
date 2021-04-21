@@ -41,7 +41,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.RotateTransformation;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.H264Frame;
@@ -623,7 +623,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtil.getInstance().showShort(getString(R.string.wifi_video_lock_find_file_show_toast) + "");
+                    ToastUtils.showShort(getString(R.string.wifi_video_lock_find_file_show_toast) + "");
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {

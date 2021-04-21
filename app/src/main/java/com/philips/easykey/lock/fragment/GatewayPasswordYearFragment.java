@@ -38,7 +38,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import com.philips.easykey.lock.widget.CustomDatePicker;
 
@@ -185,12 +185,12 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                 break;
             case R.id.btn_confirm_generation:
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtil.getInstance().showShort(R.string.please_have_net_add_pwd);
+                    ToastUtils.showShort(R.string.please_have_net_add_pwd);
                     return;
                 }
                 String strPassword = etPassword.getText().toString().trim();
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {
@@ -220,7 +220,7 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                 String model=  gatewayPasswordAddActivity.gatewayModel;
 
                 if (0 == timeStatus) {
-                    ToastUtil.getInstance().showShort(R.string.select_time_ce_lue);
+                    ToastUtils.showShort(R.string.select_time_ce_lue);
                     return;
                 } else if (KeyConstants.YONG_JIU == timeStatus) {
                     showLoading(getString(R.string.is_setting_password));
@@ -265,16 +265,16 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                 } else if (KeyConstants.CUSTOM == timeStatus) {
                     //自定义
                     if (startMilliseconds == 0) {
-                        ToastUtil.getInstance().showShort(R.string.select_take_effect_time);
+                        ToastUtils.showShort(R.string.select_take_effect_time);
                         return;
                     }
                     if (endMilliseconds == 0) {
-                        ToastUtil.getInstance().showShort(R.string.select_end_time);
+                        ToastUtils.showShort(R.string.select_end_time);
                         return;
                     }
 
                     if (startMilliseconds >= endMilliseconds) {
-                        ToastUtil.getInstance().showShort(R.string.end_time_must_bigger_end_time);
+                        ToastUtils.showShort(R.string.end_time_must_bigger_end_time);
                         return;
                     }
                     LogUtils.d("开始时间   " + DateUtils.getDateTimeFromMillisecond(startMilliseconds));
@@ -454,7 +454,7 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
     @Override
     public void addLockPwdSuccess(GatewayPasswordPlanBean gatewayPasswordPlanBean, String pwdValue) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.set_success));
+        ToastUtils.showLong(getString(R.string.set_success));
 
         //跳转到分享页面
         Intent intent = new Intent(getActivity(), GatewayLockPasswordShareActivity.class);
@@ -486,7 +486,7 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
     @Override
     public void setUserTypeSuccess(String passwordValue, GatewayPasswordPlanBean gatewayPasswordPlanBean) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.set_success));
+        ToastUtils.showLong(getString(R.string.set_success));
 
         //跳转到分享页面
         Intent intent = new Intent(getActivity(), GatewayLockPasswordShareActivity.class);

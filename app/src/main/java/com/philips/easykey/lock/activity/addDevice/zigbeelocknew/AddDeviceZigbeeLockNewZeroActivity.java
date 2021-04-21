@@ -18,7 +18,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.BindGateway
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.List;
 
@@ -46,14 +46,14 @@ public class AddDeviceZigbeeLockNewZeroActivity  extends BaseActivity<GatewayBin
 
     private void initView() {
         if (TextUtils.isEmpty(deviceSN)) {
-            ToastUtil.getInstance().showShort(getString(R.string.unbind_not_have_devicesn));
+            ToastUtils.showShort(getString(R.string.unbind_not_have_devicesn));
             return;
         }
         if (NetUtil.isNetworkAvailable()) {
             LogUtils.d("deviceSN    " + deviceSN);
             mPresenter.bindGateway(deviceSN);
         } else {
-            ToastUtil.getInstance().showShort(getString(R.string.network_exception));
+            ToastUtils.showShort(getString(R.string.network_exception));
         }
 
     }
@@ -98,12 +98,12 @@ public class AddDeviceZigbeeLockNewZeroActivity  extends BaseActivity<GatewayBin
     @Override
     public void bindGatewayFail(String code, String msg) {
         if ("812".equals(code)) { //通知管理员确认
-            ToastUtil.getInstance().showLong(R.string.already_notify_admin);
+            ToastUtils.showLong(R.string.already_notify_admin);
             Intent cancelBind = new Intent(this, DeviceGatewayBindListView.class);
             startActivity(cancelBind);
             finish();
         } else if ("813".equals(code)) { //您已绑定该网关
-            ToastUtil.getInstance().showLong(R.string.already_bind_gatway);
+            ToastUtils.showLong(R.string.already_bind_gatway);
             Intent cancelBind = new Intent(this, DeviceGatewayBindListView.class);
             startActivity(cancelBind);
             finish();

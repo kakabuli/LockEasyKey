@@ -40,7 +40,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -606,13 +606,13 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
     @Override
     public void getOpenLockRecordFail() {
         changePage(false);
-        ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.get_open_lock_record_fail);
     }
 
     @Override
     public void getOpenLockRecordThrowable(Throwable throwable) {
         changePage(false);
-        ToastUtil.getInstance().showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.get_open_lock_record_fail);
     }
 
     @Override
@@ -696,7 +696,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
             public void onClick(View v) {
                 String pwd = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(pwd)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 mPresenter.realOpenLock(gwLockInfo.getGwID(), gwLockInfo.getServerInfo().getDeviceId(), pwd);
@@ -741,7 +741,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
                 }else{
                     changeOpenLockStatus(5);
                 }
-                ToastUtil.getInstance().showShort(getString(R.string.open_lock_fail));
+                ToastUtils.showShort(getString(R.string.open_lock_fail));
             }
         },3000);
 
@@ -765,7 +765,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
         }else{
             changeOpenLockStatus(5);
         }
-        ToastUtil.getInstance().showShort(getString(R.string.open_lock_fail));
+        ToastUtils.showShort(getString(R.string.open_lock_fail));
         LogUtils.d("开锁异常");
     }
 
@@ -930,9 +930,9 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
             isClosing = true;
             String nickName = gatewayLockInfo.getServerInfo().getNickName();
             if (!TextUtils.isEmpty(nickName)) {
-                ToastUtil.getInstance().showShort(nickName + ":" + getString(R.string.open_lock_success));
+                ToastUtils.showShort(nickName + ":" + getString(R.string.open_lock_success));
             } else {
-                ToastUtil.getInstance().showShort(devId + ":" + getString(R.string.open_lock_success));
+                ToastUtils.showShort(devId + ":" + getString(R.string.open_lock_success));
             }
             handler.postDelayed(new Runnable() {
                 @Override
@@ -998,9 +998,9 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
              if (gwLockInfo != null) {
                  String nickName = gwLockInfo.getServerInfo().getNickName();
                  if (!TextUtils.isEmpty(nickName)) {
-                     ToastUtil.getInstance().showShort(nickName + ":" + getString(R.string.close_lock_success));
+                     ToastUtils.showShort(nickName + ":" + getString(R.string.close_lock_success));
                  } else {
-                     ToastUtil.getInstance().showShort(devId + ":" + getString(R.string.close_lock_success));
+                     ToastUtils.showShort(devId + ":" + getString(R.string.close_lock_success));
                  }
              }
 
@@ -1038,15 +1038,15 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
                     if (!TextUtils.isEmpty(lockversion) && lockversion.contains(";") &&
                             (lockversion.split(";")[0].startsWith("8100Z") || lockversion.split(";")[0].startsWith("8100A"))) {
                         if (statusFlag==1){
-                            ToastUtil.getInstance().showShort(R.string.wifi_alreade_offline);
+                            ToastUtils.showShort(R.string.wifi_alreade_offline);
                             return true;
                         }
                         if (isOpening) {
-                            ToastUtil.getInstance().showShort(R.string.is_opening_try_latter);
+                            ToastUtils.showShort(R.string.is_opening_try_latter);
                             return true;
                         }
                         if (isClosing) {
-                            ToastUtil.getInstance().showShort(R.string.lock_already_open);
+                            ToastUtils.showShort(R.string.lock_already_open);
                             return true;
                         }
                         if (mPresenter != null) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 
 import butterknife.BindView;
@@ -36,7 +36,7 @@ public class BarCodeActivity extends BaseAddToApplicationActivity implements Vie
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
         if(TextUtils.isEmpty(bar_url)){
-            ToastUtil.getInstance().showShort(getString(R.string.bar_code_scan_qr_failed));
+            ToastUtils.showShort(getString(R.string.bar_code_scan_qr_failed));
             finish();
         }
         Log.e(GeTui.VideoLog," finall->result:"+bar_url);

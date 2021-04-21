@@ -38,7 +38,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.TimeUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import com.philips.easykey.lock.widget.CustomDatePicker;
 
@@ -222,13 +222,13 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
                 break;
             case R.id.btn_confirm_generation:
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtil.getInstance().showShort(R.string.please_have_net_add_pwd);
+                    ToastUtils.showShort(R.string.please_have_net_add_pwd);
                     return;
                 }
                 String strPassword = etPassword.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {
@@ -254,24 +254,24 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
                     return;
                 }
 //                if (TextUtils.isEmpty(nickName)) {
-//                    ToastUtil.getInstance().showShort(R.string.nickname_not_empty);
+//                    ToastUtils.showShort(R.string.nickname_not_empty);
 //                    return;
 //                }
 
                 if (TextUtils.isEmpty(strStart)) {
-                    ToastUtil.getInstance().showShort(R.string.select_start_time);
+                    ToastUtils.showShort(R.string.select_start_time);
                     return;
                 }
                 if (TextUtils.isEmpty(strEnd)) {
-                    ToastUtil.getInstance().showShort(R.string.select_end_time);
+                    ToastUtils.showShort(R.string.select_end_time);
                     return;
                 }
                 if (DateFormatUtils.hourMinuteChangeMillisecond(strEnd) <= DateFormatUtils.hourMinuteChangeMillisecond(strStart)) {
-                    ToastUtil.getInstance().showShort(R.string.end_time_great_start_time);
+                    ToastUtils.showShort(R.string.end_time_great_start_time);
                     return;
                 }
                 if (TextUtils.isEmpty(weekRule)) {
-                    ToastUtil.getInstance().showShort(R.string.select_repeat_rule);
+                    ToastUtils.showShort(R.string.select_repeat_rule);
                     return;
                 }
 
@@ -435,7 +435,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
     @Override
     public void setUserTypeSuccess(String passwordValue, GatewayPasswordPlanBean gatewayPasswordPlanBean) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.set_success));
+        ToastUtils.showLong(getString(R.string.set_success));
 
         //跳转到分享页面
         Intent intent = new Intent(getActivity(), GatewayLockPasswordShareActivity.class);

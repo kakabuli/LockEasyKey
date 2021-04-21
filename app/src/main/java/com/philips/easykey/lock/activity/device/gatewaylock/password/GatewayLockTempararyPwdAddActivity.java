@@ -21,7 +21,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 
 import java.util.Map;
@@ -92,7 +92,7 @@ public class GatewayLockTempararyPwdAddActivity extends BaseActivity<IGatewayLoc
                 }
                 String strForeverPassword = etPassword.getText().toString().trim();
                 if (!StringUtil.randomJudge(strForeverPassword)) {
-                    ToastUtil.getInstance().showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strForeverPassword)) {
@@ -179,7 +179,7 @@ public class GatewayLockTempararyPwdAddActivity extends BaseActivity<IGatewayLoc
     @Override
     public void addLockPwdSuccess(GatewayPasswordPlanBean gatewayPasswordPlanBean, String pwdValue) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(getString(R.string.set_success));
+        ToastUtils.showLong(getString(R.string.set_success));
 
         //跳转到分享页面
         Intent intent = new Intent(this, GatewayLockPasswordShareActivity.class);

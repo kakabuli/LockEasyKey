@@ -12,7 +12,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShare
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DeviceShareUserResultBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +53,7 @@ public class GatewaySharedPresenter<T> extends BasePresenter<IGatewaySharedView>
                             } else if("402".equals(shareResultBean.getCode())){
                                 if (isSafe()) {
                                 //    mViewRef.get().shareDeviceFail();
-                                    ToastUtil.getInstance().showShort(shareResultBean.getMsg());
+                                    ToastUtils.showShort(shareResultBean.getMsg());
                                 }
                             }
                             else {

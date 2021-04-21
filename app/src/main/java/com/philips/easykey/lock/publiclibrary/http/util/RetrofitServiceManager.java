@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.publiclibrary.http.temp.HttpConstants;
+import com.philips.easykey.lock.publiclibrary.http.HttpUrlConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 
 import java.io.BufferedInputStream;
@@ -69,7 +69,7 @@ public class RetrofitServiceManager {
             addInterceptor(builder, true);
             mRetrofit = new Retrofit.Builder()
                     .client(builder.build())
-                    .baseUrl(HttpConstants.BASE_URL)
+                    .baseUrl(HttpUrlConstants.BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(FastJsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -107,7 +107,7 @@ public class RetrofitServiceManager {
             addInterceptor(noBuilder, false);
             noRetrofit = new Retrofit.Builder()
                     .client(noBuilder.build())
-                    .baseUrl(HttpConstants.BASE_URL)
+                    .baseUrl(HttpUrlConstants.BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(FastJsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -209,7 +209,7 @@ public class RetrofitServiceManager {
         addInterceptor(builder, true);
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .baseUrl(HttpConstants.BASE_URL)
+                .baseUrl(HttpUrlConstants.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(FastJsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -24,7 +24,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -532,9 +532,9 @@ public class WifiVideoLockRealTimeActivity extends BaseActivity<IWifiVideoLockRe
                 public void run() {
 
                     if(flag){
-                        ToastUtil.getInstance().showShort(getString(R.string.modify_success));
+                        ToastUtils.showShort(getString(R.string.modify_success));
                     }else{
-                        ToastUtil.getInstance().showShort(getString(R.string.modify_failed));
+                        ToastUtils.showShort(getString(R.string.modify_failed));
                     }
                     if(avi != null){
                         tvTips.setVisibility(View.GONE);

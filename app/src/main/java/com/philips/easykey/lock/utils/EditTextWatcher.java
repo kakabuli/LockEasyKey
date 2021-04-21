@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 
 import java.io.UnsupportedEncodingException;
@@ -54,7 +55,7 @@ public class EditTextWatcher implements TextWatcher {
                             break;
                         }else{
                             String message = String.format(context.getString(R.string.input_name_max), len+"",chinaLen+"");
-                            ToastUtil.getInstance().showShort(message);
+                            ToastUtils.showShort(message);
                         }
 
                     } while (cnt-- > 0);

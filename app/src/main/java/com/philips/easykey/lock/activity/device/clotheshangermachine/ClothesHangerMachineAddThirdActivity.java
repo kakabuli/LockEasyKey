@@ -28,7 +28,7 @@ import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
 import java.util.List;
@@ -98,7 +98,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
         if (GpsUtil.isOPen(this)){
             mPresenter.searchDevices();
         }else {
-            ToastUtil.getInstance().showLong(R.string.check_phone_not_open_gps_please_open);
+            ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
         }
     }
 
@@ -133,7 +133,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
                 if (GpsUtil.isOPen(this)){
                     mPresenter.searchDevices();
                 }else {
-                    ToastUtil.getInstance().showLong(R.string.check_phone_not_open_gps_please_open);
+                    ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
                 }
                 break;
         }
@@ -178,7 +178,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
             mPresenter.checkBind(wifiModelType,device);
 //            showLoading(getString(R.string.is_checking_bind));
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 
@@ -215,14 +215,14 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
     @Override
     public void onScanDevicesFailed(Throwable throwable) {
         stopSearchAnimation();
-        ToastUtil.getInstance().showShort(getString(R.string.scan_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.scan_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void onConnectFailed() {
         hiddenLoading();
         stopSearchAnimation();
-//        ToastUtil.getInstance().showLong(R.string.connect_failed_retry);
+//        ToastUtils.showLong(R.string.connect_failed_retry);
         Intent intent = new Intent(ClothesHangerMachineAddThirdActivity.this,ClothesHangerMachineAddThirdFailedActivity.class);
         intent.putExtra("wifiModelType",wifiModelType);
         startActivity(intent);
@@ -269,14 +269,14 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
 
     @Override
     public void onCheckBindFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(getString(R.string.bind_failed) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.bind_failed) + HttpUtils.httpProtocolErrorCode(this, throwable));
         hiddenLoading();
     }
 
     @Override
     public void checkBindFailed() {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.network_exception);
+        ToastUtils.showLong(R.string.network_exception);
     }
 
     @Override

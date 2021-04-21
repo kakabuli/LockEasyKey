@@ -34,7 +34,7 @@ import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.TimeUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,7 +108,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                 break;
             case R.id.btn_register:
                 if(!userProtocolSlected){
-                    ToastUtil.getInstance().showShort("请先同意用户协议");
+                    ToastUtils.showShort("请先同意用户协议");
                     return;
                 }
                 register();
@@ -210,13 +210,13 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         if (NetUtil.isNetworkAvailable()) {
             String account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
-//                ToastUtil.getInstance().showShort(R.string.input_telephone_or_rmail);
+//                ToastUtils.showShort(R.string.input_telephone_or_rmail);
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-//                    ToastUtil.getInstance().showShort( R.string.phone_not_right);
+//                    ToastUtils.showShort( R.string.phone_not_right);
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                     return;
                 } else {
@@ -228,7 +228,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                 if (DetectionEmailPhone.getInstance().isEmail(account)) {
                     mPresenter.sendRandomByEmail(account);
                 } else {
-//                    ToastUtil.getInstance().showShort( R.string.email_not_right);
+//                    ToastUtils.showShort( R.string.email_not_right);
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                     return;
                 }
@@ -237,7 +237,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             timeUtils = new TimeUtils(tvGetVerification, tvGetVerification);
             timeUtils.RunTimer();
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 
@@ -246,11 +246,11 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         if (NetUtil.isNetworkAvailable()) {
             String phone = getEdittextContent(etTelephone);
             if (TextUtils.isEmpty(phone)) {
-                ToastUtil.getInstance().showShort(R.string.phone_number_con_not_empty);
+                ToastUtils.showShort(R.string.phone_number_con_not_empty);
                 return;
             }
             if (!PhoneUtil.isMobileNO(phone)) {
-                ToastUtil.getInstance().showShort(R.string.phone_not_right);
+                ToastUtils.showShort(R.string.phone_not_right);
                 return;
             }
             //手机号
@@ -263,7 +263,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             timeUtils = new TimeUtils(tvTime, btnGetVerification);
             timeUtils.RunTimer();
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }*/
 
@@ -272,34 +272,34 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         if (NetUtil.isNetworkAvailable()) {
             account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
-//                ToastUtil.getInstance().showShort(R.string.input_telephone_or_rmail);
+//                ToastUtils.showShort(R.string.input_telephone_or_rmail);
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
                 return;
             }
             String code = StringUtil.getEdittextContent(etVerification);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-//                ToastUtil.getInstance().showShort(R.string.verification_verify_error);
+//                ToastUtils.showShort(R.string.verification_verify_error);
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
                 return;
             }
 
             pwd = StringUtil.getEdittextContent(etPassword);
             if (StringUtil.judgeSpecialCharacter(pwd)) {
-                ToastUtil.getInstance().showShort(R.string.not_input_special_symbol);
+                ToastUtils.showShort(R.string.not_input_special_symbol);
                 return;
             }
             if (!StringUtil.passwordJudge(pwd)) {
-                ToastUtil.getInstance().showShort(R.string.password_judgment);
+                ToastUtils.showShort(R.string.password_judgment);
                 return;
             }
 
             if (!userProtocolSlected) {
-                ToastUtil.getInstance().showShort(R.string.agree_user_protocol);
+                ToastUtils.showShort(R.string.agree_user_protocol);
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-//                    ToastUtil.getInstance().showShort(R.string.phone_not_right);
+//                    ToastUtils.showShort(R.string.phone_not_right);
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                     return;
                 }
@@ -315,7 +315,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                     telephoneRegister = false;
                     mPresenter.registerByEmail(account, pwd, code);
                 } else {
-//                    ToastUtil.getInstance().showShort( R.string.email_not_right);
+//                    ToastUtils.showShort( R.string.email_not_right);
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                     return;
                 }
@@ -323,7 +323,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
 
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }
 
@@ -332,36 +332,36 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         if (NetUtil.isNetworkAvailable()) {
             final String phone = getEdittextContent(etTelephone);
             if (TextUtils.isEmpty(phone)) {
-                ToastUtil.getInstance().showShort(R.string.phone_number_con_not_empty);
+                ToastUtils.showShort(R.string.phone_number_con_not_empty);
                 return;
             }
             if (!PhoneUtil.isMobileNO(phone)) {
-                ToastUtil.getInstance().showShort(R.string.phone_not_right);
+                ToastUtils.showShort(R.string.phone_not_right);
                 return;
             }
             String code = getEdittextContent(etVerification);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-                ToastUtil.getInstance().showShort(R.string.verification_verify_error);
+                ToastUtils.showShort(R.string.verification_verify_error);
                 return;
             }
             String pwd = getEdittextContent(etPassword);
             if (StringUtil.judgeSpecialCharacter(pwd)) {
-                ToastUtil.getInstance().showShort(R.string.not_input_special_symbol);
+                ToastUtils.showShort(R.string.not_input_special_symbol);
                 return;
             }
             if (!StringUtil.passwordJudge(pwd)) {
-                ToastUtil.getInstance().showShort(R.string.password_judgment);
+                ToastUtils.showShort(R.string.password_judgment);
                 return;
             }
 
             if (!userProtocolSlected) {
-                ToastUtil.getInstance().showShort(R.string.agree_user_protocol);
+                ToastUtils.showShort(R.string.agree_user_protocol);
                 return;
             }
             String countryCode = tvCountryCode.getText().toString().trim().replace("+", "");
             phoneRegister(countryCode + phone, code, pwd);
         } else {
-            ToastUtil.getInstance().showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.noNet);
         }
     }*/
 
@@ -395,7 +395,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     public void registerSuccess() { //注册成功
         hiddenLoading();
         LogUtils.d("注册成功");
-        ToastUtil.getInstance().showLong(R.string.register_success);
+        ToastUtils.showLong(R.string.register_success);
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         intent.putExtra(KeyConstants.AREA_CODE, countryNumber);
         intent.putExtra(KeyConstants.COUNTRY, countryName);
@@ -408,19 +408,19 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
     @Override
     public void sendRandomFailed(Throwable e) { //发送验证码失败
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 
     @Override
     public void sendRandomFailedServer(BaseResult result) {
 
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 
     @Override
     public void registerFailed(Throwable e) { //注册失败
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 
     @Override
@@ -429,7 +429,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         if ("445".equals(result.getCode())){
             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
         }else {
-            ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+            ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
         }
 
 

@@ -33,7 +33,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -301,20 +301,20 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
     @Override
     public void onDeleteDeviceSuccess() {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.delete_success);
+        ToastUtils.showLong(R.string.delete_success);
         finish();
     }
 
     @Override
     public void onDeleteDeviceFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.delete_fialed);
+        ToastUtils.showLong(R.string.delete_fialed);
     }
 
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showLong(R.string.delete_fialed);
+        ToastUtils.showLong(R.string.delete_fialed);
     }
 
     //获取状态栏高度

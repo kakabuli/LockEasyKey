@@ -16,7 +16,7 @@ import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +69,7 @@ public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerpr
     @Override
     public void onBleOpenStateChange(boolean isOpen) {
         if (!isOpen) { //如果蓝牙没有打开
-            ToastUtil.getInstance().showLong(R.string.please_allow_open_ble);
+            ToastUtils.showLong(R.string.please_allow_open_ble);
         }
     }
 
@@ -85,7 +85,7 @@ public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerpr
 
     @Override
     public void onSearchDeviceFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(getString(R.string.search_device_fail));
+        ToastUtils.showShort(getString(R.string.search_device_fail));
     }
 
     @Override
@@ -121,7 +121,7 @@ public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerpr
         //结束连接
         if (!isSuccess) {
             //r如果没有连接，
-            ToastUtil.getInstance().showLong(R.string.connect_failed_please_hand_connect);
+            ToastUtils.showLong(R.string.connect_failed_please_hand_connect);
             toHandView();
         }
     }

@@ -29,7 +29,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceGatewayBindListView;
 import com.philips.easykey.lock.utils.handPwdUtil.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -130,7 +130,7 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
 //                        if(zigbeeBindGatewayBeanSelect!=null){
 //                            zigbeeBindGatewayBeanSelect.setSelect(true);
 //                        }
-//                        ToastUtil.getInstance().showShort(getString(R.string.gateway_offline));
+//                        ToastUtils.showShort(getString(R.string.gateway_offline));
 //                        return;
 //                    }
 //                    if (zigbeeBindGatewayBeanSelect.getIsAdmin()!=1){
@@ -138,7 +138,7 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
 //                        if(zigbeeBindGatewayBeanSelect!=null){
 //                            zigbeeBindGatewayBeanSelect.setSelect(true);
 //                        }
-//                        ToastUtil.getInstance().showShort(R.string.gateway_is_authorization);
+//                        ToastUtils.showShort(R.string.gateway_is_authorization);
 //                        return;
 //                    }
 //                    if (zigbeeBindGatewayBeanSelect.getModel() != null) {
@@ -150,12 +150,12 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
 //                            if (zigbeeBindGatewayBeanSelect != null) {
 //                                zigbeeBindGatewayBeanSelect.setSelect(true);
 //                            }
-//                            ToastUtil.getInstance().showShort(R.string.gateway_no_support);
+//                            ToastUtils.showShort(R.string.gateway_no_support);
 //                            return;
 //                        }
 //                    }
 //                    else {
-//                        ToastUtil.getInstance().showShort(R.string.gateway_confirm_version);
+//                        ToastUtils.showShort(R.string.gateway_confirm_version);
 //                        return;
 //                    }
 //                    lastzigbeeBindGatewayBeanSelect= zigbeeBindGatewayBeanSelect;

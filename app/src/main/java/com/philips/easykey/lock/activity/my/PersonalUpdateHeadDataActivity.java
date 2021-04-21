@@ -32,7 +32,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.IPersonalDataView;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 import com.philips.easykey.lock.widget.CircleImageView;
@@ -277,7 +277,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
                 uploadPhoto();
 
             } else {
-                ToastUtil.getInstance().showShort(R.string.no_data);
+                ToastUtils.showShort(R.string.no_data);
             }
         }
 
@@ -344,12 +344,12 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
 
     @Override
     public void photoUploadFail(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
     }
 
     @Override
     public void photoUploadError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(getString(R.string.upload_hear) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.upload_hear) + HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
 
@@ -361,7 +361,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
 
     @Override
     public void downloadPhotoError(Throwable e) {
-//        ToastUtil.getInstance().showShort( HttpUtils.httpProtocolErrorCode(this,e));
+//        ToastUtils.showShort( HttpUtils.httpProtocolErrorCode(this,e));
     }
 
     @Override

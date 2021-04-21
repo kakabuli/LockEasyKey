@@ -16,7 +16,7 @@ import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockSafeModeView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.imagepicker.util.Utils;
 
 import butterknife.BindView;
@@ -121,7 +121,7 @@ public class WifiLockSafeModelActivity extends BaseActivity<IWifiLockSafeModeVie
                 finish();
                 break;
             case R.id.rl_safe_mode:
-                ToastUtil.getInstance().showLong(R.string.please_operation_in_lock);
+                ToastUtils.showLong(R.string.please_operation_in_lock);
                 break;
         }
     }

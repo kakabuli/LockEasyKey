@@ -21,7 +21,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -433,7 +433,7 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
                     if (flag) {
 
                     } else {
-                        ToastUtil.getInstance().showLong(getString(R.string.ota_fail));
+                        ToastUtils.showLong(getString(R.string.ota_fail));
                     }
                     if (avi != null) {
                         avi.hide();

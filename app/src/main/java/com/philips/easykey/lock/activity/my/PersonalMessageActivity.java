@@ -27,7 +27,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.DpPxConversion;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalMessageView;
 import com.philips.easykey.lock.widget.RecyclerViewNoBugLinearLayoutManager;
 import com.philips.easykey.lock.widget.SlideRecyclerView;
@@ -169,12 +169,12 @@ public class PersonalMessageActivity extends BaseActivity<IPersonalMessageView, 
 
     @Override
     public void getMessageFail(GetMessageResult getMessageResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, getMessageResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, getMessageResult.getCode()));
     }
 
     @Override
     public void getMessageError(Throwable e) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, e));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, e));
     }
 
     @Override
@@ -186,12 +186,12 @@ public class PersonalMessageActivity extends BaseActivity<IPersonalMessageView, 
 
     @Override
     public void deleteError(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void deleteFail(BaseResult baseResult) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
     }
 
     @Override

@@ -158,7 +158,7 @@ public class WifiVideoLockScanFailedActivity extends BaseAddToApplicationActivit
                     finish();
                     break;
                 case R.id.rl_safe_mode:
-                    ToastUtil.getInstance().showLong(R.string.please_operation_in_lock);
+                    ToastUtils.showLong(R.string.please_operation_in_lock);
                     break;
             }
         }

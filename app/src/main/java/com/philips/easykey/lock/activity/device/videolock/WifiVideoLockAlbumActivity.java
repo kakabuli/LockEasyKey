@@ -26,7 +26,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -222,7 +222,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
                         showDeleteSelectFileItemDialog();
                     }else{
                         revoke();
-                        ToastUtil.getInstance().showShort(getString(R.string.wifi_video_lock_delete_show_toast) + "");
+                        ToastUtils.showShort(getString(R.string.wifi_video_lock_delete_show_toast) + "");
                     }
                 }else if(tvCancel.getVisibility() == View.GONE){
                     showDeleteItem = true;

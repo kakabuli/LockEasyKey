@@ -31,7 +31,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 import java.util.ArrayList;
@@ -114,7 +114,7 @@ public class AddDoorCardSuccessActivity extends BaseActivity<IAddFingerSuccessVi
             case R.id.btn_save:
                 String strDoorCardName = etDoorCardName.getText().toString();
                 if (!StringUtil.nicknameJudge(strDoorCardName)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(R.string.nickname_verify_error);
                     return;
                 }
                 showLoading(getString(R.string.is_savving));
@@ -168,12 +168,12 @@ public class AddDoorCardSuccessActivity extends BaseActivity<IAddFingerSuccessVi
     @Override
     public void onUploadFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void onUploadFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 }

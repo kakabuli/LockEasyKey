@@ -20,7 +20,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.OfflinePasswordFactorManager;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,12 +127,12 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
 
     @Override
     public void onBindFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void onBindFailedServer(BaseResult result) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 
 
@@ -149,22 +149,22 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
     @Override
     public void onUnbindSuccess() {
         tvNotice.setText(R.string.device_add_third_content_in_net);
-        ToastUtil.getInstance().showShort(R.string.unbind_success_innet);
+        ToastUtils.showShort(R.string.unbind_success_innet);
     }
 
     @Override
     public void onUnbindFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void onUnbindFailedServer(BaseResult result) {
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 
     @Override
     public void readLockTypeFailed(Throwable throwable) {
-        ToastUtil.getInstance().showShort(R.string.bind_failed);
+        ToastUtils.showShort(R.string.bind_failed);
     }
 
     @Override
@@ -207,7 +207,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
     @Override
     public void unknownFunctionSet(int functionSet) {
         String content = String.format(getString(R.string.unknow_function_set), "" + functionSet);
-        ToastUtil.getInstance().showLong(content);
+        ToastUtils.showLong(content);
         finish();
         startActivity(new Intent(AddBluetoothThirdActivity.this, AddBluetoothSearchActivity.class));
     }
@@ -219,7 +219,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
 
     @Override
     public void readFunctionSetFailed(Throwable throwable) {
-        ToastUtil.getInstance().showLong(R.string.read_lock_info_failed);
+        ToastUtils.showLong(R.string.read_lock_info_failed);
         finish();
         startActivity(new Intent(AddBluetoothThirdActivity.this, AddBluetoothSearchActivity.class));
     }

@@ -19,7 +19,7 @@ import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.imagepicker.util.Utils;
 
 import butterknife.BindView;
@@ -70,7 +70,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
         if (mPresenter.isAuth(bleLockInfo, false)) {
             mPresenter.getDeviceInfo();
         } else {
-            ToastUtil.getInstance().showLong(getString(R.string.please_connect_lock));
+            ToastUtils.showLong(getString(R.string.please_connect_lock));
         }
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.safe_mode);
@@ -168,7 +168,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
 
     @Override
     public void onSetFailed(Throwable throwable) {
-        ToastUtil.getInstance().showLong(getString(R.string.set_failed));
+        ToastUtils.showLong(getString(R.string.set_failed));
         hiddenLoading();
     }
 
@@ -186,7 +186,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
     @Override
     public void onGetStateFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(getString(R.string.get_lock_state_fail));
+        ToastUtils.showShort(getString(R.string.get_lock_state_fail));
         LogUtils.d("获取门锁状态失败   " + throwable.getMessage());
     }
 

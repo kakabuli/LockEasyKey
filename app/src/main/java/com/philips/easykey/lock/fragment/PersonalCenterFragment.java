@@ -197,7 +197,7 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
 
     @Override
     public void downloadPhotoError(Throwable e) {
-//        ToastUtil.getInstance().showShort( HttpUtils.httpProtocolErrorCode(getActivity(),e));
+//        ToastUtils.showShort( HttpUtils.httpProtocolErrorCode(getActivity(),e));
 
     }
 

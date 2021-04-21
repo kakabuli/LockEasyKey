@@ -30,7 +30,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -251,7 +251,7 @@ public class WiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPassw
         if (refreshLayout != null) {
             refreshLayout.finishRefresh();
         }
-        ToastUtil.getInstance().showLong(R.string.refresh_failed_please_retry_later);
+        ToastUtils.showLong(R.string.refresh_failed_please_retry_later);
     }
 
     @Override
@@ -259,7 +259,7 @@ public class WiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPassw
         if (refreshLayout != null) {
             refreshLayout.finishRefresh();
         }
-        ToastUtil.getInstance().showLong(R.string.refresh_failed_please_retry_later);
+        ToastUtils.showLong(R.string.refresh_failed_please_retry_later);
     }
 
     @Override

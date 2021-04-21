@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
@@ -32,7 +33,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.philips.easykey.lock.utils.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,11 +164,11 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
             case R.id.save:
                 String name = inputName.getText().toString().trim();
                 if (TextUtils.isEmpty(name)) {
-                    ToastUtil.getInstance().showShort(R.string.not_empty);
+                    ToastUtils.showShort(R.string.not_empty);
                     return;
                 }
                 if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtil.getInstance().showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(R.string.nickname_verify_error);
                     return;
                 }
 
@@ -180,7 +181,7 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
     @Override
     public void modifyDeviceNicknameSuccess() {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(R.string.save_success);
+        ToastUtils.showShort(R.string.save_success);
         //设置成功  跳转到设备列别界面
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -190,13 +191,13 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
     @Override
     public void modifyDeviceNicknameError(Throwable throwable) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
     }
 
     @Override
     public void modifyDeviceNicknameFail(BaseResult baseResult) {
         hiddenLoading();
-        ToastUtil.getInstance().showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
     }
 
     @Override
