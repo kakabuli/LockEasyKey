@@ -19,10 +19,13 @@ import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity;
+import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.PersonalDataPresenter;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
@@ -130,16 +133,18 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
     }
 
 
-    @OnClick({R.id.head_nickname_layout, R.id.rl_head})
+    @OnClick({R.id.head_nickname_layout, R.id.rl_head, R.id.head_telNum_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.head_nickname_layout:
                 Intent mHeadNickName = new Intent(this, PersonalUpdateNickNameActivity.class);
                 startActivity(mHeadNickName);
                 break;
-
             case R.id.rl_head:
                 showHeadDialog();
+                break;
+            case R.id.head_telNum_layout:
+                showChangeNumber();
                 break;
         }
     }
@@ -182,6 +187,34 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
         });
         bottomMenuDialog = dialogBuilder.create();
         bottomMenuDialog.show();
+    }
+
+    private void showChangeNumber(){
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
+                this
+                , getString(R.string.activity_personal_change_tel_number),
+                getString(R.string.cancel), getString(R.string.change), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+                        Intent mUpdateNumber = new Intent(PersonalUpdateHeadDataActivity.this, PersonalUpdateNumberActivity.class);
+                        startActivity(mUpdateNumber);
+
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 
     //请求权限

@@ -293,6 +293,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.my.PersonalUpdateNumberActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.my.PersonalSecuritySettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

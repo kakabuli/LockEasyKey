@@ -15,6 +15,8 @@
     <string name="register">注册</string>
     <string name="get_verification">获取验证码</string>
     <string name="input_verification">请输入验证码</string>
+    <string name="verification_code">验证码</string>
+    <string name="input_verification_code">输入验证码</string>
     <string name="register_default_agree">注册默认同意</string>
     <string name="user_protocol">用户协议</string>
     <string name="forget_password">忘记密码</string>
@@ -191,6 +193,7 @@
     <string name="nickname">昵称</string>
     <string name="head_portrait_name">程序员艾伦斯</string>
     <string name="tel_num">手机号</string>
+    <string name="personal_number">账号</string>
     <string name="select_photo_album">从手机相册中选择</string>
     <string name="zi_pai">拍照</string>
     <string name="no_data">没有数据</string>
@@ -2158,7 +2161,10 @@
     <string name="seven_day_data_statistics">近7天数据统计</string>
     <string name="warning_message_inform">预警消息通知</string>
     <string name="all_device">全部设备</string>
-
+    <string name="change">更换</string>
+    <string name="activity_personal_change_tel_number">确定更换手机号</string>
+    <string name="activity_personal_change_email">确定更换邮箱</string>
+    <string name="activity_personal_verification_code_sent_to_the_following_number">请输入发送至以下号码的验证码</string>
 
 
 </resources>

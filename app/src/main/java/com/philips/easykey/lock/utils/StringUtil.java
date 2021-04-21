@@ -404,11 +404,11 @@ public class StringUtil {
     public static String phoneToHide(String phone){
         StringBuilder stringBuilder = new StringBuilder();
         if(phone.matches("^[1]\\d{10}$")){
-            return stringBuilder.append(phone.substring(0,3)).append("***").append(phone.substring(phone.length() - 3,phone.length())).toString();
+            return stringBuilder.append(phone.substring(0,3)).append("****").append(phone.substring(phone.length() - 3,phone.length())).toString();
         }else{
             if(phone.length() == 13){
                 if(phone.substring(2,phone.length()).matches("^[1]\\d{10}$")){
-                    return stringBuilder.append(phone.substring(0,5)).append("***").append(phone.substring(phone.length() - 3,phone.length())).toString();
+                    return stringBuilder.append(phone.substring(0,5)).append("****").append(phone.substring(phone.length() - 3,phone.length())).toString();
                 }
             }
         }
