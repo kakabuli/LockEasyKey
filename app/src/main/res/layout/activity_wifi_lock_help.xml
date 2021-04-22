@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="配置前确认: "
+                    android:text="@string/activity_wifi_lock_help_1"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -79,7 +79,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 确认门锁已安装 \n② 建议在门锁后面板装入用本产品配置的碱性电池或其他符合规格的干电 池4节或8节，确保门锁正常使用Wi-Fi联网功能 \n③ 当门锁出现低电量报警时，请及时更换掉电池，确保电池正负极安装正确 \n④ 确认门锁后面板Wi-Fi 模块已插紧，不松动 \n⑤ 确保手机蓝牙已打开，家里Wi-Fi网络(2.4G网络) 可正常使用，并且手机已经连接该网络"
+                    android:text="@string/activity_wifi_lock_help_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="进行门锁的激活操作: "
+                    android:text="@string/activity_wifi_lock_help_3"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -108,7 +108,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 微信搜索【凯迪仕智能锁】公众号并关注\n② 进入公众号－【售后服务】，点击【产品激活】\n③ 扫描电池盖产品序列号，获取激活码\n④ 唤醒门锁，输入激活码，按“＃”确认"
+                    android:text="@string/activity_wifi_lock_help_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -129,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="门锁首次配网: "
+                    android:text="@string/activity_wifi_lock_help_5"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -137,7 +137,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 在[添加设备页面]， 点击右上角图标，扫描对应电池盒上的配网二维码，进行配网\n② 请确保手机已打开蓝牙,并优先连接上2.4G Wi-Fi \n③ 用手触碰按键区，唤醒门锁 ，确保门锁数字键盘灯亮，手机App连上门锁热点，如手机连接不上门锁热点，请选择其他配网方式进行配网\n④ 门锁验证-输入配置门锁当前管理密码进行验证，验证通过，跳转下一步\n⑤ 输入Wi-Fi 密码， (确保此处选择的Wi-Fi与手机已连接的Wi-Fi是同一个2.4G Wi-Fi网络)，点击[下一步]\n⑥ 在 [连接设备]，等待设备连接成功"
+                    android:text="@string/activity_wifi_lock_help_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="无法发现待配网门锁? "
+                    android:text="@string/activity_wifi_lock_help_7"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -165,7 +165,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 用手触碰按键区，唤醒门锁 ，确保门锁数字键盘灯亮 \n② 确保手机蓝牙已打开 \n③ 门锁后面板Wi-Fi 模块已插紧，不松动\n④ 为门锁配网过程中，针对苹果手机，App会根据系统情况弹窗提示您打开“Wi-Fi开关”， “系统位置服务”和“应用定位权限”，请务必打开以保证完成配网过程\n⑤ 对于安卓手机，如果没有任何弹窗提示，请手动检查并打开:“系统位置服务”在:设置->高级(更多)设置->系统安全->位置信息,“应用定位权限”在系统的应用权限管理界面"
+                    android:text="@string/activity_wifi_lock_help_8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -185,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="选择其他配网方式 "
+                    android:text="@string/activity_wifi_lock_help_9"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -193,7 +193,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="触摸门锁前面数字面板，唤醒门锁，门锁进入配网模式:\n① 按键区先输入“*”两次\n② 输入门锁管理密码：“******* ”\n③ 按“#”确认，语音播报“已进入管理模式”\n④ 根据语音提示：按[4] 选择 “扩展模式”，再按[1] 选择 “加入网络”\n⑤ 语音播报：“配网中，请稍后”"
+                    android:text="@string/activity_wifi_lock_help_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -213,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="门锁都支持哪些Wi-Fi ?"
+                    android:text="@string/activity_wifi_lock_help_11"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -221,7 +221,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 门锁目前支持2.4G Wi-Fi， 暂不支持5G Wi-Fi\n② 如果您的路由器同时打开了2.4G和5G的Wi-Fi，建议两者使用不同的Wi-Fi名称，以免影响门锁联网效果\n③ 门锁暂不支持同一Wi-Fi名称漫游的公共Wi-Fi环境，比如很多公司、酒店等公共场合的Wi-Fi环境\n④ 如果需要在上述公共Wi-Fi环境下使用，可以安装一台拥有独立Wi-Fi名称的路由器，并将该路由器接入公共Wi-Fi 网络\n⑤ 如使用连接的家庭Wi-Fi无密码，可在App端输入密码12345678，进行连网"
+                    android:text="@string/activity_wifi_lock_help_12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -239,7 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="检查路由器设置"
+                    android:text="@string/activity_wifi_lock_help_13"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -247,7 +247,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 确认路由器设置的Wi-Fi名称及密码没有使用特殊字符\n② 确认路由器的Wi-Fi网络的安全认证类型是WPA-PSK或WPA2-PSK，若不是请修改为WPA-PSK或WPA2-PSK\n③ 确认路由器的Wi-Fi网络是否设置了白名单、黑名单、MAC地址过滤\n④ 如果您的路由器已经长时间工作，建议重启路由器后重试"
+                    android:text="@string/activity_wifi_lock_help_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -267,7 +267,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="以上步骤都正常，仍配网失败"
+                    android:text="@string/activity_wifi_lock_help_15"
                     android:textColor="#333333"
                     android:textSize="13sp" />
 
@@ -276,7 +276,7 @@
                     android:lineSpacingExtra="5dp"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:text="① 尝试关闭手机Wi-Fi并再次打开后重试\n② 重新启动手机系统后重试"
+                    android:text="@string/activity_wifi_lock_help_16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

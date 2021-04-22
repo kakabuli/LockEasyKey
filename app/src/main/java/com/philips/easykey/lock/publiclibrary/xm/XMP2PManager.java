@@ -27,7 +27,7 @@ import com.xmitech.sdk.interfaces.VideoPackagedListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import la.xiong.androidquick.tool.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 public class XMP2PManager extends StreamListener  {

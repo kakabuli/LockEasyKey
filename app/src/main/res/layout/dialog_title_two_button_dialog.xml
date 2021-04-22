@@ -13,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#000"
         android:textSize="@dimen/sp_16"
-        android:text="温馨提示"
+        android:text="@string/dialog_wifi_video_tip"
         android:layout_marginTop="@dimen/dp_23"/>
 
     <TextView

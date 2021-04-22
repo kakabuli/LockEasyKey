@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_40"
-            android:text="唤醒门锁确保数字键盘灯亮"
+            android:text="@string/activity_wifi_lock_add_new_connect_device_dial"
             android:textColor="#333333"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -113,7 +113,7 @@
         <TextView
             android:layout_marginTop="@dimen/dp_100"
             android:gravity="center_horizontal"
-            android:text="自动搜索门锁热点中，请稍等..."
+            android:text="@string/activity_wifi_lock_add_new_connect_device_search"
             android:textColor="#8F8F8F"
             android:textSize="17sp"
             android:layout_width="match_parent"

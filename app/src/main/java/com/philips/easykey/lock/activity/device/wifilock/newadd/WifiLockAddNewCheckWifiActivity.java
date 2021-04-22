@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAPAddFailedActivity;
@@ -196,7 +197,8 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
 
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                WifiLockAddNewCheckWifiActivity.this, "", "Wi-Fi账号或密码输错已超过5次", getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewCheckWifiActivity.this, "", getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1),
+                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -235,15 +237,15 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
 //                Toast.makeText(WifiLockAddNewCheckWifiActivity.this, R.string.bind_failed+"=="+errorCode, Toast.LENGTH_SHORT).show();
 
                 if (errorCode == -1) {
-                    Toast.makeText(WifiLockAddNewCheckWifiActivity.this, "读取失败,请尝试手机系统忘记kaadas_AP热点", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_2);
                 } else if (errorCode == -2) {
-                    Toast.makeText(WifiLockAddNewCheckWifiActivity.this, "连接失败,请尝试手机系统忘记kaadas_AP热点", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_3);
                 } else if (errorCode == -3) {
-                    Toast.makeText(WifiLockAddNewCheckWifiActivity.this, "管理员密码输入错误，请重新输入", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_4);
                 } else if (errorCode == -4) {
-                    Toast.makeText(WifiLockAddNewCheckWifiActivity.this, "写数据错误,请尝试手机系统忘记kaadas_AP热点", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_5);
                 } else if (errorCode == -5) {
-                    Toast.makeText(WifiLockAddNewCheckWifiActivity.this, "返回错误,请尝试手机系统忘记kaadas_AP热点", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_6);
                 }
                 Intent intent = new Intent(WifiLockAddNewCheckWifiActivity.this, WifiLockAddNewBindFailedActivity.class);
                 startActivity(intent);

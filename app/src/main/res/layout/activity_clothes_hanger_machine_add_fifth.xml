@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="连接中..."
+            android:text="@string/activity_clothes_hanger_machine_add_fifth_connect"
             android:textColor="#000000"
             android:textSize="@dimen/sp_17"
             android:textStyle="bold" />

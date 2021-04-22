@@ -57,5 +57,5 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:text="没有数据啦"/>
+        android:text="@string/no_more"/>
 </RelativeLayout>

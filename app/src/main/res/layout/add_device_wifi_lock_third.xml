@@ -54,7 +54,7 @@
             android:id="@+id/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3. 门锁进入配网模式"
+            android:text="@string/add_device_wifi_lock_third"
             android:textColor="#333333"
             android:textSize="@dimen/sp_18" />
 

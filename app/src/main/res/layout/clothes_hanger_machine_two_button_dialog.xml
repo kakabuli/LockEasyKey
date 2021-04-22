@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:textColor="#000000"
         android:textSize="@dimen/sp_15"
-        android:text="请选择风干时间"
+        android:text="@string/clothes_hanger_machine_two_button_dialog_airdry"
         android:lineSpacingExtra="@dimen/dp_10"
         />
 

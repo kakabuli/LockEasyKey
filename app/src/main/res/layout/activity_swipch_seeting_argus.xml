@@ -37,7 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:textColor="#BEBEBE"
-            android:text="智能开关"
+            android:text="@string/smart_switch"
             android:layout_alignParentRight="true"
             ></TextView>
 

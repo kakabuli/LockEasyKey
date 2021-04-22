@@ -54,7 +54,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import la.xiong.androidquick.tool.FileTool;
+import com.philips.easykey.core.tool.FileTool;
 
 public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlayerView, MyAlbumPlayerPresenter<IMyAlbumPlayerView>>  implements IMyAlbumPlayerView{
 

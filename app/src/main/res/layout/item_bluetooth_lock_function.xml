@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_14"
-            android:text="密码"
+            android:text="@string/password"
             android:textColor="#333333"
             android:textSize="@dimen/sp_13" />
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_9"
-            android:text="6组"
+            android:text="@string/number_6"
             android:textColor="#999999"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>

@@ -14,7 +14,7 @@
 
         <TextView
             android:layout_weight="1"
-            android:text="按了门锁的“重置”按钮，恢复出厂设置后无法使用1111？"
+            android:text="@string/personal_faq_item_title"
             android:id="@+id/faq_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

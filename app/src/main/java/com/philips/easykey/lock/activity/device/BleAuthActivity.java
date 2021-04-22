@@ -470,11 +470,11 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                         "3".equals(bleLockInfo.getServerLockInfo().getBleVersion())) {
                     String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
                     if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
-                        com.philips.easykey.lock.utils.LogUtils.d("跳转   老蓝牙  设备信息");
+                        LogUtils.d("跳转   老蓝牙  设备信息");
                         Intent intent = new Intent(this, OldDeviceInfoActivity.class);
                         startActivity(intent);
                     } else {
-                        com.philips.easykey.lock.utils.LogUtils.d("跳转   全功能  蓝牙   设备信息");
+                        LogUtils.d("跳转   全功能  蓝牙   设备信息");
                         Intent intent = new Intent(this, BleDeviceInfoActivity.class);
                         startActivity(intent);
                     }
@@ -485,11 +485,11 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                     } else if (mPresenter.getBleVersion() == 3) {
                         String functionSet = bleLockInfo.getServerLockInfo().getFunctionSet();
                         if (!TextUtils.isEmpty(functionSet) && Integer.parseInt(functionSet) == 0) {
-                            com.philips.easykey.lock.utils.LogUtils.d("跳转   老蓝牙  设备信息");
+                            LogUtils.d("跳转   老蓝牙  设备信息");
                             Intent intent = new Intent(this, OldDeviceInfoActivity.class);
                             startActivity(intent);
                         } else {
-                            com.philips.easykey.lock.utils.LogUtils.d("跳转   全功能  蓝牙   设备信息");
+                            LogUtils.d("跳转   全功能  蓝牙   设备信息");
                             Intent intent = new Intent(this, BleDeviceInfoActivity.class);
                             startActivity(intent);
                         }

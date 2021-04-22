@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 
+import com.blankj.utilcode.util.Utils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;

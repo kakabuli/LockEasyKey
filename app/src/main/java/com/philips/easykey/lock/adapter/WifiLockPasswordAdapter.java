@@ -52,22 +52,22 @@ public class WifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPassword, B
                 helper.setText(R.id.tv_time, view.getContext().getString(R.string.foever_able));
                 break;
             case 1:
-                helper.setText(R.id.tv_time, "策略密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.philips_policy_password));
                 break;
             case 2:
-                helper.setText(R.id.tv_time, "胁迫密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.stress_password));
                 break;
             case 3:
-                helper.setText(R.id.tv_time, "管理员密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.philips_admin_password));
                 break;
             case 4:
-                helper.setText(R.id.tv_time, "无权限密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.philips_without_permission_password));
                 break;
             case 254:
-                helper.setText(R.id.tv_time, "临时密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.wifi_lock_temp_password));
                 break;
             case 255:
-                helper.setText(R.id.tv_time, "无效值密码");
+                helper.setText(R.id.tv_time, view.getContext().getString(R.string.philips_invalid_value_password));
                 break;
         }
     }

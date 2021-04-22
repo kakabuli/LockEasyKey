@@ -692,7 +692,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
             case R.id.iv_external_big:
 
                 TextView msg = new TextView(getActivity());
-                msg.setText("不可点击");
+                msg.setText(getString(R.string.not_enable_click));
                 msg.setPadding(100, 80, 100, 80);
                 msg.setGravity(Gravity.CENTER);
                 msg.setTextSize(15);

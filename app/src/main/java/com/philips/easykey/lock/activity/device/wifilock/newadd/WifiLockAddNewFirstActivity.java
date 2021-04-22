@@ -142,8 +142,8 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(
                 WifiLockAddNewFirstActivity.this,
-                "手机未连接Wi-Fi，无法添加设备",
-                "去连接", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_1),
+                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_2), "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                     }
@@ -168,8 +168,8 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
     private void showLocationPermission() {
         AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(
                 WifiLockAddNewFirstActivity.this
-                , "温馨提示",
-                "请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁",
+                , getString(R.string.dialog_wifi_video_tip),
+                getString(R.string.philips_activity_wifi_lock_new_add_first),
                 getString(R.string.confirm), getString(R.string.cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

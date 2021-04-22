@@ -89,7 +89,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.subjects.PublishSubject;
-import la.xiong.androidquick.tool.ActivityCollectorUtil;
+import com.philips.easykey.core.tool.ActivityCollectorUtil;
 
 
 /**

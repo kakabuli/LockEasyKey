@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import la.xiong.androidquick.tool.ToastUtil;
+import com.blankj.utilcode.util.ToastUtils;
 
 public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHangerMachineDetailView, ClothesHangerMachineDetailPresenter<IClothesHangerMachineDetailView>>
         implements IClothesHangerMachineDetailView {
@@ -140,8 +140,8 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     private void showCheckVersion(List<MultiCheckOTAResult.UpgradeTask> upgradeTasks) {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineDetailActivity.this,
-                "发现新版本，是否更新？",
-                "否", "是","#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.find_newAPP),
+                getString(R.string.philips__no), getString(R.string.philips__yes),"#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -166,8 +166,8 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     private void showDeleteDevice() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineDetailActivity.this,
-                "删除后，需要重新连接 \n是否删除？",
-                "否", "是","#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_activity_clothes_hanger_machine_detail_1),
+                getString(R.string.philips__no), getString(R.string.philips__yes),"#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -190,8 +190,7 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     }
 
     private void showShort(String ss) {
-        ToastUtil.setGravity(Gravity.CENTER,0,0);
-        ToastUtil.showShort(ss);
+        ToastUtils.getDefaultMaker().setGravity(Gravity.CENTER,0,0).show(ss);
     }
 
     @Override

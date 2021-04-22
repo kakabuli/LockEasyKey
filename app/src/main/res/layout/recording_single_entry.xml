@@ -85,33 +85,6 @@
                 android:background="@mipmap/more_icon" />
 
         </RelativeLayout>
-
-       <!-- <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/view4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="7dp"
-            android:layout_marginRight="7dp"
-            android:text="已下载"
-            android:textColor="@color/white"
-            android:textSize="10dp"
-            android:visibility="gone" />-->
-
-
-
-
-        <!-- <ImageView
-             android:id="@+id/img_pir_del"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="@drawable/pir_del"
-             android:layout_alignParentRight="true"
-             android:paddingLeft="10dp"
-             android:paddingRight="5dp"
-             android:layout_marginRight="15dp"/>-->
-
     </RelativeLayout>
 
 

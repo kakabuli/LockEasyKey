@@ -108,7 +108,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                 break;
             case R.id.btn_register:
                 if(!userProtocolSlected){
-                    ToastUtils.showShort("请先同意用户协议");
+                    ToastUtils.showShort(R.string.philips_activity_register_agreenment);
                     return;
                 }
                 register();

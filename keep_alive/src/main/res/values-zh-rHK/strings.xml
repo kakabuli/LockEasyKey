@@ -1,0 +1,5 @@
+<resources>
+    <string name="sllocal_service_name">飛利浦智能前臺推送服務</string>
+    <string name="slremote_service_name">飛利浦智能生活服務</string>
+    <string name="notification_channel">門鈴消息</string>
+</resources>

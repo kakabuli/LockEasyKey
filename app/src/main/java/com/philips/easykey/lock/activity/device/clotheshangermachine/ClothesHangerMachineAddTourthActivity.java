@@ -167,11 +167,11 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
 
     private void onAdminPasswordError() {
         if (times < 5) {
-            showDialog("请确认输入正确的账号密码， \n超过5次，将退出配网");
+            showDialog(getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_1));
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                     ClothesHangerMachineAddTourthActivity.this, "",
-                    "账号密码已输错5次， \n请重新配网", getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_2), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 

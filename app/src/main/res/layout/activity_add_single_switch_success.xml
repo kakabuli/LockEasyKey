@@ -127,7 +127,7 @@
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:background="@null"
             android:ellipsize="end"
-            android:hint="手动输入或从下面已有名称选择"
+            android:hint="@string/add_success_hint"
             android:maxLength="50"
             android:paddingRight="@dimen/dp_15"
             android:singleLine="true"

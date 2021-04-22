@@ -20,7 +20,7 @@ import com.philips.easykey.lock.utils.LogUtils;
 
 import java.util.List;
 
-import la.xiong.androidquick.tool.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 
 
 public class MyAlbumAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {

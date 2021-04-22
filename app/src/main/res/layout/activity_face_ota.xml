@@ -84,7 +84,7 @@
 
         <Button
             android:onClick="copy"
-            android:text="复制"
+            android:text="@string/copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -104,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="状态" />
+        android:text="@string/status" />
 
     <SeekBar
         android:id="@+id/ota_progress"

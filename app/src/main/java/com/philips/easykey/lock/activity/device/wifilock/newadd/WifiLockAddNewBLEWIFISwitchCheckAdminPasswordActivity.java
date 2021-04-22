@@ -334,9 +334,9 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
     }
     private void showModifyPasswordDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
-                WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this
-                , "门锁初始密码不能验证，\n" + "请修改门锁管理密码或重新输入\n",
-                getString(R.string.re_input), "修改密码", "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this,
+                getString(R.string.philips_activity_wifi_lock_ble_wifi_checkadmin_password),
+                getString(R.string.re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         //重新输入

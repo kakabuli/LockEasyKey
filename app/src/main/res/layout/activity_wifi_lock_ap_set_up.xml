@@ -155,7 +155,7 @@
         android:gravity="center"
         android:textColor="#1F96F7"
         android:textSize="10sp"
-        android:text="查看门锁WiFi支持家庭路由器"
+        android:text="@string/activity_wifi_lock_ap_set_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

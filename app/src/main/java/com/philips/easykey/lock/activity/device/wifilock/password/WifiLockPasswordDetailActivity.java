@@ -139,22 +139,22 @@ public class WifiLockPasswordDetailActivity extends BaseActivity<IWifiLockNickNa
                 tvNumber.setText(getString(R.string.password_yong_jiu_valid));
                 break;
             case 1:
-                tvNumber.setText("策略密码");
+                tvNumber.setText(R.string.philips_policy_password);
                 break;
             case 2:
-                tvNumber.setText("胁迫密码");
+                tvNumber.setText(R.string.stress_password);
                 break;
             case 3:
-                tvNumber.setText("管理员密码");
+                tvNumber.setText(R.string.philips_admin_password);
                 break;
             case 4:
-                tvNumber.setText("无权限密码");
+                tvNumber.setText(R.string.philips_without_permission_password);
                 break;
             case 254:
-                tvNumber.setText("密码一次性有效");
+                tvNumber.setText(R.string.philips_once_valid_password);
                 break;
             case 255:
-                tvNumber.setText("无效值密码");
+                tvNumber.setText(R.string.philips_invalid_value_password);
                 break;
 
         }

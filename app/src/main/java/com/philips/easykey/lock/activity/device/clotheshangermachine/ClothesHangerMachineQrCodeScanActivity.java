@@ -161,7 +161,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
         if(str.length > 0){
             if(str.length >= 4){
                 if(ClothesHangerMachineUtil.pairMode(str[1]).equals(str[2])){
-                    showClothesMachineDialog(str[1] + "晾衣机，是否进入配网？");
+                    showClothesMachineDialog(getString(R.string.philips_avtivity_clothes_hanger_machine_qrcode_scan,str[1]));
                     return;
                 }
             }
@@ -196,7 +196,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     public void onScanQRCodeOpenCameraError() {
         LogUtils.d("打开相机出错");
         finish();
-        Toast.makeText(this, getString(R.string.open_camera_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.open_camera_failed);
     }
 
     @Override
@@ -230,7 +230,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     }
 
     private void showClothesMachineDialog(String content) {
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, content, "否", "是",
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, content, getString(R.string.philips__no), getString(R.string.philips__yes),
                 "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
