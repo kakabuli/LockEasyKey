@@ -61,7 +61,7 @@
             android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="第一步："
+            android:text="@string/activity_clothes_hanger_machine_add_first_title"
             android:textColor="#333333"
             android:textSize="@dimen/sp_17" />
 

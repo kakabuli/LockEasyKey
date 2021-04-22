@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:textColor="#FFFFFF"
-                android:text="壮壮家的门锁"
+                android:text="@string/activity_gateway_lock_authorize_function_lock_nickname"
                 android:textSize="@dimen/sp_17"
                 android:singleLine="true"
                 android:ellipsize="end"

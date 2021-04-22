@@ -61,7 +61,7 @@
                     android:layout_alignBottom="@id/iv_external_big"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/dp_52"
-                    android:text="节能模式"/>
+                    android:text="@string/power_save_mode"/>
 
                 <TextView
                     android:id="@+id/tv_center_mode"
@@ -72,7 +72,7 @@
                     android:textSize="@dimen/sp_10"
                     android:textColor="#ffffff"
                     android:layout_marginBottom="@dimen/dp_25"
-                    android:text="节能模式"/>
+                    android:text="@string/power_save_mode"/>
             </RelativeLayout>
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_18_1"
                 android:gravity="center"
-                android:text="已启动安全模式"
+                android:text="@string/already_safe_model_open"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/sp_14" />
 
@@ -96,7 +96,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="2019.10.28  13:05:56"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:visibility="gone"
                 android:textSize="@dimen/sp_10" />

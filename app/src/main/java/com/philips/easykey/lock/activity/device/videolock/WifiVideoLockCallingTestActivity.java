@@ -70,8 +70,8 @@ import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import la.xiong.androidquick.tool.FileTool;
-import la.xiong.androidquick.tool.ToastUtil;
+import com.philips.easykey.core.tool.FileTool;
+import com.blankj.utilcode.util.ToastUtils;
 
 public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVideoCallingView,
         WifiVideoLockCallingPresenter<IWifiLockVideoCallingView>> implements IWifiLockVideoCallingView{
@@ -226,13 +226,13 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     if (ContextCompat.checkSelfPermission(WifiVideoLockCallingTestActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions( WifiVideoLockCallingTestActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
-                        ToastUtil.showShort("请先获取麦克风权限");
+                        ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
                     }else{
                         // 勾选了不再提示
                         if (! ActivityCompat.shouldShowRequestPermissionRationale
                                 (WifiVideoLockCallingTestActivity.this,Manifest.permission.RECORD_AUDIO )) {
                             // ...
-                            ToastUtil.showShort("请先获取麦克风权限");
+                            ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
                         }else{
                             if(mPresenter.isTalkback()){
                                 ivCalling.setSelected(false);
@@ -333,7 +333,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
             case R.id.iv_recoring:
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                    ToastUtil.showShort("请先获取读写权限");
+                    ToastUtils.showShort(R.string.wifi_video_lock_read_and_write_permission);
                 }else{
                    /* // 勾选了不再提示
                     if (!ActivityCompat.shouldShowRequestPermissionRationale
@@ -341,7 +341,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                             !ActivityCompat.shouldShowRequestPermissionRationale
                             (this,Manifest.permission.READ_EXTERNAL_STORAGE )) {
                         // ...
-                        ToastUtil.showShort("请先获取读写权限");
+                        ToastUtil.showShort(R.string.wifi_video_lock_read_and_write_permission);
                     }else{*/
                         if(!ivRecoring.isSelected()){
                             ivRecoring.setSelected(true);
@@ -620,7 +620,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastUtil.showShort("请先获取麦克风权限");
+                ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
             }
         });
     }
@@ -649,8 +649,8 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         tvTitle.setVisibility(View.GONE);*/
         TextView tvContent = mView.findViewById(R.id.tv_content);
         TextView title = mView.findViewById(R.id.title);
-        title.setText("温馨提示");
-        tvContent.setText("门锁已打开，是否继续观看?");
+        title.setText(R.string.dialog_wifi_video_tip);
+        tvContent.setText(R.string.dialog_wifi_video_open_the_door_continue_watching);
         TextView tv_cancel = mView.findViewById(R.id.tv_left);
         tv_cancel.setText(getString(R.string.dialog_wifi_video_continue_playing));
         tv_cancel.setTextColor(Color.parseColor("#9A9A9A"));

@@ -104,7 +104,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/sp_12"
                     android:textStyle="bold"
-                    android:text="电量："/>
+                    android:text="@string/activity_wi_fi_lock_detail_power"/>
 
                 <com.philips.easykey.lock.utils.BatteryView
                     android:id="@+id/iv_power"

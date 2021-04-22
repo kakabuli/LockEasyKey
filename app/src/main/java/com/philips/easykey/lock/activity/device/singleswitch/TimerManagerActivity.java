@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
@@ -53,7 +54,8 @@ public class TimerManagerActivity extends BaseAddToApplicationActivity {
         setContentView(R.layout.activity_timer_manager);
         ButterKnife.bind(this);
         for (int i = 0; i < 10; i++) {
-            singleSwitchTimerShowBeans.add(new SingleSwitchTimerShowBean("16:00 - 20:00", "不重複", "打開開關1", i % 2 == 0));
+            singleSwitchTimerShowBeans.add(new SingleSwitchTimerShowBean("16:00 - 20:00", getString(R.string.philips_activity_timer_manager_1),
+                    getString(R.string.philips_activity_timer_manager_2), i % 2 == 0));
         }
 
         if (singleSwitchTimerShowBeans!=null&& singleSwitchTimerShowBeans.size()>0) {
@@ -81,7 +83,7 @@ public class TimerManagerActivity extends BaseAddToApplicationActivity {
             public void onItemClick(SwipeMenuBridge menuBridge) {
                 int adapterPosition = menuBridge.getAdapterPosition();
                 menuBridge.closeMenu();
-                Toast.makeText(TimerManagerActivity.this, "删除   " + adapterPosition, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(getString(R.string.philips_activity_timer_manager_3,adapterPosition+""));
             }
         });
         rvTimerList.setLayoutManager(new LinearLayoutManager(this));

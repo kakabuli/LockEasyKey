@@ -55,7 +55,7 @@
         android:textSize="13sp"
         android:layout_marginTop="@dimen/dp_30"
         android:layout_gravity="center"
-        android:text="配对过程中避免设备断电和App退出"
+        android:text="@string/activity_add_rg4300_connect_wifi_expain"
         android:textColor="#666666"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/dp_60"
         android:layout_width="wrap_content"
         android:textColor="#333333"
-        android:text="正在进行设备配对中..."
+        android:text="@string/activity_add_rg4300_connect_wifi_connect"
         android:textSize="17sp"
         android:layout_height="wrap_content" />
 

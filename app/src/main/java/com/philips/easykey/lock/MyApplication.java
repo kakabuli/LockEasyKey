@@ -44,7 +44,6 @@ import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import com.philips.easykey.lock.utils.greenDao.db.ClothesHangerMachineAllBeanDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoManager;
@@ -90,7 +89,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.subjects.PublishSubject;
-import la.xiong.androidquick.tool.ActivityCollectorUtil;
+import com.philips.easykey.core.tool.ActivityCollectorUtil;
 
 
 /**
@@ -131,7 +130,7 @@ public class MyApplication extends Application {
         MyLog.getInstance().init(this);
         LogUtils.d("attachView  App启动 ");
         instance = this;
-//        CrashReport.initCrashReport(getApplicationContext(), "3ac95f5a71", true);
+//        CrashReport.initCrashReport(getApplicationContext(), "37003f935b", true);
         initBleService();
         initMqttService();//启动MqttService
         initMMKV(this);

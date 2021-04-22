@@ -233,7 +233,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
     public void onAlreadyBind(BluetoothDevice device, String name) {
         hiddenLoading();
         stopSearchAnimation();
-        binding(device, false,  String.format("设备已被%1$s绑定",name ));
+        binding(device, false,  getString(R.string.philips_activity_clothes_hanger_machine_add_third_1,name));
     }
 
     @Override

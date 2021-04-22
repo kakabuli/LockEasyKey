@@ -17,5 +17,5 @@
             android:padding="15dp"
             android:textColor="@color/color_333333"
             android:textSize="14sp"
-            android:text="加载中..." />
+            android:text="@string/dialog_loading" />
 </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_marginVertical="@dimen/dp_11"
         android:textSize="12sp"
         android:textColor="#333333"
-        android:text="今天"
+        android:text="@string/today"
         android:id="@+id/tv_day_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -69,7 +69,7 @@
             android:layout_weight="8"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="爸爸"
+            android:text=""
             android:textColor="#999999"
             android:textSize="@dimen/sp_12" />
 
@@ -82,7 +82,7 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:lines="3"
-            android:text="更改编号01密码为妈妈"
+            android:text=""
             android:textColor="#999999"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>

@@ -67,7 +67,7 @@
         android:layout_gravity="center"
         android:textColor="#333333"
         android:textSize="13sp"
-        android:text="请确认设备成功开启并处于发现状态"
+        android:text="@string/activity_add_rg4300_failed_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -67,6 +67,13 @@
                 android:textSize="@dimen/sp_15"
                 android:textColor="@drawable/fragment_message_text_color_selector"
                 android:layout_centerInParent="true"/>
+
+            <com.philips.easykey.lock.widget.BadgeNumberView
+                android:id="@+id/badge_number_view"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_toRightOf="@+id/tv_system_msg"
+                android:layout_alignTop="@+id/tv_system_msg" />
             <View
                 android:id="@+id/v_system_msg"
                 android:layout_width="@dimen/dp_16"

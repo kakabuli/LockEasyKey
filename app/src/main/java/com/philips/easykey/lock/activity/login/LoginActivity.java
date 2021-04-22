@@ -327,7 +327,8 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
         if ("101".equals(result.getCode() + "")){
             if(result.getData() != null){
                 if(result.getData().getRestrictCount() >= 5){
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, "输错" + result.getData().getRestrictCount() + "次，限制" + StringUtil.getTimeToString(result.getData().getRestrictTime()));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_login_password_restrict,
+                            result.getData().getRestrictCount() + "" , getString(StringUtil.getTimeToString(result.getData().getRestrictTime()))));
                 }else{
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
                 }

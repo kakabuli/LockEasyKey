@@ -43,7 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import la.xiong.androidquick.tool.FileTool;
+import com.philips.easykey.core.tool.FileTool;
 
 /**
  * Created by David on 2019/4/22

@@ -396,28 +396,28 @@ public class StringUtil {
         return str;
     }
 
-    public static String getTimeToString(int time){
+    public static int getTimeToString(int time){
         if(time == 60){
-            return "1分钟";
+            return R.string.philips_password_restrict_60;
         }else if(time == 900){
-            return "15分钟";
+            return R.string.philips_password_restrict_900;
         }else if(time == 3600){
-            return "1小时";
+            return R.string.philips_password_restrict_3600;
         }else if(time == 86400){
-            return "1个自然日";
+            return R.string.philips_password_restrict_86400;
         }else {
-            return "";
+            return -1;
         }
     }
 
     public static String phoneToHide(String phone){
         StringBuilder stringBuilder = new StringBuilder();
         if(phone.matches("^[1]\\d{10}$")){
-            return stringBuilder.append(phone.substring(0,3)).append("***").append(phone.substring(phone.length() - 3,phone.length())).toString();
+            return stringBuilder.append(phone.substring(0,3)).append("****").append(phone.substring(phone.length() - 3,phone.length())).toString();
         }else{
             if(phone.length() == 13){
                 if(phone.substring(2,phone.length()).matches("^[1]\\d{10}$")){
-                    return stringBuilder.append(phone.substring(0,5)).append("***").append(phone.substring(phone.length() - 3,phone.length())).toString();
+                    return stringBuilder.append(phone.substring(0,5)).append("****").append(phone.substring(phone.length() - 3,phone.length())).toString();
                 }
             }
         }

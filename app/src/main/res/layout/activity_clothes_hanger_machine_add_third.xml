@@ -63,7 +63,7 @@
         android:textSize="@dimen/sp_15"
         android:textColor="#333333"
         android:layout_marginTop="@dimen/dp_30"
-        android:text="蓝牙搜索中..."
+        android:text="@string/activity_clothes_hanger_machine_add_third_bluetooth_search"
         />
 
     <androidx.recyclerview.widget.RecyclerView

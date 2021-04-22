@@ -53,7 +53,7 @@ public class WifiLockAddNewThird2Activity extends BaseAddToApplicationActivity {
             head.setText(R.string.modify_admin_pwd);
             title.setText(R.string.modify_admin_pwd);
         }else {
-            head.setText("第四步：" + getString(R.string.modify_admin_pwd));
+            head.setText(getString(R.string.philips_avtivity_wifi_lock_add_new_third_1));
             title.setText(R.string.add_lock);
         }
     }

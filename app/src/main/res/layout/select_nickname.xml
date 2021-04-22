@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="爸爸"
+        android:text=""
         android:textColor="#1F96F7"
         android:textSize="@dimen/sp_12"
         />

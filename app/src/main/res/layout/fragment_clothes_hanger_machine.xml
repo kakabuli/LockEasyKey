@@ -126,7 +126,7 @@
                         android:textColor="#333333"
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_centerHorizontal="true"
-                        android:text="照明"/>
+                        android:text="@string/lighting"/>
 
                 </RelativeLayout>
 
@@ -165,7 +165,7 @@
                         android:textColor="#333333"
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_centerHorizontal="true"
-                        android:text="消毒"/>
+                        android:text="@string/disinfect"/>
                 </RelativeLayout>
 
                 <View
@@ -205,7 +205,7 @@
                         android:textColor="#333333"
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_centerHorizontal="true"
-                        android:text="风干"/>
+                        android:text="@string/airdry"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -246,7 +246,7 @@
                         android:textColor="#333333"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="烘干"/>
+                        android:text="@string/baking"/>
                 </RelativeLayout>
                 <View
                     android:layout_weight="1"
@@ -271,7 +271,7 @@
                         android:textColor="#333333"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="语音"/>
+                        android:text="@string/voice"/>
                 </RelativeLayout>
                 <View
                     android:layout_weight="1"
@@ -299,7 +299,7 @@
                         android:textColor="#333333"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="童锁"/>
+                        android:text="@string/child_lock"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_12"
         android:layout_marginRight="@dimen/dp_20"
-        android:text="上锁故障报警：您的门锁未上锁，请检查锁舌是否弹出"
+        android:text="@string/item_wifi_lock_alrm_1"
         android:textColor="#999999"
         android:textSize="@dimen/sp_12" />
 

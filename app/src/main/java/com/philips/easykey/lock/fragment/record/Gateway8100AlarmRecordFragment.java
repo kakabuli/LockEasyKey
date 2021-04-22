@@ -243,7 +243,7 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
                     openType = getString(R.string.warring_broken);
                     break;
                 case 5:
-                    openType = "即时性推送消息";
+                    openType = getString(R.string.philips_fragment_gateway_alarm_record);
                     break;
                 case 6:
                     openType = getString(R.string.warrign_hijack);

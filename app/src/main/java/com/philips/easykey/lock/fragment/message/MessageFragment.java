@@ -18,6 +18,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.MessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.view.IMessageView;
+import com.philips.easykey.lock.widget.BadgeNumberView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,12 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
     View vSystemMsg;
     @BindView(R.id.vp_message)
     ViewPager vpMessage;
+    @BindView(R.id.rl_door_lock_msg)
+    RelativeLayout rlDoorLockMsg;
+    @BindView(R.id.badge_number_view)
+    BadgeNumberView badgeNumberView;
+    @BindView(R.id.rl_system_msg)
+    RelativeLayout rlSystemMsg;
     private View mView;
     private Unbinder unbinder;
     private FragmentPagerAdapter adapter;
@@ -67,6 +74,7 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
         titleBar.setLayoutParams(lp);
+        badgeNumberView.setText(32);
         setTvDoorLockMsgAndTvSystemMsgColor(true);
         vpMessage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -76,9 +84,9 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0){
+                if (position == 0) {
                     setTvDoorLockMsgAndTvSystemMsgColor(true);
-                }else if(position == 1){
+                } else if (position == 1) {
                     setTvDoorLockMsgAndTvSystemMsgColor(false);
                 }
             }
@@ -150,13 +158,13 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
         switch (view.getId()) {
             case R.id.rl_door_lock_msg:
                 setTvDoorLockMsgAndTvSystemMsgColor(true);
-                if(fragments.size() > 0){
+                if (fragments.size() > 0) {
                     vpMessage.setCurrentItem(0);
                 }
                 break;
             case R.id.rl_system_msg:
                 setTvDoorLockMsgAndTvSystemMsgColor(false);
-                if(fragments.size() > 1){
+                if (fragments.size() > 1) {
                     vpMessage.setCurrentItem(1);
                 }
                 break;

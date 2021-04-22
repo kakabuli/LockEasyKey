@@ -18,7 +18,7 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/title_21"
                 android:textSize="15sp"
-                android:text="取消"
+                android:text="@string/dialog_btn_cancel"
                 android:layout_alignParentLeft="true"
         />
         <TextView
@@ -31,7 +31,7 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/title_21"
                 android:textSize="15sp"
-                android:text="发布"
+                android:text="@string/dialog_btn_publish"
         />
     </RelativeLayout>
 
@@ -45,7 +45,7 @@
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="评论"
+                android:hint="@string/dialog_btn_comment"
                 android:maxLength="200"
                 android:focusable="true"
                 android:textColorHint="@color/commentTextColor"

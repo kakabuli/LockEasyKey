@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_17"
             android:textColor="#999999"
-            android:text="时间设置"
+            android:text="@string/real_time_video_time_setting"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dp_24"
             android:layout_centerHorizontal="true"/>

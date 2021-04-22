@@ -226,7 +226,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_12"
-                android:text="客廳"
+                android:text="@string/single_switch_position1"
                 android:textColor="#858585"
                 android:textSize="@dimen/sp_12" />
 

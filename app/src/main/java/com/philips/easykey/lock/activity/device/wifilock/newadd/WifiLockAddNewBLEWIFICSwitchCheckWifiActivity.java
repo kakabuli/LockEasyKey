@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAddBleSuccessActivity;
@@ -107,7 +108,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if(circleProgressBar2 != null && circleProgressBar2.getValue() != 100){
-                                Toast.makeText(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "绑定100s超时", Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShort(R.string.philips_activity_wifi_lock_ble_wifi_checkwifi_timeout);
                                 Intent intent = new Intent(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, WifiLockAddNewBindFailedActivity.class);
                                 startActivity(intent);
                             }
@@ -174,7 +175,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
     };
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", "Wi-Fi账号或密码输错已超过5次", getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 //                        onError(socketManager, -5);
@@ -383,7 +384,8 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
                 @Override
                 public void run() {
 
-                    AlertDialogUtil.getInstance().singleButtonNoTitleDialogNoLine(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "Wi-Fi账号或密码输错已超过5次",
+                    AlertDialogUtil.getInstance().singleButtonNoTitleDialogNoLine(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this,
+                            getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1),
                             getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {
                                 @Override
                                 public void left() {

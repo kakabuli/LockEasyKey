@@ -89,7 +89,7 @@
         android:layout_marginBottom="@dimen/dp_46"
         android:background="@drawable/go_and_buy"
         android:gravity="center"
-        android:text="已唤醒面板"
+        android:text="@string/activity_wifi_lock_old_user_third_1"
         android:textColor="#fff"
         android:textSize="@dimen/sp_15" />
 

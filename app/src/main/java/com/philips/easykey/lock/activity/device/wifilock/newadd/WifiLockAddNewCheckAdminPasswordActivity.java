@@ -73,7 +73,8 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
                 LogUtils.d("--Kaadas--socketManager断开连接");
                 LogUtils.d("--Kaadas--"+getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                        WifiLockAddNewCheckAdminPasswordActivity.this, "", "连接已断开，请重新开始", getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.philips_activity_wifi_lock_checkadmin_password),
+                        getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 startActivity(new Intent(WifiLockAddNewCheckAdminPasswordActivity.this, WifiLockAddNewScanFailedActivity.class));
@@ -421,7 +422,8 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
         if (times < 5) {
             if (times == 3) { //提示三次错误
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                        WifiLockAddNewCheckAdminPasswordActivity.this, "", "门锁管理密码验证失败3次，\n超过5次，配网失败", getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.philips_activity_wifi_lock_check_password_dialog_1),
+                        getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 toInputPasswordActivity();
@@ -493,9 +495,9 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
 
     private void showModifyPasswordDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
-                WifiLockAddNewCheckAdminPasswordActivity.this
-                , "门锁初始密码不能验证，\n" + "请修改门锁管理密码或重新输入\n",
-                getString(R.string.re_input), "修改密码", "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewCheckAdminPasswordActivity.this,
+                getString(R.string.philips_activity_wifi_lock_ble_wifi_checkadmin_password),
+                getString(R.string.re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         //重新输入

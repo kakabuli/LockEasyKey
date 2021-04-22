@@ -59,7 +59,7 @@ public class ScanHttpDialogActivity extends BaseAddToApplicationActivity {
         this.setFinishOnTouchOutside(true);
 
         LoadingDialog loadingDialog = LoadingDialog.getInstance(this);
-        loadingDialog.show("加载中...");
+        loadingDialog.show(getString(R.string.loading));
 
     }
 

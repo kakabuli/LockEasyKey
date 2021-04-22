@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.annotations.SerializedName;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -198,7 +199,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
                     //键位昵称
                     if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(0).getNickname()!=null) {
                         if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(0).getNickname().length() > 0)
-                            swipch_one_nick_text.setText(wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(0).getNickname() + "(键位1)");
+                            swipch_one_nick_text.setText( getString(R.string.philips_activity_swipchlink_1,wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(0).getNickname()));
                     }
                     break;
                 case 2://键位2开关
@@ -237,7 +238,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
                     //键位昵称
                     if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(1).getNickname()!=null) {
                         if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(1).getNickname().length() > 0)
-                            swipch_two_nick_text.setText(wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(1).getNickname() + "(键位2)");
+                            swipch_two_nick_text.setText( getString(R.string.philips_activity_swipchlink_2,wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(1).getNickname()));
                     }
                     break;
                 case 3://键位3开关
@@ -277,7 +278,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
                     if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(2).getNickname()!=null) {
 
                         if (wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(2).getNickname().length() > 0)
-                            swipch_three_nick_text.setText(wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(2).getNickname() + "(键位3)");
+                            swipch_three_nick_text.setText(getString(R.string.philips_activity_swipchlink_3,wifiLockInfoChange.getSingleFireSwitchInfo().getSwitchNumber().get(2).getNickname()));
                     }
                     break;
             }
@@ -519,9 +520,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void settingDeviceThrowable() {
-//         refresh();
-        Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
-//        LogUtils.d("--kaadas--设置超时");
+        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
 
     }
 
@@ -584,16 +583,12 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void bindingAndModifyDeviceFail() {
-//        LogUtils.d("--kaadas--修改信息失败");
-//        refresh();
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
     public void bindingAndModifyDeviceThrowable() {
-//        LogUtils.d("--kaadas--修改信息超时");
-//        refresh();
-        Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
     }
 //    public void refresh() {
 //        if (switchIsEn) {

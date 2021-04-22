@@ -81,67 +81,67 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
 
     @Override
     public void setArmLockedSuccess() {
-        ToastUtils.showShort("设置布防成功");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_1);
     }
 
     @Override
     public void setArmLockedFail() {
-        ToastUtils.showShort("设置布防失败");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_2);
     }
 
     @Override
     public void setArmLockedThrowable(Throwable throwable) {
-        ToastUtils.showShort("设置布防异常");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_3);
     }
 
     @Override
     public void setAMSuccess() {
-        ToastUtils.showShort("设置AM成功");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_4);
     }
 
     @Override
     public void setAMFail() {
-        ToastUtils.showShort("设置AM失败");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_5);
     }
 
     @Override
     public void setAMThrowable(Throwable throwable) {
-        ToastUtils.showShort("设置AM异常");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_6);
     }
 
     @Override
     public void getArmLockedSuccess(int operatingMode) {
         if (getArmLocked!=null){
-            getArmLocked.setText("布防状态时"+operatingMode);
+            getArmLocked.setText(getString(R.string.philips_activity_gatewaylock_setting_7) + operatingMode);
         }
-        ToastUtils.showShort("获取布防成功");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_8);
     }
 
     @Override
     public void getArmLockedFail() {
-        ToastUtils.showShort("获取布防失败");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_9);
     }
 
     @Override
     public void getArmLockedThrowable(Throwable throwable) {
-        ToastUtils.showShort("获取布防异常");
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_10));
     }
 
     @Override
     public void getAMSuccess(int autoRelockTime) {
         if (getAM!=null){
-            getArmLocked.setText("AM是"+autoRelockTime);
+            getArmLocked.setText(getString(R.string.philips_activity_gatewaylock_setting_11,autoRelockTime + ""));
         }
-        ToastUtils.showShort("获取AM成功");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_12);
     }
 
     @Override
     public void getAMFail() {
-        ToastUtils.showShort("获取AM失败");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_13);
     }
 
     @Override
     public void getAMThrowable(Throwable throwable) {
-        ToastUtils.showShort("获取AM异常");
+        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_14);
     }
 }

@@ -274,7 +274,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
         }
 
         tvCenterMode.setVisibility(View.VISIBLE);
-        tvTopStates.setText("已关锁");
+        tvTopStates.setText(getString(R.string.philips_fragment_wifi_video_locked));
         ivTopIcon.setVisibility(View.VISIBLE); //上方图标显示
         switch (status) {
             case 2:
@@ -288,7 +288,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 } else {
                     tvUpdateTime.setText("" + DateUtils.timestampToDateSecond(openStatusTime));
                 }
-                tvCenterMode.setText("布防模式");
+                tvCenterMode.setText(getString(R.string.safe_protection));
                 break;
             case 3:
                 //“已反锁，请门内开锁”
@@ -302,7 +302,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 } else {
                     tvUpdateTime.setText("" + DateUtils.timestampToDateSecond(openStatusTime));
                 }
-                tvCenterMode.setText("反锁模式");
+                tvCenterMode.setText(getString(R.string.philips_fragment_wifi_video_anti_lock_mode));
                 break;
             case 4:
                 //“锁已打开”
@@ -312,7 +312,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
 //                tvTopStates.setText(getString(R.string.open_lock_already));  //设置设备状态   离线
                 tvCenterMode.setText(tvCenterMode.getText() + "");
                 tvCenterContent.setText(getString(R.string.click_door_info));
-                tvTopStates.setText("已开锁");
+                tvTopStates.setText(getString(R.string.philips_fragment_wifi_video_unlocked));
                 if (openStatusTime == 0) {
                     tvUpdateTime.setText(""+ DateUtils.timestampToDateSecond(updateTime));
                 } else {
@@ -330,7 +330,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 } else {
                     tvUpdateTime.setText("" + DateUtils.timestampToDateSecond(openStatusTime));
                 }
-                tvCenterMode.setText("正常模式");
+                tvCenterMode.setText(getString(R.string.real_time_video_setting_normal));
                 break;
             case 6:
                 //已启动安全模式
@@ -362,7 +362,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 ivBackGround.setImageResource(R.mipmap.video_jie_neng_big_middle_icon);  //背景大图标
                 ivCenterIcon.setImageResource(R.mipmap.wifi_video_lock_home_middle_icon);  //中间小图标
 //                tvTopStates.setText(getString(R.string.already_face_sensor_model_open));
-                tvCenterContent.setText(getString(R.string.power_Save_mode));
+                tvCenterContent.setText(getString(R.string.power_save_mode));
                 if (openStatusTime == 0) {
                     tvUpdateTime.setText(""+ DateUtils.timestampToDateSecond(updateTime));
                 } else {
@@ -385,7 +385,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 break;
         }
         if(wifiLockInfo.getPowerSave() == 1){
-            tvCenterContent.setText(getString(R.string.power_Save_mode));
+            tvCenterContent.setText(getString(R.string.power_save_mode));
         }else{
             tvCenterContent.setText(getString(R.string.click_door_info));
         }
@@ -585,7 +585,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), "锁已开启节能模式，无法查看门外情况", "请更换电池或进入管理员模式进行关闭",
+        AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.philips_fragment_wifi_video_dialog_1), getString(R.string.philips_fragment_wifi_video_dialog_2),
                 getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

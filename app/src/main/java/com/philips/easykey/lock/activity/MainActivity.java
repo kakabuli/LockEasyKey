@@ -58,7 +58,6 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.PermissionUtil;
@@ -79,12 +78,6 @@ import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import la.xiong.androidquick.tool.Constans;
-import la.xiong.androidquick.ui.eventbus.EventCenter;
 
 import static com.philips.easykey.lock.utils.PermissionUtil.REQUEST_AUDIO_PERMISSION_REQUEST_CODE;
 
@@ -128,7 +121,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         ButterKnife.bind(this);
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
         isRunning = true;
-        EventBus.getDefault().register(this);
         rg.setOnCheckedChangeListener(this);
         MqttService mqttService = MyApplication.getInstance().getMqttService();
         if (mqttService != null) {
@@ -227,7 +219,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     private void checkNotificatoinEnabled() {
         if(!NotificationUtil.isNotifyEnabled(this)){
-            AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, "检测到您没有打开通知权限，是否去打开",
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.philips_activity_main_notification),
                     getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
@@ -576,7 +568,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     @Override
     public void gatewayResetSuccess(String gatewayId) {
-        ToastUtils.showShort(gatewayId + "网关:" + getString(R.string.gateway_reset_unbind));
+        ToastUtils.showShort(getString(R.string.philips_gateway_reset_unbind,gatewayId));
     }
 
     @Override
@@ -816,15 +808,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(EventCenter eventCenter) {
-        if (eventCenter.getEventCode() == Constans.RELOGIN) {  //商城token  过期
-            MyApplication.getInstance().tokenInvalid(true);
-            MMKVUtils.removeKey(SPUtils.STORE_TOKEN);
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -834,7 +817,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){//同意授权
 
                 }else {
-                    ToastUtils.showShort("请先获取麦克风权限");
+                    ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
                 }
                 break;
         }
