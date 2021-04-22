@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="106pt"
+    android:layout_marginTop="5pt"
+    android:layout_marginBottom="5pt"
+    android:layout_marginStart="16pt"
+    android:layout_marginEnd="16pt"
+    app:cardCornerRadius="15pt">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivRecordIcon"
+            android:layout_width="78pt"
+            android:layout_height="78pt"
+            android:layout_marginStart="16pt"
+            android:contentDescription="@string/cdt_record_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/philips_home_icon_video_card" />
+
+        <ImageView
+            android:id="@+id/ivWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5pt"
+            android:layout_marginEnd="10pt"
+            app:layout_constraintEnd_toStartOf="@+id/ivPower"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/philips_home_icon_wifi"
+            android:contentDescription="@string/cdt_wifi" />
+
+        <ImageView
+            android:id="@+id/ivPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16pt"
+            android:layout_marginTop="5pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/philips_home_icon_battery"
+            android:contentDescription="@string/cdt_power" />
+
+        <TextView
+            android:id="@+id/tvDeviceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16pt"
+            android:layout_marginTop="29pt"
+            tools:text="DDL708-V-5HW"
+            android:textColor="@color/color_333333"
+            app:layout_constraintStart_toEndOf="@+id/ivRecordIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLastRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13pt"
+            android:gravity="center_horizontal"
+            android:textColor="@color/color_333333"
+            android:textSize="12pt"
+            app:layout_constraintStart_toStartOf="@+id/tvDeviceName"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeviceName"
+            tools:text="2021.03.29  10:00   小明指纹00开锁" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

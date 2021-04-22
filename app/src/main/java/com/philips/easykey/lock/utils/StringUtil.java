@@ -16,6 +16,15 @@ import java.util.regex.Pattern;
 public class StringUtil {
 
     /**
+     * 处理可能存在null的数据，避免闪退
+     * @param willProcessStr 要处理的string字符串
+     * @return 输出不为null的字符串
+     */
+    public static String processEmptyString(String willProcessStr) {
+        return TextUtils.isEmpty(willProcessStr)?"":willProcessStr;
+    }
+
+    /**
      * 是否全为数字
      *
      * @param str

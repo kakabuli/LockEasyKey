@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="343pt"
+    android:layout_height="391pt"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15pt">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvDeviceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20pt"
+            android:layout_marginTop="14pt"
+            android:textColor="@color/color_333333"
+            android:textSize="15pt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DDL708-V-5HW" />
+
+        <ImageView
+            android:id="@+id/ivWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19pt"
+            android:layout_marginEnd="10pt"
+            app:layout_constraintEnd_toStartOf="@+id/ivPower"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/philips_home_icon_wifi"
+            android:contentDescription="@string/cdt_wifi" />
+
+        <ImageView
+            android:id="@+id/ivPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19pt"
+            android:layout_marginEnd="16pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/philips_home_icon_battery"
+            android:contentDescription="@string/cdt_power" />
+
+        <ImageView
+            android:id="@+id/ivVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeviceName"
+            app:srcCompat="@drawable/philips_home_icon_video_card"
+            android:contentDescription="@string/cdt_record_icon" />
+
+        <TextView
+            android:id="@+id/tvLastRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32pt"
+            android:gravity="center_horizontal"
+            tools:text="2021.03.29  10:00   小明指纹00开锁"
+            android:textColor="@color/c666666"
+            android:textSize="12pt"
+            app:layout_constraintTop_toBottomOf="@+id/ivVideo" />
+
+        <ImageView
+            android:id="@+id/ivMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="45pt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
+            app:srcCompat="@drawable/philips_home_icon_message"
+            android:contentDescription="@string/philips_message" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9pt"
+            android:text="@string/philips_message"
+            android:textColor="@color/color_333333"
+            android:textSize="12pt"
+            app:layout_constraintEnd_toEndOf="@+id/ivMessage"
+            app:layout_constraintStart_toStartOf="@+id/ivMessage"
+            app:layout_constraintTop_toBottomOf="@+id/ivMessage" />
+
+        <ImageView
+            android:id="@+id/ivPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="69pt"
+            android:layout_marginTop="45pt"
+            app:layout_constraintStart_toEndOf="@+id/ivMessage"
+            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
+            app:srcCompat="@drawable/philips_home_icon_password"
+            android:contentDescription="@string/philips_pwd" />
+
+        <TextView
+            android:id="@+id/tvPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/philips_pwd"
+            android:layout_marginTop="9pt"
+            android:textColor="@color/color_333333"
+            android:textSize="12pt"
+            app:layout_constraintEnd_toEndOf="@+id/ivPwd"
+            app:layout_constraintStart_toStartOf="@+id/ivPwd"
+            app:layout_constraintTop_toBottomOf="@+id/ivPwd" />
+
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45pt"
+            android:layout_marginStart="68pt"
+            app:layout_constraintStart_toEndOf="@+id/ivPwd"
+            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
+            app:srcCompat="@drawable/philips_home_icon_fingerprint"
+            android:contentDescription="@string/philips_setting" />
+
+        <TextView
+            android:id="@+id/tvSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/philips_setting"
+            android:layout_marginTop="9pt"
+            android:textColor="@color/color_333333"
+            android:textSize="12pt"
+            app:layout_constraintEnd_toEndOf="@+id/ivSetting"
+            app:layout_constraintStart_toStartOf="@+id/ivSetting"
+            app:layout_constraintTop_toBottomOf="@+id/ivSetting" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

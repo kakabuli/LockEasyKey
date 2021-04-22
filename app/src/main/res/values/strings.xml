@@ -2158,7 +2158,15 @@
     <string name="seven_day_data_statistics">近7天数据统计</string>
     <string name="warning_message_inform">预警消息通知</string>
     <string name="all_device">全部设备</string>
+    <string name="philips_message">消息</string>
+    <string name="philips_last_record">%1$s %2$s</string>
+    <string name="philips_pwd">密钥</string>
+    <string name="philips_setting">设置</string>
 
-
+    <!-- contentDescription -->
+    <string name="cdt_power">电量</string>
+    <string name="cdt_wifi">Wifi</string>
+    <string name="cdt_record_icon">记录图标</string>
+    <string name="philips_device_count">/%1$d</string>
 
 </resources>
