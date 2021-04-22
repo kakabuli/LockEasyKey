@@ -40,6 +40,7 @@ import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PersonalCenterFragment;
 import com.philips.easykey.lock.fragment.device.DeviceFragment;
 import com.philips.easykey.lock.fragment.home.HomePageFragment;
+import com.philips.easykey.lock.fragment.home.PhilipsDeviceFragment;
 import com.philips.easykey.lock.fragment.message.MessageFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
 import com.philips.easykey.lock.mvp.presenter.MainActivityPresenter;
@@ -143,7 +144,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             }
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
-        fragments.add(new HomePageFragment());
+        fragments.add(new PhilipsDeviceFragment());
         fragments.add(new MessageFragment());
 //        fragments.add(new ShopFragment());
         fragments.add(new PersonalCenterFragment());
@@ -222,11 +223,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         LogUtils.d("MainActivity启动完成 ");
 
         checkNotificatoinEnabled();
-    }
-
-    @Override
-    public Resources getResources() {
-        return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
     }
 
     private void checkNotificatoinEnabled() {

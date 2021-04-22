@@ -2,10 +2,12 @@ package com.philips.easykey.lock.mvp.mvpbase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.shulan.KeepAliveManager;
@@ -70,6 +72,11 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
     protected void onDestroy() {
         MyApplication.getInstance().removeActivity(this);
         super.onDestroy();
+    }
+
+    @Override
+    public Resources getResources() {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
     }
 
 }
