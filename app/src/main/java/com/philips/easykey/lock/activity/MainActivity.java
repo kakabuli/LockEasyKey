@@ -18,7 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -37,10 +37,9 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
-import com.philips.easykey.lock.fragment.PersonalCenterFragment;
-import com.philips.easykey.lock.fragment.device.DeviceFragment;
+import com.philips.easykey.lock.fragment.PhilipsPersonalCenterFragment;
 import com.philips.easykey.lock.fragment.home.HomePageFragment;
-import com.philips.easykey.lock.fragment.message.MessageFragment;
+import com.philips.easykey.lock.fragment.message.PhilipsMessageFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
 import com.philips.easykey.lock.mvp.presenter.MainActivityPresenter;
 import com.philips.easykey.lock.mvp.presenter.UpgradePresenter;
@@ -144,9 +143,9 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
         fragments.add(new HomePageFragment());
-        fragments.add(new MessageFragment());
+        fragments.add(new PhilipsMessageFragment());
 //        fragments.add(new ShopFragment());
-        fragments.add(new PersonalCenterFragment());
+        fragments.add(new PhilipsPersonalCenterFragment());
 //        evevt = this;
         instance = this;
         isCreate = true;

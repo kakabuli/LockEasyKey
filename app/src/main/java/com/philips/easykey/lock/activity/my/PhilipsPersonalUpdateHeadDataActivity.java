@@ -19,8 +19,6 @@ import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.PersonalDataPresenter;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -51,7 +49,7 @@ import butterknife.OnClick;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataView, PersonalDataPresenter<IPersonalDataView>> implements IPersonalDataView, View.OnClickListener {
+public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataView, PersonalDataPresenter<IPersonalDataView>> implements IPersonalDataView, View.OnClickListener {
 
 
     @BindView(R.id.iv_back)
@@ -88,7 +86,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_data);
+        setContentView(R.layout.philips_activity_personal_data);
         ButterKnife.bind(this);
         initDefault();
         initView();
@@ -144,7 +142,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
                 showHeadDialog();
                 break;
             case R.id.head_telNum_layout:
-                showChangeNumber();
+                showChangeNumberDialog();
                 break;
         }
     }
@@ -172,7 +170,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
             @Override
             public void onClick(View v) {
                 //摄像头
-                Intent intent = new Intent(PersonalUpdateHeadDataActivity.this, ImageGridActivity.class);
+                Intent intent = new Intent(PhilipsPersonalUpdateHeadDataActivity.this, ImageGridActivity.class);
                 intent.putExtra(ImageGridActivity.EXTRAS_IMAGES, images);
                 //ImagePicker.getInstance().setSelectedImages(images);
                 startActivityForResult(intent, PHOTO_REQUEST_CODE);
@@ -189,7 +187,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
         bottomMenuDialog.show();
     }
 
-    private void showChangeNumber(){
+    private void showChangeNumberDialog(){
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_personal_change_tel_number),
@@ -201,7 +199,7 @@ public class PersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataVi
 
                     @Override
                     public void right() {
-                        Intent mUpdateNumber = new Intent(PersonalUpdateHeadDataActivity.this, PersonalUpdateNumberActivity.class);
+                        Intent mUpdateNumber = new Intent(PhilipsPersonalUpdateHeadDataActivity.this, PhilipsPersonalUpdateNumberActivity.class);
                         startActivity(mUpdateNumber);
 
                     }

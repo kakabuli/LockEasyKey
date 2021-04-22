@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,11 +20,10 @@ import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.ProductActivati
 import com.philips.easykey.lock.activity.my.AboutUsActivity;
 import com.philips.easykey.lock.activity.my.BarCodeActivity;
 import com.philips.easykey.lock.activity.my.PersonalFAQActivity;
-import com.philips.easykey.lock.activity.my.PersonalMessageActivity;
-import com.philips.easykey.lock.activity.my.PersonalSecuritySettingActivity;
+import com.philips.easykey.lock.activity.my.PhilipsPersonalSecuritySettingActivity;
 import com.philips.easykey.lock.activity.my.PersonalSystemSettingActivity;
-import com.philips.easykey.lock.activity.my.PersonalUpdateHeadDataActivity;
-import com.philips.easykey.lock.activity.my.UserFeedbackActivity;
+import com.philips.easykey.lock.activity.my.PhilipsPersonalUpdateHeadDataActivity;
+import com.philips.easykey.lock.activity.my.PhilipsUserFeedbackActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.MyFragmentPresenter;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -55,7 +55,7 @@ import static android.app.Activity.RESULT_OK;
  * @company kaadas
  * created at 2019/2/25 14:47
  */
-public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView, View.OnClickListener {
+public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView{
     @BindView(R.id.security_setting_layout)
     RelativeLayout securitySettingLayout;
     @BindView(R.id.faq_layout)
@@ -84,10 +84,9 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mPersonlCenterView == null) {
-            mPersonlCenterView = inflater.inflate(R.layout.fragment_my, container, false);
+            mPersonlCenterView = inflater.inflate(R.layout.philips_fragment_my, container, false);
         }
         unbinder = ButterKnife.bind(this, mPersonlCenterView);
-        rlUserFeedback.setOnClickListener(this);
         return mPersonlCenterView;
     }
 
@@ -112,7 +111,9 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
     }
 
     private void initView() {
-
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(headSecond.getLayoutParams());
+        lp.setMargins(0, getStatusBarHeight(), 0, 0);
+        headSecond.setLayoutParams(lp);
         //用户名
         String userName = (String) SPUtils.get(SPUtils.USERNAME, "");
         if (!TextUtils.isEmpty(userName)) {
@@ -141,12 +142,16 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
         unbinder.unbind();
     }
 
-    @OnClick({R.id.security_setting_layout, R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second,R.id.product_activition})
+    @OnClick({R.id.security_setting_layout,R.id.rl_user_feedback,R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second,R.id.product_activition})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.security_setting_layout:
-                Intent mSercurityIntent = new Intent(getActivity(), PersonalSecuritySettingActivity.class);
+                Intent mSercurityIntent = new Intent(getActivity(), PhilipsPersonalSecuritySettingActivity.class);
                 startActivity(mSercurityIntent);
+                break;
+            case R.id.rl_user_feedback:
+                Intent mUserFeedbackintent = new Intent(getActivity(), PhilipsUserFeedbackActivity.class);
+                startActivity(mUserFeedbackintent);
                 break;
             case R.id.faq_layout:
                 Intent mFaq = new Intent(getActivity(), PersonalFAQActivity.class);
@@ -161,7 +166,7 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
                 startActivity(aboutIntent);
                 break;
             case R.id.head_second:
-                Intent updateHeadData = new Intent(getActivity(), PersonalUpdateHeadDataActivity.class);
+                Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
                 startActivity(updateHeadData);
                 break;
             case R.id.product_activition:
@@ -218,17 +223,6 @@ public class PersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFrag
     public void getNicknameError(Throwable throwable) {
         String account = (String) SPUtils.get(SPUtils.PHONEN, "");
         headPortraitName.setText(account);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
-            case R.id.rl_user_feedback:
-                intent = new Intent(getActivity(), UserFeedbackActivity.class);
-                startActivity(intent);
-                break;
-        }
     }
 
     @Override

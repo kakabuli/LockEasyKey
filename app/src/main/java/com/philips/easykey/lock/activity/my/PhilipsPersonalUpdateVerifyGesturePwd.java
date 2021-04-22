@@ -36,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity {
+public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity {
     @BindView(R.id.text_tip)
     TextView mTextTip;
 
@@ -57,7 +57,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.update_verify_hand_pwd);
+        setContentView(R.layout.philips_update_verify_hand_pwd);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
@@ -82,7 +82,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
 
                 @Override
                 public void checkedSuccess() {
-                    if ("PersonalSecuritySettingActivity".equals(source)) {
+                    if ("PhilipsPersonalSecuritySettingActivity".equals(source)) {
                         Intent intent = new Intent();
                         //把返回数据存入Intent
                         //设置返回数据
@@ -90,7 +90,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
                         finish();
                     } else {
                         finish();
-                        Intent intent = new Intent(PersonalUpdateVerifyGesturePwd.this, PersonalUpdateGesturePwdActivity.class);
+                        Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PersonalUpdateGesturePwdActivity.class);
                         startActivity(intent);
                     }
 
@@ -106,7 +106,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
                         mTextTip.setText(Html
                                 .fromHtml("<font color='#DB392B'>" + text + "</font>"));
                         // 左右移动动画
-                        Animation shakeAnimation = AnimationUtils.loadAnimation(PersonalUpdateVerifyGesturePwd.this, R.anim.shake);
+                        Animation shakeAnimation = AnimationUtils.loadAnimation(PhilipsPersonalUpdateVerifyGesturePwd.this, R.anim.shake);
                         mTextTip.startAnimation(shakeAnimation);
                     } else {
                         //重新登录
@@ -116,7 +116,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
                             MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                         }
                         MyApplication.getInstance().tokenInvalid(false);
-                        Intent intent = new Intent(PersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
+                        Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -139,7 +139,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
         String password = (String) SPUtils.get(SPUtils.PASSWORD, "");
         if (TextUtils.isEmpty(password)) { //如果本地密码保存为空
             MyApplication.getInstance().tokenInvalid(false);
-            Intent intent = new Intent(PersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
+            Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
             startActivity(intent);
         } else {
             showInputPassword();
@@ -196,7 +196,7 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
                     String localPassword = (String) SPUtils.get(SPUtils.PASSWORD, "");
                     if (localPassword.equals(password)){  //验证成功  跳转至设置手势密码界面
                         finish();
-                        Intent intent = new Intent(PersonalUpdateVerifyGesturePwd.this, PersonalUpdateGesturePwdActivity.class);
+                        Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PersonalUpdateGesturePwdActivity.class);
                         startActivity(intent);
                     }else {
                         showSelectDialog();
@@ -229,13 +229,13 @@ public class PersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity
 
 
     public void showSelectDialog(){
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(PersonalUpdateVerifyGesturePwd.this, getString(R.string.account_password_error2),
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(PhilipsPersonalUpdateVerifyGesturePwd.this, getString(R.string.account_password_error2),
                 getString(R.string.modify_password), getString(R.string.re_input), "#333333",
                 "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         Intent intent = new Intent();
-                        intent.setClass(PersonalUpdateVerifyGesturePwd.this, ForgetPasswordActivity.class);
+                        intent.setClass(PhilipsPersonalUpdateVerifyGesturePwd.this, ForgetPasswordActivity.class);
                         startActivity(intent);
                     }
 

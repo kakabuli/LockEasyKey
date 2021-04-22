@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PersonalUpdateNumberActivity extends BaseActivity<IPersonalUpdateNumberView, PersonalUpdateNumberPresenter<IPersonalUpdateNumberView>> implements IPersonalUpdateNumberView {
+public class PhilipsPersonalUpdateNumberActivity extends BaseActivity<IPersonalUpdateNumberView, PersonalUpdateNumberPresenter<IPersonalUpdateNumberView>> implements IPersonalUpdateNumberView {
 
 
     @BindView(R.id.tv_content)
@@ -31,7 +31,7 @@ public class PersonalUpdateNumberActivity extends BaseActivity<IPersonalUpdateNu
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_update_number);
+        setContentView(R.layout.philips_activity_personal_update_number);
         ButterKnife.bind(this);
         initView();
     }

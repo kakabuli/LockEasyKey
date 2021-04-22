@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.message.DeviceSelectDialogActivity;
+import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
 import com.philips.easykey.lock.adapter.SevendayDataStatisticsAdapter;
 import com.philips.easykey.lock.adapter.TodayLockStatisticsAdapter;
 import com.philips.easykey.lock.adapter.VideoLockWarningInformAdapter;
@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, DoorLockMessageFragmentPresenter<IDoorLockMessageView>> implements IDoorLockMessageView {
+public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, DoorLockMessageFragmentPresenter<IDoorLockMessageView>> implements IDoorLockMessageView {
 
     @BindView(R.id.rcv_video_lock_msg)
     RecyclerView rcvVideoLockMsg;
@@ -58,7 +58,7 @@ public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_door_lock_message, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_door_lock_message, container, false);
         }
         unbinder = ButterKnife.bind(this, mView);
         initView();
@@ -135,7 +135,7 @@ public class DoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, 
 
     @OnClick(R.id.tv_lock_name)
     public void onViewClicked() {
-        Intent intent = new Intent(getContext(), DeviceSelectDialogActivity.class);
+        Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
         startActivityForResult(intent, RESULT_OK);
     }
 

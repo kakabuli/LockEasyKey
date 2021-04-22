@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.DeviceSelectAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
-import com.philips.easykey.lock.bean.SevendayDataStatisticsBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.widget.SpacesItemDecoration;
 
@@ -22,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DeviceSelectDialogActivity extends BaseAddToApplicationActivity {
+public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActivity {
 
     @BindView(R.id.rcv_device_select)
     RecyclerView rcvDeviceSelect;
@@ -34,7 +33,7 @@ public class DeviceSelectDialogActivity extends BaseAddToApplicationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        setContentView(R.layout.device_select_dialog);
+        setContentView(R.layout.philips_device_select_dialog);
         ButterKnife.bind(this);
         initView();
     }

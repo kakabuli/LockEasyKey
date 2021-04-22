@@ -10,14 +10,13 @@ import androidx.annotation.Nullable;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
-import com.philips.easykey.lock.mvp.presenter.DoorLockMessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.presenter.SystemMessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.view.ISystemMessageView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class SystemMessageFragment extends BaseFragment<ISystemMessageView, SystemMessageFragmentPresenter<ISystemMessageView>> implements ISystemMessageView {
+public class PhilipsSystemMessageFragment extends BaseFragment<ISystemMessageView, SystemMessageFragmentPresenter<ISystemMessageView>> implements ISystemMessageView {
 
     private View mView;
     private Unbinder unbinder;
@@ -26,7 +25,7 @@ public class SystemMessageFragment extends BaseFragment<ISystemMessageView, Syst
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_system_message, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_system_message, container, false);
         }
         unbinder = ButterKnife.bind(this, mView);
         return mView;

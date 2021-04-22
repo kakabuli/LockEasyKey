@@ -285,7 +285,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.my.PersonalUpdateHeadDataActivity"
+            android:name=".activity.my.PhilipsPersonalUpdateHeadDataActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -293,15 +293,15 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.my.PersonalUpdateNumberActivity"
+            android:name=".activity.my.PhilipsPersonalUpdateNumberActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.my.PersonalSecuritySettingActivity"
+            android:name=".activity.my.PhilipsPersonalSecuritySettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.my.PersonalUpdateVerifyGesturePwd"
+            android:name=".activity.my.PhilipsPersonalUpdateVerifyGesturePwd"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -309,7 +309,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.my.UserFeedbackActivity"
+            android:name=".activity.my.PhilipsUserFeedbackActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -1177,7 +1177,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.message.DeviceSelectDialogActivity"
+            android:name=".activity.message.PhilipsDeviceSelectDialogActivity"
             android:theme="@style/DialogTransparent"
             android:screenOrientation="portrait"
             />

@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentPresenter<IMessageView>> implements IMessageView {
+public class PhilipsMessageFragment extends BaseFragment<IMessageView, MessageFragmentPresenter<IMessageView>> implements IMessageView {
 
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
@@ -57,7 +57,7 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_message, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_message, container, false);
         }
         unbinder = ButterKnife.bind(this, mView);
         initView();
@@ -99,8 +99,8 @@ public class MessageFragment extends BaseFragment<IMessageView, MessageFragmentP
     }
 
     private void initFragment() {
-        DoorLockMessageFragment doorLockMsgFragment = new DoorLockMessageFragment();
-        SystemMessageFragment systemMessageFragment = new SystemMessageFragment();
+        PhilipsDoorLockMessageFragment doorLockMsgFragment = new PhilipsDoorLockMessageFragment();
+        PhilipsSystemMessageFragment systemMessageFragment = new PhilipsSystemMessageFragment();
         fragments.add(doorLockMsgFragment);
         fragments.add(systemMessageFragment);
         if (adapter == null) {
