@@ -66,7 +66,7 @@
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:background="@null"
             android:textColorHint="#CCCCCC"
-            android:hint="请输入晾衣机名称"
+            android:hint="@string/activity_clothes_hanger_machine_nickname"
             android:textSize="@dimen/sp_14" />
 
 

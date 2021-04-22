@@ -9,7 +9,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -32,14 +31,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PhilipsPersonalCenterFragment;
-import com.philips.easykey.lock.fragment.home.HomePageFragment;
 import com.philips.easykey.lock.fragment.message.PhilipsMessageFragment;
+import com.philips.easykey.lock.fragment.home.PhilipsDeviceFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
 import com.philips.easykey.lock.mvp.presenter.MainActivityPresenter;
 import com.philips.easykey.lock.mvp.presenter.UpgradePresenter;
@@ -56,7 +54,6 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.PermissionUtil;
@@ -77,12 +74,6 @@ import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import la.xiong.androidquick.tool.Constans;
-import la.xiong.androidquick.ui.eventbus.EventCenter;
 
 import static com.philips.easykey.lock.utils.PermissionUtil.REQUEST_AUDIO_PERMISSION_REQUEST_CODE;
 
@@ -126,7 +117,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         ButterKnife.bind(this);
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
         isRunning = true;
-        EventBus.getDefault().register(this);
         rg.setOnCheckedChangeListener(this);
         MqttService mqttService = MyApplication.getInstance().getMqttService();
         if (mqttService != null) {
@@ -142,7 +132,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             }
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
-        fragments.add(new HomePageFragment());
+        fragments.add(new PhilipsDeviceFragment());
         fragments.add(new PhilipsMessageFragment());
 //        fragments.add(new ShopFragment());
         fragments.add(new PhilipsPersonalCenterFragment());
@@ -223,14 +213,9 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         checkNotificatoinEnabled();
     }
 
-    @Override
-    public Resources getResources() {
-        return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
-    }
-
     private void checkNotificatoinEnabled() {
         if(!NotificationUtil.isNotifyEnabled(this)){
-            AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, "检测到您没有打开通知权限，是否去打开",
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.philips_activity_main_notification),
                     getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
@@ -579,7 +564,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     @Override
     public void gatewayResetSuccess(String gatewayId) {
-        ToastUtils.showShort(gatewayId + "网关:" + getString(R.string.gateway_reset_unbind));
+        ToastUtils.showShort(getString(R.string.philips_gateway_reset_unbind,gatewayId));
     }
 
     @Override
@@ -819,15 +804,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(EventCenter eventCenter) {
-        if (eventCenter.getEventCode() == Constans.RELOGIN) {  //商城token  过期
-            MyApplication.getInstance().tokenInvalid(true);
-            MMKVUtils.removeKey(SPUtils.STORE_TOKEN);
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -837,7 +813,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){//同意授权
 
                 }else {
-                    ToastUtils.showShort("请先获取麦克风权限");
+                    ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
                 }
                 break;
         }

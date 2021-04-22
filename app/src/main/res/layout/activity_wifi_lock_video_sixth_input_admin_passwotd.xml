@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="35dp"
-            android:text="第六步：输入管理员密码，激活临时密码"
+            android:text="@string/activity_wifi_lock_video_sixth"
             android:textColor="#333333"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -69,7 +69,7 @@
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_14"
             android:textColor="#7D7D7D"
-            android:text="①  使用临时密码，请先输入管理密码激活"/>
+            android:text="@string/activity_wifi_lock_video_sixth_1"/>
 
         <LinearLayout
             android:id="@+id/lly_et_layout"

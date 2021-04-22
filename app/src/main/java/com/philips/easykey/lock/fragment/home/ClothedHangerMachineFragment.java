@@ -303,14 +303,14 @@ public class ClothedHangerMachineFragment extends BaseFragment<IClothesHangerMac
                 if(imgHangerAirdry.isSelected()){
                     mPresenter.setAirDryTime(wifiSn,0);
                 }else{
-                    showFunctionTimeDialog("请选择风干时间",KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_AIR_DRY);
+                    showFunctionTimeDialog(getString(R.string.clothes_hanger_machine_two_button_dialog_airdry),KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_AIR_DRY);
                 }
                 break;
             case R.id.rl_hanger_baking:
                 if(imgHangerBaking.isSelected()){
                     mPresenter.setBakingTime(wifiSn,0);
                 }else{
-                    showFunctionTimeDialog("请选择烘干时间",KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_BAKING);
+                    showFunctionTimeDialog(getString(R.string.clothes_hanger_machine_two_button_dialog_baking),KeyConstants.CLOTHES_HANGER_MACHINE_FUNCTION_BAKING);
                 }
                 break;
             case R.id.rl_hanger_voice:

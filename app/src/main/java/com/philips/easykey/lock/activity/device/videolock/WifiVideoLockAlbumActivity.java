@@ -41,7 +41,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import la.xiong.androidquick.tool.FileTool;
+import com.philips.easykey.core.tool.FileTool;
 
 public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
 

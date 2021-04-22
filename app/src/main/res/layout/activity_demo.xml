@@ -14,7 +14,7 @@
             android:id="@+id/setArmLocked"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
-            android:text="设置布防"
+            android:text="@string/activity_demo_setting_alrm"
             android:textSize="@dimen/sp_15"
             android:gravity="center"
             />
@@ -37,7 +37,7 @@
             android:id="@+id/setAM"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
-            android:text="设置A-M"
+            android:text="@string/activity_demo_setting_am"
             android:textSize="@dimen/sp_15"
             android:gravity="center"
             />
@@ -58,7 +58,7 @@
         android:id="@+id/getArmLocked"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
-        android:text="获取布防或反锁状态:"
+        android:text="@string/activity_demo_1"
         android:textSize="@dimen/sp_15"
         android:gravity="center"/>
 
@@ -66,7 +66,7 @@
         android:id="@+id/getAM"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
-        android:text="获取AM状态"
+        android:text="@string/activity_demo_2"
         android:textSize="@dimen/sp_15"
         android:gravity="center"/>
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Philips Smart Lock</string>
+    <string name="philips_message">message</string>
+    <string name="philips_last_record">%1$s %2$s</string>
+    <string name="philips_pwd">password</string>
+    <string name="philips_setting">setting</string>
+    <string name="cdt_power">power</string>
+    <string name="cdt_wifi">Wifi</string>
+    <string name="cdt_record_icon">record icon</string>
+    <string name="philips_device_count">/%1$d</string>
+</resources>

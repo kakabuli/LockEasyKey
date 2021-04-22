@@ -260,8 +260,9 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
         hiddenLoading();
         String content = getString(R.string.already_newest_version) + "";
         if(multiOTAflag && BleLockUtils.isSupportPanelMultiOTA(wifiLockInfo.getFunctionSet())){
-            content = getString(R.string.already_newest_version) + "\n前面板固件版本：" + wifiLockInfo.getFrontPanelVersion()
-            + "\n后面板固件版本：" + wifiLockInfo.getBackPanelVersion();
+            content = getString(R.string.already_newest_version) + "\n"
+                    + getString(R.string.philips_activity_wifi_lock_device_info_front_panel) + wifiLockInfo.getFrontPanelVersion()
+            + "\n" + getString(R.string.philips_activity_wifi_lock_device_info_back_panel) + wifiLockInfo.getBackPanelVersion();
         }
         //当前已是最新版本
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.hint)

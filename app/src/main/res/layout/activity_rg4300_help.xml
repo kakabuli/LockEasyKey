@@ -53,7 +53,7 @@
                 android:lineSpacingExtra="8dp"
                 android:paddingHorizontal="@dimen/dp_22"
                 android:paddingVertical="@dimen/dp_20"
-                android:text="您无法发现您的蓝牙设备，请按照以下步骤对设备进行检查："
+                android:text="@string/help_title"
                 android:textColor="#333333"
                 android:textSize="13sp" />
 
@@ -84,7 +84,7 @@
                         android:layout_marginRight="@dimen/dp_24"
                         android:lineSpacingExtra="@dimen/dp_8"
                         android:paddingVertical="@dimen/dp_30"
-                        android:text="请保证您的设备已经接通电源，或电池电量充足。"
+                        android:text="@string/help_one"
                         android:textColor="#333333"
                         android:textSize="13sp" />
 
@@ -116,7 +116,7 @@
                         android:layout_marginRight="@dimen/dp_24"
                         android:lineSpacingExtra="@dimen/dp_8"
                         android:paddingVertical="@dimen/dp_30"
-                        android:text="请保证您的设备已经接通电源，或电池电量充足。"
+                        android:text="@string/help_one"
                         android:textColor="#333333"
                         android:textSize="13sp" />
 
@@ -147,7 +147,7 @@
                         android:layout_marginRight="@dimen/dp_24"
                         android:lineSpacingExtra="@dimen/dp_8"
                         android:paddingVertical="@dimen/dp_30"
-                        android:text="请保证您的设备已经接通电源，或电池电量充足。"
+                        android:text="@string/help_one"
                         android:textColor="#333333"
                         android:textSize="13sp" />
 
@@ -178,7 +178,7 @@
                         android:layout_marginRight="@dimen/dp_24"
                         android:lineSpacingExtra="@dimen/dp_8"
                         android:paddingVertical="@dimen/dp_30"
-                        android:text="请保证您的设备已经接通电源，或电池电量充足。"
+                        android:text="@string/help_one"
                         android:textColor="#333333"
                         android:textSize="13sp" />
 

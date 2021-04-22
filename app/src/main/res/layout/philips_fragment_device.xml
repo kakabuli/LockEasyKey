@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cF7F7F7">
+
+    <ImageView
+        android:id="@+id/ivTop"
+        android:layout_width="375pt"
+        android:layout_height="133pt"
+        android:background="@drawable/philips_home_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14pt"
+        android:layout_marginTop="44pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_home_sun" />
+
+    <TextView
+        android:id="@+id/tvWelcomeHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11pt"
+        android:layout_marginTop="39pt"
+        android:text="欢迎回家"
+        android:textColor="@color/white"
+        android:textSize="22pt"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11pt"
+        android:layout_marginTop="4pt"
+        android:text="Philips EasyKey守护您的安全"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeHome" />
+
+    <ImageView
+        android:id="@+id/ivAddDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44pt"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_icon_add" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDeviceTap"
+        android:layout_width="0pt"
+        android:layout_height="0pt"
+        android:layout_marginEnd="30pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="17pt"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGrid"
+        app:layout_constraintEnd_toStartOf="@+id/ivGrid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop" />
+
+    <ImageView
+        android:id="@+id/ivGrid"
+        android:layout_width="18pt"
+        android:layout_height="18pt"
+        android:layout_marginTop="23pt"
+        android:layout_marginEnd="48pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop"
+        app:srcCompat="@drawable/philips_icon_card_selected" />
+
+    <ImageView
+        android:id="@+id/ivList"
+        android:layout_width="18pt"
+        android:layout_height="18pt"
+        android:layout_marginTop="23pt"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop"
+        app:srcCompat="@drawable/philips_icon_list_default" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpDevices"
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="16pt"
+        android:layout_marginEnd="16pt"
+        android:layout_marginBottom="30pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivGrid" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDevices"
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:layout_marginTop="10pt"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivGrid" />
+
+    <LinearLayout
+        android:id="@+id/llNoDevice"
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:paddingBottom="60pt"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop">
+
+        <Button
+            android:id="@+id/btn_add_device"
+            android:layout_width="343pt"
+            android:layout_height="44pt"
+            android:layout_gravity="bottom"
+            android:background="@drawable/philips_shape_btn_bg"
+            android:gravity="center"
+            android:layout_marginStart="16pt"
+            android:text="@string/click_add_device"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7pt"
+        android:layout_marginEnd="177pt"
+        tools:text="@string/philips_device_count"
+        android:textSize="10pt"
+        android:paddingBottom="2pt"
+        android:textColor="@color/c999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vpDevices" />
+
+    <TextView
+        android:id="@+id/tvCurrentPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2"
+        android:layout_marginEnd="1pt"
+        android:textColor="@color/c666666"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCount"
+        app:layout_constraintEnd_toStartOf="@+id/tvCount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

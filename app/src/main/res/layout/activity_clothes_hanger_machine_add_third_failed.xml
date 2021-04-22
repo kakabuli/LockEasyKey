@@ -82,7 +82,7 @@
             android:drawablePadding="@dimen/dp_11"
             android:textColor="#999999"
             android:textSize="@dimen/sp_14"
-            android:text="请重新按照说明，启动设备配网"/>
+            android:text="@string/activity_clothes_hanger_machine_add_third_failed_1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
             android:textSize="@dimen/sp_14"
             android:drawableLeft="@drawable/circle_d5d5d5"
             android:layout_marginLeft="@dimen/dp_26"
-            android:text="请保持手机靠近晾衣机"/>
+            android:text="@string/activity_clothes_hanger_machine_add_third_failed_2"/>
     </LinearLayout>
     
     <View

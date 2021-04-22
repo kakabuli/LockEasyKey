@@ -316,14 +316,12 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void settingDeviceFail() {
-//        LogUtils.d("--kaadas--设置失败");
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.set_failed);
     }
 
     @Override
     public void settingDeviceThrowable() {
-        Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
-//        LogUtils.d("--kaadas--设置超时");
+        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
     }
 
     @Override
@@ -366,13 +364,13 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void bindingAndModifyDeviceFail() {
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.set_failed);
 
     }
 
     @Override
     public void bindingAndModifyDeviceThrowable() {
-        Toast.makeText(this, "设置超时", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
 
     }
 

@@ -66,7 +66,7 @@
         android:layout_marginBottom="@dimen/dp_40"
         android:background="@drawable/go_and_buy"
         android:gravity="center"
-        android:text="已唤醒门锁"
+        android:text="@string/swipch_link_join_network_three_text"
         android:textColor="#fff"
         android:textSize="@dimen/sp_15" />
 

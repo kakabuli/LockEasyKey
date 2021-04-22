@@ -565,7 +565,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
         switch (requestCode) {
             case REQUEST_CALL_PERMISSION: //拨打电话
                 if (permissions.length != 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {//失败
-                    Toast.makeText(this,"请允许拨号权限后再试",Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.philips_activity_addbluetooth_search);
                 } else {//成功
                     call("tel:"+"4008005919");
                 }

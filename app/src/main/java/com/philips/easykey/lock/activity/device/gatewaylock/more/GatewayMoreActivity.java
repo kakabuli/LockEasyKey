@@ -347,7 +347,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
-        ToastUtils.showShort("获取失败");
+        ToastUtils.showShort(R.string.philips_activity_gateway_more_failed);
 
     }
 
@@ -359,7 +359,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
-        ToastUtils.showShort("获取失败");
+        ToastUtils.showShort(R.string.philips_activity_gateway_more_failed);
         LogUtils.d("获取音量异常   " + throwable.getMessage());
     }
 
@@ -480,7 +480,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
             getAutoLockSuccess = true;
         } else {
             getAutoLockSuccess = false;
-            ToastUtils.showShort("获取失败");
+            ToastUtils.showShort(R.string.philips_activity_gateway_more_failed);
         }
 
     }
@@ -490,7 +490,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
         loadingDialog.dismiss();
         getAutoLockSuccess = false;
         flagAM = true;
-        ToastUtils.showShort("获取失败");
+        ToastUtils.showShort(R.string.philips_activity_gateway_more_failed);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class NotificationUtils extends ContextWrapper {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void createNotificationChannel() {
         if (channel == null) {
-            channel = new NotificationChannel(id, "门铃消息", NotificationManager.IMPORTANCE_HIGH);
+            channel = new NotificationChannel(id, mContext.getString(R.string.notification_channel), NotificationManager.IMPORTANCE_HIGH);
             channel.enableVibration(false);
             channel.enableLights(false);
             channel.enableVibration(false);

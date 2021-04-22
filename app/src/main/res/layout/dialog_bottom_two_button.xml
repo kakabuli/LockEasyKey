@@ -13,7 +13,7 @@
         android:layout_height="@dimen/dp_58"
         android:layout_weight="1"
         android:textSize="@dimen/sp_18"
-        android:text="删除照片"
+        android:text="@string/delete_picture"
         android:gravity="center"
         android:textColor="#FF3B30"
         android:background="@drawable/dialog_bj"

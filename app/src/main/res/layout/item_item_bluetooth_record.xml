@@ -55,7 +55,7 @@
         android:layout_weight="8"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="昵称昵称昵称昵称昵称昵称昵称昵称"
+        android:text=""
         android:textColor="#999999"
         android:textSize="@dimen/sp_12" />
 

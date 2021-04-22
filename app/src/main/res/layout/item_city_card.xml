@@ -48,7 +48,7 @@
             android:visibility="visible"
             android:singleLine="true"
             android:ellipsize="end"
-            android:text="主卧室"
+            android:text="@string/item_city_card_1"
             android:layout_marginTop="5dp"
             />
 

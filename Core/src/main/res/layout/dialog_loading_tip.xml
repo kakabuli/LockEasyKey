@@ -25,7 +25,7 @@
         android:padding="15dp"
         android:textColor="@color/color_333333"
         android:textSize="14sp"
-        android:text="加载中..." />
+        android:text="@string/dialog_loading" />
     <Button
         android:id="@+id/bt_operate"
         android:layout_width="wrap_content"
@@ -38,5 +38,5 @@
         android:paddingTop="5dp"
         android:textColor="@color/color_333333"
         android:visibility="gone"
-        tools:text="重新加载..." />
+        tools:text="@string/dialog_reloading_" />
 </LinearLayout>

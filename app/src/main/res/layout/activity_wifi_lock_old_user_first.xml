@@ -61,7 +61,7 @@
             android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="第一步：已进入管理模式"
+            android:text="@string/activity_wifi_lock_old_user_first_1"
             android:textColor="#333333"
             android:textSize="@dimen/sp_18" />
 
@@ -99,7 +99,7 @@
         android:layout_marginBottom="@dimen/dp_8"
         android:background="@drawable/go_and_buy"
         android:gravity="center"
-        android:text="下一步"
+        android:text="@string/add_next"
         android:textColor="#fff"
         android:textSize="@dimen/sp_15" />
 
@@ -108,7 +108,7 @@
         android:layout_marginBottom="@dimen/dp_30"
         android:textColor="#9E9E9E"
         android:textSize="10sp"
-        android:text="已进入管理模式"
+        android:text="@string/activity_wifi_lock_old_user_first_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -91,7 +91,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
-            todayLockStatisticsBean.setStatisticsType("预警信息");
+            todayLockStatisticsBean.setStatisticsType(getString(R.string.warn_information));
             todayLockStatisticsBean.setStatisticsCount(10);
             TodayLockStatisticsData.add(todayLockStatisticsBean);
         }
@@ -107,7 +107,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
             sevendayDataStatisticsBean.setOrdinateValue(new float[]{0, 0, 23, 10, 24, 42, 18});
             sevendayDataStatisticsBean.setTransverseValue(new String[]{"02 13", "02 14", "02 15", "02 16", "02 17", "02 18", "02 19"});
-            sevendayDataStatisticsBean.setStatisticsTypeName("预警信息");
+            sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
             sevendayDataStatisticsData.add(sevendayDataStatisticsBean);
         }
         sevendayDataStatisticsAdapter = new SevendayDataStatisticsAdapter(sevendayDataStatisticsData);

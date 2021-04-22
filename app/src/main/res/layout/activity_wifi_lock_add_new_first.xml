@@ -110,7 +110,7 @@
         android:gravity="center"
         android:textColor="#1F96F7"
         android:textSize="15sp"
-        android:text="门锁已联网，重新配网"
+        android:text="@string/activity_wifi_lock_add_new_first"
 
         />
 </LinearLayout>

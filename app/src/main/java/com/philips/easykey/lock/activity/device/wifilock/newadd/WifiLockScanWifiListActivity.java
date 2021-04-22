@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.choosecountry.CountrySortModel;
@@ -78,7 +79,7 @@ public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
         ListView listView = (ListView) findViewById(R.id.lv_wifi_list);  //获得界面的列表
         wifiBeanList = new ArrayList<>();
         if (list == null) {
-            Toast.makeText(this, "当前周围无WiFi", Toast.LENGTH_LONG).show();
+            ToastUtils.showShort(R.string.philips_activity_wifi_lock_scan_not_wifi_list);
         }else {
             for(int i=0;i<list.size();i++) {
                 wifiName = list.get(i).SSID;

@@ -7,5 +7,4 @@ public interface IHomeView extends IBaseView {
 
     void onDeviceRefresh(AllBindDevices allBindDevices);
 
-
 }

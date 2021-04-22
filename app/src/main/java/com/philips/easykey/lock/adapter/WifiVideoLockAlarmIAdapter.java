@@ -22,7 +22,7 @@ import com.philips.easykey.lock.utils.RotateTransformation;
 
 import java.util.List;
 
-import la.xiong.androidquick.tool.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 
 public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmRecord, BaseViewHolder> {
     List<WifiVideoLockAlarmRecord> data;
@@ -106,24 +106,26 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
 
         switch (record.getType()){
             case 0x10://您的智能门锁低电量，请及时更换
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvRight.getContext().getText(R.string.wifi_lock_alarm_low_power) +"</font>" + "<br><font color='#999999'>已自动开启节能模式（视频功能已关闭）</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvRight.getContext().getString(R.string.wifi_lock_alarm_low_power)
+                        + "</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_1) +"</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_battery);
                 rlPic.setVisibility(View.GONE);
                 break;
             case 0x20:// 您的门锁有故障，请注意
-                tvRight.setText(tvRight.getContext().getText(R.string.wifi_lock_alarm_problem));
+                tvRight.setText(tvRight.getContext().getString(R.string.wifi_lock_alarm_problem));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_fault);
                 break;
             case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
-                tvRight.setText(tvRight.getContext().getText(R.string.wifi_lock_alarm_lock_5min_1));
+                tvRight.setText(tvRight.getContext().getString(R.string.wifi_lock_alarm_lock_5min_1));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_error);
                 break;
             case 0x08:// 门锁正在被机械方式开启，请回家或联系保安查看
-                tvRight.setText(tvDayTime.getContext().getText(R.string.wifi_lock_alarm_opens));
+                tvRight.setText(tvDayTime.getContext().getString(R.string.wifi_lock_alarm_opens));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_prylock);
                 break;
             case 0x04:// 已监测到您的门锁被撬，请联系家人或小区保安
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getText(R.string.pick_proof) +"</font>" + "<br><font color='#999999'>已监测到您的门锁异常</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getString(R.string.pick_proof)
+                        +"</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_2) +"</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_prylock);
                 break;
             case 0x70:// 徘徊报警
@@ -131,15 +133,16 @@ public class WifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAl
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_alert);
                 break;
             case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
-                tvRight.setText(tvDayTime.getContext().getText(R.string.wifi_lock_alarm_hijack));
+                tvRight.setText(tvDayTime.getContext().getString(R.string.wifi_lock_alarm_hijack));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_warning);
                 break;
             case 0x01:// 锁定报警
-                tvRight.setText("锁定报警");
+                tvRight.setText(tvRight.getContext().getString(R.string.lock_alarm));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_locking);
                 break;
             case 0x40:// 布防报警
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getText(R.string.warring_defence) +"</font>" + "<br><font color='#999999'>您的门锁有从门内开锁情况</font>"));
+                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getString(R.string.warring_defence)
+                        +"</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_3) +"</font>"));
                 iv.setImageResource(R.mipmap.video_lock_alarm_icon_protection);
                 break;
         }

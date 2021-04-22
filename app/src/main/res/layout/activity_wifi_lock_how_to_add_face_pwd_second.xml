@@ -63,7 +63,7 @@
             android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="第二步：开始添加用户人脸"
+            android:text="@string/activity_wifi_lock_how_to_add_face_pwd_second"
             android:textColor="#333333"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
@@ -102,7 +102,7 @@
         android:layout_marginBottom="@dimen/dp_46"
         android:background="@drawable/go_and_buy"
         android:gravity="center"
-        android:text="完成"
+        android:text="@string/complete"
         android:textColor="#fff"
         android:textSize="@dimen/sp_15" />
 

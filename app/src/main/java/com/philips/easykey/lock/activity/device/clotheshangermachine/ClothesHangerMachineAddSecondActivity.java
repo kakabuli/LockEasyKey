@@ -82,7 +82,7 @@ public class ClothesHangerMachineAddSecondActivity extends BaseActivity<IClothes
     private void showBluetoothErrorDialog() {
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(
                 ClothesHangerMachineAddSecondActivity.this,
-                "设置失败",
+                getString(R.string.set_failed),
                 getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
@@ -107,8 +107,9 @@ public class ClothesHangerMachineAddSecondActivity extends BaseActivity<IClothes
     private void showBluetoothEnableDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineAddSecondActivity.this,
-                "蓝牙未开启，是否开启蓝牙？",
-                "关闭", "设置","#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_avtivity_clothes_hanger_machine_add_dialog_4),
+                getString(R.string.close), getString(R.string.settting),
+                "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

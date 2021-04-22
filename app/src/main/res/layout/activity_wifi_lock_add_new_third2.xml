@@ -97,7 +97,7 @@
             android:layout_gravity="center"
             android:background="@drawable/go_and_buy"
             android:gravity="center"
-            android:text="已修改管理密码"
+            android:text="@string/activity_wifi_lock_add_new_third2_1"
             android:textColor="#fff"
             android:textSize="@dimen/sp_15" />
 

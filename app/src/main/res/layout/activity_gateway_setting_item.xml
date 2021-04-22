@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dp_16"
-        android:text="网关："
+        android:text="@string/gateway_"
         android:textColor="#ff333333"
         android:textSize="@dimen/sp_13" />
     <LinearLayout

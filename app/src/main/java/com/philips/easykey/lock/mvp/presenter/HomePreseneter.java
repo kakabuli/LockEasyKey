@@ -50,47 +50,4 @@ public class HomePreseneter<T> extends BasePresenter<IHomeView> {
     }
 
 
-  /*  //请求电量
-    public void getPower(String gatewayId,String deviceId,String uid){
-        MqttMessage message = MqttCommandFactory.getDevicePower(gatewayId,deviceId,uid);
-        toDisposable(getPowerDisposable);
-        getPowerDisposable = mqttService.mqttPublish(MqttConstant.MQTT_REQUEST_APP, message)
-                .compose(RxjavaHelper.observeOnMainThread())
-                .filter(new Predicate<MqttData>() {
-                    @Override
-                    public boolean test(MqttData mqttData) throws Exception {
-                        return mqttData.getFunc().equalsIgnoreCase(MqttConstant.GET_POWER);
-                    }
-                })
-                .timeout(10 * 1000, TimeUnit.MILLISECONDS)
-                .subscribe(new Consumer<MqttData>() {
-                    @Override
-                    public void accept(MqttData mqttData) throws Exception {
-                        toDisposable(getPowerDisposable);
-                        String payload = mqttData.getPayload();
-                        GetDevicePowerBean powerBean = new Gson().fromJson(payload, GetDevicePowerBean.class);
-                        if (powerBean!=null){
-                            if ("200".equals(powerBean.getReturnCode())){
-                                if (mViewRef.get()!=null){
-                                    mViewRef.get().getDevicePowerSuccess(powerBean.getReturnData().getPower());
-                                }
-                            }else{
-                                if (mViewRef.get()!=null){
-                                    mViewRef.get().getDevicePowerFail();
-                                }
-                            }
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        if (mViewRef.get()!=null){
-                            mViewRef.get().getDevicePowerThrowable(throwable);
-                        }
-                    }
-                });
-        compositeDisposable.add(getPowerDisposable);
-    }
-*/
-
 }

@@ -42,7 +42,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import la.xiong.androidquick.tool.FileTool;
+import com.philips.easykey.core.tool.FileTool;
 
 
 public class WifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiVideoLockAlarmRecordView, WifiVideoLockAlarmRecordPresenter<IWifiVideoLockAlarmRecordView>>

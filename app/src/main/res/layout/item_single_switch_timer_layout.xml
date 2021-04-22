@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_time"
             android:layout_toRightOf="@+id/iv_wait"
-            android:text="不重复"
+            android:text="@string/no_repeat"
             android:textColor="#2C2C2C"
             android:textSize="12sp" />
 
@@ -66,7 +66,7 @@
         android:id="@+id/tv_action"
         android:textColor="#2C2C2C"
         android:textSize="12sp"
-        android:text="电源开关1-开启"
+        android:text="@string/item_single_switch_timer_layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

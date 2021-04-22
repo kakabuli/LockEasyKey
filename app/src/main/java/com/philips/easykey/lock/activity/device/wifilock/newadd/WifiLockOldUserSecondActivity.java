@@ -77,7 +77,7 @@ public class WifiLockOldUserSecondActivity extends BaseAddToApplicationActivity 
                     startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
                 }
                 else {
-                    ToastUtils.showShort("未知模组类型");
+                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_fifth_1);
                 }
                 break;
         }
