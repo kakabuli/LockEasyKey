@@ -165,7 +165,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/warning_message_inform"/>
+                android:text="@string/philips_frament_warning_message_inform"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_video_lock_msg"
@@ -179,7 +179,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
-             android:text="@string/today_lock_statistics"/>
+             android:text="@string/philips_frament_today_lock_statistics"/>
 
          <RelativeLayout
              android:layout_width="wrap_content"
@@ -221,7 +221,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_below="@+id/rl_open_lock_number"
-                   android:text="@string/today_lock_message"/>
+                   android:text="@string/philips_frament_today_lock_message"/>
             </RelativeLayout>
 
          </RelativeLayout>
@@ -237,7 +237,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
-             android:text="@string/seven_day_data_statistics"/>
+             android:text="@string/philips_frament_seven_day_data_statistics"/>
 
          <RelativeLayout
              android:layout_width="match_parent"

@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:textColor="@color/white"
-        android:text="@string/all_device"/>
+        android:text="@string/philips_activity_device_select_all_device"/>
 
     <LinearLayout
         android:layout_width="match_parent"
