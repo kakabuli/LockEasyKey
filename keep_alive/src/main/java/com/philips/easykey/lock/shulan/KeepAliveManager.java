@@ -21,7 +21,7 @@ import com.philips.easykey.lock.shulan.service.JobHandlerService;
 import com.philips.easykey.lock.shulan.service.SLLocalService;
 import com.philips.easykey.lock.shulan.service.SLRemoteService;
 import com.philips.easykey.lock.shulan.utils.KeepAliveUtils;
-import com.philips.easykey.lock.shulan.utils.SPUtils;
+import com.philips.easykey.lock.shulan.utils.MMKVUtils;
 
 
 /**
@@ -40,10 +40,10 @@ public class KeepAliveManager {
     public static void toKeepAlive(@NonNull Application application, @NonNull int runMode, String title, String content, int res_icon, ForegroundNotification foregroundNotification) {
         if (KeepAliveUtils.isRunning(application)) {
             KeepAliveConfig.foregroundNotification = foregroundNotification;
-            SPUtils.getInstance(application, KeepAliveConfig.SP_NAME).put(KeepAliveConfig.TITLE, title);
-            SPUtils.getInstance(application, KeepAliveConfig.SP_NAME).put(KeepAliveConfig.CONTENT, content);
-            SPUtils.getInstance(application, KeepAliveConfig.SP_NAME).put(KeepAliveConfig.RES_ICON, res_icon);
-            SPUtils.getInstance(application, KeepAliveConfig.SP_NAME).put(KeepAliveConfig.RUN_MODE, runMode);
+            MMKVUtils.setMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.TITLE, title);
+            MMKVUtils.setMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.CONTENT, content);
+            MMKVUtils.setMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.RES_ICON, res_icon);
+            MMKVUtils.setMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.RUN_MODE, runMode);
             //优化后的枚举
             RunMode.setShape(runMode);
             KeepAliveConfig.runMode = RunMode.getShape();

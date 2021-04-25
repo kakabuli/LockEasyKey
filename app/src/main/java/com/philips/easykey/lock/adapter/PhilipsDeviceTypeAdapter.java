@@ -30,7 +30,7 @@ public class PhilipsDeviceTypeAdapter extends BaseQuickAdapter<PhilipsDeviceType
         holder.setTextColor(R.id.tvDeviceTypeName, s.isSelected()
                 ?getContext().getColor(R.color.color_333333)
                 :getContext().getColor(R.color.c666666));
-        ((TextView) holder.getView(R.id.tvDeviceTypeName)).setTextSize(TypedValue.COMPLEX_UNIT_SP, s.isSelected()? 16:14);
+        ((TextView) holder.getView(R.id.tvDeviceTypeName)).setTextSize(TypedValue.COMPLEX_UNIT_PT, s.isSelected()? 16:14);
         holder.setVisible(R.id.vSelected, s.isSelected());
     }
 }

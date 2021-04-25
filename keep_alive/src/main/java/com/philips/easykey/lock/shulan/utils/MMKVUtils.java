@@ -1,4 +1,4 @@
-package com.philips.easykey.lock.utils;
+package com.philips.easykey.lock.shulan.utils;
 
 import com.tencent.mmkv.MMKV;
 
@@ -45,6 +45,11 @@ public class MMKVUtils {
         return kv.decodeString(key,value);
     }
 
+    public static String getStringMultiMMKV(String id ,String key){
+        MMKV kv = MMKV.mmkvWithID(id,MMKV.MULTI_PROCESS_MODE);
+        return kv.decodeString(key);
+    }
+
     public static boolean getBoolMultiMMKV(String id ,String key,boolean value){
         MMKV kv = MMKV.mmkvWithID(id,MMKV.MULTI_PROCESS_MODE);
         return kv.decodeBool(key,value);
@@ -54,6 +59,12 @@ public class MMKVUtils {
         MMKV kv = MMKV.mmkvWithID(id,MMKV.MULTI_PROCESS_MODE);
         return kv.decodeInt(key,value);
     }
+
+    public static int getIntMultiMMKV(String id ,String key){
+        MMKV kv = MMKV.mmkvWithID(id,MMKV.MULTI_PROCESS_MODE);
+        return kv.decodeInt(key);
+    }
+
 
     //========================多进程访问==================
 

@@ -25,7 +25,7 @@ import com.philips.easykey.lock.shulan.config.NotificationUtils;
 import com.philips.easykey.lock.shulan.config.RunMode;
 import com.philips.easykey.lock.shulan.receive.NotificationClickReceiver;
 import com.philips.easykey.lock.shulan.receive.OnepxReceiver;
-import com.philips.easykey.lock.shulan.utils.SPUtils;
+import com.philips.easykey.lock.shulan.utils.MMKVUtils;
 
 
 public class SLLocalService extends Service {
@@ -75,7 +75,7 @@ public class SLLocalService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //播放无声音乐
-        KeepAliveConfig.runMode = SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getInt(KeepAliveConfig.RUN_MODE);
+        KeepAliveConfig.runMode = MMKVUtils.getIntMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.RUN_MODE);
         Log.d(TAG, "运行模式：" + KeepAliveConfig.runMode);
         if (mediaPlayer == null && KeepAliveConfig.runMode == RunMode.HIGH_POWER_CONSUMPTION) {
             mediaPlayer = MediaPlayer.create(this, R.raw.novioce);
@@ -187,9 +187,9 @@ public class SLLocalService extends Service {
             try {
                 if (mBilder != null && KeepAliveConfig.foregroundNotification != null) {
                     KeepAliveAIDL guardAidl = KeepAliveAIDL.Stub.asInterface(service);
-                    guardAidl.wakeUp(SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getString(KeepAliveConfig.TITLE),
-                            SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getString(KeepAliveConfig.CONTENT),
-                            SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getInt(KeepAliveConfig.RES_ICON));
+                    guardAidl.wakeUp(MMKVUtils.getStringMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.TITLE),
+                            MMKVUtils.getStringMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.CONTENT),
+                            MMKVUtils.getIntMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.RES_ICON));
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -221,9 +221,9 @@ public class SLLocalService extends Service {
     private void shouDefNotify() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             try {
-                KeepAliveConfig.CONTENT = SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getString(KeepAliveConfig.CONTENT) + "";
-                KeepAliveConfig.DEF_ICONS = SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getInt(KeepAliveConfig.RES_ICON, R.mipmap.ic_launcher);
-                KeepAliveConfig.TITLE = SPUtils.getInstance(SLLocalService.this, KeepAliveConfig.SP_NAME).getString(KeepAliveConfig.TITLE) + "";
+                KeepAliveConfig.CONTENT = MMKVUtils.getStringMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.CONTENT);
+                KeepAliveConfig.DEF_ICONS = MMKVUtils.getIntMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.RES_ICON,R.mipmap.ic_launcher);
+                KeepAliveConfig.TITLE = MMKVUtils.getStringMultiMMKV(KeepAliveConfig.SP_NAME,KeepAliveConfig.TITLE);
             }catch (Exception e){
             }
             if (!TextUtils.isEmpty(KeepAliveConfig.TITLE) && !TextUtils.isEmpty(KeepAliveConfig.CONTENT)) {

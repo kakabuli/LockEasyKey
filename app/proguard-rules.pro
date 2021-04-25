@@ -206,9 +206,9 @@
 
 #对含有反射类的处理
 -keep class com.philips.easykey.lock.shulan.KeepAliveRuning {*;}
--keep class la.xiong.androidquick.tool.ReflectUtil {*;}
--keep class la.xiong.androidquick.tool.Utils {*;}
--keep class la.xiong.androidquick.ui.permission.EasyPermissions {*;}
+-keep class com.philips.easykey.core.tool.ReflectUtil {*;}
+-keep class com.philips.easykey.core.tool.Utils {*;}
+-keep class com.philips.easykey.core.ui.permission.EasyPermissions {*;}
 -keep class com.zhouyou.http.cache.converter.** {*;}
 -keep class com.philips.easykey.lock.publiclibrary.linphone.linphonenew.LinphoneService{
     private void initData();

@@ -236,6 +236,7 @@ public class PhilipsDeviceFragment extends Fragment {
     }
 
     private void showCardView() {
+        if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_default));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_selected));
         mTvCurrentPage.setVisibility(View.VISIBLE);
@@ -247,6 +248,7 @@ public class PhilipsDeviceFragment extends Fragment {
     }
 
     private void showListView() {
+        if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_selected));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_default));
         mTvCurrentPage.setVisibility(View.GONE);
