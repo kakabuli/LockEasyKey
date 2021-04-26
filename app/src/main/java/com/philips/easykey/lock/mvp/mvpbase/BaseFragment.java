@@ -1,14 +1,18 @@
 package com.philips.easykey.lock.mvp.mvpbase;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 
 import com.philips.easykey.lock.utils.LoadingDialog;
 
@@ -106,11 +110,22 @@ public abstract class BaseFragment<T extends IBaseView, V
 
     //获取状态栏高度
     public int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
+        int result = 20;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            final View decorView = getActivity().getWindow().getDecorView();
+            WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
+            if (rootWindowInsets == null) {
+                return result;
+            }
+            DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
+            result = displayCutout.getSafeInsetTop();
+            return result;
+        }else {
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = getResources().getDimensionPixelSize(resourceId);
+            }
+            return result;
         }
-        return result;
     }
 }

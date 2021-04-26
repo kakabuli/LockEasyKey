@@ -2429,5 +2429,7 @@
     <string name="cdt_wifi">Wifi</string>
     <string name="cdt_record_icon">记录图标</string>
     <string name="philips_device_count">/%1$d</string>
+    <string name="philips_biometric_login">生物识别登录</string>
+    <string name="philips_login_using_your_biometric_credential">使用您的生物识别证书登录</string>
 
 </resources>

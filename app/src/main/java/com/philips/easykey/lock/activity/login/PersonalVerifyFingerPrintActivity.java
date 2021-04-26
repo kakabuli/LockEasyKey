@@ -1,18 +1,12 @@
 package com.philips.easykey.lock.activity.login;
 
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.fingerprint.FingerprintManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CancellationSignal;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +23,6 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalFingerPrintPresenter;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
-import com.philips.easykey.lock.utils.EncryUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -38,6 +31,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalVerifyFingerPrintView;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
+import com.philips.easykey.lock.utils.manager.BiometricPromptManager;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 import com.philips.easykey.lock.widget.CircleImageView;
 
@@ -63,10 +57,8 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
     private BottomMenuDialog bottomMenuDialog;
     private Context mContext;
     private Bitmap changeBitmap;
-    private FingerprintManager mFingerprintManager;
-    private CancellationSignal mCancellationSignal;//用于取消指纹识别
 
-    private final String mAlias = "touch_id_key";//用于获取加密key
+    private BiometricPromptManager mBiometricPromptManager;
     private TranslateAnimation translateAnimation;
     private AlertDialog alertDialog;
     @Override
@@ -81,36 +73,89 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
 
     private void initData() {
         initTouchId();
-
     }
 
     private void initTouchId() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mFingerprintManager = getFingerprintManagerOrNull();
-            if (mFingerprintManager != null) {
-                mCancellationSignal = new CancellationSignal();
-                //开始验证指纹
-                mFingerprintManager.authenticate(new
-                                FingerprintManager.CryptoObject(EncryUtils.getInstance().getCipher(mAlias))
-                        , mCancellationSignal, 0, callback, null);
-            }
+        if(mBiometricPromptManager == null) {
+            mBiometricPromptManager = new BiometricPromptManager(PersonalVerifyFingerPrintActivity.this);
+        }
+        if(mBiometricPromptManager.isBiometricPromptEnable()){
+            mBiometricPromptManager.authenticate(new BiometricPromptManager.BiometricIdentifyCallbackLinstener() {
+                @Override
+                public void onAuthenticationError(int errorCode, String errString) {
+                    LogUtils.d("指纹识别码错误"+errorCode);
+                    if (alertDialog != null){
+                        alertDialog.dismiss();
+                    }
+                    if (errorCode == 7){
+                        AlertDialogUtil.getInstance().noEditSingleButtonDialog(mContext, getString(R.string.app_name), getString(R.string.touch_id_call_limited), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                            @Override
+                            public void left() {
+
+                            }
+
+                            @Override
+                            public void right() {
+
+                            }
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(String toString) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onSucceeded() {
+                    if (alertDialog!=null){
+                        alertDialog.dismiss();
+                    }
+                    Intent successIntent = new Intent(mContext, MainActivity.class);
+                    startActivity(successIntent);
+                    ToastUtils.showShort(R.string.fingerprint_success);
+                    finish();
+                }
+
+                @Override
+                public void onFailed() {
+                    //指纹验证失败，指纹识别失败，可再验，该指纹不是系统录入的指纹。
+                    if (alertDialog!=null){
+                        alertDialog.dismiss();
+                    }
+
+                    if (translateAnimation != null && fingeprintImg != null) {
+                        fingeprintImg.startAnimation(translateAnimation);
+                    }
+                    ToastUtils.showShort(R.string.fingerprint_unidentifiable);
+                }
+
+                @Override
+                public void onAuthenticationHelp(int code, String reason) {
+                    //指纹验证失败，可再验，可能手指过脏，或者移动过快等原因。
+                    if (alertDialog!=null){
+                        alertDialog.dismiss();
+                    }
+                    if (translateAnimation != null && fingeprintImg != null) {
+                        fingeprintImg.startAnimation(translateAnimation);
+                    }
+                    ToastUtils.showShort(R.string.fingerprint_fail_check);
+                }
+
+                @Override
+                public void onCancel() {
+                    if (alertDialog!=null){
+                        alertDialog.dismiss();
+                    }
+                }
+            });
         }
     }
-
-    /**
-     * 获取FingerprintManager
-     *
-     * @return FingerprintManager
-     */
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public FingerprintManager getFingerprintManagerOrNull() {
-        if (getApplication().getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            return getApplication().getSystemService(FingerprintManager.class);
-        } else {
-            return null;
-        }
-    }
-
 
     @Override
     protected PersonalFingerPrintPresenter<IPersonalVerifyFingerPrintView> createPresent() {
@@ -171,7 +216,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                         alertDialog.dismiss();
                     }
                 });
-
+                initTouchId();
                 break;
             case R.id.finger_more:
                 showMoreDialog();
@@ -194,8 +239,8 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                     startActivity(loginIntent);
                     if (bottomMenuDialog != null) {
                         bottomMenuDialog.dismiss();
-                        if (mCancellationSignal!=null){
-                            mCancellationSignal.cancel();
+                        if (mBiometricPromptManager.getCancellationSignal() != null){
+                            mBiometricPromptManager.getCancellationSignal().cancel();
                         }
                         finish();
                     }
@@ -210,8 +255,8 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                 startActivity(loginIntent);
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();
-                    if (mCancellationSignal!=null){
-                        mCancellationSignal.cancel();
+                    if (mBiometricPromptManager.getCancellationSignal() != null){
+                        mBiometricPromptManager.getCancellationSignal().cancel();
                     }
                     finish();
                 }
@@ -225,8 +270,8 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                 startActivity(registerIntent);
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();
-                    if (mCancellationSignal!=null){
-                        mCancellationSignal.cancel();
+                    if (mBiometricPromptManager.getCancellationSignal() != null){
+                        mBiometricPromptManager.getCancellationSignal().cancel();
                     }
                     finish();
                 }
@@ -251,81 +296,6 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
             }
         }
     }
-
-    /**
-     * 指纹识别回调监听
-     */
-    @TargetApi(23)
-    private FingerprintManager.AuthenticationCallback callback = new FingerprintManager.AuthenticationCallback() {
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-            if (alertDialog!=null){
-                alertDialog.dismiss();
-            }
-            Intent successIntent = new Intent(mContext, MainActivity.class);
-            startActivity(successIntent);
-            ToastUtils.showShort(R.string.fingerprint_success);
-            finish();
-        }
-
-        @Override
-        public void onAuthenticationError(int errorCode, CharSequence errString) {
-            LogUtils.d("指纹识别码错误"+errorCode);
-            if (alertDialog!=null){
-                alertDialog.dismiss();
-            }
-            if (errorCode==7){
-                AlertDialogUtil.getInstance().noEditSingleButtonDialog(mContext, getString(R.string.app_name), getString(R.string.touch_id_call_limited), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
-
-                    }
-
-                    @Override
-                    public void right() {
-
-                    }
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(String toString) {
-
-                    }
-                });
-            }
-
-        }
-
-        @Override
-        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-            //指纹验证失败，可再验，可能手指过脏，或者移动过快等原因。
-            if (alertDialog!=null){
-                alertDialog.dismiss();
-            }
-            if (translateAnimation != null && fingeprintImg != null) {
-                fingeprintImg.startAnimation(translateAnimation);
-            }
-            ToastUtils.showShort(R.string.fingerprint_fail_check);
-        }
-
-        @Override
-        public void onAuthenticationFailed() {
-            //指纹验证失败，指纹识别失败，可再验，该指纹不是系统录入的指纹。
-            if (alertDialog!=null){
-                alertDialog.dismiss();
-            }
-
-            if (translateAnimation != null && fingeprintImg != null) {
-                fingeprintImg.startAnimation(translateAnimation);
-            }
-
-            ToastUtils.showShort(R.string.fingerprint_unidentifiable);
-        }
-    };
-
 
     @Override
     public void downloadPhoto(Bitmap bitmap) {

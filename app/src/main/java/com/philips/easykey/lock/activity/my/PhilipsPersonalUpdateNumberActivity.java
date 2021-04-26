@@ -56,7 +56,7 @@ public class PhilipsPersonalUpdateNumberActivity extends BaseActivity<IPersonalU
 
     private void initView() {
         tvContent.setText(getString(R.string.input_verification_code));
-        tvHint.setText(getString(R.string.activity_personal_verification_code_sent_to_the_following_number));
+        tvHint.setText(getString(R.string.philips_activity_personal_verification_code_sent_to_the_following_number));
         //获取手机号码
         String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
         if (!TextUtils.isEmpty(phone)) {
