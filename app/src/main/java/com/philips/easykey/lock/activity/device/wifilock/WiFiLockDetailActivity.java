@@ -29,7 +29,7 @@ import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswo
 import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumActivity;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockMoreActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockMoreActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -479,7 +479,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             break;
                         case BleLockUtils.TYPE_MORE:
                             if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSn) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
-                                intent = new Intent(WiFiLockDetailActivity.this, WifiVideoLockMoreActivity.class);
+                                intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiVideoLockMoreActivity.class);
                                 intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                                 startActivityForResult(intent, TO_MORE_REQUEST_CODE);
                             }else{
@@ -585,7 +585,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             break;
                         case BleLockUtils.TYPE_MORE:
                             if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSn) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
-                                intent = new Intent(WiFiLockDetailActivity.this, WifiVideoLockMoreActivity.class);
+                                intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiVideoLockMoreActivity.class);
                                 intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                                 startActivityForResult(intent, TO_MORE_REQUEST_CODE);
                             }else{

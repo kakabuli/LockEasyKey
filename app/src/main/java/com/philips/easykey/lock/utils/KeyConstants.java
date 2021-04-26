@@ -373,6 +373,9 @@ public class KeyConstants {
     //实时视频设置
     public static final int WIFI_VIDEO_LOCK_REAL_TIME_SETTING_CODE = 2018;
 
+    //设置昵称
+    public static final int WIFI_VIDEO_LOCK_SETTING_NICKNAME = 2019;
+
     //X9开门方向
     public static final int WIFI_LOCK_SET_OPEN_DIRECTION = 3001;
 

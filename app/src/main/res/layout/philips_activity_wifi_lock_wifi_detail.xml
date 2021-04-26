@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cF7F7F7">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back"  />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/activity_wifi_lock_wifi_detail_title"
+            android:textColor="@color/color_333333"
+            android:textSize="17pt"
+             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_replace_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:layout_marginTop="12pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_lock_wifi_detail_title"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="16pt"
+            android:drawableRight="@drawable/philips_detail_setting_more"
+            android:drawablePadding="10pt"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_replace_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text=""
+            android:textColor="@color/color_666666"
+            android:textSize="16pt" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:layout_marginTop="12pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_lock_wifi_detail_name"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_wifi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text=""
+            android:textColor="@color/color_666666"
+            android:textSize="16pt" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_lock_wifi_detail_strength"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="16pt"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_wifi_strength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text=""
+            android:textColor="@color/color_666666"
+            android:textSize="16pt" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="RSSI"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="16pt"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_rssid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text=""
+            android:textColor="@color/color_666666"
+            android:textSize="16pt" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="MAC"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="16pt"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_mac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text=""
+            android:textColor="@color/color_666666"
+            android:textSize="16pt" />
+
+    </RelativeLayout>
+
+</LinearLayout>

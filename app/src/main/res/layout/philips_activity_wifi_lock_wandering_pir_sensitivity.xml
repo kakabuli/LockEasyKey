@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cF7F7F7">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back"
+             />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/wandering_pir_sensitivity"
+            android:textColor="@color/color_333333"
+            android:textSize="17pt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sensitivity_1"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginTop="12pt"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_video_wamdering_3meters"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <CheckBox
+            android:id="@+id/iv_sensitivity_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
+            android:clickable="false"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sensitivity_2"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/rl_sensitivity_1"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_video_wamdering_2meters"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <CheckBox
+            android:id="@+id/iv_sensitivity_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
+            android:clickable="false"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sensitivity_3"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/rl_sensitivity_2"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16pt"
+            android:text="@string/activity_wifi_video_wamdering_1meters"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <CheckBox
+            android:id="@+id/iv_sensitivity_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
+            android:clickable="false"
+            />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,7 @@ public class BleLockUtils {
     public static final int TYPE_VIDEO = 9;
     public static final int TYPE_RECORD = 10;
     public static final int TYPE_ALBUM = 11;
+    public static final int TYPE_ALL_PASSWORD = 12;
 
     /***更新版本V 3.6(20200603) 刘静
      *

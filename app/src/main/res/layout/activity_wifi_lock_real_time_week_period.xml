@@ -14,9 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingLeft="@dimen/dp_16"
+            android:paddingLeft="16pt"
             android:paddingTop="@dimen/dp_5"
-            android:paddingRight="@dimen/dp_16"
+            android:paddingRight="16pt"
             android:paddingBottom="@dimen/dp_5"
             android:src="@mipmap/back_gray" />
 
@@ -54,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -91,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -127,8 +127,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -163,8 +163,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -199,8 +199,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -235,8 +235,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -271,8 +271,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 
@@ -307,8 +307,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_16"
-            android:button="@drawable/wandering_judge_time_selector"
+            android:layout_marginRight="16pt"
+            android:button="@drawable/philips_setting_checkbox_selector"
             android:clickable="false"
             />
 

@@ -3,8 +3,6 @@ package com.philips.easykey.lock.activity.device.wifilock.newadd;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -175,7 +173,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
     };
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_1), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 //                        onError(socketManager, -5);
@@ -385,7 +383,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
                 public void run() {
 
                     AlertDialogUtil.getInstance().singleButtonNoTitleDialogNoLine(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this,
-                            getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1),
+                            getString(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_1),
                             getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {
                                 @Override
                                 public void left() {

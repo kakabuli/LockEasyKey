@@ -33,6 +33,7 @@ import com.philips.easykey.lock.activity.device.gateway.GatewayActivity;
 import com.philips.easykey.lock.activity.device.gatewaylock.GatewayLockAuthorizeFunctionActivity;
 import com.philips.easykey.lock.activity.device.gatewaylock.GatewayLockFunctionActivity;
 import com.philips.easykey.lock.activity.device.oldbluetooth.OldBleDetailActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockDetailActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockAuthActivity;
 import com.philips.easykey.lock.adapter.DeviceDetailAdapter;

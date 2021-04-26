@@ -20,7 +20,7 @@
             android:layout_width="78pt"
             android:layout_height="78pt"
             android:layout_marginStart="16pt"
-            android:contentDescription="@string/cdt_record_icon"
+            android:contentDescription="@string/philips_cdt_record_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ivPower"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/philips_home_icon_wifi"
-            android:contentDescription="@string/cdt_wifi" />
+            android:contentDescription="@string/philips_cdt_wifi" />
 
         <ImageView
             android:id="@+id/ivPower"
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/philips_home_icon_battery"
-            android:contentDescription="@string/cdt_power" />
+            android:contentDescription="@string/philips_cdt_power" />
 
         <TextView
             android:id="@+id/tvDeviceName"

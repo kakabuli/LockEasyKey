@@ -408,7 +408,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 break;
             case R.id.iv_setting:
                 isLastPirture = true;
-                Intent settingIntent = new Intent(WifiVideoLockCallingActivity.this, WifiVideoLockRealTimeActivity.class);
+                Intent settingIntent = new Intent(WifiVideoLockCallingActivity.this, PhilipsWifiVideoLockRealTimeActivity.class);
                 settingIntent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                 startActivity(settingIntent);
                 mPresenter.release();
