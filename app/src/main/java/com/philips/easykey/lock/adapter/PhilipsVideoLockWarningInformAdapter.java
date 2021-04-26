@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class VideoLockWarningInformAdapter extends BaseQuickAdapter<WifiVideoLockAlarmRecord, BaseViewHolder> {
+public class PhilipsVideoLockWarningInformAdapter extends BaseQuickAdapter<WifiVideoLockAlarmRecord, BaseViewHolder> {
 
     private VideoLockWarningCallBackLinstener mListener;
 
@@ -23,8 +23,8 @@ public class VideoLockWarningInformAdapter extends BaseQuickAdapter<WifiVideoLoc
         void onVideoLockWarningCallBackLinstener(WifiVideoLockAlarmRecord record);
     }
 
-    public VideoLockWarningInformAdapter(@Nullable List<WifiVideoLockAlarmRecord> data, VideoLockWarningCallBackLinstener listener) {
-        super(R.layout.item_video_lock_warn_inform, data);
+    public PhilipsVideoLockWarningInformAdapter(@Nullable List<WifiVideoLockAlarmRecord> data, VideoLockWarningCallBackLinstener listener) {
+        super(R.layout.philips_item_video_lock_warn_inform, data);
         this.mListener = listener;
     }
 

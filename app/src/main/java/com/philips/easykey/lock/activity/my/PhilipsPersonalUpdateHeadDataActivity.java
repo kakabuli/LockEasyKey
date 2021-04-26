@@ -4,19 +4,25 @@ package com.philips.easykey.lock.activity.my;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -34,11 +40,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.IPersonalDataView;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 import com.philips.easykey.lock.widget.CircleImageView;
-import com.philips.easykey.lock.widget.image.GlideImageLoader;
-import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.view.CropImageView;
+import com.philips.easykey.lock.widget.image.GlideEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,19 +78,16 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     RelativeLayout headTelNumLayout;
     private BottomMenuDialog.Builder dialogBuilder;
     private BottomMenuDialog bottomMenuDialog;
-    public static final int PHOTO_REQUEST_CODE = 100;
-    private ArrayList<ImageItem> images;
+    public static final int PHOTO_REQUEST_CODE = 101;
     private String photoPath;
     private Bitmap changeBitmap;
     public static final int REQUEST_PERMISSION_REQUEST_CODE = 1;
-    private ImagePicker imagePicker;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_personal_data);
         ButterKnife.bind(this);
-        initDefault();
         initView();
         getMessage();
         tvContent.setText(getString(R.string.personal_center));
@@ -169,12 +168,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
         dialogBuilder.addMenu(R.string.select_photo_album, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //摄像头
-                Intent intent = new Intent(PhilipsPersonalUpdateHeadDataActivity.this, ImageGridActivity.class);
-                intent.putExtra(ImageGridActivity.EXTRAS_IMAGES, images);
-                //ImagePicker.getInstance().setSelectedImages(images);
-                startActivityForResult(intent, PHOTO_REQUEST_CODE);
-
+                createAlbum();
 
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();
@@ -187,11 +181,22 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
         bottomMenuDialog.show();
     }
 
+    private void createAlbum(){
+        EasyPhotos.createAlbum(PhilipsPersonalUpdateHeadDataActivity.this, false, false, GlideEngine.getInstance())
+                .setFileProviderAuthority("com.philips.easykey.lock.provider")
+                .setMinHeight(200)
+                .setMinWidth(200)
+                .setCount(1)
+                .setPuzzleMenu(false)
+                .setCleanMenu(false)
+                .start(PHOTO_REQUEST_CODE);
+    }
+
     private void showChangeNumberDialog(){
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
-                , getString(R.string.activity_personal_change_tel_number),
-                getString(R.string.cancel), getString(R.string.change), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                , getString(R.string.philips_activity_personal_change_tel_number),
+                getString(R.string.cancel), getString(R.string.philips_dialog_change), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -221,9 +226,11 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
             //判断是否已经赋予权限   没有权限  赋值权限
             permissions = checkPermission(permissions);
             if (permissions.length == 0) {
-                Intent intent = new Intent(this, ImageGridActivity.class);
-                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-                startActivityForResult(intent, PHOTO_REQUEST_CODE);
+                EasyPhotos.createCamera(this,true)
+                        .setFileProviderAuthority("com.philips.easykey.lock.provider")
+                        .setMinWidth(200)
+                        .setMinHeight(200)
+                        .start(PHOTO_REQUEST_CODE);
             } else {
                 //如果应用之前请求过此权限但用户拒绝了请求，此方法将返回 true。
                 //申请权限，字符串数组内是一个或多个要申请的权限，1是申请权限结果的返回参数，在onRequestPermissionsResult可以得知申请结果
@@ -265,16 +272,16 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+        if (resultCode == RESULT_OK) {
             if (data != null && requestCode == PHOTO_REQUEST_CODE) {
-                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                photoPath = images.get(0).path;
-                if (null == photoPath || "".equals(photoPath)) {
-                    photoPath = "";
+                ArrayList<Photo> resultPhotos =
+                        data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if(resultPhotos.size() > 0){
+                    photoPath = resultPhotos.get(0).path;
                 }
+                photoPath = StringUtil.processEmptyString(photoPath);
                 uploadPhoto();
-
-            } else {
+            }else {
                 ToastUtils.showShort(R.string.no_data);
             }
         }
@@ -287,32 +294,6 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
         LogUtils.d("davi photoPath " + photoPath);
         String uid = MyApplication.getInstance().getUid();
         mPresenter.uploadPicture(uid, photoPath);
-    }
-
-
-    //图片初始化默认值
-    public void initDefault() {
-        imagePicker = ImagePicker.getInstance();
-        //
-        imagePicker.setImageLoader(new GlideImageLoader());
-        //设置只选一张图片
-        imagePicker.setMultiMode(false);
-        //矩形  长宽固定200
-        imagePicker.setStyle(CropImageView.Style.RECTANGLE);
-        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
-        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
-        imagePicker.setFocusWidth(width);
-        imagePicker.setFocusHeight(height);
-
-        //是否显示摄像机
-        imagePicker.setShowCamera(false);
-        //矩形区域保存
-        imagePicker.setSaveRectangle(true);
-        //设置保存的图片大小
-        imagePicker.setOutPutX(200);
-        imagePicker.setOutPutY(200);
-        //设置裁剪
-        imagePicker.setCrop(true);
     }
 
     //权限申请结果
@@ -329,9 +310,9 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                     return;
                 }
             }
-            Intent intent = new Intent(this, ImageGridActivity.class);
-            intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-            startActivityForResult(intent, PHOTO_REQUEST_CODE);
+            EasyPhotos.createCamera(this,true)
+                    .setFileProviderAuthority("com.philips.easykey.lock.provider")
+                    .start(PHOTO_REQUEST_CODE);
         }
     }
 

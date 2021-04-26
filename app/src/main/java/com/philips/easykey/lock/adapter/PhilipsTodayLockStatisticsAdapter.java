@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class TodayLockStatisticsAdapter extends BaseQuickAdapter<TodayLockStatisticsBean, BaseViewHolder> {
+public class PhilipsTodayLockStatisticsAdapter extends BaseQuickAdapter<TodayLockStatisticsBean, BaseViewHolder> {
 
-    public TodayLockStatisticsAdapter(@Nullable List<TodayLockStatisticsBean> data) {
-        super(R.layout.item_lock_statistics, data);
+    public PhilipsTodayLockStatisticsAdapter(@Nullable List<TodayLockStatisticsBean> data) {
+        super(R.layout.philips_item_lock_statistics, data);
     }
 
     @Override

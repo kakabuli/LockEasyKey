@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.BleDetailActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
@@ -20,7 +21,6 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.lzy.imagepicker.util.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,13 +88,13 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
                 all.setVisibility(View.VISIBLE);
                 noCard.setVisibility(View.GONE);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(rlNotice.getLayoutParams());
-                lp.setMargins(0, 0, 0, Utils.dp2px(this, 60));
+                lp.setMargins(0, 0, 0, SizeUtils.dp2px(60));
                 rlNotice.setLayoutParams(lp);
             } else {
                 all.setVisibility(View.GONE);
                 noCard.setVisibility(View.VISIBLE);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(rlNotice.getLayoutParams());
-                lp.setMargins(0, 0, 0, Utils.dp2px(this, 100));
+                lp.setMargins(0, 0, 0, SizeUtils.dp2px(100));
                 rlNotice.setLayoutParams(lp);
                 if (supportFinger && supportCard) {
                     iv1.setImageResource(R.mipmap.safe_finger);

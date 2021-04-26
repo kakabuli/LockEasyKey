@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
-import com.philips.easykey.lock.adapter.SevendayDataStatisticsAdapter;
-import com.philips.easykey.lock.adapter.TodayLockStatisticsAdapter;
-import com.philips.easykey.lock.adapter.VideoLockWarningInformAdapter;
+import com.philips.easykey.lock.adapter.PhilipsSevenDayDataStatisticsAdapter;
+import com.philips.easykey.lock.adapter.PhilipsTodayLockStatisticsAdapter;
+import com.philips.easykey.lock.adapter.PhilipsVideoLockWarningInformAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.SevendayDataStatisticsBean;
 import com.philips.easykey.lock.bean.TodayLockStatisticsBean;
@@ -47,9 +47,9 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     TextView tvLockName;
     @BindView(R.id.ll_video_lock_msg)
     LinearLayout llVideoLockMsg;
-    private VideoLockWarningInformAdapter videoLockWarningInformAdapter;
-    private TodayLockStatisticsAdapter lockStatisticsAdapter;
-    private SevendayDataStatisticsAdapter sevendayDataStatisticsAdapter;
+    private PhilipsVideoLockWarningInformAdapter videoLockWarningInformAdapter;
+    private PhilipsTodayLockStatisticsAdapter lockStatisticsAdapter;
+    private PhilipsSevenDayDataStatisticsAdapter sevendayDataStatisticsAdapter;
     private int RESULT_OK = 100;
     private View mView;
     private Unbinder unbinder;
@@ -76,7 +76,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             WifiVideoLockAlarmRecord wifiVideoLockAlarmRecord = new WifiVideoLockAlarmRecord();
             wifiVideoLockAlarmRecordData.add(wifiVideoLockAlarmRecord);
         }
-        videoLockWarningInformAdapter = new VideoLockWarningInformAdapter(wifiVideoLockAlarmRecordData, new VideoLockWarningInformAdapter.VideoLockWarningCallBackLinstener() {
+        videoLockWarningInformAdapter = new PhilipsVideoLockWarningInformAdapter(wifiVideoLockAlarmRecordData, new PhilipsVideoLockWarningInformAdapter.VideoLockWarningCallBackLinstener() {
             @Override
             public void onVideoLockWarningCallBackLinstener(WifiVideoLockAlarmRecord record) {
 
@@ -95,7 +95,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             todayLockStatisticsBean.setStatisticsCount(10);
             TodayLockStatisticsData.add(todayLockStatisticsBean);
         }
-        lockStatisticsAdapter = new TodayLockStatisticsAdapter(TodayLockStatisticsData);
+        lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter(TodayLockStatisticsData);
         LinearLayoutManager horizontalLayoutManager1 = new LinearLayoutManager(getContext());
         horizontalLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(40, 0, 0, 0));
@@ -110,7 +110,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
             sevendayDataStatisticsData.add(sevendayDataStatisticsBean);
         }
-        sevendayDataStatisticsAdapter = new SevendayDataStatisticsAdapter(sevendayDataStatisticsData);
+        sevendayDataStatisticsAdapter = new PhilipsSevenDayDataStatisticsAdapter(sevendayDataStatisticsData);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {

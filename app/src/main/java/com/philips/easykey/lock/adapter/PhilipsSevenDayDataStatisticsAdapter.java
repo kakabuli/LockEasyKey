@@ -8,17 +8,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.SevendayDataStatisticsBean;
-import com.philips.easykey.lock.bean.TodayLockStatisticsBean;
 import com.philips.easykey.lock.widget.CurveChart;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SevendayDataStatisticsAdapter extends BaseQuickAdapter<SevendayDataStatisticsBean, BaseViewHolder> {
+public class PhilipsSevenDayDataStatisticsAdapter extends BaseQuickAdapter<SevendayDataStatisticsBean, BaseViewHolder> {
 
-    public SevendayDataStatisticsAdapter(@Nullable List<SevendayDataStatisticsBean> data) {
-        super(R.layout.item_seven_day_data_statistics, data);
+    public PhilipsSevenDayDataStatisticsAdapter(@Nullable List<SevendayDataStatisticsBean> data) {
+        super(R.layout.philips_item_seven_day_data_statistics, data);
     }
 
     @Override

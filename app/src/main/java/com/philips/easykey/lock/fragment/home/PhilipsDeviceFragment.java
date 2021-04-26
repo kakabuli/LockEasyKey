@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.adapter.PhilipsDeviceTypeAdapter;
 import com.philips.easykey.lock.adapter.PhilipsRvHomeDeviceAdapter;
 import com.philips.easykey.lock.adapter.PhilipsVpHomeDevicesAdapter;
@@ -66,6 +68,13 @@ public class PhilipsDeviceFragment extends Fragment {
         initTab(root);
         initSelectBtn(root);
         initDataViewFromListType(root);
+
+        ImageView ivAddDevice = root.findViewById(R.id.ivAddDevice);
+        ivAddDevice.setOnClickListener(v -> {
+            // 跳转到添加设备页面
+            Intent intent = new Intent(getActivity(), DeviceAdd2Activity.class);
+            startActivity(intent);
+        });
 
         return root;
     }
@@ -168,6 +177,7 @@ public class PhilipsDeviceFragment extends Fragment {
     }
 
     private void initDevices() {
+        mAllDeviceBeans.clear();
         PhilipsDeviceBean bean1 = new PhilipsDeviceBean();
         bean1.setDeviceName("视频锁1号");
         bean1.setLastRecordDetail("小明指纹00开锁");
@@ -204,6 +214,7 @@ public class PhilipsDeviceFragment extends Fragment {
         bean6.setLastRecordTime(1619075998000L);
         bean6.setDeviceType(2);
         mAllDeviceBeans.add(bean6);
+        mWillShowDeviceBeans.clear();
         mWillShowDeviceBeans.addAll(mAllDeviceBeans);
         mVpHomeDevicesAdapter.notifyDataSetChanged();
         mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
@@ -236,6 +247,7 @@ public class PhilipsDeviceFragment extends Fragment {
     }
 
     private void showCardView() {
+        if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_default));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_selected));
         mTvCurrentPage.setVisibility(View.VISIBLE);
@@ -247,6 +259,7 @@ public class PhilipsDeviceFragment extends Fragment {
     }
 
     private void showListView() {
+        if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_selected));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_default));
         mTvCurrentPage.setVisibility(View.GONE);
