@@ -82,7 +82,7 @@ public class WifiLockSafeModelActivity extends BaseActivity<IWifiLockSafeModeVie
             all.setVisibility(View.VISIBLE);
             noCard.setVisibility(View.GONE);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(rlNotice.getLayoutParams());
-            lp.setMargins(0, 0, 0, SizeUtils.dp2px(60));
+            lp.setMargins(0, 0, 0, SizeUtils.dp2px( 60));
             rlNotice.setLayoutParams(lp);
         } else {
             all.setVisibility(View.GONE);

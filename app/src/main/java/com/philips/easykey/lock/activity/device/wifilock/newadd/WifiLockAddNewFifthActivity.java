@@ -16,7 +16,6 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
@@ -79,7 +78,7 @@ public class WifiLockAddNewFifthActivity extends BaseAddToApplicationActivity {
                     startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
                 }
                 else {
-                    ToastUtils.showShort(getString(R.string.philips_avtivity_wifi_lock_add_new_fifth_1));
+                    ToastUtils.showShort(getString(R.string.philips_activity_wifi_lock_add_new_fifth_1));
 
                 }
 

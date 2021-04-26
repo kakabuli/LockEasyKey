@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cF7F7F7">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back"/>
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/wandering_alarm"
+            android:textColor="@color/color_333333"
+            android:textSize="17pt" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_wandering_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="72pt"
+        android:layout_marginTop="12pt"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:background="#FFFFFF"
+        >
+
+        <TextView
+            android:id="@+id/tv_wandering_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14pt"
+            android:layout_marginLeft="16pt"
+            android:text="@string/wandering_alarm"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16pt"
+            android:layout_marginEnd="75pt"
+            android:text="@string/activity_wifi_video_wamdering_open"
+            android:layout_below="@id/tv_wandering_1"
+            android:textColor="#999999"
+            android:layout_marginTop="8pt"
+            android:textSize="12pt" />
+
+        <ImageView
+            android:id="@+id/iv_wandering_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10pt"
+            android:src="@drawable/philips_setting_switch_selector" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        app:layout_constraintTop_toBottomOf="@+id/rl_wandering_alarm"
+        android:id="@+id/rl_wandering_pir_sensitivity"
+        android:layout_width="match_parent"
+        android:layout_height="72pt"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/tv_wandering_pir_sensitivity_right"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16pt"
+            android:drawableRight="@drawable/philips_detail_setting_more"
+            android:drawablePadding="10pt"
+            android:textSize="15pt"
+            android:text="@string/activity_wifi_video_wamdering_low"/>
+
+
+        <TextView
+            android:id="@+id/tv_wandering_pir_sensitivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16pt"
+            android:text="@string/wandering_pir_sensitivity"
+            android:layout_marginTop="14pt"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8pt"
+            android:layout_below="@id/tv_wandering_pir_sensitivity"
+            android:layout_marginLeft="16pt"
+            android:text="@string/wandering_pir_sensitivity_text"
+            android:textColor="#999999"
+            android:textSize="12pt" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        app:layout_constraintTop_toBottomOf="@+id/rl_wandering_pir_sensitivity"
+        android:id="@+id/rl_wandering_judge_time"
+        android:layout_width="match_parent"
+        android:layout_height="72pt"
+        android:background="#FFFFFF">
+
+
+        <TextView
+            android:id="@+id/tv_wandering_judge_time_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16pt"
+            android:drawableRight="@drawable/philips_detail_setting_more"
+            android:textSize="15pt"
+            android:text="@string/second_15"/>
+
+        <TextView
+            android:id="@+id/tv_wandering_judge_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16pt"
+            android:text="@string/wandering_judge_time"
+            android:layout_marginTop="14pt"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_wandering_judge_time"
+            android:layout_marginTop="8pt"
+            android:layout_marginLeft="16pt"
+            android:text="@string/wandering_judge_time_text"
+            android:textColor="#999999"
+            android:textSize="12pt" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_restore"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@drawable/philips_retangle_0066a1_3"
+        android:text="@string/philips_device_wandering_alarm_restore_default"
+        android:textColor="@color/white"
+        android:layout_marginBottom="53pt"
+        android:layout_marginEnd="16pt"
+        android:layout_marginStart="16pt"
+        android:textSize="16pt"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="35pt"
+        android:layout_height="35pt"
+        app:indicatorColor="#333333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10pt"
+        android:text="@string/wifi_video_lock_waiting"
+        android:textSize="14pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avi"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

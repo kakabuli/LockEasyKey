@@ -107,7 +107,7 @@ public class ClothesHangerMachineAddSecondActivity extends BaseActivity<IClothes
     private void showBluetoothEnableDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineAddSecondActivity.this,
-                getString(R.string.philips_avtivity_clothes_hanger_machine_add_dialog_4),
+                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_4),
                 getString(R.string.close), getString(R.string.settting),
                 "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override

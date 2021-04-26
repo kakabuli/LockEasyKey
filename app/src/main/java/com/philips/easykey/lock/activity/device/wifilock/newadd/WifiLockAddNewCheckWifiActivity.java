@@ -14,9 +14,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAPAddFailedActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAddSuccessActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockApConnectDeviceActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiApWifiSetUpPresenter;
@@ -197,7 +195,7 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
 
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                WifiLockAddNewCheckWifiActivity.this, "", getString(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1),
+                WifiLockAddNewCheckWifiActivity.this, "", getString(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_1),
                 getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
@@ -237,15 +235,15 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
 //                Toast.makeText(WifiLockAddNewCheckWifiActivity.this, R.string.bind_failed+"=="+errorCode, Toast.LENGTH_SHORT).show();
 
                 if (errorCode == -1) {
-                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_2);
+                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_2);
                 } else if (errorCode == -2) {
-                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_3);
+                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_3);
                 } else if (errorCode == -3) {
-                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_4);
+                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_4);
                 } else if (errorCode == -4) {
-                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_5);
+                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_5);
                 } else if (errorCode == -5) {
-                    ToastUtils.showShort(R.string.philips_avtivity_wifi_lock_add_new_checkwifi_dialog_6);
+                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_6);
                 }
                 Intent intent = new Intent(WifiLockAddNewCheckWifiActivity.this, WifiLockAddNewBindFailedActivity.class);
                 startActivity(intent);
