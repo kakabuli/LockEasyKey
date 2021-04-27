@@ -6,40 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity">
 
-    <ImageView
-        android:id="@+id/img_back"
-        android:layout_width="12pt"
-        android:layout_height="20pt"
-        app:srcCompat="@drawable/philips_icon_back"
-        android:layout_marginStart="16pt"
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32pt"
-        android:layout_centerVertical="true"/>
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back"/>
+
+        <TextView
+            android:id="@+id/tv_device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="@color/color_333333"
+            android:textSize="17pt"/>
 
 
-    <TextView
-        android:id="@+id/tvDeviceName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:textSize="17pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="31pt"
-        android:text="DDL708-V-5HW" />
+        <ImageView
+            android:id="@+id/iv_detail_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="16pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/philips_equipment_icon_setting"
+            android:layout_alignParentEnd="true"
 
-
-    <ImageView
-        android:layout_width="20pt"
-        android:layout_height="20pt"
-        android:layout_marginEnd="16pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/philips_icon_setting"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32pt"/>
-
+            />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/ivWifi"
@@ -48,7 +50,7 @@
         android:layout_marginTop="19pt"
         android:layout_marginStart="16pt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDeviceName"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:srcCompat="@drawable/philips_home_icon_wifi"
         android:contentDescription="@string/philips_cdt_wifi" />
 
@@ -62,24 +64,18 @@
         app:srcCompat="@drawable/philips_home_icon_battery"
         android:contentDescription="@string/philips_cdt_power" />
 
-    <ImageView
-        android:id="@+id/img_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/philips_detail_equipment_icon_help"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ivWifi"
-        android:layout_marginEnd="16pt" />
-
     <TextView
         android:id="@+id/tv_right_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/safe_mode"
         android:textSize="14pt"
-        app:layout_constraintEnd_toStartOf="@id/img_help"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:drawableRight="@drawable/philips_detail_equipment_icon_help"
+        android:drawablePadding="10pt"
+        android:layout_marginEnd="16pt"
         app:layout_constraintTop_toTopOf="@id/ivWifi"
-        android:layout_marginEnd="10pt"
         android:textColor="@color/c000028" />
 
 
@@ -108,13 +104,202 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="130pt"
-        android:layout_marginBottom="36pt"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20pt"
         android:layout_marginEnd="20pt">
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_password"
+            android:layout_width="163pt"
+            android:layout_height="56pt"
+            android:layout_marginBottom="12pt"
+            android:background="@drawable/philips_detail_bg_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_detail_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_equipment_icon_password"
+                android:layout_marginStart="24pt"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_detail_password"
+                android:textSize="14pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6pt"
+                android:textColor="@color/color_333333"
+                android:text="@string/philips_pwd"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16pt"
+                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_share"
+            android:layout_width="163pt"
+            android:layout_height="56pt"
+            android:layout_marginBottom="12pt"
+            android:background="@drawable/philips_detail_bg_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_detail_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_equipment_icon_share"
+                android:layout_marginStart="24pt"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_detail_share"
+                android:textSize="14pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6pt"
+                android:textColor="@color/color_333333"
+                android:text="@string/philips_activity_detail_share"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16pt"
+                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_share_setting"
+            android:layout_width="163pt"
+            android:layout_height="56pt"
+            android:background="@drawable/philips_detail_bg_3"
+            app:layout_constraintBottom_toTopOf="@+id/rl_detail_share"
+            android:layout_marginBottom="12pt"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_detail_share_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_equipment_icon_setting"
+                android:layout_marginStart="24pt"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_detail_share_setting"
+                android:textSize="14pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6pt"
+                android:textColor="@color/color_333333"
+                android:text="@string/philips_setting"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16pt"
+                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_record"
+            android:layout_width="163pt"
+            android:layout_height="56pt"
+            android:layout_marginBottom="12pt"
+            android:background="@drawable/philips_detail_bg_3"
+            app:layout_constraintBottom_toTopOf="@+id/rl_detail_password"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_detail_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_equipment_icon_message"
+                android:layout_marginStart="24pt"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_detail_record"
+                android:textSize="14pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6pt"
+                android:textColor="@color/color_333333"
+                android:text="@string/philips_message"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16pt"
+                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_album"
+            android:layout_width="163pt"
+            android:layout_height="56pt"
+            android:layout_marginBottom="12pt"
+            android:background="@drawable/philips_detail_bg_3"
+            app:layout_constraintBottom_toTopOf="@+id/rl_detail_share"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_detail_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_equipment_icon_album"
+                android:layout_marginStart="24pt"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_detail_album"
+                android:textSize="14pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6pt"
+                android:textColor="@color/color_333333"
+                android:text="@string/philips_album"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16pt"
+                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

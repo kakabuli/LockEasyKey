@@ -266,7 +266,7 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                                     WifiLockInfo wifiLockInfo = (WifiLockInfo) deviceDetailBean.getObject();
                                     if (!TextUtils.isEmpty(wifiLockInfo.getFunctionSet())) {
                                         if (wifiLockInfo.getIsAdmin() == 1) { //主用户
-                                            Intent intent = new Intent(getActivity(), WiFiLockDetailActivity.class);
+                                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
                                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                                             startActivity(intent);
                                         } else { //分享用户
