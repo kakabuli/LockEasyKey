@@ -3,8 +3,6 @@ package com.philips.easykey.lock.adapter;
 import android.content.Context;
 import android.media.MediaMetadataRetriever;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,7 +21,7 @@ public class MyAlbumItemAdapter extends BaseQuickAdapter<FileItemBean, BaseViewH
     Context context;
 
     public MyAlbumItemAdapter(List<FileItemBean> data, Context context) {
-        super(R.layout.item_my_ablum, data);
+        super(R.layout.philips_item_my_ablum, data);
         this.context = context;
     }
 

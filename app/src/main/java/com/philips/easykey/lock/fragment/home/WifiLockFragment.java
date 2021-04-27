@@ -32,7 +32,7 @@ import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
@@ -381,7 +381,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             break;
 
                         case BleLockUtils.TYPE_ALBUM:
-                            intent = new Intent(getContext(), WifiVideoLockAlbumActivity.class);
+                            intent = new Intent(getContext(), PhilipsWifiVideoLockAlbumActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN,wifiSN);
                             startActivity(intent);
                             break;

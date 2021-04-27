@@ -201,15 +201,11 @@ dependencies {
     implementation 'com.king.zxing:zxing-lite:1.1.1'
     implementation 'com.google.android.material:material:1.3.0'
 
-    implementation 'com.github.razerdp:BasePopup:2.1.9'
     implementation 'com.bm.photoview:library:1.4.1'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
-    implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
 
     //微信分享
-
-//        implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
     implementation 'com.getui:sdk:2.14.1.0'

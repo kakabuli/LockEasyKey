@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,14 +44,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 
-public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
+public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
 
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.tv_cancel)
-    TextView tvCancel;
     @BindView(R.id.iv_myalbum_delete)
     ImageView ivMyAlbumDelete;
 
@@ -60,7 +59,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
 
     private String wifiSn = "";
 
-    private boolean showDeleteItem ;
+    private boolean showDeleteItem = false;
 
     private final int DELETE_MYALBUM_PIC_VIDEO = 10100;
 
@@ -69,7 +68,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_lock_video_album);
+        setContentView(R.layout.philips_activity_wifi_lock_video_album);
 
         ButterKnife.bind(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
@@ -87,8 +86,8 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
     }
 
     private void initRecycleView() {
-        adapter = new MyAlbumAdapter(items, WifiVideoLockAlbumActivity.this);
-        recycleview.setLayoutManager(new LinearLayoutManager(WifiVideoLockAlbumActivity.this));
+        adapter = new MyAlbumAdapter(items, PhilipsWifiVideoLockAlbumActivity.this);
+        recycleview.setLayoutManager(new LinearLayoutManager(PhilipsWifiVideoLockAlbumActivity.this));
         recycleview.setAdapter(adapter);
         adapter.setOnMyAlbumItemClickListener(new MyAlbumAdapter.onMyAlbumItemClickListener() {
             @Override
@@ -103,7 +102,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
                     return;
                 }
                 if(data.get(position).getType() == 1){
-                    Intent intent = new Intent(WifiVideoLockAlbumActivity.this, WifiVideoLockPreViewActivity.class);
+                    Intent intent = new Intent(PhilipsWifiVideoLockAlbumActivity.this, PhilipsWifiVideoLockPreViewActivity.class);
                     intent.putExtra(KeyConstants.VIDEO_PIC_PATH,data.get(position).getPath());
                     String filename = data.get(position).getName();
                     filename = StringUtil.getFileNameNoEx(filename);
@@ -116,7 +115,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
                     intent.putExtra("NAME",filename);
                     startActivityForResult(intent,DELETE_MYALBUM_PIC_VIDEO);
                 }else if(data.get(position).getType() == 2){
-                    Intent intent = new Intent(WifiVideoLockAlbumActivity.this, WifiVideoLockAlbumDetailActivity.class);
+                    Intent intent = new Intent(PhilipsWifiVideoLockAlbumActivity.this, PhilipsWifiVideoLockAlbumDetailActivity.class);
                     String filename = data.get(position).getName();
                     filename = StringUtil.getFileNameNoEx(filename);
                     try{
@@ -207,27 +206,26 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
         }
     }
 
-    @OnClick({R.id.back,R.id.tv_cancel,R.id.iv_myalbum_delete})
+    @OnClick({R.id.back,R.id.iv_myalbum_delete})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.back:
-                finish();
-                break;
-            case R.id.tv_cancel:
-                revoke();
+                if(showDeleteItem){
+                    revoke();
+                }else{
+                    finish();
+                }
                 break;
             case R.id.iv_myalbum_delete:
-                if(tvCancel.getVisibility() == View.VISIBLE){
+                if(showDeleteItem){
                     if(isSelectFileItem()){
                         showDeleteSelectFileItemDialog();
                     }else{
                         revoke();
                         ToastUtils.showShort(getString(R.string.wifi_video_lock_delete_show_toast) + "");
                     }
-                }else if(tvCancel.getVisibility() == View.GONE){
+                }else {
                     showDeleteItem = true;
-                    back.setVisibility(View.GONE);
-                    tvCancel.setVisibility(View.VISIBLE);
                     showDeleteItem(true);
                 }
                 break;
@@ -239,9 +237,9 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
             deleteSelectFileItemDialog = new Dialog(this, R.style.MyDialog);
         }
         // 获取Dialog布局
-        View mView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_two_button, null);
-        TextView delete = mView.findViewById(R.id.tv_top);
-        TextView cancel = mView.findViewById(R.id.tv_bottom);
+        View mView = LayoutInflater.from(this).inflate(R.layout.philips_dialog_bottom_two_button, null);
+        Button delete = mView.findViewById(R.id.tv_top);
+        Button cancel = mView.findViewById(R.id.tv_bottom);
         deleteSelectFileItemDialog.setContentView(mView);
 
         Window window = deleteSelectFileItemDialog.getWindow();
@@ -273,7 +271,7 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
                 deleteSelectFileItemDialog.dismiss();
             }
         });
-        if(!WifiVideoLockAlbumActivity.this.isFinishing()){
+        if(!PhilipsWifiVideoLockAlbumActivity.this.isFinishing()){
             deleteSelectFileItemDialog.show();
         }
 
@@ -301,8 +299,6 @@ public class WifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
     }
 
     private void revoke() {
-        tvCancel.setVisibility(View.GONE);
-        back.setVisibility(View.VISIBLE);
         showDeleteItem(false);
         showDeleteItem = false;
     }

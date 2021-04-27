@@ -62,11 +62,13 @@
     <color name="common_red">#DD262C</color>
 
     <color name="seekbar_bg">#9E9E9E</color>
+    <color name="color_bfbfbf">#BFBFBF</color>
     <color name="seekbar_process">#149CF3</color>
 
 
     <color name="c0066A1">#0066A1</color>
     <color name="cF7F7F7">#F7F7F7</color>
+    <color name="cEF1A28">#EF1A28</color>
     <color name="c666666">#666666</color>
     <color name="c000028">#000028</color>
 </resources>

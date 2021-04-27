@@ -325,7 +325,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                 mPresenter.release();
                 break;
             case R.id.iv_album:
-                Intent intent = new Intent(WifiVideoLockCallingTestActivity.this, WifiVideoLockAlbumActivity.class);
+                Intent intent = new Intent(WifiVideoLockCallingTestActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                 startActivity(intent);
                 mPresenter.release();

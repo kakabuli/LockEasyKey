@@ -28,11 +28,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -417,7 +415,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 break;
             case R.id.iv_album:
                 isLastPirture = true;
-                Intent intent = new Intent(PhilipsWifiVideoLockCallingActivity.this, WifiVideoLockAlbumActivity.class);
+                Intent intent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                 startActivity(intent);
                 mPresenter.release();
