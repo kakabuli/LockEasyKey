@@ -173,7 +173,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_lock_video_calling);
+        setContentView(R.layout.philips_activity_wifi_lock_video_calling);
 
         ButterKnife.bind(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
@@ -312,7 +312,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
                         if(!mPresenter.isEnableAudio()){
                             mPresenter.enableAudio(true);
                             isMute = false;
-                            ivMute.setImageResource(R.mipmap.real_time_video_mute);
+                            ivMute.setImageResource(R.drawable.philips_video_icon_mute);
                         }
                     }
 
@@ -399,7 +399,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
 
 
 //        mPresenter.startRealTimeVideo(mSufaceView);
-        ivMute.setImageResource(R.mipmap.real_time_video_mute);
+        ivMute.setImageResource(R.drawable.philips_video_icon_mute);
         isShowAudio = true;
         registerBroadcast();
 

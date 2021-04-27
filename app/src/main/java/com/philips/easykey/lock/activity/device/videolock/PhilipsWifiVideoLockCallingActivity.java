@@ -32,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -74,7 +75,7 @@ import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 import com.blankj.utilcode.util.ToastUtils;
 
-public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCallingView,
+public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCallingView,
         WifiVideoLockCallingPresenter<IWifiLockVideoCallingView>> implements IWifiLockVideoCallingView{
 
     @BindView(R.id.iv_answer_icon)
@@ -103,8 +104,6 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     SurfaceView mSufaceView;
     @BindView(R.id.tv_temporary_password)
     TextView tvTemporaryPassword;
-    @BindView(R.id.lly_temporary_password)
-    LinearLayout llyTemporaryPassword;
 
     @BindView(R.id.rl_video_layout)
     RelativeLayout rlVideoLayout;
@@ -124,6 +123,8 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     RelativeLayout llyRecord;
     @BindView(R.id.iv_screenshot_bitmap)
     ImageView ivScreenshotBitmap;
+    @BindView(R.id.ll_screenshot)
+    RelativeLayout mRlScreenShot;
     @BindView(R.id.iv_record_spot)
     ImageView ivRecordSpot;
     @BindView(R.id.tv_time)
@@ -154,6 +155,10 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     RelativeLayout rlTitleBar;
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
+    @BindView(R.id.head_title)
+    TextView mTvHeadTitle;
+    @BindView(R.id.iv_temporary_pwd)
+    ImageView mIvTemporaryPwd;
 
     private Bitmap myBitmap;
 
@@ -168,8 +173,6 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     private boolean isConnect = false;
     private String wifiSn;
     private WifiLockInfo wifiLockInfo;
-
-    private boolean isPasswordShow = false;
 
     private int isCalling = 0;
 
@@ -196,7 +199,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_wifi_lock_video_calling);
+        setContentView(R.layout.philips_activity_wifi_lock_video_calling);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -241,6 +244,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
             mPresenter.settingDevice(wifiLockInfo);
             changeIcon();
             String lockNickname = wifiLockInfo.getLockNickname();
+            mTvHeadTitle.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
             tvHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
             tvBigHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
         }
@@ -250,17 +254,17 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
         llyRecord.setVisibility(View.GONE);
         avi.show();
 
-        llyTemporaryPassword.setVisibility(View.GONE);
+        tvTemporaryPassword.setVisibility(View.GONE);
         tvTemporaryPassword.setText("");
 
         initLinstener();
-        //动态设置状态栏高度
+/*        //动态设置状态栏高度
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
-        titleBar.setLayoutParams(lp);
+        titleBar.setLayoutParams(lp);*/
         RelativeLayout.LayoutParams rllp = new RelativeLayout.LayoutParams(rlTitleBar.getLayoutParams());
         rllp.setMargins(0, getStatusBarHeight(), 0, 0);
-        rlTitleBar.setLayoutParams(lp);
+        rlTitleBar.setLayoutParams(rllp);
     }
 
     private void changeIcon() {
@@ -306,8 +310,8 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if (ContextCompat.checkSelfPermission(WifiVideoLockCallingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions( WifiVideoLockCallingActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+                    if (ContextCompat.checkSelfPermission(PhilipsWifiVideoLockCallingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions( PhilipsWifiVideoLockCallingActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
                         ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission) + "");
                     }else{
                         if(isFirstAudio){
@@ -317,14 +321,12 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                                 mPresenter.talkback(false);
                                 mPresenter.stopTalkback();
                                 tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-                                tvCallingTips.setTextColor(Color.parseColor("#333333"));
                             }else{
                                 ivCalling.setSelected(true);
                                 mPresenter.talkback(true);
                                 mPresenter.startTalkback();
                                 showShort(getString(R.string.wifi_video_lock_open_talk_back));
                                 tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
-                                tvCallingTips.setTextColor(Color.parseColor("#ffffff"));
                             }
                         }
                     }
@@ -390,7 +392,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                         if(mPresenter.isEnableAudio()){
                             mPresenter.enableAudio(false);
                             isMute = true;
-                            ivMute.setImageResource(R.mipmap.real_time_video_mute_seleted);
+                            ivMute.setImageResource(R.drawable.philips_video_icon_mute);
                             showShort(getString(R.string.wifi_video_lock_mute_on));
                         }
                     }
@@ -400,7 +402,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                         if(!mPresenter.isEnableAudio()){
                             mPresenter.enableAudio(true);
                             isMute = false;
-                            ivMute.setImageResource(R.mipmap.real_time_video_mute);
+                            ivMute.setImageResource(R.drawable.philips_video_icon_mute);
                         }
                     }
 
@@ -408,14 +410,14 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 break;
             case R.id.iv_setting:
                 isLastPirture = true;
-                Intent settingIntent = new Intent(WifiVideoLockCallingActivity.this, PhilipsWifiVideoLockRealTimeActivity.class);
+                Intent settingIntent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockRealTimeActivity.class);
                 settingIntent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                 startActivity(settingIntent);
                 mPresenter.release();
                 break;
             case R.id.iv_album:
                 isLastPirture = true;
-                Intent intent = new Intent(WifiVideoLockCallingActivity.this, WifiVideoLockAlbumActivity.class);
+                Intent intent = new Intent(PhilipsWifiVideoLockCallingActivity.this, WifiVideoLockAlbumActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                 startActivity(intent);
                 mPresenter.release();
@@ -450,14 +452,14 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 mPresenter.snapImage();
                 break;
             case R.id.iv_temporary_pwd:
-                if(!isPasswordShow){
-                    tvTemporaryPassword.setText(getPassword() + "");
+                if(!mIvTemporaryPwd.isSelected()){
+                    tvTemporaryPassword.setText(getPassword() + "#");
 //                    tvTemporaryPassword.setText(XMP2PManager.getInstance().getMode() + "");//test查看讯美p2p连接直连还是转发
-                    llyTemporaryPassword.setVisibility(View.VISIBLE);
-                    isPasswordShow = true;
+                    tvTemporaryPassword.setVisibility(View.VISIBLE);
+                    mIvTemporaryPwd.setSelected(true);
                 }else{
-                    isPasswordShow = false;
-                    llyTemporaryPassword.setVisibility(View.GONE);
+                    mIvTemporaryPwd.setSelected(false);
+                    tvTemporaryPassword.setVisibility(View.GONE);
                 }
 
                 break;
@@ -571,7 +573,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
         mPresenter.handler.post(new Runnable() {
             @Override
             public void run() {
-                if(!WifiVideoLockCallingActivity.this.isFinishing()){
+                if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
                     if(avi != null){
                         avi.hide();
                     }
@@ -580,7 +582,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                     LogUtils.d("shulan"+this + " paramInt=" + paramInt);
                     String errorStringWithCode;
                     if(paramInt >0){
-                        errorStringWithCode = XMP2PConnectJsonError.checkP2PJSONErrorStringWithCode(WifiVideoLockCallingActivity.this,paramInt);
+                        errorStringWithCode = XMP2PConnectJsonError.checkP2PJSONErrorStringWithCode(PhilipsWifiVideoLockCallingActivity.this,paramInt);
                     }else{
                         if(isConnect && (paramInt == -13 || paramInt == -12)){
                             mPresenter.talkback(false);
@@ -590,7 +592,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                             mPresenter.connectP2P();
                             return;
                         }
-                        errorStringWithCode = XMP2PConnectError.checkP2PErrorStringWithCode(WifiVideoLockCallingActivity.this,paramInt);
+                        errorStringWithCode = XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiVideoLockCallingActivity.this,paramInt);
                     }
                     isConnect = false;
                     creteDialog(errorStringWithCode + "");
@@ -604,15 +606,14 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
     }
 
     private void resetStatus() {
-        ivMute.setImageResource(R.mipmap.real_time_video_mute);
+        ivMute.setImageResource(R.drawable.philips_video_icon_mute);
         isShowAudio = true;
         isFirstAudio = false;
         llyRecord.setVisibility(View.GONE);
         ivRecoring.setSelected(false);
         ivCalling.setSelected(false);
         tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-        tvCallingTips.setTextColor(Color.parseColor("#333333"));
-        llyTemporaryPassword.setVisibility(View.GONE);
+        tvTemporaryPassword.setVisibility(View.GONE);
         tvTemporaryPassword.setText("");
     }
 
@@ -649,7 +650,6 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                     mPresenter.stopTalkback();
                     ivCalling.setSelected(false);
                     tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-                    tvCallingTips.setTextColor(Color.parseColor("#333333"));
                     showShort(getString(R.string.xm_json_error_talk_occupied) + "");
                 }
 
@@ -671,9 +671,8 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                     @Override
                     public void run() {
                         if(ivScreenshotBitmap != null){
-                            Glide.with(WifiVideoLockCallingActivity.this).load(myBitmap).into(ivScreenshotBitmap);
-                            ivScreenshotBitmap.setVisibility(View.VISIBLE);
-                            showShort(getString(R.string.screen_success));
+                            Glide.with(PhilipsWifiVideoLockCallingActivity.this).load(myBitmap).into(ivScreenshotBitmap);
+                            mRlScreenShot.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -682,7 +681,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                     @Override
                     public void run() {
                         if(ivScreenshotBitmap != null)
-                            ivScreenshotBitmap.setVisibility(View.GONE);
+                            mRlScreenShot.setVisibility(View.GONE);
                     }
                 },3000);
 
@@ -697,7 +696,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 }else{
                     // 其次把文件插入到系统图库
                     try {
-                        MediaStore.Images.Media.insertImage(WifiVideoLockCallingActivity.this.getContentResolver(),
+                        MediaStore.Images.Media.insertImage(PhilipsWifiVideoLockCallingActivity.this.getContentResolver(),
                                 FileTool.getVideoLockPath(this,wifiLockInfo.getWifiSN()).getAbsolutePath(), fileName, null);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -706,7 +705,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
 
                 // 最后通知图库更新
                 // context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
-                WifiVideoLockCallingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                PhilipsWifiVideoLockCallingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                         Uri.fromFile(FileTool.getVideoLockPath(this,wifiLockInfo.getWifiSN()))));
 
             }
@@ -784,7 +783,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
 
     @Override
     public void openDoor(WifiLockOperationBean.EventparamsBean eventparams) {
-        if(!WifiVideoLockCallingActivity.this.isFinishing()){
+        if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
             if(eventparams.getEventCode() == 2){
                 runOnUiThread(new Runnable() {
                     @Override
@@ -839,7 +838,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 finish();
             }
         });
-        if(!WifiVideoLockCallingActivity.this.isFinishing()){
+        if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
             openDialog.show();
         }
     }
@@ -853,7 +852,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
                 stopTimer();
                 // 最后通知图库更新
                 if(mp4Info.isResult()){
-                    WifiVideoLockCallingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(mp4Info.getFilePath()))));
+                    PhilipsWifiVideoLockCallingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(mp4Info.getFilePath()))));
                     mPresenter.handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -989,7 +988,7 @@ public class WifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCal
             }
         });
 
-        if(!WifiVideoLockCallingActivity.this.isFinishing()){
+        if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
             dialog.show();
         }
 

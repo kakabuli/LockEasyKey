@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.BuildConfig;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.mqtt.PublishResult;
@@ -519,11 +519,11 @@ public class MqttService extends Service {
                 if(!AppUtil.isAppOnForeground(MqttService.this)){
                     return;
                 }
-                if(getRunningActivityName().equals(WifiVideoLockCallingActivity.class.getName())){
+                if(getRunningActivityName().equals(PhilipsWifiVideoLockCallingActivity.class.getName())){
                     return;
                 }
                 if(wifiLockInfoBySn.getPowerSave() == 0){
-                    Intent intent = new Intent(this, WifiVideoLockCallingActivity.class);
+                    Intent intent = new Intent(this, PhilipsWifiVideoLockCallingActivity.class);
                     intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
                     intent.putExtra(KeyConstants.WIFI_SN,mDoorbellingResult.getWfId());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

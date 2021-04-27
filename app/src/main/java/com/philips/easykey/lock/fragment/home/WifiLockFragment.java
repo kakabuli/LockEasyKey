@@ -33,7 +33,7 @@ import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyMa
 import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
@@ -394,7 +394,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                         case BleLockUtils.TYPE_VIDEO:
                             try {
                                 if(wifiLockInfo.getPowerSave() == 0){
-                                    intent = new Intent(getContext(), WifiVideoLockCallingActivity.class);
+                                    intent = new Intent(getContext(), PhilipsWifiVideoLockCallingActivity.class);
                                     intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
                                     intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
                                     startActivity(intent);

@@ -128,7 +128,7 @@
         <activity android:name=".activity.device.videolock.WifiVideoLockAlbumActivity" />
         <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeVideoActivity" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockCallingActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockCallingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
