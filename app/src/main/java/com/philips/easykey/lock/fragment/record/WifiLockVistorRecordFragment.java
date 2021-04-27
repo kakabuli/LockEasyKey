@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumDetailActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity;
 import com.philips.easykey.lock.adapter.WifiLockVistorIAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockVistorRecordPresenter;
@@ -123,7 +123,7 @@ public class WifiLockVistorRecordFragment extends BaseFragment<IWifiLockVistorRe
                         String path = FileTool.getVideoCacheFolder(getActivity(),record.getWifiSN()).getPath();
                         String fileName = path +  File.separator + record.get_id() + ".mp4";
                         if (new File(fileName).exists()){
-                            Intent intent = new Intent(getActivity(), WifiVideoLockAlbumDetailActivity.class);
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
                             intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
                             intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
                             try{
@@ -138,7 +138,7 @@ public class WifiLockVistorRecordFragment extends BaseFragment<IWifiLockVistorRe
                             intent.putExtra("record",record);
                             startActivity(intent);
                         }else{
-                            Intent intent = new Intent(getActivity(), WifiVideoLockAlbumDetailActivity.class);
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
                             intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
                             intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
                             try{

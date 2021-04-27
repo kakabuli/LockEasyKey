@@ -15,7 +15,7 @@ import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
@@ -124,7 +124,7 @@ public class GeTuiIntentService extends GTIntentService {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            intent = new Intent(GeTuiIntentService.this, WifiVideoLockCallingActivity.class);
+            intent = new Intent(GeTuiIntentService.this, PhilipsWifiVideoLockCallingActivity.class);
             intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
             intent.putExtra("VIDEO_CALLING_IS_MAINACTIVITY",true);
             intent.putExtra(KeyConstants.WIFI_SN,wifiSN);

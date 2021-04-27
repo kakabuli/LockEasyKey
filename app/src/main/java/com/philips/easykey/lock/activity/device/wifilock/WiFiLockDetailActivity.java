@@ -24,11 +24,11 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockMoreActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
@@ -502,7 +502,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             break;
 
                         case BleLockUtils.TYPE_ALBUM:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiVideoLockAlbumActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
                             startActivity(intent);
                             break;
@@ -515,7 +515,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                         case BleLockUtils.TYPE_VIDEO:
                             try {
                                 if(wifiLockInfo.getPowerSave() == 0){
-                                    intent = new Intent(WiFiLockDetailActivity.this, WifiVideoLockCallingActivity.class);
+                                    intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiVideoLockCallingActivity.class);
                                     intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
                                     intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                                     startActivity(intent);

@@ -33,49 +33,42 @@
         <RelativeLayout
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:background="#00000000">
+            android:layout_height="64pt"
+            android:paddingTop="20pt"
+            android:background="@color/color_7f000">
 
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_16"
-                android:paddingTop="@dimen/dp_5"
-                android:src="@mipmap/video_lock_back" />
+                android:layout_height="match_parent"
+                android:paddingStart="16pt"
+                app:srcCompat="@drawable/philips_icon_back_white" />
 
             <ImageView
                 android:id="@+id/iv_setting"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:paddingBottom="@dimen/dp_5"
-                android:paddingLeft="@dimen/dp_16"
-                android:paddingRight="@dimen/dp_16"
-                android:paddingTop="@dimen/dp_5"
-                android:src="@mipmap/video_lock_icon_setting" />
+                android:paddingEnd="12pt"
+                app:srcCompat="@drawable/philips_video_icon_setting" />
 
             <TextView
                 android:id="@+id/head_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/real_time_video_function"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
                 android:textColor="#ffff"
-                android:textSize="@dimen/sp_17"
-                android:visibility="gone"
-                android:textStyle="bold" />
+                android:text=""
+                android:textSize="17pt"
+                />
             <TextView
                 android:id="@+id/tv_video_timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/sp_10"
+                android:textSize="10pt"
                 android:visibility="gone"
                 android:layout_alignParentBottom="true"
                 android:text="2020-10-20 15:00:00"/>
@@ -89,47 +82,73 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/lly_bottom_bar"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="@dimen/dp_49"
-            android:layout_marginRight="@dimen/dp_19"
-            android:src="@drawable/real_time_video_pwd_selector" />
+            android:layout_marginBottom="47pt"
+            android:layout_marginRight="16pt"
+            app:srcCompat="@drawable/philips_real_time_video_pwd_selector" />
 
-        <ImageView
-            android:id="@+id/iv_screenshot_bitmap"
-            android:layout_width="@dimen/dp_66"
-            android:layout_height="@dimen/dp_104"
-            android:layout_above="@id/lly_bottom_bar"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:layout_marginLeft="@dimen/dp_10" />
+        <RelativeLayout
+            android:id="@+id/ll_screenshot"
+            android:layout_width="155pt"
+            android:layout_height="209pt"
+            android:layout_below="@id/title_bar"
+            android:background="@color/color_7f000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="126pt"
+            >
+
+            <ImageView
+                android:id="@+id/iv_screenshot_bitmap"
+                android:layout_width="90pt"
+                android:layout_height="160pt"
+                android:layout_marginTop="12pt"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_screenshot_bitmap"
+                android:layout_marginTop="6pt"
+                android:layout_centerHorizontal="true"
+                android:textSize="14pt"
+                android:textColor="@color/white"
+                android:text="@string/philips_activity_calling_screenshot_bitmap_save"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/lly_bottom_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_87"
+            android:layout_height="100pt"
+            android:layout_marginBottom="25pt"
             android:layout_alignParentBottom="true"
-            android:background="#C8232323"
+            android:background="@color/color_7f000"
             android:orientation="horizontal">
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginLeft="16pt"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/iv_screenshot"
+                    android:id="@+id/iv_mute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/real_time_video_screenshot" />
+                    android:layout_marginTop="22pt"
+                    app:srcCompat="@drawable/philips_video_icon_mute"
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/screen_img"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/mute_name"
                     android:textColor="#ffffff"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="14pt" />
             </LinearLayout>
 
             <View
@@ -139,25 +158,25 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/iv_mute"
+                    android:id="@+id/iv_album"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/real_time_video_mute"
-                     />
+                    android:layout_marginTop="22pt"
+                    app:srcCompat="@drawable/philips_video_icon_album" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/mute_name"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/wifi_video_lock_album"
                     android:textColor="#ffffff"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="14pt" />
             </LinearLayout>
 
             <View
@@ -167,22 +186,25 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/iv_calling"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/real_time_video_calling_selector" />
+                    android:layout_marginTop="11pt"
+                    android:src="@drawable/philips_real_time_video_calling_selector" />
 
                 <TextView
                     android:id="@+id/tv_calling_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/dp_11"
-                    android:layout_marginTop="@dimen/dp_38"
+                    android:textSize="14pt"
+                    android:layout_below="@id/iv_calling"
+                    android:layout_marginTop="7pt"
+                    android:textColor="@color/white"
                     android:text="@string/wifi_video_lock_talk_back"/>
             </RelativeLayout>
 
@@ -191,26 +213,28 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
 
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/iv_recoring"
+                    android:id="@+id/iv_screenshot"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="22pt"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/real_time_video_record_selector" />
+                    app:srcCompat="@drawable/philips_video_icon_screenshot" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/recording_screen"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/screen_img"
                     android:textColor="#ffffff"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="14pt" />
             </LinearLayout>
 
             <View
@@ -220,69 +244,65 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/dp_13"
+                android:layout_marginEnd="16pt"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/iv_album"
+                    android:id="@+id/iv_recoring"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="22pt"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/real_time_video_album" />
+                    android:src="@drawable/real_time_video_record_selector" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/philips_album"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/recording_screen"
                     android:textColor="#ffffff"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="14pt" />
             </LinearLayout>
+
         </LinearLayout>
 
 
-        <LinearLayout
+  <!--      <LinearLayout
             android:id="@+id/lly_temporary_password"
             android:layout_width="@dimen/dp_255"
             android:layout_height="@dimen/dp_50"
-            android:layout_above="@id/lly_bottom_bar"
+
             android:layout_marginBottom="@dimen/dp_49"
             android:background="@drawable/temporary_password_background"
-            android:orientation="vertical">
+            android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_8"
-                android:textSize="@dimen/sp_11"
-                android:text="@string/wifi_video_lock_30_sceond_password"
-                android:textColor="#505050" />
-
-            <TextView
-                android:id="@+id/tv_temporary_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:letterSpacing="0.5"
-                android:text="12345678123"
-                android:textColor="#333"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
 
-
+        <TextView
+            android:id="@+id/tv_temporary_password"
+            android:layout_width="wrap_content"
+            android:layout_height="47pt"
+            android:paddingStart="11pt"
+            android:paddingEnd="11pt"
+            android:layout_above="@id/lly_bottom_bar"
+            android:layout_marginBottom="33pt"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.5"
+            android:layout_marginStart="16pt"
+            android:text="12345678123"
+            android:background="@color/color_7f000"
+            android:textColor="@color/white"
+            android:textSize="20pt" />
 
         <RelativeLayout
             android:id="@+id/lly_record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_bar"
-            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginTop="12pt"
             android:orientation="horizontal">
 
             <ImageView
@@ -290,17 +310,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_23"
+                android:layout_marginStart="26pt"
                 android:src="@drawable/spot_bg" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginLeft="6pt"
                 android:layout_toRightOf="@id/iv_record_spot"
+                android:textSize="14pt"
                 android:text="REC"
-                android:textColor="#FFF" />
+                android:textColor="@color/color_333333" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -308,8 +329,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="00:00:00"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/sp_17" />
+                android:textColor="@color/color_333333"
+                android:textSize="17pt" />
         </RelativeLayout>
 
         <TextView
@@ -317,11 +338,11 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/lly_bottom_bar"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="@dimen/dp_24"
-            android:layout_marginRight="@dimen/dp_13"
+            android:layout_marginBottom="18pt"
+            android:layout_marginRight="6pt"
             android:text="@string/wifi_lock_temp_password"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/dp_15" />
+            android:textColor="@color/color_333333"
+            android:textSize="14pt" />
 
 
 
@@ -348,7 +369,7 @@
             android:id="@+id/rl_real_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_155"
+            android:layout_marginTop="155pt"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/v_view"
             android:visibility="gone">
@@ -379,7 +400,7 @@
             android:layout_height="wrap_content"
             android:text="@string/wifi_video_lock_rang_the_doorbell"
             android:textSize="@dimen/sp_15"
-            android:layout_marginTop="@dimen/dp_150"
+            android:layout_marginTop="150pt"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/view_head"
             android:visibility="gone"
@@ -391,7 +412,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/avi"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/sp_17"
+            android:layout_marginTop="17pt"
             android:text="@string/wifi_video_lock_p2p_connect"
             android:textColor="#ffffff"
             android:textSize="@dimen/sp_15" />
@@ -400,7 +421,7 @@
             android:id="@+id/rl_calling_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_155"
+            android:layout_marginTop="155pt"
             android:layout_below="@id/v_view"
             >
 
@@ -482,13 +503,13 @@
             android:layout_height="@dimen/dp_35"
             android:layout_below="@id/view_head"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_150" />
+            android:layout_marginTop="150pt" />
 
             <com.philips.easykey.lock.widget.CircleImageView
                 android:id="@+id/iv_head_pic"
                 android:layout_width="@dimen/dp_63"
                 android:layout_height="@dimen/dp_63"
-                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginLeft="14pt"
                 android:layout_below="@id/rl_title_bar"
                 android:layout_marginTop="@dimen/dp_24"
                 android:src="@mipmap/default_head" />
@@ -532,7 +553,7 @@
             android:id="@+id/iv_big_head_pic"
             android:layout_width="@dimen/dp_87"
             android:layout_height="@dimen/dp_87"
-            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginLeft="14pt"
             android:layout_below="@id/rl_title_bar"
             android:layout_marginTop="@dimen/dp_24"
             android:scaleType="centerCrop"

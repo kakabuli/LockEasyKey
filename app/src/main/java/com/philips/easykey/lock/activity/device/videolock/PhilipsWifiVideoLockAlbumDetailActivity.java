@@ -56,7 +56,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 
-public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlayerView, MyAlbumPlayerPresenter<IMyAlbumPlayerView>>  implements IMyAlbumPlayerView{
+public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlayerView, MyAlbumPlayerPresenter<IMyAlbumPlayerView>>  implements IMyAlbumPlayerView{
 
     private MediaPlayerWrapper mediaPlayer;
     private String filepath;
@@ -121,7 +121,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_lock_video_album_detail);
+        setContentView(R.layout.philips_activity_wifi_lock_video_album_detail);
         ButterKnife.bind(this);
         LogUtils.d("shulan WifiVideoLockAlbumDetailActivity------------->onCreate");
         filepath = getIntent().getStringExtra(KeyConstants.VIDEO_PIC_PATH);
@@ -475,10 +475,10 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
     }
 
     private void showDeleteDialog(String filepath) {
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
-                WifiVideoLockAlbumDetailActivity.this
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(
+                PhilipsWifiVideoLockAlbumDetailActivity.this
                 , getString(R.string.dialog_wifi_video_delete_video) + "",
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -486,7 +486,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
 
                     @Override
                     public void right() {
-                        Intent intent = new Intent(WifiVideoLockAlbumDetailActivity.this,WifiVideoLockAlbumActivity.class);
+                        Intent intent = new Intent(PhilipsWifiVideoLockAlbumDetailActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
                         intent.putExtra(KeyConstants.VIDEO_PIC_PATH,filepath);
                         intent.putExtra("NAME",tvName.getText().toString());
                         setResult(RESULT_OK,intent);
@@ -515,13 +515,13 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
         mPresenter.handler.post(new Runnable() {
             @Override
             public void run() {
-                if(!WifiVideoLockAlbumDetailActivity.this.isFinishing()){
+                if(!PhilipsWifiVideoLockAlbumDetailActivity.this.isFinishing()){
                     if(avi != null){
                         avi.hide();
                     }
                     if(tvTips != null)
                         tvTips.setVisibility(View.GONE);
-                    String errorStringWithCode = XMP2PConnectError.checkP2PErrorStringWithCode(WifiVideoLockAlbumDetailActivity.this,paramInt);
+                    String errorStringWithCode = XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiVideoLockAlbumDetailActivity.this,paramInt);
                     creteDialog(errorStringWithCode + "");
                 }
 
@@ -574,7 +574,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
         if(mp4Info.isResult()){
             filepath = mp4Info.getFilePath();
 
-            if(WifiVideoLockAlbumDetailActivity.this.isFinishing() && !isRecordSuccess){
+            if(PhilipsWifiVideoLockAlbumDetailActivity.this.isFinishing() && !isRecordSuccess){
                 try {
                     if(!mp4Info.getFilePath().isEmpty()){
 
@@ -691,7 +691,7 @@ public class WifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlaye
             }
         });
 
-        if(!WifiVideoLockAlbumDetailActivity.this.isFinishing()){
+        if(!PhilipsWifiVideoLockAlbumDetailActivity.this.isFinishing()){
             dialog.show();
         }
 

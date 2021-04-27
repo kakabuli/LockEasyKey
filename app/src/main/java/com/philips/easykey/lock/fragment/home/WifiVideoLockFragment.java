@@ -21,7 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
 import com.philips.easykey.lock.bean.WifiLockOperationRecordGroup;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
@@ -423,7 +423,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
                 break;
             case R.id.iv_external_big:
                 if(wifiLockInfo.getPowerSave() == 0){
-                    intent = new Intent(getContext(), WifiVideoLockCallingActivity.class);
+                    intent = new Intent(getContext(), PhilipsWifiVideoLockCallingActivity.class);
 //                    intent = new Intent(getContext(), WifiLockVideoCallingTestActivity.class);
                     intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
                     intent.putExtra(KeyConstants.WIFI_SN,  wifiLockInfo.getWifiSN());

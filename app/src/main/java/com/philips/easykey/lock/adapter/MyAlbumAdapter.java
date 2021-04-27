@@ -27,7 +27,7 @@ public class MyAlbumAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
     private Context context;
 
     public MyAlbumAdapter(List<FileBean> data, Context context) {
-        super(R.layout.item_my_ablum_layout, data);
+        super(R.layout.philips_item_my_ablum_layout, data);
         this.context = context;
     }
 

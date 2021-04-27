@@ -56,113 +56,154 @@
     <LinearLayout
         android:id="@+id/lly_bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_87"
+        android:layout_height="100pt"
+        android:layout_marginBottom="25pt"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#90232323">
+        android:background="@color/color_7f000"
+        android:orientation="horizontal">
+
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_13"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/iv_screenshot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/real_time_video_screenshot"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/screen_img"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_8"
-                android:textSize="@dimen/sp_11"
-                android:textColor="#ffffff"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_43"
+            android:layout_marginLeft="16pt"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_mute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="22pt"
+                app:srcCompat="@drawable/philips_video_icon_mute"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10pt"
                 android:text="@string/mute_name"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_8"
-                android:textSize="@dimen/sp_11"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                android:textSize="14pt" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_calling"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/real_time_video_calling_selected"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_34"/>
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_34"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/iv_recoring"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/real_time_video_record"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recording_name"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_8"
-                android:textSize="@dimen/sp_11"
-                android:textColor="#ffffff"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_34"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_album"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/real_time_video_album"/>
+                android:layout_marginTop="22pt"
+                app:srcCompat="@drawable/philips_video_icon_album" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/philips_album"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_8"
-                android:textSize="@dimen/sp_11"
-                android:textColor="#ffffff"/>
+                android:layout_marginTop="10pt"
+                android:text="@string/wifi_video_lock_album"
+                android:textColor="#ffffff"
+                android:textSize="14pt" />
         </LinearLayout>
-    </LinearLayout>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_calling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11pt"
+                android:src="@drawable/philips_real_time_video_calling_selector" />
+
+            <TextView
+                android:id="@+id/tv_calling_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="14pt"
+                android:layout_below="@id/iv_calling"
+                android:layout_marginTop="7pt"
+                android:textColor="@color/white"
+                android:text="@string/wifi_video_lock_talk_back"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_screenshot"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="22pt"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/philips_video_icon_screenshot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10pt"
+                android:text="@string/screen_img"
+                android:textColor="#ffffff"
+                android:textSize="14pt" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16pt"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_recoring"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="22pt"
+                android:layout_height="wrap_content"
+                android:src="@drawable/real_time_video_record_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10pt"
+                android:text="@string/recording_screen"
+                android:textColor="#ffffff"
+                android:textSize="14pt" />
+        </LinearLayout>
+
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
@@ -179,11 +220,11 @@
         android:id="@+id/iv_temporary_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_19"
         android:layout_above="@id/lly_bottom_bar"
-        android:layout_marginBottom="@dimen/dp_49"
-        android:src="@mipmap/real_time_video_pws"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="47pt"
+        android:layout_marginRight="16pt"
+        app:srcCompat="@drawable/philips_real_time_video_pwd_selector" />
 
     <TextView
         android:layout_above="@id/lly_bottom_bar"

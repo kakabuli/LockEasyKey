@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
+public class PhilipsWifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
 
     @BindView(R.id.preview_img)
     PhotoView preview_img;
@@ -39,7 +39,7 @@ public class WifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_lock_video_preview);
+        setContentView(R.layout.philips_activity_wifi_lock_video_preview);
         ButterKnife.bind(this);
 
         stringExtra = getIntent().getStringExtra(KeyConstants.VIDEO_PIC_PATH);
@@ -68,10 +68,10 @@ public class WifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
     }
 
     private void showDeleteDialog(String filepath) {
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
-                WifiVideoLockPreViewActivity.this
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(
+                PhilipsWifiVideoLockPreViewActivity.this
                 , getString(R.string.activity_wifi_video_preview_delete),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -79,7 +79,7 @@ public class WifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
 
                     @Override
                     public void right() {
-                        Intent intent = new Intent(WifiVideoLockPreViewActivity.this,WifiVideoLockAlbumActivity.class);
+                        Intent intent = new Intent(PhilipsWifiVideoLockPreViewActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
                         intent.putExtra(KeyConstants.VIDEO_PIC_PATH,stringExtra);
                         intent.putExtra("NAME",tvName.getText().toString());
                         setResult(RESULT_OK,intent);

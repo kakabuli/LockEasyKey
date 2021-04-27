@@ -72,7 +72,7 @@ public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlay
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_lock_video_album_detail);
+        setContentView(R.layout.philips_activity_wifi_lock_video_album_detail);
         ButterKnife.bind(this);
 
         mWifiVideoLockAlarmRecord = (WifiVideoLockAlarmRecord) getIntent().getSerializableExtra(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD_DATA);

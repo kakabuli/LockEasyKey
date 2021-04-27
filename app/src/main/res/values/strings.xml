@@ -2444,6 +2444,7 @@
     <string name="philips_setting_duress_alarm_app_add_time">添加时间</string>
     <string name="philips_setting_duress_alarm_receiver">接收账号</string>
     <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
+    <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
 
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>

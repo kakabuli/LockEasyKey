@@ -110,7 +110,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockPreViewActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockPreViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -122,13 +122,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockAlbumDetailActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.device.videolock.WifiVideoLockAlbumActivity" />
+        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockAlbumActivity" />
         <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeVideoActivity" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockCallingActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockCallingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -974,10 +974,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.singleswitch.SingleSwichMoreActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.device.singleswitch.TimerManagerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

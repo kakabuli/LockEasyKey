@@ -3,17 +3,15 @@ package com.philips.easykey.lock.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.activity.login.GuidePageActivity;
 import com.philips.easykey.lock.activity.login.LoginActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyFingerPrintActivity;
@@ -29,7 +27,6 @@ import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.ServiceUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
@@ -38,8 +35,6 @@ import com.philips.easykey.lock.utils.ftp.GeTui;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 
 public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<ISplashView>> implements ISplashView {
@@ -70,7 +65,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
 
         if(TextUtils.equals(func,"doorbell") &&!TextUtils.isEmpty(wifiSN)){
             if((time + 180000) > System.currentTimeMillis()){
-                Intent intent = new Intent(WelcomeActivity.this, WifiVideoLockCallingActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, PhilipsWifiVideoLockCallingActivity.class);
                 intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
                 intent.putExtra("VIDEO_CALLING_IS_MAINACTIVITY",true);
                 intent.putExtra(KeyConstants.WIFI_SN,wifiSN);

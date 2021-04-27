@@ -11,7 +11,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
@@ -197,7 +197,7 @@ public class DoorbellingService extends Service {
                     }
                     Intent intent = null;
                     if(mDoorbellingResult.getEventparams().getAlarmCode() == BleUtil.DOOR_BELL){
-                        intent = new Intent(DoorbellingService.this, WifiVideoLockCallingActivity.class);
+                        intent = new Intent(DoorbellingService.this, PhilipsWifiVideoLockCallingActivity.class);
                         intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
                         intent.putExtra(KeyConstants.WIFI_SN,mDoorbellingResult.getWfId());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
