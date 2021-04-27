@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/wifi_video_lock_album"
+            android:text="@string/philips_album"
             android:textColor="@color/color_333333"
             android:textSize="17pt"/>
 

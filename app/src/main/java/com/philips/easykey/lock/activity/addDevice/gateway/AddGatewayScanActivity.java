@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.addDevice.gateway;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.View;
@@ -15,10 +14,6 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureActivity;
-/*import com.philips.easykey.lock.utils.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.uuzuche.lib_zxing.activity.CaptureFragment;
-import com.uuzuche.lib_zxing.activity.CodeUtils;*/
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,9 +26,8 @@ public class AddGatewayScanActivity extends CaptureActivity {
     LinearLayout touchLightLayout;
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
-    private Camera.Parameters parameter;
-    private Camera camera;
     private boolean falshLight=false;
+
     @Override
     public int getLayoutId() {
         return R.layout.device_scan_qrcode;
@@ -43,10 +37,8 @@ public class AddGatewayScanActivity extends CaptureActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         ButterKnife.bind(this);
         initView();
         checkVersion();
@@ -69,29 +61,19 @@ public class AddGatewayScanActivity extends CaptureActivity {
     }
 
     private void checkVersion() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int i = checkSelfPermission(Manifest.permission.CAMERA);
-            if (i == -1) {
-                if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
-                    finish();
-                    return;
-                }else{
-                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
-                    finish();
-                    return;
-                }
-            }
-        }
-        //版本为22 5.1
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if (!isCameraCanUse()) {
+        int i = checkSelfPermission(Manifest.permission.CAMERA);
+        if (i == -1) {
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                 ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
+            }else{
+                ToastUtils.showShort(getString(R.string.inquire_camera_permission));
+                finish();
+                return;
             }
-
         }
+        //版本为22 5.1
     }
         //Android6.0以下的摄像头权限处理：
         public static boolean isCameraCanUse() {

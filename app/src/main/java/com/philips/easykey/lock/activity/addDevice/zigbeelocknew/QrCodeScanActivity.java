@@ -3,16 +3,18 @@ package com.philips.easykey.lock.activity.addDevice.zigbeelocknew;
 import android.Manifest;
 import android.content.Intent;
 import android.hardware.Camera;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.camera.view.PreviewView;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
+import com.google.zxing.Result;
+import com.king.zxing.CameraScan;
+import com.king.zxing.DefaultCameraScan;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -24,17 +26,15 @@ import com.blankj.utilcode.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bingoogolapple.qrcode.core.QRCodeView;
-import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
-public class QrCodeScanActivity extends BaseAddToApplicationActivity implements QRCodeView.Delegate {
+public class QrCodeScanActivity extends BaseAddToApplicationActivity implements CameraScan.OnScanResultCallback {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
-    private ZBarView mZBarView;
+    private CameraScan mCameraScan;
     private boolean isOpenLight = false;
     int scan = 0;
     private static final int REQUEST_CODE = 101;
@@ -49,60 +49,59 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
         ButterKnife.bind(this);
         checkVersion();
         scan = getIntent().getIntExtra(KeyConstants.SCAN_TYPE, 0);
-        mZBarView = findViewById(R.id.zbarview);
-        mZBarView.setDelegate(this);
         //动态设置状态栏高度
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
         titleBar.setLayoutParams(lp);
+        PreviewView previewView = findViewById(R.id.previewView);
+        mCameraScan = new DefaultCameraScan(this, previewView);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
-        mZBarView.startSpotAndShowRect(); // 显示扫描框，并开始识别
+        if(mCameraScan != null) {
+            mCameraScan.setOnScanResultCallback(this)
+                    .setVibrate(true)
+                    .startCamera();
+        }
     }
 
     @Override
     protected void onStop() {
-        mZBarView.stopCamera(); // 关闭摄像头预览，并且隐藏扫描框
+        if(mCameraScan != null) {
+            mCameraScan.stopCamera();
+        }
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        mZBarView.onDestroy(); // 销毁二维码扫描控件
+        if(mCameraScan != null) {
+            mCameraScan.enableTorch(false);
+            mCameraScan.release();
+        }
         super.onDestroy();
     }
 
     private void checkVersion() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int i = checkSelfPermission(Manifest.permission.CAMERA);
-            LogUtils.d("权限是允许还是开启还是禁止" + i);
-            if (i == -1) {
-                if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    //禁止该权限
-                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
-                    finish();
-                    return;
-                } else {
-                    //询问该权限
-                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
-                    finish();
-                    return;
-                }
-            }
-        }
-        //版本为22 5.1
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if (!isCameraCanUse()) {
+        int i = checkSelfPermission(Manifest.permission.CAMERA);
+        LogUtils.d("权限是允许还是开启还是禁止" + i);
+        if (i == -1) {
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                //禁止该权限
                 ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
+            } else {
+                //询问该权限
+                ToastUtils.showShort(getString(R.string.inquire_camera_permission));
+                finish();
+                return;
             }
-
         }
+        //版本为22 5.1
 
     }
 
@@ -134,58 +133,27 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
 //                mZBarView.openFlashlight(); // 打开闪光灯
                 if (!isOpenLight){
                     isOpenLight = true;
-                    mZBarView.openFlashlight(); // 打开闪光灯
+                    if(mCameraScan != null) {
+                        mCameraScan.enableTorch(true);
+                    }
                 }else {
                     isOpenLight = false;
-                    mZBarView.closeFlashlight(); // 打开闪光灯
+                    if(mCameraScan != null) {
+                        mCameraScan.enableTorch(false);
+                    }
                 }
                 break;
         }
     }
 
     private String result = "";
-    @Override
-    public void onScanQRCodeSuccess(String result) {
-        this.result = result;
-        //首页过来的
-        Intent intent;
-//        if (scan == 1 && TextUtils.isEmpty(result)) {
-//
-//            Intent scanSuccessIntent = new Intent(this, AddDeviceZigbeeLockNewScanFailActivity.class);
-//            startActivity(scanSuccessIntent);
-//            finish();
-//
-//        }
 
-        intent = new Intent();
-        intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-    @Override
-    public void onCameraAmbientBrightnessChanged(boolean isDark) {
-//        // 这里是通过修改提示文案来展示环境是否过暗的状态，接入方也可以根据 isDark 的值来实现其他交互效果
-//        String tipText = mZBarView.getScanBoxView().getTipText();
-//        String ambientBrightnessTip = "\n环境过暗，请打开闪光灯";
-//        if (isDark) {
-//            if (!tipText.contains(ambientBrightnessTip)) {
-//                mZBarView.getScanBoxView().setTipText(tipText + ambientBrightnessTip);
-//            }
-//        } else {
-//            if (tipText.contains(ambientBrightnessTip)) {
-//                tipText = tipText.substring(0, tipText.indexOf(ambientBrightnessTip));
-//                mZBarView.getScanBoxView().setTipText(tipText);
-//            }
-//        }
-    }
-
-    @Override
-    public void onScanQRCodeOpenCameraError() {
-        LogUtils.d("打开相机出错");
-        finish();
-        Toast.makeText(this, getString(R.string.open_camera_failed), Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onScanQRCodeOpenCameraError() {
+//        LogUtils.d("打开相机出错");
+//        finish();
+//        Toast.makeText(this, getString(R.string.open_camera_failed), Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -215,5 +183,18 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    @Override
+    public boolean onScanResultCallback(Result result) {
+        this.result = result.getText();
+        //首页过来的
+        Intent intent;
+
+        intent = new Intent();
+        intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result.getText());
+        setResult(RESULT_OK, intent);
+        finish();
+        return true;
     }
 }
