@@ -1,15 +1,18 @@
 package com.philips.easykey.lock.fragment.device;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 
 /**
  * author : Jack
@@ -27,6 +30,15 @@ public class PhilipsAddManuallyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.philips_fragment_add_manually, container, false);
+
+        Button btnVideoLock = root.findViewById(R.id.btnVideoLock);
+        btnVideoLock.setOnClickListener(v -> {
+            //视频WIFI锁
+            Intent wifiIntent = new Intent(getContext(), WifiLockAddNewFirstActivity.class);
+            String wifiModelType = "WiFi&VIDEO";
+            wifiIntent.putExtra("wifiModelType", wifiModelType);
+            startActivity(wifiIntent);
+        });
 
         return root;
     }

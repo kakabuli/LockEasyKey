@@ -29,7 +29,7 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
     private TextView mTvScanAdd, mTvAddManually;
     private View mVScanAddSelected, mVAddManuallySelected;
 
-    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private final ArrayList<Fragment> mFragments = new ArrayList<>();
 
     @Override
     public void initData(@Nullable Bundle bundle) {

@@ -25,7 +25,7 @@
     <string name="complete">完成</string>
     <string name="right_now_set">立即设置</string>
     <string name="sure_to_perform">确定执行</string>
-    <string name="search">搜索</string>
+    <string name="philips_search">搜索</string>
     <string name="input_lock_product">请输入您的门锁型号</string>
     <string name="input_clothes_product">请输入您的晾衣机型号</string>
     <string name="look_for_QRCode">在门锁后面板找到配网二维码</string>
@@ -816,7 +816,7 @@
     <string name="add_device_before_pair_gateway">添加设备前，请先配置kaadas网关</string>
     <string name="gateway">网关</string>
     <string name="cateye">猫眼</string>
-    <string name="smart_lock">智能锁</string>
+    <string name="philips_smart_lock">智能锁</string>
     <string name="cateye_gateway">猫眼网关</string>
     <string name="three_gateway">6030 网关</string>
     <string name="kaadas_cateye">Kaadas 猫眼</string>
@@ -2445,15 +2445,17 @@
     <string name="philips_setting_duress_alarm_receiver">接收账号</string>
     <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
 
-    <!-- contentDescription -->
-    <string name="philips_cdt_power">电量</string>
-    <string name="philips_cdt_wifi">Wifi</string>
-    <string name="philips_cdt_record_icon">记录图标</string>
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>
     <string name="philips_flash_light">手电筒</string>
     <string name="philips_biometric_login">生物识别登录</string>
     <string name="philips_login_using_your_biometric_credential">使用您的生物识别证书登录</string>
+    <string name="philips_hint_please_input_lock_type">请输入门锁型号</string>
+
+    <!-- contentDescription -->
+    <string name="philips_cdt_power">电量</string>
+    <string name="philips_cdt_wifi">Wifi</string>
+    <string name="philips_cdt_record_icon">记录图标</string>
 
 
 </resources>
