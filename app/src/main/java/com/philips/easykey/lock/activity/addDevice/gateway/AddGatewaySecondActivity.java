@@ -12,11 +12,11 @@ import android.widget.Toast;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.QrCodeScanActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
 import com.blankj.utilcode.util.ToastUtils;
-import com.king.zxing.Intents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +64,7 @@ public class AddGatewaySecondActivity extends BaseAddToApplicationActivity {
         if(resultCode == RESULT_OK && data!=null){
             switch (requestCode){
                 case KeyConstants.SCANGATEWAY_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
                     LogUtils.d("扫描结果是   " + result);
                     if (result.contains("SN-GW")&&result.contains("MAC-")&&result.contains(" ")){
                         String[] strs=result.split(" ");

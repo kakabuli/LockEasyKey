@@ -202,7 +202,7 @@ dependencies {
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
 
     //zxing
-    implementation 'com.king.zxing:zxing-lite:1.1.1'
+    implementation 'com.king.zxing:zxing-lite:2.0.3'
     implementation 'com.google.android.material:material:1.3.0'
 
     implementation 'com.github.razerdp:BasePopup:2.1.9'

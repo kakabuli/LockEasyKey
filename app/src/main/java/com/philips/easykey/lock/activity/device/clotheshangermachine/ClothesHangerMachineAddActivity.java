@@ -15,13 +15,13 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddPresenter;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddView;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.king.zxing.Intents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,7 +100,7 @@ public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHanger
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
                     LogUtils.d("扫描结果是   " + result);
                     if(result.contains("_WiFi&BLE_")){
                         String[] str = result.split("_");

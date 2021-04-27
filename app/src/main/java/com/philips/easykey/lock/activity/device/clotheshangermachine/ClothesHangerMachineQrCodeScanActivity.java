@@ -18,12 +18,12 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.king.zxing.Intents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -207,12 +207,12 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
                 String result2 = data.getStringExtra(KeyConstants.URL_RESULT);
 
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result2);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result2);
                 setResult(RESULT_OK, intent);
                 finish();
             }else {
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -242,7 +242,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
             public void right() {
                 //首页过来的
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
                 setResult(RESULT_OK, intent);
                 finish();
             }

@@ -29,6 +29,7 @@ import com.philips.easykey.lock.mvp.presenter.MyFragmentPresenter;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.utils.BitmapUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
@@ -37,9 +38,6 @@ import com.philips.easykey.lock.utils.StorageUtil;
 import com.philips.easykey.lock.mvp.view.IMyFragmentView;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.widget.CircleImageView;
-import com.king.zxing.Intents;
-
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -231,7 +229,7 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         if(resultCode == RESULT_OK && data!=null){
             switch (requestCode){
                 case KeyConstants.SCANPRODUCT_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
                     LogUtils.d(result+"     产品激活");
                     if(result.contains(" ")){
                         result=result.replace(" ","%20");

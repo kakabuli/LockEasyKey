@@ -2040,7 +2040,7 @@
 
     <string name="wifi_video_lock_rang_the_doorbell">有人按门铃啦~</string>
     <string name="wifi_video_lock_30_sceond_password">注：远程临时密码30分钟有效</string>
-    <string name="wifi_video_lock_album">相册</string>
+    <string name="philips_album">相册</string>
     <string name="wifi_video_lock_screen_recording_enable">已开启录屏</string>
     <string name="wifi_video_lock_screen_recording_disable">已结束录屏</string>
     <string name="wifi_video_lock_read_and_write_permission">请先获取读写权限</string>
@@ -2429,5 +2429,7 @@
     <string name="cdt_wifi">Wifi</string>
     <string name="cdt_record_icon">记录图标</string>
     <string name="philips_device_count">/%1$d</string>
+    <string name="philips_add_manually">手动添加</string>
+    <string name="philips_flash_light">手电筒</string>
 
 </resources>

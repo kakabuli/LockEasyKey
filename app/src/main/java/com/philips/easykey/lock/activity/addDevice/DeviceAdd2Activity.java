@@ -28,12 +28,12 @@ import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceZigBeeDetailView;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.king.zxing.Intents;
 
 import java.util.List;
 
@@ -253,7 +253,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
                     LogUtils.d("扫描结果是   " + result);
 
                     if (result.contains("SN-GW") && result.contains("MAC-") && result.contains(" ")) {

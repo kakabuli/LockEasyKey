@@ -1262,6 +1262,7 @@
             android:process=":pushservice"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity" />
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"

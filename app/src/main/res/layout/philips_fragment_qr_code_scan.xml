@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <cn.bingoogolapple.qrcode.zbar.ZBarView
+        android:id="@+id/zbarview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:qrcv_animTime="2000"
+        app:qrcv_barCodeTipText=""
+        app:qrcv_barcodeRectHeight="120dp"
+        app:qrcv_borderColor="@android:color/transparent"
+        app:qrcv_borderSize="1dp"
+        app:qrcv_cornerColor="#0066A1"
+        app:qrcv_cornerLength="20dp"
+        app:qrcv_cornerSize="3dp"
+        app:qrcv_customGridScanLineDrawable="@drawable/philips_scan_scan_bar"
+        app:qrcv_isAutoZoom="true"
+        app:qrcv_isBarcode="false"
+        app:qrcv_isOnlyDecodeScanBoxArea="false"
+        app:qrcv_isShowDefaultGridScanLineDrawable="false"
+        app:qrcv_isShowDefaultScanLineDrawable="true"
+        app:qrcv_isShowLocationPoint="false"
+        app:qrcv_isShowTipBackground="false"
+        app:qrcv_isShowTipTextAsSingleLine="false"
+        app:qrcv_isTipTextBelowRect="true"
+        app:qrcv_maskColor="#33FFFFFF"
+        app:qrcv_qrCodeTipText="@string/qr_notice"
+        app:qrcv_rectWidth="@dimen/dp_225"
+        app:qrcv_scanLineColor="#0066A1"
+        app:qrcv_tipTextMargin="12dp"
+        app:qrcv_toolbarHeight="56dp"
+        app:qrcv_topOffset="120dp"
+        app:qrcv_verticalBias="-1" />
+
+    <ImageView
+        android:id="@+id/ivFlashLight"
+        android:layout_width="60pt"
+        android:layout_height="60pt"
+        android:layout_marginStart="74pt"
+        android:layout_marginBottom="71pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/philips_scan_icon_flashlight" />
+
+    <ImageView
+        android:id="@+id/ivAlbum"
+        android:layout_width="60pt"
+        android:layout_height="60pt"
+        android:layout_marginBottom="71pt"
+        android:layout_marginEnd="74pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/philips_scan_icon_album" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_flash_light"
+        android:layout_marginTop="12pt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/ivFlashLight"
+        app:layout_constraintStart_toStartOf="@+id/ivFlashLight"
+        app:layout_constraintTop_toBottomOf="@+id/ivFlashLight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_album"
+        android:layout_marginTop="12pt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/ivAlbum"
+        app:layout_constraintStart_toStartOf="@+id/ivAlbum"
+        app:layout_constraintTop_toBottomOf="@+id/ivAlbum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,10 +16,10 @@ import android.widget.Toast;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.king.zxing.Intents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,10 +43,8 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_scan_qrcode);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
         checkVersion();
@@ -160,7 +158,7 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
 //        }
 
         intent = new Intent();
-        intent.putExtra(Intents.Scan.RESULT, result);
+        intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -197,12 +195,12 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
                 String result2 = data.getStringExtra(KeyConstants.URL_RESULT);
 
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result2);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result2);
                 setResult(RESULT_OK, intent);
                 finish();
             }else {
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
                 setResult(RESULT_OK, intent);
                 finish();
             }

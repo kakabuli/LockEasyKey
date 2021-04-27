@@ -10,6 +10,7 @@ buildscript {
         mavenCentral()
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         maven { url 'https://developer.huawei.com/repo/'}
+        maven { url 'https://dl.bintray.com/jenly/maven' }
     }
     dependencies {
         //目前发现gradle升级未3.6.1有问题
@@ -37,6 +38,7 @@ allprojects {
         maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
         maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://dl.bintray.com/jenly/maven' }
 
     }
 }
