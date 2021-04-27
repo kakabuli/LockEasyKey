@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -161,7 +160,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
         if(str.length > 0){
             if(str.length >= 4){
                 if(ClothesHangerMachineUtil.pairMode(str[1]).equals(str[2])){
-                    showClothesMachineDialog(getString(R.string.philips_avtivity_clothes_hanger_machine_qrcode_scan,str[1]));
+                    showClothesMachineDialog(getString(R.string.philips_activity_clothes_hanger_machine_qrcode_scan,str[1]));
                     return;
                 }
             }

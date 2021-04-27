@@ -375,7 +375,7 @@
     <string name="wandering_pir_sensitivity">PIR灵敏度</string>
     <string name="wandering_judge_time">徘徊判定时间</string>
     <string name="wandering_alarm_close">已关闭</string>
-    <string name="wandering_alarm_text">开启后，可摄像头会侦测门外徘徊人员，比较耗电</string>
+    <string name="wandering_alarm_text">当门外有人经过时，门锁会抓拍室外异常视频， 此功能较为耗电</string>
     <string name="wandering_pir_sensitivity_text">高度灵敏会增加频繁检测距离，导致耗电</string>
     <string name="wandering_judge_time_text">判定时间不宜太短，防止误报</string>
     <string name="serial_number">序列号</string>
@@ -572,7 +572,7 @@
     <string name="warring_broken">已监测到您的门锁异常,请联系家人或小区保安</string>
     <string name="warring_mechanical_key">您的智能锁正在被机械方式开启,请回家或联系保安查看</string>
     <string name="warring_low_power">您的门锁电量过低，请及时更换</string>
-<!--    <string name="warring_door_not_lock">您的门锁有故障,请注意</string>-->
+    <!--    <string name="warring_door_not_lock">您的门锁有故障,请注意</string>-->
     <string name="warring_door_not_lock">您的门锁未上锁，请检查锁舌是否弹出</string>
     <string name="warring_arm">您的门锁处于布防状态,有从门内开锁情况</string>
     <string name="warrign_hijack">有人使用劫持密码开启门锁，赶紧联系或报警</string>
@@ -2394,16 +2394,16 @@
     <string name="philips_activity_clothes_hanger_machine_add_dialog_3">请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁</string>
     <string name="philips_activity_timer_manager_1">不重复</string>
     <string name="philips_activity_timer_manager_2">打开开关1</string>
-    <string name="philips_avtivity_clothes_hanger_machine_add_dialog_4">蓝牙未开启，是否开启蓝牙？</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_1">Wi-Fi账号或密码输错已超过5次</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_2">读取失败,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_3">连接失败,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_4">管理员密码输入错误，请重新输入</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_5">写数据错误,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_avtivity_wifi_lock_add_new_checkwifi_dialog_6">返回错误,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_avtivity_wifi_lock_add_new_fifth_1">未知模组类型</string>
-    <string name="philips_avtivity_wifi_lock_add_new_third_1">第四步：修改初始管理密码</string>
-    <string name="philips_avtivity_clothes_hanger_machine_qrcode_scan">%1$s 晾衣机，是否进入配网？</string>
+    <string name="philips_activity_clothes_hanger_machine_add_dialog_4">蓝牙未开启，是否开启蓝牙？</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_1">Wi-Fi账号或密码输错已超过5次</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_2">读取失败,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_3">连接失败,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_4">管理员密码输入错误，请重新输入</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_5">写数据错误,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_6">返回错误,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_fifth_1">未知模组类型</string>
+    <string name="philips_activity_wifi_lock_add_new_third_1">第四步：修改初始管理密码</string>
+    <string name="philips_activity_clothes_hanger_machine_qrcode_scan">%1$s 晾衣机，是否进入配网？</string>
     <string name="philips__yes">是</string>
     <string name="philips__no">否</string>
     <string name="philips_activity_clothes_hanger_machine_add_third_1">设备已被%1$s绑定</string>
@@ -2424,12 +2424,36 @@
     <string name="philips_activity_main_notification">检测到您没有打开通知权限，是否去打开</string>
     <string name="philips_gateway_reset_unbind">%1$s网关:已被重置或者解绑</string>
 
+
+    <!-- setting -->
+    <string name="philips_video_setting_lock_mode">门锁模式</string>
+    <string name="philips_video_activity_open_lock_mode">验证方式</string>
+    <string name="philips_video_activity_lock_auto_mode">上锁模式</string>
+    <string name="philips_video_activity_lock_language">语言设置</string>
+    <string name="philips_video_activity_lock_video">视频设置</string>
+    <string name="philips_video_activity_lock_real_time_video">视频模式</string>
+    <string name="philips_video_activity_delete_device">删除用户</string>
+    <string name="philips_video_activity_duress_alarm">胁迫报警</string>
+    <string name="philips_video_activity_nickname">修改名称</string>
+    <string name="philips_device_nick_name_update_failed">设备名称修改失败</string>
+    <string name="philips_device_wandering_alarm_restore_default">恢复默认</string>
+    <string name="philips_device_duress_alarm_des_check_tips">开启后，输入指纹APP实时接收报警信息</string>
+    <string name="philips_device_duress_alarm_notification">警报通知</string>
+    <string name="philips_setting_stress_alarm">设置胁迫密码</string>
+    <string name="philips_setting_app_stress_alarm">APP实时推送胁迫报警消息</string>
+    <string name="philips_setting_duress_alarm_app_add_time">添加时间</string>
+    <string name="philips_setting_duress_alarm_receiver">接收账号</string>
+    <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
+
     <!-- contentDescription -->
-    <string name="cdt_power">电量</string>
-    <string name="cdt_wifi">Wifi</string>
-    <string name="cdt_record_icon">记录图标</string>
+    <string name="philips_cdt_power">电量</string>
+    <string name="philips_cdt_wifi">Wifi</string>
+    <string name="philips_cdt_record_icon">记录图标</string>
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>
     <string name="philips_flash_light">手电筒</string>
+    <string name="philips_biometric_login">生物识别登录</string>
+    <string name="philips_login_using_your_biometric_credential">使用您的生物识别证书登录</string>
+
 
 </resources>

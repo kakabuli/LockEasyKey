@@ -36,6 +36,8 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PhilipsPersonalCenterFragment;
+import com.philips.easykey.lock.fragment.device.DeviceFragment;
+import com.philips.easykey.lock.fragment.home.HomePageFragment;
 import com.philips.easykey.lock.fragment.message.PhilipsMessageFragment;
 import com.philips.easykey.lock.fragment.home.PhilipsDeviceFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
@@ -130,9 +132,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             }
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
-        fragments.add(new PhilipsDeviceFragment());
-        fragments.add(new PhilipsMessageFragment());
-//        fragments.add(new ShopFragment());
+        fragments.add(new HomePageFragment());
+//        fragments.add(new PhilipsDeviceFragment());
+        fragments.add(new DeviceFragment());
+//        fragments.add(new PhilipsMessageFragment());
         fragments.add(new PhilipsPersonalCenterFragment());
 //        evevt = this;
         instance = this;

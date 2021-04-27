@@ -231,8 +231,8 @@ public class XMP2PManager extends StreamListener  {
         if(handleSession<0){
             currentDid=null;
             LogUtils.d("shulan--------------111");
-            /*if(mConnectListener != null)
-                mConnectListener.onConnectFailed(handleSession);*/
+            if(mConnectListener != null)
+                mConnectListener.onConnectFailed(handleSession);
         }else {
             //获取P2P当前信息
             sessionStatus();

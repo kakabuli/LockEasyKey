@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockOTAPresenter;
+import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.PhilipsWifiVideoLockOTAPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockOTAView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoLockOTAView, WifiVideoLockOTAPresenter<IWifiVideoLockOTAView>>
+public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoLockOTAView, PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView>>
         implements IWifiVideoLockOTAView {
 
     @BindView(R.id.back)
@@ -109,8 +109,8 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     }
 
     @Override
-    protected WifiVideoLockOTAPresenter<IWifiVideoLockOTAView> createPresent() {
-        return new WifiVideoLockOTAPresenter<>();
+    protected PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView> createPresent() {
+        return new PhilipsWifiVideoLockOTAPresenter<>();
     }
 
 

@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockRealTimeActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockWanderingAlarmActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockRealTimeActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockWanderingAlarmActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockMorePresenter;
@@ -442,21 +442,21 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
                         });
                         break;
                     case R.id.rl_wifi_name: //WiFi名称
-                        Intent setWifiIntent = new Intent(this,WifiLockWifiDetailActivity.class);
+                        Intent setWifiIntent = new Intent(this, PhilipsWifiLockWifiDetailActivity.class);
                         setWifiIntent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                         startActivity(setWifiIntent);
                         break;
                     case R.id.rl_message_push:
-                        intent = new Intent(this,WifiLockMessagePushActivity.class);
+                        intent = new Intent(this, PhilipsWifiLockMessagePushActivity.class);
                         startActivity(intent);
                         break;
 
                     case R.id.rl_real_time_video:
-                        intent = new Intent(this, WifiVideoLockRealTimeActivity.class);
+                        intent = new Intent(this, PhilipsWifiVideoLockRealTimeActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.rl_wandering_alarm:
-                        intent = new Intent(this, WifiVideoLockWanderingAlarmActivity.class);
+                        intent = new Intent(this, PhilipsWifiVideoLockWanderingAlarmActivity.class);
                         startActivity(intent);
                         break;
                     /*case R.id.rl_door_direction:

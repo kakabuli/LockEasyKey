@@ -24,6 +24,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockMoreActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockAuthDeviceInfoActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockDeviceInfoActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockMoreActivity;
@@ -33,7 +34,6 @@ import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswo
 import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumActivity;
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockCallingActivity;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockMoreActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
@@ -358,7 +358,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             break;
                         case BleLockUtils.TYPE_MORE:
                             if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSN) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
-                                intent = new Intent(getContext(), WifiVideoLockMoreActivity.class);
+                                intent = new Intent(getContext(), PhilipsWifiVideoLockMoreActivity.class);
                                 intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
                                 startActivityForResult(intent, TO_MORE_REQUEST_CODE);
                             }else{
@@ -464,7 +464,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             break;
                         case BleLockUtils.TYPE_MORE:
                             if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSN) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
-                                intent = new Intent(getContext(), WifiVideoLockMoreActivity.class);
+                                intent = new Intent(getContext(), PhilipsWifiVideoLockMoreActivity.class);
                                 intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
                                 startActivityForResult(intent, TO_MORE_REQUEST_CODE);
                             }else{

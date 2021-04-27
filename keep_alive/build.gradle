@@ -37,8 +37,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleCompatible
     implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'com.tencent:mmkv-static:1.2.7'
 
 }
