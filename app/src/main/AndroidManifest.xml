@@ -53,7 +53,7 @@
     -->
     <meta-data
         android:name="push_kit_auto_init_enabled"
-        android:value="true"/>
+        android:value="true" />
 
     <application
         android:name=".MyApplication"
@@ -65,18 +65,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:allowBackup">
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity"></activity>
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockNickNameActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.WifiVideoLockCallingTestActivity"
             android:launchMode="singleTop"
@@ -1333,7 +1338,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public" />
         </provider>
-
     </application>
 
 </manifest>
