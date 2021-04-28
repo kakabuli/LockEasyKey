@@ -3,17 +3,16 @@
               android:layout_height="wrap_content"
               android:baselineAligned="false"
               android:orientation="vertical"
-              android:paddingBottom="@dimen/dp_10"
-              android:paddingLeft="@dimen/dp_10"
-              android:paddingRight="@dimen/dp_10"
-              android:paddingTop="@dimen/dp_10">
+              android:paddingBottom="24pt"
+              android:paddingLeft="16pt"
+              android:paddingRight="16pt">
 
 
     <LinearLayout
         android:id="@+id/lay_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_5"
+        android:layout_marginBottom="12pt"
         android:orientation="vertical"/>
 
     <TextView
@@ -22,11 +21,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_selector_singleton"
         android:gravity="center"
-        android:paddingBottom="@dimen/dp_25"
-        android:paddingTop="@dimen/dp_25"
+        android:paddingBottom="12pt"
+        android:paddingTop="12pt"
         android:text="@string/cancel"
-        android:textColor="#1F96F7"
-        android:textSize="@dimen/sp_20"
-        android:textStyle="bold"/>
+        android:textColor="#333333"
+        android:textSize="16pt"/>
 
 </LinearLayout>

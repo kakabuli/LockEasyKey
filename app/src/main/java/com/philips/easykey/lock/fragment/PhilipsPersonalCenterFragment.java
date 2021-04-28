@@ -3,8 +3,6 @@ package com.philips.easykey.lock.fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +12,22 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.king.zxing.Intents;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.zigbeelocknew.ProductActivationScanActivity;
 import com.philips.easykey.lock.activity.my.AboutUsActivity;
 import com.philips.easykey.lock.activity.my.BarCodeActivity;
 import com.philips.easykey.lock.activity.my.PersonalFAQActivity;
-import com.philips.easykey.lock.activity.my.PhilipsPersonalSecuritySettingActivity;
 import com.philips.easykey.lock.activity.my.PersonalSystemSettingActivity;
+import com.philips.easykey.lock.activity.my.PhilipsPersonalSecuritySettingActivity;
 import com.philips.easykey.lock.activity.my.PhilipsPersonalUpdateHeadDataActivity;
 import com.philips.easykey.lock.activity.my.PhilipsUserFeedbackActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.MyFragmentPresenter;
+import com.philips.easykey.lock.mvp.view.IMyFragmentView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.utils.BitmapUtil;
@@ -34,12 +36,9 @@ import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
-import com.philips.easykey.lock.mvp.view.IMyFragmentView;
+import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.widget.CircleImageView;
-import com.king.zxing.Intents;
-
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +54,7 @@ import static android.app.Activity.RESULT_OK;
  * @company kaadas
  * created at 2019/2/25 14:47
  */
-public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView{
+public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView {
     @BindView(R.id.security_setting_layout)
     RelativeLayout securitySettingLayout;
     @BindView(R.id.faq_layout)
@@ -69,13 +68,12 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
     RelativeLayout headSecond;
     @BindView(R.id.iv_photo)
     CircleImageView ivPhoto;
-    //用户名称
-    @BindView(R.id.head_portrait_name)
-    TextView headPortraitName;
     @BindView(R.id.rl_user_feedback)
     RelativeLayout rlUserFeedback;
-    @BindView(R.id.product_activition)
-    RelativeLayout product_activition;
+    @BindView(R.id.tv_nick_name)
+    TextView tvNickName;
+    @BindView(R.id.tv_number)
+    TextView tvNumber;
 
     private View mPersonlCenterView;
     private Bitmap changeBitmap;
@@ -117,12 +115,18 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         //用户名
         String userName = (String) SPUtils.get(SPUtils.USERNAME, "");
         if (!TextUtils.isEmpty(userName)) {
-            headPortraitName.setText(userName);
-        }else {
+            tvNickName.setText(userName);
+        } else {
             //获取昵称
             String uid = MMKVUtils.getStringMMKV(SPUtils.UID);
             mPresenter.getUserName(uid);
         }
+
+        String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
+        if (!TextUtils.isEmpty(phone)) {
+            tvNumber.setText(StringUtil.phoneToHide(phone));
+        }
+
         String photoPath = (String) SPUtils.get(KeyConstants.HEAD_PATH, "");
         if ("".equals(photoPath)) {
             mPresenter.downloadPicture(MyApplication.getInstance().getUid());
@@ -142,7 +146,7 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         unbinder.unbind();
     }
 
-    @OnClick({R.id.security_setting_layout,R.id.rl_user_feedback,R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second,R.id.product_activition})
+    @OnClick({R.id.security_setting_layout, R.id.rl_user_feedback, R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.security_setting_layout:
@@ -162,30 +166,26 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
                 startActivity(mSystemSetting);
                 break;
             case R.id.about_xk_layout:
-                Intent aboutIntent=new Intent(getActivity(),AboutUsActivity.class);
+                Intent aboutIntent = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(aboutIntent);
                 break;
             case R.id.head_second:
                 Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
                 startActivity(updateHeadData);
                 break;
-            case R.id.product_activition:
-                Intent zigbeeLockIntent=new Intent(getActivity(), ProductActivationScanActivity.class);
-                startActivityForResult(zigbeeLockIntent,KeyConstants.SCANPRODUCT_REQUEST_CODE);
-                break;
         }
     }
 
     private void showImage(String photoPath) {
         if ("".equals(photoPath)) {
-            ivPhoto.setImageDrawable(getResources().getDrawable(R.mipmap.default_head));
+            ivPhoto.setImageDrawable(getResources().getDrawable(R.drawable.philips_mine_img_profile));
         } else {
             int degree = BitmapUtil.readPictureDegree(photoPath);
             changeBitmap = BitmapUtil.ratio(photoPath, 720, 720);
             /**
              * 把图片旋转为正的方向
              */
-            if (changeBitmap!=null){
+            if (changeBitmap != null) {
                 Bitmap newbitmap = BitmapUtil.rotaingImageView(degree, changeBitmap);
                 ivPhoto.setImageBitmap(newbitmap);
                 ivPhoto.setBackgroundResource(R.drawable.head_circle_bj);
@@ -210,47 +210,47 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
     public void getNicknameSuccess(UserNickResult userNickResult) {
         String nickName = userNickResult.getData().getNickName();
         SPUtils.put(SPUtils.USERNAME, nickName);
-        headPortraitName.setText(nickName);
+        tvNickName.setText(nickName);
     }
 
     @Override
     public void getNicknameFail(BaseResult baseResult) {
         String account = (String) SPUtils.get(SPUtils.PHONEN, "");
-        headPortraitName.setText(account);
+        tvNickName.setText(account);
     }
 
     @Override
     public void getNicknameError(Throwable throwable) {
         String account = (String) SPUtils.get(SPUtils.PHONEN, "");
-        headPortraitName.setText(account);
+        tvNickName.setText(account);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && data!=null){
-            switch (requestCode){
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
                 case KeyConstants.SCANPRODUCT_REQUEST_CODE:
                     String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.d(result+"     产品激活");
-                    if(result.contains(" ")){
-                        result=result.replace(" ","%20");
+                    LogUtils.d(result + "     产品激活");
+                    if (result.contains(" ")) {
+                        result = result.replace(" ", "%20");
                     }
-                    String bar_url="http://s.kaadas.com:8989/extFun/regWeb.asp?uiFrm=2&id=" + result+"&telnum=";
+                    String bar_url = "http://s.kaadas.com:8989/extFun/regWeb.asp?uiFrm=2&id=" + result + "&telnum=";
 //                    +"&telnum=18988780718&mail=8618988780718&nickname=8618988780718";
 
                     //获取手机号码
                     String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
                     if (!TextUtils.isEmpty(phone)) {
-                        bar_url= bar_url+phone+"&mail=";
+                        bar_url = bar_url + phone + "&mail=";
                     }
                     String userName = (String) SPUtils.get(SPUtils.USERNAME, "");
                     if (!TextUtils.isEmpty(userName)) {
-                        bar_url=bar_url+userName+"&nickname="+userName;
+                        bar_url = bar_url + userName + "&nickname=" + userName;
                     }
-                    Log.e(GeTui.VideoLog,"finally->result:"+bar_url);
-                    Intent intent=new Intent(getActivity(), BarCodeActivity.class);
-                    intent.putExtra(KeyConstants.BAR_CODE,bar_url);
+                    Log.e(GeTui.VideoLog, "finally->result:" + bar_url);
+                    Intent intent = new Intent(getActivity(), BarCodeActivity.class);
+                    intent.putExtra(KeyConstants.BAR_CODE, bar_url);
                     startActivity(intent);
 
                     //     String bar_url="http://s.kaadas.com:8989/extFun/regWeb.asp?uiFrm=2&id=SN-GW01183810798%20MAC-90:F2:78:70:0F:33&telnum=18988780718&mail=8618988780718&nickname=8618988780718";

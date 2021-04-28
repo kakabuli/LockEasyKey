@@ -19,6 +19,38 @@ import okhttp3.ResponseBody;
  *
  */
 public class PersonalDataPresenter<T> extends BasePresenter<IPersonalDataView> {
+
+    public void loginOut() {
+        XiaokaiNewServiceImp.loginOut()
+                .subscribe(new BaseObserver<BaseResult>() {
+                    @Override
+                    public void onSuccess(BaseResult result) {
+                        if (isSafe()) {
+                            mViewRef.get().onLoginOutSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        if (isSafe()) {
+                            mViewRef.get().onLoginOutFailedServer(baseResult);
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        if (isSafe()) {
+                            mViewRef.get().onLoginOutFailed(throwable);
+                        }
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+                });
+    }
+
     //下载图片
     public void downloadPicture(String uid) {
         XiaokaiNewServiceImp.downloadUserHead(uid).subscribe(new Observer<ResponseBody>() {
