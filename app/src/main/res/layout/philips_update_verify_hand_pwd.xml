@@ -81,7 +81,7 @@
             android:id="@+id/more"
             android:textColor="#1F96F7"
             android:gravity="center"
-            android:text="@string/more"
+            android:text="@string/philips_more"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

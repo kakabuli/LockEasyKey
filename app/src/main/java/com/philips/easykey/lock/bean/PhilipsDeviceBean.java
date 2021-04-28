@@ -12,7 +12,8 @@ public class PhilipsDeviceBean {
     private int power;
     private long lastRecordTime;
     private String lastRecordDetail;
-    private int deviceType;              // 模拟 1：视频锁  2：晾衣机
+    private int deviceType;              // 模拟 6：视频锁  7：晾衣机
+    private String wifiSn;
 
 
     public String getDeviceName() {
@@ -55,6 +56,14 @@ public class PhilipsDeviceBean {
         this.deviceType = deviceType;
     }
 
+    public String getWifiSn() {
+        return wifiSn;
+    }
+
+    public void setWifiSn(String wifiSn) {
+        this.wifiSn = wifiSn;
+    }
+
     @Override
     public String toString() {
         return "PhilipsDeviceBean{" +
@@ -63,6 +72,7 @@ public class PhilipsDeviceBean {
                 ", lastRecordTime=" + lastRecordTime +
                 ", lastRecordDetail='" + lastRecordDetail + '\'' +
                 ", deviceType=" + deviceType +
+                ", sn='" + wifiSn + '\'' +
                 '}';
     }
 }

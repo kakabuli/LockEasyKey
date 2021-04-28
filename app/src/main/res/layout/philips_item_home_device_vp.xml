@@ -114,27 +114,27 @@
             app:layout_constraintTop_toBottomOf="@+id/ivPwd" />
 
         <ImageView
-            android:id="@+id/ivSetting"
+            android:id="@+id/ivMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="45pt"
             android:layout_marginStart="68pt"
             app:layout_constraintStart_toEndOf="@+id/ivPwd"
             app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
-            app:srcCompat="@drawable/philips_home_icon_fingerprint"
-            android:contentDescription="@string/philips_setting" />
+            app:srcCompat="@drawable/philips_home_icon_more"
+            android:contentDescription="@string/philips_more" />
 
         <TextView
             android:id="@+id/tvSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/philips_setting"
+            android:text="@string/philips_more"
             android:layout_marginTop="9pt"
             android:textColor="@color/color_333333"
             android:textSize="12pt"
-            app:layout_constraintEnd_toEndOf="@+id/ivSetting"
-            app:layout_constraintStart_toStartOf="@+id/ivSetting"
-            app:layout_constraintTop_toBottomOf="@+id/ivSetting" />
+            app:layout_constraintEnd_toEndOf="@+id/ivMore"
+            app:layout_constraintStart_toStartOf="@+id/ivMore"
+            app:layout_constraintTop_toBottomOf="@+id/ivMore" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

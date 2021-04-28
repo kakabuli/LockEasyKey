@@ -735,9 +735,9 @@ public class MyApplication extends Application {
         getDevicesFromServer.onNext(allBindDevices);
     }
 
-    public void setHomeshowDevice(List<HomeShowBean> homeshowDeviceList) {
-        homeShowDevices = homeshowDeviceList;
-        loclHomeShowDevices = homeshowDeviceList;
+    public void setHomeShowDevice(List<HomeShowBean> homeShowDeviceList) {
+        homeShowDevices = homeShowDeviceList;
+        loclHomeShowDevices = homeShowDeviceList;
     }
 
     public List<HomeShowBean> getHomeShowDevices() {

@@ -178,7 +178,7 @@
                     android:drawableTop="@mipmap/old_bluetooth_detail_more"
                     android:drawablePadding="@dimen/dp_22"
                     android:gravity="center_vertical"
-                    android:text="@string/more"
+                    android:text="@string/philips_more"
                     android:textColor="#333333"
                     android:textSize="@dimen/sp_14" />
 

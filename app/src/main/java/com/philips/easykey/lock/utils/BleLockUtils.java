@@ -1,11 +1,9 @@
 package com.philips.easykey.lock.utils;
 
-import android.content.Intent;
 import android.text.TextUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
 import com.philips.easykey.lock.bean.BluetoothLockFunctionBean;
 import com.philips.easykey.lock.bean.WifiLockFunctionBean;
 
@@ -560,7 +558,7 @@ public class BleLockUtils {
             functionBeans.add(new BluetoothLockFunctionBean(MyApplication.getInstance().getString(R.string.card), R.mipmap.bluetooth_card, TYPE_CARD));
         }
         functionBeans.add(new BluetoothLockFunctionBean(MyApplication.getInstance().getString(R.string.device_share), R.mipmap.wifi_lock_share, TYPE_SHARE));
-        functionBeans.add(new BluetoothLockFunctionBean(MyApplication.getInstance().getString(R.string.more), R.mipmap.bluetooth_more, TYPE_MORE));
+        functionBeans.add(new BluetoothLockFunctionBean(MyApplication.getInstance().getString(R.string.philips_more), R.mipmap.bluetooth_more, TYPE_MORE));
 
         return functionBeans;
     }
@@ -607,7 +605,7 @@ public class BleLockUtils {
         }
 
         functionBeans.add(new WifiLockFunctionBean(MyApplication.getInstance().getString(R.string.device_share), R.mipmap.wifi_lock_share, TYPE_SHARE));
-        functionBeans.add(new WifiLockFunctionBean(MyApplication.getInstance().getString(R.string.more), R.mipmap.bluetooth_more, TYPE_MORE));
+        functionBeans.add(new WifiLockFunctionBean(MyApplication.getInstance().getString(R.string.philips_more), R.mipmap.bluetooth_more, TYPE_MORE));
 
         return functionBeans;
     }
