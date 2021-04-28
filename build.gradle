@@ -21,7 +21,6 @@ buildscript {
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
 
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30"
         classpath 'com.huawei.agconnect:agcp:1.4.1.300'
     }
 }
