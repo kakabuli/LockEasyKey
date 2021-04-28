@@ -7,38 +7,41 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
+import androidx.camera.view.PreviewView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.zxing.Result;
+import com.king.zxing.CameraScan;
+import com.king.zxing.DefaultCameraScan;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.king.zxing.Intents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bingoogolapple.qrcode.core.QRCodeView;
-import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
 
-public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplicationActivity implements QRCodeView.Delegate {
+public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplicationActivity implements CameraScan.OnScanResultCallback {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
-    private ZBarView mZBarView;
+    private CameraScan mCameraScan;
     private boolean isOpenLight = false;
     int scan = 0;
     private static final int REQUEST_CODE = 101;
@@ -49,16 +52,14 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_scan_qrcode);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
         checkVersion();
         scan = getIntent().getIntExtra(KeyConstants.SCAN_TYPE, 0);
-        mZBarView = findViewById(R.id.zbarview);
-        mZBarView.setDelegate(this);
+        PreviewView previewView = findViewById(R.id.previewView);
+        mCameraScan = new DefaultCameraScan(this, previewView);
         //动态设置状态栏高度
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
@@ -68,49 +69,47 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
     @Override
     protected void onStart() {
         super.onStart();
-        mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
-        mZBarView.startSpotAndShowRect(); // 显示扫描框，并开始识别
+        if(mCameraScan != null) {
+            mCameraScan.setOnScanResultCallback(this)
+                    .setVibrate(true)
+                    .startCamera();
+        }
     }
 
     @Override
     protected void onStop() {
-        mZBarView.stopCamera(); // 关闭摄像头预览，并且隐藏扫描框
+        if(mCameraScan != null) {
+            mCameraScan.stopCamera();
+        }
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        mZBarView.onDestroy(); // 销毁二维码扫描控件
+        if(mCameraScan != null) {
+            mCameraScan.enableTorch(false);
+            mCameraScan.release();
+        }
         super.onDestroy();
     }
 
     private void checkVersion() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int i = checkSelfPermission(Manifest.permission.CAMERA);
-            LogUtils.d("权限是允许还是开启还是禁止" + i);
-            if (i == -1) {
-                if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    //禁止该权限
-                    ToastUtils.showShort(getString(R.string.ban_camera_permission));
-                    finish();
-                    return;
-                } else {
-                    //询问该权限
-                    ToastUtils.showShort(getString(R.string.inquire_camera_permission));
-                    finish();
-                    return;
-                }
-            }
-        }
-        //版本为22 5.1
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if (!isCameraCanUse()) {
+        int i = checkSelfPermission(Manifest.permission.CAMERA);
+        LogUtils.d("权限是允许还是开启还是禁止" + i);
+        if (i == -1) {
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                //禁止该权限
                 ToastUtils.showShort(getString(R.string.ban_camera_permission));
                 finish();
                 return;
+            } else {
+                //询问该权限
+                ToastUtils.showShort(getString(R.string.inquire_camera_permission));
+                finish();
+                return;
             }
-
         }
+        //版本为22 5.1
 
     }
 
@@ -142,32 +141,20 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
 //                mZBarView.openFlashlight(); // 打开闪光灯
                 if (!isOpenLight){
                     isOpenLight = true;
-                    mZBarView.openFlashlight(); // 打开闪光灯
+                    if(mCameraScan != null) {
+                        mCameraScan.enableTorch(true);
+                    }
                 }else {
                     isOpenLight = false;
-                    mZBarView.closeFlashlight(); // 打开闪光灯
+                    if(mCameraScan != null) {
+                        mCameraScan.enableTorch(false);
+                    }
                 }
                 break;
         }
     }
 
     private String result = "";
-    @Override
-    public void onScanQRCodeSuccess(String result) {
-        this.result = result;
-        LogUtils.d("shulan -->" + result);
-        String[] str = result.split("_");
-        if(str.length > 0){
-            if(str.length >= 4){
-                if(ClothesHangerMachineUtil.pairMode(str[1]).equals(str[2])){
-                    showClothesMachineDialog(getString(R.string.philips_activity_clothes_hanger_machine_qrcode_scan,str[1]));
-                    return;
-                }
-            }
-        }
-        showErrorDialog();
-
-    }
 
     private void showErrorDialog() {
         //信息
@@ -186,17 +173,13 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
         }, 3000); //延迟3秒消失
     }
 
-    @Override
-    public void onCameraAmbientBrightnessChanged(boolean isDark) {
 
-    }
-
-    @Override
-    public void onScanQRCodeOpenCameraError() {
-        LogUtils.d("打开相机出错");
-        finish();
-        ToastUtils.showShort(R.string.open_camera_failed);
-    }
+//    @Override
+//    public void onScanQRCodeOpenCameraError() {
+//        LogUtils.d("打开相机出错");
+//        finish();
+//        ToastUtils.showShort(R.string.open_camera_failed);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -206,12 +189,12 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
                 String result2 = data.getStringExtra(KeyConstants.URL_RESULT);
 
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result2);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result2);
                 setResult(RESULT_OK, intent);
                 finish();
             }else {
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -241,7 +224,7 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
             public void right() {
                 //首页过来的
                 Intent intent = new Intent();
-                intent.putExtra(Intents.Scan.RESULT, result);
+                intent.putExtra(Constants.SCAN_QR_CODE_RESULT, result);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -256,5 +239,22 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
 
             }
         });
+    }
+
+    @Override
+    public boolean onScanResultCallback(Result result) {
+        this.result = result.getText();
+        LogUtils.d("shulan -->" + result);
+        String[] str = result.getText().split("_");
+        if(str.length > 0){
+            if(str.length >= 4){
+                if(ClothesHangerMachineUtil.pairMode(str[1]).equals(str[2])){
+                    showClothesMachineDialog(getString(R.string.philips_activity_clothes_hanger_machine_qrcode_scan,str[1]));
+                    return true;
+                }
+            }
+        }
+        showErrorDialog();
+        return true;
     }
 }

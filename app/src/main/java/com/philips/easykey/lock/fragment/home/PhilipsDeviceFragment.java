@@ -21,6 +21,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
+import com.philips.easykey.lock.activity.addDevice.PhilipsAddDeviceActivity;
 import com.philips.easykey.lock.adapter.PhilipsDeviceTypeAdapter;
 import com.philips.easykey.lock.adapter.PhilipsRvHomeDeviceAdapter;
 import com.philips.easykey.lock.adapter.PhilipsVpHomeDevicesAdapter;
@@ -71,8 +72,8 @@ public class PhilipsDeviceFragment extends Fragment {
 
         ImageView ivAddDevice = root.findViewById(R.id.ivAddDevice);
         ivAddDevice.setOnClickListener(v -> {
-            // 跳转到添加设备页面
-            Intent intent = new Intent(getActivity(), DeviceAdd2Activity.class);
+//            Intent intent = new Intent(getActivity(), DeviceAdd2Activity.class);
+            Intent intent = new Intent(getActivity(), PhilipsAddDeviceActivity.class);
             startActivity(intent);
         });
 

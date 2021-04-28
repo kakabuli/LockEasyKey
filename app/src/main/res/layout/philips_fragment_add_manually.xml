@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="343pt"
+        android:layout_height="44pt"
+        android:layout_marginTop="10pt"
+        android:background="@drawable/philips_shape_search_et_bg"
+        android:drawableStart="@drawable/philips_icon_search"
+        android:drawablePadding="16pt"
+        android:gravity="center_vertical"
+        android:hint="@string/philips_hint_please_input_lock_type"
+        android:maxLines="1"
+        android:paddingStart="8pt"
+        android:singleLine="true"
+        android:textColorHint="@color/c999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="59pt"
+        android:layout_height="44pt"
+        android:textColor="@color/white"
+        android:textSize="15pt"
+        android:background="@drawable/philips_shape_search_btn_bg"
+        android:text="@string/philips_search"
+        android:layout_marginTop="10pt"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSmartLockStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="37pt"
+        android:text="@string/philips_smart_lock"
+        android:textColor="@color/c0066A1"
+        android:textSize="16pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="90pt"
+        android:layout_height="1pt"
+        android:layout_marginStart="32pt"
+        android:background="@color/cd9d9d9"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSmartLockStr"
+        app:layout_constraintStart_toEndOf="@+id/tvSmartLockStr"
+        app:layout_constraintTop_toTopOf="@+id/tvSmartLockStr" />
+
+    <TextView
+        android:id="@+id/tvSmartLockStr3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124pt"
+        android:text="@string/philips_smart_lock"
+        android:textColor="@color/color_333333"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSmartLockStr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSmartLockStr" />
+
+    <View
+        android:layout_width="90pt"
+        android:layout_height="1pt"
+        android:background="@color/cd9d9d9"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSmartLockStr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSmartLockStr" />
+
+    <Button
+        android:id="@+id/btnVideoLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="视频锁"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSmartLockStr3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

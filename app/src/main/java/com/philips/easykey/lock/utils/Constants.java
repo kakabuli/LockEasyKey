@@ -74,4 +74,6 @@ public class Constants {
 
     public static final String ADMIN_PASSWORD = "adminPassword";
 
+    public static final String SCAN_QR_CODE_RESULT = "ScanQrCodeResult";
+
 }

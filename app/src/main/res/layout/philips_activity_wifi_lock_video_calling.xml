@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:keepScreenOn="true"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/rl_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/transparent"
+
+        >
+
+        <SurfaceView
+            android:id="@+id/surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <ImageView
+            android:id="@+id/iv_cache"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="64pt"
+            android:paddingTop="20pt"
+            android:background="@color/color_7f000">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="16pt"
+                app:srcCompat="@drawable/philips_icon_back_white" />
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingEnd="12pt"
+                app:srcCompat="@drawable/philips_video_icon_setting" />
+
+            <TextView
+                android:id="@+id/head_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:textColor="#ffff"
+                android:text=""
+                android:textSize="17pt"
+                />
+            <TextView
+                android:id="@+id/tv_video_timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:textSize="10pt"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                android:text="2020-10-20 15:00:00"/>
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_temporary_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/lly_bottom_bar"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="47pt"
+            android:layout_marginRight="16pt"
+            app:srcCompat="@drawable/philips_real_time_video_pwd_selector" />
+
+        <RelativeLayout
+            android:id="@+id/ll_screenshot"
+            android:layout_width="155pt"
+            android:layout_height="209pt"
+            android:layout_below="@id/title_bar"
+            android:background="@color/color_7f000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="126pt"
+            >
+
+            <ImageView
+                android:id="@+id/iv_screenshot_bitmap"
+                android:layout_width="90pt"
+                android:layout_height="160pt"
+                android:layout_marginTop="12pt"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_screenshot_bitmap"
+                android:layout_marginTop="6pt"
+                android:layout_centerHorizontal="true"
+                android:textSize="14pt"
+                android:textColor="@color/white"
+                android:text="@string/philips_activity_calling_screenshot_bitmap_save"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lly_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="100pt"
+            android:layout_marginBottom="25pt"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_7f000"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16pt"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_mute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22pt"
+                    app:srcCompat="@drawable/philips_video_icon_mute"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/mute_name"
+                    android:textColor="#ffffff"
+                    android:textSize="14pt" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22pt"
+                    app:srcCompat="@drawable/philips_video_icon_album" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/philips_album"
+                    android:textColor="#ffffff"
+                    android:textSize="14pt" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_calling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11pt"
+                    android:src="@drawable/philips_real_time_video_calling_selector" />
+
+                <TextView
+                    android:id="@+id/tv_calling_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14pt"
+                    android:layout_below="@id/iv_calling"
+                    android:layout_marginTop="7pt"
+                    android:textColor="@color/white"
+                    android:text="@string/wifi_video_lock_talk_back"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_screenshot"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="22pt"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/philips_video_icon_screenshot" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/screen_img"
+                    android:textColor="#ffffff"
+                    android:textSize="14pt" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16pt"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_recoring"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="22pt"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/real_time_video_record_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10pt"
+                    android:text="@string/recording_screen"
+                    android:textColor="#ffffff"
+                    android:textSize="14pt" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+  <!--      <LinearLayout
+            android:id="@+id/lly_temporary_password"
+            android:layout_width="@dimen/dp_255"
+            android:layout_height="@dimen/dp_50"
+
+            android:layout_marginBottom="@dimen/dp_49"
+            android:background="@drawable/temporary_password_background"
+            android:orientation="vertical">-->
+
+        <!--</LinearLayout>-->
+
+
+        <TextView
+            android:id="@+id/tv_temporary_password"
+            android:layout_width="wrap_content"
+            android:layout_height="47pt"
+            android:paddingStart="11pt"
+            android:paddingEnd="11pt"
+            android:layout_above="@id/lly_bottom_bar"
+            android:layout_marginBottom="33pt"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.5"
+            android:layout_marginStart="16pt"
+            android:text="12345678123"
+            android:background="@color/color_7f000"
+            android:textColor="@color/white"
+            android:textSize="20pt" />
+
+        <RelativeLayout
+            android:id="@+id/lly_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_bar"
+            android:layout_marginTop="12pt"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_record_spot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="26pt"
+                android:src="@drawable/spot_bg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6pt"
+                android:layout_toRightOf="@id/iv_record_spot"
+                android:textSize="14pt"
+                android:text="REC"
+                android:textColor="@color/color_333333" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="00:00:00"
+                android:textColor="@color/color_333333"
+                android:textSize="17pt" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/lly_bottom_bar"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="18pt"
+            android:layout_marginRight="6pt"
+            android:text="@string/wifi_lock_temp_password"
+            android:textColor="@color/color_333333"
+            android:textSize="14pt" />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_mark_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/call_mask" />
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl_real_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="155pt"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/v_view"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:id="@+id/iv_real_time_refuse_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/refuse_icon" />
+
+
+            <TextView
+                android:id="@+id/tv_real_time_refuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_real_time_refuse_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_32"
+                android:text="@string/cancel"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_11" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_doorbell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wifi_video_lock_rang_the_doorbell"
+            android:textSize="@dimen/sp_15"
+            android:layout_marginTop="150pt"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/view_head"
+            android:visibility="gone"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avi"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17pt"
+            android:text="@string/wifi_video_lock_p2p_connect"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_15" />
+
+        <RelativeLayout
+            android:id="@+id/rl_calling_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="155pt"
+            android:layout_below="@id/v_view"
+            >
+
+            <ImageView
+                android:id="@+id/iv_answer_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_78"
+                android:src="@mipmap/answer_icon" />
+
+            <ImageView
+                android:id="@+id/iv_refuse_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/dp_78"
+                android:src="@mipmap/refuse_icon" />
+
+            <TextView
+                android:id="@+id/tv_refuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/iv_refuse_icon"
+                android:layout_marginLeft="@dimen/dp_94"
+                android:layout_marginTop="@dimen/dp_32"
+                android:text="@string/cancel"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_11" />
+
+            <TextView
+                android:id="@+id/tv_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/iv_answer_icon"
+                android:layout_marginRight="@dimen/dp_94"
+                android:layout_marginTop="@dimen/dp_32"
+                android:text="@string/call_coming_answer"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_11" />
+
+            <ImageView
+                android:id="@+id/iv_refuse_icon_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp_78"
+                android:src="@mipmap/refuse_icon" />
+
+
+            <TextView
+                android:id="@+id/tv_refuse_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/iv_refuse_icon_1"
+                android:layout_marginLeft="@dimen/dp_94"
+                android:layout_marginTop="@dimen/dp_32"
+                android:text="@string/cancel"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_11" />
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/v_view"
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/view_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_170" />
+
+        <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_below="@id/view_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150pt" />
+
+            <com.philips.easykey.lock.widget.CircleImageView
+                android:id="@+id/iv_head_pic"
+                android:layout_width="@dimen/dp_63"
+                android:layout_height="@dimen/dp_63"
+                android:layout_marginLeft="14pt"
+                android:layout_below="@id/rl_title_bar"
+                android:layout_marginTop="@dimen/dp_24"
+                android:src="@mipmap/default_head" />
+            <View
+                android:id="@+id/view_head"
+                android:layout_width="@dimen/dp_63"
+                android:layout_height="@dimen/dp_63"
+                android:layout_below="@id/rl_title_bar"
+                android:layout_marginTop="@dimen/dp_24"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_title_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40">
+                <ImageView
+                    android:id="@+id/mark_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_8"
+                         android:paddingBottom="@dimen/dp_5"
+                     android:paddingRight="@dimen/dp_16"
+                     android:paddingTop="@dimen/dp_5"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/video_lock_back" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_head_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/iv_head_pic"
+                android:layout_marginLeft="@dimen/sp_18"
+                android:layout_marginTop="@dimen/dp_25"
+                android:layout_toRightOf="@id/iv_head_pic"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_15" />
+
+        <com.philips.easykey.lock.widget.CircleImageView
+            android:id="@+id/iv_big_head_pic"
+            android:layout_width="@dimen/dp_87"
+            android:layout_height="@dimen/dp_87"
+            android:layout_marginLeft="14pt"
+            android:layout_below="@id/rl_title_bar"
+            android:layout_marginTop="@dimen/dp_24"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/default_head" />
+
+        <TextView
+            android:id="@+id/tv_big_head_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/iv_big_head_pic"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_15" />
+    </RelativeLayout>
+</RelativeLayout>

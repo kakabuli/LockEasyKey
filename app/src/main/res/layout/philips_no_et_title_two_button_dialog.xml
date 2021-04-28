@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/philips_retangle_ffffff_3">
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="23pt"
+        android:textColor="@color/cEF1A28"
+        android:textSize="17pt"
+        android:lineSpacingExtra="10pt"
+        />
+
+
+
+
+    <Button
+        android:id="@+id/tv_right"
+        android:layout_below="@id/tv_content"
+        android:layout_width="100pt"
+        android:layout_height="40pt"
+        android:textSize="16pt"
+        android:textColor="@color/white"
+        android:text="@string/delete"
+        android:layout_marginTop="35pt"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12pt"
+        android:layout_marginBottom="12pt"
+        android:gravity="center"
+        android:background="@drawable/philips_retangle_0066a1_3"
+        />
+
+    <Button
+        android:id="@+id/tv_left"
+        android:layout_width="100pt"
+        android:layout_height="40pt"
+        android:layout_marginTop="35pt"
+        android:layout_marginRight="8pt"
+        android:layout_below="@id/tv_content"
+        android:layout_toLeftOf="@id/tv_right"
+        android:textSize="16pt"
+        android:layout_marginBottom="12pt"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:textColor="@color/c0066A1"
+        android:background="@drawable/philips_retangle_ffffff_3"
+        />
+</RelativeLayout>

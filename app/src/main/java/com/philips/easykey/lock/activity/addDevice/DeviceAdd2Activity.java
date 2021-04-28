@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
@@ -28,12 +27,12 @@ import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceZigBeeDetailView;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
-import com.king.zxing.Intents;
 
 import java.util.List;
 
@@ -253,7 +252,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
                 case KeyConstants.SCANGATEWAYNEW_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
                     LogUtils.d("扫描结果是   " + result);
 
                     if (result.contains("SN-GW") && result.contains("MAC-") && result.contains(" ")) {
@@ -303,34 +302,31 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
                         String wifiModelType = "WiFi&BLE";
                         wifiIntent.putExtra("wifiModelType", wifiModelType);
                         startActivity(wifiIntent);
-                    }else if(result.contains("WiFi&VIDEO") || result.contains("kaadas_WiFi_camera")){
+                    } else if(result.contains("WiFi&VIDEO") || result.contains("kaadas_WiFi_camera")){
                         //视频WIFI锁
                         Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
                         String wifiModelType = "WiFi&VIDEO";
                         wifiIntent.putExtra("wifiModelType", wifiModelType);
                         startActivity(wifiIntent);
-                    }
-                    else {
-                        unknow_qr();
+                    } else {
+                        unKnowQr();
                     }
                     break;
             }
         }
     }
 
-    public void unknow_qr(){
+    public void unKnowQr(){
         //信息
         messageDialog = new MessageDialog.Builder(this)
                 .setMessage(R.string.unknow_qr)
                 .create();
         messageDialog.show();
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                if(messageDialog != null){
-                    messageDialog.dismiss();
+        new Handler().postDelayed(() -> {
+            if(messageDialog != null){
+                messageDialog.dismiss();
 
-                }
             }
         }, 3000); //延迟3秒消失
     }

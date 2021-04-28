@@ -263,7 +263,6 @@ public class SwipLinkSucActivity  extends BaseActivity<SingleFireSwitchView, Sin
                 }, 3000); //延迟3秒消失
             }
         });
-//        Intent intent=new Intent(SwipLinkSucActivity.this, WiFiLockDetailActivity.class);
 
     }
 

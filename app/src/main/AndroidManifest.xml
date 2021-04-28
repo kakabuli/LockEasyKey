@@ -53,7 +53,7 @@
     -->
     <meta-data
         android:name="push_kit_auto_init_enabled"
-        android:value="true"/>
+        android:value="true" />
 
     <application
         android:name=".MyApplication"
@@ -65,18 +65,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:allowBackup">
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity"></activity>
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockNickNameActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.WifiVideoLockCallingTestActivity"
             android:launchMode="singleTop"
@@ -110,7 +115,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockPreViewActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockPreViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -122,13 +127,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockAlbumDetailActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.device.videolock.WifiVideoLockAlbumActivity" />
+        <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockAlbumActivity" />
         <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeVideoActivity" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockCallingActivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockCallingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -977,10 +982,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.singleswitch.TimerManagerActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.device.singleswitch.AddTimeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -1289,6 +1290,7 @@
             android:process=":pushservice"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity" />
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"
@@ -1336,7 +1338,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public" />
         </provider>
-
     </application>
 
 </manifest>

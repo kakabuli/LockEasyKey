@@ -38,7 +38,7 @@
                 android:paddingBottom="@dimen/dp_5"
                 android:text="@string/home_page"
                 android:textColor="@drawable/activity_main_radiobutton_bottom_text"
-                android:textSize="10sp" />
+                android:textSize="10pt" />
 
             <RadioButton
                 android:id="@+id/rb_two"
@@ -50,9 +50,9 @@
                 android:gravity="center"
                 android:paddingTop="@dimen/dp_9"
                 android:paddingBottom="@dimen/dp_5"
-                android:text="@string/device"
+                android:text="@string/message"
                 android:textColor="@drawable/activity_main_radiobutton_bottom_text"
-                android:textSize="10sp" />
+                android:textSize="10pt" />
 
             <!--<RadioButton-->
                 <!--android:id="@+id/rb_shop"-->
@@ -81,7 +81,7 @@
                 android:paddingBottom="@dimen/dp_5"
                 android:text="@string/mine"
                 android:textColor="@drawable/activity_main_radiobutton_bottom_text"
-                android:textSize="10sp" />
+                android:textSize="10pt" />
         </RadioGroup>
     </LinearLayout>
 

@@ -111,10 +111,8 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         LogUtils.d("MainActivity启动 ");
         ButterKnife.bind(this);
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
@@ -134,8 +132,8 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             }
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
-        fragments.add(new HomePageFragment());
-//        fragments.add(new PhilipsDeviceFragment());
+//        fragments.add(new HomePageFragment());
+        fragments.add(new PhilipsDeviceFragment());
         fragments.add(new DeviceFragment());
 //        fragments.add(new PhilipsMessageFragment());
         fragments.add(new PhilipsPersonalCenterFragment());

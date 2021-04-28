@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.king.zxing.Intents;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.my.AboutUsActivity;
@@ -31,6 +30,7 @@ import com.philips.easykey.lock.mvp.view.IMyFragmentView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.utils.BitmapUtil;
+import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
@@ -231,10 +231,10 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
                 case KeyConstants.SCANPRODUCT_REQUEST_CODE:
-                    String result = data.getStringExtra(Intents.Scan.RESULT);
-                    LogUtils.d(result + "     产品激活");
-                    if (result.contains(" ")) {
-                        result = result.replace(" ", "%20");
+                    String result = data.getStringExtra(Constants.SCAN_QR_CODE_RESULT);
+                    LogUtils.d(result+"     产品激活");
+                    if(result.contains(" ")){
+                        result=result.replace(" ","%20");
                     }
                     String bar_url = "http://s.kaadas.com:8989/extFun/regWeb.asp?uiFrm=2&id=" + result + "&telnum=";
 //                    +"&telnum=18988780718&mail=8618988780718&nickname=8618988780718";

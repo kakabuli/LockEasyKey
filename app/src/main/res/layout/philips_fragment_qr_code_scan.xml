@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="260pt"
+        android:layout_height="260pt"
+        android:layout_marginTop="46pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.king.zxing.ViewfinderView
+        android:id="@+id/viewfinderView"
+        android:layout_width="260pt"
+        android:layout_height="260pt"
+        android:layout_marginTop="46pt"
+        app:cornerColor="@color/c0066A1"
+        app:laserColor="@color/c0066A1"
+        app:frameHeight="260pt"
+        app:frameWidth="260pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFlashLight"
+        android:layout_width="60pt"
+        android:layout_height="60pt"
+        android:layout_marginStart="74pt"
+        android:layout_marginBottom="71pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/philips_scan_icon_flashlight" />
+
+    <ImageView
+        android:id="@+id/ivAlbum"
+        android:layout_width="60pt"
+        android:layout_height="60pt"
+        android:layout_marginBottom="71pt"
+        android:layout_marginEnd="74pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/philips_scan_icon_album" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_flash_light"
+        android:layout_marginTop="12pt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/ivFlashLight"
+        app:layout_constraintStart_toStartOf="@+id/ivFlashLight"
+        app:layout_constraintTop_toBottomOf="@+id/ivFlashLight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_album"
+        android:layout_marginTop="12pt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/ivAlbum"
+        app:layout_constraintStart_toStartOf="@+id/ivAlbum"
+        app:layout_constraintTop_toBottomOf="@+id/ivAlbum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

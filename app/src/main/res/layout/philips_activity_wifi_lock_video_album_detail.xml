@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cF7F7F7"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rly_head"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/philips_album"
+            android:textColor="@color/color_333333"
+            android:textSize="17pt"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="2018"
+            android:visibility="gone"
+            android:textSize="10pt"/>
+
+        <ImageView
+            android:id="@+id/iv_myalbum_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingStart="12pt"
+            android:paddingEnd="12pt"
+            app:srcCompat="@drawable/philips_album_icon_delete"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <SurfaceView
+        android:id="@+id/video_surface"
+        android:layout_below="@id/rly_head"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <SurfaceView
+        android:id="@+id/video_surface_1"
+        android:layout_below="@id/rly_head"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_icon_background"
+        android:layout_below="@id/rly_head"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#66000000"/>
+
+    <ImageView
+        android:id="@+id/iv_cache"
+        android:layout_below="@id/rly_head"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/iv_play_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/activity_myalbum_play_start"
+        android:layout_centerInParent="true"/>
+
+    <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="35pt"
+        android:layout_height="35pt"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17pt"
+        android:text="@string/wifi_video_lock_p2p_connect"
+        android:textColor="#ffffff"
+        android:textSize="15pt" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/lly_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@drawable/philips_retangle_66000000_3"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="16pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginBottom="24pt"
+        >
+        <ImageView
+            android:id="@+id/iv_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/activity_myalbum_play_small_selector"
+            android:layout_marginLeft="9pt"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12pt"
+            android:textColor="@color/white"
+            android:text="00:00"
+            android:layout_marginLeft="11pt"
+            />
+        
+        <SeekBar
+            android:id="@+id/duration_seek_bar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/scrubber_selector"
+            android:progressDrawable="@drawable/seekbarbackground"/>
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12pt"
+            android:textColor="@color/white"
+            android:layout_marginRight="14pt"
+            android:text="00:00"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

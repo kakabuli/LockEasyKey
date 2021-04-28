@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockAlbumDetailActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity;
 import com.philips.easykey.lock.adapter.WifiVideoLockAlarmIAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockAlarmRecordPresenter;
@@ -108,7 +108,7 @@ public class WifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiVideoLoc
                         String path = FileTool.getVideoCacheFolder(getActivity(),record.getWifiSN()).getPath();
                         String fileName = path +  File.separator + record.get_id() + ".mp4";
                         if (new File(fileName).exists()){
-                            Intent intent = new Intent(getActivity(), WifiVideoLockAlbumDetailActivity.class);
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
                             intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
                             intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
                             try{
@@ -123,7 +123,7 @@ public class WifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiVideoLoc
                             intent.putExtra("record",record);
                             startActivity(intent);
                         }else{
-                            Intent intent = new Intent(getActivity(), WifiVideoLockAlbumDetailActivity.class);
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
                             intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
                             intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
                             try {
@@ -217,7 +217,8 @@ public class WifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiVideoLoc
                 WifiVideoLockAlarmRecord record = lockRecords.get(i);
                 boolean falg = false;
                 for(WifiVideoLockAlarmRecord li : list){
-                    if(li.get_id().equals(record.get_id()) ){
+                    if(li.get_id() != null && record.get_id() != null
+                            && li.get_id().equals(record.get_id()) ){
                         falg = true;
                         break;
                     }

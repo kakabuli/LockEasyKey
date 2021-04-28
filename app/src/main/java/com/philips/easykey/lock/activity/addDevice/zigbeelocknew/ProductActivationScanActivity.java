@@ -115,19 +115,19 @@ public class ProductActivationScanActivity extends CaptureActivity {
     //打开手电筒
     private void openFlashLight(boolean highlight) {
         LogUtils.d("开启闪光灯");
-        if (getCameraManager().getOpenCamera()!=null) {
-            camera = getCameraManager().getOpenCamera().getCamera();
-            parameter = camera.getParameters();
-            if (!highlight) {
-                parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                camera.setParameters(parameter);
-                falshLight = true;
-            } else {  // 关灯
-                parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                camera.setParameters(parameter);
-                falshLight = false;
-            }
-        }
+//        if (getCameraManager().getOpenCamera()!=null) {
+//            camera = getCameraManager().getOpenCamera().getCamera();
+//            parameter = camera.getParameters();
+//            if (!highlight) {
+//                parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+//                camera.setParameters(parameter);
+//                falshLight = true;
+//            } else {  // 关灯
+//                parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//                camera.setParameters(parameter);
+//                falshLight = false;
+//            }
+//        }
 
     }
 
