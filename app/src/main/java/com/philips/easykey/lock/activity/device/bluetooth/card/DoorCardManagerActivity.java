@@ -125,7 +125,7 @@ public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, C
     }
 
     private void initRecycleview() {
-        doorCardManagerAdapter = new DoorCardManagerAdapter(list, R.layout.item_door_card_manager);
+        doorCardManagerAdapter = new DoorCardManagerAdapter(list, R.layout.philips_item_door_card_manager);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(doorCardManagerAdapter);
         doorCardManagerAdapter.setOnItemClickListener(new OnItemClickListener() {

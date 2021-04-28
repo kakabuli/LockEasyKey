@@ -235,7 +235,7 @@
         android:layout_marginRight="@dimen/dp_13"
         android:textSize="@dimen/sp_15"
         android:textColor="#FFFFFF"
-        android:text="@string/wifi_lock_temp_password"/>
+        android:text="@string/philips_temp_password"/>
     <LinearLayout
         android:id="@+id/lly_temporary_password"
         android:layout_width="@dimen/dp_255"

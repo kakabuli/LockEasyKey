@@ -21,6 +21,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
+import androidx.core.text.HtmlCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -63,15 +64,19 @@ public class GatewayOTADialogActivity extends BaseActivity<GatewayOTAView, Gatew
 
             if (deviceSn.startsWith("GW")) {
                 if (swInfo.startsWith("orangeiot")) {
-                    tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>" + getString(R.string.gateway) + ":" + notifyBean.getDeviceId() + "</font>"));
+                    tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>"
+                                    + getString(R.string.gateway) + ":" + notifyBean.getDeviceId() + "</font>"));
                 } else if (swInfo.startsWith("znp")) {
-                    tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>" + getString(R.string.gateway_zigbeen_have_update) + ":" + deviceSn + "</font>"));
+                    tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>"
+                            + getString(R.string.gateway_zigbeen_have_update) + ":" + deviceSn + "</font>"));
                 }
             } else if (deviceSn.startsWith("ZG")) { //zigbeen
-                tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>" + getString(R.string.zigbeen_have_update) + ":" + deviceSn + "</font>"));
+                tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>"
+                        + getString(R.string.zigbeen_have_update) + ":" + deviceSn + "</font>"));
                 //    tvContent.setText(getString(R.string.zigbeen_have_update) + ":" + notifyBean.getDeviceId() + "\n" + swInfoStr);
             } else if (deviceSn.startsWith("CH")) { // 猫眼
-                tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>" + getString(R.string.cateye) + ":" + deviceSn + "</font>"));
+                tvContent.setText(Html.fromHtml("<big><font color='black'>" + swInfoStr + "</font></big>" + "<br>" + "<font color='#999999'>"
+                        + getString(R.string.cateye) + ":" + deviceSn + "</font>"));
                 //  tvContent.setText(getString(R.string.cateye) + ":" + notifyBean.getDeviceId() + "\n" + swInfoStr);
             } else {
                 finish();

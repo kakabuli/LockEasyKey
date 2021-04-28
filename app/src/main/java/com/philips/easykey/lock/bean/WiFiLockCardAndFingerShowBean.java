@@ -6,12 +6,22 @@ public class WiFiLockCardAndFingerShowBean implements Serializable {
     private int num;
     private long createTime;
     private String nickName;
+    private int tpye;
 
 
-    public WiFiLockCardAndFingerShowBean(int num, long createTime, String nickName) {
+    public WiFiLockCardAndFingerShowBean(int num, long createTime, String nickName,int type) {
         this.num = num;
         this.createTime = createTime;
         this.nickName = nickName;
+        this.tpye = type;
+    }
+
+    public int getTpye() {
+        return tpye;
+    }
+
+    public void setTpye(int tpye) {
+        this.tpye = tpye;
     }
 
     public int getNum() {

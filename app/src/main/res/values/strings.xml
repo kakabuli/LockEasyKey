@@ -1391,14 +1391,13 @@
     <string name="pair_failed">配对失败</string>
     <string name="wifi_lock_repair">重新配网</string>
     <string name="wifi_lovk_skip">跳 过</string>
-    <string name="wifi_lock_temp_password">临时密码</string>
     <string name="pice">张</string>
     <string name="rad">台</string>
     <string name="check_admin">输入锁管理员密码</string>
     <string name="input_6_12password">请输入6~12位数字密码</string>
     <string name="tem_password_notice">注：远程临时密码10分钟内有效</string>
     <string name="inout_admin_password">输入管理员密码</string>
-    <string name="wifi_lock_share_notice">为确保您的安全，密码请自行保存或分享给客人</string>
+    <string name="philips_wifi_lock_share_notice">为确保您的安全，密码请自行保存或分享给客人</string>
     <string name="set_up_wifi_failed3">确保连接的Wi-Fi 路由处于联网状态</string>
     <string name="set_up_wifi_failed2">确保已经输入正确的Wi-Fi账号和密码</string>
     <string name="set_up_wifi_failed1">确保Wi-Fi是2.4G频率</string>
@@ -2447,6 +2446,7 @@
     <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
     <string name="philips_activity_detail_share">分享</string>
     <string name="philips_activity_detail_password_lock_type">开门方式</string>
+    <string name="philips_activity_offline_password_share_time">30分钟内永久有效</string>
 
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>
@@ -2454,6 +2454,9 @@
     <string name="philips_biometric_login">生物识别登录</string>
     <string name="philips_login_using_your_biometric_credential">使用您的生物识别证书登录</string>
     <string name="philips_hint_please_input_lock_type">请输入门锁型号</string>
+    <string name="philips_temp_password">临时密码</string>
+    <string name="philips_share_copy_password">复制密码</string>
+    <string name="philips_share_permanent_password">永久密码</string>
 
     <!-- contentDescription -->
     <string name="philips_cdt_power">电量</string>
