@@ -31,7 +31,7 @@ public class PhilipsWifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPass
         int num = Integer.parseInt(bean.getNum());
         helper.setText(R.id.tv_num, num > 9 ? getContext().getString(R.string.password) + num : getContext().getString(R.string.password) + "0" + num);
         helper.setText(R.id.tv_nick, bean.getNickName());
-        helper.setText(R.id.tv_time, DateUtils.getDayTimeFromMillisecond(bean.getCreateTime()));
+        helper.setText(R.id.tv_time, DateUtils.getDayTimeFromMillisecond(bean.getCreateTime() * 1000));
     }
 
 
