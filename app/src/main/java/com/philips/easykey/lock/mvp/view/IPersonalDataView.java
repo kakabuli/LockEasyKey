@@ -36,5 +36,10 @@ public interface IPersonalDataView extends IBaseView {
      */
     void downloadPhotoError(Throwable e);
 
+    void onLoginOutSuccess();
+
+    void onLoginOutFailed(Throwable throwable);
+
+    void onLoginOutFailedServer(BaseResult result);
 
 }

@@ -2460,5 +2460,8 @@
     <string name="philips_cdt_wifi">Wifi</string>
     <string name="philips_cdt_record_icon">记录图标</string>
 
+    <!-- my -->
+    <string name="philips_system_setting">系统设置</string>
+    <string name="philips_contact_us">联系我们</string>
 
 </resources>

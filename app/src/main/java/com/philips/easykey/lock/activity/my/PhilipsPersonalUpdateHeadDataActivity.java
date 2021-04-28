@@ -4,7 +4,6 @@ package com.philips.easykey.lock.activity.my;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -12,17 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.huantansheng.easyphotos.EasyPhotos;
-import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -115,7 +114,11 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
         //获取昵称
         String userName = (String) SPUtils.get(SPUtils.USERNAME, "");
         if (!TextUtils.isEmpty(userName)) {
-            headPortraitName.setText(userName);
+            if(userName.length() > 10){
+                headPortraitName.setText(userName.substring(0,10) + "...");
+            }else {
+                headPortraitName.setText(userName);
+            }
         }
         //获取手机号码
         String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
@@ -130,7 +133,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     }
 
 
-    @OnClick({R.id.head_nickname_layout, R.id.rl_head, R.id.head_telNum_layout})
+    @OnClick({R.id.head_nickname_layout, R.id.rl_head, R.id.head_telNum_layout,R.id.bt_sign_out_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.head_nickname_layout:
@@ -143,13 +146,27 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
             case R.id.head_telNum_layout:
                 showChangeNumberDialog();
                 break;
+            case R.id.bt_sign_out_login:
+                loginOut();
+                break;
         }
     }
 
     //展示头像对话框
     private void showHeadDialog() {
         dialogBuilder = new BottomMenuDialog.Builder(this);
+        dialogBuilder.addMenu(R.string.select_photo_album, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAlbum();
 
+                if (bottomMenuDialog != null) {
+                    bottomMenuDialog.dismiss();
+                }
+
+
+            }
+        });
         dialogBuilder.addMenu(R.string.zi_pai, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,32 +182,48 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
 
             }
         });
-        dialogBuilder.addMenu(R.string.select_photo_album, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAlbum();
-
-                if (bottomMenuDialog != null) {
-                    bottomMenuDialog.dismiss();
-                }
-
-
-            }
-        });
         bottomMenuDialog = dialogBuilder.create();
         bottomMenuDialog.show();
     }
 
     private void createAlbum(){
-        EasyPhotos.createAlbum(PhilipsPersonalUpdateHeadDataActivity.this, false, false, GlideEngine.getInstance())
-                .setFileProviderAuthority("com.philips.easykey.lock.provider")
-                .setMinHeight(200)
-                .setMinWidth(200)
-                .setCount(1)
-                .setPuzzleMenu(false)
-                .setCleanMenu(false)
-                .start(PHOTO_REQUEST_CODE);
+        PictureSelector.create(PhilipsPersonalUpdateHeadDataActivity.this)
+                .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .isCamera(false)
+                .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
+                .minSelectNum(1)// 最小选择数量
+                .imageSpanCount(4)// 每行显示个数
+                .selectionMode( PictureConfig.SINGLE)
+                .isPreviewImage(true)
+                .isZoomAnim(true)
+                .isEnableCrop(true)// 是否裁剪
+                .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+                .cropImageWideHigh(300,300)
+                .withAspectRatio(1, 1)
+                .cutOutQuality(100)// 裁剪输出质量 默认100
+                .minimumCompressSize(20)// 小于多少kb的图片不压缩
+                .forResult(onResultCallbackListener);
     }
+
+    private OnResultCallbackListener onResultCallbackListener = new OnResultCallbackListener<LocalMedia>() {
+        @Override
+        public void onResult(List<LocalMedia> result) {
+            if(result.size() > 0){
+                photoPath = result.get(0).getCutPath();
+                if (null == photoPath || "".equals(photoPath)) {
+                    photoPath = "";
+                }
+                uploadPhoto();
+            }else {
+                ToastUtils.showShort(R.string.no_data);
+            }
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+    };
 
     private void showChangeNumberDialog(){
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
@@ -220,17 +253,45 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                 });
     }
 
+    private void loginOut() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_log_out), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+            @Override
+            public void left() {
+
+            }
+
+            @Override
+            public void right() {
+                mPresenter.loginOut();
+                showLoading(getString(R.string.is_login_out));
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(String toString) {
+
+            }
+        });
+    }
+
     //请求权限
     public void requestPermission(String[] permissions) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {  //版本号大鱼23
             //判断是否已经赋予权限   没有权限  赋值权限
             permissions = checkPermission(permissions);
             if (permissions.length == 0) {
-                EasyPhotos.createCamera(this,true)
-                        .setFileProviderAuthority("com.philips.easykey.lock.provider")
-                        .setMinWidth(200)
-                        .setMinHeight(200)
-                        .start(PHOTO_REQUEST_CODE);
+                PictureSelector.create(PhilipsPersonalUpdateHeadDataActivity.this)
+                        .openCamera(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                        .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
+                        .isEnableCrop(true)// 是否裁剪
+                        .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+                        .cropImageWideHigh(300,300)
+                        .withAspectRatio(1, 1)
+                        .cutOutQuality(100)// 裁剪输出质量 默认100
+                        .forResult(onResultCallbackListener);
             } else {
                 //如果应用之前请求过此权限但用户拒绝了请求，此方法将返回 true。
                 //申请权限，字符串数组内是一个或多个要申请的权限，1是申请权限结果的返回参数，在onRequestPermissionsResult可以得知申请结果
@@ -255,7 +316,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     //展示图片
     private void showImage(String photoPath) {
         if ("".equals(photoPath)) {
-            ivHead.setImageDrawable(getResources().getDrawable(R.mipmap.default_head));
+            ivHead.setImageDrawable(getResources().getDrawable(R.drawable.philips_mine_img_profile));
         } else {
             int degree = BitmapUtil.readPictureDegree(photoPath);
             changeBitmap = BitmapUtil.ratio(photoPath, 720, 720);
@@ -267,26 +328,6 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                 ivHead.setImageBitmap(newbitmap);
             }
         }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (data != null && requestCode == PHOTO_REQUEST_CODE) {
-                ArrayList<Photo> resultPhotos =
-                        data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
-                if(resultPhotos.size() > 0){
-                    photoPath = resultPhotos.get(0).path;
-                }
-                photoPath = StringUtil.processEmptyString(photoPath);
-                uploadPhoto();
-            }else {
-                ToastUtils.showShort(R.string.no_data);
-            }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //上传到服务器
@@ -310,9 +351,15 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                     return;
                 }
             }
-            EasyPhotos.createCamera(this,true)
-                    .setFileProviderAuthority("com.philips.easykey.lock.provider")
-                    .start(PHOTO_REQUEST_CODE);
+            PictureSelector.create(PhilipsPersonalUpdateHeadDataActivity.this)
+                    .openCamera(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                    .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
+                    .isEnableCrop(true)// 是否裁剪
+                    .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+                    .cropImageWideHigh(300,300)
+                    .withAspectRatio(1, 1)
+                    .cutOutQuality(100)// 裁剪输出质量 默认100
+                    .forResult(onResultCallbackListener);
         }
     }
 
@@ -341,6 +388,30 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     @Override
     public void downloadPhotoError(Throwable e) {
 //        ToastUtils.showShort( HttpUtils.httpProtocolErrorCode(this,e));
+    }
+
+    @Override
+    public void onLoginOutSuccess() {
+        hiddenLoading();
+        //退出mqtt
+        if (MyApplication.getInstance().getMqttService()!=null){
+            MyApplication.getInstance().getMqttService().httpMqttDisconnect();
+        }
+        MyApplication.getInstance().tokenInvalid(false);
+    }
+
+    @Override
+    public void onLoginOutFailed(Throwable throwable) {
+        hiddenLoading();
+        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        LogUtils.d("退出失败  " + throwable.getMessage());
+    }
+
+    @Override
+    public void onLoginOutFailedServer(BaseResult result) {
+        hiddenLoading();
+        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
+        LogUtils.d("退出失败  " + result.getMsg());
     }
 
     @Override

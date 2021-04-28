@@ -104,7 +104,7 @@ public class BottomMenuDialog extends Dialog {
             LayoutParams lpItem = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             LayoutParams lpDivider = new LayoutParams(LayoutParams.MATCH_PARENT, 1);
             int dip1 = (int) (1 * p.context.getResources().getDisplayMetrics().density + 0.5f);
-            int spacing = dip1 * 20;
+            int spacing = dip1 * 13;
 
             boolean hasTitle = !TextUtils.isEmpty(p.menuTitle);
             if (hasTitle) {
@@ -147,7 +147,7 @@ public class BottomMenuDialog extends Dialog {
                 bbm.setGravity(Gravity.CENTER);
                 bbm.setText(bottomMenu.funName);
                 bbm.setTextColor(0xFF333333);
-                bbm.setTextSize(20);
+                bbm.setTextSize(16);
                 bbm.setOnClickListener(bottomMenu.listener);
                 layContainer.addView(bbm);
 
