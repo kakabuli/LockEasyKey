@@ -29,7 +29,7 @@ import com.philips.easykey.lock.activity.device.wifilock.WifiLockAuthDeviceInfoA
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockDeviceInfoActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockMoreActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
+import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
@@ -352,7 +352,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(getContext(), WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(getContext(), PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
                             startActivity(intent);
                             break;
@@ -458,7 +458,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(getContext(), WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(getContext(), PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
                             startActivity(intent);
                             break;

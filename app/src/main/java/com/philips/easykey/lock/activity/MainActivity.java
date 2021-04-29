@@ -132,10 +132,8 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             }
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
-//        fragments.add(new HomePageFragment());
         fragments.add(new PhilipsDeviceFragment());
-        fragments.add(new DeviceFragment());
-//        fragments.add(new PhilipsMessageFragment());
+        fragments.add(new PhilipsMessageFragment());
         fragments.add(new PhilipsPersonalCenterFragment());
 //        evevt = this;
         instance = this;

@@ -42,7 +42,7 @@ public class AddGatewayLockShareActivity extends BaseAddToApplicationActivity im
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_family_member);
+        setContentView(R.layout.philips_activity_add_family_member);
         ButterKnife.bind(this);
         initView();
         initListener();
@@ -52,7 +52,7 @@ public class AddGatewayLockShareActivity extends BaseAddToApplicationActivity im
     }
 
     private void initView() {
-        tvContent.setText(getString(R.string.add_user));
+        tvContent.setText(getString(R.string.philips_add_user));
     }
 
     private void initListener() {

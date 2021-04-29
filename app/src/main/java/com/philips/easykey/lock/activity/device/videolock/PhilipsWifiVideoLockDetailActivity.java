@@ -1,38 +1,26 @@
 package com.philips.easykey.lock.activity.device.videolock;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
-import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
+import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
-import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
-
-import java.util.List;
 
 
 public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActivity {
@@ -101,7 +89,6 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 mRlDetailShareSetting.setVisibility(View.GONE);
                 mRlDetailShare.setVisibility(View.VISIBLE);
                 mRlDetailAlbum.setVisibility(View.VISIBLE);
-                mIvDetailSetting.setVisibility(View.VISIBLE);
             }else{
                 mRlDetailPassword.setVisibility(View.GONE);
                 mRlDetailShareSetting.setVisibility(View.VISIBLE);
@@ -139,7 +126,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 startActivity(intent);
                 break;
             case R.id.rl_detail_share:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                 startActivity(intent);
                 break;

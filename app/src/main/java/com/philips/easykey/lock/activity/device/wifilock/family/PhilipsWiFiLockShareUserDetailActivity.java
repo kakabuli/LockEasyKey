@@ -33,23 +33,22 @@ import butterknife.ButterKnife;
 /**
  * 分享用户详情界面
  */
-public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShareUserDetailView, WiFiLockShareUserDetailPresenter
+public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShareUserDetailView, WiFiLockShareUserDetailPresenter
         <IWiFiLockShareUserDetailView>>  implements IWiFiLockShareUserDetailView, View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_content)
     TextView tvContent;
-
+    @BindView(R.id.confirm)
+    Button confirm;
     @BindView(R.id.tv_number)
-    TextView tvNumber;
+    EditText tvNumber;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.iv_editor)
-    ImageView ivEditor;
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.btn_delete)
-    Button btnDelete;
+    TextView btnDelete;
     private String nickname;
     String data;
     WifiLockShareResult.WifiLockShareUser shareUser;
@@ -58,16 +57,16 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_member_detail);
+        setContentView(R.layout.philips_activity_family_member_detail);
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
-        ivEditor.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
-        tvContent.setText(getString(R.string.user_detail));
+        confirm.setOnClickListener(this);
+        tvContent.setText(getString(R.string.philips_user_detail));
         Intent intent = getIntent();
         shareUser = (WifiLockShareResult.WifiLockShareUser) intent.getSerializableExtra(KeyConstants.SHARE_USER_INFO);
-        tvNumber.setText(shareUser.getUname());
-        tvName.setText(shareUser.getUserNickname());
+        tvNumber.setText(shareUser.getUserNickname());
+        tvName.setText(shareUser.getUname());
         long createTime = shareUser.getCreateTime();
         if (createTime == 0) {
             getAuthorizationTime();
@@ -99,68 +98,47 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
             case R.id.btn_delete:
                 //删除
                 if (NetUtil.isNetworkAvailable()) {
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, "", getString(R.string.sure_delete_user_permission), getString(R.string.cancel), getString(R.string.delete), new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
+                    AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this, getString(R.string.sure_delete_user_permission),
+                            getString(R.string.cancel), getString(R.string.delete), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
+                                @Override
+                                public void left() {
 
-                        }
+                                }
 
-                        @Override
-                        public void right() {
-                            showLoading(getString(R.string.is_deleting));
-                            mPresenter.deleteUserList(shareUser.get_id(),adminNickname);
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                @Override
+                                public void right() {
+                                    showLoading(getString(R.string.is_deleting));
+                                    mPresenter.deleteUserList(shareUser.get_id(),adminNickname);
+                                }
 
-                        }
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                        @Override
-                        public void afterTextChanged(String toString) {
+                                }
 
-                        }
-                    });
+                                @Override
+                                public void afterTextChanged(String toString) {
+
+                                }
+                            });
                 } else {
                     ToastUtils.showLong(R.string.network_exception);
                 }
                 break;
-            case R.id.iv_editor:
-                //弹出编辑框
-                View mView = LayoutInflater.from(this).inflate(R.layout.have_edit_dialog, null);
-                TextView tvTitle = mView.findViewById(R.id.tv_title);
-                EditText editText = mView.findViewById(R.id.et_name);
-                TextView tv_cancel = mView.findViewById(R.id.tv_left);
-                TextView tv_query = mView.findViewById(R.id.tv_right);
-                AlertDialog alertDialog = AlertDialogUtil.getInstance().common(this, mView);
-                tvTitle.setText(getString(R.string.input_user_name));
-                editText.setText(shareUser.getUserNickname());
-                if (shareUser.getUserNickname() != null) {
-                    editText.setSelection(shareUser.getUserNickname().length());
+            case R.id.confirm:
+                if(shareUser.getUserNickname().equals(tvNumber.getText().toString().trim())) {
+                    ToastUtils.showShort(getString(R.string.user_nickname_no_update));
+                    return;
                 }
-                tv_cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-                tv_query.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        data = editText.getText().toString().trim();
-                        if (!StringUtil.nicknameJudge(data)) {
-                            ToastUtils.showShort(R.string.nickname_verify_error);
-                            return;
-                        }
-                        if (!TextUtils.isEmpty(shareUser.getUserNickname()) && shareUser.getUserNickname().equals(data)) {
-                            ToastUtils.showShort(getString(R.string.user_nickname_no_update));
-                            return;
-                        }
-                        showLoading(getString(R.string.is_modifing));
-                        mPresenter.modifyCommonUserNickname(shareUser.get_id(), data);
-                        alertDialog.dismiss();
-                    }
-                });
 
+                data = tvNumber.getText().toString().trim();
+                if (!StringUtil.nicknameJudge(data)) {
+                    ToastUtils.showShort(R.string.nickname_verify_error);
+                    return;
+                }
+                showLoading(getString(R.string.is_modifing));
+
+                mPresenter.modifyCommonUserNickname(shareUser.get_id(), data);
 
                 break;
         }
@@ -187,7 +165,7 @@ public class WiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShare
     @Override
     public void modifyCommonUserNicknameSuccess(BaseResult baseResult) {
         nickname = data;
-        tvName.setText(nickname);
+        tvNumber.setText(nickname);
         shareUser.setUserNickname(nickname);
         ToastUtils.showShort(R.string.modify_user_nickname_success);
         hiddenLoading();

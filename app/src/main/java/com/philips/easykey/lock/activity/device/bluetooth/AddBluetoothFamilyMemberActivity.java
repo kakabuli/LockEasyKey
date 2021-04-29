@@ -43,10 +43,10 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_family_member);
+        setContentView(R.layout.philips_activity_add_family_member);
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
-        tvContent.setText(getString(R.string.add_user));
+        tvContent.setText(getString(R.string.philips_add_user));
         btnConfirm.setOnClickListener(this);
     }
 
