@@ -12,8 +12,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.espressif.iot.esptouch.util.TouchNetUtil;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -83,7 +84,7 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
                                 // All requested permissions are granted
                             } else {
                                 // At least one permission is denied
-                                Toast.makeText(this, getString(R.string.granted_local_please_open_wifi), Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
                             }
                         });
                 if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {

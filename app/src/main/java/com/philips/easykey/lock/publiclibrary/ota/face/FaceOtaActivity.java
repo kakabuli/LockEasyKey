@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
@@ -113,7 +113,8 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
                 }
             }.start();
         } else {
-            Toast.makeText(this, "请连接到指定WiFi", Toast.LENGTH_LONG).show();
+            // TODO: 2021/4/29 没有抽离
+            ToastUtils.showLong("请连接到指定WiFi");
         }
     }
 
@@ -151,8 +152,9 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    // TODO: 2021/4/29 抽离文字
                     otaStatus.setText("传输完成");
-                    Toast.makeText(FaceOtaActivity.this, "数据传输完成", Toast.LENGTH_LONG).show();
+                    ToastUtils.showLong("数据传输完成");
                     mPresenter.endSendFile();
                 }
             });
@@ -164,6 +166,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    // TODO: 2021/4/29 抽离文字
                     otaStatus.setText("OTA出错  " + errorCode);
                     mPresenter.finishOta((byte) moduleNumber, (byte) otaType, version);
                 }

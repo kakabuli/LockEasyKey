@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -332,7 +332,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
 
     @Override
     public void getSwitchFail() {
-        Toast.makeText(this, getString(R.string.get_swtich_status_fail), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.get_swtich_status_fail));
     }
 
     @Override
@@ -350,7 +350,7 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
     @Override
     public void updateSwitchUpdateFail() {
         isopenlockPushSwitch = !isopenlockPushSwitch;
-        Toast.makeText(this, getString(R.string.update_swtich_status_fail), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.update_swtich_status_fail));
 
     }
 

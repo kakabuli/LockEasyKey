@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchResult;
@@ -128,18 +128,18 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
 
                     } else {
                         // At least one permission is denied
-                        Toast.makeText(this, getString(R.string.granted_local_please_open_wifi), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            Toast.makeText(this, getString(R.string.wifi_no_open_please_open_wifi), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
-            Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.locak_no_open_please_open_local));
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -163,18 +163,18 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
                 .subscribe(granted -> {
                     if (!granted) {
                         // All requested permissions are granted
-                        Toast.makeText(this, getString(R.string.granted_local_please_open_wifi), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            Toast.makeText(this, getString(R.string.wifi_no_open_please_open_wifi), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
         }
 
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
-            Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.locak_no_open_please_open_local));
         }
 
     }
@@ -258,7 +258,7 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
 
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    Toast.makeText(this, R.string.wifi_name_disable_empty, Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
                     check();
                     return;
                 }

@@ -18,7 +18,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.bluetooth.AddBluetoothSecondActivity;

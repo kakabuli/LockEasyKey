@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import android.content.Context;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {

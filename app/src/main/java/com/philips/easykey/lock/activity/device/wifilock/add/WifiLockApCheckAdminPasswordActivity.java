@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -84,7 +84,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
             @Override
             public void run() {
                 finish();
-                Toast.makeText(WifiLockApCheckAdminPasswordActivity.this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.bind_failed);
                 startActivity(new Intent(WifiLockApCheckAdminPasswordActivity.this, WifiLockApAddThirdActivity.class));
                 socketManager.destroy();
                 runOnUiThread(new Runnable() {
@@ -196,7 +196,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
                     adminPassword = name;
                     parseData(adminPassword);
                 } else {
-                    Toast.makeText(WifiLockApCheckAdminPasswordActivity.this, getString(R.string.please_input_612), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.please_input_612));
                     return;
                 }
                 alertDialog.dismiss();

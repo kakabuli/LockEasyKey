@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -256,20 +255,17 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
         intent.putExtra(KeyConstants.DEVICE_NICKNAME, name);
         //设置返回数据
         setResult(RESULT_OK, intent);
-        //    ToastUtils.showShort(getString(R.string.update_nick_name));
-        Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nick_name), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.update_nick_name));
     }
 
     @Override
     public void updateDevNickNameFail() {
-        //  ToastUtils.showShort(getString(R.string.update_nickname_fail));
-        Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nickname_fail), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.update_nickname_fail));
     }
 
     @Override
     public void updateDevNickNameThrowable(Throwable throwable) {
-        // ToastUtils.showShort(getString(R.string.update_nickname_exception));
-        Toast.makeText(GatewayDeviceInformationActivity.this, getString(R.string.update_nickname_exception), Toast.LENGTH_SHORT).show();
+         ToastUtils.showShort(getString(R.string.update_nickname_exception));
     }
 
 }

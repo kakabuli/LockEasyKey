@@ -10,7 +10,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
@@ -53,9 +53,9 @@ public class WifiLockAddNewNotActivateActivity extends BaseAddToApplicationActiv
             public boolean onLongClick(View v) {
                 boolean b = saveImageToGallery(WifiLockAddNewNotActivateActivity.this, ivWeiXinCode);
                 if (b) {
-                    Toast.makeText(WifiLockAddNewNotActivateActivity.this, getString(R.string.save_success), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.save_success));
                 } else {
-                    Toast.makeText(WifiLockAddNewNotActivateActivity.this, getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.save_failed));
                 }
                 return false;
             }
@@ -68,7 +68,7 @@ public class WifiLockAddNewNotActivateActivity extends BaseAddToApplicationActiv
         BitmapDrawable bmpDrawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bmp = bmpDrawable.getBitmap();
         if (bmp == null) {
-            Toast.makeText(context, getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.save_failed));
             return false;
         }
         // 首先保存图片

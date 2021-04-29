@@ -22,7 +22,7 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 import com.philips.easykey.lock.MyApplication;
@@ -1489,12 +1489,12 @@ public class BleService extends Service {
             int blueState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, 0);
             switch (blueState) {
                 case BluetoothAdapter.STATE_OFF:
-                    Toast.makeText(context, getString(R.string.ble_already_close), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.ble_already_close));
                     bleIsEnable = false;
                     bleOpenStateSubject.onNext(false);
                     break;
                 case BluetoothAdapter.STATE_ON:
-                    Toast.makeText(context, getString(R.string.ble_already_open), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.ble_already_open));
                     bleOpenStateSubject.onNext(true);
                     bleIsEnable = true;
                     scanLeDevice(true);

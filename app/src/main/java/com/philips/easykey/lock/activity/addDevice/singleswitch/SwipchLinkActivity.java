@@ -27,7 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -515,7 +515,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
     public void settingDeviceFail() {
 //        LogUtils.d("--kaadas--设置失败");
 //        refresh();
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override

@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.espressif.iot.esptouch.util.ByteUtil;
 import com.espressif.iot.esptouch.util.TouchNetUtil;
@@ -116,7 +116,7 @@ public class WifiLockApWifiSetUpActivity extends BaseActivity<IWifiLockAPWifiSet
                 sSsid = mApSsidTV.getText().toString();
                 String sPassword = mApPasswordET.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    Toast.makeText(this, R.string.wifi_name_disable_empty, Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
                     return;
                 }
                 if (TextUtils.isEmpty(sPassword)) { //WiFi密码为空

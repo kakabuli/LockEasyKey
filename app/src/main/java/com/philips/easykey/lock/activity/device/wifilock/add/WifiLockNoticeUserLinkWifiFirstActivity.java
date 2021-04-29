@@ -13,7 +13,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.espressif.iot.esptouch.util.TouchNetUtil;
 import com.philips.easykey.lock.MyApplication;
@@ -150,6 +150,6 @@ public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicatio
         ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         // 将文本内容放到系统剪贴板里。
         cm.setText("88888888");
-        Toast.makeText(this, R.string.copy_success, Toast.LENGTH_LONG).show();
+        ToastUtils.showLong(R.string.copy_success);
     }
 }

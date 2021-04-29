@@ -13,7 +13,6 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,15 +28,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
 import com.philips.easykey.lock.fragment.PhilipsPersonalCenterFragment;
-import com.philips.easykey.lock.fragment.device.DeviceFragment;
-import com.philips.easykey.lock.fragment.home.HomePageFragment;
 import com.philips.easykey.lock.fragment.message.PhilipsMessageFragment;
 import com.philips.easykey.lock.fragment.home.PhilipsDeviceFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
@@ -265,7 +261,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //                message.what = 2;
 //                mHandler.sendMessage(message);
                 if (isforce) {
-                    Toast.makeText(MainActivity.this, getString(R.string.isforce), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.isforce));
                 } else {
                     bottomMenuDialog.dismiss();
                 }
@@ -486,8 +482,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     @Override
     public void onWarringUp(String warringContent) {
-        Toast.makeText(this, warringContent, Toast.LENGTH_LONG).show();
-//        ToastUtils.showLong(warringContent);
+        ToastUtils.showLong(warringContent);
     }
 
     @Override
@@ -608,8 +603,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
             case 0x70://pir 动作
                 break;
         }
-        if(!content.isEmpty())
-            Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT).show();
+        if(!content.isEmpty()) ToastUtils.showShort(content);
     }
 
     public NoScrollViewPager getViewPager() {
@@ -622,26 +616,26 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public static final int ERROR_2 = 2;
     public static final int ERROR_3 = 3;
     public static final int ERROR_4 = 4;
-    Handler errorHandler = new Handler() {
+    Handler errorHandler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case ERROR_1:
-                    Toast.makeText(MainActivity.this, getString(R.string.sip_register_fail), Toast.LENGTH_LONG).show();
-                    break;
+                    ToastUtils.showLong(getString(R.string.sip_register_fail));
+                    return true;
                 case ERROR_2:
-                    Toast.makeText(MainActivity.this, getString(R.string.socket_send_failed), Toast.LENGTH_LONG).show();
-                    break;
+                    ToastUtils.showLong(getString(R.string.socket_send_failed));
+                    return true;
                 case ERROR_3:
-                    Toast.makeText(MainActivity.this, getString(R.string.io_send_failed), Toast.LENGTH_LONG).show();
-                    break;
+                    ToastUtils.showLong(getString(R.string.io_send_failed));
+                    return true;
                 case ERROR_4:
-                    Toast.makeText(MainActivity.this, getString(R.string.get_port_failed), Toast.LENGTH_LONG).show();
-                    break;
+                    ToastUtils.showLong(getString(R.string.get_port_failed));
+                    return true;
             }
+            return false;
         }
-    };
+    });
     int getPortTimes = 0;
 
     private long mExitTime;
@@ -650,7 +644,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                Toast.makeText(this, R.string.exit, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.exit);
                 mExitTime = System.currentTimeMillis();
             } else {
 //                MainActivity.this.finish();
