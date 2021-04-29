@@ -244,7 +244,6 @@ dependencies {
     // if u use AndroidX, use the following
     implementation 'com.blankj:utilcodex:1.30.6'
     //相册图片选择器
-
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.1'
     implementation 'androidx.biometric:biometric:1.1.0-rc01'
 
