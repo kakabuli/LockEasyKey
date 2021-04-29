@@ -25,6 +25,8 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.PhilipsAddDeviceActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockDetailActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.adapter.PhilipsDeviceTypeAdapter;
 import com.philips.easykey.lock.adapter.PhilipsRvHomeDeviceAdapter;
 import com.philips.easykey.lock.adapter.PhilipsVpHomeDevicesAdapter;
@@ -142,6 +144,16 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mVpHomeDevicesAdapter = new PhilipsVpHomeDevicesAdapter(getContext(), R.layout.philips_item_home_device_vp, mWillShowDeviceBeans);
         mVpHomeDevicesAdapter.setOnClickMoreListener((v, data) -> {
             Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
+            startActivity(intent);
+        });
+        mVpHomeDevicesAdapter.setOnClickMessageListener((v, data) -> {
+            Intent intent = new Intent(getActivity(), PhilipsWifiLockRecordActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
+            startActivity(intent);
+        });
+        mVpHomeDevicesAdapter.setOnClickPasswordListener((v, data) -> {
+            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockPasswordTypeActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
             startActivity(intent);
         });
