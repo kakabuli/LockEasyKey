@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/transparent"
-
+        android:visibility="gone"
         >
 
         <SurfaceView
@@ -94,6 +94,7 @@
             android:background="@color/color_7f000"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="126pt"
+            android:visibility="gone"
             >
 
             <ImageView
@@ -268,19 +269,6 @@
 
         </LinearLayout>
 
-
-  <!--      <LinearLayout
-            android:id="@+id/lly_temporary_password"
-            android:layout_width="@dimen/dp_255"
-            android:layout_height="@dimen/dp_50"
-
-            android:layout_marginBottom="@dimen/dp_49"
-            android:background="@drawable/temporary_password_background"
-            android:orientation="vertical">-->
-
-        <!--</LinearLayout>-->
-
-
         <TextView
             android:id="@+id/tv_temporary_password"
             android:layout_width="wrap_content"
@@ -351,60 +339,103 @@
 
     <RelativeLayout
         android:id="@+id/rl_mark_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@mipmap/call_mask" />
+            android:background="@mipmap/philips_calling_img_bg" />
+
+        <RelativeLayout
+            android:id="@+id/rl_title_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="44pt">
+            <ImageView
+                android:id="@+id/mark_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
 
 
+        <ImageView
+            android:id="@+id/iv_real_time_refuse_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80pt"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/philips_calling_icon_refuse" />
 
 
         <RelativeLayout
-            android:id="@+id/rl_real_time"
+            android:id="@+id/rl_calling_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="155pt"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/v_view"
-            android:visibility="gone">
-
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80pt"
+            >
 
             <ImageView
-                android:id="@+id/iv_real_time_refuse_icon"
+                android:id="@+id/iv_answer_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/refuse_icon" />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60pt"
+                app:srcCompat="@drawable/philips_calling_icon_video" />
 
-
-            <TextView
-                android:id="@+id/tv_real_time_refuse"
+            <ImageView
+                android:id="@+id/iv_refuse_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_real_time_refuse_icon"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="60pt"
+                app:srcCompat="@drawable/philips_calling_icon_refuse" />
+
+            <ImageView
+                android:id="@+id/iv_refuse_icon_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_32"
-                android:text="@string/cancel"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_11" />
+                app:srcCompat="@drawable/philips_calling_icon_refuse" />
+
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_big_head_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_title_bar"
+            android:layout_marginTop="37pt"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/philips_calling_img_use" />
+
 
         <TextView
             android:id="@+id/tv_doorbell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wifi_video_lock_rang_the_doorbell"
-            android:textSize="@dimen/sp_15"
-            android:layout_marginTop="150pt"
+            android:textSize="15pt"
+            android:layout_marginTop="18pt"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/view_head"
-            android:visibility="gone"
-            android:textColor="#ffffff"/>
+            android:layout_below="@id/iv_big_head_pic"
+            android:textColor="@color/ce1e1e1"/>
+
+        <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:layout_width="35pt"
+            android:layout_height="35pt"
+            android:layout_centerInParent="true"
+            />
 
         <TextView
             android:id="@+id/tv_tips"
@@ -414,161 +445,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17pt"
             android:text="@string/wifi_video_lock_p2p_connect"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/sp_15" />
-
-        <RelativeLayout
-            android:id="@+id/rl_calling_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="155pt"
-            android:layout_below="@id/v_view"
-            >
-
-            <ImageView
-                android:id="@+id/iv_answer_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_78"
-                android:src="@mipmap/answer_icon" />
-
-            <ImageView
-                android:id="@+id/iv_refuse_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/dp_78"
-                android:src="@mipmap/refuse_icon" />
-
-            <TextView
-                android:id="@+id/tv_refuse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/iv_refuse_icon"
-                android:layout_marginLeft="@dimen/dp_94"
-                android:layout_marginTop="@dimen/dp_32"
-                android:text="@string/cancel"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_11" />
-
-            <TextView
-                android:id="@+id/tv_answer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/iv_answer_icon"
-                android:layout_marginRight="@dimen/dp_94"
-                android:layout_marginTop="@dimen/dp_32"
-                android:text="@string/call_coming_answer"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_11" />
-
-            <ImageView
-                android:id="@+id/iv_refuse_icon_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/dp_78"
-                android:src="@mipmap/refuse_icon" />
+            android:textColor="@color/ce1e1e1"
+            android:textSize="15pt" />
 
 
-            <TextView
-                android:id="@+id/tv_refuse_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/iv_refuse_icon_1"
-                android:layout_marginLeft="@dimen/dp_94"
-                android:layout_marginTop="@dimen/dp_32"
-                android:text="@string/cancel"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_11" />
-        </RelativeLayout>
-
-
-        <View
-            android:id="@+id/v_view"
-            android:layout_width="1dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/view_head"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_170" />
-
-        <com.philips.easykey.lock.widget.AVLoadingIndicatorView
-            android:id="@+id/avi"
-            style="@style/AVLoadingIndicatorView.Large"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_below="@id/view_head"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="150pt" />
-
-            <com.philips.easykey.lock.widget.CircleImageView
-                android:id="@+id/iv_head_pic"
-                android:layout_width="@dimen/dp_63"
-                android:layout_height="@dimen/dp_63"
-                android:layout_marginLeft="14pt"
-                android:layout_below="@id/rl_title_bar"
-                android:layout_marginTop="@dimen/dp_24"
-                android:src="@mipmap/default_head" />
-            <View
-                android:id="@+id/view_head"
-                android:layout_width="@dimen/dp_63"
-                android:layout_height="@dimen/dp_63"
-                android:layout_below="@id/rl_title_bar"
-                android:layout_marginTop="@dimen/dp_24"
-                />
-
-            <RelativeLayout
-                android:id="@+id/rl_title_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_40">
-                <ImageView
-                    android:id="@+id/mark_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dp_8"
-                         android:paddingBottom="@dimen/dp_5"
-                     android:paddingRight="@dimen/dp_16"
-                     android:paddingTop="@dimen/dp_5"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/video_lock_back" />
-
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/tv_head_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/iv_head_pic"
-                android:layout_marginLeft="@dimen/sp_18"
-                android:layout_marginTop="@dimen/dp_25"
-                android:layout_toRightOf="@id/iv_head_pic"
-                android:text=""
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_15" />
-
-        <com.philips.easykey.lock.widget.CircleImageView
-            android:id="@+id/iv_big_head_pic"
-            android:layout_width="@dimen/dp_87"
-            android:layout_height="@dimen/dp_87"
-            android:layout_marginLeft="14pt"
-            android:layout_below="@id/rl_title_bar"
-            android:layout_marginTop="@dimen/dp_24"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/default_head" />
-
-        <TextView
-            android:id="@+id/tv_big_head_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/iv_big_head_pic"
-            android:layout_marginTop="@dimen/dp_10"
-            android:text=""
-            android:textColor="#ffffff"
-            android:textSize="@dimen/sp_15" />
     </RelativeLayout>
 </RelativeLayout>
