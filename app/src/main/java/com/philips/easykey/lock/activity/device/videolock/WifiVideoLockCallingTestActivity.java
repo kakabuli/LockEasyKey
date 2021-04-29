@@ -80,10 +80,6 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
     ImageView ivAnswerIcon;
     @BindView(R.id.iv_refuse_icon)
     ImageView ivRefuseIcon;
-    @BindView(R.id.tv_answer)
-    TextView tvAnswer;
-    @BindView(R.id.tv_refuse)
-    TextView tvRefuse;
     @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
     @BindView(R.id.tv_tips)
@@ -123,20 +119,10 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
     ImageView ivRecordSpot;
     @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.iv_real_time_refuse_icon)
-    ImageView ivRealTimeRefuseIcon;
-    @BindView(R.id.rl_real_time)
-    RelativeLayout rlRealTime;
     @BindView(R.id.rl_calling_time)
     RelativeLayout rlCallingTime;
-    @BindView(R.id.iv_head_pic)
-    ImageView ivHeadPic;
     @BindView(R.id.iv_big_head_pic)
     ImageView ivBigHeadPic;
-    @BindView(R.id.tv_head_pic)
-    TextView tvHeadPic;
-    @BindView(R.id.tv_big_head_pic)
-    TextView tvBigHeadPic;
     @BindView(R.id.tv_video_timestamp)
     TextView tvVideoTimeStamp;
 
@@ -181,19 +167,11 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         isCalling = getIntent().getIntExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
         if(isCalling == 0){
             rlCallingTime.setVisibility(View.GONE);
-            rlRealTime.setVisibility(View.GONE);
-            tvBigHeadPic.setVisibility(View.VISIBLE);
             ivBigHeadPic.setVisibility(View.VISIBLE);
-            ivHeadPic.setVisibility(View.GONE);
-            tvHeadPic.setVisibility(View.GONE);
             isDoorbelling = false;
         }else if(isCalling == 1){
             rlCallingTime.setVisibility(View.VISIBLE);
-            rlRealTime.setVisibility(View.GONE);
-            tvBigHeadPic.setVisibility(View.GONE);
             ivBigHeadPic.setVisibility(View.GONE);
-            ivHeadPic.setVisibility(View.VISIBLE);
-            tvHeadPic.setVisibility(View.VISIBLE);
             isDoorbelling = true;
         }
 
@@ -205,10 +183,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         if (wifiLockInfo != null){
             mPresenter.settingDevice(wifiLockInfo);
             ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
-            ivHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
             String lockNickname = wifiLockInfo.getLockNickname();
-            tvHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
-            tvBigHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
         }
 
         rlVideoLayout.setVisibility(View.VISIBLE);
@@ -258,7 +233,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
     }
 
     @OnClick({R.id.back,R.id.mark_back,R.id.iv_answer_icon, R.id.iv_refuse_icon,R.id.iv_setting,
-            R.id.iv_mute,R.id.iv_screenshot,R.id.iv_calling,R.id.iv_recoring,R.id.iv_album,R.id.iv_temporary_pwd,R.id.iv_real_time_refuse_icon})
+            R.id.iv_mute,R.id.iv_screenshot,R.id.iv_calling,R.id.iv_recoring,R.id.iv_album,R.id.iv_temporary_pwd})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.mark_back:
@@ -266,7 +241,6 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
 //                mPresenter.release();
                 finish();
                 break;
-            case R.id.iv_real_time_refuse_icon:
             case R.id.iv_refuse_icon:
                 mPresenter.stopConnect();
                 avi.hide();

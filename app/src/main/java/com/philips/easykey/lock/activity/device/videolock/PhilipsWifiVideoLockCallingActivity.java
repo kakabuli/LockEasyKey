@@ -82,12 +82,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivRefuseIcon;
     @BindView(R.id.iv_refuse_icon_1)
     ImageView ivRefuseIcon1;
-    @BindView(R.id.tv_answer)
-    TextView tvAnswer;
-    @BindView(R.id.tv_refuse_1)
-    TextView tvRefuse1;
-    @BindView(R.id.tv_refuse)
-    TextView tvRefuse;
     @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
     @BindView(R.id.tv_tips)
@@ -129,18 +123,10 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     TextView tvTime;
     @BindView(R.id.iv_real_time_refuse_icon)
     ImageView ivRealTimeRefuseIcon;
-    @BindView(R.id.rl_real_time)
-    RelativeLayout rlRealTime;
     @BindView(R.id.rl_calling_time)
     RelativeLayout rlCallingTime;
-    @BindView(R.id.iv_head_pic)
-    ImageView ivHeadPic;
     @BindView(R.id.iv_big_head_pic)
     ImageView ivBigHeadPic;
-    @BindView(R.id.tv_head_pic)
-    TextView tvHeadPic;
-    @BindView(R.id.tv_big_head_pic)
-    TextView tvBigHeadPic;
     @BindView(R.id.tv_video_timestamp)
     TextView tvVideoTimeStamp;
     @BindView(R.id.tv_calling_tip)
@@ -209,22 +195,11 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         productList = MyApplication.getInstance().getProductInfos();
         if(isCalling == 0){
             rlCallingTime.setVisibility(View.GONE);
-            rlRealTime.setVisibility(View.GONE);
-            tvBigHeadPic.setVisibility(View.VISIBLE);
-            ivBigHeadPic.setVisibility(View.VISIBLE);
-            ivHeadPic.setVisibility(View.GONE);
-            tvHeadPic.setVisibility(View.GONE);
             tvDoorbell.setVisibility(View.GONE);
             isDoorbelling = false;
         }else if(isCalling == 1){
-            rlCallingTime.setVisibility(View.VISIBLE);
-            rlRealTime.setVisibility(View.GONE);
-            tvBigHeadPic.setVisibility(View.GONE);
-            ivBigHeadPic.setVisibility(View.GONE);
-            ivHeadPic.setVisibility(View.VISIBLE);
-            tvHeadPic.setVisibility(View.VISIBLE);
+            ivRealTimeRefuseIcon.setVisibility(View.GONE);
             tvDoorbell.setVisibility(View.VISIBLE);
-            tvRefuse1.setVisibility(View.GONE);
             ivRefuseIcon1.setVisibility(View.GONE);
             if(avi != null){
                 avi.hide();
@@ -240,11 +215,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         }
         if (wifiLockInfo != null){
             mPresenter.settingDevice(wifiLockInfo);
-            changeIcon();
+//            changeIcon();
             String lockNickname = wifiLockInfo.getLockNickname();
             mTvHeadTitle.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
-            tvHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
-            tvBigHeadPic.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
         }
 
         rlVideoLayout.setVisibility(View.GONE);
@@ -265,12 +238,11 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         rlTitleBar.setLayoutParams(rllp);
     }
 
+    @Deprecated
     private void changeIcon() {
         ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
-        ivHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
         if (!TextUtils.isEmpty(wifiLockInfo.getProductModel())){
             ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
-            ivHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
             String model = wifiLockInfo.getProductModel();
             String WifiSN = wifiLockInfo.getWifiSN();
 
@@ -286,12 +258,8 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
                     for (ProductInfo productInfo : productList) {
                         try {
-//                            if (productInfo.getDevelopmentModel().contentEquals(model)) {
-//                            if (productInfo.getSnHead().equals(WifiSN.substring(0,3))) {
                             if (productInfo.getSnHead().equals(WifiSN.substring(0,3))) {
 
-                                //匹配型号获取下载地址
-                                Glide.with(this).load(productInfo.getAdminUrl()).apply(options).into(ivHeadPic);
                                 Glide.with(this).load(productInfo.getAdminUrl()).apply(options).into(ivBigHeadPic);
                             }
                         } catch (Exception e) {
@@ -374,9 +342,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                     }).start();
                 }else{
                     ivAnswerIcon.setVisibility(View.GONE);
-                    tvAnswer.setVisibility(View.GONE);
                     ivRefuseIcon.setVisibility(View.GONE);
-                    tvRefuse.setVisibility(View.GONE);
                     tvDoorbell.setVisibility(View.GONE);
                     avi.setVisibility(View.VISIBLE);
                     avi.show();
