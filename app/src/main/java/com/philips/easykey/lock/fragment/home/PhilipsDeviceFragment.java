@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,16 +20,23 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.activity.addDevice.PhilipsAddDeviceActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockDetailActivity;
 import com.philips.easykey.lock.adapter.PhilipsDeviceTypeAdapter;
 import com.philips.easykey.lock.adapter.PhilipsRvHomeDeviceAdapter;
 import com.philips.easykey.lock.adapter.PhilipsVpHomeDevicesAdapter;
+import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceTypeBean;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author :
@@ -51,6 +59,7 @@ public class PhilipsDeviceFragment extends Fragment {
 
     private int mCurrentTab = 0;
 
+    private final List<HomeShowBean> mDevices = new ArrayList<>();
     private final ArrayList<PhilipsDeviceBean> mAllDeviceBeans = new ArrayList<>();
     private final ArrayList<PhilipsDeviceBean> mWillShowDeviceBeans = new ArrayList<>();
 
@@ -71,8 +80,12 @@ public class PhilipsDeviceFragment extends Fragment {
         initDataViewFromListType(root);
 
         ImageView ivAddDevice = root.findViewById(R.id.ivAddDevice);
+        Button btnAddDevice = root.findViewById(R.id.btnAddDevice);
+        btnAddDevice.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PhilipsAddDeviceActivity.class);
+            startActivity(intent);
+        });
         ivAddDevice.setOnClickListener(v -> {
-//            Intent intent = new Intent(getActivity(), DeviceAdd2Activity.class);
             Intent intent = new Intent(getActivity(), PhilipsAddDeviceActivity.class);
             startActivity(intent);
         });
@@ -83,6 +96,11 @@ public class PhilipsDeviceFragment extends Fragment {
     private void initDataViewFromListType(View root) {
         mRvDevices = root.findViewById(R.id.rvDevices);
         mRvHomeDeviceAdapter = new PhilipsRvHomeDeviceAdapter(R.layout.philips_item_home_device_rv);
+        mRvHomeDeviceAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, mWillShowDeviceBeans.get(position).getWifiSn());
+            startActivity(intent);
+        });
         mRvDevices.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvDevices.setAdapter(mRvHomeDeviceAdapter);
     }
@@ -119,6 +137,11 @@ public class PhilipsDeviceFragment extends Fragment {
             }
         });
         mVpHomeDevicesAdapter = new PhilipsVpHomeDevicesAdapter(getContext(), R.layout.philips_item_home_device_vp, mWillShowDeviceBeans);
+        mVpHomeDevicesAdapter.setOnClickMoreListener((v, data) -> {
+            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
+            startActivity(intent);
+        });
         mVPDevices.setOffscreenPageLimit(4);
         mVPDevices.setPageTransformer(false, new PhilipsVpTransform());
         mVPDevices.setAdapter(mVpHomeDevicesAdapter);
@@ -147,9 +170,9 @@ public class PhilipsDeviceFragment extends Fragment {
         if(position == 0) {
             changedWillShowDevice(0);
         } else if(position == 1) {
-            changedWillShowDevice(1);
+            changedWillShowDevice(6);
         } else if(position == 2) {
-            changedWillShowDevice(2);
+            changedWillShowDevice(7);
         }
     }
 
@@ -163,6 +186,7 @@ public class PhilipsDeviceFragment extends Fragment {
     private void initTabData() {
         ArrayList<PhilipsDeviceTypeBean> list = new ArrayList<>();
         PhilipsDeviceTypeBean bean1 = new PhilipsDeviceTypeBean();
+        // TODO: 2021/4/28 抽离文字
         bean1.setTypeName("所有设备");
         bean1.setSelected(true);
         list.add(bean1);
@@ -179,42 +203,32 @@ public class PhilipsDeviceFragment extends Fragment {
 
     private void initDevices() {
         mAllDeviceBeans.clear();
-        PhilipsDeviceBean bean1 = new PhilipsDeviceBean();
-        bean1.setDeviceName("视频锁1号");
-        bean1.setLastRecordDetail("小明指纹00开锁");
-        bean1.setLastRecordTime(1619075698000L);
-        bean1.setDeviceType(1);
-        mAllDeviceBeans.add(bean1);
-        PhilipsDeviceBean bean2 = new PhilipsDeviceBean();
-        bean2.setDeviceName("视频锁2号");
-        bean2.setLastRecordDetail("小明指纹00开锁");
-        bean2.setLastRecordTime(1619075798000L);
-        bean2.setDeviceType(1);
-        mAllDeviceBeans.add(bean2);
-        PhilipsDeviceBean bean3 = new PhilipsDeviceBean();
-        bean3.setDeviceName("晾衣机1号");
-        bean3.setLastRecordDetail("小明指纹00开锁");
-        bean3.setLastRecordTime(1619075898000L);
-        bean3.setDeviceType(2);
-        mAllDeviceBeans.add(bean3);
-        PhilipsDeviceBean bean4 = new PhilipsDeviceBean();
-        bean4.setDeviceName("晾衣机2号");
-        bean4.setLastRecordDetail("小明指纹00开锁");
-        bean4.setLastRecordTime(1619075998000L);
-        bean4.setDeviceType(2);
-        mAllDeviceBeans.add(bean4);
-        PhilipsDeviceBean bean5 = new PhilipsDeviceBean();
-        bean5.setDeviceName("晾衣机3号");
-        bean5.setLastRecordDetail("小明指纹00开锁");
-        bean5.setLastRecordTime(1619075998000L);
-        bean5.setDeviceType(2);
-        mAllDeviceBeans.add(bean5);
-        PhilipsDeviceBean bean6 = new PhilipsDeviceBean();
-        bean6.setDeviceName("晾衣机4号");
-        bean6.setLastRecordDetail("小明指纹00开锁");
-        bean6.setLastRecordTime(1619075998000L);
-        bean6.setDeviceType(2);
-        mAllDeviceBeans.add(bean6);
+        mDevices.clear();
+        mDevices.addAll(MyApplication.getInstance().getHomeShowDevices());
+        if(mDevices.isEmpty()) {
+            mllNoDevice.setVisibility(View.VISIBLE);
+            mTvCurrentPage.setVisibility(View.GONE);
+            mTvCount.setVisibility(View.GONE);
+        } else {
+            mllNoDevice.setVisibility(View.GONE);
+            if(isCardShow) {
+                mTvCurrentPage.setVisibility(View.VISIBLE);
+                mTvCount.setVisibility(View.VISIBLE);
+            }
+        }
+        for (HomeShowBean bean : mDevices) {
+            PhilipsDeviceBean deviceBean = new PhilipsDeviceBean();
+            deviceBean.setDeviceName(bean.getDeviceNickName());
+            deviceBean.setLastRecordDetail("小明指纹00开锁");
+            deviceBean.setLastRecordTime(1619075698000L);
+            deviceBean.setDeviceType(bean.getDeviceType());
+            if(bean.getObject() instanceof WifiLockInfo) {
+                deviceBean.setWifiSn(((WifiLockInfo) bean.getObject()).getWifiSN());
+            } else if(bean.getObject() instanceof ClothesHangerMachineAllBean) {
+                deviceBean.setWifiSn(((ClothesHangerMachineAllBean) bean.getObject()).getWifiSN());
+            }
+            mAllDeviceBeans.add(deviceBean);
+        }
         mWillShowDeviceBeans.clear();
         mWillShowDeviceBeans.addAll(mAllDeviceBeans);
         mVpHomeDevicesAdapter.notifyDataSetChanged();

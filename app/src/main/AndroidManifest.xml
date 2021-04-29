@@ -862,15 +862,15 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.password.WifiLockPasswordShareActivity"
+            android:name=".activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.password.WiFiLockPasswordManagerActivity"
+            android:name=".activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.password.WifiLockPasswordDetailActivity"
+            android:name=".activity.device.wifilock.password.PhilipsWifiLockPasswordDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

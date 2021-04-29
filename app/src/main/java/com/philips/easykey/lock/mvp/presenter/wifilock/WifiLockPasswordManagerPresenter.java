@@ -12,6 +12,7 @@ import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordListResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -30,28 +31,6 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                     public void onSuccess(WifiLockGetPasswordListResult wifiLockGetPasswordListResult) {
 
                         WiFiLockPassword wiFiLockPassword = wifiLockGetPasswordListResult.getData();
-
-//                        List<WiFiLockPassword.PwdListBean> pwdList = new ArrayList<>();
-//                        long time =  System.currentTimeMillis() / 1000;
-//                        pwdList.add(new WiFiLockPassword.PwdListBean(time, 0, 0, 0, 1, null));
-//                        pwdList.add(new WiFiLockPassword.PwdListBean(time, 0, 2, 0, 0, null));
-//                        List<WiFiLockPassword.FingerprintListBean> fingerprintList = new ArrayList<>();
-//                        fingerprintList.add(new WiFiLockPassword.FingerprintListBean(time, 0));
-//                        fingerprintList.add(new WiFiLockPassword.FingerprintListBean(time, 1));
-//                        List<WiFiLockPassword.CardListBean> cardList = new ArrayList<>();
-//                        cardList.add(new WiFiLockPassword.CardListBean(time, 0));
-//                        cardList.add(new WiFiLockPassword.CardListBean(time, 1));
-//                        cardList.add(new WiFiLockPassword.CardListBean(time, 2));
-//                        List<WiFiLockPassword.PwdNicknameBean> pwdNickname = new ArrayList<>();
-//                        pwdNickname.add(new WiFiLockPassword.PwdNicknameBean(0, "密码1"));
-//                        pwdNickname.add(new WiFiLockPassword.PwdNicknameBean(1, "密码2"));
-//                        List<WiFiLockPassword.FingerprintNicknameBean> fingerprintNickname = new ArrayList<>();
-//                        fingerprintNickname.add(new WiFiLockPassword.FingerprintNicknameBean(0, "指纹1"));
-//                        fingerprintNickname.add(new WiFiLockPassword.FingerprintNicknameBean(1, "指纹2"));
-//                        List<WiFiLockPassword.CardNicknameBean> cardNickname = new ArrayList<>();
-//                        cardNickname.add(new WiFiLockPassword.CardNicknameBean(0, "卡片1"));
-//                        cardNickname.add(new WiFiLockPassword.CardNicknameBean(1, "卡片2"));
-//                        wiFiLockPassword = new WiFiLockPassword( pwdList,  fingerprintList,  cardList,   pwdNickname,  fingerprintNickname,  cardNickname);
                         String object = new Gson().toJson(wiFiLockPassword);
                         LogUtils.d("服务器数据是   " + object);
 
@@ -124,7 +103,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                         for (WiFiLockPassword.FingerprintListBean password : fingerprintList) {
                             int num = password.getNum();
                             String sNick = num > 9 ? "" + num : "0" + num;
-                            WiFiLockCardAndFingerShowBean fingerShowBean = new WiFiLockCardAndFingerShowBean(num, password.getCreateTime(), sNick);
+                            WiFiLockCardAndFingerShowBean fingerShowBean = new WiFiLockCardAndFingerShowBean(num, password.getCreateTime(), sNick, BleLockUtils.TYPE_FINGER);
                             if (fingerprintNickname != null) {
                                 for (WiFiLockPassword.FingerprintNicknameBean nickname : fingerprintNickname) {
                                     if (nickname.getNum() == num) {
@@ -144,7 +123,7 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
                         for (WiFiLockPassword.CardListBean password : cardList) {
                             int num = password.getNum();
                             String sNick = num > 9 ? "" + num : "0" + num;
-                            WiFiLockCardAndFingerShowBean fingerShowBean = new WiFiLockCardAndFingerShowBean(num, password.getCreateTime(), sNick);
+                            WiFiLockCardAndFingerShowBean fingerShowBean = new WiFiLockCardAndFingerShowBean(num, password.getCreateTime(), sNick,BleLockUtils.TYPE_CARD);
                             if (cardNickname != null) {
                                 for (WiFiLockPassword.CardNicknameBean nickname : cardNickname) {
                                     if (nickname.getNum() == num) {
@@ -162,45 +141,6 @@ public class WifiLockPasswordManagerPresenter<T> extends BasePresenter<IWifiLock
         return passwords;
     }
 
-//    public void getFacePasswordList(String wifiSn) {
-//        XiaokaiNewServiceImp.wifiLockGetPwdList(wifiSn, MyApplication.getInstance().getUid())
-//                .subscribe(new BaseObserver<WifiLockGetPasswordListResult>() {
-//                    @Override
-//                    public void onSuccess(WifiLockGetPasswordListResult wifiLockGetPasswordListResult) {
-//                        WiFiLockPassword wiFiLockPassword = wifiLockGetPasswordListResult.getData();
-//
-//                        List<WiFiLockPassword.FaceListBean> pwdList = new ArrayList<>();
-//
-//                        String object = new Gson().toJson(wiFiLockPassword);
-//                        LogUtils.d("服务器数据是   " + object);
-//
-//                        SPUtils.put(KeyConstants.WIFI_LOCK_PASSWORD_LIST + wifiSn, object);
-//                        if (isSafe()) {
-//                            mViewRef.get().onGetPasswordSuccess(wiFiLockPassword);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onAckErrorCode(BaseResult baseResult) {
-//                        if (isSafe()) {
-//                            mViewRef.get().onGetPasswordFailedServer(baseResult);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailed(Throwable throwable) {
-//                        if (isSafe()) {
-//                            mViewRef.get().onGetPasswordFailed(throwable);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onSubscribe1(Disposable d) {
-//                        compositeDisposable.add(d);
-//                    }
-//                });
-//    }
-//getShowFacePasswords   getFacePasswords
     public List<FacePassword> getShowFacePasswords(WiFiLockPassword wiFiLockPassword) {
         List<FacePassword> passwords = new ArrayList<>();
         if (wiFiLockPassword != null) {

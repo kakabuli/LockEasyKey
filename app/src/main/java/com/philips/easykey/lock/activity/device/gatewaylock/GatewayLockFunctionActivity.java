@@ -170,7 +170,7 @@ public class GatewayLockFunctionActivity extends BaseActivity<GatewayLockDetailV
         tvNameThree.setText(R.string.stress_warn);
         //更多
         ivFour.setImageResource(R.mipmap.bluetooth_more);
-        tvNameFour.setText(R.string.more);
+        tvNameFour.setText(R.string.philips_more);
 
     }
 

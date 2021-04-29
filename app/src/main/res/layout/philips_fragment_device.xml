@@ -117,31 +117,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivGrid" />
 
-    <LinearLayout
-        android:id="@+id/llNoDevice"
-        android:layout_width="match_parent"
-        android:layout_height="0pt"
-        android:paddingBottom="60pt"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivTop">
-
-        <Button
-            android:id="@+id/btn_add_device"
-            android:layout_width="343pt"
-            android:layout_height="44pt"
-            android:layout_gravity="bottom"
-            android:background="@drawable/philips_shape_btn_bg"
-            android:gravity="center"
-            android:layout_marginStart="16pt"
-            android:text="@string/click_add_device"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_15" />
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/tvCount"
         android:layout_width="wrap_content"
@@ -165,5 +140,30 @@
         android:textSize="14pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvCount"
         app:layout_constraintEnd_toStartOf="@+id/tvCount" />
+
+    <LinearLayout
+        android:id="@+id/llNoDevice"
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:paddingBottom="60pt"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop">
+
+        <Button
+            android:id="@+id/btnAddDevice"
+            android:layout_width="343pt"
+            android:layout_height="44pt"
+            android:layout_gravity="bottom"
+            android:background="@drawable/philips_shape_btn_bg"
+            android:gravity="center"
+            android:layout_marginStart="16pt"
+            android:text="@string/click_add_device"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

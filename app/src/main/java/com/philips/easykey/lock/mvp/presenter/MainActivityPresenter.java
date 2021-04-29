@@ -62,7 +62,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -672,7 +671,7 @@ public class MainActivityPresenter<T> extends BlePresenter<IMainActivityView> {
                 }
             }
         }
-        MyApplication.getInstance().setHomeshowDevice(homeShowBeans);
+        MyApplication.getInstance().setHomeShowDevice(homeShowBeans);
 
     }
 

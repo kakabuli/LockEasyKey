@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 
 import android.content.Context;
 import android.text.Html;

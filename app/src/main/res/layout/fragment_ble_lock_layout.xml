@@ -151,7 +151,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp_12"
                         android:padding="@dimen/dp_18"
-                        android:text="@string/more"
+                        android:text="@string/philips_more"
                         android:textColor="#1F96F7"
                         android:textSize="@dimen/sp_12" />
 

@@ -26,8 +26,8 @@ import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivi
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
-import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswordManagerActivity;
-import com.philips.easykey.lock.activity.device.wifilock.password.WifiLockPasswordShareActivity;
+import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity;
+import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockMoreActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailAdapater;
@@ -430,19 +430,19 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                     Intent intent;
                     switch (bluetoothLockFunctionBean.getType()) {
                         case BleLockUtils.TYPE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 1);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_FINGER:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 2);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_CARD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 3);
                             startActivity(intent);
@@ -490,12 +490,12 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             }
                             break;
                         case BleLockUtils.TYPE_OFFLINE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockPasswordShareActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockPasswordShareActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_FACE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 4);
                             startActivity(intent);
@@ -537,19 +537,19 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                     Intent intent;
                     switch (bluetoothLockFunctionBean.getType()) {
                         case BleLockUtils.TYPE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 1);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_FINGER:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 2);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_CARD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 3);
                             startActivity(intent);
@@ -596,12 +596,12 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
 
                             break;
                         case BleLockUtils.TYPE_OFFLINE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockPasswordShareActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockPasswordShareActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_FACE_PASSWORD:
-                            intent = new Intent(WiFiLockDetailActivity.this, WiFiLockPasswordManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWiFiLockPasswordManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             intent.putExtra(KeyConstants.KEY_TYPE, 4);
                             startActivity(intent);
