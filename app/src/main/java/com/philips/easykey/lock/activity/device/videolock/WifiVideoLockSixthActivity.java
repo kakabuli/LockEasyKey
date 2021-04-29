@@ -9,7 +9,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -190,7 +189,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
             @Override
             public void run() {
                 finish();
-                Toast.makeText(WifiVideoLockSixthActivity.this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.bind_failed);
                 startActivity(new Intent(WifiVideoLockSixthActivity.this, WifiLockAddNewScanFailedActivity.class));
             }
         });

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -157,7 +156,7 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
                     multiOTAflag = false;
                     mPresenter.checkOtaInfo(wifiSN, faceModelFirmwareVersion, 3);
                 } else {
-                    Toast.makeText(this, getString(R.string.info_error), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.info_error));
                 }
                 break;
             case R.id.rl_lock_model_firmware_version:
@@ -171,7 +170,7 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
                         mPresenter.checkOtaInfo(wifiSN, lockFirmwareVersion, 2);
                     }
                 } else {
-                    Toast.makeText(this, getString(R.string.info_error), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.info_error));
                 }
                 break;
             case R.id.rl_wifi_model_firmware_version:
@@ -180,7 +179,7 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
                     multiOTAflag = false;
                     mPresenter.checkOtaInfo(wifiSN, sWifiVersion, 1);
                 } else {
-                    Toast.makeText(this, getString(R.string.info_error), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.info_error));
                 }
                 break;
             case R.id.rl_lock_firware_number:
@@ -383,10 +382,10 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
     public void uploadSuccess(int type) {
         if (type == 1) {
             hiddenLoading();
-            Toast.makeText(this, getString(R.string.notice_wifi_update), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.notice_wifi_update));
         } else if (type == 2) {
             hiddenLoading();
-            Toast.makeText(this, getString(R.string.notice_lock_update), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.notice_lock_update));
         }
         else if (type == 3) {
             hiddenLoading();
@@ -400,7 +399,7 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
     @Override
     public void uploadFailed() {
         hiddenLoading();
-        Toast.makeText(this, getString(R.string.notice_lock_update_uploadFailed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.notice_lock_update_uploadFailed));
     }
 
 }

@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.PhilipsWifiVideoLockOTAPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockOTAView;
@@ -24,7 +21,6 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
@@ -426,7 +422,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     @Override
     public void uploadFailed() {
         hiddenLoading();
-        Toast.makeText(this, getString(R.string.notice_lock_update_uploadFailed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.notice_lock_update_uploadFailed));
     }
 
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -97,7 +97,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
                     return;
                 }
                 finish();
-                Toast.makeText(WifiLockApConnectDeviceActivity.this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.bind_failed);
                 Intent intent = new Intent(WifiLockApConnectDeviceActivity.this, WifiLockAPAddFailedActivity.class);
                 startActivity(intent);
 //                if (errorCode == -1) {
@@ -186,7 +186,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onBindFailed(BaseResult baseResult) {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -194,7 +194,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onBindThrowable(Throwable throwable) {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -209,7 +209,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onUpdateFailed(BaseResult baseResult) {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -217,7 +217,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onUpdateThrowable(Throwable throwable) {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -230,7 +230,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onSendFailed() {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -238,7 +238,7 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     @Override
     public void onReceiverFailed() {
-        Toast.makeText(this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.bind_failed);
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);

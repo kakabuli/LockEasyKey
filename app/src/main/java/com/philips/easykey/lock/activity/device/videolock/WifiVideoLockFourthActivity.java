@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLcokSupportWifiActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
@@ -104,7 +104,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    Toast.makeText(this, R.string.wifi_name_disable_empty, Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
                     return;
                 }
                 /*if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
@@ -121,7 +121,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
 
                 }*/
                 if (sPassword.length()<8){
-                    Toast.makeText(this, getString(R.string.activity_wifi_video_fourth_password), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
                     return;
                 }
                 Intent intent = new Intent(this, WifiVideoLockFifthActivity.class);

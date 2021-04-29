@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -53,18 +53,18 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
                     if (granted) {
 
                     } else {
-                        Toast.makeText(this, getString(R.string.granted_local_please_open_wifi), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            Toast.makeText(this, getString(R.string.wifi_no_open_please_open_wifi), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
-            Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.locak_no_open_please_open_local));
         }
         WifiUtil.getIns().init(getApplicationContext());
           WifiUtil.getIns().changeToWifi("kaadas_AP", "88888888");
@@ -153,7 +153,7 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, getString(R.string.is_connect_wifi_please_wait), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.is_connect_wifi_please_wait));
     }
 
     @OnClick(R.id.help)

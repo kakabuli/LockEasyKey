@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -224,7 +223,7 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
     //播放操作
     private void playOperation() {
         if (filepath == null) {
-            Toast.makeText(this, getResources().getString(R.string.no_video), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getResources().getString(R.string.no_video));
             return;
         }
         mediaPlayer.setMediaPlayerFromUri(filepath);
@@ -283,7 +282,8 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
         long videoDuration = mediaPlayer.getDuration();
 
         if (videoDuration == 0) {
-            Toast.makeText(this.getApplicationContext(), "Could not play this video.", Toast.LENGTH_SHORT).show();
+            // TODO: 2021/4/29 记得把文字抽离到string
+            ToastUtils.showShort("Could not play this video.");
             finish();
         }
         durationSeekBar.setProgress(0);

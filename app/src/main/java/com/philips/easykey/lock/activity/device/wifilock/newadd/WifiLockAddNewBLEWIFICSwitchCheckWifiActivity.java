@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
@@ -205,7 +205,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
                 }
                 finish();
 //                socketManager.destroy();
-                Toast.makeText(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, R.string.bind_failed+"=="+errorCode, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(getString(R.string.bind_failed) + errorCode);
                 Intent intent = new Intent(WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, WifiLockAddNewBindFailedActivity.class);
                 startActivity(intent);
 //                if (errorCode == -1) {
@@ -334,7 +334,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
 
     @Override
     public void onBindFailed(BaseResult baseResult) {
-        Toast.makeText(this, R.string.bind_failed+"--1", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.bind_failed) +"--1");
         Intent intent = new Intent(this, WifiLockAddNewBindFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -342,7 +342,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
 
     @Override
     public void onBindThrowable(Throwable throwable) {
-        Toast.makeText(this, R.string.bind_failed+"--2", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.bind_failed)+"--2");
         Intent intent = new Intent(this, WifiLockAddNewBindFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -430,7 +430,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
 
     @Override
     public void onUpdateFailed(BaseResult baseResult){
-        Toast.makeText(this, R.string.bind_failed+"--1", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.bind_failed) +"--1");
         Intent intent = new Intent(this, WifiLockAddNewBindFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);
@@ -438,7 +438,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
 
     @Override
     public void onUpdateThrowable(Throwable throwable) {
-        Toast.makeText(this, R.string.bind_failed+"--2", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.bind_failed) +"--2");
         Intent intent = new Intent(this, WifiLockAddNewBindFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         startActivity(intent);

@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchResult;
@@ -84,7 +84,7 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
 
             @Override
             public void onSetUpSuccess(String hostAddress) { //设置成功
-                Toast.makeText(WifiLockSmartConfigActivity.this, R.string.set_up_success2, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.set_up_success2);
                 Intent intent = new Intent(WifiLockSmartConfigActivity.this, WifiLockInputAdminPasswordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
                 startActivity(intent);

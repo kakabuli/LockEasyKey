@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -600,7 +600,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(TiOtaUpgradeActivity.this, getString(R.string.image_not_match), Toast.LENGTH_SHORT).show();
+                                    ToastUtils.showShort(getString(R.string.image_not_match));
                                 }
                             });
                         }
@@ -615,7 +615,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                                 client.abortProgramming();
                             }
                             handler.removeCallbacks(timeoutRunnable);
-                            Toast.makeText(TiOtaUpgradeActivity.this, getString(R.string.update_success), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showShort(getString(R.string.update_success));
                             otasuccess();
                         }
                     });
@@ -628,7 +628,7 @@ public class TiOtaUpgradeActivity extends BaseAddToApplicationActivity implement
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(TiOtaUpgradeActivity.this, getString(R.string.update_failed_please_retry), Toast.LENGTH_SHORT).show();
+                                    ToastUtils.showShort(getString(R.string.update_failed_please_retry));
                                 }
                             });
                         }

@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.annotations.SerializedName;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -348,13 +349,13 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
     @Override
     public void settingDeviceFail() {
         refresh();
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override
     public void settingDeviceThrowable() {
         refresh();
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override
@@ -397,7 +398,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
     public void bindingAndModifyDeviceFail() {
         refresh();
 
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
 
     }
 
@@ -405,7 +406,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
     public void bindingAndModifyDeviceThrowable() {
         refresh();
 
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
 
     }
 

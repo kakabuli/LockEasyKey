@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -50,7 +50,7 @@ public class WifiLockAddFirstActivity extends BaseAddToApplicationActivity {
                         // All requested permissions are granted
                     } else {
                         // At least one permission is denied
-                        Toast.makeText(this, getString(R.string.granted_local_please_open_wifi), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
 
                     }
                 });
@@ -58,11 +58,11 @@ public class WifiLockAddFirstActivity extends BaseAddToApplicationActivity {
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            Toast.makeText(this, getString(R.string.wifi_no_open_please_open_wifi), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
-            Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.locak_no_open_please_open_local));
         }
     }
 

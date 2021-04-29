@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -495,7 +494,7 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
 
     @Override
     public void onUpdatePushSwitchSuccess(int status) {
-        Toast.makeText(this, getString(R.string.set_success), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_success));
         hiddenLoading();
         gwLockInfo.getServerInfo().setPushSwitch(status);
         if (status == 2) {
@@ -508,6 +507,6 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
     @Override
     public void onUpdatePushSwitchThrowable(Throwable throwable) {
         hiddenLoading();
-        Toast.makeText(this, getString(R.string.set_failed), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 }

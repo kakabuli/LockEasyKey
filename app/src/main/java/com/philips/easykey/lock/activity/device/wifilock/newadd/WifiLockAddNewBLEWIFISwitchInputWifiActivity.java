@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -103,7 +103,7 @@ public class WifiLockAddNewBLEWIFISwitchInputWifiActivity extends BaseActivity<I
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    Toast.makeText(this, R.string.wifi_name_disable_empty, Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
                     return;
                 }
                 if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
@@ -121,7 +121,7 @@ public class WifiLockAddNewBLEWIFISwitchInputWifiActivity extends BaseActivity<I
                     return;
                 }
                 if (sPassword.length()<8){
-                    Toast.makeText(this, getString(R.string.activity_wifi_video_fourth_password), Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
                     return;
                 }
                 Intent intent = new Intent(this,WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.class);
