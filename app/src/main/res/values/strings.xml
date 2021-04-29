@@ -403,7 +403,7 @@
     <string name="user_manage">用户管理</string>
     <string name="input_other_telephone_or_account">请输入对方的手机或账号</string>
     <string name="add_family_member_hint">授权给对应账号或手机号用户，启用APP控制</string>
-    <string name="add_user">添加用户</string>
+    <string name="philips_add_user">添加用户</string>
     <string name="no_add_my">不能添加自己</string>
     <string name="modify_user_nickname_success">修改用户昵称成功</string>
     <string name="delete_common_user_success">删除普通用户成功</string>
@@ -412,7 +412,7 @@
     <string name="input_fingerprint_name">请输入指纹名称</string>
     <string name="sure_delete_user_permission">确认删除该用户权限么？</string>
     <string name="authorization_time">授权时间</string>
-    <string name="user_detail">用户详情</string>
+    <string name="philips_user_detail">用户详情</string>
     <string name="delete_user">删除用户</string>
     <string name="ming_cheng">名称</string>
     <string name="ota_load_hint">loading···</string>
@@ -2447,6 +2447,9 @@
     <string name="philips_activity_detail_share">分享</string>
     <string name="philips_activity_detail_password_lock_type">开门方式</string>
     <string name="philips_activity_offline_password_share_time">30分钟内永久有效</string>
+    <string name="philips_activity_share_add_user">添加新用户</string>
+    <string name="philips_activity_shared__user">已分享用户</string>
+    <string name="philips_activity_shared__account">授权账号</string>
 
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>
@@ -2457,6 +2460,9 @@
     <string name="philips_temp_password">临时密码</string>
     <string name="philips_share_copy_password">复制密码</string>
     <string name="philips_share_permanent_password">永久密码</string>
+    <string name="philips_share_user_account">用户账号</string>
+    <string name="philips_share_user_account_nickname">备注名称</string>
+    <string name="philips_share_user_nickname">将设备分享给“%1$s”分享给</string>
 
     <!-- contentDescription -->
     <string name="philips_cdt_power">电量</string>

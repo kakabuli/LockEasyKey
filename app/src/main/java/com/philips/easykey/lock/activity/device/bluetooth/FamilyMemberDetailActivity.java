@@ -57,13 +57,13 @@ public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatil
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_member_detail);
+        setContentView(R.layout.philips_activity_family_member_detail);
         ButterKnife.bind(this);
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         ivEditor.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
-        tvContent.setText(getString(R.string.user_detail));
+        tvContent.setText(getString(R.string.philips_user_detail));
         Intent intent = getIntent();
         dataBean = (BluetoothSharedDeviceBean.DataBean) intent.getSerializableExtra(KeyConstants.COMMON_FAMILY_MEMBER_DATA);
         tvNumber.setText(dataBean.getUname());

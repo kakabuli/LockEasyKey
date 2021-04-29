@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WiFiLockShareAddUserPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWiFiLockShareAddUserView;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -30,31 +32,37 @@ import butterknife.ButterKnife;
 /**
  * Created by David
  */
-public class WiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockShareAddUserView, WiFiLockShareAddUserPresenter<IWiFiLockShareAddUserView>>
+public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockShareAddUserView, WiFiLockShareAddUserPresenter<IWiFiLockShareAddUserView>>
         implements View.OnClickListener, IWiFiLockShareAddUserView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
-    TextView tvContent;
-    @BindView(R.id.iv_right)
-    ImageView ivRight;
     @BindView(R.id.et_telephone)
     EditText etTelephone;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
+    @BindView(R.id.tv_nick_name)
+    TextView mTvNickName;
+    @BindView(R.id.et_nick_name)
+    EditText mEtNickName;
     private String wifiSn;
     private String nickName;
+
+    private WifiLockInfo mWifiLockInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_family_member);
+        setContentView(R.layout.philips_activity_add_family_member);
         ButterKnife.bind(this);
         ivBack.setOnClickListener(this);
-        tvContent.setText(getString(R.string.add_user));
         btnConfirm.setOnClickListener(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
+        mWifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
+
+        if(mWifiLockInfo != null){
+            mTvNickName.setText(getString(R.string.philips_share_user_nickname,mWifiLockInfo.getLockNickname()));
+        }
 
         nickName = (String) SPUtils.get(SPUtils.USERNAME, "");
         if (TextUtils.isEmpty(nickName)) {
@@ -84,35 +92,43 @@ public class WiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockShareAdd
                         return;
                     }
                 }
-                if (NetUtil.isNetworkAvailable()) {
-                    if (TextUtils.isEmpty(phone)) {
-                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+
+                if (!NetUtil.isNetworkAvailable()) {
+                    ToastUtils.showShort(R.string.noNet);
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phone)) {
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                    return;
+                }
+
+                String userNickName = "86" + phone;
+                if(!mEtNickName.getText().toString().trim().isEmpty()){
+                    userNickName = mEtNickName.getText().toString().trim();
+                }
+
+                if (StringUtil.isNumeric(phone)) {
+                    if (!PhoneUtil.isMobileNO(phone)) {
+                        // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
+                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
                         return;
                     }
 
-                    if (StringUtil.isNumeric(phone)) {
-                        if (!PhoneUtil.isMobileNO(phone)) {
-                            // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
-                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
-                            return;
-                        } else {
-                            mPresenter.addUser(wifiSn, "86" + phone, "86" + phone,nickName);
-                            showLoading(getString(R.string.is_adding));
-                        }
-                    } else {
-                        if (!DetectionEmailPhone.isEmail(phone)) {
-                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
-                            return;
-                        } else {
-                            mPresenter.addUser(wifiSn, phone, phone,nickName);
-                            showLoading(getString(R.string.is_adding));
-                        }
-                    }
+                    mPresenter.addUser(wifiSn, "86" + phone, userNickName, nickName);
+                    showLoading(getString(R.string.is_adding));
                 } else {
-                    ToastUtils.showShort(R.string.noNet);
-                }
+                    if (!DetectionEmailPhone.isEmail(phone)) {
+                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                        return;
+                    }
 
+                    mPresenter.addUser(wifiSn, phone, userNickName, nickName);
+                    showLoading(getString(R.string.is_adding));
+
+                }
                 break;
+
         }
     }
 

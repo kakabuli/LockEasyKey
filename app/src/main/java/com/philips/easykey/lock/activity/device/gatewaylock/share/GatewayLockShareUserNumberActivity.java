@@ -57,7 +57,7 @@ public class GatewayLockShareUserNumberActivity extends BaseActivity<IGatewayDel
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_member_detail);
+        setContentView(R.layout.philips_activity_family_member_detail);
         context=this;
         ButterKnife.bind(this);
         initListener();
@@ -72,7 +72,7 @@ public class GatewayLockShareUserNumberActivity extends BaseActivity<IGatewayDel
 
     private void initView() {
 
-        tvContent.setText(getString(R.string.user_detail));
+        tvContent.setText(getString(R.string.philips_user_detail));
         Intent intent = getIntent();
         dataBean = (DeviceShareUserResultBean.DataBean) intent.getSerializableExtra(KeyConstants.GATEWAY_SHARE_USER);
         if (dataBean!=null) {

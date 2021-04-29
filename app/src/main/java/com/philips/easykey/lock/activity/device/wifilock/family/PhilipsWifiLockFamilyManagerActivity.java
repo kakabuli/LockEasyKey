@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.adapter.WifiLockShareUserAdapter;
+import com.philips.easykey.lock.adapter.PhilipsWifiLockShareUserAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockFamilyManagerPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockFamilyManagerView;
@@ -36,7 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyManagerView,
+public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyManagerView,
         WifiLockFamilyManagerPresenter<IWifiLockFamilyManagerView>> implements IWifiLockFamilyManagerView, View.OnClickListener {
     @BindView(R.id.iv_back)
     ImageView ivBack;//返回
@@ -45,7 +46,7 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
     @BindView(R.id.recycleview)
     RecyclerView recycleview;
 
-    WifiLockShareUserAdapter wifiLockShareUserAdapter;
+    PhilipsWifiLockShareUserAdapter wifiLockShareUserAdapter;
     List< WifiLockShareResult.WifiLockShareUser> shareUsers = new ArrayList<>();
     boolean isNotData = true;
     @BindView(R.id.refreshLayout)
@@ -54,7 +55,7 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
     @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     @BindView(R.id.ll_add_user)
-    LinearLayout llAddUser;
+    RelativeLayout llAddUser;
     @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
 
@@ -65,20 +66,20 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bluetooth_shared_device_management);
+        setContentView(R.layout.philips_activity_shared_device_management);
         ButterKnife.bind(this);
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
 
-        wifiLockShareUserAdapter = new WifiLockShareUserAdapter(shareUsers, R.layout.item_has_bluetooth_shared_device);
+        wifiLockShareUserAdapter = new PhilipsWifiLockShareUserAdapter(shareUsers, R.layout.philips_item_has_shared_device);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(wifiLockShareUserAdapter);
         wifiLockShareUserAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 WifiLockShareResult.WifiLockShareUser wifiLockShareUser = shareUsers.get(position);
-                Intent intent = new Intent(WifiLockFamilyManagerActivity.this, WiFiLockShareUserDetailActivity.class);
+                Intent intent = new Intent(PhilipsWifiLockFamilyManagerActivity.this, PhilipsWiFiLockShareUserDetailActivity.class);
                 intent.putExtra(KeyConstants.SHARE_USER_INFO, wifiLockShareUser);
                 startActivity(intent);
             }
@@ -147,7 +148,7 @@ public class WifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyM
             case R.id.ll_add_user:
                 if (querySuccess ) {
                     if (shareUsers.size() < 10) {
-                        intent = new Intent(this, WiFiLockAddShareUserActivity.class);
+                        intent = new Intent(this, PhilipsWiFiLockAddShareUserActivity.class);
                         intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                         startActivity(intent );
                     } else {

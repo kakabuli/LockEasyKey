@@ -25,7 +25,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
-import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
+import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
@@ -473,7 +473,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;
@@ -579,7 +579,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;
