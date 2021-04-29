@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12pt"
+    >
+
+    <TextView
+        android:id="@+id/tv_day_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt"
+        android:text="@string/today"
+        android:textColor="#333333"
+        android:textSize="18pt"
+        android:textStyle="bold"
+        android:layout_marginStart="16pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_day_time"
+        android:text="16:40"
+        android:textColor="@color/color_333333"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_time"
+        android:layout_marginTop="14pt"
+        android:textSize="12pt"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/philips_circle_0066a1_9"
+        android:layout_marginStart="16pt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="19pt"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_time" />
+
+
+    <TextView
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20pt"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@id/iv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_time"
+        android:layout_marginTop="12pt"
+        android:textColor="@color/color_333333"
+        android:textSize="16pt" />
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_marginStart="24pt"
+        app:layout_constraintStart_toEndOf="@id/tv_content"
+        app:layout_constraintEnd_toStartOf="@id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_time"
+        android:layout_marginTop="12pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textColor="@color/color_333333"
+        android:textSize="16pt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2463,6 +2463,7 @@
     <string name="philips_share_user_account">用户账号</string>
     <string name="philips_share_user_account_nickname">备注名称</string>
     <string name="philips_share_user_nickname">将设备分享给“%1$s”分享给</string>
+    <string name="philips_dynamic_record_message">消息记录</string>
 
     <!-- contentDescription -->
     <string name="philips_cdt_power">电量</string>

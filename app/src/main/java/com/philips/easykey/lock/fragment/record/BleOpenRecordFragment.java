@@ -66,7 +66,7 @@ public class BleOpenRecordFragment extends BaseBleFragment<IOpenLockRecordView, 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = View.inflate(getActivity(), R.layout.fragment_bluetooth_open_lock_record, null);
+        view = View.inflate(getActivity(), R.layout.philips_fragment_bluetooth_open_lock_record, null);
         unbinder = ButterKnife.bind(this, view);
         tvSynchronizedRecord.setOnClickListener(this);
         activity = (BluetoothRecordActivity) getActivity();

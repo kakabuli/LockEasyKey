@@ -507,7 +507,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_RECORD:
-                            intent = new Intent(WiFiLockDetailActivity.this,WifiLockRecordActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                             startActivity(intent);
 

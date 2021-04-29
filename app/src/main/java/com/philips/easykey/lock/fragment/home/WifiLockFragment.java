@@ -25,10 +25,10 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockMoreActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockAuthDeviceInfoActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockDeviceInfoActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockMoreActivity;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity;
@@ -386,7 +386,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_RECORD:
-                            intent = new Intent(getContext(),WifiLockRecordActivity.class);
+                            intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                             startActivity(intent);
 
@@ -537,7 +537,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
             @Override
             public void onClickMore() {
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
             }
@@ -681,7 +681,7 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
             case R.id.lly_record_bar:
             case R.id.tv_more:
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
                 break;

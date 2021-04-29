@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -202,7 +202,7 @@ public class DoorbellingService extends Service {
                         intent.putExtra(KeyConstants.WIFI_SN,mDoorbellingResult.getWfId());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     }else if(mDoorbellingResult.getEventparams().getAlarmCode() == BleUtil.PIR_ALARM){
-                        intent = new Intent(DoorbellingService.this, WifiLockRecordActivity.class);
+                        intent = new Intent(DoorbellingService.this, PhilipsWifiLockRecordActivity.class);
                         intent.putExtra(KeyConstants.WIFI_SN,mDoorbellingResult.getWfId());
                         intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_WANDERING_ALARM_PIR_FLAG,1);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

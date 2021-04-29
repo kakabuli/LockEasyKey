@@ -886,7 +886,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.WifiLockRecordActivity"
+            android:name=".activity.device.wifilock.PhilipsWifiLockRecordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

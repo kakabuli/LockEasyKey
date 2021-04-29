@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
 import com.philips.easykey.lock.bean.WifiLockOperationRecordGroup;
@@ -244,7 +244,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             @Override
             public void onClickMore() {
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
             }
@@ -413,7 +413,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             case R.id.iv_device_dynamic:
             case R.id.tv_more:
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
                 break;

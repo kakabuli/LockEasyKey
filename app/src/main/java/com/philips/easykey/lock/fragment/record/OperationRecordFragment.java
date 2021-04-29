@@ -2,7 +2,6 @@ package com.philips.easykey.lock.fragment.record;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.home.BluetoothRecordActivity;
@@ -75,7 +72,7 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
         activity = (BluetoothRecordActivity) getActivity();
         bleLockInfo = activity.getBleDeviceInfo();
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_bluetooth_open_lock_record, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_bluetooth_open_lock_record, container, false);
         }
         unbinder = ButterKnife.bind(this, mView);
         LogUtils.d("当前类型是  " + type);

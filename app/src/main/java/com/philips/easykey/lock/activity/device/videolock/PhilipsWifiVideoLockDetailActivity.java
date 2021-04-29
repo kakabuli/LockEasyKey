@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
@@ -109,7 +109,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 finish();
                 break;
             case R.id.rl_detail_record:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, WifiLockRecordActivity.class);
+                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
                 break;
