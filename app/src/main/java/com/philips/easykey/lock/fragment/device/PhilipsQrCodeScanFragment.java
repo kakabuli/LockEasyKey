@@ -17,7 +17,6 @@ import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.Result;
 import com.king.zxing.CameraScan;
 import com.king.zxing.DefaultCameraScan;
-import com.king.zxing.ViewfinderView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
@@ -46,11 +45,8 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
         View root = inflater.inflate(R.layout.philips_fragment_qr_code_scan, container, false);
 
         PreviewView previewView = root.findViewById(R.id.previewView);
-        ViewfinderView viewfinderView = root.findViewById(R.id.viewfinderView);
         mCameraScan = new DefaultCameraScan(this, previewView);
-        mCameraScan.setOnScanResultCallback(this)
-                .setVibrate(true)
-                .startCamera();
+        mCameraScan.setOnScanResultCallback(this).setVibrate(true);
 
         ImageView ivFlashLight = root.findViewById(R.id.ivFlashLight);
         ivFlashLight.setOnClickListener(v -> {
@@ -58,8 +54,20 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
                 mCameraScan.enableTorch(!mCameraScan.isTorchEnabled());
             }
         });
+        ImageView ivAlbum = root.findViewById(R.id.ivAlbum);
+        ivAlbum.setOnClickListener(v -> {
+            // TODO: 2021/4/29 从图片选择
+        });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mCameraScan != null) {
+            mCameraScan.startCamera();
+        }
     }
 
     @Override
@@ -101,7 +109,7 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
     private MessageDialog messageDialog;
 
     public void unKnowQr(){
-        //信息
+        // 信息
         messageDialog = new MessageDialog.Builder(getContext())
                 .setMessage(R.string.unknow_qr)
                 .create();
@@ -112,7 +120,7 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
                 messageDialog.dismiss();
                 getActivity().finish();
             }
-        }, 3000); //延迟3秒消失
+        }, 3000); // 延迟3秒消失
     }
 
 }
