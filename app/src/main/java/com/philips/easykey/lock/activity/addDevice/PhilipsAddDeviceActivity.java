@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.philips.easykey.lock.R;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
  */
 public class PhilipsAddDeviceActivity extends NormalBaseActivity {
 
-    private FragmentContainerView mFcvAddDevice;
     private TextView mTvScanAdd, mTvAddManually;
     private View mVScanAddSelected, mVAddManuallySelected;
 
@@ -44,7 +42,6 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState, @Nullable View contentView) {
 
-        mFcvAddDevice = findViewById(R.id.fcvAddDevice);
         mTvScanAdd = findViewById(R.id.tvScanAdd);
         mTvAddManually = findViewById(R.id.tvAddManually);
         mVScanAddSelected = findViewById(R.id.vScanAddSelected);
