@@ -75,7 +75,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     private void initView() {
         mPresenter.setHandPwdSwitchFlag();
         mPresenter.setFingerPrintFlag();
-        tvContent.setText(R.string.security_setting);
+        tvContent.setText(R.string.philips_system_setting);
         setFaceIdUI(faceId);
     }
 

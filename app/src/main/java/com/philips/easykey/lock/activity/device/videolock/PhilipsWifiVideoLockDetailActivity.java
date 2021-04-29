@@ -8,11 +8,14 @@ import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
@@ -20,10 +23,16 @@ import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LogUtils;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
+
+import java.util.List;
 
 
 public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActivity {

@@ -1,14 +1,13 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.password.WiFiLockPasswordManagerActivity;
+import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
 import butterknife.BindView;
@@ -45,7 +44,7 @@ public class WifiLockAddFaceSecondActivity extends BaseAddToApplicationActivity 
                 finish();
                 break;
             case R.id.button_next:
-                startActivity(new Intent(this, WiFiLockPasswordManagerActivity.class));
+                startActivity(new Intent(this, PhilipsWiFiLockPasswordManagerActivity.class));
                 break;
         }
     }

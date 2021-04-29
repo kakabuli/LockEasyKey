@@ -340,7 +340,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="18pt"
             android:layout_marginRight="6pt"
-            android:text="@string/wifi_lock_temp_password"
+            android:text="@string/philips_temp_password"
             android:textColor="@color/color_333333"
             android:textSize="14pt" />
 

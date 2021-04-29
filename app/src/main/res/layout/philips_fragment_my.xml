@@ -52,9 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="18pt"
-                android:layout_centerVertical="true"
-                android:src="@drawable/philips_icon_right_arrow" />
+                android:layout_marginRight="14pt"
+                android:layout_marginTop="78pt"
+                android:src="@drawable/philips_icon_more" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -66,7 +66,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/security_setting_layout"
+            android:id="@+id/system_setting"
             android:layout_width="match_parent"
             android:layout_height="56pt"
             android:background="#FFFFFF">
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16pt"
-                android:drawableLeft="@drawable/philips_icon_securitysettings"
+                android:drawableLeft="@drawable/philips_mine_icon_setting"
                 android:drawablePadding="16pt"
                 android:text="@string/philips_system_setting"
                 android:textColor="#333333"
@@ -87,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:src="@drawable/philips_icon_right_arrow" />
+                android:layout_marginRight="14pt"
+                android:src="@drawable/philips_icon_more_10" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16pt"
-                android:drawableLeft="@drawable/philips_icon_problem"
+                android:drawableLeft="@drawable/philips_mine_icon_problem"
                 android:drawablePadding="16pt"
                 android:text="@string/chang_jian_question"
                 android:textColor="#333333"
@@ -113,8 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:src="@drawable/philips_icon_right_arrow" />
+                android:layout_marginRight="14pt"
+                android:src="@drawable/philips_icon_more" />
 
         </RelativeLayout>
 
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16pt"
-                android:drawableLeft="@drawable/philips_icon_feedback"
+                android:drawableLeft="@drawable/philips_mine_icon_feedback"
                 android:drawablePadding="16pt"
                 android:text="@string/user_feedback"
                 android:textColor="#333333"
@@ -140,12 +140,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:src="@drawable/philips_icon_right_arrow" />
+                android:layout_marginRight="14pt"
+                android:src="@drawable/philips_icon_more_10" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/system_setting_layout"
+            android:id="@+id/about_app"
             android:layout_width="match_parent"
             android:layout_height="56pt"
             android:background="#FFFFFF">
@@ -155,9 +155,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16pt"
-                android:drawableLeft="@drawable/philips_icon_setting"
+                android:drawableLeft="@drawable/philips_mine_icon_about"
                 android:drawablePadding="16pt"
-                android:text="@string/about_us"
+                android:text="@string/menu_item_about"
                 android:textColor="#333333"
                 android:textSize="16pt" />
 
@@ -166,12 +166,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:src="@drawable/philips_icon_right_arrow" />
+                android:layout_marginRight="14pt"
+                android:src="@drawable/philips_icon_more" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/about_xk_layout"
+            android:id="@+id/contact_us"
             android:layout_width="match_parent"
             android:layout_height="56pt"
             android:layout_marginTop="12pt"
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16pt"
-                android:drawableLeft="@drawable/philips_icon_abuot"
+                android:drawableLeft="@drawable/philips_mine_icon_contact"
                 android:drawablePadding="16pt"
                 android:text="@string/philips_contact_us"
                 android:textColor="#333333"
@@ -193,8 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:src="@drawable/philips_icon_right_arrow"/>
+                android:layout_marginRight="14pt"
+                android:src="@drawable/philips_icon_more"/>
 
         </RelativeLayout>
     </LinearLayout>

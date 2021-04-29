@@ -13,51 +13,34 @@ import com.philips.easykey.lock.utils.SharedUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by David on 2019/4/9
  */
-public class AboutUsActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
+public class AboutUsActivity extends BaseAddToApplicationActivity {
+
     @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
-    ImageView ivRight;
-    @BindView(R.id.rl_customer_service_phone)
-    RelativeLayout rlCustomerServicePhone;
-    @BindView(R.id.rl_zhao_shang_phone)
-    RelativeLayout rlZhaoShangPhone;
-    @BindView(R.id.rl_enterprise_official_website)
-    RelativeLayout rlEnterpriseOfficialWebsite;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         ButterKnife.bind(this);
-        ivBack.setOnClickListener(this);
-        rlCustomerServicePhone.setOnClickListener(this);
-        rlZhaoShangPhone.setOnClickListener(this);
-        rlEnterpriseOfficialWebsite.setOnClickListener(this);
-        tvContent.setText(getString(R.string.about_us));
+        tvContent.setText(getString(R.string.philips_contact_us));
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+
+    @OnClick({R.id.iv_back,R.id.rl_customer_service_phone})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.rl_customer_service_phone:
-                SharedUtil.getInstance().callPhone(this,"400-800-5919");
-                break;
-            case R.id.rl_zhao_shang_phone:
-                SharedUtil.getInstance().callPhone(this,"400-800-3756");
-                break;
-            case R.id.rl_enterprise_official_website:
-                SharedUtil.getInstance().jumpWebsite(this,"http://www.kaadas.com");
+                SharedUtil.getInstance().callPhone(this, getResources().getString(R.string.Philips_after_sales_number));
                 break;
         }
     }

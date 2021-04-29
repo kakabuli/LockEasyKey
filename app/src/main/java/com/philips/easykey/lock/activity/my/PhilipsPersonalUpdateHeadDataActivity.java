@@ -144,7 +144,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                 showHeadDialog();
                 break;
             case R.id.head_telNum_layout:
-                showChangeNumberDialog();
+                //showChangeNumberDialog();
                 break;
             case R.id.bt_sign_out_login:
                 loginOut();
