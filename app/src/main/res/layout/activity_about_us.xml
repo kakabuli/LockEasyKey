@@ -2,214 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <include layout="@layout/head"></include>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/about_us_bj"
+        android:background="#F7F7F7"
         android:orientation="vertical">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_23"
-                    android:src="@mipmap/about_us_logo" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_23"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:lineSpacingExtra="@dimen/dp_8"
-                    android:text="@string/about_us_content" />
-
-
-            </LinearLayout>
-        </ScrollView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:background="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12pt"
+            android:layout_marginLeft="16pt"
+            android:layout_marginRight="16pt"
             android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="343pt"
+                    android:layout_height="365pt"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/background_white_3dp"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50pt"
+                        android:src="@drawable/philips_mine_img_code" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35pt"
+                        android:layout_marginTop="38pt"
+                        android:layout_marginRight="35pt"
+                        android:gravity="center"
+                        android:textSize="14pt"
+                        android:textColor="#666666"
+                        android:text="@string/philips_contact_us_content" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:text="@string/wechat_official_account"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_15" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:text="@string/kaadas_smart_door_lock"
-                    android:textColor="#1F96F7"
-                    android:textSize="@dimen/sp_15" />
-
-                <View
+                <RelativeLayout
+                    android:id="@+id/rl_customer_service_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="#EAE9E9"></View>
-            </RelativeLayout>
+                    android:layout_height="56pt"
+                    android:layout_marginTop="12pt"
+                    android:background="#ffffff">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16pt"
+                        android:text="@string/Philips_after_sales_call"
+                        android:textColor="#333333"
+                        android:textSize="16pt" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:text="@string/wei_bo"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:text="@string/kaadas_smart_lock"
-                    android:textColor="#1F96F7"
-                    android:textSize="@dimen/sp_15" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="#EAE9E9"></View>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_customer_service_phone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:text="@string/customer_service_phone"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:text="400-800-5919"
-                    android:textColor="#1F96F7"
-                    android:textSize="@dimen/sp_15" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="#EAE9E9"></View>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_zhao_shang_phone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:text="@string/zhao_shang_phone"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:text="400-800-3756"
-                    android:textColor="#1F96F7"
-                    android:textSize="@dimen/sp_15" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="#EAE9E9"></View>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_enterprise_official_website"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:text="@string/enterprise_official_website"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/sp_15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:text="www.kaadas.com"
-                    android:textColor="#1F96F7"
-                    android:textSize="@dimen/sp_15" />
-
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:text="@string/Philips_after_sales_number"
+                        android:textColor="#333333"
+                        android:textSize="16pt" />
+                </RelativeLayout>
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"></View>
     </LinearLayout>
 </LinearLayout>

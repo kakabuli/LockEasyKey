@@ -31,10 +31,6 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
     ImageView ivBack;
     @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_right)
-    TextView tvRight;
-    @BindView(R.id.nickname_text)
-    TextView nicknameText;
     @BindView(R.id.et_nickName)
     EditText etNickName;
     @BindView(R.id.delete)
@@ -48,8 +44,7 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
         ButterKnife.bind(this);
         initView();
         ivBack.setOnClickListener(this);
-        tvContent.setText(getString(R.string.modify_nickname));
-        tvRight.setText(getString(R.string.save));
+        tvContent.setText(getString(R.string.philips_set_nickname));
     }
 
     @Override
@@ -80,13 +75,13 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
     }
 
 
-    @OnClick({R.id.delete, R.id.tv_right})
+    @OnClick({R.id.delete,R.id.bt_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.delete:
                 etNickName.setText("");
                 break;
-            case R.id.tv_right:
+            case R.id.bt_ok:
                 String editText = etNickName.getText().toString().trim();
                 if (NetUtil.isNetworkAvailable()) {
                     if (TextUtils.isEmpty(editText)) {

@@ -55,14 +55,9 @@ import static android.app.Activity.RESULT_OK;
  * created at 2019/2/25 14:47
  */
 public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView {
-    @BindView(R.id.security_setting_layout)
-    RelativeLayout securitySettingLayout;
+
     @BindView(R.id.faq_layout)
     RelativeLayout faqLayout;
-    @BindView(R.id.system_setting_layout)
-    RelativeLayout systemSettingLayout;
-    @BindView(R.id.about_xk_layout)
-    RelativeLayout aboutXkLayout;
     Unbinder unbinder;
     @BindView(R.id.head_second)
     RelativeLayout headSecond;
@@ -146,10 +141,14 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         unbinder.unbind();
     }
 
-    @OnClick({R.id.security_setting_layout, R.id.rl_user_feedback, R.id.faq_layout, R.id.system_setting_layout, R.id.about_xk_layout, R.id.head_second})
+    @OnClick({R.id.head_second,R.id.system_setting, R.id.rl_user_feedback, R.id.faq_layout, R.id.about_app, R.id.contact_us})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.security_setting_layout:
+            case R.id.head_second:
+                Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
+                startActivity(updateHeadData);
+                break;
+            case R.id.system_setting:
                 Intent mSercurityIntent = new Intent(getActivity(), PhilipsPersonalSecuritySettingActivity.class);
                 startActivity(mSercurityIntent);
                 break;
@@ -161,17 +160,13 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
                 Intent mFaq = new Intent(getActivity(), PersonalFAQActivity.class);
                 startActivity(mFaq);
                 break;
-            case R.id.system_setting_layout:
+            case R.id.about_app:
                 Intent mSystemSetting = new Intent(getActivity(), PersonalSystemSettingActivity.class);
                 startActivity(mSystemSetting);
                 break;
-            case R.id.about_xk_layout:
+            case R.id.contact_us:
                 Intent aboutIntent = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(aboutIntent);
-                break;
-            case R.id.head_second:
-                Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
-                startActivity(updateHeadData);
                 break;
         }
     }

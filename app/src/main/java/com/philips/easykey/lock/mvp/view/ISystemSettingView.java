@@ -10,10 +10,5 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
  */
 public interface ISystemSettingView extends IBaseView {
 
-    void onLoginOutSuccess();
-
-    void onLoginOutFailed(Throwable throwable);
-
-    void onLoginOutFailedServer(BaseResult result);
 
 }

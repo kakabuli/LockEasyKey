@@ -35,7 +35,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16pt"
-                android:src="@mipmap/right" />
+                android:src="@drawable/philips_icon_more" />
 
             <com.philips.easykey.lock.widget.CircleImageView
                 android:id="@+id/iv_head"
@@ -70,7 +70,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16pt"
-                android:src="@mipmap/right" />
+                android:src="@drawable/philips_icon_more" />
 
             <TextView
                 android:id="@+id/head_portrait_name"
@@ -91,29 +91,27 @@
         <RelativeLayout
             android:id="@+id/head_telNum_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_75"
-            android:visibility="gone">
+            android:layout_height="56pt"
+            android:background="#ffffff">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginLeft="16pt"
                 android:text="@string/personal_number"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_15" />
-
-
+                android:textSize="16pt" />
 
             <TextView
                 android:id="@+id/head_telNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_38"
+                android:layout_marginRight="42pt"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/sp_15"
-                android:textColor="#8E8E93"
+                android:textSize="16pt"
+                android:textColor="#666666"
                 android:text="" />
 
             <ImageView
@@ -122,7 +120,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_16"
-                android:src="@mipmap/right" />
+                android:src="@drawable/philips_icon_more"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <RelativeLayout

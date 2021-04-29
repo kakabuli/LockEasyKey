@@ -20,38 +20,6 @@ import io.reactivex.disposables.Disposable;
  */
 public class SystemSettingPresenter<T> extends BasePresenter<ISystemSettingView> {
 
-    public void loginOut() {
-        XiaokaiNewServiceImp.loginOut()
-                .subscribe(new BaseObserver<BaseResult>() {
-                    @Override
-                    public void onSuccess(BaseResult result) {
-                        if (isSafe()) {
-                            mViewRef.get().onLoginOutSuccess();
-                        }
-                    }
-
-                    @Override
-                    public void onAckErrorCode(BaseResult baseResult) {
-                        if (isSafe()) {
-                            mViewRef.get().onLoginOutFailedServer(baseResult);
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(Throwable throwable) {
-                        if (isSafe()) {
-                            mViewRef.get().onLoginOutFailed(throwable);
-                        }
-                    }
-
-                    @Override
-                    public void onSubscribe1(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
-                });
-    }
-
-
     public void getProtocolVersion() {
 
     }
