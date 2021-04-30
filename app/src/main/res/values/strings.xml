@@ -2464,6 +2464,11 @@
     <string name="philips_share_user_account_nickname">备注名称</string>
     <string name="philips_share_user_nickname">将设备分享给“%1$s”分享给</string>
     <string name="philips_dynamic_record_message">消息记录</string>
+    <string name="philips_album_not_find_video">Could not play this video.</string>
+    <string name="philips_face_ota_conncet_wifi">请连接到指定WiFi</string>
+    <string name="philips_face_ota_data_transmission_complete">数据传输完成</string>
+    <string name="philips_face_ota_transmission_complete">传输完成</string>
+    <string name="philips_face_ota_failed">OTA出错%1$s</string>
 
     <!-- contentDescription -->
     <string name="philips_cdt_power">电量</string>

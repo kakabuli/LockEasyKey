@@ -298,7 +298,7 @@ public class OpenLockRecordPresenter<T> extends BlePresenter<IOpenLockRecordView
                                 }
                                 lockRecords[deVaule[1] & 0xff] = openLockRecord;
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
@@ -308,7 +308,7 @@ public class OpenLockRecordPresenter<T> extends BlePresenter<IOpenLockRecordView
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
 
                                 if ((deVaule[1] & 0xff) == (endIndex - 1) || (deVaule[1] & 0xff) == (total - 1)) {  //收到一组最后一个数据  或者全部的最后一个数据
                                     for (int i = startIndex; i < endIndex && i < total; i++) {
@@ -360,7 +360,7 @@ public class OpenLockRecordPresenter<T> extends BlePresenter<IOpenLockRecordView
                                 }
                                 LogUtils.d("获取数据  超时   数据完成");
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
@@ -370,7 +370,7 @@ public class OpenLockRecordPresenter<T> extends BlePresenter<IOpenLockRecordView
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
                                 for (int i = startIndex; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
                                         LogUtils.d("数据不全  " + retryTimes);
@@ -517,7 +517,7 @@ public class OpenLockRecordPresenter<T> extends BlePresenter<IOpenLockRecordView
         bleService.sendCommand(endFrame);
         retryTimes++;
         toDisposable(oldRecordDisposable);
-        // TODO: 2019/5/14   老蓝牙模块   做简单的处理
+        //  2019/5/14   老蓝牙模块   做简单的处理
         //5f80001c80000000000000000000000000000000
         oldRecordDisposable = bleService.listeneDataChange()
                 .timeout(10 * 1000, TimeUnit.MILLISECONDS)

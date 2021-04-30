@@ -364,8 +364,7 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
     }
 
     private void oldBleSyncTime() {
-        // TODO: 2019/6/5    透传模块无此功能
-
+        //  2019/6/5    透传模块无此功能
 
     }
 
@@ -613,8 +612,6 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
     public void attachView(T view) {
         super.attachView(view);
         listenerConnectState();
-        // TODO: 2019/3/15 会出现空指针
-
         if (bleService == null) { //判断
             if (MyApplication.getInstance().getBleService() == null) {
                 return;
@@ -829,10 +826,6 @@ public abstract class BlePresenter<T extends IBleView> extends BasePresenter<T> 
                 .subscribe(new BaseObserver<GetPasswordResult>() {
                     @Override
                     public void onSuccess(GetPasswordResult getPasswordResult) {
-                        // TODO: 2019/3/6   密码昵称列表  需要做缓存 付积辉--已做
-                        //获取成功缓存
-//                        GetPasswordUtil.deletePassword(bleLockInfo.getServerLockInfo().getLockName());
-//                        GetPasswordUtil.writePasswords(getPasswordResult, bleLockInfo.getServerLockInfo().getLockName());
                         LogUtils.d("获取所有密码成功   " + getPasswordResult.toString());
                         if (isSafe()) {
                             mViewRef.get().onGetPasswordSuccess(getPasswordResult);

@@ -300,7 +300,7 @@ public class BleUtil {
         }
         int state5 = (payload[4] & 0b00100000) == 0b00100000 ? 1 : 0;
         if (state5 == 1) {
-            buffer.append(context.getString(R.string.warring_force) + " ");  //todo 此处需要提示吗
+            buffer.append(context.getString(R.string.warring_force) + " ");
         }
 
         int state6 = (payload[4] & 0b01000000) == 0b01000000 ? 1 : 0;

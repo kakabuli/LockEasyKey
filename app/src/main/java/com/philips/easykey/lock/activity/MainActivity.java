@@ -328,12 +328,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     }
 
 
-    /*//TODO：删除华为推送位置
-    @Override
-    public void onNetEventToken(String token) {
-        uploadToken(3,token);
-    }*/
-
 
     public interface HomeSelectListener {
         void onHomeSelectChange(boolean isSelect);

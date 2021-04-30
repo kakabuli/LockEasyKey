@@ -255,7 +255,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
             operationDisposable.dispose();
         }
 
-        //TODO 测试操作记录
+        // 测试操作记录
 //        operationCommand = BleCommandFactory.getLockRecordCommand((byte) startIndex, (byte) endIndex, bleService.getBleLockInfo().getAuthKey());
         operationCommand = BleCommandFactory.getOperationCommand(Rsa.int2BytesArray(operationStartIndex), Rsa.int2BytesArray(operationEndIndex), bleService.getBleLockInfo().getAuthKey());
         bleService.sendCommand(operationCommand);
@@ -309,7 +309,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 LogUtils.d(" 1 index " + index + " operationTotal " + operationTotal);
                                 operationLockRecords[index] = operationLockRecord;
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < operationEndIndex && i < operationTotal; i++) {
                                     if (operationLockRecords[i] == null) { //数据不全
@@ -319,7 +319,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
 
                                 if (index == (operationEndIndex - 1) || index == (operationTotal - 1)) {  //收到一组最后一个数据  或者全部的最后一个数据
                                     for (int i = operationStartIndex; i < operationEndIndex && i < operationTotal; i++) {
@@ -371,7 +371,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 }
                                 LogUtils.d("获取数据  超时   数据完成");
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < operationEndIndex && i < operationTotal; i++) {
                                     if (operationLockRecords[i] == null) { //数据不全
@@ -381,7 +381,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
                                 for (int i = operationStartIndex; i < operationEndIndex && i < operationTotal; i++) {
                                     if (operationLockRecords[i] == null) { //数据不全
                                         LogUtils.d("数据不全  " + operationRetryTimes);
@@ -478,7 +478,7 @@ public class OperationRecordPresenter<T> extends BlePresenter<IOperationRecordVi
                     public void accept(BleDataBean bleDataBean) throws Exception {
                         if (bleDataBean.getOriginalData()[0] == 1) { //开锁记录都是加密的
                             byte[] deVaule = Rsa.decrypt(bleDataBean.getPayload(), bleService.getBleLockInfo().getAuthKey());
-                            //TODO 测试操作记录
+                            // 测试操作记录
 //                            OpenLockRecord openLockRecord = BleUtil.parseLockRecord(deVaule);
                             OperationLockRecord operationLockRecord = BleUtil.parseOperationRecord(deVaule);
                             byte[] byteIndex = new byte[2];

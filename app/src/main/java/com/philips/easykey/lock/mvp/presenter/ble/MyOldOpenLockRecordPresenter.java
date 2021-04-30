@@ -291,7 +291,7 @@ public class MyOldOpenLockRecordPresenter<T> extends BlePresenter<IOldBleLockVie
                                 }
                                 lockRecords[deVaule[1] & 0xff] = openLockRecord;
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
@@ -301,7 +301,7 @@ public class MyOldOpenLockRecordPresenter<T> extends BlePresenter<IOldBleLockVie
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                //  2019/3/7  开锁记录测试
 
                                 if ((deVaule[1] & 0xff) == (endIndex - 1) || (deVaule[1] & 0xff) == (total - 1)) {  //收到一组最后一个数据  或者全部的最后一个数据
                                     for (int i = startIndex; i < endIndex && i < total; i++) {
@@ -353,7 +353,7 @@ public class MyOldOpenLockRecordPresenter<T> extends BlePresenter<IOldBleLockVie
                                 }
                                 LogUtils.d("获取数据  超时   数据完成");
 
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
                                 List<Integer> loseNumber = new ArrayList<>();
                                 for (int i = 0; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
@@ -363,7 +363,7 @@ public class MyOldOpenLockRecordPresenter<T> extends BlePresenter<IOldBleLockVie
                                 if (isSafe()) {
                                     mViewRef.get().onLoseRecord(loseNumber);
                                 }
-                                // TODO: 2019/3/7  开锁记录测试
+                                // 2019/3/7  开锁记录测试
                                 for (int i = startIndex; i < endIndex && i < total; i++) {
                                     if (lockRecords[i] == null) { //数据不全
                                         LogUtils.d("数据不全  " + retryTimes);

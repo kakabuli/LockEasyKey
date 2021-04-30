@@ -52,10 +52,8 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        //todo 清除数据库的数据
                         //清除消息免打扰
                         SPUtils.remove(deviceName + SPUtils.MESSAGE_STATUS);
-                        //todo 清除保存的密码
                         SPUtils.remove(KeyConstants.SAVE_PWD_HEARD + bleLockInfo.getServerLockInfo().getMacLock()); //Key删除设备
                         MyApplication.getInstance().getAllDevicesByMqtt(true);
 
@@ -395,7 +393,6 @@ public class BleDeviceMorePresenter<T> extends BleCheckOTAPresenter<IDeviceMoreV
                         if (isSafe()) {
                             mViewRef.get().readVersionSuccess(version);
                         }
-                        // TODO: 2019/5/28    测试
                         LogUtils.d("获取到的版本号是   " + version);
                         if (version.length() >= 9) {
                             version = version.substring(1, 9);

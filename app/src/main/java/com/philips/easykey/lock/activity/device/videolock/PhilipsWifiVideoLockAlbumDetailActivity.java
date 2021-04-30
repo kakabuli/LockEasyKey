@@ -282,8 +282,7 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
         long videoDuration = mediaPlayer.getDuration();
 
         if (videoDuration == 0) {
-            // TODO: 2021/4/29 记得把文字抽离到string
-            ToastUtils.showShort("Could not play this video.");
+            ToastUtils.showShort(getString(R.string.philips_album_not_find_video));
             finish();
         }
         durationSeekBar.setProgress(0);

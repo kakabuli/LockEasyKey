@@ -194,7 +194,6 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         querySuccess = true;
         shareUsers.clear();
         shareUsers.addAll(users);
-        //todo  缓存数据
         if (shareUsers.size() > 0) {
             isNotData = false;
             wifiLockShareUserAdapter.notifyDataSetChanged();
