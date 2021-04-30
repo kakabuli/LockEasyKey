@@ -7,9 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.SizeUtils;
 
 import java.text.DecimalFormat;
 
@@ -30,13 +33,13 @@ public class DrawLineChart extends View {
     /**横线画笔*/
     private Paint mHorizontalLinePaint;
     /**边框的左边距*/
-    private float mBrokenLineLeft = dip2px(30);
+    private float mBrokenLineLeft = SizeUtils.dp2px(30);
     /**边框的上边距*/
-    private float mBrokenLineTop = dip2px(10);
+    private float mBrokenLineTop = SizeUtils.dp2px(10);
     /**边框的下边距*/
-    private float mBrokenLineBottom = dip2px(20);
+    private float mBrokenLineBottom = SizeUtils.dp2px(20);
     /**边框的右边距*/
-    private float mBrokenLinerRight = dip2px(10);
+    private float mBrokenLinerRight = SizeUtils.dp2px(10);
     /**圆的半径*/
     private float radius = 2;
     /**需要绘制的宽度*/
@@ -57,19 +60,19 @@ public class DrawLineChart extends View {
     /**横线数量*/
     private float numberLine = 5;
     /**边框线颜色*/
-    private int mBorderLineColor = Color.BLACK;
+    private int mBorderLineColor = 0xffededed;
     /**边框线的宽度*/
     private  int mBorderWidth = 2;
     /**边框文本颜色*/
-    private int mBorderTextColor = Color.GRAY;
+    private int mBorderTextColor = 0xff999999;
     /**边框文本大小*/
-    private float mBorderTextSize = dip2px(10);
+    private float mBorderTextSize = SizeUtils.dp2px(10);
     /**边框横线颜色*/
-    private int mBorderTransverseLineColor = Color.GRAY;
+    private int mBorderTransverseLineColor = 0xffededed;
     /**边框横线宽度*/
     private float mBorderTransverseLineWidth = 2;
     /**折线颜色*/
-    private int mBrokenLineColor = Color.GRAY;
+    private int mBrokenLineColor = 0xff1E9D8B;
     /**折线文本颜色*/
     private  int mBrokenLineTextColor = Color.GRAY;
     /**折线宽度*/
@@ -80,10 +83,10 @@ public class DrawLineChart extends View {
     public Point[] mPoints;
     /**设置边框左上右下边距*/
     public  void  setBrokenLineLTRB(float l,float t,float  r,float b){
-        mBrokenLineLeft = dip2px(l);
-        mBrokenLineTop = dip2px(t);
-        mBrokenLinerRight = dip2px(r);
-        mBrokenLineBottom = dip2px(b);
+        mBrokenLineLeft = SizeUtils.dp2px(l);
+        mBrokenLineTop = SizeUtils.dp2px(t);
+        mBrokenLinerRight = SizeUtils.dp2px(r);
+        mBrokenLineBottom = SizeUtils.dp2px(b);
     }
 
     public int getViewWidth() {
@@ -160,7 +163,7 @@ public class DrawLineChart extends View {
     }
     /**边框文本大小*/
     public void setBorderTextSize(float borderTextSize) {
-        mBorderTextSize = dip2px(borderTextSize);
+        mBorderTextSize = SizeUtils.dp2px(borderTextSize);
     }
     /**框线横线 颜色*/
     public void setBorderTransverseLineColor(int borderTransverseLineColor) {
@@ -176,19 +179,19 @@ public class DrawLineChart extends View {
     }
     /**折线文本大小*/
     public void setBrokenLineTextSize(float brokenLineTextSize) {
-        mBrokenLineTextSize = dip2px(brokenLineTextSize);
+        mBrokenLineTextSize = SizeUtils.dp2px(brokenLineTextSize);
     }
     /**边框线宽度*/
     public void setBorderWidth(float borderWidth) {
-        mBorderWidth = dip2px(borderWidth);
+        mBorderWidth = SizeUtils.dp2px(borderWidth);
     }
     /**边框横线宽度*/
     public void setBorderTransverseLineWidth(float borderTransverseLineWidth) {
-        mBorderTransverseLineWidth = dip2px(borderTransverseLineWidth);
+        mBorderTransverseLineWidth = SizeUtils.dp2px(borderTransverseLineWidth);
     }
     /**折线宽度*/
     public void setBrokenLineWidth(float brokenLineWidth) {
-        mBrokenLineWidth = dip2px(brokenLineWidth);
+        mBrokenLineWidth = SizeUtils.dp2px(brokenLineWidth);
     }
 
     /**获取框线画笔*/
@@ -216,15 +219,6 @@ public class DrawLineChart extends View {
         return mHorizontalLinePaint;
     }
 
-    /**
-     * 将dip或dp值转换为px值，保证尺寸大小不变
-     * @param dipValue
-     * @return
-     */
-    private  int dip2px( float dipValue) {
-        final float scale = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale + 0.5f);
-    }
 
     public DrawLineChart(Context context) {
         super(context);
@@ -244,7 +238,7 @@ public class DrawLineChart extends View {
         mViewWidth = getMeasuredWidth();
 
         /**计算总值*/
-        calculateValue=maxVlaue-minValue;
+        calculateValue = maxVlaue - minValue;
 
         initNeedDrawWidthAndHeight();
 
@@ -269,7 +263,8 @@ public class DrawLineChart extends View {
         }
         mTextPaint.setTextSize(mBorderTextSize);
         mTextPaint.setTextAlign(Paint.Align.RIGHT);
-        mTextPaint.setColor(Color.GRAY);
+        mTextPaint.setColor(mBorderTextColor);
+
         /**初始化边框线画笔*/
         if(mBorderLinePaint==null){
             mBorderLinePaint=new Paint();
@@ -288,11 +283,12 @@ public class DrawLineChart extends View {
 
         mBrokenLinePaint.setStrokeWidth(mBrokenLineWidth);
         mBrokenLinePaint.setColor(mBrokenLineColor);
+        mBrokenLinePaint.setShadowLayer(SizeUtils.dp2px(10), 0, 0, 0xFF5BBBB7);
 
 
         /**折线文本画笔*/
         if (mBrokenLineTextPaint == null){
-            mBrokenLineTextPaint=new Paint();
+            mBrokenLineTextPaint = new Paint();
             initPaint(mBrokenLineTextPaint);
         }
         mBrokenLineTextPaint.setTextAlign(Paint.Align.CENTER);
@@ -332,7 +328,7 @@ public class DrawLineChart extends View {
             if(i == 0){
                 mPath.moveTo(point.x,point.y);
             }else {
-                mPath.lineTo(point.x,point.y);
+                mPath.lineTo(point.x ,point.y);
             }
             canvas.drawText(mOrdinateValue[i]+"",point.x,point.y - radius,mBrokenLineTextPaint);
         }
@@ -349,7 +345,6 @@ public class DrawLineChart extends View {
          * stopY    结束的y坐标
          * paint    绘制该线的画笔
          * */
-
         /**绘制边框竖线*/
         //canvas.drawLine(mBrokenLineLeft,mBrokenLineTop-dip2px(5),mBrokenLineLeft,mViewHeight-mBrokenLineBottom,mBorderLinePaint);
         /**绘制边框横线*/
@@ -357,7 +352,7 @@ public class DrawLineChart extends View {
 
 
         /**绘制边框分段横线与分段文本*/
-        float averageHeight=mNeedDrawHeight/(numberLine-1);
+        float averageHeight=mNeedDrawHeight / (numberLine - 1);
 
         for (int i = 0; i < numberLine; i++) {
             float nowadayHeight = averageHeight * i;
@@ -367,14 +362,12 @@ public class DrawLineChart extends View {
             if(i != numberLine - 1) {
                 canvas.drawLine(mBrokenLineLeft, nowadayHeight + mBrokenLineTop, mViewWidth, nowadayHeight + mBrokenLineTop, mHorizontalLinePaint);
             }
-            if(i != numberLine - 1){
-                canvas.drawText(floatKeepTwoDecimalPlaces(v,"0"),mBrokenLineLeft - dip2px(2),nowadayHeight + mBrokenLineTop + dip2px(4),mTextPaint);
-            }
+            canvas.drawText(floatKeepTwoDecimalPlaces(v,"0"),mBrokenLineLeft - SizeUtils.dp2px(13),nowadayHeight + mBrokenLineTop + SizeUtils.dp2px(4),mTextPaint);
         }
 
-        /**竖线*/
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
         for (int i = 0; i < mPoints.length; i++) {
-            canvas.drawText(mTransverseValue[i],mPoints[i].x - dip2px(10)  ,mViewHeight ,mBorderLinePaint);
+            canvas.drawText(mTransverseValue[i],mBrokenLineLeft + SizeUtils.dp2px(13) + (mViewWidth / mPoints.length  - mBrokenLinerRight / (mPoints.length - 1)) * i, mViewHeight,mTextPaint);
         }
     }
     /**保留几位小数*/

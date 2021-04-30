@@ -4,24 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="10dp"
-    android:background="#fff">
+    android:paddingLeft="16pt"
+    android:paddingRight="14pt"
+    android:background="#f7f7f7">
 
-   <LinearLayout
+   <RelativeLayout
        android:id="@+id/ll_device_type"
-       android:layout_width="wrap_content"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="horizontal">
+       android:layout_marginTop="22pt"
+       android:layout_marginBottom="22pt">
 
       <TextView
           android:id="@+id/tv_lock_name"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textSize="18pt"
+          android:textColor="#333333"
+          android:textStyle="bold"
           android:text="DDL708-1HW"/>
 
-   </LinearLayout>
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_alignParentRight="true"
+          android:background="@drawable/philips_icon_more"/>
+
+   </RelativeLayout>
 
    <ScrollView
        android:layout_width="match_parent"
@@ -37,89 +47,71 @@
 
          <LinearLayout
              android:layout_width="match_parent"
-             android:layout_height="@dimen/dp_80"
-             android:layout_marginTop="8dp"
-             android:layout_marginBottom="8dp"
-             android:background="#f2f2f2"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent"
-             app:layout_constraintVertical_bias="0.64">
+             android:layout_height="100pt"
+             android:background="#ffffff">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="20">
-
-               <RelativeLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerInParent="true">
-
+                android:layout_weight="1">
                   <TextView
                       android:id="@+id/tv_guard_time"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="@string/guard_time"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginTop="14pt"
+                      android:text="@string/philips_add_duration"
                       android:textColor="#333333"
-                      android:textSize="@dimen/sp_12" />
-
-                  <RelativeLayout
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_below="@+id/tv_guard_time"
-                      android:layout_centerHorizontal="true">
-
-                     <TextView
-                         android:id="@+id/create_time"
+                      android:textSize="12pt" />
+                     <RelativeLayout
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:text="0"
-                         android:singleLine="true"
-                         android:ellipsize="end"
-                         android:textColor="#1F96F7"
-                         android:textSize="20sp" />
+                         android:layout_below="@+id/tv_guard_time"
+                         android:layout_marginTop="14pt"
+                         android:layout_centerHorizontal="true">
 
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="@string/day"
-                         android:textColor="#999999"
-                         android:layout_marginLeft="4dp"
-                         android:layout_toRightOf="@+id/create_time"
-                         android:layout_alignBottom="@+id/create_time"
-                         android:layout_marginBottom="3dp"
-                         android:textSize="@dimen/sp_12" />
+                        <TextView
+                            android:id="@+id/create_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textColor="#0066A1"
+                            android:textSize="30pt" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/day"
+                            android:textColor="#999999"
+                            android:layout_marginLeft="2pt"
+                            android:layout_toRightOf="@+id/create_time"
+                            android:layout_alignBottom="@+id/create_time"
+                            android:layout_marginBottom="6pt"
+                            android:textSize="12pt" />
+                     </RelativeLayout>
                   </RelativeLayout>
-
-               </RelativeLayout>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="20">
-
-               <RelativeLayout
+                android:layout_weight="1">
+               <TextView
+                   android:id="@+id/tv_guard_number"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_centerInParent="true">
-
-                  <TextView
-                      android:id="@+id/tv_guard_number"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="@string/guard_number"
-                      android:textColor="#333333"
-                      android:textSize="@dimen/sp_12" />
+                   android:layout_centerHorizontal="true"
+                   android:layout_marginTop="14pt"
+                   android:text="@string/guard_number"
+                   android:textColor="#333333"
+                   android:textSize="12pt" />
 
                   <RelativeLayout
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_below="@+id/tv_guard_number"
+                      android:layout_marginTop="14pt"
                       android:layout_centerHorizontal="true">
 
                      <TextView
@@ -129,126 +121,151 @@
                          android:text="0"
                          android:singleLine="true"
                          android:ellipsize="end"
-                         android:textColor="#1F96F7"
-                         android:textSize="20sp" />
+                         android:textColor="#0066A1"
+                         android:textSize="30pt" />
 
                      <TextView
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:layout_marginLeft="4dp"
-                         android:layout_toRightOf="@+id/tv_open_lock_times"
                          android:layout_alignBottom="@+id/tv_open_lock_times"
-                         android:layout_marginBottom="3dp"
+                         android:layout_marginLeft="2pt"
+                         android:layout_marginBottom="6pt"
+                         android:layout_toRightOf="@+id/tv_open_lock_times"
                          android:text="@string/ci"
                          android:textColor="#999999"
-                         android:textSize="@dimen/sp_12" />
+                         android:textSize="12pt" />
                   </RelativeLayout>
                </RelativeLayout>
-            </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/iv_device_dynamic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/dp_20"
-                android:src="@mipmap/right" />
          </LinearLayout>
 
          <LinearLayout
              android:id="@+id/ll_video_lock_msg"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:paddingTop="10dp"
+             android:layout_height="176pt"
+             android:layout_marginTop="12pt"
+             android:background="@drawable/background_white_3dp"
              android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="14pt"
+                android:layout_marginLeft="14pt"
+                android:textSize="15pt"
+                android:textColor="#333333"
                 android:text="@string/philips_frament_warning_message_inform"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_video_lock_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginLeft="14pt"
+                android:layout_marginRight="13pt"
+                android:layout_marginTop="19pt"/>
          </LinearLayout>
 
-         <TextView
-             android:id="@+id/tv_today_lock_statistics"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="10dp"
-             android:text="@string/philips_frament_today_lock_statistics"/>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="329pt"
+             android:background="@drawable/background_white_3dp"
+             android:layout_marginTop="12pt"
+             android:orientation="vertical">
 
-         <RelativeLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="center"
-             android:layout_marginTop="10dp"
-             android:background="@mipmap/bluetooth_no_connect_big_middle_icon">
-
-            <RelativeLayout
+            <TextView
+                android:id="@+id/tv_today_lock_statistics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_marginTop="14pt"
+                android:layout_marginLeft="14pt"
+                android:textSize="15pt"
+                android:textColor="#333333"
+                android:text="@string/philips_frament_today_lock_statistics"/>
+
+            <RelativeLayout
+                android:layout_width="140pt"
+                android:layout_height="140pt"
+                android:layout_marginTop="34pt"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/philips_message_img_statistical">
 
                <RelativeLayout
-                   android:id="@+id/rl_open_lock_number"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_centerHorizontal="true">
+                   android:layout_centerInParent="true">
 
-                  <TextView
-                      android:id="@+id/tv_open_lock_number"
+                  <RelativeLayout
+                      android:id="@+id/rl_open_lock_number"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="26sp"
-                      android:text="100"/>
+                      android:layout_centerHorizontal="true">
+
+                     <TextView
+                         android:id="@+id/tv_open_lock_number"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textSize="30pt"
+                         android:textColor="#333333"
+                         android:text="20"/>
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_toRightOf="@+id/tv_open_lock_number"
+                         android:layout_marginLeft="2pt"
+                         android:layout_marginBottom="6pt"
+                         android:layout_alignBottom="@+id/tv_open_lock_number"
+                         android:textSize="14pt"
+                         android:textColor="#999999"
+                         android:text="@string/bar"/>
+                  </RelativeLayout>
 
                   <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_toRightOf="@+id/tv_open_lock_number"
-                      android:layout_marginLeft="4dp"
-                      android:layout_marginBottom="4dp"
-                      android:layout_alignBottom="@+id/tv_open_lock_number"
-                      android:textSize="16sp"
-                      android:text="@string/ci"/>
+                      android:layout_below="@+id/rl_open_lock_number"
+                      android:textSize="11pt"
+                      android:textColor="#999999"
+                      android:text="@string/philips_frament_today_lock_message"/>
                </RelativeLayout>
 
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/rl_open_lock_number"
-                   android:text="@string/philips_frament_today_lock_message"/>
             </RelativeLayout>
 
-         </RelativeLayout>
-
-         <androidx.recyclerview.widget.RecyclerView
-             android:id="@+id/rcv_today_lock_statistics"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="20dp"/>
-
-         <TextView
-             android:id="@+id/tv_seven_day_data_statistics"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="10dp"
-             android:text="@string/philips_frament_seven_day_data_statistics"/>
-
-         <RelativeLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/white"
-             android:layout_marginTop="20dp">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_seven_day_data_statistics"
+                android:id="@+id/rcv_today_lock_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-         </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginRight="14pt"/>
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:layout_marginTop="12pt"
+             android:layout_marginBottom="80pt"
+             android:background="@drawable/background_white_3dp">
+            <TextView
+                android:id="@+id/tv_seven_day_data_statistics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14pt"
+                android:layout_marginLeft="15pt"
+                android:textSize="15pt"
+                android:textColor="#333333"
+                android:text="@string/philips_frament_seven_day_data_statistics"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="17pt">
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/rcv_seven_day_data_statistics"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+            </RelativeLayout>
+         </LinearLayout>
       </LinearLayout>
 
    </ScrollView>

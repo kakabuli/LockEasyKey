@@ -2,14 +2,14 @@ package com.philips.easykey.lock.bean;
 
 public class TodayLockStatisticsBean {
 
-    private String statisticsType;
+    private int statisticsType;
     private int statisticsCount;
 
-    public String getStatisticsType() {
+    public int getStatisticsType() {
         return statisticsType;
     }
 
-    public void setStatisticsType(String statisticsType) {
+    public void setStatisticsType(int statisticsType) {
         this.statisticsType = statisticsType;
     }
 
