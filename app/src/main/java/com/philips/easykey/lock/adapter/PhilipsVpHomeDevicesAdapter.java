@@ -27,6 +27,7 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
     private OnClickMoreListener mOnClickMoreListener;
     private OnClickPasswordListener mOnClickPasswordListener;
     private OnClickMessageListener mOnClickMessageListenter;
+    private OnClickCallingListener mOnClickCallingListener;
 
     public PhilipsVpHomeDevicesAdapter(Context context, int convertId, List<PhilipsDeviceBean> dataList) {
         super(context, convertId, dataList);
@@ -51,6 +52,11 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         view.findViewById(R.id.ivPwd).setOnClickListener(v -> {
             if(mOnClickPasswordListener != null){
                 mOnClickPasswordListener.onClick(v,data);
+            }
+        });
+        view.findViewById(R.id.ivVideo).setOnClickListener(v -> {
+            if(mOnClickCallingListener != null){
+                mOnClickCallingListener.onClick(v,data);
             }
         });
         tvDeviceName.setText(StringUtil.processEmptyString(data.getDeviceName()));
@@ -82,6 +88,14 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
     }
 
     public interface OnClickMessageListener {
+        void onClick(View v, @NotNull PhilipsDeviceBean data);
+    }
+
+    public void setOnClickCallingListener(OnClickCallingListener onClickCallingListener){
+        mOnClickCallingListener = onClickCallingListener;
+    }
+
+    public interface OnClickCallingListener {
         void onClick(View v, @NotNull PhilipsDeviceBean data);
     }
 }

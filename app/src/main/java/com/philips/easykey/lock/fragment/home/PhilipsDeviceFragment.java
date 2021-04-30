@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.PhilipsAddDeviceActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockDetailActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity;
 import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
@@ -34,6 +35,7 @@ import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceTypeBean;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
@@ -157,6 +159,18 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
             startActivity(intent);
         });
+        mVpHomeDevicesAdapter.setOnClickCallingListener((v, data) -> {
+            if(data.getDeviceType() != HomeShowBean.TYPE_WIFI_VIDEO_LOCK) return;
+            if(data.getPowerSave() == 1){
+                powerStatusDialog();
+                return;
+            }
+            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockCallingActivity.class);
+            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
+            intent.putExtra(KeyConstants.WIFI_SN, data.getWifiSn());
+            startActivity(intent);
+
+        });
         mVPDevices.setOffscreenPageLimit(4);
         mVPDevices.setPageTransformer(false, new PhilipsVpTransform());
         mVPDevices.setAdapter(mVpHomeDevicesAdapter);
@@ -239,6 +253,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             deviceBean.setDeviceType(bean.getDeviceType());
             if(bean.getObject() instanceof WifiLockInfo) {
                 deviceBean.setWifiSn(((WifiLockInfo) bean.getObject()).getWifiSN());
+                deviceBean.setPowerSave(((WifiLockInfo) bean.getObject()).getPowerSave());
             } else if(bean.getObject() instanceof ClothesHangerMachineAllBean) {
                 deviceBean.setWifiSn(((ClothesHangerMachineAllBean) bean.getObject()).getWifiSN());
             }
@@ -386,4 +401,28 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     }
 
+    public void powerStatusDialog(){
+        AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
+                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
+    }
 }
