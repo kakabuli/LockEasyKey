@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -95,7 +95,7 @@ public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlay
 
         LogUtils.d("video duration = " + videoDuration);
         if (videoDuration == 0) {
-            Toast.makeText(this.getApplicationContext(), "Could not play this video.", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.philips_album_not_find_video));
             finish();
         }
         durationSeekBar.setProgress(0);

@@ -3,6 +3,7 @@ package com.philips.easykey.lock.fragment.device;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,22 @@ import androidx.camera.view.PreviewView;
 import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.zxing.Result;
 import com.king.zxing.CameraScan;
 import com.king.zxing.DefaultCameraScan;
-import com.king.zxing.ViewfinderView;
+import com.king.zxing.util.CodeUtils;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
+import com.philips.easykey.lock.widget.image.GlideEngine;
+
+import java.util.List;
 
 
 /**
@@ -46,11 +56,8 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
         View root = inflater.inflate(R.layout.philips_fragment_qr_code_scan, container, false);
 
         PreviewView previewView = root.findViewById(R.id.previewView);
-        ViewfinderView viewfinderView = root.findViewById(R.id.viewfinderView);
         mCameraScan = new DefaultCameraScan(this, previewView);
-        mCameraScan.setOnScanResultCallback(this)
-                .setVibrate(true)
-                .startCamera();
+        mCameraScan.setOnScanResultCallback(this).setVibrate(true);
 
         ImageView ivFlashLight = root.findViewById(R.id.ivFlashLight);
         ivFlashLight.setOnClickListener(v -> {
@@ -58,8 +65,18 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
                 mCameraScan.enableTorch(!mCameraScan.isTorchEnabled());
             }
         });
+        ImageView ivAlbum = root.findViewById(R.id.ivAlbum);
+        ivAlbum.setOnClickListener(v -> createAlbum());
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mCameraScan != null) {
+            mCameraScan.startCamera();
+        }
     }
 
     @Override
@@ -73,8 +90,13 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
 
     @Override
     public boolean onScanResultCallback(Result result) {
-        LogUtils.d(result, result.getText());
-        if(result.getText().contains("WiFi&VIDEO") || result.getText().contains("kaadas_WiFi_camera")){
+        String code = result.getText();
+        LogUtils.d(result, code);
+        return processScanResult(code);
+    }
+
+    private boolean processScanResult(String code) {
+        if(code.contains("WiFi&VIDEO") || code.contains("kaadas_WiFi_camera")){
             //视频WIFI锁
             Intent wifiIntent = new Intent(getContext(), WifiLockAddNewFirstActivity.class);
             String wifiModelType = "WiFi&VIDEO";
@@ -98,21 +120,57 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
 
     }
 
-    private MessageDialog messageDialog;
+    private MessageDialog mMessageDialog;
 
-    public void unKnowQr(){
-        //信息
-        messageDialog = new MessageDialog.Builder(getContext())
+    private void unKnowQr(){
+        // 信息
+        mMessageDialog = new MessageDialog.Builder(getContext())
                 .setMessage(R.string.unknow_qr)
                 .create();
-        messageDialog.show();
+        mMessageDialog.show();
 
         new Handler().postDelayed(() -> {
-            if(messageDialog != null){
-                messageDialog.dismiss();
+            if(mMessageDialog != null){
+                mMessageDialog.dismiss();
                 getActivity().finish();
             }
-        }, 3000); //延迟3秒消失
+        }, 3000); // 延迟3秒消失
     }
+
+    private void createAlbum() {
+        PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .isCamera(false)
+                .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
+                .minSelectNum(1)// 最小选择数量
+                .imageSpanCount(4)// 每行显示个数
+                .selectionMode(PictureConfig.SINGLE)
+                .isPreviewImage(true)
+                .isZoomAnim(true)
+                .isEnableCrop(false)// 是否裁剪
+                .forResult(mOnResultCallbackListener);
+    }
+
+    private final OnResultCallbackListener<LocalMedia> mOnResultCallbackListener = new OnResultCallbackListener<LocalMedia>() {
+        @Override
+        public void onResult(List<LocalMedia> result) {
+            if(result.size() > 0){
+                String path = result.get(0).getRealPath();
+                if(TextUtils.isEmpty(path)) {
+                    return;
+                }
+                LogUtils.d("bitmap path: " + path);
+                String code = CodeUtils.parseCode(path);
+                processScanResult(code);
+            }else {
+                ToastUtils.showShort(R.string.no_data);
+            }
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+    };
 
 }

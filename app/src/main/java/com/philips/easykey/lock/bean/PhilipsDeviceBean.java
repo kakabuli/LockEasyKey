@@ -14,7 +14,15 @@ public class PhilipsDeviceBean {
     private String lastRecordDetail;
     private int deviceType;              // 模拟 6：视频锁  7：晾衣机
     private String wifiSn;
+    private int powerSave;
 
+    public int getPowerSave() {
+        return powerSave;
+    }
+
+    public void setPowerSave(int powerSave) {
+        this.powerSave = powerSave;
+    }
 
     public String getDeviceName() {
         return deviceName;

@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.adapter.WifiLockOperationGroupRecordAdapter;
 import com.philips.easykey.lock.bean.WifiLockOperationRecordGroup;
@@ -244,7 +244,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             @Override
             public void onClickMore() {
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
             }
@@ -307,9 +307,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             case 4:
                 //“锁已打开”
                 //TODO:开锁动画
-//                ivBackGround.setImageResource(R.mipmap.video_zheng_chang_big_middle_icon);  //背景大图标
                 ivCenterIcon.setImageResource(R.mipmap.wifi_video_lock_home_middle_icon);  //门锁关闭状态
-//                tvTopStates.setText(getString(R.string.open_lock_already));  //设置设备状态   离线
                 tvCenterMode.setText(tvCenterMode.getText() + "");
                 tvCenterContent.setText(getString(R.string.click_door_info));
                 tvTopStates.setText(getString(R.string.philips_fragment_wifi_video_unlocked));
@@ -413,7 +411,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             case R.id.iv_device_dynamic:
             case R.id.tv_more:
                 //  跳转至记录界面
-                Intent intent = new Intent(getContext(), WifiLockRecordActivity.class);
+                Intent intent = new Intent(getContext(), PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
                 break;

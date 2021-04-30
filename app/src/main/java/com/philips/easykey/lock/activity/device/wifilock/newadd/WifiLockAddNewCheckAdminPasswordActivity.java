@@ -7,7 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
@@ -192,7 +192,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
             @Override
             public void run() {
                 finish();
-                Toast.makeText(WifiLockAddNewCheckAdminPasswordActivity.this, R.string.bind_failed, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(R.string.bind_failed);
                 startActivity(new Intent(WifiLockAddNewCheckAdminPasswordActivity.this, WifiLockAddNewScanFailedActivity.class));
                 socketManager.destroy();
             }

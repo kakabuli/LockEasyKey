@@ -264,7 +264,6 @@ public class BluetoothLeService extends Service {
                 Log.e(TAG, "onDescriptorWrite  写入失败");
                 if (status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION
                         || status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION) {
-//                    pairDevice(); // TODO: Android automatically pairs in this case
                     sendExplicitBroadcastIntent(mContext, new Intent(ACTION_GATT_INSUFFICIENT_ENCRYPTION));
                 } else {
                     sendExplicitBroadcastIntent(mContext, new Intent(ACTION_WRITE_FAILED));

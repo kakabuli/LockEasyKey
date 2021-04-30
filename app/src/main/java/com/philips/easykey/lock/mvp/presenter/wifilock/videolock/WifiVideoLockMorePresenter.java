@@ -99,7 +99,7 @@ public class WifiVideoLockMorePresenter<T> extends BasePresenter<IWifiVideoLockM
         ;
     }
 
-    public void deleteVideDevice(String wifiSn){
+    public void deleteVideoDevice(String wifiSn){
         XiaokaiNewServiceImp.wifiVideoLockUnbind(wifiSn, MyApplication.getInstance().getUid())
                 .subscribe(new BaseObserver<WifiLockVideoBindResult>() {
             @Override

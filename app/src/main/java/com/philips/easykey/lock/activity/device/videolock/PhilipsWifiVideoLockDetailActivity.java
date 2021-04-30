@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.activity.device.videolock;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -14,19 +13,29 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
-import com.philips.easykey.lock.activity.device.wifilock.WifiLockRecordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
-import com.philips.easykey.lock.adapter.WifiLockDetailOneLineAdapater;
+import com.philips.easykey.lock.activity.MainActivity;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
+import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
+import com.philips.easykey.lock.bean.HomeShowBean;
+import com.philips.easykey.lock.bean.WifiLockFunctionBean;
+import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.mvp.presenter.wifilock.PhilipsWifiVideoLockDetailPresenter;
+import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockMorePresenter;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsWifiVideoLockDetailView;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockMoreView;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
+import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -35,7 +44,8 @@ import com.philips.easykey.lock.utils.StatusBarUtils;
 import java.util.List;
 
 
-public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActivity {
+public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWifiVideoLockDetailView, PhilipsWifiVideoLockDetailPresenter<IPhilipsWifiVideoLockDetailView>>
+        implements IPhilipsWifiVideoLockDetailView {
 
     @BindView(R.id.back)
     ImageView back;
@@ -63,9 +73,15 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
     RelativeLayout mRlDetailShare;
     @BindView(R.id.rl_detail_share_setting)
     RelativeLayout mRlDetailShareSetting;
+    @BindView(R.id.iv_detail_delete)
+    ImageView mIvDetailDelete;
 
     private String wifiSn = "";
     private WifiLockInfo wifiLockInfo;
+    private boolean isWifiVideoLockType = false;
+    private WiFiLockPassword wiFiLockPassword;
+    private List<WifiLockFunctionBean> supportFunctions;
+    private List<WifiLockShareResult.WifiLockShareUser> shareUsers;
 
 
     private static final int TO_MORE_REQUEST_CODE = 101;
@@ -90,10 +106,46 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
         super.onDestroy();
     }
 
+    @Override
+    protected PhilipsWifiVideoLockDetailPresenter<IPhilipsWifiVideoLockDetailView> createPresent() {
+        return new PhilipsWifiVideoLockDetailPresenter<>();
+    }
+
     private void initData() {
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
         if (wifiLockInfo != null){
+            if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSn) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
+                isWifiVideoLockType = true;
+            }
+
+            String localPasswordCache = (String) SPUtils.get(KeyConstants.WIFI_LOCK_PASSWORD_LIST + wifiSn, "");
+            if (!TextUtils.isEmpty(localPasswordCache)) {
+                wiFiLockPassword = new Gson().fromJson(localPasswordCache, WiFiLockPassword.class);
+            }
+            String localShareUsers = (String) SPUtils.get(KeyConstants.WIFI_LOCK_SHARE_USER_LIST + wifiSn, "");
+            if (!TextUtils.isEmpty(localShareUsers)) {
+                shareUsers = new Gson().fromJson(localShareUsers, new TypeToken<List<WifiLockShareResult.WifiLockShareUser>>() {
+                }.getType());
+                LogUtils.d("本地的分享用户为  shareUsers  " + (shareUsers == null ? 0 : shareUsers.size()));
+            }
+            if(supportFunctions == null){
+                String functionSet = wifiLockInfo.getFunctionSet(); //锁功能集
+                int func = 0x64;
+                try {
+                    if(!functionSet.isEmpty()){
+
+                        func = Integer.parseInt(functionSet);
+                    }
+                } catch (Exception e) {
+                    func = 0x64;
+                }
+                supportFunctions = BleLockUtils.getWifiLockSupportFunction(func);
+            }
+            initPassword();
+            mPresenter.getPasswordList(wifiSn);
+            mPresenter.queryUserList(wifiSn);
+
             mTvDeviceName.setText(wifiLockInfo.getLockNickname().isEmpty() ? wifiSn : wifiLockInfo.getLockNickname());
 
             if(wifiLockInfo.getIsAdmin() == 1){
@@ -101,7 +153,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 mRlDetailShareSetting.setVisibility(View.GONE);
                 mRlDetailShare.setVisibility(View.VISIBLE);
                 mRlDetailAlbum.setVisibility(View.VISIBLE);
-                mIvDetailSetting.setVisibility(View.VISIBLE);
+                mIvDetailDelete.setVisibility(View.GONE);
             }else{
                 mRlDetailPassword.setVisibility(View.GONE);
                 mRlDetailShareSetting.setVisibility(View.VISIBLE);
@@ -114,7 +166,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
 
     @OnClick({R.id.back,R.id.rl_detail_share_setting,R.id.rl_detail_share,R.id.rl_detail_password,
             R.id.rl_detail_album,R.id.tv_right_mode,R.id.rl_detail_record,R.id.iv_detail_setting,
-            R.id.ivVideo})
+            R.id.ivVideo,R.id.iv_detail_delete})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()){
@@ -122,7 +174,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 finish();
                 break;
             case R.id.rl_detail_record:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, WifiLockRecordActivity.class);
+                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);
                 break;
@@ -139,7 +191,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
                 startActivity(intent);
                 break;
             case R.id.rl_detail_share:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                 startActivity(intent);
                 break;
@@ -168,6 +220,34 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
 
                 }
                 break;
+            case R.id.iv_detail_delete:
+                AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
+                        getString(R.string.cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                            @Override
+                            public void left() {
+
+                            }
+
+                            @Override
+                            public void right() {
+                                showLoading(getString(R.string.is_deleting));
+                                if(isWifiVideoLockType){
+                                    mPresenter.deleteVideoDevice(wifiLockInfo.getWifiSN());
+                                }else{
+                                    mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
+                                }
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            }
+
+                            @Override
+                            public void afterTextChanged(String toString) {
+                            }
+                        });
+                break;
         }
     }
 
@@ -177,6 +257,57 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
         if (requestCode == TO_MORE_REQUEST_CODE && resultCode == RESULT_OK) {
             String newName = data.getStringExtra(KeyConstants.WIFI_LOCK_NEW_NAME);
             mTvDeviceName.setText(newName + "");
+        }
+    }
+
+    private void initPassword() {
+        if (wiFiLockPassword != null) {
+            for (WifiLockFunctionBean wifiLockFunctionBean : supportFunctions) {
+                switch (wifiLockFunctionBean.getType()) {
+                    case BleLockUtils.TYPE_PASSWORD:
+                        List<WiFiLockPassword.PwdListBean> pwdList = wiFiLockPassword.getPwdList();
+                        wifiLockFunctionBean.setNumber(pwdList == null ? 0 : pwdList.size());
+                        break;
+                    case BleLockUtils.TYPE_FINGER:
+                        List<WiFiLockPassword.FingerprintListBean> fingerprintList = wiFiLockPassword.getFingerprintList();
+                        wifiLockFunctionBean.setNumber(fingerprintList == null ? 0 : fingerprintList.size());
+                        break;
+                    case BleLockUtils.TYPE_CARD:
+                        List<WiFiLockPassword.CardListBean> cardList = wiFiLockPassword.getCardList();
+                        wifiLockFunctionBean.setNumber(cardList == null ? 0 : cardList.size());
+                        break;
+                    case BleLockUtils.TYPE_FACE_PASSWORD:
+                        List<WiFiLockPassword.FaceListBean> faceList = wiFiLockPassword.getFaceList();
+                        wifiLockFunctionBean.setNumber(faceList == null ? 0 : faceList.size());
+                        break;
+                }
+            }
+        } else {
+            for (WifiLockFunctionBean wifiLockFunctionBean : supportFunctions) {
+                switch (wifiLockFunctionBean.getType()) {
+                    case BleLockUtils.TYPE_PASSWORD:
+                        wifiLockFunctionBean.setNumber(0);
+                        break;
+                    case BleLockUtils.TYPE_FINGER:
+                        wifiLockFunctionBean.setNumber(0);
+                        break;
+                    case BleLockUtils.TYPE_CARD:
+                        wifiLockFunctionBean.setNumber(0);
+                        break;
+                    case BleLockUtils.TYPE_FACE_PASSWORD:
+                        wifiLockFunctionBean.setNumber(0);
+                        break;
+                }
+            }
+        }
+        for (WifiLockFunctionBean wifiLockFunctionBean : supportFunctions) {
+            if (wifiLockFunctionBean.getType() == BleLockUtils.TYPE_SHARE) {
+                if (shareUsers != null) {
+                    wifiLockFunctionBean.setNumber(shareUsers.size());
+                } else {
+                    wifiLockFunctionBean.setNumber(0);
+                }
+            }
         }
     }
 
@@ -204,5 +335,61 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseAddToApplicationActi
 
                     }
                 });
+    }
+
+    @Override
+    public void onGetPasswordSuccess(WiFiLockPassword wiFiLockPassword) {
+        this.wiFiLockPassword = wiFiLockPassword;
+        initPassword();
+    }
+
+    @Override
+    public void onGetPasswordFailedServer(BaseResult baseResult) {
+
+    }
+
+    @Override
+    public void onGetPasswordFailed(Throwable throwable) {
+
+    }
+
+    @Override
+    public void querySuccess(List<WifiLockShareResult.WifiLockShareUser> users) {
+        shareUsers = users;
+        initPassword();
+    }
+
+    @Override
+    public void queryFailedServer(BaseResult result) {
+
+    }
+
+    @Override
+    public void queryFailed(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onDeleteDeviceSuccess() {
+        ToastUtils.showShort(R.string.delete_success);
+        hiddenLoading();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onDeleteDeviceFailed(Throwable throwable) {
+        LogUtils.d("删除失败   " + throwable.getMessage());
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+        hiddenLoading();
+    }
+
+    @Override
+    public void onDeleteDeviceFailedServer(BaseResult result) {
+        LogUtils.d("删除失败   " + result.toString());
+        String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+        ToastUtils.showLong(httpErrorCode);
+        hiddenLoading();
     }
 }

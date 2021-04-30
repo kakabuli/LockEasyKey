@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.utils;
 
 import android.content.Context;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import java.io.BufferedWriter;
@@ -69,7 +69,7 @@ public class MyLog {
             filerWriter = new FileWriter(file, true);
             bufWriter = new BufferedWriter(filerWriter);
         } catch (Exception e) {
-            Toast.makeText(mContext, mContext.getString(R.string.log_info), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(mContext.getString(R.string.log_info));
         }
     }
 

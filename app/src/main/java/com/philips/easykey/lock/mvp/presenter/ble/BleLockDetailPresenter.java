@@ -50,7 +50,7 @@ public class BleLockDetailPresenter<T> extends BlePresenter<IDeviceDetailView> {
 
     @Override
     public void authSuccess() {
-        // TODO: 2019/4/1    连接成功   之后通过特征值获取信息   不通过   指令获取设备信息  规避管理模式下发送指令不能获取设备信息的问题
+        //  2019/4/1    连接成功   之后通过特征值获取信息   不通过   指令获取设备信息  规避管理模式下发送指令不能获取设备信息的问题
         //存在一个问题    通过特征值获取信息可能不是最新的信息。这个怎么办
         if (bleLockInfo.getBattery() == -1) {   //没有获取过再重新获取   获取到电量
             readBattery();

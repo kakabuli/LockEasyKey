@@ -317,31 +317,32 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.btn_delete:  //删除设备
-                        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-                            @Override
-                            public void left() {
+                        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
+                                getString(R.string.cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                                    @Override
+                                    public void left() {
 
-                            }
+                                    }
 
-                            @Override
-                            public void right() {
-                                showLoading(getString(R.string.is_deleting));
-                                if(isWifiVideoLockType){
-                                    mPresenter.deleteVideDevice(wifiLockInfo.getWifiSN());
-                                }else{
-                                    mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
-                                }
+                                    @Override
+                                    public void right() {
+                                        showLoading(getString(R.string.is_deleting));
+                                        if(isWifiVideoLockType){
+                                            mPresenter.deleteVideoDevice(wifiLockInfo.getWifiSN());
+                                        }else{
+                                            mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
+                                        }
 
-                            }
+                                    }
 
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
+                                    @Override
+                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    }
 
-                            @Override
-                            public void afterTextChanged(String toString) {
-                            }
-                        });
+                                    @Override
+                                    public void afterTextChanged(String toString) {
+                                    }
+                                });
                         break;
                     case R.id.rl_wifi_name: //WiFi名称
                         if(avi.isShow()){

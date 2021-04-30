@@ -41,6 +41,7 @@
     <color name="cD6D6D6">#D6D6D6</color>
     <color name="c25F290">#25F290</color>
     <color name="cFF3B30">#FF3B30</color>
+    <color name="cCD2020">#CD202C</color>
     <color name="grayIconTint">#727272</color>
     <color name="colorA">#ff5e00</color>
     <color name="colorD">#808080</color>
@@ -72,4 +73,5 @@
     <color name="c666666">#666666</color>
     <color name="c000028">#000028</color>
     <color name="cd9d9d9">#d9d9d9</color>
+    <color name="ce1e1e1">#e1e1e1</color>
 </resources>

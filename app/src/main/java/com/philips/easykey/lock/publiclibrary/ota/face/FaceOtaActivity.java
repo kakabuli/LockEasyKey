@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleActivity;
@@ -113,7 +113,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
                 }
             }.start();
         } else {
-            Toast.makeText(this, "请连接到指定WiFi", Toast.LENGTH_LONG).show();
+            ToastUtils.showShort(getString(R.string.philips_face_ota_conncet_wifi));
         }
     }
 
@@ -151,8 +151,8 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    otaStatus.setText("传输完成");
-                    Toast.makeText(FaceOtaActivity.this, "数据传输完成", Toast.LENGTH_LONG).show();
+                    otaStatus.setText(getString(R.string.philips_face_ota_transmission_complete));
+                    ToastUtils.showShort(getString(R.string.philips_face_ota_data_transmission_complete));
                     mPresenter.endSendFile();
                 }
             });
@@ -164,7 +164,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    otaStatus.setText("OTA出错  " + errorCode);
+                    otaStatus.setText(getString(R.string.philips_face_ota_failed,errorCode + ""));
                     mPresenter.finishOta((byte) moduleNumber, (byte) otaType, version);
                 }
             });

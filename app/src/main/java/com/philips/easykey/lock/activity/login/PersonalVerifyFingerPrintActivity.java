@@ -38,7 +38,9 @@ import com.philips.easykey.lock.widget.CircleImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-//todo 指纹验证解锁页面 从启动页跳转
+/**
+ * 指纹验证解锁页面 从启动页跳转
+ */
 public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVerifyFingerPrintView, PersonalFingerPrintPresenter<IPersonalVerifyFingerPrintView>> implements IPersonalVerifyFingerPrintView {
 
 

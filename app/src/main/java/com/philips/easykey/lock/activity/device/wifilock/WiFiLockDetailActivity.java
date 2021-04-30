@@ -25,7 +25,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkActivity;
 import com.philips.easykey.lock.activity.addDevice.singleswitch.SwipchLinkNo;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
-import com.philips.easykey.lock.activity.device.wifilock.family.WifiLockFamilyManagerActivity;
+import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWifiLockPasswordShareActivity;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
@@ -337,7 +337,6 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
             }
         }
 
-        //todo  读取电量时间
         long readDeviceInfoTime = updateTime * 1000;
         long todayMillions = DateUtils.getTodayMillions();
         LogUtils.d("更新时间   " + readDeviceInfoTime + "  当前时间  " + System.currentTimeMillis() + "  相差时间 " + ((System.currentTimeMillis() - readDeviceInfoTime))
@@ -473,7 +472,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;
@@ -507,7 +506,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             startActivity(intent);
                             break;
                         case BleLockUtils.TYPE_RECORD:
-                            intent = new Intent(WiFiLockDetailActivity.this,WifiLockRecordActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                             startActivity(intent);
 
@@ -579,7 +578,7 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
                             }
                             break;
                         case BleLockUtils.TYPE_SHARE:
-                            intent = new Intent(WiFiLockDetailActivity.this, WifiLockFamilyManagerActivity.class);
+                            intent = new Intent(WiFiLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             break;

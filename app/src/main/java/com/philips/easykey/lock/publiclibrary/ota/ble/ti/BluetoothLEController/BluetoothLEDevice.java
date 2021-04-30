@@ -132,7 +132,7 @@ public class BluetoothLEDevice {
                 Log.d(TAG,"Disconnect called from : " + stackTraceElements[3].getClassName() + " " + stackTraceElements[3].getMethodName());
         }
         if (g != null) {
-            //TODO: Add timeout
+            // Add timeout
             g.disconnect();
         }
         else {
@@ -486,7 +486,7 @@ public class BluetoothLEDevice {
                     long curDate = new Date().getTime();
                     if (Math.abs(transDate - curDate) > 5000) {
                         Log.d(TAG,"Transaction has used more than " + (Math.abs(transDate - curDate) / 1000) + " seconds to complete !");
-                        /* TODO: Handle error here */
+                        /*  Handle error here */
                         currentTransaction = null;
                         continue;
                     }
@@ -497,7 +497,7 @@ public class BluetoothLEDevice {
                     currentTransaction.transactionStartDate = new Date();
                     if (!commitTransactionToBT(currentTransaction)) {
                         currentTransaction = null;
-                        /* TODO: Needs to warn application that things went sour ! */
+                        /* Needs to warn application that things went sour ! */
                         continue;
                     }
                 }

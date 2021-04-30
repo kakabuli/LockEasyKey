@@ -12,8 +12,6 @@ import java.util.List;
  */
 public interface IOperationRecordView extends IBleView {
 
-    // TODO: 2019/3/7   测试开锁记录
-
     /**
      * onLose
      */

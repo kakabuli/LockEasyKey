@@ -14,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import butterknife.OnClick;
+
 /**
  * author :
  * time   : 2021/4/22
@@ -23,6 +25,9 @@ import java.util.List;
 public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDeviceBean> {
 
     private OnClickMoreListener mOnClickMoreListener;
+    private OnClickPasswordListener mOnClickPasswordListener;
+    private OnClickMessageListener mOnClickMessageListenter;
+    private OnClickCallingListener mOnClickCallingListener;
 
     public PhilipsVpHomeDevicesAdapter(Context context, int convertId, List<PhilipsDeviceBean> dataList) {
         super(context, convertId, dataList);
@@ -37,6 +42,21 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         view.findViewById(R.id.ivMore).setOnClickListener(v -> {
             if(mOnClickMoreListener != null) {
                 mOnClickMoreListener.onClick(v, data);
+            }
+        });
+        view.findViewById(R.id.ivMessage).setOnClickListener(v -> {
+            if(mOnClickMessageListenter != null){
+                mOnClickMessageListenter.onClick(v,data);
+            }
+        });
+        view.findViewById(R.id.ivPwd).setOnClickListener(v -> {
+            if(mOnClickPasswordListener != null){
+                mOnClickPasswordListener.onClick(v,data);
+            }
+        });
+        view.findViewById(R.id.ivVideo).setOnClickListener(v -> {
+            if(mOnClickCallingListener != null){
+                mOnClickCallingListener.onClick(v,data);
             }
         });
         tvDeviceName.setText(StringUtil.processEmptyString(data.getDeviceName()));
@@ -55,4 +75,27 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         void onClick(View v, @NotNull PhilipsDeviceBean data);
     }
 
+    public void setOnClickPasswordListener(OnClickPasswordListener onClickPasswordListener){
+        mOnClickPasswordListener = onClickPasswordListener;
+    }
+
+    public interface OnClickPasswordListener {
+        void onClick(View v, @NotNull PhilipsDeviceBean data);
+    }
+
+    public void setOnClickMessageListener(OnClickMessageListener onClickMessageListener){
+        mOnClickMessageListenter = onClickMessageListener;
+    }
+
+    public interface OnClickMessageListener {
+        void onClick(View v, @NotNull PhilipsDeviceBean data);
+    }
+
+    public void setOnClickCallingListener(OnClickCallingListener onClickCallingListener){
+        mOnClickCallingListener = onClickCallingListener;
+    }
+
+    public interface OnClickCallingListener {
+        void onClick(View v, @NotNull PhilipsDeviceBean data);
+    }
 }

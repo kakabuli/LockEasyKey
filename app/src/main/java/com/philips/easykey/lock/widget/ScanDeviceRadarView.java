@@ -35,24 +35,21 @@ public class ScanDeviceRadarView extends View {
 
     public ScanDeviceRadarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        // TODO Auto-generated constructor stub
         init(context);
     }
 
     public ScanDeviceRadarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
         init(context);
     }
 
     public ScanDeviceRadarView(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         init(context);
     }
 
     /**
-     * TODO<提前初始化好需要使用的对象,避免在绘制过程中多次初始化>
+     * <提前初始化好需要使用的对象,避免在绘制过程中多次初始化>
      *
      * @return void
      */
@@ -71,7 +68,6 @@ public class ScanDeviceRadarView extends View {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // TODO Auto-generated method stub
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // 获取控件区域宽高
@@ -102,7 +98,6 @@ public class ScanDeviceRadarView extends View {
      */
     @Override
     protected void onDraw(Canvas canvas) {
-        // TODO Auto-generated method stub
         super.onDraw(canvas);
         // 开始绘制最外层的圆
         mPaint.setAntiAlias(true);// 设置抗锯齿
@@ -202,7 +197,7 @@ public class ScanDeviceRadarView extends View {
     }
 
     /**
-     * TODO<设置扫描状态>
+     * <设置扫描状态>
      *
      * @return void
      */
@@ -212,7 +207,7 @@ public class ScanDeviceRadarView extends View {
     }
 
     /**
-     * TODO<新增动态点>
+     * <新增动态点>
      *
      * @return void
      */
@@ -222,7 +217,7 @@ public class ScanDeviceRadarView extends View {
     }
 
     /**
-     * TODO<解析获取控件宽高>
+     * <解析获取控件宽高>
      *
      * @return int
      */

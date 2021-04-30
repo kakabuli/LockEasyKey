@@ -14,7 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import com.blankj.utilcode.util.ToastUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -192,13 +192,13 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
 
     @Override
     public void onSetNameFailedNet(Throwable throwable) {
-        Toast.makeText(this, R.string.set_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.set_failed);
         hiddenLoading();
     }
 
     @Override
     public void onSetNameFailedServer(BaseResult baseResult) {
-        Toast.makeText(this, R.string.set_failed, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(R.string.set_failed);
         hiddenLoading();
     }
 }

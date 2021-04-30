@@ -41,6 +41,15 @@
             android:layout_alignParentEnd="true"
 
             />
+
+        <ImageView
+            android:id="@+id/iv_detail_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="16pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/philips_equipment_icon_delete"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <ImageView

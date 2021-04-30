@@ -259,24 +259,6 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
         lockInfo = (GwLockInfo) intent.getSerializableExtra(KeyConstants.GATEWAY_LOCK_INFO);
         userId = MyApplication.getInstance().getUid();
         gatewayModel =getIntent().getStringExtra(KeyConstants.GATEWAY_MODEL);
-        //第一次进入该页面,由于锁上重置，删除，添加无法知道当前锁的信息所以只有第一次进入需要判断
-//        int firstIn = (int) SPUtils.get(KeyConstants.FIRST_IN_GATEWAY_LOCK + userId + deviceId, 0);
-//        LogUtils.d("是否是第一次进入   " + firstIn);
-//        if (firstIn == 0) { //默认是第一次进来
-//            mPresenter.syncPassword(gatewayId, deviceId);
-//            loadingDialog.show2(getString(R.string.get_gateway_lock_pwd_waiting));
-//        } else {
-        // TODO: 2019/11/26    获取缓存的数据
-//        List<GatewayPasswordPlanBean> gatewayPasswordPlanBeans = daoManager.queryAll(deviceId, MyApplication.getInstance().getUid(), gatewayId);
-//        mList.clear();
-//        mList.addAll(gatewayPasswordPlanBeans);
-//        if (gatewayPasswordPlanBeans.size() > 0) {
-//            gatewayLockPasswordAdapter.notifyDataSetChanged();
-//            passwordPageChange(true);
-//        } else {
-//            passwordPageChange(false);
-//        }
-//        }
     }
 
 

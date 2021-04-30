@@ -874,19 +874,19 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.family.WifiLockFamilyManagerActivity"
+            android:name=".activity.device.wifilock.family.PhilipsWifiLockFamilyManagerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.family.WiFiLockAddShareUserActivity"
+            android:name=".activity.device.wifilock.family.PhilipsWiFiLockAddShareUserActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.family.WiFiLockShareUserDetailActivity"
+            android:name=".activity.device.wifilock.family.PhilipsWiFiLockShareUserDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.wifilock.WifiLockRecordActivity"
+            android:name=".activity.device.wifilock.PhilipsWifiLockRecordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

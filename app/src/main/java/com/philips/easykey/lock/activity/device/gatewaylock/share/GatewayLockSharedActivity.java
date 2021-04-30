@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -54,7 +55,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
     @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     @BindView(R.id.ll_add_user)
-    LinearLayout llAddUser;
+    RelativeLayout llAddUser;
     @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
 
@@ -69,7 +70,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bluetooth_shared_device_management);
+        setContentView(R.layout.philips_activity_shared_device_management);
         ButterKnife.bind(this);
         initView();
         initData();
