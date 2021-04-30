@@ -453,3 +453,9 @@ public static java.lang.String TABLENAME;
 # If you do NOT use RxJava:
 -dontwarn rx.**
 # ----------------GreenDao------------------
+
+# ----------------二维码库&easypermissions&Google相关的------------------
+-keep class com.king.zxing**{*; }
+-keep class pub.devrel.easypermissions**{*;}
+-keep class com.google**{*;}
+# ----------------二维码库&easypermissions&Google相关的------------------
