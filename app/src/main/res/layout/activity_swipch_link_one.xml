@@ -60,7 +60,7 @@
             android:id="@+id/btn_next"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:text="@string/next_step"
+            android:text="@string/philips_next_step"
             android:background="@drawable/register_button_shape"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

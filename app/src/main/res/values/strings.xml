@@ -565,7 +565,7 @@
     <string name="bluetooth_no_connect_bluetooth_one_three">语音提示：“已进入管理模式”。</string>
     <string name="bluetooth_no_connect_bluetooth_two_hint">按照语音提示,点击对应数字选项,进入指纹添加</string>
     <string name="bluetooth_no_connect_bluetooth_three_hint">请找到门锁指纹采集位置,按照语音提示将要手指触摸进行采集</string>
-    <string name="next_step">下一步</string>
+    <string name="philips_next_step">下一步</string>
 
     <string name="warring_lock">您的门锁错误验证多次,门锁系统锁定</string>
     <string name="warring_three_times">您的门锁错误验证多次，请回家或联系保安查看！</string>
@@ -2480,6 +2480,9 @@
     <string name="philips_contact_us_content">欢迎使用飞利浦智能锁，门锁售后服务及\n资讯，请关注【飞利浦智能锁】公众号</string>
     <string name="Philips_after_sales_call">售后电话</string>
     <string name="Philips_after_sales_number">400-8828-236</string>
+    <string name="philips_tip_add_video_lock_task1">1.触摸门锁数字键区域，唤醒门锁面板 \n2.连续2次点击“*”号键，输入管理员密码\n&#160;&#160;&#160;&#160;后按“#”号键确认 \n3.根据语音提示，在门锁菜单中选择“4-1”</string>
+    <string name="philips_the_door_lock_has_a_voice_prompt_distributing_network_please_wait">门锁已语音提示“配网中，请稍后”</string>
+    <string name="philips_voice_prompt_setting_failed">语音提示设置失败？</string>
 
 
 </resources>

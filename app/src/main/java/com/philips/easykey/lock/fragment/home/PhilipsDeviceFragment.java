@@ -295,8 +295,8 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_default));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_selected));
-        mTvCurrentPage.setVisibility(View.VISIBLE);
-        mTvCount.setVisibility(View.VISIBLE);
+        mTvCurrentPage.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
+        mTvCount.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
         mVPDevices.setVisibility(View.VISIBLE);
         mRvDevices.setVisibility(View.GONE);
 

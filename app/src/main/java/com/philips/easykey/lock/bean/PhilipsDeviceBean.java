@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.bean;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * author :
  * time   : 2021/4/22
@@ -72,6 +74,7 @@ public class PhilipsDeviceBean {
         this.wifiSn = wifiSn;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "PhilipsDeviceBean{" +
@@ -80,7 +83,8 @@ public class PhilipsDeviceBean {
                 ", lastRecordTime=" + lastRecordTime +
                 ", lastRecordDetail='" + lastRecordDetail + '\'' +
                 ", deviceType=" + deviceType +
-                ", sn='" + wifiSn + '\'' +
+                ", wifiSn='" + wifiSn + '\'' +
+                ", powerSave=" + powerSave +
                 '}';
     }
 }

@@ -52,7 +52,7 @@
             android:layout_marginRight="@dimen/dp_88"
             android:background="@drawable/retangle_1f96f7_22"
             android:gravity="center"
-            android:text="@string/next_step"
+            android:text="@string/philips_next_step"
             android:textColor="#fff"
             android:textSize="@dimen/sp_15"></Button>
     </LinearLayout>
