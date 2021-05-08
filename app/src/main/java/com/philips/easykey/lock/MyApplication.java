@@ -91,12 +91,15 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.subjects.PublishSubject;
 import com.philips.easykey.core.tool.ActivityCollectorUtil;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 
 /**
  * Create By lxj  on 2019/1/7
  * Describe
  */
 public class MyApplication extends Application {
+    public static final String DB_KEY = "kaadas-2021";
     private static MyApplication instance;
     private String token;
     private String uid;
@@ -141,7 +144,7 @@ public class MyApplication extends Application {
         initXMP2PManager();
         regToWx();
         //配置数据库
-        setUpWriteDataBase();
+        setUpWriteDataBase(DB_KEY);
         // HuaWei phone
         if (Rom.isEmui()) {
             HmsMessaging.getInstance(this).setAutoInitEnabled(true);
@@ -848,9 +851,10 @@ public class MyApplication extends Application {
     private static DaoSession daoWriteSession;
     private DaoManager manager;
 
-    private void setUpWriteDataBase() {
+    private void setUpWriteDataBase(String password) {
+        SQLiteDatabase.loadLibs(this);
         manager = DaoManager.getInstance(this);
-        daoWriteSession = manager.getDaoSession();
+        daoWriteSession = manager.getDaoSession(password);
     }
 
     public DaoSession getDaoWriteSession() {
