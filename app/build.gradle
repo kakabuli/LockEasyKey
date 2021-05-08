@@ -256,4 +256,6 @@ dependencies {
     // 权限请求帮助库
     // For developers using AndroidX in their applications
     implementation 'pub.devrel:easypermissions:3.0.0'
+    // basePopup
+    implementation 'com.github.razerdp:BasePopup:2.2.18'
 }

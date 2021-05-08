@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f7f7f7">
+
+    <ImageView
+        android:id="@+id/ivWifiLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_dms_img_wifi" />
+
+    <ImageView
+        android:id="@+id/ivSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18pt"
+        android:layout_marginStart="95pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivWifiLogo"
+        app:srcCompat="@drawable/philips_dms_icon_support" />
+
+    <TextView
+        android:id="@+id/tv24G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.4G"
+        android:textColor="@color/color_333333"
+        android:textSize="18pt"
+        android:layout_marginStart="4pt"
+        app:layout_constraintBottom_toBottomOf="@+id/ivSupport"
+        app:layout_constraintStart_toEndOf="@+id/ivSupport"
+        app:layout_constraintTop_toTopOf="@+id/ivSupport" />
+
+    <TextView
+        android:id="@+id/tv24GHz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HZ"
+        android:textColor="@color/color_333333"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tv24G"
+        app:layout_constraintStart_toEndOf="@+id/tv24G" />
+
+    <ImageView
+        android:id="@+id/ivNotSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42pt"
+        android:layout_marginTop="18pt"
+        app:layout_constraintStart_toEndOf="@+id/tv24GHz"
+        app:layout_constraintTop_toBottomOf="@+id/ivWifiLogo"
+        app:srcCompat="@drawable/philips_dms_img_does_not_support" />
+
+    <TextView
+        android:id="@+id/tv5G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4pt"
+        android:text="5G"
+        android:textColor="@color/color_333333"
+        android:textSize="18pt"
+        app:layout_constraintBottom_toBottomOf="@+id/ivNotSupport"
+        app:layout_constraintStart_toEndOf="@+id/ivNotSupport"
+        app:layout_constraintTop_toTopOf="@+id/ivNotSupport" />
+
+    <TextView
+        android:id="@+id/tv5GHz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HZ"
+        android:textColor="@color/color_333333"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tv5G"
+        app:layout_constraintStart_toEndOf="@+id/tv5G" />
+
+    <EditText
+        android:id="@+id/etWifiName"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:drawableStart="@drawable/philips_dms_icon_wifi"
+        android:drawablePadding="15pt"
+        android:paddingStart="12pt"
+        android:paddingEnd="9pt"
+        android:layout_marginTop="37pt"
+        android:layout_marginStart="16pt"
+        android:background="@drawable/philips_shape_search_et_bg"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv24G" />
+
+    <ImageView
+        android:id="@+id/ivDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9pt"
+        app:layout_constraintBottom_toBottomOf="@+id/etWifiName"
+        app:layout_constraintEnd_toEndOf="@+id/etWifiName"
+        app:layout_constraintTop_toTopOf="@+id/etWifiName"
+        app:srcCompat="@drawable/philips_dms_icon_cbb_down" />
+
+    <EditText
+        android:id="@+id/etWifiPwd"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="24pt"
+        android:layout_marginEnd="16pt"
+        android:background="@drawable/philips_shape_search_et_bg"
+        android:drawableStart="@drawable/philips_dms_icon_password"
+        android:drawableEnd="@drawable/philips_dms_icon_display"
+        android:drawablePadding="15pt"
+        android:paddingStart="12pt"
+        android:paddingEnd="9pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etWifiName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="仅支持2.4G网络，不支持使用公共网络"
+        android:layout_marginTop="8pt"
+        android:textSize="14pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintStart_toStartOf="@+id/etWifiPwd"
+        app:layout_constraintTop_toBottomOf="@+id/etWifiPwd" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="343pt"
+        android:layout_height="44pt"
+        android:background="@drawable/philips_shape_btn_invalid_bg"
+        android:text="@string/philips_next_step"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:layout_marginBottom="53pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

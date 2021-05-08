@@ -90,7 +90,7 @@ public class WifiLockAddNewBLEWIFISwitchInputAdminPasswotdActivity extends BaseA
             case R.id.button_next: //输入管理员密码  下一步
                 String adminPassword = apPasswordEdit.getText().toString().trim();
                 if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
 

@@ -6,11 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.blankj.utilcode.util.ToastUtils;
@@ -21,28 +19,19 @@ import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivit
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.BindBleWiFiSwitchPresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.IBindBleView;
-import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleDataBean;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
-import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.philips.easykey.lock.utils.MyLog;
-import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.OfflinePasswordFactorManager;
-import com.philips.easykey.lock.utils.Rsa;
-import com.philips.easykey.lock.utils.WifiUtil;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleView, BindBleWiFiSwitchPresenter<IBindBleView>> implements IBindBleView {
 
@@ -88,14 +77,14 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
                     if (granted) {
 
                     } else {
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());

@@ -102,7 +102,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
                 }
                 String strForeverPassword = etPassword.getText().toString().trim();
                 if (!StringUtil.randomJudge(strForeverPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strForeverPassword)) {

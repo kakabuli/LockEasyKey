@@ -87,7 +87,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
                                 // All requested permissions are granted
                             } else {
                                 // At least one permission is denied
-                                ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                                ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                             }
                         });
                 if (wifiModelType != null) {
@@ -96,7 +96,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
                         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
                         if (!wifiUtils.isWifiEnable()) {
                             wifiUtils.openWifi();
-                            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+                            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
                             return;
                         }
                     }

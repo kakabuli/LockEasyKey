@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.ContextCompat;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,10 +22,12 @@ import com.philips.easykey.lock.R;
 public class DropEditText extends AppCompatEditText implements AdapterView.OnItemClickListener, PopupWindow.OnDismissListener {
 
     private Drawable mDrawable; // 显示的图
+    private Drawable mLeftDrawable;
     private PopupWindow mPopupWindow; // 点击图片弹出的popWindow对象
     private ListView mPopListView; // popWindow的布局
     private int mDropDrawableResId; // 下拉图标
     private int mRiseDrawableResID; // 上拉图标
+    private int mLeftDrawableResID;
 
     public DropEditText(Context context) {
         this(context, null);
@@ -41,8 +45,9 @@ public class DropEditText extends AppCompatEditText implements AdapterView.OnIte
 
     private void init(Context context) {
         mPopListView = new ListView(context);
-        mDropDrawableResId = R.mipmap.wifi_ssid_right_delete; // 设置下拉图标
-        mRiseDrawableResID = R.mipmap.wifi_ssid_right_delete; // 设置上拉图标
+        mDropDrawableResId = R.drawable.philips_dms_icon_cbb_down; // 设置下拉图标
+        mRiseDrawableResID = R.drawable.philips_dms_icon_cbb_up; // 设置上拉图标
+        mLeftDrawableResID = R.drawable.philips_dms_icon_wifi;
         showDropDrawable(); // 默认显示下拉图标
         mPopListView.setOnItemClickListener(this);
     }
@@ -104,13 +109,17 @@ public class DropEditText extends AppCompatEditText implements AdapterView.OnIte
     private void showDropDrawable() {
         mDrawable = getResources().getDrawable(mDropDrawableResId);
         mDrawable.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
-        setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], mDrawable, getCompoundDrawables()[3]);
+        mLeftDrawable = getContext().getDrawable(mLeftDrawableResID);
+        mLeftDrawable.setBounds(0, 0, mLeftDrawable.getIntrinsicWidth(), mLeftDrawable.getIntrinsicHeight());
+        setCompoundDrawables(mLeftDrawable, getCompoundDrawables()[1], mDrawable, getCompoundDrawables()[3]);
     }
 
     private void showRiseDrawable() {
         mDrawable = getResources().getDrawable(mRiseDrawableResID);
         mDrawable.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
-        setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], mDrawable, getCompoundDrawables()[3]);
+        mLeftDrawable = getContext().getDrawable(mLeftDrawableResID);
+        mLeftDrawable.setBounds(0, 0, mLeftDrawable.getIntrinsicWidth(), mLeftDrawable.getIntrinsicHeight());
+        setCompoundDrawables(mLeftDrawable, getCompoundDrawables()[1], mDrawable, getCompoundDrawables()[3]);
     }
 
     public void setAdapter(BaseAdapter adapter) {

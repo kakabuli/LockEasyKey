@@ -81,7 +81,7 @@ public class WifiLockApInputAdminPasswordActivity extends BaseAddToApplicationAc
             case R.id.tv_next:
                 String adminPassword = etAdminPassword.getText().toString().trim();
                 if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 intent = new Intent(WifiLockApInputAdminPasswordActivity.this, WifiLockApCheckAdminPasswordActivity.class);

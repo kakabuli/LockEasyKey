@@ -246,7 +246,7 @@ public class PasswordWeekFragment extends BaseBleFragment<IPasswordLoopView, Pas
                 String nickName = etName.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {

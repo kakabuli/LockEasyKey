@@ -27,7 +27,7 @@ public class WifiUtils {
         if (utils == null){
             synchronized (WifiUtils.class){
                 if (utils == null){
-                    utils = new WifiUtils(context);
+                    utils = new WifiUtils(context.getApplicationContext());
                 }
             }
         }

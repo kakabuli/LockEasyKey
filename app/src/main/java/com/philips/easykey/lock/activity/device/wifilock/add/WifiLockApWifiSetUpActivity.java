@@ -1,15 +1,6 @@
 package com.philips.easykey.lock.activity.device.wifilock.add;
 
-import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -21,19 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.espressif.iot.esptouch.util.ByteUtil;
-import com.espressif.iot.esptouch.util.TouchNetUtil;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiApWifiSetUpPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockAPWifiSetUpView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SocketManager;
 import com.philips.easykey.lock.widget.DropEditText;
 
 import butterknife.BindView;
@@ -116,7 +102,7 @@ public class WifiLockApWifiSetUpActivity extends BaseActivity<IWifiLockAPWifiSet
                 sSsid = mApSsidTV.getText().toString();
                 String sPassword = mApPasswordET.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     return;
                 }
                 if (TextUtils.isEmpty(sPassword)) { //WiFi密码为空

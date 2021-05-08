@@ -27,7 +27,6 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.PhilipsAddVideoLockActivity;
-import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.image.GlideEngine;
 
@@ -103,7 +102,9 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
             String wifiModelType = "WiFi&VIDEO";
             wifiIntent.putExtra("wifiModelType", wifiModelType);
             startActivity(wifiIntent);
-            getActivity().finish();
+            if(getActivity() != null) {
+                getActivity().finish();
+            }
         } else {
             unKnowQr();
             // 停止扫描了

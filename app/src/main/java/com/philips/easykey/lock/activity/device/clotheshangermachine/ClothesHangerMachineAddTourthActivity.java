@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddTourthPresenter;
@@ -126,11 +125,11 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     return;
                 }
                 if (sPassword.length() < 8){
-                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
+                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
                     return;
                 }
 

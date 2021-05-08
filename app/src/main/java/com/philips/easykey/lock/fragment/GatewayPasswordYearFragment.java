@@ -19,7 +19,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.gatewaylock.password.GatewayPasswordAddActivity;
@@ -190,7 +189,7 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
                 }
                 String strPassword = etPassword.getText().toString().trim();
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {

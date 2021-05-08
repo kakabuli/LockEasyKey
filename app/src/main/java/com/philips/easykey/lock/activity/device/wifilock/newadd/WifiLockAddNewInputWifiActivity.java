@@ -13,8 +13,6 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLcokSupportWifiActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockApAddThirdActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockApCheckAdminPasswordActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -87,7 +85,7 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     return;
                 }
                 if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
@@ -103,7 +101,7 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
 
                 }
                 if (sPassword.length()<8){
-                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
+                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
                     return;
                 }
                 Intent intent = new Intent(this,WifiLockAddNewCheckWifiActivity.class);

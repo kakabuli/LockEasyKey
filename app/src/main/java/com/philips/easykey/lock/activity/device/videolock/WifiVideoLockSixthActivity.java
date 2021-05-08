@@ -108,13 +108,13 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
             case R.id.button_next:
                 String adminPassword = apPasswordEdit.getText().toString().trim();
                 if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 //打开wifi
                 WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
                 if (!wifiUtils.isWifiEnable()) {
-                    ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+                    ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
                 }
                 if(System.currentTimeMillis() - time > 500){
                     checkAdminPassword(adminPassword);

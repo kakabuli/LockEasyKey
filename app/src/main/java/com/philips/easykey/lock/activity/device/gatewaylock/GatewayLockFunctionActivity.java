@@ -407,7 +407,7 @@ public class GatewayLockFunctionActivity extends BaseActivity<GatewayLockDetailV
             public void onClick(View v) {
                 String pwd = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(pwd)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 mPresenter.openLock(gatewayId, deviceId, pwd);

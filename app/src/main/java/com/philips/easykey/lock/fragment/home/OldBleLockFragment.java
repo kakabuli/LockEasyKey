@@ -712,7 +712,7 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(name)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 mPresenter.realOpenLock(name, false);
