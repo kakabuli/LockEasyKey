@@ -33,12 +33,6 @@
 
         <service android:name=".service.JobHandlerService"
             android:permission="android.permission.BIND_JOB_SERVICE"></service>
-        
-        <provider
-            android:authorities="com.philips.easykey.lock.shulan.preference"
-            android:name=".pro_sp.SharedPreferenceProvider"
 
-            android:exported="false"/>
-        <!--android:process=":slremote"-->
     </application>
 </manifest>
