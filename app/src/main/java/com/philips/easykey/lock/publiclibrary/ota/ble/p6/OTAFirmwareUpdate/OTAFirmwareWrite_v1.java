@@ -57,7 +57,7 @@ public class OTAFirmwareWrite_v1 {
 
     public void OTAEnterBootLoaderCmd(byte checkSumType, byte[] productId) {
         int idx = 0;
-        final int dataLength = 6;//productId(4) + zero bytes(2)//TODO
+        final int dataLength = 6;//productId(4) + zero bytes(2)
         final int commandSize = BootLoaderCommands_v1.BASE_CMD_SIZE + dataLength;
         final int checksumableDataSize = commandSize - NON_CHECKSUMMABLE_SIZE;
 

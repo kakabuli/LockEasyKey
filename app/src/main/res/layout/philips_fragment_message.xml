@@ -24,8 +24,7 @@
     <LinearLayout
         android:id="@+id/ll_message_type"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_42"
-        android:background="#f2f2f2">
+        android:layout_height="48pt">
 
         <RelativeLayout
             android:id="@+id/rl_door_lock_msg"
@@ -39,17 +38,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/philips_frament_door_lock_message"
-                android:textSize="@dimen/sp_15"
+                android:textSize="16pt"
                 android:textColor="@drawable/fragment_message_text_color_selector"
                 android:layout_centerInParent="true"/>
             <View
                 android:id="@+id/v_door_lock_msg"
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="2dp"
+                android:layout_width="125pt"
+                android:layout_height="3pt"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:background="#1F96F7"
-                />
+                android:background="#0066A1"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -63,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/philips_frament_system_message"
-                android:textSize="@dimen/sp_15"
+                android:textSize="16pt"
                 android:textColor="@drawable/fragment_message_text_color_selector"
                 android:layout_centerInParent="true"/>
 
@@ -75,11 +73,11 @@
                 android:layout_alignTop="@+id/tv_system_msg" />
             <View
                 android:id="@+id/v_system_msg"
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="2dp"
+                android:layout_width="125pt"
+                android:layout_height="3pt"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:background="#1F96F7"
+                android:background="#0066A1"
                 android:visibility="gone"
                 />
         </RelativeLayout>
@@ -89,6 +87,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#f7f7f7"/>
 
 </LinearLayout>

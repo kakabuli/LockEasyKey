@@ -129,6 +129,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
         MyLog.getInstance().save("MainActivity==>OnCreate");
         fragments.add(new PhilipsDeviceFragment());
+        //fragments.add(new DeviceFragment());
         fragments.add(new PhilipsMessageFragment());
         fragments.add(new PhilipsPersonalCenterFragment());
 //        evevt = this;
@@ -327,12 +328,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         }
     }
 
-
-    /*//TODO：删除华为推送位置
-    @Override
-    public void onNetEventToken(String token) {
-        uploadToken(3,token);
-    }*/
 
 
     public interface HomeSelectListener {

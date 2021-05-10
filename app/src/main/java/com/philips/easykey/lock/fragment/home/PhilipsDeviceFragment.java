@@ -3,6 +3,7 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -347,6 +348,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                     RC_CAMERA_PERMISSIONS, Manifest.permission.CAMERA);
         }
     }
+
 
     @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE_PERMISSIONS)
     private void rcReadStoragePermission(){

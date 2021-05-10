@@ -537,7 +537,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
 
     public void startUpgrade(BluetoothGattCharacteristic updateChar) {
         LogUtils.d(TAG, "开始升级   " + updateChar.getUuid());
-        //todo 测试地址
+        // 测试地址
         mOTAFUHandler = createOTAFUHandler(updateChar, filePath);
         new Thread() {
             @Override

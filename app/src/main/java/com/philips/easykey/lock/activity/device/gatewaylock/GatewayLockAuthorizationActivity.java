@@ -145,7 +145,6 @@ public class GatewayLockAuthorizationActivity extends BaseAddToApplicationActivi
         if (imgResId != -1) {
             ivPower.setImageResource(imgResId);
         }
-        //todo  读取电量时间
         long readDeviceInfoTime = System.currentTimeMillis();
         if (readDeviceInfoTime != -1) {
             if ((System.currentTimeMillis() - readDeviceInfoTime) < 60 * 60 * 1000) {

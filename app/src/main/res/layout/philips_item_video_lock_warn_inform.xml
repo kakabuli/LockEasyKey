@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="76pt"
+    android:layout_height="110pt"
+    android:layout_marginLeft="4pt">
 
-    <RelativeLayout
-        android:id="@+id/rl_pic"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_70"
-        android:layout_marginTop="@dimen/dp_2"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_18">
         <ImageView
             android:id="@+id/iv_content"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_70"
-            android:scaleType="fitXY"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"/>
 
         <ImageView
             android:id="@+id/iv_paly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/video_lock_icon_play"/>
-    </RelativeLayout>
-
+            android:src="@drawable/philips_icon_play"/>
 </RelativeLayout>

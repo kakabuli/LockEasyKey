@@ -113,8 +113,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
                 }
             }.start();
         } else {
-            // TODO: 2021/4/29 没有抽离
-            ToastUtils.showLong("请连接到指定WiFi");
+            ToastUtils.showShort(getString(R.string.philips_face_ota_conncet_wifi));
         }
     }
 
@@ -152,9 +151,8 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    // TODO: 2021/4/29 抽离文字
-                    otaStatus.setText("传输完成");
-                    ToastUtils.showLong("数据传输完成");
+                    otaStatus.setText(getString(R.string.philips_face_ota_transmission_complete));
+                    ToastUtils.showShort(getString(R.string.philips_face_ota_data_transmission_complete));
                     mPresenter.endSendFile();
                 }
             });
@@ -166,8 +164,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    // TODO: 2021/4/29 抽离文字
-                    otaStatus.setText("OTA出错  " + errorCode);
+                    otaStatus.setText(getString(R.string.philips_face_ota_failed,errorCode + ""));
                     mPresenter.finishOta((byte) moduleNumber, (byte) otaType, version);
                 }
             });

@@ -2,19 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="22pt"
+    android:layout_marginBottom="14pt"
     android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/tv_type"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="#666666"
+        android:layout_marginLeft="17pt"
+        android:drawableLeft="@drawable/philips_message_icon_display"
+        android:drawablePadding="10pt"
+        android:textSize="12pt"/>
 
 
     <com.philips.easykey.lock.widget.CurveChart
         android:id="@+id/curve_chart"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="160pt"/>
 
 </LinearLayout>

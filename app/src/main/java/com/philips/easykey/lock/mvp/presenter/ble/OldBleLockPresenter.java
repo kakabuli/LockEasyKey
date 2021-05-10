@@ -281,7 +281,7 @@ public class OldBleLockPresenter<T> extends MyOldOpenLockRecordPresenter<IOldBle
         bleService.sendCommand(endFrame);
         retryTimes++;
         toDisposable(oldRecordDisposable);
-        // TODO: 2019/5/14   老蓝牙模块   做简单的处理
+        // 2019/5/14   老蓝牙模块   做简单的处理
         oldRecordDisposable = bleService.listeneDataChange()
                 .timeout(10 * 1000, TimeUnit.MILLISECONDS)
                 .compose(RxjavaHelper.observeOnMainThread())

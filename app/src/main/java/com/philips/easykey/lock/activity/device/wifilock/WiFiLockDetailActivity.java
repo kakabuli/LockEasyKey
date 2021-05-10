@@ -337,7 +337,6 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
             }
         }
 
-        //todo  读取电量时间
         long readDeviceInfoTime = updateTime * 1000;
         long todayMillions = DateUtils.getTodayMillions();
         LogUtils.d("更新时间   " + readDeviceInfoTime + "  当前时间  " + System.currentTimeMillis() + "  相差时间 " + ((System.currentTimeMillis() - readDeviceInfoTime))

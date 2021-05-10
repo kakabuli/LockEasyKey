@@ -307,9 +307,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
             case 4:
                 //“锁已打开”
                 //TODO:开锁动画
-//                ivBackGround.setImageResource(R.mipmap.video_zheng_chang_big_middle_icon);  //背景大图标
                 ivCenterIcon.setImageResource(R.mipmap.wifi_video_lock_home_middle_icon);  //门锁关闭状态
-//                tvTopStates.setText(getString(R.string.open_lock_already));  //设置设备状态   离线
                 tvCenterMode.setText(tvCenterMode.getText() + "");
                 tvCenterContent.setText(getString(R.string.click_door_info));
                 tvTopStates.setText(getString(R.string.philips_fragment_wifi_video_unlocked));

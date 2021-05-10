@@ -33,7 +33,7 @@ public class BleCheckOTAPresenter<T extends ICheckOtaView> extends BlePresenter<
 
     private void checkOtaInfo(String SN, String version, int type, CheckOTAResult stackResult) {
         //请求成功
-        //todo 测试版本号写死
+        //测试版本号写死
         //200  成功  401  数据参数不对  102 SN格式不对  210 查无结果
         otaDisposable = XiaokaiNewServiceImp.getOtaInfo(1, SN, version, type)
                 .subscribe(new Consumer<CheckOTAResult>() {

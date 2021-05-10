@@ -19,7 +19,6 @@ public class PersonalMessagePresenter<T> extends BasePresenter<IPersonalMessageV
 
     //获取消息
     public void getMessage(String uid, int page) {
-        // TODO: 2019/3/15
         XiaokaiNewServiceImp.getMessageList(uid, page).subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {

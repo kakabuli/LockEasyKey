@@ -99,7 +99,6 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
         }else {
               bssid = TouchNetUtil.parseBssid2bytes(wifiBssid);
         }
-        //todo  wifiBssid 为空
         byte[] deviceCount = {1};
         byte[] broadcast = {1};
         mTask.execute(ssidArrays, bssid, password, deviceCount, broadcast);

@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.SizeUtils;
+
 
 public class CurveChart extends  DrawLineChart {
     public CurveChart(Context context) {
@@ -34,7 +36,7 @@ public class CurveChart extends  DrawLineChart {
                 p4.y = endp.y;
                 p4.x = wt;
                 if (j == 0) {
-                    mPath.moveTo(startp.x, startp.y);
+                    mPath.moveTo(startp.x + SizeUtils.dp2px(13), startp.y);
                 }
                 mPath.cubicTo(p3.x, p3.y, p4.x, p4.y, endp.x, endp.y);
             }

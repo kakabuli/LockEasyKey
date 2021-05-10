@@ -24,7 +24,6 @@ public class MyDate {
 		this.week = week;
 	}
 	public MyDate() {
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {

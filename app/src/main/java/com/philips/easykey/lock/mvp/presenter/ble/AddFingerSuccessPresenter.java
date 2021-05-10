@@ -31,7 +31,6 @@ public class AddFingerSuccessPresenter<T> extends BasePresenter<IAddFingerSucces
                     @Override
                     public void onSuccess(BaseResult result) {
                         LogUtils.d("davi 上传秘钥昵称到服务器成功");
-                        // TODO: 2019/3/8   通知更新秘钥列表   从服务器拿
                         if (isSafe()) {
                             mViewRef.get().onUploadSuccess();
                             MyApplication.getInstance().passwordChangeListener().onNext(true);

@@ -131,7 +131,7 @@ public class OTAFUHandler_v1 extends OTAFUHandlerBase {
             Log.e(TAG, "移除数据超时    EXTRA_ERROR_OTA " );
             String errorMessage = extras.getString(Constants.EXTRA_ERROR_OTA);
             Log.e(TAG, "升级错误  " + errorMessage);
-            //todo 升级错误时的回调
+            // 升级错误时的回调
             if (System.currentTimeMillis() - lastErrorTime > sumErrorTime || System.currentTimeMillis() - lastErrorTime < 0) {
                 errorTimes = 1;
             } else {

@@ -273,7 +273,6 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
             }
         }
 
-        //todo  读取电量时间
         long readDeviceInfoTime = updateTime * 1000;
         if (readDeviceInfoTime != -1) {
             if ((System.currentTimeMillis() - readDeviceInfoTime) < 60 * 60 * 1000) {

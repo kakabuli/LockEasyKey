@@ -26,11 +26,11 @@ public class PhilipsSevenDayDataStatisticsAdapter extends BaseQuickAdapter<Seven
         CurveChart curveChart = baseViewHolder.getView(R.id.curve_chart);
         tvType.setText(sevendayDataStatisticsBean.getStatisticsTypeName());
         curveChart.setMaxVlaue(80);
-        curveChart.setMinValue(0);
-        curveChart.setNumberLine(5);
+        curveChart.setMinValue(20);
+        curveChart.setNumberLine(4);
         curveChart.setOrdinateValue(sevendayDataStatisticsBean.getOrdinateValue());
         curveChart.setTransverseValue(sevendayDataStatisticsBean.getTransverseValue());
         curveChart.setBorderTransverseLineWidth(0.3f);
-        curveChart.setBrokenLineLTRB(18,10,18,10);
+        curveChart.setBrokenLineLTRB(43,20,15,22);
     }
 }

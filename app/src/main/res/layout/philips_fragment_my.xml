@@ -88,7 +88,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="14pt"
-                android:src="@drawable/philips_icon_more_10" />
+                android:src="@drawable/philips_icon_more" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -141,7 +141,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="14pt"
-                android:src="@drawable/philips_icon_more_10" />
+                android:src="@drawable/philips_icon_more" />
         </RelativeLayout>
 
         <RelativeLayout

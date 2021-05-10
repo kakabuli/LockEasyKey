@@ -31,7 +31,7 @@ public class PhilipsVideoLockWarningInformAdapter extends BaseQuickAdapter<WifiV
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, WifiVideoLockAlarmRecord wifiVideoLockAlarmRecord) {
         ImageView ivContent = baseViewHolder.getView(R.id.iv_content);
-        Glide.with(getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
+        //Glide.with(getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
         ivContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

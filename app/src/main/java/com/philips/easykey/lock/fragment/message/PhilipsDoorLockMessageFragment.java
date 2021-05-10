@@ -84,29 +84,46 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         });
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rcvVideoLockMsg.addItemDecoration(new SpacesItemDecoration(40, 0, 0, 0));
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
 
         List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
-            todayLockStatisticsBean.setStatisticsType(getString(R.string.warn_information));
-            todayLockStatisticsBean.setStatisticsCount(10);
-            TodayLockStatisticsData.add(todayLockStatisticsBean);
-        }
+        TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
+        todayLockStatisticsBean.setStatisticsType(1);
+        todayLockStatisticsBean.setStatisticsCount(10);
+        TodayLockStatisticsData.add(todayLockStatisticsBean);
+
+        TodayLockStatisticsBean todayLockStatisticsBean1 = new TodayLockStatisticsBean();
+        todayLockStatisticsBean1.setStatisticsType(2);
+        todayLockStatisticsBean1.setStatisticsCount(3);
+        TodayLockStatisticsData.add(todayLockStatisticsBean1);
+
+        TodayLockStatisticsBean todayLockStatisticsBean2 = new TodayLockStatisticsBean();
+        todayLockStatisticsBean2.setStatisticsType(3);
+        todayLockStatisticsBean2.setStatisticsCount(110);
+        TodayLockStatisticsData.add(todayLockStatisticsBean2);
+
+        TodayLockStatisticsBean todayLockStatisticsBean3 = new TodayLockStatisticsBean();
+        todayLockStatisticsBean3.setStatisticsType(4);
+        todayLockStatisticsBean3.setStatisticsCount(20);
+        TodayLockStatisticsData.add(todayLockStatisticsBean3);
+
+        TodayLockStatisticsBean todayLockStatisticsBean4 = new TodayLockStatisticsBean();
+        todayLockStatisticsBean4.setStatisticsType(3);
+        todayLockStatisticsBean4.setStatisticsCount(55);
+        TodayLockStatisticsData.add(todayLockStatisticsBean4);
+
         lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter(TodayLockStatisticsData);
         LinearLayoutManager horizontalLayoutManager1 = new LinearLayoutManager(getContext());
         horizontalLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(40, 0, 0, 0));
         rcvTodayLockStatistics.setLayoutManager(horizontalLayoutManager1);
         rcvTodayLockStatistics.setAdapter(lockStatisticsAdapter);
 
         List<SevendayDataStatisticsBean> sevendayDataStatisticsData = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
-            sevendayDataStatisticsBean.setOrdinateValue(new float[]{0, 0, 23, 10, 24, 42, 18});
-            sevendayDataStatisticsBean.setTransverseValue(new String[]{"02 13", "02 14", "02 15", "02 16", "02 17", "02 18", "02 19"});
+            sevendayDataStatisticsBean.setOrdinateValue(new float[]{20, 20, 27, 26, 24, 21});
+            sevendayDataStatisticsBean.setTransverseValue(new String[]{"02.13", "02.14", "02.15", "02.16", "02.17", "02.18"});
             sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
             sevendayDataStatisticsData.add(sevendayDataStatisticsBean);
         }
@@ -118,7 +135,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             }
         };
         verticalLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rcvSevenDayDataStatistics.addItemDecoration(new SpacesItemDecoration(0, 0, 40, 0));
         rcvSevenDayDataStatistics.setLayoutManager(verticalLayoutManager);
         rcvSevenDayDataStatistics.setAdapter(sevendayDataStatisticsAdapter);
     }
@@ -133,7 +149,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     }
 
 
-    @OnClick(R.id.tv_lock_name)
+    @OnClick(R.id.ll_device_type)
     public void onViewClicked() {
         Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
         startActivityForResult(intent, RESULT_OK);

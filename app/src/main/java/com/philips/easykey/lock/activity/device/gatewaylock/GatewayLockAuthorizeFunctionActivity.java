@@ -466,7 +466,6 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
         } else {
             readDeviceInfoTime = Long.parseLong(timeStamp);
         }
-        //todo  读取电量时间
         if (readDeviceInfoTime != -1 && tvDate != null) {
             //60 * 60
             if ((System.currentTimeMillis() - readDeviceInfoTime) < 60 * 60 * 1000) {
