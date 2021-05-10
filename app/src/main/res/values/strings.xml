@@ -2493,6 +2493,9 @@
     <string name="philips_connecting_data">正在连接数据</string>
     <string name="philips_sending_data">正在发送数据</string>
     <string name="philips_unit_sec">s</string>
-
+    <string name="philips_lock_init_admin_pwd">门锁初始管理密码：12345678</string>
+    <string name="philips_admin_pwd_wrong">管理员密码错误？</string>
+    <string name="philips_plz_input_admin_pwd_to_confirm">请输入门锁管理员密码进行确认</string>
+    <string name="philips_tip_input_admin_pwd_fail">门锁管理密码验证失败%1$d次，\n超过5次，配网失败</string>
 
 </resources>

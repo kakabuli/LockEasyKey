@@ -1,6 +1,8 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,25 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         EditText etWifiPwd = root.findViewById(R.id.etWifiPwd);
         Button btnNext = root.findViewById(R.id.btnNext);
         TextView tvPwdFailed = root.findViewById(R.id.tvPwdFailed);
+        btnNext.setEnabled(false);
+
+        etWifiPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                btnNext.setEnabled(s.length() > 0);
+                btnNext.setBackgroundResource(s.length()>0?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_invalid_bg);
+            }
+        });
 
         btnNext.setOnClickListener(v -> {
             String adminPwd = etWifiPwd.getText().toString();

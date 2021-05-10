@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -22,24 +23,22 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoBindBea
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoUpdateBindBean;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockVideoBindResult;
-import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiLockVideoBindBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiVideoLockBindErrorBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
-import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.xm.bean.QrCodeBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.QrCodeUtils;
 import com.philips.easykey.lock.utils.Rsa;
-import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.WifiVideoPasswordFactorManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * author : Jack
@@ -59,7 +58,6 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     public String mAdminPassword;
     public String mWifiName;
     private String mWifiPwd;
-    private String mWifiSn;
     private String mRandomCode;
     private int mFunc;
     private int mTimes = 1;
@@ -167,6 +165,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mTvTitle.setText(R.string.philips_qr_code_msg);
         mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(2, mFragments);
+        getDeviceBindingStatus();
         if(mFragments.get(2) instanceof PhilipsAddVideoLockTask3Fragment) {
             ((PhilipsAddVideoLockTask3Fragment)mFragments.get(2)).refreshQrCode();
         }
@@ -265,7 +264,6 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     }
 
     public void startTask4(PhilipsAddVideoLockTask4Fragment task4Fragment) {
-        getDeviceBindingStatus();
         task4Fragment.startCountDown();
     }
 
@@ -273,6 +271,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         // TODO: 2021/5/8 成功
         if(mWifiLockVideoBindBean == null) {
             mWifiLockVideoBindBean = wifiLockVideoBindBean;
+            mRandomCode = wifiLockVideoBindBean.getEventparams().getRandomCode();
         } else {
             // TODO: 2021/5/8 后来重复，可能需要通过判断时间戳来进行选择
         }
@@ -309,32 +308,21 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                             mWifiLockVideoBindBean.getEventparams().getP2p_password());
                 }
 
-            }else{
-                onAdminPasswordError();
+            } else {
+                adminPasswordError();
                 mTimes++;
             }
         }
 
     }
 
-    public void onBindSuccess(String randomCode,int func) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                Intent intent = new Intent(this, WifiVideoLockAddSuccessActivity.class);
-//                intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
-//                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-//                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-//                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
-//                intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
-//                startActivity(intent);
-                finish();
-            }
-        });
+    public void bindSuccess() {
+        runOnUiThread(this::showFirstTask6);
     }
 
-    public void onBindFailed(BaseResult baseResult) {
-        com.philips.easykey.lock.utils.LogUtils.d("six-------" + baseResult.getCode());
+    public void bindFailed(BaseResult baseResult) {
+        // TODO: 2021/5/10 绑定失败
+        LogUtils.d("six-------" + baseResult.getCode());
         unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
 //        .post(new Runnable() {
 //            @Override
@@ -377,13 +365,13 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                 });
     }
 
-    private void onAdminPasswordError() {
+    private void adminPasswordError() {
         if (mTimes < 5) {
             if(mTimes < 3){ // 正常提示
                 showDialog(getString(R.string.activity_wifi_video_sixth_fail));
 
             }else {
-                showDialog(getString(R.string.activity_wifi_video_sixth_fail_1)+ mTimes +getString(R.string.activity_wifi_video_sixth_fail_2));
+                showDialog(getString(R.string.philips_tip_input_admin_pwd_fail, mTimes));
             }
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(this,
@@ -412,172 +400,169 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         }
     }
 
-    public void bindDevice(String wifiSN, String lockNickName, String uid, String randomCode, String wifiName, int func,
-                           int distributionNetwork, String device_sn, String mac, String device_did, String p2p_password) {
+    public void bindDevice(String wifiSN, String lockNickName, String uid,
+                           String randomCode, String wifiName, int func,
+                           int distributionNetwork, String device_sn,
+                           String mac, String device_did, String p2p_password) {
 
-        WiFiLockVideoBindBean bean = new WiFiLockVideoBindBean(wifiSN,lockNickName,uid,randomCode,wifiName,func,distributionNetwork,
+        WiFiLockVideoBindBean bean = new WiFiLockVideoBindBean(wifiSN,lockNickName,
+                uid,randomCode,wifiName,func,distributionNetwork,
                 device_sn,mac,device_did,p2p_password);
-        com.philips.easykey.lock.utils.LogUtils.d("WifiLockVideoSixthPresenter WiFiLockVideoBindBean-->" + bean.toString());
-        XiaokaiNewServiceImp.wifiVideoLockBind(bean).subscribe(new BaseObserver<BaseResult>() {
-            @Override
-            public void onSuccess(BaseResult baseResult) {
-                MyApplication.getInstance().getAllDevicesByMqtt(true);
-//                        SPUtils.put(KeyConstants.WIFI_VIDEO_LOCK_OPERATION_RECORD + wifiSN, "");
-//                        SPUtils.put(KeyConstants.WIFI_VIDEO_LOCK_VISITOR_RECORD + wifiSN, "");
-                SPUtils.put(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD + wifiSN, "");
-                SPUtils.put(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSN, "");
-                SPUtils.put(KeyConstants.WIFI_VIDEO_LOCK_VISITOR_RECORD + wifiSN, "");
-                SPUtils.put(KeyConstants.WIFI_LOCK_ALARM_RECORD + wifiSN, "");
-                SPUtils.put(KeyConstants.WIFI_VIDEO_LOCK_RANDOMCODE + wifiSN,true);
-                onBindSuccess(mRandomCode, mFunc);
-            }
+        LogUtils.d(bean.toString());
+        XiaokaiNewServiceImp.wifiVideoLockBind(bean)
+                .safeSubscribe(new Observer<WifiLockVideoBindResult>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
 
-            @Override
-            public void onAckErrorCode(BaseResult baseResult) {
-                onBindFailed(baseResult);
-            }
+                    }
 
-            @Override
-            public void onFailed(Throwable throwable) {
-                LogUtils.e(throwable);
-            }
+                    @Override
+                    public void onNext(@NotNull WifiLockVideoBindResult wifiLockVideoBindResult) {
+                        MyApplication.getInstance().getAllDevicesByMqtt(true);
+                        bindSuccess();
+                    }
 
-            @Override
-            public void onSubscribe1(Disposable d) {
-                mCompositeDisposable.add(d);
-            }
-        });
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void unBindDeviceFail(String wifiSN) {
-        XiaokaiNewServiceImp.wifiVideoLockBindFail(wifiSN,0).subscribe(new BaseObserver<WifiLockVideoBindResult>() {
-            @Override
-            public void onSuccess(WifiLockVideoBindResult wifiLockVideoBindResult) {
-                onBindFailed(wifiLockVideoBindResult);
-            }
+        XiaokaiNewServiceImp.wifiVideoLockBindFail(wifiSN,0)
+                .safeSubscribe(new Observer<WifiLockVideoBindResult>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
 
-            @Override
-            public void onAckErrorCode(BaseResult baseResult) {
-                onBindFailed(baseResult);
-            }
+                    }
 
-            @Override
-            public void onFailed(Throwable throwable) {
-                LogUtils.e(throwable);
-            }
+                    @Override
+                    public void onNext(@NotNull WifiLockVideoBindResult wifiLockVideoBindResult) {
+                        bindFailed(wifiLockVideoBindResult);
+                    }
 
-            @Override
-            public void onSubscribe1(Disposable d) {
-                mCompositeDisposable.add(d);
-            }
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        LogUtils.e(e);
+                    }
 
+                    @Override
+                    public void onComplete() {
 
-        });
+                    }
+                });
     }
 
     public void updateBindDevice(String wifiSN, String uid, String randomCode, String wifiName,
                                  int functionSet,String device_did, String p2p_password){
         WiFiLockVideoUpdateBindBean bean = new WiFiLockVideoUpdateBindBean(wifiSN,uid,randomCode,wifiName,functionSet,device_did,p2p_password);
-        XiaokaiNewServiceImp.wifiVideoLockUpdateBind(bean).subscribe(new BaseObserver<WifiLockVideoBindResult>() {
-            @Override
-            public void onSuccess(WifiLockVideoBindResult wifiLockVideoBindResult) {
-                onUpdateSuccess(wifiSN);
-            }
+        XiaokaiNewServiceImp.wifiVideoLockUpdateBind(bean)
+                .safeSubscribe(new Observer<WifiLockVideoBindResult>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
 
-            @Override
-            public void onAckErrorCode(BaseResult baseResult) {
-//                onUpdateFailed(baseResult);
-            }
+                    }
 
-            @Override
-            public void onFailed(Throwable throwable) {
-//                onUpdateThrowable(throwable);
-            }
+                    @Override
+                    public void onNext(@NotNull WifiLockVideoBindResult wifiLockVideoBindResult) {
+                        String code = wifiLockVideoBindResult.getCode();
+                        if(TextUtils.isEmpty(code)) {
+                            LogUtils.e("code is empty");
+                            return;
+                        }
+                        if(!code.equals("200")) {
+                            String msg = wifiLockVideoBindResult.getMsg();
+                            LogUtils.e("code: " + code + " msg: " + msg);
+                            if(!TextUtils.isEmpty(msg)) ToastUtils.showShort(msg);
+                            // TODO: 2021/5/10 错误跳转
+                            return;
+                        }
+                        bindSuccess();
+                    }
 
-            @Override
-            public void onSubscribe1(Disposable d) {
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        LogUtils.e(e);
+                    }
 
-            }
-        });
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
-    public void onUpdateSuccess(String wifiSn) {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(this, WifiVideoLockAddSuccessActivity.class);
-//                intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
-//                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
-//                intent.putExtra("update",true);
-//                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, password);
-//                intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+    public void setNickName(String lockNickname){
+        // TODO: 2021/5/10 设置名字
+        XiaokaiNewServiceImp.wifiLockUpdateNickname(mWifiLockVideoBindBean.getEventparams().getDevice_sn(),
+                MyApplication.getInstance().getUid(), lockNickname)
+                .safeSubscribe(new Observer<BaseResult>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NotNull BaseResult baseResult) {
+                        // TODO: 2021/5/10 设置名称成功
+                        String code = baseResult.getCode();
+                        if(TextUtils.isEmpty(code)) {
+                            LogUtils.e("code is empty");
+                            return;
+                        }
+                        if(!code.equals("200")) {
+                            String msg = baseResult.getMsg();
+                            LogUtils.e("code: " + code + " msg: " + msg);
+                            if(!TextUtils.isEmpty(msg)) ToastUtils.showShort(msg);
+                            return;
+                        }
+                        // TODO: 2021/5/10 可能需要做出提示
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        // TODO: 2021/5/10 设置失败
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
-    public void setNickName(String wifiSN, String lockNickname){
-//        XiaokaiNewServiceImp.wifiLockUpdateNickname(wifiSN, MyApplication.getInstance().getUid(), lockNickname)
-//                .subscribe(new BaseObserver<BaseResult>() {
-//                    @Override
-//                    public void onSuccess(BaseResult baseResult) {
-//                        onSetNameSuccess();
-//                    }
-//
-//                    @Override
-//                    public void onAckErrorCode(BaseResult baseResult) {
-//                        onSetNameFailedServer(baseResult);
-//                    }
-//
-//                    @Override
-//                    public void onFailed(Throwable throwable) {
-//                        onSetNameFailedNet(throwable);
-//                    }
-//
-//                    @Override
-//                    public void onSubscribe1(Disposable d) {
-//                        mCompositeDisposable.add(d);
-//                    }
-//                });
-
-    }
-
-    private Disposable listenerBindStatus;
+    private Disposable mListenerBindStatus;
 
     public void listenerBindingStatus(){
         if(mqttService != null){
-            toDisposable(listenerBindStatus);
-            listenerBindStatus = mqttService.listenerDataBack()
+            toDisposable(mListenerBindStatus);
+            mListenerBindStatus = mqttService.listenerDataBack()
                     .compose(RxjavaHelper.observeOnMainThread())
-                    .subscribe(new Consumer<MqttData>() {
+                    .subscribe(mqttData -> {
+                        if(mqttData != null){
+                            if(mqttData.getFunc().equals(MqttConstant.FUNC_WFEVENT)){
 
-                        @Override
-                        public void accept(MqttData mqttData) throws Exception {
-                            if(mqttData != null){
-                                if(mqttData.getFunc().equals(MqttConstant.FUNC_WFEVENT)){
+                                WifiVideoLockBindErrorBean mWifiVideoLockBindErrorBean = new Gson()
+                                        .fromJson(mqttData.getPayload(),WifiVideoLockBindErrorBean.class);
 
-                                    WifiVideoLockBindErrorBean mWifiVideoLockBindErrorBean = new Gson().fromJson(mqttData.getPayload(),WifiVideoLockBindErrorBean.class);
-
-
-                                    if(mWifiVideoLockBindErrorBean.getDevtype().equals(MqttConstant.WIFI_VIDEO_LOCK_XM)
-                                            && mWifiVideoLockBindErrorBean.getEventtype().equals("errorNotify")){
-                                        onBindFailed(new BaseResult());
-                                    }
+                                if(mWifiVideoLockBindErrorBean.getDevtype().equals(MqttConstant.WIFI_VIDEO_LOCK_XM)
+                                        && mWifiVideoLockBindErrorBean.getEventtype().equals("errorNotify")){
+                                    bindFailed(new BaseResult());
                                 }
-
                             }
 
-
-
                         }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
 
-                        }
-                    });
-            mCompositeDisposable.add(listenerBindStatus);
+                    }, LogUtils::e);
+            mCompositeDisposable.add(mListenerBindStatus);
         }
 
     }

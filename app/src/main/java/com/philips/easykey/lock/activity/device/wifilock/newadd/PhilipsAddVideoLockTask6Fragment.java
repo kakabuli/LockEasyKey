@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.philips.easykey.lock.R;
  */
 public class PhilipsAddVideoLockTask6Fragment extends Fragment {
 
+    private PhilipsAddVideoLockActivity mAddVideoLockActivity;
+
     public static PhilipsAddVideoLockTask6Fragment getInstance() {
         return new PhilipsAddVideoLockTask6Fragment();
     }
@@ -35,6 +38,9 @@ public class PhilipsAddVideoLockTask6Fragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.philips_fragment_add_video_lock_task6, container, false);
         initTaskUI(root);
+        if(getActivity() instanceof PhilipsAddVideoLockActivity) {
+            mAddVideoLockActivity = (PhilipsAddVideoLockActivity) getActivity();
+        }
         return root;
     }
 
@@ -44,6 +50,18 @@ public class PhilipsAddVideoLockTask6Fragment extends Fragment {
         RecyclerView rvNames = root.findViewById(R.id.rvNames);
         Button btnUse = root.findViewById(R.id.btnUse);
         rvNames.setLayoutManager(new GridLayoutManager(getContext(), 6));
+
+        btnUse.setOnClickListener(v -> {
+            // TODO: 2021/5/10 立即体验
+            String name = etName.getText().toString();
+            if(TextUtils.isEmpty(name)) {
+                // TODO: 2021/5/10 提示错误
+                return;
+            }
+            if(mAddVideoLockActivity != null) {
+                mAddVideoLockActivity.setNickName(name);
+            }
+        });
     }
 
 }
