@@ -477,7 +477,7 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
         AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(
                 PhilipsWifiVideoLockAlbumDetailActivity.this
                 , getString(R.string.dialog_wifi_video_delete_video) + "",
-                getString(R.string.cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

@@ -136,7 +136,7 @@ public class GatewayLockDeletePasswordActivity extends BaseActivity<IGatewayLock
                 break;
             case R.id.btn_delete:
                 AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(context, getString(R.string.sure_delete_password),
-                        getString(R.string.cancel), getString(R.string.delete),
+                        getString(R.string.philips_cancel), getString(R.string.delete),
                         "#333333",
                         "#FF3B30", new AlertDialogUtil.ClickListener() {
                     @Override

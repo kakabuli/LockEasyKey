@@ -19,10 +19,10 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.utils.StringUtil;
 
 /**
- * author :
+ * author : Jack
  * time   : 2021/5/6
  * E-mail : wengmaowei@kaadas.com
- * desc   :
+ * desc   : 输入管理密码
  */
 public class PhilipsAddVideoLockTask5Fragment extends Fragment {
 
@@ -80,11 +80,8 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
             }
             // TODO: 2021/5/8 需要回调监听成功与失败
         });
-        tvPwdFailed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2021/5/8 跳转到错误指引页面
-            }
+        tvPwdFailed.setOnClickListener(v -> {
+            // TODO: 2021/5/8 跳转到错误指引页面
         });
     }
 

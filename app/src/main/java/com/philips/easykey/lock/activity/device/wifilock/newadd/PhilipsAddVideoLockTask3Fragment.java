@@ -16,10 +16,10 @@ import com.bumptech.glide.Glide;
 import com.philips.easykey.lock.R;
 
 /**
- * author :
+ * author : Jack
  * time   : 2021/5/6
  * E-mail : wengmaowei@kaadas.com
- * desc   :
+ * desc   : 二维码
  */
 public class PhilipsAddVideoLockTask3Fragment extends Fragment {
 

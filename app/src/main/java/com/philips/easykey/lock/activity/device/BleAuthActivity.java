@@ -495,7 +495,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                 }
                 break;
             case R.id.iv_delete:
-                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

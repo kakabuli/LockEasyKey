@@ -38,7 +38,6 @@ import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -372,7 +371,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 
     private void binding(BluetoothDevice device, Boolean bindFlag, String content) {
         hiddenLoading();
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 
@@ -514,7 +513,7 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
     @Override
     public void notice419() {
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint),
-                getString(R.string.notice_419_call), getString(R.string.cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.notice_419_call), getString(R.string.philips_cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

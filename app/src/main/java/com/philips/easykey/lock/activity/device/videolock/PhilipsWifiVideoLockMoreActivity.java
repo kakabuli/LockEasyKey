@@ -318,7 +318,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         break;
                     case R.id.btn_delete:  //删除设备
                         AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
-                                getString(R.string.cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                                getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
                                     @Override
                                     public void left() {
 
@@ -397,7 +397,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
 
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(PhilipsWifiVideoLockMoreActivity.this, getString(R.string.activity_wifi_video_replace_wifi_again),
-                getString(R.string.cancel), getString(R.string.confirm), "#999999", "#1F95F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#999999", "#1F95F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

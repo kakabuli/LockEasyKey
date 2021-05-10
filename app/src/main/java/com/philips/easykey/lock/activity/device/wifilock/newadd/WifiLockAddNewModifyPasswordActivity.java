@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -18,7 +15,6 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SocketManager;
-import com.philips.easykey.lock.utils.WifiUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,7 +112,7 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

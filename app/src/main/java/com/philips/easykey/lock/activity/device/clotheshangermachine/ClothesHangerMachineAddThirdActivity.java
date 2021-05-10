@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -245,7 +244,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
 
     private void binding(BluetoothDevice device, boolean bindFlag, String content) {
         hiddenLoading();
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 

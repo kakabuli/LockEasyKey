@@ -1,7 +1,9 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +19,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.dialog.PhilipsOpenLocationDialog;
+import com.philips.easykey.lock.dialog.PhilipsWiFiNotConnectDialog;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoBindBean;
@@ -63,6 +67,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     private int mTimes = 1;
 
     private WifiLockVideoBindBean mWifiLockVideoBindBean;
+    private PhilipsOpenLocationDialog mOpenLocationDialog;
+    private PhilipsWiFiNotConnectDialog mWiFiNotConnectDialog;
 
     @Override
     public void initData(@Nullable Bundle bundle) {
@@ -86,6 +92,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mFragments.add(PhilipsAddVideoLockTask5Fragment.getInstance());
         mFragments.add(PhilipsAddVideoLockTask6Fragment.getInstance());
         FragmentUtils.add(getSupportFragmentManager(), mFragments, R.id.fcvAddVideoLock, 0);
+        initDialogs();
 
         applyDebouncingClickListener(findViewById(R.id.ivBack), mIvHelp);
     }
@@ -108,6 +115,51 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     protected void onDestroy() {
         toDisposable(mGetDeviceBindingDisposable);
         super.onDestroy();
+    }
+
+    private void initDialogs() {
+        mOpenLocationDialog = new PhilipsOpenLocationDialog(this);
+        mOpenLocationDialog.setOnOpenLocationListener(new PhilipsOpenLocationDialog.OnOpenLocationListener() {
+            @Override
+            public void setting() {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(intent,887);
+            }
+
+            @Override
+            public void cancel() {
+                if(mOpenLocationDialog != null) {
+                    mOpenLocationDialog.dismiss();
+                }
+            }
+        });
+        mWiFiNotConnectDialog = new PhilipsWiFiNotConnectDialog(this);
+        mWiFiNotConnectDialog.setOnWifiNotConnectListener(new PhilipsWiFiNotConnectDialog.OnWifiNotConnectListener() {
+            @Override
+            public void cancel() {
+                if(mWiFiNotConnectDialog != null) {
+                    mWiFiNotConnectDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void gotoConnect() {
+                Intent wifiIntent =  new Intent(Settings.ACTION_WIFI_SETTINGS);
+                startActivity(wifiIntent);
+            }
+        });
+    }
+
+    public void showOpenLocDialog() {
+        if(mOpenLocationDialog != null) {
+            mOpenLocationDialog.show();
+        }
+    }
+
+    public void showWifiNotConnectDialog() {
+        if(mWiFiNotConnectDialog != null) {
+            mWiFiNotConnectDialog.show();
+        }
     }
 
     private void initTaskShowUI() {
@@ -387,6 +439,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                         public void right() {
                             unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
                         }
+
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
 

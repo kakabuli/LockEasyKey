@@ -1,9 +1,7 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.WifiUtils;
 
@@ -79,11 +76,8 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
             isChoose = !isChoose;
             refreshNext();
         });
-        tvVoicePromptFailed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2021/5/6 跳转到语音提示失败的操作显示
-            }
+        tvVoicePromptFailed.setOnClickListener(v -> {
+            // TODO: 2021/5/6 跳转到语音提示失败的操作显示
         });
     }
 
@@ -96,17 +90,17 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
         WifiUtils wifiUtils = WifiUtils.getInstance(context);
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
+            if(mAddVideoLockActivity != null) {
+                mAddVideoLockActivity.showWifiNotConnectDialog();
+            }
             ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
-            return;
-        }
-        if (!WifiUtils.getInstance(context).isWifiEnable()) {
-            showWifiDialog();
-            WifiUtils.getInstance(context).openWifi();
             return;
         }
         if (!GpsUtil.isOPen(context)) {
             GpsUtil.openGPS(context);
-            showLocationPermission();
+            if(mAddVideoLockActivity != null) {
+                mAddVideoLockActivity.showOpenLocDialog();
+            }
             return;
         }
         if(mAddVideoLockActivity != null) {
@@ -116,65 +110,8 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
 
     private void refreshNext() {
         mBtnNext.setBackgroundResource(isChoose?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_invalid_bg);
-        // TODO: 2021/5/6 缺少切图，暂时使用其他的临时替代
-        mIvSelect.setImageResource(isChoose?R.drawable.philips_dms_icon_success:R.drawable.philips_dms_icon_default);
+        mIvSelect.setImageResource(isChoose?R.drawable.philips_dms_icon_selected:R.drawable.philips_dms_icon_default);
         mBtnNext.setEnabled(isChoose);
-    }
-
-    private void showWifiDialog() {
-        AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(
-                getContext(),
-                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_1),
-                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_2), "#1F96F7", new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
-
-                    }
-
-                    @Override
-                    public void right() {
-//                        Intent wifiIntent =  new Intent(Settings.ACTION_WIFI_SETTINGS);
-//                        startActivity(wifiIntent);
-                    }
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(String toString) {
-
-                    }
-                });
-    }
-
-    private void showLocationPermission() {
-        AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(
-                getContext(),
-                getString(R.string.dialog_wifi_video_tip),
-                getString(R.string.philips_activity_wifi_lock_new_add_first),
-                getString(R.string.confirm), getString(R.string.cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-
-                        startActivityForResult(intent,887);
-                    }
-
-                    @Override
-                    public void right() {
-
-                    }
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(String toString) {
-
-                    }
-                });
     }
 
 }

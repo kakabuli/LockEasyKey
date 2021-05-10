@@ -143,7 +143,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(
                 WifiLockAddNewFirstActivity.this,
                 getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_1),
-                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_2), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_dialog_go_to_connect), "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                     }
@@ -170,7 +170,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
                 WifiLockAddNewFirstActivity.this
                 , getString(R.string.dialog_wifi_video_tip),
                 getString(R.string.philips_activity_wifi_lock_new_add_first),
-                getString(R.string.confirm), getString(R.string.cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);

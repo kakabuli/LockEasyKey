@@ -38,7 +38,7 @@
     <string name="more_then_ten_member">您已添加超过10个成员，\n请删除已有成员权限，再添加</string>
     <string name="dialog_confirm">确认</string>
     <string name="safe_mode_dialog">请去新增开锁方式，启动安全模式</string>
-    <string name="cancel">取消</string>
+    <string name="philips_cancel">取消</string>
     <string name="query">确认</string>
     <string name="get_verification_content">重新获取(%1$s)</string>
     <string name="verification_verify_error">请输入六位验证码</string>
@@ -1384,9 +1384,9 @@
     <string name="support_family_rute">支持的家庭路由器</string>
     <string name="rute_name">路由器名称</string>
     <string name="rute_model">型号</string>
-    <string name="wifi_lock_my_home">我的家</string>
-    <string name="wifi_lock_bedroom">卧室</string>
-    <string name="wifi_lock_company">公司</string>
+    <string name="philips_wifi_lock_my_home">我的家</string>
+    <string name="philips_wifi_lock_bedroom">卧室</string>
+    <string name="philips_wifi_lock_company">公司</string>
     <string name="add_failed">添加失败</string>
     <string name="pair_failed">配对失败</string>
     <string name="wifi_lock_repair">重新配网</string>
@@ -2390,7 +2390,7 @@
     <string name="philips_activity_gatewaylock_setting_14">获取AM异常</string>
     <string name="philips_activity_gateway_more_failed">获取失败</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_1">手机未连接Wi-Fi，无法添加设备</string>
-    <string name="philips_activity_clothes_hanger_machine_add_dialog_2">去连接</string>
+    <string name="philips_dialog_go_to_connect">去连接</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_3">请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁</string>
     <string name="philips_activity_timer_manager_1">不重复</string>
     <string name="philips_activity_timer_manager_2">打开开关1</string>
@@ -2503,5 +2503,9 @@
     <string name="philips_admin_pwd_wrong">管理员密码错误？</string>
     <string name="philips_plz_input_admin_pwd_to_confirm">请输入门锁管理员密码进行确认</string>
     <string name="philips_tip_input_admin_pwd_fail">门锁管理密码验证失败%1$d次，\n超过5次，配网失败</string>
+    <string name="philips_wifi_not_connect">WiFi未连接</string>
+    <string name="philips_phone_not_connect_wifi_cant_add_device">手机未连接WiFi，无法添加设备</string>
+    <string name="philips_open_location">开启定位</string>
+    <string name="philips_plz_open_loc_cant_add_lock">请开启定位服务，否则无法添加门锁</string>
 
 </resources>

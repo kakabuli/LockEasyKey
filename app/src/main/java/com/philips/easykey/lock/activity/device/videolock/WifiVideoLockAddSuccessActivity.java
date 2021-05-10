@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.videolock;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -118,9 +117,9 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
 
     private void initData() {
         mList = new ArrayList<>();
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_my_home), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_bedroom), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_company), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_my_home), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_bedroom), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_company), false));
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         sSsid = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
         func = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_FUNC,0);

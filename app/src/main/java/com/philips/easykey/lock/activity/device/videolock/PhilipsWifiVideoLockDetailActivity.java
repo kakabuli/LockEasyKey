@@ -24,11 +24,8 @@ import com.philips.easykey.lock.activity.device.wifilock.family.PhilipsWifiLockF
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockFunctionBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
-import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.PhilipsWifiVideoLockDetailPresenter;
-import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockMorePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsWifiVideoLockDetailView;
-import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockMoreView;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -222,7 +219,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                 break;
             case R.id.iv_detail_delete:
                 AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
-                        getString(R.string.cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                        getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
 

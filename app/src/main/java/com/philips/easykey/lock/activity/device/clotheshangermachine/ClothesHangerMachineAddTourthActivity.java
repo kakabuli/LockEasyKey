@@ -200,7 +200,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineAddTourthActivity.this
                 , content,
-                getString(R.string.cancel), getString(R.string.re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

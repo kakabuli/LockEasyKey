@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.annotations.SerializedName;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -178,7 +177,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
                         SwipchSeetingArgus.this,
                         getString(R.string.swipch_setting_pluease_input_title_name)
                         ,getString(R.string.swipch_setting_pluease_input_context_name)
-                        ,getString(R.string.cancel),
+                        ,getString(R.string.philips_cancel),
                           getString(R.string.query), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
@@ -209,7 +208,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
                         SwipchSeetingArgus.this,
                         getString(R.string.swipch_setting_pluease_dialog_title1)
                         ,switch1ChangeNickname
-                        , getString(R.string.cancel),
+                        , getString(R.string.philips_cancel),
                         getString(R.string.query), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
@@ -248,7 +247,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
                         SwipchSeetingArgus.this,
                         getString(R.string.swipch_setting_pluease_dialog_title2)
                         ,switch2ChangeNickname
-                        , getString(R.string.cancel),
+                        , getString(R.string.philips_cancel),
                         getString(R.string.query), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
@@ -292,7 +291,7 @@ public class SwipchSeetingArgus extends BaseActivity<SingleFireSwitchView, Singl
                         SwipchSeetingArgus.this,
                         getString(R.string.swipch_setting_pluease_dialog_title3)
                         ,switch3ChangeNickname
-                        , getString(R.string.cancel),
+                        , getString(R.string.philips_cancel),
                         getString(R.string.query), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {

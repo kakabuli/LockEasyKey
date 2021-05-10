@@ -1,11 +1,9 @@
 package com.philips.easykey.lock.activity.device.wifilock.family;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,7 +97,7 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
                 //删除
                 if (NetUtil.isNetworkAvailable()) {
                     AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this, getString(R.string.sure_delete_user_permission),
-                            getString(R.string.cancel), getString(R.string.delete), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
+                            getString(R.string.philips_cancel), getString(R.string.delete), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                                 @Override
                                 public void left() {
 

@@ -41,7 +41,7 @@ public class BiometricUtils {
                 .Builder(mActivity)
                 .setTitle(mActivity.getResources().getString(R.string.philips_biometric_login))
                 .setSubtitle(mActivity.getResources().getString(R.string.philips_login_using_your_biometric_credential))
-                .setNegativeButton(mActivity.getResources().getString(R.string.cancel),
+                .setNegativeButton(mActivity.getResources().getString(R.string.philips_cancel),
                 mActivity.getMainExecutor(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

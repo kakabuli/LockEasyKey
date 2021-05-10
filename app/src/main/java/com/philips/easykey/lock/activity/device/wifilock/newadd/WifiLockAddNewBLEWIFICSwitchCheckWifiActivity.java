@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockAddBleSuccessActivity;
@@ -510,7 +509,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

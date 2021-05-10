@@ -77,10 +77,10 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             def date = new Date().format("yyyyMMdd" , TimeZone.getDefault())
-            if(variant.buildType.name.equals('debug')){
+            if(variant.buildType.name == 'debug'){
                 outputFileName = "Philips_EasyKey-debug${date}-${versionCode}-${versionName}.apk"
             }
-            if(variant.buildType.name.equals('release')){
+            if(variant.buildType.name == 'release'){
                 outputFileName = "Philips_EasyKey-${versionCode}-${versionName}.apk"
             }
         }
@@ -150,6 +150,7 @@ dependencies {
     implementation project(path: ':keep_alive')
     implementation files('libs/GetuiSDK-support-MZP-1.1.1.jar')
     implementation files('libs/GetuiSDK-support-STP-1.0.1.jar')
+    implementation project(path: ':library:Common')
 
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

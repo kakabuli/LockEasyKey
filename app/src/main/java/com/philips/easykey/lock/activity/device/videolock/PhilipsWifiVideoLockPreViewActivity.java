@@ -71,7 +71,7 @@ public class PhilipsWifiVideoLockPreViewActivity extends BaseAddToApplicationAct
         AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(
                 PhilipsWifiVideoLockPreViewActivity.this
                 , getString(R.string.activity_wifi_video_preview_delete),
-                getString(R.string.cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

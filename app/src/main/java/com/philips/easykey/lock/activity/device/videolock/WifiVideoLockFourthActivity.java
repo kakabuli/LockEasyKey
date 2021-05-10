@@ -172,7 +172,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 WifiVideoLockFourthActivity.this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

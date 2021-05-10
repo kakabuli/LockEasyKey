@@ -39,7 +39,7 @@
         android:id="@+id/finger_cancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_44"
-        android:text="@string/cancel"
+        android:text="@string/philips_cancel"
         android:textSize="@dimen/sp_15"
         android:textColor="#1F96F7"
         android:gravity="center"

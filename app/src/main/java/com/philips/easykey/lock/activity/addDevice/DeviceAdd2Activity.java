@@ -149,7 +149,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
                     startActivity(zigbeeIntent);
 
                 } else if (flag == false) {
-                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(DeviceAdd2Activity.this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(DeviceAdd2Activity.this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -179,7 +179,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
                     startActivity(catEyeIntent);
 
                 } else if (flag == false) {
-                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 

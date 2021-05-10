@@ -229,7 +229,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.philips_activity_personal_change_tel_number),
-                getString(R.string.cancel), getString(R.string.philips_dialog_change), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_dialog_change), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -254,7 +254,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     }
 
     private void loginOut() {
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_log_out), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_log_out), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 

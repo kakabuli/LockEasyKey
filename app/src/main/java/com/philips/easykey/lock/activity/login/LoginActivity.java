@@ -102,7 +102,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
     }
 
     private void appUpdateDialog() {
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.find_newAPP), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.find_newAPP), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
             }

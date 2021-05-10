@@ -23,7 +23,7 @@
         android:gravity="center"
         android:paddingBottom="12pt"
         android:paddingTop="12pt"
-        android:text="@string/cancel"
+        android:text="@string/philips_cancel"
         android:textColor="#333333"
         android:textSize="16pt"/>
 

@@ -32,7 +32,6 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.CircleProgress;
 import com.philips.easykey.lock.widget.OtaMutiProgress;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -379,7 +378,7 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
         MyApplication.getInstance().uploadOtaResult(sn, version, tag, 1);
         isUpdating = false;
         AlertDialogUtil.getInstance().noEditTwoButtonDialogCanNotDismiss(this, getString(R.string.ota_fail), getString(R.string.ota_fail_reply),
-                getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         finish();

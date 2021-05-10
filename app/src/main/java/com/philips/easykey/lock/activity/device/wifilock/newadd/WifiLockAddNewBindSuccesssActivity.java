@@ -30,7 +30,6 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,9 +100,9 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
 
     private void initData() {
         mList = new ArrayList<>();
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_my_home), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_bedroom), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_company), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_my_home), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_bedroom), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_company), false));
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
     }
 

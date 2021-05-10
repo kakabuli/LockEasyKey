@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="329pt"
+    android:layout_height="343pt"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvOpenLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24pt"
+        android:layout_marginTop="21pt"
+        android:text="@string/philips_open_location"
+        android:textColor="@color/color_333333"
+        android:textSize="17pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivNotOpenLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOpenLoc"
+        app:srcCompat="@drawable/philips_dms_img_positioning" />
+
+
+    <TextView
+        android:id="@+id/tvOpenLocTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24pt"
+        android:layout_marginStart="24pt"
+        android:text="@string/philips_plz_open_loc_cant_add_lock"
+        android:textSize="16pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivNotOpenLoc" />
+
+    <TextView
+        android:id="@+id/tvSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_setting"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:background="@drawable/philips_shape_btn_bg"
+        android:paddingStart="12pt"
+        android:paddingEnd="12pt"
+        android:layout_marginBottom="12pt"
+        android:layout_marginEnd="12pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_cancel"
+        android:textSize="16pt"
+        android:textColor="@color/c0066A1"
+        android:layout_marginEnd="8pt"
+        android:paddingStart="14pt"
+        android:paddingEnd="14pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSetting"
+        app:layout_constraintEnd_toStartOf="@+id/tvSetting"
+        app:layout_constraintTop_toTopOf="@+id/tvSetting" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@
         android:layout_toLeftOf="@id/tv_right"
         android:textSize="16pt"
         android:layout_marginBottom="12pt"
-        android:text="@string/cancel"
+        android:text="@string/philips_cancel"
         android:gravity="center"
         android:textColor="@color/c0066A1"
         android:background="@drawable/philips_retangle_ffffff_3"

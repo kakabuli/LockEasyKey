@@ -16,10 +16,10 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.widget.PhilipsWifiVideoCircleProgress;
 
 /**
- * author :
+ * author : Jack
  * time   : 2021/5/6
  * E-mail : wengmaowei@kaadas.com
- * desc   :
+ * desc   : 虚假无用的倒计时
  */
 public class PhilipsAddVideoLockTask4Fragment extends Fragment {
 

@@ -186,7 +186,7 @@ public class BluetoothPasswordShareActivity extends BaseBleActivity<IPasswordDet
                 });
                 break;
             case R.id.btn_delete:
-                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.sure_delete_password), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.sure_delete_password), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

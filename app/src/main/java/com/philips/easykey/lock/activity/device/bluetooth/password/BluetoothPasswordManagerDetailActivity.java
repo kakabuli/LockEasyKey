@@ -172,7 +172,7 @@ public class BluetoothPasswordManagerDetailActivity extends BaseBleActivity<IPas
                 break;
             case R.id.btn_delete:
                 if (NetUtil.isNetworkAvailable()) {
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, "", getString(R.string.sure_delete_password), getString(R.string.cancel), getString(R.string.delete), new AlertDialogUtil.ClickListener() {
+                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, "", getString(R.string.sure_delete_password), getString(R.string.philips_cancel), getString(R.string.delete), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 

@@ -43,7 +43,6 @@ import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,7 +150,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
 
     //当没有搜索到蓝牙设备时，显示对话框。
     private void showNotScanDeviceDialog() {
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getResources().getString(R.string.no_find_connect_device), getResources().getString(R.string.cancel), getResources().getString(R.string.rescan),"#333333","#1F96F7", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getResources().getString(R.string.no_find_connect_device), getResources().getString(R.string.philips_cancel), getResources().getString(R.string.rescan),"#333333","#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
                 finish();
@@ -339,7 +338,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
 
     private void binding(BluetoothDevice device, Boolean bindFlag, String content) {
         hiddenLoading();
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), content, getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 
@@ -476,7 +475,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
     @Override
     public void notice419() {
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint),
-                getString(R.string.notice_419_call), getString(R.string.cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.notice_419_call), getString(R.string.philips_cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
