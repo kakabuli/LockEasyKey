@@ -2,13 +2,12 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }

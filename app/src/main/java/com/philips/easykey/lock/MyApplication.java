@@ -89,7 +89,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.subjects.PublishSubject;
-import com.philips.easykey.core.tool.ActivityCollectorUtil;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -352,7 +351,6 @@ public class MyApplication extends Application {
      */
     public void tokenInvalid(boolean isShowDialog) {
         deleSQL();  //清除数据库数据
-        ActivityCollectorUtil.finishAllActivity();
         LogUtils.d("token过期   ");
         SPUtils.put(KeyConstants.HEAD_PATH, "");
         boolean alreadyStart = false;

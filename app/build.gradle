@@ -5,7 +5,7 @@ apply plugin: 'bugly'   //添加bugly的符号表
 apply plugin: 'com.mob.sdk'
 
 greendao {
-    schemaVersion 1// 数据库版本号
+    schemaVersion rootProject.ext.greendao_schemaVersion// 数据库版本号
 //    daoPackage 'com.philips.easykey.lock.utils.greenDao.db'//自动生成的dao的包名，包名默认是entity所在的包；
 //    targetGenDir 'src/main/java'//生成数据库文件的目录
 }
@@ -17,13 +17,13 @@ bugly {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId "com.philips.easykey.lock"
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 202105061
-        versionName "1.0.0"
+        applicationId rootProject.ext.appId["app"]
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         flavorDimensions "versionCode"
         multiDexEnabled true
@@ -57,6 +57,23 @@ android {
         preDexLibraries = false
     }
 
+    productFlavors {
+        PhilipsEasyKey {
+            applicationId rootProject.ext.appId["app"]
+            if(rootProject.ext.env){
+                buildConfigField('String', 'HTTP_HOST', rootProject.ext.HOST.HTTPS)
+                buildConfigField('String', 'MQTT_HOST', rootProject.ext.HOST.MQTT)
+                buildConfigField('String', 'SIP_HOST', rootProject.ext.HOST.LINPHONE_SIP)
+            }else{
+                buildConfigField('String', 'HTTP_HOST', rootProject.ext.HOST.HTTPS_DEV)
+                buildConfigField('String', 'MQTT_HOST', rootProject.ext.HOST.MQTT_DEV)
+                buildConfigField('String', 'SIP_HOST', rootProject.ext.HOST.LINPHONE_SIP_DEV)
+            }
+            buildConfigField('String', 'HTTP_VERSION', rootProject.ext.HOST.VERSION)
+            buildConfigField('Boolean','IS_OVERSEAS', rootProject.ext.IS_OVERSEAS)
+        }
+    }
+
     signingConfigs {
         debug {
             v1SigningEnabled true
@@ -88,15 +105,13 @@ android {
 
     buildTypes {
         release {
-            buildConfigField('String', 'HTTP_VERSION', '"1"')
             minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            debuggable true  //启用debug的buildType配置
-            buildConfigField('String', 'HTTP_VERSION', '"1"')
+            debuggable rootProject.ext.isDeBug  //启用debug的buildType配置
         }
     }
 
@@ -160,9 +175,9 @@ dependencies {
     implementation files('libs/xm-support.jar')
 
     testImplementation 'junit:junit:4.13.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espresso_core_version}"
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 

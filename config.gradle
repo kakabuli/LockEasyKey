@@ -1,0 +1,46 @@
+ext {
+
+    //日志打印 true打印 false禁止
+    isDeBug = true
+    //Net环境 true正式 false测试
+    env = true
+    //是否未海外环境
+    IS_OVERSEAS = "false"
+
+    HOST = [
+            HTTPS                   :'"https://app.kaadas.com:34000/"',
+            MQTT                    :'"tcp://mqtt-kaadas.juziwulian.com:1883"',
+            LINPHONE_SIP            :'"sip-kaadas.juziwulian.com:5061"',
+
+            HTTPS_DEV               :'"https://test.juziwulian.com:8090/"',
+            MQTT_DEV                :'"tcp://test.juziwulian.com:1883"',
+            LINPHONE_SIP_DEV        :'"test.juziwulian.com:5061"',
+
+            VERSION                 :'"1"',//HTTPS加密版本
+    ]
+
+    android = [
+            compileSdkVersion       :30,
+            minSdkVersion           :26,
+            targetSdkVersion        :30,
+            versionCode             :202105061,
+            versionName             :"1.0.0",
+            buildToolsVersion       :"30.0.2",
+
+            coreVersionCode         :201909250,
+            coreVersionName         :"3.4.8",
+
+            keepAliveVersionCode    :2021050601,
+            keepAliveVersionName    :"1.3.0",
+
+    ]
+
+    appId = [
+            "app"                   :"com.philips.easykey.lock",
+            "philips"               :"com.philips.easykey.lock"
+    ]
+
+    greendao_schemaVersion = 1 //App 数据库版本
+    constraintlayoutVersion = "2.0.4"
+    espresso_core_version = "3.3.0"
+}
