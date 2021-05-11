@@ -29,7 +29,8 @@
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
           android:layout_alignParentRight="true"
-          android:background="@drawable/philips_icon_more"/>
+          android:layout_marginRight="16pt"
+          android:background="@drawable/philips_message_icon_cbb"/>
 
    </RelativeLayout>
 
@@ -155,13 +156,34 @@
                 android:textColor="#333333"
                 android:text="@string/philips_frament_warning_message_inform"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_video_lock_msg"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14pt"
-                android:layout_marginRight="13pt"
-                android:layout_marginTop="19pt"/>
+                android:layout_marginTop="19pt">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/rcv_video_lock_msg"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="14pt"
+                   android:layout_marginRight="13pt"/>
+
+               <ImageView
+                   android:id="@+id/iv_video_lock_msg_left"
+                   android:layout_width="14pt"
+                   android:layout_height="110pt"
+                   android:layout_marginLeft="14pt"
+                   android:src="@drawable/philips_icon_more_left_default_01"/>
+
+               <ImageView
+                   android:id="@+id/iv_video_lock_msg_right"
+                   android:layout_width="14pt"
+                   android:layout_height="110pt"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginRight="13pt"
+                   android:src="@drawable/philips_icon_more_right_selected_01" />
+
+            </RelativeLayout>
          </LinearLayout>
 
          <LinearLayout
@@ -230,13 +252,34 @@
 
             </RelativeLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_today_lock_statistics"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30pt"
-                android:layout_marginLeft="10pt"
-                android:layout_marginRight="14pt"/>
+                android:layout_marginTop="30pt">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/rcv_today_lock_statistics"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="14pt"
+                   android:layout_marginRight="14pt"/>
+
+               <ImageView
+                   android:id="@+id/iv_today_lock_statistics_left"
+                   android:layout_width="14pt"
+                   android:layout_height="76pt"
+                   android:layout_marginLeft="14pt"
+                   android:src="@drawable/philips_icon_more_left_default_02"/>
+
+               <ImageView
+                   android:id="@+id/iv_today_lock_statistics_right"
+                   android:layout_width="14pt"
+                   android:layout_height="76pt"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginRight="14pt"
+                   android:src="@drawable/philips_icon_more_right_selected_02" />
+
+            </RelativeLayout>
          </LinearLayout>
 
          <LinearLayout

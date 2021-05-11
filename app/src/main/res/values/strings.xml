@@ -2158,6 +2158,7 @@
 
     <string name="philips_frament_door_lock_message">门锁消息</string>
     <string name="philips_frament_system_message">系统消息</string>
+    <string name="philips_frament_no_message">暂无消息~</string>
     <string name="philips_add_duration">添加时长</string>
     <string name="philips_frament_today_lock_statistics">今日门锁统计</string>
     <string name="philips_frament_today_lock_message">今日门锁消息</string>

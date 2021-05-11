@@ -119,7 +119,7 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
 
         String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
         if (!TextUtils.isEmpty(phone)) {
-            tvNumber.setText(StringUtil.phoneToHide(phone));
+            tvNumber.setText(getString(R.string.personal_number) + "：" + StringUtil.phoneToHide(phone));
         }
 
         String photoPath = (String) SPUtils.get(KeyConstants.HEAD_PATH, "");

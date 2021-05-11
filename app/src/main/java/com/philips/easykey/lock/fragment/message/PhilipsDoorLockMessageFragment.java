@@ -2,9 +2,11 @@ package com.philips.easykey.lock.fragment.message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
 import com.philips.easykey.lock.adapter.PhilipsSevenDayDataStatisticsAdapter;
@@ -47,12 +51,28 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     TextView tvLockName;
     @BindView(R.id.ll_video_lock_msg)
     LinearLayout llVideoLockMsg;
+    @BindView(R.id.iv_video_lock_msg_left)
+    ImageView ivVideoLockMsgLeft;
+    @BindView(R.id.iv_video_lock_msg_right)
+    ImageView ivVideoLockMsgRight;
+    @BindView(R.id.iv_today_lock_statistics_left)
+    ImageView ivTodayLockStatisticsLeft;
+    @BindView(R.id.iv_today_lock_statistics_right)
+    ImageView ivTodayLockStatisticsRight;
     private PhilipsVideoLockWarningInformAdapter videoLockWarningInformAdapter;
     private PhilipsTodayLockStatisticsAdapter lockStatisticsAdapter;
     private PhilipsSevenDayDataStatisticsAdapter sevendayDataStatisticsAdapter;
     private int RESULT_OK = 100;
     private View mView;
     private Unbinder unbinder;
+    private List<WifiVideoLockAlarmRecord> wifiVideoLockAlarmRecordData = new ArrayList<>();
+    private List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
+    private List<SevendayDataStatisticsBean> sevendayDataStatisticsData = new ArrayList<>();
+    private int earlyWarningMsgMoveLeftDistance = 0;
+    private int earlyWarningMsgMoveRightDistance = 0;
+    private int todayLockStatisticsMoveLeftDistance = 0;
+    private int todayLockStatisticsMoveRightDistance = 0;
+    private int itemDecorationLeft = SizeUtils.dp2px(4);
 
     @Nullable
     @Override
@@ -71,8 +91,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     }
 
     private void initView() {
-        List<WifiVideoLockAlarmRecord> wifiVideoLockAlarmRecordData = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             WifiVideoLockAlarmRecord wifiVideoLockAlarmRecord = new WifiVideoLockAlarmRecord();
             wifiVideoLockAlarmRecordData.add(wifiVideoLockAlarmRecord);
         }
@@ -84,10 +103,52 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         });
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcvVideoLockMsg.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
+        if(wifiVideoLockAlarmRecordData.size() < 5){
+            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
+        }
+        rcvVideoLockMsg.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(wifiVideoLockAlarmRecordData.size() < 5)return;
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                //找到即将移出屏幕Item的position
+                int position = layoutManager.findFirstVisibleItemPosition();
+                //根据position找到这个Item
+                View firstVisiableChildView = layoutManager.findViewByPosition(position);
+                //获取Item的宽
+                int itemWidth = firstVisiableChildView.getWidth();
+                //算出该Item还未移出屏幕的高度
+                int itemRight = firstVisiableChildView.getRight();
+                earlyWarningMsgMoveLeftDistance = itemWidth + itemDecorationLeft;
+                earlyWarningMsgMoveRightDistance = itemWidth  + itemDecorationLeft;
+                if(itemWidth > itemRight){
+                    earlyWarningMsgMoveRightDistance = earlyWarningMsgMoveRightDistance + (itemWidth - itemRight) + itemDecorationLeft;
+                    earlyWarningMsgMoveLeftDistance = earlyWarningMsgMoveLeftDistance + itemRight + itemDecorationLeft;
+                }
+                int firstCompletelyVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+                int lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
+                if (firstCompletelyVisibleItemPosition == 0){
+                    ivVideoLockMsgLeft.setVisibility(View.VISIBLE);
+                    ivVideoLockMsgRight.setVisibility(View.VISIBLE);
+                    ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_selected_01);
+                    ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_default_01);
+                }else if(lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1){
+                    ivVideoLockMsgRight.setVisibility(View.VISIBLE);
+                    ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_default_01);
+                    ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_selected_01);
+                }else {
+                    ivVideoLockMsgRight.setVisibility(View.VISIBLE);
+                    ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_selected_01);
+                    ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_selected_01);
+                }
+            }
+        });
 
-        List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
         TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
         todayLockStatisticsBean.setStatisticsType(1);
         todayLockStatisticsBean.setStatisticsCount(10);
@@ -116,10 +177,55 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter(TodayLockStatisticsData);
         LinearLayoutManager horizontalLayoutManager1 = new LinearLayoutManager(getContext());
         horizontalLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvTodayLockStatistics.setLayoutManager(horizontalLayoutManager1);
         rcvTodayLockStatistics.setAdapter(lockStatisticsAdapter);
+        if(TodayLockStatisticsData.size() < 5){
+            ivTodayLockStatisticsLeft.setVisibility(View.INVISIBLE);
+            ivTodayLockStatisticsRight.setVisibility(View.INVISIBLE);
+        }
+        rcvTodayLockStatistics.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(TodayLockStatisticsData.size() < 5)return;
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                //找到即将移出屏幕Item的position
+                int position = layoutManager.findFirstVisibleItemPosition();
+                //根据position找到这个Item
+                View firstVisiableChildView = layoutManager.findViewByPosition(position);
+                //获取Item的宽
+                int itemWidth = firstVisiableChildView.getWidth();
+                //算出该Item还未移出屏幕的高度
+                int itemRight = firstVisiableChildView.getRight();
+                todayLockStatisticsMoveLeftDistance = itemWidth + itemDecorationLeft;
+                todayLockStatisticsMoveRightDistance = itemWidth  + itemDecorationLeft;
+                if(itemWidth > itemRight){
+                    todayLockStatisticsMoveRightDistance = todayLockStatisticsMoveRightDistance + (itemWidth - itemRight) + itemDecorationLeft;
+                    todayLockStatisticsMoveLeftDistance = todayLockStatisticsMoveLeftDistance + itemRight + itemDecorationLeft;
+                }
+                int firstCompletelyVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+                int lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
+                if (firstCompletelyVisibleItemPosition == 0){
+                    ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsLeft.setImageResource(R.drawable.philips_icon_more_left_selected_02);
+                    ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_default_02);
+                }else if(lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1){
+                    ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsLeft.setImageResource(R.drawable.philips_icon_more_left_default_02);
+                    ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_selected_02);
+                }else {
+                    ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
+                    ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_selected_02);
+                    ivTodayLockStatisticsLeft.setImageResource(R.drawable.philips_icon_more_left_selected_02);
+                }
 
-        List<SevendayDataStatisticsBean> sevendayDataStatisticsData = new ArrayList<>();
+            }
+        });
+
         for (int i = 0; i < 3; i++) {
             SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
             sevendayDataStatisticsBean.setOrdinateValue(new float[]{20, 20, 27, 26, 24, 21});
@@ -148,13 +254,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         }
     }
 
-
-    @OnClick(R.id.ll_device_type)
-    public void onViewClicked() {
-        Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
-        startActivityForResult(intent, RESULT_OK);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -168,5 +267,27 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick({R.id.ll_device_type,R.id.iv_video_lock_msg_left, R.id.iv_video_lock_msg_right, R.id.iv_today_lock_statistics_left, R.id.iv_today_lock_statistics_right})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_device_type:
+                Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
+                startActivityForResult(intent, RESULT_OK);
+                break;
+            case R.id.iv_video_lock_msg_left:
+                rcvVideoLockMsg.scrollBy(earlyWarningMsgMoveLeftDistance,0);
+                break;
+            case R.id.iv_video_lock_msg_right:
+                rcvVideoLockMsg.scrollBy(-earlyWarningMsgMoveRightDistance,0);
+                break;
+            case R.id.iv_today_lock_statistics_left:
+                rcvTodayLockStatistics.scrollBy(todayLockStatisticsMoveLeftDistance,0);
+                break;
+            case R.id.iv_today_lock_statistics_right:
+                rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance,0);
+                break;
+        }
     }
 }
