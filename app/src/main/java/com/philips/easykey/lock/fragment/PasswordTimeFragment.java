@@ -245,7 +245,7 @@ public class PasswordTimeFragment extends BaseBleFragment<IAddTimePasswprdView, 
                 String strPassword = etPassword.getText().toString().trim();
                 String nickName = etName.getText().toString().trim();
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {

@@ -95,6 +95,11 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         return root;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
     private void gotoAddDeviceAct() {
         Intent intent = new Intent(getActivity(), PhilipsAddDeviceActivity.class);
         startActivity(intent);
@@ -295,8 +300,8 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         if(getContext() == null) return;
         mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_default));
         mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_selected));
-        mTvCurrentPage.setVisibility(View.VISIBLE);
-        mTvCount.setVisibility(View.VISIBLE);
+        mTvCurrentPage.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
+        mTvCount.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
         mVPDevices.setVisibility(View.VISIBLE);
         mRvDevices.setVisibility(View.GONE);
 
@@ -343,6 +348,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         }
     }
 
+
     @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE_PERMISSIONS)
     private void rcReadStoragePermission(){
         if(!hasReadExternalStoragePermission()) {
@@ -361,6 +367,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        LogUtils.d("onPermissionsGranted requestCode: " + requestCode);
         if(perms.isEmpty()) {
             LogUtils.e("onPermissionsGranted 返回的权限不存在数据 perms size: " + perms.size());
             return;
@@ -368,18 +375,15 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         if(requestCode == RC_QR_CODE_PERMISSIONS) {
             if(perms.size() == 2) {
                 LogUtils.d("onPermissionsGranted 同时两条权限都请求成功");
-                gotoAddDeviceAct();
             } else if(perms.get(0).equals(Manifest.permission.CAMERA)) {
                 LogUtils.d("onPermissionsGranted 只有相机权限成功");
                 if(hasReadExternalStoragePermission()) {
-                    gotoAddDeviceAct();
                 } else {
                     rcReadStoragePermission();
                 }
             } else if(perms.get(0).equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 LogUtils.d("onPermissionsGranted 只有存储权限成功");
                 if(hasCameraPermission()) {
-                    gotoAddDeviceAct();
                 } else {
                     rcCameraPermission();
                 }
@@ -393,17 +397,18 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        LogUtils.d("onPermissionsDenied requestCode: " + requestCode);
         if(perms.get(0).equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            LogUtils.e("onPermissionsDenied 拒绝了扫描二维码需要的储存权限, requestCode: %1d", requestCode);
+            LogUtils.e("onPermissionsDenied 拒绝了扫描二维码需要的储存权限, requestCode: " + requestCode);
         } else if(perms.get(0).equals(Manifest.permission.CAMERA)) {
-            LogUtils.e("onPermissionsDenied 拒绝了扫描二维码需要的相机权限, requestCode: %1d", requestCode);
+            LogUtils.e("onPermissionsDenied 拒绝了扫描二维码需要的相机权限, requestCode: " + requestCode);
         }
 
     }
 
     public void powerStatusDialog(){
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

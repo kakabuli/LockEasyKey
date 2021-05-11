@@ -19,7 +19,7 @@
     <string name="input_verification_code">输入验证码</string>
     <string name="register_default_agree">注册默认同意</string>
     <string name="user_protocol">用户协议</string>
-    <string name="forget_password">忘记密码</string>
+    <string name="philips_forget_password">忘记密码</string>
     <string name="have_add_lock">门锁已添加成功</string>
     <string name="have_add_lock_text">快来设置智能开关吧!</string>
     <string name="complete">完成</string>
@@ -32,13 +32,13 @@
     <string name="not_input_special_symbol">不能输入特殊符号</string>
     <string name="phone_not_right">手机号错误</string>
     <string name="hint">提示</string>
-    <string name="password_error">密码错误</string>
+    <string name="philips_password_error">密码错误</string>
     <string name="affirm">确认</string>
     <string name="noNet">无网络,请先连接网络!</string>
     <string name="more_then_ten_member">您已添加超过10个成员，\n请删除已有成员权限，再添加</string>
     <string name="dialog_confirm">确认</string>
     <string name="safe_mode_dialog">请去新增开锁方式，启动安全模式</string>
-    <string name="cancel">取消</string>
+    <string name="philips_cancel">取消</string>
     <string name="query">确认</string>
     <string name="get_verification_content">重新获取(%1$s)</string>
     <string name="verification_verify_error">请输入六位验证码</string>
@@ -147,7 +147,7 @@
     <string name="gateway_light_setting">指示灯处于其它状态？</string>
     <string name="add_gateway">添加网关</string>
     <string name="add_next">下一步</string>
-    <string name="clothes_hanger_add_next">重新连接</string>
+    <string name="philips_clothes_hanger_add_next">重新连接</string>
     <string name="clothes_hanger_add_reconnect">取消连接</string>
     <string name="clothes_hanger_add_success">配网成功，您可以体验产品了~</string>
     <string name="gateway_light_confirm">网线连接路由器LAN和网关WAN,\n接通电源,确认指示灯常亮</string>
@@ -565,7 +565,7 @@
     <string name="bluetooth_no_connect_bluetooth_one_three">语音提示：“已进入管理模式”。</string>
     <string name="bluetooth_no_connect_bluetooth_two_hint">按照语音提示,点击对应数字选项,进入指纹添加</string>
     <string name="bluetooth_no_connect_bluetooth_three_hint">请找到门锁指纹采集位置,按照语音提示将要手指触摸进行采集</string>
-    <string name="next_step">下一步</string>
+    <string name="philips_next_step">下一步</string>
 
     <string name="warring_lock">您的门锁错误验证多次,门锁系统锁定</string>
     <string name="warring_three_times">您的门锁错误验证多次，请回家或联系保安查看！</string>
@@ -757,8 +757,8 @@
     <string name="already_newest_version">当前已是最新版本</string>
     <string name="sync_failed_card">同步门卡失败</string>
     <string name="lock_no_this_card">锁上没有此卡片，请同步</string>
-    <string name="confirm">确定</string>
-    <string name="random_verify_error">请输入6-12位数字</string>
+    <string name="philips_confirm">确定</string>
+    <string name="philips_random_verify_error">请输入6-12位数字</string>
     <string name="get_lock_card_failed">获取锁上卡片失败！</string>
     <string name="password_full_and_delete_exist_code">密码库已满，请删除已有码库再添加</string>
     <string name="forever_pwd_is_full">永久密码库已满，请删除已有的永久密码</string>
@@ -1226,7 +1226,7 @@
     <string name="phone_add_info">手机屏幕对准</string>
     <string name="phone_add_tip">将手机移动到猫头前面5-10cm</string>
     <string name="product_qrcode">生成二维码</string>
-    <string name="qrcode_msg">扫描二维码</string>
+    <string name="philips_qr_code_msg">扫描二维码</string>
     <string name="qrcode_msg_info">(将APP二维码对准猫眼监控头，根据提示完成操作)</string>
     <string name="qrcode_keep_info">保持扫描距离5-10cm</string>
     <string name="touch_your_light">轻触照亮</string>
@@ -1297,7 +1297,7 @@
     <string name="current_account">当前账户</string>
     <string name="account_password_error2">账户密码输入错误</string>
     <string name="modify_password">修改密码</string>
-    <string name="re_input">重新输入</string>
+    <string name="philips_re_input">重新输入</string>
     <string name="password_number_exit_please_sync">密码编号已存在，请先同步</string>
     <string name="night_sight_info">夜视功能</string>
     <string name="hand_day">白天</string>
@@ -1379,14 +1379,14 @@
     <string name="connect">连 接</string>
     <string name="look_wifi_support_rout">查看门锁Wi-Fi支持家庭路由器</string>
     <string name="please_input_wifi_password">请输入密码</string>
-    <string name="wifi_name_disable_empty">WiFi名不能为空</string>
+    <string name="philips_wifi_name_disable_empty">WiFi名不能为空</string>
     <string name="lock_net_connect">门锁网络连接中</string>
     <string name="support_family_rute">支持的家庭路由器</string>
     <string name="rute_name">路由器名称</string>
     <string name="rute_model">型号</string>
-    <string name="wifi_lock_my_home">我的家</string>
-    <string name="wifi_lock_bedroom">卧室</string>
-    <string name="wifi_lock_company">公司</string>
+    <string name="philips_wifi_lock_my_home">我的家</string>
+    <string name="philips_wifi_lock_bedroom">卧室</string>
+    <string name="philips_wifi_lock_company">公司</string>
     <string name="add_failed">添加失败</string>
     <string name="pair_failed">配对失败</string>
     <string name="wifi_lock_repair">重新配网</string>
@@ -1503,8 +1503,8 @@
     <string name="all">全部</string>
     <string name="offline_password_open">临时密码开锁</string>
     <string name="unknow_operation">未知操作</string>
-    <string name="granted_local_please_open_wifi">你拒绝了定位权限，请允许定位权限</string>
-    <string name="wifi_no_open_please_open_wifi">Wi-Fi没打开，请打开Wi-Fi</string>
+    <string name="philips_granted_local_please_open_wifi">你拒绝了定位权限，请允许定位权限</string>
+    <string name="philips_wifi_no_open_please_open_wifi">Wi-Fi没打开，请打开Wi-Fi</string>
     <string name="locak_no_open_please_open_local">定位未打开，请打开定位</string>
     <string name="wifi_lock_first_notice1">确保门锁已安装\n后面板Wi-Fi模块插入\n并装上电池</string>
     <string name="wifi_lock_first_notice2">首次绑定请先确保门锁已激活</string>
@@ -1624,7 +1624,7 @@
     <string name="add_single_switch_notice">② 用螺丝钉将开关固定到墙壁接线盒里，再扣上面壳</string>
     <string name="add_single_switch_first_notice1">1. 开关接线</string>
     <string name="add_single_switch_first_notice2">切断总闸，按照要求进行接线，接线图如下所示；（L孔接火线、L1/L2孔接电灯导线）</string>
-    <string name="add_success">添加成功</string>
+    <string name="philips_add_success">添加成功</string>
     <string name="add_success_hint">手动输入或从下面已有名称选择</string>
     <string name="single_switch_position1">客厅</string>
     <string name="single_switch_position2">主卧</string>
@@ -2074,7 +2074,7 @@
     <string name="activity_wifi_video_fourth_sceond">第二步：配置连接WI-FI</string>
     <string name="activity_wifi_video_fourth_third">第三步：配置连接WI-FI</string>
     <string name="activity_wifi_video_fourth_fifth">第四步：配置连接WI-FI</string>
-    <string name="activity_wifi_video_fourth_password">wifi密码必须不小于8位</string>
+    <string name="philips_password_len_not_less_8">wifi密码必须不小于8位</string>
     <string name="activity_wifi_video_fifth_network">确定重新开始配网吗？</string>
     <string name="activity_wifi_video_fifth_camera">提示：因手机屏幕尺寸不同，请移动手机在\n距离门锁摄像头10-50CM范围内扫描</string>
     <string name="activity_wifi_video_fifth_next">Wi-Fi已连接，下一步</string>
@@ -2391,7 +2391,7 @@
     <string name="philips_activity_gatewaylock_setting_14">获取AM异常</string>
     <string name="philips_activity_gateway_more_failed">获取失败</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_1">手机未连接Wi-Fi，无法添加设备</string>
-    <string name="philips_activity_clothes_hanger_machine_add_dialog_2">去连接</string>
+    <string name="philips_dialog_go_to_connect">去连接</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_3">请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁</string>
     <string name="philips_activity_timer_manager_1">不重复</string>
     <string name="philips_activity_timer_manager_2">打开开关1</string>
@@ -2487,6 +2487,31 @@
     <string name="philips_contact_us_content">欢迎使用飞利浦智能锁，门锁售后服务及\n资讯，请关注【飞利浦智能锁】公众号</string>
     <string name="Philips_after_sales_call">售后电话</string>
     <string name="Philips_after_sales_number">400-8828-236</string>
-
+    <string name="philips_tip_add_video_lock_task1">1.触摸门锁数字键区域，唤醒门锁面板 \n2.连续2次点击“*”号键，输入管理员密码\n&#160;&#160;&#160;&#160;后按“#”号键确认 \n3.根据语音提示，在门锁菜单中选择“4-1”</string>
+    <string name="philips_the_door_lock_has_a_voice_prompt_distributing_network_please_wait">门锁已语音提示“配网中，请稍后”</string>
+    <string name="philips_voice_prompt_setting_failed">语音提示设置失败？</string>
+    <string name="philips_enter_management_mode">进入管理模式</string>
+    <string name="philips_lock_tip_scan_suc_pair_network">门锁已语音提示“扫描成功，配网中”</string>
+    <string name="philips_pls_face_the_qr_code_directly_to_the_door_camera">请将二维码正对门锁摄像头8-20CM范围内</string>
+    <string name="philips_connect_wifi">连接WiFi</string>
+    <string name="philips_network_pairing">配网中</string>
+    <string name="philips_confirm_management_pwd">确认管理密码</string>
+    <string name="philips_connect_the_lock_to_the_router_within_about_10_meters">将门锁与路由器约10米内进行连接</string>
+    <string name="philips_connecting_data">正在连接数据</string>
+    <string name="philips_sending_data">正在发送数据</string>
+    <string name="philips_unit_sec">s</string>
+    <string name="philips_lock_init_admin_pwd">门锁初始管理密码：12345678</string>
+    <string name="philips_admin_pwd_wrong">管理员密码错误？</string>
+    <string name="philips_plz_input_admin_pwd_to_confirm">请输入门锁管理员密码进行确认</string>
+    <string name="philips_tip_input_admin_pwd_fail">门锁管理密码验证失败%1$d次，\n超过5次，配网失败</string>
+    <string name="philips_wifi_not_connect">WiFi未连接</string>
+    <string name="philips_phone_not_connect_wifi_cant_add_device">手机未连接WiFi，无法添加设备</string>
+    <string name="philips_open_location">开启定位</string>
+    <string name="philips_plz_open_loc_cant_add_lock">请开启定位服务，否则无法添加门锁</string>
+    <string name="philips_plz_reconnect_wifi">请重新连接WiFi</string>
+    <string name="philips_reconnect_wifi_tip">1.请确保门锁WiFi连接未超过3分钟\n2.请确保WiFi是2.4G网络\n3.请确保WiFi账号、密码输入正确\n4.请确保门锁与路由器在10米内连接</string>
+    <string name="philips_plz_input_right_admin_pwd_5_times_need_repair">请输入正确的管理员密码，当错误超过5次需重新配网</string>
+    <string name="philips_already_5_times_wrong_plz_repair_network_after_modify_admin_pwd">已输错5次，请在门锁端修改管理员密码后，重新配网</string>
+    <string name="philips_lock_restore_tip">1.门锁通电情况下，使用尖锐物体双击后面板\n【RES】键\n2.语音提示“正在恢复设置”\n3.恢复出厂后，门锁管理员密码为“12345678”</string>
 
 </resources>

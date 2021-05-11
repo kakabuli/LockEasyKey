@@ -1,12 +1,10 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 201909250
-        versionName "3.4.8"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         multiDexEnabled true
     }
 
@@ -20,3 +18,4 @@ android {
         abortOnError false
     }
 }
+

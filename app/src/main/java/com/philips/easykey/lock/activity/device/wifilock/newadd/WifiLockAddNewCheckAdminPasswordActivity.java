@@ -74,7 +74,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
                 LogUtils.d("--Kaadas--"+getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                         WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.philips_activity_wifi_lock_checkadmin_password),
-                        getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 startActivity(new Intent(WifiLockAddNewCheckAdminPasswordActivity.this, WifiLockAddNewScanFailedActivity.class));
@@ -423,7 +423,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
             if (times == 3) { //提示三次错误
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                         WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.philips_activity_wifi_lock_check_password_dialog_1),
-                        getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 toInputPasswordActivity();
@@ -468,7 +468,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
             }
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                    WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.activity_wifi_video_sixth_fail_3) + getString(R.string.activity_wifi_video_sixth_fail_4), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    WifiLockAddNewCheckAdminPasswordActivity.this, "", getString(R.string.activity_wifi_video_sixth_fail_3) + getString(R.string.activity_wifi_video_sixth_fail_4), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
                             startActivity(new Intent(WifiLockAddNewCheckAdminPasswordActivity.this, WifiLockAddNewBindFailedActivity.class));
@@ -497,7 +497,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 WifiLockAddNewCheckAdminPasswordActivity.this,
                 getString(R.string.philips_activity_wifi_lock_ble_wifi_checkadmin_password),
-                getString(R.string.re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         //重新输入
@@ -546,7 +546,7 @@ public class WifiLockAddNewCheckAdminPasswordActivity extends BaseAddToApplicati
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

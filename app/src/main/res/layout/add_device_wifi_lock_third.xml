@@ -92,7 +92,7 @@
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_44"
         android:layout_marginBottom="@dimen/dp_40"
-        android:text="@string/next_step"
+        android:text="@string/philips_next_step"
         android:textSize="@dimen/sp_15" />
 
     <Button

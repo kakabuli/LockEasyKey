@@ -228,7 +228,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
                 String strPassword = etPassword.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strPassword)) {
@@ -477,7 +477,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
         hiddenLoading();
         //密码添加异常
         LogUtils.d("添加密码异常    ");
-        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getContext(), getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getContext(), getString(R.string.add_lock_pwd_fail), getString(R.string.philips_confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 

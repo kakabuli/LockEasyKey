@@ -244,7 +244,7 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     public void updateDialog(CheckOTAResult.UpdateFileInfo appInfo,String content,String wifiSN){
         AlertDialogUtil.getInstance().noEditTwoButtonDialogWidthDialog_color(this, "", getString(R.string.dialog_wifi_video_check_ota)
                         + content+"\n" + getString(R.string.dialog_wifi_video_ota_update),
-                getString(R.string.cancel),getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel),getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -270,7 +270,7 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
 
     public void powerStatusDialog(){
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

@@ -374,7 +374,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(name)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 mPresenter.realOpenLock(name, false);
@@ -495,7 +495,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
                 }
                 break;
             case R.id.iv_delete:
-                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

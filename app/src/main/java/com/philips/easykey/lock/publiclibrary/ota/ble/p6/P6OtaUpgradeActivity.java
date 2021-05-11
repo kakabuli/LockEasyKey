@@ -390,7 +390,7 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         MyApplication.getInstance().uploadOtaResult(sn,version,tag,1);
         isUpdating = false;
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.ota_fail), getString(R.string.ota_fail_reply),
-                getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         finish();

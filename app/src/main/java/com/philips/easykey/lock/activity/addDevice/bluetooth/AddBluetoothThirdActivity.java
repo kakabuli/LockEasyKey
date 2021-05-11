@@ -179,7 +179,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
         }
         if (!isConnected) {
             //Context context, String title, String content, String query, ClickListener clickListener
-            AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(AddBluetoothThirdActivity.this, getString(R.string.hint), getString(R.string.ble_disconnected_please_retry), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+            AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(AddBluetoothThirdActivity.this, getString(R.string.hint), getString(R.string.ble_disconnected_please_retry), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                 @Override
                 public void left() {
                     finish();

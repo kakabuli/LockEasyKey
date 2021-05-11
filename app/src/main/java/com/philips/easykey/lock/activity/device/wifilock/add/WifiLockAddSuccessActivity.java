@@ -107,9 +107,9 @@ public class WifiLockAddSuccessActivity extends BaseActivity<IWifiLockAddSuccess
 
     private void initData() {
         mList = new ArrayList<>();
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_my_home), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_bedroom), false));
-        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_company), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_my_home), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_bedroom), false));
+        mList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_company), false));
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
     }
 

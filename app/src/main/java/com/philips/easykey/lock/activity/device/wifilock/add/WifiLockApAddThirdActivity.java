@@ -62,14 +62,14 @@ public class WifiLockApAddThirdActivity extends BaseAddToApplicationActivity {
                     if (granted) {
 
                     } else {
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());

@@ -49,7 +49,7 @@
             android:layout_marginLeft="16pt"
             android:layout_marginRight="16pt"
             android:background="@drawable/philips_button_0066a1_3"
-            android:text="@string/confirm"
+            android:text="@string/philips_confirm"
             android:textColor="#FFFFFF"
             android:textSize="16pt"/>
 

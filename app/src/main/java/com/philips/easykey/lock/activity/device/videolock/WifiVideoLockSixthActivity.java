@@ -108,13 +108,13 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
             case R.id.button_next:
                 String adminPassword = apPasswordEdit.getText().toString().trim();
                 if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 //打开wifi
                 WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
                 if (!wifiUtils.isWifiEnable()) {
-                    ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+                    ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
                 }
                 if(System.currentTimeMillis() - time > 500){
                     checkAdminPassword(adminPassword);
@@ -199,7 +199,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 WifiVideoLockSixthActivity.this
                 , content,
-                getString(R.string.re_input), getString(R.string.forget_password_symbol), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_re_input), getString(R.string.forget_password_symbol), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -235,7 +235,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                     WifiVideoLockSixthActivity.this, "", getString(R.string.activity_wifi_video_sixth_fail_3) +
-                            getString(R.string.activity_wifi_video_sixth_fail_4), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                            getString(R.string.activity_wifi_video_sixth_fail_4), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -262,7 +262,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

@@ -24,7 +24,6 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.File;
 
@@ -258,7 +257,7 @@ public class FaceOtaActivity extends BaseBleActivity<IFaceOtaView, FaceOtaPresen
 
     private void showNotice() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(this, getString(R.string.hint),
-                getString(R.string.ota_fail), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.ota_fail), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         finish();

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f7f7f7">
+
+    <com.philips.easykey.lock.widget.PhilipsWifiVideoCircleProgress
+        android:id="@+id/circleCountDown"
+        android:layout_width="146pt"
+        android:layout_height="146pt"
+        android:layout_marginTop="48pt"
+        app:circleStroke="10pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_connect_the_lock_to_the_router_within_about_10_meters"
+        android:layout_marginTop="26pt"
+        android:textColor="@color/color_333333"
+        android:textSize="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleCountDown" />
+
+    <ImageView
+        android:id="@+id/ivSendingData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67pt"
+        android:layout_marginStart="59pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTip"
+        app:srcCompat="@drawable/philips_dms_icon_send" />
+
+    <TextView
+        android:id="@+id/tvSendingData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10pt"
+        android:text="@string/philips_sending_data"
+        android:textColor="@color/c999999"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="@+id/ivSendingData"
+        app:layout_constraintStart_toEndOf="@+id/ivSendingData"
+        app:layout_constraintTop_toTopOf="@+id/ivSendingData" />
+
+    <ImageView
+        android:id="@+id/ivConnectingData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt"
+        app:layout_constraintStart_toStartOf="@+id/ivSendingData"
+        app:layout_constraintTop_toBottomOf="@+id/ivSendingData"
+        app:srcCompat="@drawable/philips_dms_icon_send" />
+
+    <TextView
+        android:id="@+id/tvConnectingData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10pt"
+        android:text="@string/philips_connecting_data"
+        android:textColor="@color/c999999"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="@+id/ivConnectingData"
+        app:layout_constraintStart_toEndOf="@+id/ivConnectingData"
+        app:layout_constraintTop_toTopOf="@+id/ivConnectingData" />
+
+    <ImageView
+        android:id="@+id/ivBindingSuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt"
+        app:layout_constraintStart_toStartOf="@+id/ivConnectingData"
+        app:layout_constraintTop_toBottomOf="@+id/ivConnectingData"
+        app:srcCompat="@drawable/philips_dms_icon_send" />
+
+    <TextView
+        android:id="@+id/tvBindingSuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10pt"
+        android:text="绑定成功"
+        android:textColor="@color/c999999"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBindingSuc"
+        app:layout_constraintStart_toEndOf="@+id/ivBindingSuc"
+        app:layout_constraintTop_toTopOf="@+id/ivBindingSuc" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/circleCountDown"
+        app:layout_constraintEnd_toEndOf="@+id/circleCountDown"
+        app:layout_constraintStart_toStartOf="@+id/circleCountDown"
+        app:layout_constraintTop_toTopOf="@+id/circleCountDown" >
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textColor="@color/color_333333"
+            android:textSize="36pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/philips_unit_sec"
+            android:textSize="18pt"
+            android:textColor="@color/c999999"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

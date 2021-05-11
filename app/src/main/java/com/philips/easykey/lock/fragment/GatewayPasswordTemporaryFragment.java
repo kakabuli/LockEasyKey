@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.gatewaylock.password.GatewayPasswordAddActivity;
@@ -132,7 +131,7 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
                 String strTemporaryPassword = etPassword.getText().toString().trim();
 
                 if (!StringUtil.randomJudge(strTemporaryPassword)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 if (StringUtil.checkSimplePassword(strTemporaryPassword)) {
@@ -275,7 +274,7 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
         hiddenLoading();
         //密码添加异常
         LogUtils.d("添加密码异常    ");
-        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getActivity(), getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getActivity(), getString(R.string.add_lock_pwd_fail), getString(R.string.philips_confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 

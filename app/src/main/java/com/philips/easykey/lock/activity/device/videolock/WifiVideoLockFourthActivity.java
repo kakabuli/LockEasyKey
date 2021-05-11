@@ -104,7 +104,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     return;
                 }
                 /*if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
@@ -121,7 +121,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
 
                 }*/
                 if (sPassword.length()<8){
-                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
+                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
                     return;
                 }
                 Intent intent = new Intent(this, WifiVideoLockFifthActivity.class);
@@ -172,7 +172,7 @@ public class WifiVideoLockFourthActivity extends BaseAddToApplicationActivity {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 WifiVideoLockFourthActivity.this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

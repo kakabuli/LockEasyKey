@@ -90,7 +90,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                         alertDialog.dismiss();
                     }
                     if (errorCode == 7){
-                        AlertDialogUtil.getInstance().noEditSingleButtonDialog(mContext, getString(R.string.app_name), getString(R.string.touch_id_call_limited), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        AlertDialogUtil.getInstance().noEditSingleButtonDialog(mContext, getString(R.string.app_name), getString(R.string.touch_id_call_limited), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
 

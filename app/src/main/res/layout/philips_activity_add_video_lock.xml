@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/vTitleBg"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13pt"
+        android:layout_marginStart="16pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_icon_back" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_enter_management_mode"
+        android:textColor="@color/color_333333"
+        android:textSize="17pt"
+        android:layout_marginTop="11pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_icon_help" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vTitleBg">
+
+        <View
+            android:id="@+id/vTask1"
+            android:layout_width="14pt"
+            android:layout_height="14pt"
+            android:background="@drawable/philips_shape_task_done_circle_view" />
+
+        <View
+            android:id="@+id/vTask1N2Line"
+            android:layout_width="41pt"
+            android:layout_height="2pt"
+            android:layout_gravity="center_vertical"
+            android:background="@color/c0066A1" />
+
+        <View
+            android:id="@+id/vTask2"
+            android:layout_width="14pt"
+            android:layout_height="14pt"
+            android:background="@drawable/philips_shape_task_prepare_circle_view" />
+
+        <View
+            android:id="@+id/vTask2N3Line"
+            android:layout_width="41pt"
+            android:layout_height="2pt"
+            android:layout_gravity="center_vertical"
+            android:background="@color/cB3C8E6" />
+
+        <View
+            android:id="@+id/vTask3"
+            android:layout_width="14pt"
+            android:layout_height="14pt"
+            android:background="@drawable/philips_shape_task_prepare_circle_view" />
+
+        <View
+            android:id="@+id/vTask3N4Line"
+            android:layout_width="41pt"
+            android:layout_height="2pt"
+            android:layout_gravity="center_vertical"
+            android:background="@color/cB3C8E6" />
+
+        <View
+            android:id="@+id/vTask4"
+            android:layout_width="14pt"
+            android:layout_height="14pt"
+            android:background="@drawable/philips_shape_task_prepare_circle_view" />
+
+        <View
+            android:id="@+id/vTask4N5Line"
+            android:layout_width="41pt"
+            android:layout_height="2pt"
+            android:layout_gravity="center_vertical"
+            android:background="@color/cB3C8E6" />
+
+        <View
+            android:id="@+id/vTask5"
+            android:layout_width="14pt"
+            android:layout_height="14pt"
+            android:background="@drawable/philips_shape_task_prepare_circle_view" />
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcvAddVideoLock"
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

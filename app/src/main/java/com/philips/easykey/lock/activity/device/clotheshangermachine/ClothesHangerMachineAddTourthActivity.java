@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.ClothesHangerMachineAddTourthPresenter;
@@ -126,11 +125,11 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
                 sSsid = apSsidText.getText().toString();
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     return;
                 }
                 if (sPassword.length() < 8){
-                    ToastUtils.showShort(getString(R.string.activity_wifi_video_fourth_password));
+                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
                     return;
                 }
 
@@ -172,7 +171,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                     ClothesHangerMachineAddTourthActivity.this, "",
-                    getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_2), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_2), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -201,7 +200,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineAddTourthActivity.this
                 , content,
-                getString(R.string.cancel), getString(R.string.re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -228,7 +227,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         if(!ClothesHangerMachineAddTourthActivity.this.isFinishing()){
             if (!isConnected) {
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                        ClothesHangerMachineAddTourthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        ClothesHangerMachineAddTourthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                             }

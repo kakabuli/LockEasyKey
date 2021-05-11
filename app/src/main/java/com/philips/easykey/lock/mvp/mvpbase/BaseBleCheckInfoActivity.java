@@ -33,7 +33,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
         hiddenLoading();
         //当前已是最新版本
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.hint)
-                , getString(R.string.already_newest_version), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                , getString(R.string.already_newest_version), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -98,7 +98,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
         }
 
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint)
-                , content, getString(R.string.cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                , content, getString(R.string.philips_cancel), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -167,7 +167,7 @@ public abstract class BaseBleCheckInfoActivity<T extends ICheckOtaView, V extend
             return;
         }
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint)
-                , getString(R.string.hava_ble_new_version), getString(R.string.cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                , getString(R.string.hava_ble_new_version), getString(R.string.philips_cancel), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

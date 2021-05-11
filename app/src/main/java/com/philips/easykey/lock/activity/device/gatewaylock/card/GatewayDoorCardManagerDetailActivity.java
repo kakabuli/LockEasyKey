@@ -101,7 +101,7 @@ public class GatewayDoorCardManagerDetailActivity extends BaseAddToApplicationAc
             case R.id.btn_delete:
                 //删除
                 if (NetUtil.isNetworkAvailable()) {
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_delete_door_card), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_delete_door_card), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 

@@ -29,7 +29,7 @@
         android:layout_marginEnd="16pt"
         android:textSize="16pt"
         android:textColor="@color/color_333333"
-        android:text="@string/cancel"
+        android:text="@string/philips_cancel"
         android:gravity="center"
         android:background="@drawable/philips_retangle_ffffff_3"
         />

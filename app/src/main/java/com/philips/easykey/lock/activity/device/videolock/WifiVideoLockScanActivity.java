@@ -99,14 +99,14 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
                     if (granted) {
 
                     } else {
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
@@ -363,7 +363,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                 WifiVideoLockScanActivity.this, "", getString(R.string.activity_wifi_video_scan_wifi_fail),
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

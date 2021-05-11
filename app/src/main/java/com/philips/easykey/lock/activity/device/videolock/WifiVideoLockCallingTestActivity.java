@@ -783,7 +783,7 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         tv_cancel.setTextColor(Color.parseColor("#9A9A9A"));
         TextView tv_query = mView.findViewById(R.id.tv_right);
         tv_query.setTextColor(Color.parseColor("#2096F8"));
-        tv_query.setText(getString(R.string.clothes_hanger_add_next));
+        tv_query.setText(getString(R.string.philips_clothes_hanger_add_next));
         dialog.setContentView(mView);
 
         Window window = dialog.getWindow();

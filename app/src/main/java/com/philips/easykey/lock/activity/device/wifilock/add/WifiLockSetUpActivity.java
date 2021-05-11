@@ -41,7 +41,6 @@ import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -128,14 +127,14 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
 
                     } else {
                         // At least one permission is denied
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
@@ -163,13 +162,13 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
                 .subscribe(granted -> {
                     if (!granted) {
                         // All requested permissions are granted
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
 
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
@@ -258,7 +257,7 @@ public class WifiLockSetUpActivity extends BaseActivity<IWifiSetUpView, WifiSetU
 
                 String sPassword = apPasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.wifi_name_disable_empty);
+                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                     check();
                     return;
                 }

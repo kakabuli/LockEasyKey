@@ -193,7 +193,7 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
     @Override
     public void onPasswordTypeLess() {
         hiddenLoading();
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.safe_mode_dialog), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.safe_mode_dialog), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
             @Override
             public void left() {
 

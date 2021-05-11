@@ -171,7 +171,7 @@
                 android:layout_height="@dimen/dp_44"
                 android:layout_gravity="center"
                 android:background="@drawable/go_and_buy"
-                android:text="@string/next_step"
+                android:text="@string/philips_next_step"
                 android:textColor="#fff"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginBottom="@dimen/dp_18"

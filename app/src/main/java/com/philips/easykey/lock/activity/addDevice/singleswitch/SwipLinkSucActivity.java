@@ -65,7 +65,7 @@ public class SwipLinkSucActivity  extends BaseActivity<SingleFireSwitchView, Sin
         setContentView(R.layout.activity_swip_link_suc);
 
         tv_content = findViewById(R.id.tv_content);
-        tv_content.setText(getString(R.string.add_success));
+        tv_content.setText(getString(R.string.philips_add_success));
         btn_next = findViewById(R.id.btn_next);
         iv_back = findViewById(R.id.iv_back);
         swipch_link_join_img = findViewById(R.id.swipch_link_join_img);

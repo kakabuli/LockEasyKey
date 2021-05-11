@@ -114,9 +114,9 @@ public class AddDoubleSwitchSuccessActivity   extends BaseAddToApplicationActivi
 
     private void initData() {
         nameList = new ArrayList<>();
-        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_my_home), false));
-        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_bedroom), false));
-        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.wifi_lock_company), false));
+        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_my_home), false));
+        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_bedroom), false));
+        nameList.add(new AddBluetoothPairSuccessBean(getString(R.string.philips_wifi_lock_company), false));
 
 
         positionList = new ArrayList<>();

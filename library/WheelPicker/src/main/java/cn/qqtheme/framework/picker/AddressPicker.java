@@ -25,18 +25,18 @@ import cn.qqtheme.framework.widget.WheelView;
  * @since 2015/12/15, 2016/12/18
  */
 public class AddressPicker extends LinkagePicker<Province, City, County> {
-    private OnAddressPickListener onAddressPickListener;
-    private OnWheelListener onWheelListener;
+    private OnAddressPickListener mOnAddressPickListener;
+    private OnWheelListener mOnWheelListener;
     //只显示地市及区县
-    private boolean hideProvince = false;
+    private boolean mHideProvince = false;
     //只显示省份及地市
-    private boolean hideCounty = false;
+    private boolean mHideCounty = false;
     //省市区数据
-    private ArrayList<Province> provinces = new ArrayList<>();
+    private final ArrayList<Province> mProvinces;
 
     public AddressPicker(Activity activity, ArrayList<Province> provinces) {
         super(activity, new AddressProvider(provinces));
-        this.provinces = provinces;
+        this.mProvinces = provinces;
     }
 
     /**
@@ -51,7 +51,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
     }
 
     public Province getSelectedProvince() {
-        return provinces.get(selectedFirstIndex);
+        return mProvinces.get(selectedFirstIndex);
     }
 
     public City getSelectedCity() {
@@ -80,7 +80,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
      * 参见demo中的“assets/city2.json”
      */
     public void setHideProvince(boolean hideProvince) {
-        this.hideProvince = hideProvince;
+        this.mHideProvince = hideProvince;
     }
 
     /**
@@ -89,27 +89,18 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
      * 数据源依然使用demo中的“assets/city.json” 仅在逻辑上隐藏县级选择框，实际项目中应该去掉县级数据。
      */
     public void setHideCounty(boolean hideCounty) {
-        this.hideCounty = hideCounty;
+        this.mHideCounty = hideCounty;
     }
 
     /**
      * 设置滑动监听器
      */
     public void setOnWheelListener(OnWheelListener onWheelListener) {
-        this.onWheelListener = onWheelListener;
+        this.mOnWheelListener = onWheelListener;
     }
 
     public void setOnAddressPickListener(OnAddressPickListener listener) {
-        this.onAddressPickListener = listener;
-    }
-
-    /**
-     * @deprecated use {@link #setOnAddressPickListener(OnAddressPickListener)} instead
-     */
-    @Deprecated
-    @Override
-    public final void setOnLinkageListener(OnLinkageListener onLinkageListener) {
-        throw new UnsupportedOperationException("Please use setOnAddressPickListener instead.");
+        this.mOnAddressPickListener = listener;
     }
 
     @Override
@@ -120,10 +111,10 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
         float provinceWeight = firstColumnWeight;
         float cityWeight = secondColumnWeight;
         float countyWeight = thirdColumnWeight;
-        if (hideCounty) {
-            hideProvince = false;
+        if (mHideCounty) {
+            mHideProvince = false;
         }
-        if (hideProvince) {
+        if (mHideProvince) {
             provinceWeight = 0;
             cityWeight = firstColumnWeight;
             countyWeight = secondColumnWeight;
@@ -137,7 +128,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
         final WheelView provinceView = createWheelView();
         provinceView.setLayoutParams(new LinearLayout.LayoutParams(0, WRAP_CONTENT, provinceWeight));
         layout.addView(provinceView);
-        if (hideProvince) {
+        if (mHideProvince) {
             provinceView.setVisibility(View.GONE);
         }
 
@@ -148,7 +139,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
         final WheelView countyView = createWheelView();
         countyView.setLayoutParams(new LinearLayout.LayoutParams(0, WRAP_CONTENT, countyWeight));
         layout.addView(countyView);
-        if (hideCounty) {
+        if (mHideCounty) {
             countyView.setVisibility(View.GONE);
         }
 
@@ -158,8 +149,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
             public void onSelected(int index) {
                 selectedFirstIndex = index;
                 selectedFirstItem = getSelectedProvince();
-                if (onWheelListener != null) {
-                    onWheelListener.onProvinceWheeled(selectedFirstIndex, selectedFirstItem);
+                if (mOnWheelListener != null) {
+                    mOnWheelListener.onProvinceWheeled(selectedFirstIndex, selectedFirstItem);
                 }
                 LogUtils.verbose(this, "change cities after province wheeled: index=" + index);
                 selectedSecondIndex = 0;//重置地级索引
@@ -193,8 +184,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
             public void onSelected(int index) {
                 selectedSecondIndex = index;
                 selectedSecondItem = getSelectedCity();
-                if (onWheelListener != null) {
-                    onWheelListener.onCityWheeled(selectedSecondIndex, selectedSecondItem);
+                if (mOnWheelListener != null) {
+                    mOnWheelListener.onCityWheeled(selectedSecondIndex, selectedSecondItem);
                 }
                 LogUtils.verbose(this, "change counties after city wheeled: index=" + index);
                 selectedThirdIndex = 0;//重置县级索引
@@ -218,8 +209,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
             public void onSelected(int index) {
                 selectedThirdIndex = index;
                 selectedThirdItem = getSelectedCounty();
-                if (onWheelListener != null) {
-                    onWheelListener.onCountyWheeled(selectedThirdIndex, selectedThirdItem);
+                if (mOnWheelListener != null) {
+                    mOnWheelListener.onCountyWheeled(selectedThirdIndex, selectedThirdItem);
                 }
             }
         });
@@ -228,14 +219,14 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
 
     @Override
     public void onSubmit() {
-        if (onAddressPickListener != null) {
+        if (mOnAddressPickListener != null) {
             Province province = getSelectedProvince();
             City city = getSelectedCity();
             County county = null;
-            if (!hideCounty) {
+            if (!mHideCounty) {
                 county = getSelectedCounty();
             }
-            onAddressPickListener.onAddressPicked(province, city, county);
+            mOnAddressPickListener.onAddressPicked(province, city, county);
         }
     }
 
@@ -265,9 +256,9 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
      * 地址提供者
      */
     private static class AddressProvider implements Provider<Province, City, County> {
-        private List<Province> firstList = new ArrayList<>();
-        private List<List<City>> secondList = new ArrayList<>();
-        private List<List<List<County>>> thirdList = new ArrayList<>();
+        private final List<Province> mProvinces1 = new ArrayList<>();
+        private final List<List<City>> mSecondList = new ArrayList<>();
+        private final List<List<List<County>>> mThirdList = new ArrayList<>();
 
         AddressProvider(List<Province> provinces) {
             parseData(provinces);
@@ -280,23 +271,23 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
 
         @Override
         public List<Province> initFirstData() {
-            return firstList;
+            return mProvinces1;
         }
 
         @Override
         public List<City> linkageSecondData(int firstIndex) {
-            if (secondList.size() <= firstIndex) {
+            if (mSecondList.size() <= firstIndex) {
                 return new ArrayList<>();
             }
-            return secondList.get(firstIndex);
+            return mSecondList.get(firstIndex);
         }
 
         @Override
         public List<County> linkageThirdData(int firstIndex, int secondIndex) {
-            if (thirdList.size() <= firstIndex) {
+            if (mThirdList.size() <= firstIndex) {
                 return new ArrayList<>();
             }
-            List<List<County>> lists = thirdList.get(firstIndex);
+            List<List<County>> lists = mThirdList.get(firstIndex);
             if (lists.size() <= secondIndex) {
                 return new ArrayList<>();
             }
@@ -308,7 +299,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
             //添加省
             for (int x = 0; x < provinceSize; x++) {
                 Province pro = data.get(x);
-                firstList.add(pro);
+                mProvinces1.add(pro);
                 List<City> cities = pro.getCities();
                 List<City> xCities = new ArrayList<>();
                 List<List<County>> xCounties = new ArrayList<>();
@@ -329,8 +320,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
                     }
                     xCounties.add(yCounties);
                 }
-                secondList.add(xCities);
-                thirdList.add(xCounties);
+                mSecondList.add(xCities);
+                mThirdList.add(xCounties);
             }
         }
 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="329pt"
+    android:layout_height="343pt"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvPwdFail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24pt"
+        android:layout_marginTop="21pt"
+        android:text="@string/philips_password_error"
+        android:textColor="@color/color_333333"
+        android:textSize="17pt"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPwdFail"
+        android:layout_width="96pt"
+        android:layout_height="130pt"
+        android:layout_marginTop="29pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPwdFail"
+        app:srcCompat="@drawable/philips_dms_pop_img_fail_01" />
+
+
+    <TextView
+        android:id="@+id/tvPwdTip"
+        android:layout_width="0pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24pt"
+        android:layout_marginTop="24pt"
+        android:layout_marginEnd="30pt"
+        android:text="@string/philips_plz_input_right_admin_pwd_5_times_need_repair"
+        android:textColor="@color/color_333333"
+        android:textSize="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPwdFail" />
+
+    <TextView
+        android:id="@+id/tvForgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_forget_password"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:background="@drawable/philips_shape_btn_bg"
+        android:paddingStart="12pt"
+        android:paddingEnd="12pt"
+        android:layout_marginBottom="12pt"
+        android:layout_marginEnd="12pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvReEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_re_input"
+        android:textSize="16pt"
+        android:textColor="@color/c0066A1"
+        android:layout_marginEnd="8pt"
+        android:paddingStart="14pt"
+        android:paddingEnd="14pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/tvForgotPwd"
+        app:layout_constraintEnd_toStartOf="@+id/tvForgotPwd"
+        app:layout_constraintTop_toTopOf="@+id/tvForgotPwd" />
+
+    <Button
+        android:id="@+id/btnSure"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:text="@string/philips_confirm"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:layout_marginEnd="12pt"
+        android:layout_marginStart="12pt"
+        android:layout_marginBottom="12pt"
+        android:visibility="gone"
+        android:background="@drawable/philips_shape_btn_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

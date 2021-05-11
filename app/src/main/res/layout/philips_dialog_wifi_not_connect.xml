@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="329pt"
+    android:layout_height="343pt"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvNotConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24pt"
+        android:layout_marginTop="21pt"
+        android:text="@string/philips_wifi_not_connect"
+        android:textColor="@color/color_333333"
+        android:textSize="17pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivNotConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotConnect"
+        app:srcCompat="@drawable/philips_dms_img_wifi_fail" />
+
+
+    <TextView
+        android:id="@+id/tvNotConnectTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24pt"
+        android:layout_marginStart="24pt"
+        android:text="@string/philips_phone_not_connect_wifi_cant_add_device"
+        android:textSize="16pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivNotConnect" />
+
+    <TextView
+        android:id="@+id/tvConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_dialog_go_to_connect"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:background="@drawable/philips_shape_btn_bg"
+        android:paddingStart="12pt"
+        android:paddingEnd="12pt"
+        android:layout_marginBottom="12pt"
+        android:layout_marginEnd="12pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:text="@string/philips_cancel"
+        android:textSize="16pt"
+        android:textColor="@color/c0066A1"
+        android:layout_marginEnd="8pt"
+        android:paddingStart="14pt"
+        android:paddingEnd="14pt"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/tvConnect"
+        app:layout_constraintEnd_toStartOf="@+id/tvConnect"
+        app:layout_constraintTop_toTopOf="@+id/tvConnect" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

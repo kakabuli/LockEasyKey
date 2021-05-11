@@ -150,6 +150,10 @@
         <!--<item name="android:backgroundDimEnabled">true</item>-->
     </style>
 
+    <declare-styleable name="PhilipsWifiVideoCircleProgress">
+        <attr name="circleStroke" format="dimension"/>
+    </declare-styleable>
+
     <!-- 圆形进度条 -->
     <declare-styleable name="CircleProgressBar">
         <attr name="antiAlias" format="boolean" />

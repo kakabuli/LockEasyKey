@@ -230,7 +230,7 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
 
     public void showSelectDialog(){
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(PhilipsPersonalUpdateVerifyGesturePwd.this, getString(R.string.account_password_error2),
-                getString(R.string.modify_password), getString(R.string.re_input), "#333333",
+                getString(R.string.modify_password), getString(R.string.philips_re_input), "#333333",
                 "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

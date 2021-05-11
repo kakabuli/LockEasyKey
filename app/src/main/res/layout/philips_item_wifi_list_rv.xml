@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvWifiName"
+    android:layout_width="match_parent"
+    android:layout_height="51pt"
+    android:paddingStart="47pt"
+    android:paddingEnd="29pt"
+    android:layout_marginBottom="1pt"
+    android:singleLine="true"
+    android:ellipsize="end"
+    android:maxLines="1"
+    tools:text="Philipsfdasasasasasasasasasasasasasafsdfsdafdasfds"
+    android:textSize="16pt"
+    android:textColor="@color/color_333333"
+    android:gravity="center_vertical"
+    android:background="@color/white" />

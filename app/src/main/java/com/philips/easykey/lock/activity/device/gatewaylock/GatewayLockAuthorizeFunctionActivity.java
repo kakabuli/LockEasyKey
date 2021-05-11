@@ -359,7 +359,7 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
                 break;
             case R.id.delete_share:
                 String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
-                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_lock_dialog_content), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -419,7 +419,7 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
             public void onClick(View v) {
                 String pwd = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(pwd)) {
-                    ToastUtils.showShort(R.string.random_verify_error);
+                    ToastUtils.showShort(R.string.philips_random_verify_error);
                     return;
                 }
                 mPresenter.openLock(gatewayId, deviceId, pwd);

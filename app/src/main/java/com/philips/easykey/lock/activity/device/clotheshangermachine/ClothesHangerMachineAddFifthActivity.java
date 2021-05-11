@@ -164,7 +164,7 @@ public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesH
         if(!ClothesHangerMachineAddFifthActivity.this.isFinishing()){
             if (!isConnected) {
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                        ClothesHangerMachineAddFifthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        ClothesHangerMachineAddFifthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                             }

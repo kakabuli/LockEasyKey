@@ -118,7 +118,7 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
 
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.activity_wifi_video_replace_wifi_again),
-                getString(R.string.cancel), getString(R.string.confirm), "#999999", "#1F95F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#999999", "#1F95F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.espressif.iot.esptouch.util.TouchNetUtil;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -84,7 +83,7 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
                                 // All requested permissions are granted
                             } else {
                                 // At least one permission is denied
-                                ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                                ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                             }
                         });
                 if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {
@@ -111,7 +110,7 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(
                 ClothesHangerMachineAddFirstActivity.this,
                 getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_1),
-                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_2), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_dialog_go_to_connect), "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                     }
@@ -138,7 +137,7 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
                 ClothesHangerMachineAddFirstActivity.this
                 , getString(R.string.dialog_wifi_video_tip),
                 getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_3),
-                getString(R.string.confirm), getString(R.string.cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);

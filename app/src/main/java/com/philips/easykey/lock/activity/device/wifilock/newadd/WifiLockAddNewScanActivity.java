@@ -17,9 +17,6 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockApAutoConnectWifiActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockApInputAdminPasswordActivity;
-import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockNoticeUserLinkWifiFirstActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.GpsUtil;
@@ -66,14 +63,14 @@ public class WifiLockAddNewScanActivity extends BaseAddToApplicationActivity {
                     if (granted) {
 
                     } else {
-                        ToastUtils.showShort(getString(R.string.granted_local_please_open_wifi));
+                        ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
                     }
                 });
         //打开wifi
         WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
         if (!wifiUtils.isWifiEnable()) {
             wifiUtils.openWifi();
-            ToastUtils.showShort(getString(R.string.wifi_no_open_please_open_wifi));
+            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
         }
         if (!GpsUtil.isOPen(MyApplication.getInstance())) {
             GpsUtil.openGPS(MyApplication.getInstance());
