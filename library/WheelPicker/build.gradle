@@ -25,5 +25,5 @@ ext {
 }
 
 dependencies {
-    implementation project(":library:Common")
+    api project(":library:Common")
 }

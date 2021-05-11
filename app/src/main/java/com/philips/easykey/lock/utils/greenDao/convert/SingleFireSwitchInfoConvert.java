@@ -1,9 +1,7 @@
 package com.philips.easykey.lock.utils.greenDao.convert;
 
+import com.google.gson.Gson;
 import com.philips.easykey.lock.publiclibrary.bean.SingleFireSwitchInfo;
-
-import com.alibaba.fastjson.JSON;
-
 import org.greenrobot.greendao.converter.PropertyConverter;
 
 
@@ -13,16 +11,15 @@ import org.greenrobot.greendao.converter.PropertyConverter;
  */
 public class SingleFireSwitchInfoConvert implements PropertyConverter<SingleFireSwitchInfo, String>{
 
-
     @Override
     public SingleFireSwitchInfo convertToEntityProperty(String databaseValue) {
-        return JSON.parseObject(databaseValue,SingleFireSwitchInfo.class);
-
+        return new Gson().fromJson(databaseValue,SingleFireSwitchInfo.class);
     }
 
     @Override
     public String convertToDatabaseValue(SingleFireSwitchInfo entityProperty) {
-        return JSON.toJSONString(entityProperty);
+        return new Gson().toJson(entityProperty);
     }
+
 
 }
