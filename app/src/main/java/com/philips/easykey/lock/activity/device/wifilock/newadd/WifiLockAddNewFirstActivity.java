@@ -170,7 +170,7 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
                 WifiLockAddNewFirstActivity.this
                 , getString(R.string.dialog_wifi_video_tip),
                 getString(R.string.philips_activity_wifi_lock_new_add_first),
-                getString(R.string.confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);

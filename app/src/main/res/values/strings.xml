@@ -19,7 +19,7 @@
     <string name="input_verification_code">输入验证码</string>
     <string name="register_default_agree">注册默认同意</string>
     <string name="user_protocol">用户协议</string>
-    <string name="forget_password">忘记密码</string>
+    <string name="philips_forget_password">忘记密码</string>
     <string name="have_add_lock">门锁已添加成功</string>
     <string name="have_add_lock_text">快来设置智能开关吧!</string>
     <string name="complete">完成</string>
@@ -32,7 +32,7 @@
     <string name="not_input_special_symbol">不能输入特殊符号</string>
     <string name="phone_not_right">手机号错误</string>
     <string name="hint">提示</string>
-    <string name="password_error">密码错误</string>
+    <string name="philips_password_error">密码错误</string>
     <string name="affirm">确认</string>
     <string name="noNet">无网络,请先连接网络!</string>
     <string name="more_then_ten_member">您已添加超过10个成员，\n请删除已有成员权限，再添加</string>
@@ -147,7 +147,7 @@
     <string name="gateway_light_setting">指示灯处于其它状态？</string>
     <string name="add_gateway">添加网关</string>
     <string name="add_next">下一步</string>
-    <string name="clothes_hanger_add_next">重新连接</string>
+    <string name="philips_clothes_hanger_add_next">重新连接</string>
     <string name="clothes_hanger_add_reconnect">取消连接</string>
     <string name="clothes_hanger_add_success">配网成功，您可以体验产品了~</string>
     <string name="gateway_light_confirm">网线连接路由器LAN和网关WAN,\n接通电源,确认指示灯常亮</string>
@@ -757,7 +757,7 @@
     <string name="already_newest_version">当前已是最新版本</string>
     <string name="sync_failed_card">同步门卡失败</string>
     <string name="lock_no_this_card">锁上没有此卡片，请同步</string>
-    <string name="confirm">确定</string>
+    <string name="philips_confirm">确定</string>
     <string name="philips_random_verify_error">请输入6-12位数字</string>
     <string name="get_lock_card_failed">获取锁上卡片失败！</string>
     <string name="password_full_and_delete_exist_code">密码库已满，请删除已有码库再添加</string>
@@ -1297,7 +1297,7 @@
     <string name="current_account">当前账户</string>
     <string name="account_password_error2">账户密码输入错误</string>
     <string name="modify_password">修改密码</string>
-    <string name="re_input">重新输入</string>
+    <string name="philips_re_input">重新输入</string>
     <string name="password_number_exit_please_sync">密码编号已存在，请先同步</string>
     <string name="night_sight_info">夜视功能</string>
     <string name="hand_day">白天</string>
@@ -2507,5 +2507,10 @@
     <string name="philips_phone_not_connect_wifi_cant_add_device">手机未连接WiFi，无法添加设备</string>
     <string name="philips_open_location">开启定位</string>
     <string name="philips_plz_open_loc_cant_add_lock">请开启定位服务，否则无法添加门锁</string>
+    <string name="philips_plz_reconnect_wifi">请重新连接WiFi</string>
+    <string name="philips_reconnect_wifi_tip">1.请确保门锁WiFi连接未超过3分钟\n2.请确保WiFi是2.4G网络\n3.请确保WiFi账号、密码输入正确\n4.请确保门锁与路由器在10米内连接</string>
+    <string name="philips_plz_input_right_admin_pwd_5_times_need_repair">请输入正确的管理员密码，当错误超过5次需重新配网</string>
+    <string name="philips_already_5_times_wrong_plz_repair_network_after_modify_admin_pwd">已输错5次，请在门锁端修改管理员密码后，重新配网</string>
+    <string name="philips_lock_restore_tip">1.门锁通电情况下，使用尖锐物体双击后面板\n【RES】键\n2.语音提示“正在恢复设置”\n3.恢复出厂后，门锁管理员密码为“12345678”</string>
 
 </resources>

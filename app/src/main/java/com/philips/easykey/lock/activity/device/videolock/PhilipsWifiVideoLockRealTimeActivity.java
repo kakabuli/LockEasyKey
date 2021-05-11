@@ -164,7 +164,7 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
     private void createKeepAliveDialog() {
         AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.activity_wifi_video_real_time_close),
                 getString(R.string.activity_wifi_video_real_time_close_no_remote),
-                getString(R.string.activity_wifi_video_real_time_belling_video), getString(R.string.philips_cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.activity_wifi_video_real_time_belling_video), getString(R.string.philips_cancel), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -403,7 +403,7 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
 
     public void powerStatusDialog(){
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

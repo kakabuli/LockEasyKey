@@ -99,7 +99,7 @@ public class AddBluetoothSecondActivity extends BaseActivity<IBindBleSecondView,
     public void onDeviceStateChange(boolean isConnected) {  //设备连接状态改变   连接成功时提示正在鉴权，连接失败时直接提示用户
         if (!isConnected)  {
             //Context context, String title, String content, String query, ClickListener clickListener
-            AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(AddBluetoothSecondActivity.this, getString(R.string.hint), getString(R.string.ble_disconnected_please_retry), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+            AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(AddBluetoothSecondActivity.this, getString(R.string.hint), getString(R.string.ble_disconnected_please_retry), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                 @Override
                 public void left() {
                     finish();

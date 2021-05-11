@@ -171,7 +171,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         } else { //都五次输入错误提示   退出
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                     ClothesHangerMachineAddTourthActivity.this, "",
-                    getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_2), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    getString(R.string.philips_activity_clothes_hanger_machine_add_tourth_2), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -200,7 +200,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 ClothesHangerMachineAddTourthActivity.this
                 , content,
-                getString(R.string.philips_cancel), getString(R.string.re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_re_input), "#9A9A9A", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -227,7 +227,7 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         if(!ClothesHangerMachineAddTourthActivity.this.isFinishing()){
             if (!isConnected) {
                 AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                        ClothesHangerMachineAddTourthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                        ClothesHangerMachineAddTourthActivity.this, "", getString(R.string.ble_disconnected_please_retry), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                             }

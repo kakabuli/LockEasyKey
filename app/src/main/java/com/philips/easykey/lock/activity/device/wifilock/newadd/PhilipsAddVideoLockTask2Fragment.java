@@ -1,7 +1,10 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -18,8 +21,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -40,7 +46,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
     private PhilipsAddVideoLockActivity mAddVideoLockActivity;
     private PhilipsWifiListPopup mWifiListPopup;
     private ImageView mIvDrop;
-    private EditText mEtWifiName;
+    private EditText mEtWifiName, mEtWifiPwd;
 
     public static PhilipsAddVideoLockTask2Fragment getInstance() {
         return new PhilipsAddVideoLockTask2Fragment();
@@ -53,7 +59,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.philips_fragment_add_video_lock_task2, container, false);
         initTaskUI(root);
-        if(getActivity() instanceof PhilipsAddVideoLockActivity) {
+        if (getActivity() instanceof PhilipsAddVideoLockActivity) {
             mAddVideoLockActivity = (PhilipsAddVideoLockActivity) getActivity();
         }
         return root;
@@ -61,7 +67,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
 
     private void initTaskUI(View root) {
         mEtWifiName = root.findViewById(R.id.etWifiName);
-        EditText etWifiPwd = root.findViewById(R.id.etWifiPwd);
+        mEtWifiPwd = root.findViewById(R.id.etWifiPwd);
         Button btnNext = root.findViewById(R.id.btnNext);
         mIvDrop = root.findViewById(R.id.ivDrop);
         initWifiListPopup();
@@ -69,8 +75,8 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
         initCurWifiName(mEtWifiName);
 
         mIvDrop.setOnClickListener(v -> {
-            if(mWifiListPopup != null) {
-                if(mWifiListPopup.isShowing()) {
+            if (mWifiListPopup != null) {
+                if (mWifiListPopup.isShowing()) {
                     mWifiListPopup.dismiss();
                 } else {
                     showPopup();
@@ -78,7 +84,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
             }
         });
         btnNext.setEnabled(false);
-        etWifiPwd.addTextChangedListener(new TextWatcher() {
+        mEtWifiPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -91,9 +97,9 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() > 0) {
+                if (s.length() > 0) {
                     String wifiName = mEtWifiName.getText().toString().trim();
-                    if(!TextUtils.isEmpty(wifiName)) {
+                    if (!TextUtils.isEmpty(wifiName)) {
                         btnNext.setEnabled(true);
                         btnNext.setBackgroundResource(R.drawable.philips_shape_btn_bg);
                     } else {
@@ -109,21 +115,32 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
 
         btnNext.setOnClickListener(v -> {
             String wifiName = mEtWifiName.getText().toString().trim();
-            String wifiPwd = etWifiPwd.getText().toString().trim();
+            String wifiPwd = mEtWifiPwd.getText().toString().trim();
 
-            if(TextUtils.isEmpty(wifiName)) {
+            if (TextUtils.isEmpty(wifiName)) {
                 ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
                 return;
             }
-            if(TextUtils.isEmpty(wifiPwd)) {
+            if (TextUtils.isEmpty(wifiPwd)) {
                 ToastUtils.showShort(R.string.philips_password_len_not_less_8);
                 return;
             }
-            if(mAddVideoLockActivity != null) {
+            if (mAddVideoLockActivity != null) {
                 mAddVideoLockActivity.setWifiInfo(wifiName, wifiPwd);
                 mAddVideoLockActivity.showFirstTask3();
             }
         });
+    }
+
+    public void initUIAndData() {
+        if(mEtWifiName != null) {
+            mEtWifiName.setText("");
+            initCurWifiName(mEtWifiName);
+        }
+        if(mEtWifiPwd != null) {
+            mEtWifiPwd.setText("");
+        }
+        initWifiList();
     }
 
     private void initWifiListPopup() {
@@ -138,10 +155,10 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
             }
         });
         mWifiListPopup.setOnItemClickListener((adapter, view, position) -> {
-            if(adapter.getItem(position) instanceof String) {
+            if (adapter.getItem(position) instanceof String) {
                 String wifiName = (String) adapter.getItem(position);
                 mEtWifiName.setText(wifiName);
-                if(mWifiListPopup != null) {
+                if (mWifiListPopup != null) {
                     mWifiListPopup.dismiss();
                 }
             }
@@ -150,10 +167,28 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
     }
 
     private void initWifiList() {
+        if(getContext() == null) {
+            return;
+        }
         ArrayList<String> wifiList = new ArrayList<>();
-        wifiList.add("Test1");
-        wifiList.add("Test2");
-        wifiList.add("Test3");
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        NetworkUtils.WifiScanResults wifiScanResults = NetworkUtils.getWifiScanResult();
+        if(wifiScanResults.getFilterResults().isEmpty()) {
+            LogUtils.e("wifiScanResults.getAllResults().isEmpty()");
+            return;
+        }
+        for (ScanResult scanResult : wifiScanResults.getFilterResults()) {
+            wifiList.add(scanResult.SSID);
+        }
         if(mWifiListPopup != null) {
             mWifiListPopup.updateWifiList(wifiList);
         }

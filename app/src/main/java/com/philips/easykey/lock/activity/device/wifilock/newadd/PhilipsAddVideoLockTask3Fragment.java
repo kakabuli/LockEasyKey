@@ -79,8 +79,7 @@ public class PhilipsAddVideoLockTask3Fragment extends Fragment {
 
     private void refreshNext() {
         mBtnNext.setBackgroundResource(isChoose?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_invalid_bg);
-        // TODO: 2021/5/6 缺少切图，暂时使用其他的临时替代
-        mIvSelect.setImageResource(isChoose?R.drawable.philips_dms_icon_success:R.drawable.philips_dms_icon_default);
+        mIvSelect.setImageResource(isChoose?R.drawable.philips_dms_icon_selected:R.drawable.philips_dms_icon_default);
         mBtnNext.setEnabled(isChoose);
     }
 

@@ -19,6 +19,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.dialog.PhilipsInputPwdFailDialog;
 import com.philips.easykey.lock.dialog.PhilipsOpenLocationDialog;
 import com.philips.easykey.lock.dialog.PhilipsWiFiNotConnectDialog;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
@@ -63,12 +64,12 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     public String mWifiName;
     private String mWifiPwd;
     private String mRandomCode;
-    private int mFunc;
     private int mTimes = 1;
 
     private WifiLockVideoBindBean mWifiLockVideoBindBean;
     private PhilipsOpenLocationDialog mOpenLocationDialog;
     private PhilipsWiFiNotConnectDialog mWiFiNotConnectDialog;
+    private PhilipsInputPwdFailDialog mInputPwdFailDialog;
 
     @Override
     public void initData(@Nullable Bundle bundle) {
@@ -91,6 +92,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mFragments.add(PhilipsAddVideoLockTask4Fragment.getInstance());
         mFragments.add(PhilipsAddVideoLockTask5Fragment.getInstance());
         mFragments.add(PhilipsAddVideoLockTask6Fragment.getInstance());
+        mFragments.add(PhilipsAddVideoLockTask4FailFragment.getInstance());
         FragmentUtils.add(getSupportFragmentManager(), mFragments, R.id.fcvAddVideoLock, 0);
         initDialogs();
 
@@ -148,6 +150,40 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                 startActivity(wifiIntent);
             }
         });
+        mInputPwdFailDialog = new PhilipsInputPwdFailDialog(this);
+        mInputPwdFailDialog.setOnPwdFailListener(new PhilipsInputPwdFailDialog.OnPwdFailListener() {
+            @Override
+            public void reEnter() {
+                clearInputAdminPwd();
+                if(mInputPwdFailDialog != null) {
+                    mInputPwdFailDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void forgotPwd() {
+                // TODO: 2021/5/11 忘记密码
+                clearInputAdminPwd();
+            }
+
+            @Override
+            public void sure() {
+                // TODO: 2021/5/11 确认
+            }
+        });
+    }
+
+    private void clearInputAdminPwd() {
+        if(mFragments.get(4) instanceof  PhilipsAddVideoLockTask5Fragment) {
+            ((PhilipsAddVideoLockTask5Fragment) mFragments.get(4)).clearInputContent();
+        }
+    }
+
+    public void showInputPwdFailDialog(boolean isMore5TimesWrong) {
+        if(mInputPwdFailDialog != null) {
+            mInputPwdFailDialog.setShowType(isMore5TimesWrong);
+            mInputPwdFailDialog.show();
+        }
     }
 
     public void showOpenLocDialog() {
@@ -187,6 +223,9 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mTvTitle.setText(R.string.philips_enter_management_mode);
         mIvHelp.setVisibility(View.VISIBLE);
         FragmentUtils.showHide(0, mFragments);
+        if(mFragments.get(0) instanceof PhilipsAddVideoLockTask1Fragment) {
+            ((PhilipsAddVideoLockTask1Fragment) mFragments.get(0)).initUIAndData();
+        }
     }
 
     public void showFirstTask2() {
@@ -202,6 +241,9 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mTvTitle.setText(R.string.philips_connect_wifi);
         mIvHelp.setVisibility(View.VISIBLE);
         FragmentUtils.showHide(1, mFragments);
+        if(mFragments.get(1) instanceof PhilipsAddVideoLockTask2Fragment) {
+            ((PhilipsAddVideoLockTask2Fragment) mFragments.get(1)).initUIAndData();
+        }
     }
 
     public void showFirstTask3() {
@@ -271,6 +313,21 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         FragmentUtils.showHide(5, mFragments);
     }
 
+    public void showFirstTask4Fail() {
+        mVTask1.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask1N2Line.setBackgroundColor(getColor(R.color.c0066A1));
+        mVTask2.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask2N3Line.setBackgroundColor(getColor(R.color.c0066A1));
+        mVTask3.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask3N4Line.setBackgroundColor(getColor(R.color.cB3C8E6));
+        mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
+        mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
+        mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
+        mTvTitle.setText(R.string.philips_network_pairing);
+        mIvHelp.setVisibility(View.GONE);
+        FragmentUtils.showHide(6, mFragments);
+    }
+
     public void setWifiInfo(@NonNull String wifiName, @NonNull String wifiPwd) {
         this.mWifiName = wifiName;
         this.mWifiPwd = wifiPwd;
@@ -320,7 +377,6 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     }
 
     public void onScanSuccess(WifiLockVideoBindBean wifiLockVideoBindBean) {
-        // TODO: 2021/5/8 成功
         if(mWifiLockVideoBindBean == null) {
             mWifiLockVideoBindBean = wifiLockVideoBindBean;
             mRandomCode = wifiLockVideoBindBean.getEventparams().getRandomCode();
@@ -345,7 +401,6 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
             if(result.result == 0){
 
                 mRandomCode = Rsa.bytesToHexString(result.password);
-                mFunc = result.func;
                 if(MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockVideoBindBean.getWfId()) == null){
                     bindDevice(mWifiLockVideoBindBean.getWfId(),mWifiLockVideoBindBean.getWfId(),mWifiLockVideoBindBean.getUserId(),
                             Rsa.bytesToHexString(result.password),mWifiName,result.func,3,
@@ -388,69 +443,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
 //        });
     }
 
-    private void showDialog(String content){
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
-                this
-                , content,
-                getString(R.string.re_input), getString(R.string.forget_password_symbol), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
-
-                    }
-
-                    @Override
-                    public void right() {
-//                        Intent intent = new Intent(this, WifiLockChangeAdminPasswordActivity.class);
-//                        intent.putExtra("video",true);
-//                        intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES,mTimes + 1);
-//                        startActivity(intent);
-                    }
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(String toString) {
-
-                    }
-                });
-    }
-
     private void adminPasswordError() {
-        if (mTimes < 5) {
-            if(mTimes < 3){ // 正常提示
-                showDialog(getString(R.string.activity_wifi_video_sixth_fail));
-
-            }else {
-                showDialog(getString(R.string.philips_tip_input_admin_pwd_fail, mTimes));
-            }
-        } else { //都五次输入错误提示   退出
-            AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(this,
-                    "", getString(R.string.activity_wifi_video_sixth_fail_3) +
-                            getString(R.string.activity_wifi_video_sixth_fail_4), getString(R.string.confirm),
-                    new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-
-                        @Override
-                        public void right() {
-                            unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                        }
-
-                        @Override
-                        public void afterTextChanged(String toString) {
-
-                        }
-                    });
-        }
+        showInputPwdFailDialog(mTimes > 5);
     }
 
     public void bindDevice(String wifiSN, String lockNickName, String uid,

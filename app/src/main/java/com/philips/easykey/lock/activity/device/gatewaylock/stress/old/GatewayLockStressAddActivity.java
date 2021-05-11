@@ -81,7 +81,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
                 break;
             case R.id.btn_confirm_generation:
                 if (!NetUtil.isNetworkAvailable()) {
-                    AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.no_find_network), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.no_find_network), getString(R.string.philips_confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -154,7 +154,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
         if (takeEffect!=null){
             takeEffect.dismiss();
         }
-        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.add_lock_pwd_fail), getString(R.string.philips_confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
                 @Override
                 public void left() {
 
@@ -181,7 +181,7 @@ public class GatewayLockStressAddActivity extends BaseActivity<IGatewayLockStres
         if (takeEffect!=null){
             takeEffect.dismiss();
         }
-            AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.add_lock_pwd_fail), getString(R.string.confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
+            AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.add_lock_pwd_fail), getString(R.string.philips_confirm), "#1F96F7", new AlertDialogUtil.ClickListener() {
                 @Override
                 public void left() {
 

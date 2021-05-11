@@ -27,6 +27,7 @@ import com.philips.easykey.lock.utils.StringUtil;
 public class PhilipsAddVideoLockTask5Fragment extends Fragment {
 
     private PhilipsAddVideoLockActivity mAddVideoLockActivity;
+    private EditText mEtAdminPwd;
 
     public static PhilipsAddVideoLockTask5Fragment getInstance() {
         return new PhilipsAddVideoLockTask5Fragment();
@@ -46,12 +47,12 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
     }
 
     private void initTaskUI(View root) {
-        EditText etWifiPwd = root.findViewById(R.id.etWifiPwd);
+        mEtAdminPwd = root.findViewById(R.id.etAdminPwd);
         Button btnNext = root.findViewById(R.id.btnNext);
         TextView tvPwdFailed = root.findViewById(R.id.tvPwdFailed);
         btnNext.setEnabled(false);
 
-        etWifiPwd.addTextChangedListener(new TextWatcher() {
+        mEtAdminPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -70,7 +71,7 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         });
 
         btnNext.setOnClickListener(v -> {
-            String adminPwd = etWifiPwd.getText().toString();
+            String adminPwd = mEtAdminPwd.getText().toString();
             if (!StringUtil.randomJudge(adminPwd)) {
                 ToastUtils.showShort(R.string.philips_random_verify_error);
                 return;
@@ -83,6 +84,12 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         tvPwdFailed.setOnClickListener(v -> {
             // TODO: 2021/5/8 跳转到错误指引页面
         });
+    }
+
+    public void clearInputContent() {
+        if(mEtAdminPwd != null) {
+            mEtAdminPwd.setText("");
+        }
     }
 
 }

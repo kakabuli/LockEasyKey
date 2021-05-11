@@ -65,7 +65,7 @@
         android:background="@drawable/background_add_white"
         android:gravity="center"
         android:layout_margin="@dimen/dp_10"
-        android:text="@string/confirm"
+        android:text="@string/philips_confirm"
         android:textColor="#1F96F7"
         android:textSize="18sp"
         android:textStyle="bold" />

@@ -18,7 +18,7 @@
 
 
     <EditText
-        android:id="@+id/etWifiPwd"
+        android:id="@+id/etAdminPwd"
         android:layout_width="match_parent"
         android:layout_height="44pt"
         android:layout_marginStart="16pt"
@@ -38,9 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="9pt"
-        app:layout_constraintBottom_toBottomOf="@+id/etWifiPwd"
-        app:layout_constraintEnd_toEndOf="@+id/etWifiPwd"
-        app:layout_constraintTop_toTopOf="@+id/etWifiPwd"
+        app:layout_constraintBottom_toBottomOf="@+id/etAdminPwd"
+        app:layout_constraintEnd_toEndOf="@+id/etAdminPwd"
+        app:layout_constraintTop_toTopOf="@+id/etAdminPwd"
         app:srcCompat="@drawable/philips_dms_icon_hidden" />
 
     <TextView
@@ -50,8 +50,8 @@
         android:layout_marginTop="8pt"
         android:textColor="@color/color_666666"
         android:textSize="14pt"
-        app:layout_constraintStart_toStartOf="@+id/etWifiPwd"
-        app:layout_constraintTop_toBottomOf="@+id/etWifiPwd" />
+        app:layout_constraintStart_toStartOf="@+id/etAdminPwd"
+        app:layout_constraintTop_toBottomOf="@+id/etAdminPwd" />
 
     <Button
         android:id="@+id/btnNext"

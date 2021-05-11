@@ -212,7 +212,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     private void checkNotificatoinEnabled() {
         if(!NotificationUtil.isNotifyEnabled(this)){
             AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.philips_activity_main_notification),
-                    getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 

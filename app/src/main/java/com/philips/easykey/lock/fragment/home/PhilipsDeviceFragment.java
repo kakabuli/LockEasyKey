@@ -3,7 +3,6 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -409,7 +408,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     public void powerStatusDialog(){
         AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

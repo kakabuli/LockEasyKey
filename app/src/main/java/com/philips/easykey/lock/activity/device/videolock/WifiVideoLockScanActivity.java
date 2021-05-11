@@ -363,7 +363,7 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
                 WifiVideoLockScanActivity.this, "", getString(R.string.activity_wifi_video_scan_wifi_fail),
-                getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

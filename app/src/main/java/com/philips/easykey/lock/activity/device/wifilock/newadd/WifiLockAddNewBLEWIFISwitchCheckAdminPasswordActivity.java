@@ -234,7 +234,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
         if (times < 5) {
             if (times == 3) { //提示三次错误
                 AlertDialogUtil.getInstance().noEditTwoButtonDialogWidthDialog_color(
-                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput_3),  getString(R.string.re_input), getString(R.string.forget_password), new AlertDialogUtil.ClickListener() {
+                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput_3),  getString(R.string.philips_re_input), getString(R.string.philips_forget_password), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 toInputPasswordActivity();
@@ -253,7 +253,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
                         });
             }else if (times == 4) { //提示四次错误
                 AlertDialogUtil.getInstance().noEditTwoButtonDialogWidthDialog_color(
-                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput_4),  getString(R.string.re_input), getString(R.string.forget_password), new AlertDialogUtil.ClickListener() {
+                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput_4),  getString(R.string.philips_re_input), getString(R.string.philips_forget_password), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 toInputPasswordActivity();
@@ -273,7 +273,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
             }
             else { // 正常提示
                 AlertDialogUtil.getInstance().noEditTwoButtonDialogWidthDialog_color(
-                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput), getString(R.string.re_input), getString(R.string.forget_password), new AlertDialogUtil.ClickListener() {
+                        WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.admin_error_reinput), getString(R.string.philips_re_input), getString(R.string.philips_forget_password), new AlertDialogUtil.ClickListener() {
                             @Override
                             public void left() {
                                 toInputPasswordActivity();
@@ -336,7 +336,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this,
                 getString(R.string.philips_activity_wifi_lock_ble_wifi_checkadmin_password),
-                getString(R.string.re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_re_input), getString(R.string.modify_password), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
                         //重新输入
@@ -387,7 +387,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -456,7 +456,7 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
     public void onDeviceStateChange(boolean isConnected) {
         if (!isConnected) {
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                    WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.ble_break_authenticate), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity.this, "", getString(R.string.ble_break_authenticate), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
                         }

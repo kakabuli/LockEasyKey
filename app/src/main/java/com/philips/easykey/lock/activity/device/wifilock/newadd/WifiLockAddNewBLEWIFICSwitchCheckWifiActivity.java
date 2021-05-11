@@ -172,7 +172,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
     };
     private void onWiFIAndPWDError() {
         AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_1), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.philips_activity_wifi_lock_add_new_checkwifi_dialog_1), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 //                        onError(socketManager, -5);
@@ -474,7 +474,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
 
         if (!isConnected) {
             AlertDialogUtil.getInstance().noEditSingleCanNotDismissButtonDialog(
-                    WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.ble_break_authenticate), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                    WifiLockAddNewBLEWIFICSwitchCheckWifiActivity.this, "", getString(R.string.ble_break_authenticate), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
                         }
@@ -509,7 +509,7 @@ public class WifiLockAddNewBLEWIFICSwitchCheckWifiActivity extends BaseActivity<
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(
                 this
                 , getString(R.string.activity_wifi_video_fifth_network),
-                getString(R.string.philips_cancel), getString(R.string.confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 

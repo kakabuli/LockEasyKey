@@ -13,17 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.WifiUtils;
 
 /**
- * author :
+ * author : Jack
  * time   : 2021/4/30
  * E-mail : wengmaowei@kaadas.com
- * desc   :
+ * desc   : 提示配网第一步
  */
 public class PhilipsAddVideoLockTask1Fragment extends Fragment {
 
@@ -81,6 +80,11 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
         });
     }
 
+    public void initUIAndData() {
+        isChoose = false;
+        refreshNext();
+    }
+
     private void processNextAction() {
         //打开wifi
         Context context = getContext();
@@ -93,7 +97,6 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
             if(mAddVideoLockActivity != null) {
                 mAddVideoLockActivity.showWifiNotConnectDialog();
             }
-            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
             return;
         }
         if (!GpsUtil.isOPen(context)) {

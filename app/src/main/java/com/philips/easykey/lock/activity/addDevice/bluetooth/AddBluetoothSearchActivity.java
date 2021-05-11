@@ -478,7 +478,7 @@ public class AddBluetoothSearchActivity extends BaseActivity<ISearchDeviceView, 
     @Override
     public void notice419() {
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint),
-                getString(R.string.notice_419_call), getString(R.string.philips_cancel), getString(R.string.confirm), new AlertDialogUtil.ClickListener() {
+                getString(R.string.notice_419_call), getString(R.string.philips_cancel), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
