@@ -1,12 +1,8 @@
 package com.philips.easykey.push.xiaomi;
 
 import android.annotation.SuppressLint;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Message;
-import android.text.LoginFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
