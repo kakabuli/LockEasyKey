@@ -59,9 +59,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import static com.philips.easykey.core.tool.ConstTool.KB;
-
-
 //import android.util.Log;
 
 /**
@@ -1464,9 +1461,9 @@ public class FileTool {
         OutputStream os = null;
         try {
             os = new BufferedOutputStream(new FileOutputStream(file, append));
-            byte data[] = new byte[KB];
+            byte data[] = new byte[1024];
             int len;
-            while ((len = is.read(data, 0, KB)) != -1) {
+            while ((len = is.read(data, 0, 1024)) != -1) {
                 os.write(data, 0, len);
             }
             return true;
@@ -1697,9 +1694,9 @@ public class FileTool {
         InputStream is = null;
         try {
             is = new BufferedInputStream(new FileInputStream(file));
-            byte[] buffer = new byte[KB];
+            byte[] buffer = new byte[1024];
             int readChars;
-            while ((readChars = is.read(buffer, 0, KB)) != -1) {
+            while ((readChars = is.read(buffer, 0, 1024)) != -1) {
                 for (int i = 0; i < readChars; ++i) {
                     if (buffer[i] == '\n') {
                         ++count;
