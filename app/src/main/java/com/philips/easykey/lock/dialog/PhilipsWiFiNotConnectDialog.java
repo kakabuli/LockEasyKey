@@ -19,7 +19,7 @@ public class PhilipsWiFiNotConnectDialog extends Dialog {
     private OnWifiNotConnectListener mOnWifiNotConnectListener;
 
     public PhilipsWiFiNotConnectDialog(@NonNull Context context) {
-        super(context, R.style.CustomDialog);
+        super(context, R.style.MyDialog);
     }
 
     @Override

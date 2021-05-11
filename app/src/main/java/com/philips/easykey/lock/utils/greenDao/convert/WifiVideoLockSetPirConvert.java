@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.utils.greenDao.convert;
 
-import com.alibaba.fastjson.JSON;
-import com.philips.easykey.lock.publiclibrary.bean.SingleFireSwitchInfo;
+import com.google.gson.Gson;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockSetPirBean;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
@@ -12,13 +11,12 @@ public class WifiVideoLockSetPirConvert implements PropertyConverter<WifiVideoLo
 
     @Override
     public WifiVideoLockSetPirBean convertToEntityProperty(String databaseValue) {
-        return JSON.parseObject(databaseValue,WifiVideoLockSetPirBean.class);
-
+        return new Gson().fromJson(databaseValue,WifiVideoLockSetPirBean.class);
     }
 
     @Override
     public String convertToDatabaseValue(WifiVideoLockSetPirBean entityProperty) {
-        return JSON.toJSONString(entityProperty);
+        return new Gson().toJson(entityProperty);
     }
 
 }
