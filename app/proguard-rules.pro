@@ -462,3 +462,8 @@ public static java.lang.String TABLENAME;
 -keep class pub.devrel.easypermissions**{*;}
 -keep class com.google**{*;}
 # ----------------二维码库&easypermissions&Google相关的------------------
+
+# -----------------eclipse mqtt--------------------------------------------------
+-keep class org.eclipse.paho.android.service.** { *; }
+-keep class org.eclipse.paho.client.mqttv3.** { *; }
+# -----------------eclipse mqtt--------------------------------------------------
