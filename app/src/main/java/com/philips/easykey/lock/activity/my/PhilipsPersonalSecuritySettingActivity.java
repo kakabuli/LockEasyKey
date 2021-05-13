@@ -42,9 +42,6 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     ImageView ivOpenHandPwd;
     @BindView(R.id.iv_open_touch_id)
     ImageView ivOpenTouchId;
-    boolean handPassword = false;
-    boolean touchId = false;
-    boolean faceId = false;
     @BindView(R.id.rl_open_hand_pwd)
     RelativeLayout rlOpenHandPwd;
     @BindView(R.id.rl_open_touch_id)
@@ -57,6 +54,9 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     TextView faceIdStatus;
     @BindView(R.id.iv_open_face_id)
     ImageView ivOpenFaceId;
+    boolean handPassword = false;
+    boolean touchId = false;
+    boolean faceId = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
                 //开启
                 handPassword = !handPassword;
                 if (handPassword) {
-                    ivOpenHandPwd.setImageResource(R.mipmap.iv_open);
+                    ivOpenHandPwd.setImageResource(R.drawable.philips_icon_switch_open);
                     Intent open = new Intent(this, PersonalUpdateGesturePwdActivity.class);
                     startActivity(open);
                 } else {
@@ -116,14 +116,14 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
                     Boolean flag = mPresenter.isSupportFinger();
                     if (flag == false) {
                         //手机不支持指纹识别
-                        ivOpenTouchId.setImageResource(R.mipmap.iv_close);
+                        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
                         touchIdStatus.setText(getString(R.string.open_touch_id));
                         ToastUtils.showShort(R.string.no_support_fingeprint);
                     } else {
                         mPresenter.isOpenFingerPrint();
                     }
                 } else {
-                    ivOpenTouchId.setImageResource(R.mipmap.iv_close);
+                    ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
                     touchIdStatus.setText(getString(R.string.open_touch_id));
                     ACache.get(MyApplication.getInstance()).remove(MyApplication.getInstance().getUid() + "fingerStatus");
                 }
@@ -172,14 +172,14 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     @Override
     public void openHandPwdSuccess() {
         handPassword = true;
-        ivOpenHandPwd.setImageResource(R.mipmap.iv_open);
+        ivOpenHandPwd.setImageResource(R.drawable.philips_icon_switch_open);
         securitySettingSwitchText.setText(R.string.close_hand_pwd);
     }
 
     @Override
     public void closeHandPwdSuccess() {
         handPassword = false;
-        ivOpenHandPwd.setImageResource(R.mipmap.iv_close);
+        ivOpenHandPwd.setImageResource(R.drawable.philips_icon_switch_close);
         securitySettingSwitchText.setText(R.string.open_hand_pwd);
     }
 
@@ -187,7 +187,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     public void phoneFigerprintOpen() {
         //已经打开
         touchId = true;
-        ivOpenTouchId.setImageResource(R.mipmap.iv_open);
+        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_open);
         touchIdStatus.setText(getString(R.string.close_touch_id));
         CacheFloder.writePhoneFingerPrint(ACache.get(MyApplication.getInstance()), MyApplication.getInstance().getUid() + "fingerStatus", "true");
     }
@@ -196,7 +196,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     public void phoneFigerprintClose() {
         //关闭
         touchId = false;
-        ivOpenTouchId.setImageResource(R.mipmap.iv_close);
+        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
         touchIdStatus.setText(getString(R.string.open_touch_id));
         ToastUtils.showLong(R.string.no_open_fingerprint);
     }
@@ -204,23 +204,23 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     @Override
     public void openFingerPrintSuccess() {
         touchId = true;
-        ivOpenTouchId.setImageResource(R.mipmap.iv_open);
+        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_open);
         touchIdStatus.setText(getString(R.string.close_touch_id));
     }
 
     @Override
     public void closeFingerPrintSuccess() {
         touchId = false;
-        ivOpenTouchId.setImageResource(R.mipmap.iv_close);
+        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
         touchIdStatus.setText(getString(R.string.open_touch_id));
     }
 
     private void setFaceIdUI(boolean faceId){
         if (faceId) {
-            ivOpenFaceId.setImageResource(R.mipmap.iv_close);
+            ivOpenFaceId.setImageResource(R.drawable.philips_icon_switch_close);
             faceIdStatus.setText(getString(R.string.open_face_id));
         } else {
-            ivOpenFaceId.setImageResource(R.mipmap.iv_open);
+            ivOpenFaceId.setImageResource(R.drawable.philips_icon_switch_open);
             faceIdStatus.setText(getString(R.string.close_face_id));
         }
     }
