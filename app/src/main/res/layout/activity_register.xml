@@ -151,7 +151,7 @@
             android:ellipsize="end"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:gravity="center_vertical"
-            android:hint="@string/input_verification"
+            android:hint="@string/philips_hint_input_verification"
             android:inputType="number"
             android:maxLength="16"
             android:maxLines="1"
@@ -169,7 +169,7 @@
             android:layout_marginRight="@dimen/dp_30"
             android:background="@drawable/register_get_verification_shape"
             android:gravity="center"
-            android:text="@string/get_verification"
+            android:text="@string/philips_get_verification"
             android:textColor="#1F96F7"
             android:textSize="@dimen/sp_12" />
 
@@ -205,7 +205,7 @@
             android:ellipsize="end"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:gravity="center_vertical"
-            android:hint="@string/input_password"
+            android:hint="@string/philips_hint_plz_input_password"
             android:inputType="textPassword"
             android:maxLength="12"
             android:maxLines="1"

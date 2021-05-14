@@ -140,12 +140,12 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
         if (NetUtil.isNetworkAvailable()) {
             String account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 } else {
                     String countryCode = tvAreaCode.getText().toString().trim().replace("+", "");
@@ -156,7 +156,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
                 if (DetectionEmailPhone.getInstance().isEmail(account)) {
                     mPresenter.sendRandomByEmail(account);
                 } else {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
             }
@@ -164,7 +164,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
             timeUtils = new TimeUtils(tvGetVerification,tvGetVerification);
             timeUtils.RunTimer();
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 
@@ -174,28 +174,28 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
         if (NetUtil.isNetworkAvailable()) {
             final String account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
             }
             String code = StringUtil.getEdittextContent(etVerification);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
                 return;
             }
 
             String pwd = StringUtil.getEdittextContent(etPassword);
             if (StringUtil.judgeSpecialCharacter(pwd)) {
-                ToastUtils.showShort(R.string.password_judgment);
+                ToastUtils.showShort(R.string.philips_password_judgment);
                 return;
             }
             if (!StringUtil.passwordJudge(pwd)) {
-                ToastUtils.showShort(R.string.password_judgment);
+                ToastUtils.showShort(R.string.philips_password_judgment);
                 return;
             }
 
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
                 showLoading("");
@@ -207,14 +207,14 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
                     showLoading("");
                     mPresenter.resetPassword(account, pwd,2, code);
                 } else {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
             }
 
 
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 
@@ -249,7 +249,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
     @Override
     public void resetPasswordSuccess() {
         hiddenLoading();
-        ToastUtils.showShort(getString(R.string.pwd_resetting_success));
+        ToastUtils.showShort(getString(R.string.philips_pwd_resetting_success));
         MyApplication.getInstance().tokenInvalid(false);
     }
 
@@ -275,7 +275,7 @@ public class ForgetPasswordActivity extends BaseActivity<IResetPasswordView, Res
     public void resetPasswordFailedServer(BaseResult result) {
         hiddenLoading();
         if ("445".equals(result.getCode())){
-            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
+            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
         }else {
             ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
         }

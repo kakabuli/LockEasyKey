@@ -177,7 +177,7 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
             mPresenter.checkBind(wifiModelType,device);
 //            showLoading(getString(R.string.is_checking_bind));
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 

@@ -1,10 +1,7 @@
 package com.philips.easykey.lock.utils;
 
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
@@ -51,7 +48,7 @@ public class TimeUtils {
 	}
 	public void cancelTimer(){
 		timer.cancel();
-		tvTime.setText(MyApplication.getInstance().getString(R.string.get_verification));
+		tvTime.setText(MyApplication.getInstance().getString(R.string.philips_get_verification));
 		tvTime.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.c1F96F7));
 //		tvTime.setVisibility(View.GONE);
 	}
@@ -70,7 +67,7 @@ public class TimeUtils {
 //						tvTime.setVisibility(View.VISIBLE);
 					} else {
 						timer.cancel();
-						tvTime.setText(MyApplication.getInstance().getString(R.string.get_verification));
+						tvTime.setText(MyApplication.getInstance().getString(R.string.philips_get_verification));
 						tvTime.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.c1F96F7));
 						tvWidget.setEnabled(true);
 //						tvTime.setVisibility(View.GONE);

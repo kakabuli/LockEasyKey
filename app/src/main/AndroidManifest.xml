@@ -1291,6 +1291,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity" />
         <activity android:name=".activity.device.wifilock.newadd.PhilipsAddVideoLockActivity" />
+        <activity android:name=".activity.login.PhilipsLoginActivity" />
+        <activity android:name=".activity.login.PhilipsForgetPwdActivity" />
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"

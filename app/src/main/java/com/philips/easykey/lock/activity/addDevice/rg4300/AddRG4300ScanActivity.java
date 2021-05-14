@@ -228,7 +228,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
             mPresenter.checkBind(device);
             showLoading(getString(R.string.is_checking_bind));
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 

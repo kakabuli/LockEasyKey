@@ -32,7 +32,7 @@
             android:gravity="center"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:layout_marginTop="30dp"
-            android:hint="@string/verification_code"
+            android:hint="@string/philips_verification_code"
             android:inputType="number"
             android:maxLength="16"
             android:maxLines="1"

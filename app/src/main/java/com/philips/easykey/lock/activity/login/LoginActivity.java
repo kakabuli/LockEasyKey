@@ -236,7 +236,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
             String phone = getEdittextContent(etAccount);
             String pwd = getEdittextContent(etPassword);
             if (TextUtils.isEmpty(phone)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
             }
             if (StringUtil.judgeSpecialCharacter(pwd)) {
@@ -246,7 +246,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
             if (StringUtil.isNumeric(phone)) {
                 if (!PhoneUtil.isMobileNO(phone)) {
                     // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 } else {
                     //密码错误
@@ -261,8 +261,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
                 }
             } else {
                 if (!DetectionEmailPhone.isEmail(phone)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
-                    return;
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                 } else {
                     //密码错误
                     if (!StringUtil.passwordJudge(pwd)) {
@@ -276,7 +275,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter<ILogi
             }
 
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 

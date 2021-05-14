@@ -188,7 +188,7 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
         list.add(new ShiXiaoNameBean(getString(R.string.elder_brother), false));
         list.add(new ShiXiaoNameBean(getString(R.string.small_di_di), false));
         list.add(new ShiXiaoNameBean(getString(R.string.elder_sister), false));
-        list.add(new ShiXiaoNameBean(getString(R.string.rests), false));
+        list.add(new ShiXiaoNameBean(getString(R.string.philips_other), false));
 
 
         shiXiaoNameAdapter = new ShiXiaoNameAdapter(list);

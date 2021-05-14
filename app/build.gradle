@@ -244,7 +244,7 @@ dependencies {
     // For developers using AndroidX in their applications
     implementation 'pub.devrel:easypermissions:3.0.0'
     // basePopup
-    implementation 'com.github.razerdp:BasePopup:2.3.0'
+    implementation 'io.github.razerdp:BasePopup:2.3.0'
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 }

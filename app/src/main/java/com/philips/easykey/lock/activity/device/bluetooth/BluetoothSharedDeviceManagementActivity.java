@@ -127,7 +127,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
             if (NetUtil.isNetworkAvailable()) {
                 mPresenter.queryUserList(MyApplication.getInstance().getUid(), bleLockInfo.getServerLockInfo().getLockName());
             } else {
-                ToastUtils.showShort(R.string.noNet);
+                ToastUtils.showShort(R.string.philips_noNet);
             }
 
         }

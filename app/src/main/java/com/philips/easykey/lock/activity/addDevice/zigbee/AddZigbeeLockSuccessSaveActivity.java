@@ -108,7 +108,7 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
         AddBluetoothPairSuccessBean brother = new AddBluetoothPairSuccessBean(getString(R.string.brother), false);
         AddBluetoothPairSuccessBean little_brother = new AddBluetoothPairSuccessBean(getString(R.string.little_brother), false);
         AddBluetoothPairSuccessBean sister = new AddBluetoothPairSuccessBean(getString(R.string.sister), false);
-        AddBluetoothPairSuccessBean other = new AddBluetoothPairSuccessBean(getString(R.string.rests), false);
+        AddBluetoothPairSuccessBean other = new AddBluetoothPairSuccessBean(getString(R.string.philips_other), false);
         mList = new ArrayList<>();
         mList.add(father);
         mList.add(mother);

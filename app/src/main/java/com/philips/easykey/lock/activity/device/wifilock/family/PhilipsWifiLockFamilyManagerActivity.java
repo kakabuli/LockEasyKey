@@ -123,7 +123,7 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         if (NetUtil.isNetworkAvailable()) {
             mPresenter.queryUserList(wifiSn);
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 

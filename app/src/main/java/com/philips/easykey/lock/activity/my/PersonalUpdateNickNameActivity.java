@@ -101,7 +101,7 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
                     mPresenter.updateNickName(MyApplication.getInstance().getUid(), editText);
 
                 } else {
-                    ToastUtils.showShort(R.string.noNet);
+                    ToastUtils.showShort(R.string.philips_noNet);
                 }
                 break;
 

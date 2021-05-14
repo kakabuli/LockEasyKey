@@ -33,7 +33,6 @@ import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +110,7 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
         AddBluetoothPairSuccessBean brother = new AddBluetoothPairSuccessBean(getString(R.string.brother), false);
         AddBluetoothPairSuccessBean little_brother = new AddBluetoothPairSuccessBean(getString(R.string.little_brother), false);
         AddBluetoothPairSuccessBean sister = new AddBluetoothPairSuccessBean(getString(R.string.sister), false);
-        AddBluetoothPairSuccessBean other = new AddBluetoothPairSuccessBean(getString(R.string.rests), false);
+        AddBluetoothPairSuccessBean other = new AddBluetoothPairSuccessBean(getString(R.string.philips_other), false);
         mList = new ArrayList<>();
         mList.add(father);
         mList.add(mother);

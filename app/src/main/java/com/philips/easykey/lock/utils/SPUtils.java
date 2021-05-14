@@ -1,9 +1,7 @@
 package com.philips.easykey.lock.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Base64;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -150,7 +148,7 @@ public class SPUtils {
 //            return sp.getLong(key, (Long) defaultObject);
             return MMKVUtils.getLongMMKV(FILE_NAME,key,(long)defaultObject);
         }
-        return null;
+        return defaultObject;
     }
 
     public static Object getProtect(String key, Object defaultObject) {

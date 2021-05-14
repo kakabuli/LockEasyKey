@@ -95,7 +95,7 @@ public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationA
                             MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                         }
                         MyApplication.getInstance().tokenInvalid(false);
-                        Intent intent = new Intent(PersonalVerifyGesturePasswordActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(PersonalVerifyGesturePasswordActivity.this, PhilipsLoginActivity.class);
                         startActivity(intent);
 
                     }
@@ -149,7 +149,7 @@ public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationA
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();
                 }
-                Intent loginIntent = new Intent(PersonalVerifyGesturePasswordActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(PersonalVerifyGesturePasswordActivity.this, PhilipsLoginActivity.class);
                 startActivity(loginIntent);
 
             }

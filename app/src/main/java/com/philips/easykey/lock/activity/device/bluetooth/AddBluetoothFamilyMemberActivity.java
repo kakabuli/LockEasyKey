@@ -69,7 +69,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                 if (NetUtil.isNetworkAvailable()) {
                     if (TextUtils.isEmpty(phone)) {
 //                ToastUtils.showShort(R.string.input_telephone_or_rmail);
-                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                         return;
                     }
 
@@ -77,7 +77,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                     if (StringUtil.isNumeric(phone)) {
                         if (!PhoneUtil.isMobileNO(phone)) {
                             // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
-                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                             return;
                         } else {
                             Intent intent = new Intent();
@@ -88,7 +88,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                     } else {
                         if (!DetectionEmailPhone.isEmail(phone)) {
 //                    ToastUtils.showShort(R.string.email_not_right);
-                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                             return;
                         } else {
                             Intent intent = new Intent();
@@ -99,7 +99,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                     }
 
                 } else {
-                    ToastUtils.showShort(R.string.noNet);
+                    ToastUtils.showShort(R.string.philips_noNet);
                 }
 
                 break;

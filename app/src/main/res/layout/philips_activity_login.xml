@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/philips_login_bg"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/philips_login_logo" />
+
+    <TextView
+        android:id="@+id/tvBrandName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centrale_sans_book"
+        android:text="@string/philips_logo_easykey"
+        android:textColor="@color/c0066A1"
+        android:textSize="20pt"
+        android:layout_marginBottom="56pt"
+        app:layout_constraintBottom_toTopOf="@+id/etPhoneOrMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etPhoneOrMail"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:hint="@string/philips_hint_plz_input_phone_or_mail"
+        android:paddingStart="90pt"
+        android:paddingEnd="14pt"
+        android:textSize="16pt"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:background="@drawable/philips_shape_et_login_bg"
+        android:layout_marginStart="16pt"
+        android:layout_marginEnd="16pt"
+        android:layout_marginBottom="14pt"
+        app:layout_constraintBottom_toTopOf="@+id/etPwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSelectCountry"
+        android:layout_width="74pt"
+        android:layout_height="wrap_content"
+        android:text="中国"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColor="@color/c666666"
+        android:textSize="16pt"
+        app:layout_constraintBottom_toBottomOf="@+id/etPhoneOrMail"
+        app:layout_constraintStart_toStartOf="@+id/etPhoneOrMail"
+        app:layout_constraintTop_toTopOf="@+id/etPhoneOrMail"
+        app:drawableEndCompat="@drawable/philips_login_icon_cbb_country_choice" />
+
+    <EditText
+        android:id="@+id/etPwd"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:hint="@string/philips_hint_plz_input_password"
+        android:paddingStart="14pt"
+        android:paddingEnd="34pt"
+        android:textSize="16pt"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="textPassword"
+        android:background="@drawable/philips_shape_et_login_bg"
+        android:layout_marginEnd="16pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginBottom="51pt"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivShowOrHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14pt"
+        android:src="@drawable/philips_dms_icon_hidden"
+        app:layout_constraintBottom_toBottomOf="@+id/etPwd"
+        app:layout_constraintEnd_toEndOf="@+id/etPwd"
+        app:layout_constraintTop_toTopOf="@+id/etPwd" />
+
+    <TextView
+        android:id="@+id/tvForgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_forget_password"
+        android:layout_marginTop="8pt"
+        android:textSize="14pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintStart_toStartOf="@+id/etPwd"
+        app:layout_constraintTop_toBottomOf="@+id/etPwd" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_register_now"
+        android:layout_marginTop="8pt"
+        android:textSize="14pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintEnd_toEndOf="@+id/etPwd"
+        app:layout_constraintTop_toBottomOf="@+id/etPwd" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:text="@string/philips_login"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        android:background="@drawable/philips_shape_btn_login_bg"
+        android:layout_marginBottom="24pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintBottom_toTopOf="@+id/tvOther"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_other"
+        android:textSize="12pt"
+        android:textColor="@color/color_666666"
+        android:layout_marginBottom="12pt"
+        app:layout_constraintBottom_toTopOf="@+id/ivVerification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/vOtherStart"
+        android:layout_width="49pt"
+        android:layout_height="1pt"
+        android:background="@color/cC0C0C0"
+        android:layout_marginEnd="57pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvOther"
+        app:layout_constraintEnd_toStartOf="@+id/tvOther"
+        app:layout_constraintTop_toTopOf="@+id/tvOther" />
+
+    <View
+        android:id="@+id/vOtherEnd"
+        android:layout_width="49pt"
+        android:layout_height="1pt"
+        android:background="@color/cC0C0C0"
+        android:layout_marginStart="57pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvOther"
+        app:layout_constraintStart_toEndOf="@+id/tvOther"
+        app:layout_constraintTop_toTopOf="@+id/tvOther" />
+
+    <ImageView
+        android:id="@+id/ivVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="106pt"
+        android:layout_marginBottom="8pt"
+        app:layout_constraintBottom_toTopOf="@+id/tvCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/philips_login_icon_verification_code" />
+
+    <TextView
+        android:id="@+id/tvCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17pt"
+        android:text="@string/philips_verification_code"
+        android:textColor="@color/color_333333"
+        android:textSize="12pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivVerification"
+        app:layout_constraintStart_toStartOf="@+id/ivVerification" />
+
+    <ImageView
+        android:id="@+id/ivWechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="106pt"
+        android:layout_marginBottom="8pt"
+        app:layout_constraintBottom_toTopOf="@+id/tvWechat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/philips_login_icon_wechat" />
+
+    <TextView
+        android:id="@+id/tvWechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_wechat"
+        android:textColor="@color/color_333333"
+        android:textSize="12pt"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCode"
+        app:layout_constraintEnd_toEndOf="@+id/ivWechat"
+        app:layout_constraintStart_toStartOf="@+id/ivWechat"
+        app:layout_constraintTop_toTopOf="@+id/tvCode" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

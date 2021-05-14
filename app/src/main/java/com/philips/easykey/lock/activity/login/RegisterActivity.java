@@ -211,13 +211,13 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             String account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
 //                ToastUtils.showShort(R.string.input_telephone_or_rmail);
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
 //                    ToastUtils.showShort( R.string.phone_not_right);
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 } else {
                     String conuntryCode = tvAreaCode.getText().toString().trim().replace("+", "");
@@ -229,7 +229,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                     mPresenter.sendRandomByEmail(account);
                 } else {
 //                    ToastUtils.showShort( R.string.email_not_right);
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
             }
@@ -237,7 +237,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             timeUtils = new TimeUtils(tvGetVerification, tvGetVerification);
             timeUtils.RunTimer();
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 
@@ -273,13 +273,13 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             account = StringUtil.getEdittextContent(etAccount);
             if (TextUtils.isEmpty(account)) {
 //                ToastUtils.showShort(R.string.input_telephone_or_rmail);
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
             }
             String code = StringUtil.getEdittextContent(etVerification);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
 //                ToastUtils.showShort(R.string.verification_verify_error);
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
                 return;
             }
 
@@ -289,7 +289,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                 return;
             }
             if (!StringUtil.passwordJudge(pwd)) {
-                ToastUtils.showShort(R.string.password_judgment);
+                ToastUtils.showShort(R.string.philips_password_judgment);
                 return;
             }
 
@@ -300,7 +300,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
 //                    ToastUtils.showShort(R.string.phone_not_right);
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
                 showLoading("");
@@ -316,14 +316,14 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
                     mPresenter.registerByEmail(account, pwd, code);
                 } else {
 //                    ToastUtils.showShort( R.string.email_not_right);
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 }
             }
 
 
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 
@@ -396,7 +396,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         hiddenLoading();
         LogUtils.d("注册成功");
         ToastUtils.showLong(R.string.register_success);
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, PhilipsLoginActivity.class);
         intent.putExtra(KeyConstants.AREA_CODE, countryNumber);
         intent.putExtra(KeyConstants.COUNTRY, countryName);
         intent.putExtra(KeyConstants.ACCOUNT, account);
@@ -427,7 +427,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     public void registerFailedServer(BaseResult result) {
         hiddenLoading();
         if ("445".equals(result.getCode())){
-            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.input_correct_verification_code));
+            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
         }else {
             ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
         }

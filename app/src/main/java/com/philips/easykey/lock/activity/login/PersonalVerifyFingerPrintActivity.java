@@ -253,7 +253,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
         dialogBuilder.addMenu(R.string.pwd_select, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(mContext, LoginActivity.class);
+                Intent loginIntent = new Intent(mContext, PhilipsLoginActivity.class);
                 startActivity(loginIntent);
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();

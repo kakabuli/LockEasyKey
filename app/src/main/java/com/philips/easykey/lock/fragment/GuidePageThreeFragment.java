@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.login.LoginActivity;
+import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,11 +48,11 @@ public class GuidePageThreeFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_skip:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().finish();
-                break;
             case R.id.btn:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), PhilipsLoginActivity.class));
+                if(getActivity() == null) {
+                    return;
+                }
                 getActivity().finish();
                 break;
         }

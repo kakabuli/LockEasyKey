@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.login.LoginActivity;
+import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +44,7 @@ public class GuidePageOneFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_skip:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), PhilipsLoginActivity.class));
                 getActivity().finish();
                 break;
         }

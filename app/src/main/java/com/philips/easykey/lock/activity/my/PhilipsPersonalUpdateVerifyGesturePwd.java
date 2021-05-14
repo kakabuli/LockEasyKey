@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.login.ForgetPasswordActivity;
-import com.philips.easykey.lock.activity.login.LoginActivity;
+import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -116,7 +116,7 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
                             MyApplication.getInstance().getMqttService().httpMqttDisconnect();
                         }
                         MyApplication.getInstance().tokenInvalid(false);
-                        Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
+                        Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PhilipsLoginActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -139,7 +139,7 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
         String password = (String) SPUtils.get(SPUtils.PASSWORD, "");
         if (TextUtils.isEmpty(password)) { //如果本地密码保存为空
             MyApplication.getInstance().tokenInvalid(false);
-            Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, LoginActivity.class);
+            Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PhilipsLoginActivity.class);
             startActivity(intent);
         } else {
             showInputPassword();

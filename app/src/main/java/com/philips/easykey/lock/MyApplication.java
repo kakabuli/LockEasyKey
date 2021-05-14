@@ -15,7 +15,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.huawei.hms.push.HmsMessaging;
 import com.igexin.sdk.PushManager;
-import com.philips.easykey.lock.activity.login.LoginActivity;
+import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockActionBean;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
@@ -61,7 +61,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mmkv.MMKV;
@@ -72,12 +71,8 @@ import com.xmitech.sdk.log.LogCodec;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.greendao.database.Database;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -381,7 +376,7 @@ public class MyApplication extends Application {
             if (activity != null) {
                 if (!alreadyStart) { //如果还没有启动Activity
                     alreadyStart = true;
-                    Intent intent = new Intent(activity, LoginActivity.class);
+                    Intent intent = new Intent(activity, PhilipsLoginActivity.class);
                     intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
                     activity.startActivity(intent);
                     /*if (isShowDialog) {  //

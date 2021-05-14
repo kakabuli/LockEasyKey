@@ -185,7 +185,7 @@
                 android:background="@drawable/register_button_shape"
                 android:textColor="#ffffff"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/complete"></Button>
+                android:text="@string/philips_complete"></Button>
 
         </LinearLayout>
 

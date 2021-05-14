@@ -13,9 +13,9 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.activity.login.GuidePageActivity;
-import com.philips.easykey.lock.activity.login.LoginActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyFingerPrintActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyGesturePasswordActivity;
+import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.bean.VersionBean;
 import com.philips.easykey.lock.mvp.presenter.SplashPresenter;
@@ -94,7 +94,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                             startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
                             finish();
                         } else {
-                            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+                            startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
                             finish();
                         }
                     } else if (!TextUtils.isEmpty(fingerPwd)) {
@@ -135,7 +135,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
         if (NetUtil.isNetworkAvailable()) {
 //            mPresenter.getAppVersion();
         } else {
-            ToastUtils.showShort(R.string.noNet);
+            ToastUtils.showShort(R.string.philips_noNet);
         }
     }
 
@@ -188,7 +188,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                         startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+                        startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
                         finish();
                     }
                 } else if (!TextUtils.isEmpty(fingerPwd)) {
@@ -226,7 +226,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                 startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
                 finish();
             } else {
-                startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
                 finish();
             }
         } else if (!TextUtils.isEmpty(fingerPwd)) {
