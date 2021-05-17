@@ -367,6 +367,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                             mPresenter.enableAudio(true);
                             isMute = false;
                             ivMute.setImageResource(R.drawable.philips_video_icon_mute);
+                            showShort(getString(R.string.philips_wifi_video_lock_mute_off));
                         }
                     }
 
