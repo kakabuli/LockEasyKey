@@ -27,6 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text=""
+            android:maxEms="10"
+            android:lines="1"
+            android:ellipsize="end"
             android:textColor="@color/color_333333"
             android:textSize="17pt"/>
 

@@ -6,6 +6,8 @@ ext {
     env = true
     //是否未海外环境
     IS_OVERSEAS = "false"
+    //是否是release版本
+    isRelease = checkRelease()
 
     HOST = [
             HTTPS                   :'"https://app.kaadas.com:34000/"',
@@ -23,8 +25,8 @@ ext {
             compileSdkVersion       :30,
             minSdkVersion           :26,
             targetSdkVersion        :30,
-            versionCode             :202105061,
-            versionName             :"1.0.0",
+            versionCode             :2021050141,
+            versionName             :"1.0.0.alpha1",
             buildToolsVersion       :"30.0.2",
 
             coreVersionCode         :201909250,
@@ -43,4 +45,15 @@ ext {
     greendao_schemaVersion = 1 //App 数据库版本
     constraintlayoutVersion = "2.0.4"
     espresso_core_version = "3.3.0"
+}
+
+def checkRelease() {
+    def runTasks = gradle.startParameter.taskNames
+    for (String task : runTasks) {
+        // 我这里根据task为"assemble"和非"Debug"认定为release
+        if (task.contains("assemble") && !task.contains("Debug")) {
+            return true
+        }
+    }
+    return false
 }

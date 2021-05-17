@@ -66,7 +66,7 @@ public class PhilipsWifiLockPasswordDetailActivity extends BaseActivity<IWifiLoc
             num = Integer.parseInt(facePassword.getNum());
 
         }
-
+        mEtNickName.setHint(nickName);
         adminNickName = (String) SPUtils.get(SPUtils.USERNAME, "");
         if (TextUtils.isEmpty(adminNickName)) {
             adminNickName = (String) SPUtils.get(SPUtils.PHONEN, "");
