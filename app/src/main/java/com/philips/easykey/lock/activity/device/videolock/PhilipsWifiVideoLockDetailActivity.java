@@ -158,7 +158,48 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                 mRlDetailAlbum.setVisibility(View.GONE);
                 mIvDetailSetting.setVisibility(View.GONE);
             }
+            initLockMode();
+            remainingCapacity(wifiLockInfo.getPower());
         }
+    }
+
+    /**
+     * 剩余电量
+     * @param power
+     */
+    private void remainingCapacity(int power) {
+
+    }
+
+    /**
+     *  门锁模式
+     */
+    private void initLockMode() {
+        if(wifiLockInfo == null) return;
+
+        int safeMode = wifiLockInfo.getSafeMode();  //安全模式
+        int operatingMode = wifiLockInfo.getOperatingMode(); //反锁模式
+        int defences = wifiLockInfo.getDefences();  //布防模式
+        int openStatus = wifiLockInfo.getOpenStatus();
+        int faceStatus = wifiLockInfo.getFaceStatus();  //面容识别已关闭
+        int powerSave = wifiLockInfo.getPowerSave();   //已启动节能模式
+
+        if (defences == 1) {//布防模式
+            mTvRightMode.setText(R.string.safe_protection);
+            return;
+        }
+
+        if (safeMode == 1) {//安全模式
+            mTvRightMode.setText(R.string.safe_mode);
+            return;
+        }
+
+        if (powerSave == 1) {//已启动节能模式
+            mTvRightMode.setText(R.string.power_save_mode);
+            return;
+        }
+
+        mTvRightMode.setText(R.string.real_time_video_setting_normal);
     }
 
     @OnClick({R.id.back,R.id.rl_detail_share_setting,R.id.rl_detail_share,R.id.rl_detail_password,
