@@ -19,6 +19,9 @@
             android:layout_marginTop="14pt"
             android:textColor="@color/color_333333"
             android:textSize="15pt"
+            android:maxEms="10"
+            android:lines="1"
+            android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="DDL708-V-5HW" />
