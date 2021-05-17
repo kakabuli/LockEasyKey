@@ -43,6 +43,7 @@ import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;
 
+import androidx.camera.core.Camera;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -240,7 +241,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
     protected void initLoginData() {
         Intent intent = getIntent();
         if (intent != null) {
-            mCountryCode = intent.getStringExtra(KeyConstants.AREA_CODE);
+            if(intent.hasExtra(KeyConstants.AREA_CODE))
+                mCountryCode = intent.getStringExtra(KeyConstants.AREA_CODE);
             String country = intent.getStringExtra(KeyConstants.COUNTRY);
             String account = intent.getStringExtra(KeyConstants.ACCOUNT);
             String password = intent.getStringExtra(KeyConstants.PASSWORD);
