@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="11pt"
         android:layout_marginTop="39pt"
-        android:text="欢迎回家"
+        android:text="@string/philips_welcome_home"
         android:textColor="@color/white"
         android:textSize="22pt"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="11pt"
         android:layout_marginTop="4pt"
-        android:text="Philips EasyKey守护您的安全"
+        android:text="@string/philips_philips_easykey_protect_you"
         android:textColor="@color/white"
         android:textSize="16pt"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -165,5 +165,27 @@
             android:textSize="@dimen/sp_15" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivNoDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="93pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvDeviceTap"
+        app:srcCompat="@drawable/philips_home_img_no_device" />
+
+    <TextView
+        android:id="@+id/tvNoDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_no_device"
+        android:textSize="14pt"
+        android:layout_marginTop="22pt"
+        android:textColor="@color/color_333333"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivNoDevice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

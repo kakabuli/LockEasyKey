@@ -18,9 +18,9 @@
 
     <TextView
         android:id="@+id/tvRestoreTip"
-        android:layout_width="wrap_content"
+        android:layout_width="353pt"
         android:layout_height="wrap_content"
-        android:layout_marginTop="111dp"
+        android:layout_marginTop="55pt"
         android:text="@string/philips_lock_restore_tip"
         android:textColor="@color/color_333333"
         android:textSize="15pt"

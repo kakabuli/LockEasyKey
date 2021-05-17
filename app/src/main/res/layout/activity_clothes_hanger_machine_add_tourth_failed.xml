@@ -144,7 +144,7 @@
         android:background="@drawable/bg_button_line_blue"
         android:gravity="center"
         android:textColor="#1F96F7"
-        android:text="@string/clothes_hanger_add_reconnect"
+        android:text="@string/philips_clothes_hanger_add_reconnect"
         android:textSize="@dimen/sp_15"
         />
 </LinearLayout>

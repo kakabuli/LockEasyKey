@@ -31,7 +31,7 @@ public class SwipLinkFailActivity extends BaseAddToApplicationActivity implement
         btn_next = findViewById(R.id.btn_next);
         iv_back = findViewById(R.id.iv_back);
         btn_cancel = findViewById(R.id.btn_cancel);
-        tv_content.setText(getString(R.string.add_failed));
+        tv_content.setText(getString(R.string.philips_add_failed));
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 

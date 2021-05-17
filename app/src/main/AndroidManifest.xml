@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tool="http://schemas.android.com/tools"
     package="com.philips.easykey.lock">
     <!-- // 使用蓝牙设备的权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 它可以监听用户的连接状态并在用户重新连接到网络时重启之前失败的请求 -->
@@ -64,7 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:replace="android:name,android:allowBackup">
+        tools:replace="android:name,android:allowBackup"
+        tool:ignore="LockedOrientationActivity">
         <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity"/>
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
@@ -1289,10 +1291,14 @@
             android:process=":pushservice"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity" />
-        <activity android:name=".activity.device.wifilock.newadd.PhilipsAddVideoLockActivity" />
-        <activity android:name=".activity.login.PhilipsLoginActivity" />
-        <activity android:name=".activity.login.PhilipsForgetPwdActivity" />
+        <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.device.wifilock.newadd.PhilipsAddVideoLockActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.PhilipsLoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.PhilipsForgetPwdActivity"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"

@@ -130,7 +130,7 @@
         android:layout_marginBottom="@dimen/dp_44"
         android:background="@drawable/go_and_buy"
         android:gravity="center"
-        android:text="@string/wifi_lock_repair"
+        android:text="@string/philips_wifi_lock_repair"
         android:textColor="#fff"
         android:textSize="@dimen/sp_15" />
 

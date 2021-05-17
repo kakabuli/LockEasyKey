@@ -47,10 +47,10 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
- * author :
+ * author : Jack
  * time   : 2021/4/21
  * E-mail : wengmaowei@kaadas.com
- * desc   :
+ * desc   : 设备列表
  */
 public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
 
@@ -60,6 +60,8 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     private RecyclerView mRvDevices;
     private TextView mTvCount, mTvCurrentPage;
     private ImageView mIvGrid, mIvList;
+    private ImageView mIvNoDevice;
+    private TextView mTvNoDevice;
 
     private PhilipsVpHomeDevicesAdapter mVpHomeDevicesAdapter;
     private PhilipsRvHomeDeviceAdapter mRvHomeDeviceAdapter;
@@ -81,6 +83,8 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mllNoDevice = root.findViewById(R.id.llNoDevice);
         mTvCount = root.findViewById(R.id.tvCount);
         mTvCurrentPage = root.findViewById(R.id.tvCurrentPage);
+        mTvNoDevice = root.findViewById(R.id.tvNoDevice);
+        mIvNoDevice = root.findViewById(R.id.ivNoDevice);
 
         initDataViewFromCardType(root);
         initTab(root);
@@ -220,16 +224,15 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     private void initTabData() {
         ArrayList<PhilipsDeviceTypeBean> list = new ArrayList<>();
         PhilipsDeviceTypeBean bean1 = new PhilipsDeviceTypeBean();
-        // TODO: 2021/4/28 抽离文字
-        bean1.setTypeName("所有设备");
+        bean1.setTypeName(getString(R.string.philips_all_device));
         bean1.setSelected(true);
         list.add(bean1);
         PhilipsDeviceTypeBean bean2 = new PhilipsDeviceTypeBean();
-        bean2.setTypeName("智能锁");
+        bean2.setTypeName(getString(R.string.philips_smart_lock));
         bean2.setSelected(false);
         list.add(bean2);
         PhilipsDeviceTypeBean bean3 = new PhilipsDeviceTypeBean();
-        bean3.setTypeName("晾衣机");
+        bean3.setTypeName(getString(R.string.philips_clothes_machine));
         bean3.setSelected(false);
         list.add(bean3);
         mDeviceTypeAdapter.setList(list);
@@ -241,9 +244,11 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mDevices.addAll(MyApplication.getInstance().getHomeShowDevices());
         if(mDevices.isEmpty()) {
             mllNoDevice.setVisibility(View.VISIBLE);
+            showNoDevice(true);
             mTvCurrentPage.setVisibility(View.GONE);
             mTvCount.setVisibility(View.GONE);
         } else {
+            showNoDevice(false);
             mllNoDevice.setVisibility(View.GONE);
             if(isCardShow) {
                 mTvCurrentPage.setVisibility(View.VISIBLE);
@@ -251,6 +256,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             }
         }
         for (HomeShowBean bean : mDevices) {
+            // TODO: 2021/5/17 等待正确json来替换
             PhilipsDeviceBean deviceBean = new PhilipsDeviceBean();
             deviceBean.setDeviceName(bean.getDeviceNickName());
             deviceBean.setLastRecordDetail("小明指纹00开锁");
@@ -320,6 +326,11 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mRvHomeDeviceAdapter.setList(mWillShowDeviceBeans);
     }
 
+    private void showNoDevice(boolean isShow) {
+        mIvNoDevice.setVisibility(isShow?View.VISIBLE:View.GONE);
+        mTvNoDevice.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
 
     /*------------------------------ 权限处理 ------------------------------*/
 
@@ -331,6 +342,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     @AfterPermissionGranted(RC_QR_CODE_PERMISSIONS)
     private void rcQRCodePermissions() {
         String[] perms = new String[] {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
+        if(getContext() == null) return;
         if (!EasyPermissions.hasPermissions(getContext(), perms)) {
             // TODO: 2021/4/29 抽离提示语
             EasyPermissions.requestPermissions(this, "扫描二维码需要请求的权限",
@@ -342,7 +354,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     @AfterPermissionGranted(RC_CAMERA_PERMISSIONS)
     private void rcCameraPermission() {
-        if(!hasCameraPermission()) {
+        if(isDoNotHasCameraPermission()) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要的相机权限",
                     RC_CAMERA_PERMISSIONS, Manifest.permission.CAMERA);
         }
@@ -351,18 +363,20 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE_PERMISSIONS)
     private void rcReadStoragePermission(){
-        if(!hasReadExternalStoragePermission()) {
+        if(isDoNotHasReadExternalStoragePermission()) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要的读取权限",
                     RC_READ_EXTERNAL_STORAGE_PERMISSIONS, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
     }
 
-    private boolean hasCameraPermission() {
-        return EasyPermissions.hasPermissions(getContext(), Manifest.permission.CAMERA);
+    private boolean isDoNotHasCameraPermission() {
+        if(getContext() == null) return false;
+        return !EasyPermissions.hasPermissions(getContext(), Manifest.permission.CAMERA);
     }
 
-    private boolean hasReadExternalStoragePermission() {
-        return EasyPermissions.hasPermissions(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+    private boolean isDoNotHasReadExternalStoragePermission() {
+        if(getContext() == null) return false;
+        return !EasyPermissions.hasPermissions(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -377,14 +391,12 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                 LogUtils.d("onPermissionsGranted 同时两条权限都请求成功");
             } else if(perms.get(0).equals(Manifest.permission.CAMERA)) {
                 LogUtils.d("onPermissionsGranted 只有相机权限成功");
-                if(hasReadExternalStoragePermission()) {
-                } else {
+                if(isDoNotHasReadExternalStoragePermission()) {
                     rcReadStoragePermission();
                 }
             } else if(perms.get(0).equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 LogUtils.d("onPermissionsGranted 只有存储权限成功");
-                if(hasCameraPermission()) {
-                } else {
+                if(isDoNotHasCameraPermission()) {
                     rcCameraPermission();
                 }
             }
