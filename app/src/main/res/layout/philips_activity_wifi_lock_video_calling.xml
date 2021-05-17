@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/transparent"
-        android:visibility="gone"
+
         >
 
         <SurfaceView
@@ -341,7 +341,7 @@
         android:id="@+id/rl_mark_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:visibility="gone"
         >
 
         <RelativeLayout

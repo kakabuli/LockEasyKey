@@ -2425,6 +2425,8 @@
     <string name="philips_activity_main_notification">检测到您没有打开通知权限，是否去打开</string>
     <string name="philips_gateway_reset_unbind">%1$s网关:已被重置或者解绑</string>
 
+    <!--  Calling  -->
+    <string name="philips_wifi_video_lock_mute_off">已关闭静音</string>
 
     <!-- setting -->
     <string name="philips_video_setting_lock_mode">门锁模式</string>
