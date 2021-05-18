@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
@@ -32,5 +33,15 @@ public class PhilipsRvHomeDeviceAdapter extends BaseQuickAdapter<PhilipsDeviceBe
                 .getString(R.string.philips_last_record,
                         TimeUtils.millis2String(bean.getLastRecordTime(), TimeUtils.getSafeDateFormat("yyyy-MM-dd HH:mm")),
                         StringUtil.processEmptyString(bean.getLastRecordDetail())));
+        
+        if(bean.getPower() <= 30){
+            holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low);
+        }else if(bean.getPower() > 30 && bean.getPower() <= 60){
+            holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low2);
+        }else if(bean.getPower() > 60 && bean.getPower() <= 90){
+            holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low1);
+        }else {
+            holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_full);
+        }
     }
 }

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/ivTop"
         android:layout_width="375pt"
-        android:layout_height="133pt"
+        android:layout_height="150pt"
         android:background="@drawable/philips_home_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,12 +2,14 @@ package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
+import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,12 +41,28 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         TextView tvDeviceName = view.findViewById(R.id.tvDeviceName);
         TextView tvLastRecord = view.findViewById(R.id.tvLastRecord);
 
+        ImageView ivPower = view.findViewById(R.id.ivPower);
+        if(data.getPower() <= 30){
+            ivPower.setImageResource(R.drawable.philips_home_icon_battery_low);
+        }else if(data.getPower() > 30 && data.getPower() <= 60){
+            ivPower.setImageResource(R.drawable.philips_home_icon_battery_low2);
+        }else if(data.getPower() > 60 && data.getPower() <= 90){
+            ivPower.setImageResource(R.drawable.philips_home_icon_battery_low1);
+        }else {
+            ivPower.setImageResource(R.drawable.philips_home_icon_battery_full);
+        }
+
         view.findViewById(R.id.ivMore).setOnClickListener(v -> {
             if(mOnClickMoreListener != null) {
                 mOnClickMoreListener.onClick(v, data);
             }
         });
         view.findViewById(R.id.ivMessage).setOnClickListener(v -> {
+            if(mOnClickMessageListenter != null){
+                mOnClickMessageListenter.onClick(v,data);
+            }
+        });
+        view.findViewById(R.id.tvLastRecord).setOnClickListener(v -> {
             if(mOnClickMessageListenter != null){
                 mOnClickMessageListenter.onClick(v,data);
             }

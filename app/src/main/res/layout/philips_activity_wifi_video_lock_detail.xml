@@ -27,6 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text=""
+            android:maxEms="10"
+            android:lines="1"
+            android:ellipsize="end"
             android:textColor="@color/color_333333"
             android:textSize="17pt"/>
 
@@ -70,14 +73,14 @@
         android:layout_marginStart="10pt"
         app:layout_constraintStart_toEndOf="@+id/ivWifi"
         app:layout_constraintTop_toTopOf="@id/ivWifi"
-        app:srcCompat="@drawable/philips_home_icon_battery"
+        app:srcCompat="@drawable/philips_home_icon_battery_low1"
         android:contentDescription="@string/philips_cdt_power" />
 
     <TextView
         android:id="@+id/tv_right_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/safe_mode"
+        tools:text="@string/safe_mode"
         android:textSize="14pt"
         android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,9 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="42pt"
         android:gravity="center_horizontal"
-        android:text="2021.03.29  10:00   小明指纹00开锁"
-        android:textColor="@color/c666666"
-        android:textSize="12pt"
+        tools:text="2021.03.29  10:00   小明指纹00开锁"
+        android:textColor="@color/color_333333"
+        android:textSize="14pt"
         app:layout_constraintTop_toBottomOf="@+id/ivVideo" />
 
 

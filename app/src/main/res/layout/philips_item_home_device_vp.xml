@@ -19,6 +19,9 @@
             android:layout_marginTop="14pt"
             android:textColor="@color/color_333333"
             android:textSize="15pt"
+            android:maxEms="10"
+            android:lines="1"
+            android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="DDL708-V-5HW" />
@@ -42,7 +45,7 @@
             android:layout_marginEnd="16pt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/philips_home_icon_battery"
+            app:srcCompat="@drawable/philips_home_icon_battery_low1"
             android:contentDescription="@string/philips_cdt_power" />
 
         <ImageView
@@ -72,11 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40pt"
-            android:layout_marginTop="45pt"
+            android:contentDescription="@string/philips_message"
+            app:layout_constraintBottom_toTopOf="@+id/tvMessage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
-            app:srcCompat="@drawable/philips_home_icon_message"
-            android:contentDescription="@string/philips_message" />
+            android:layout_marginBottom="9pt"
+            app:srcCompat="@drawable/philips_home_icon_message" />
 
         <TextView
             android:id="@+id/tvMessage"
@@ -86,55 +89,58 @@
             android:text="@string/philips_message"
             android:textColor="@color/color_333333"
             android:textSize="12pt"
+            android:layout_marginBottom="8pt"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/ivMessage"
             app:layout_constraintStart_toStartOf="@+id/ivMessage"
-            app:layout_constraintTop_toBottomOf="@+id/ivMessage" />
+            />
 
         <ImageView
             android:id="@+id/ivPwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="69pt"
-            android:layout_marginTop="45pt"
+            android:contentDescription="@string/philips_pwd"
+            android:layout_marginBottom="9pt"
+            app:layout_constraintBottom_toTopOf="@+id/tvPwd"
             app:layout_constraintStart_toEndOf="@+id/ivMessage"
-            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
-            app:srcCompat="@drawable/philips_home_icon_password"
-            android:contentDescription="@string/philips_pwd" />
+            app:srcCompat="@drawable/philips_home_icon_password" />
 
         <TextView
             android:id="@+id/tvPwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8pt"
             android:text="@string/philips_pwd"
-            android:layout_marginTop="9pt"
             android:textColor="@color/color_333333"
             android:textSize="12pt"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/ivPwd"
-            app:layout_constraintStart_toStartOf="@+id/ivPwd"
-            app:layout_constraintTop_toBottomOf="@+id/ivPwd" />
+            app:layout_constraintStart_toStartOf="@+id/ivPwd" />
 
         <ImageView
             android:id="@+id/ivMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45pt"
             android:layout_marginStart="68pt"
+            android:layout_marginBottom="9pt"
+            android:contentDescription="@string/philips_more"
+            app:layout_constraintBottom_toTopOf="@+id/tvSetting"
             app:layout_constraintStart_toEndOf="@+id/ivPwd"
-            app:layout_constraintTop_toBottomOf="@+id/tvLastRecord"
-            app:srcCompat="@drawable/philips_home_icon_more"
-            android:contentDescription="@string/philips_more" />
+            app:srcCompat="@drawable/philips_home_icon_more" />
 
         <TextView
             android:id="@+id/tvSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/philips_more"
-            android:layout_marginTop="9pt"
             android:textColor="@color/color_333333"
             android:textSize="12pt"
+            android:layout_marginBottom="8pt"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/ivMore"
             app:layout_constraintStart_toStartOf="@+id/ivMore"
-            app:layout_constraintTop_toBottomOf="@+id/ivMore" />
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
