@@ -49,6 +49,11 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
                 mOnClickMessageListenter.onClick(v,data);
             }
         });
+        view.findViewById(R.id.tvLastRecord).setOnClickListener(v -> {
+            if(mOnClickMessageListenter != null){
+                mOnClickMessageListenter.onClick(v,data);
+            }
+        });
         view.findViewById(R.id.ivPwd).setOnClickListener(v -> {
             if(mOnClickPasswordListener != null){
                 mOnClickPasswordListener.onClick(v,data);
