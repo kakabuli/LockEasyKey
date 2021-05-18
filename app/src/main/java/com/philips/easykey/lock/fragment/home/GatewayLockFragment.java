@@ -606,13 +606,13 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
     @Override
     public void getOpenLockRecordFail() {
         changePage(false);
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
     }
 
     @Override
     public void getOpenLockRecordThrowable(Throwable throwable) {
         changePage(false);
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
     }
 
     @Override
@@ -741,7 +741,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
                 }else{
                     changeOpenLockStatus(5);
                 }
-                ToastUtils.showShort(getString(R.string.open_lock_fail));
+                ToastUtils.showShort(getString(R.string.philips_code_open_lock_fail));
             }
         },3000);
 
@@ -765,7 +765,7 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
         }else{
             changeOpenLockStatus(5);
         }
-        ToastUtils.showShort(getString(R.string.open_lock_fail));
+        ToastUtils.showShort(getString(R.string.philips_code_open_lock_fail));
         LogUtils.d("开锁异常");
     }
 

@@ -403,14 +403,14 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     @Override
     public void onLoginOutFailed(Throwable throwable) {
         hiddenLoading();
-        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
+        ToastUtils.showShort(getString(R.string.philips_code_logout_fail) + HttpUtils.httpProtocolErrorCode(this, throwable));
         LogUtils.d("退出失败  " + throwable.getMessage());
     }
 
     @Override
     public void onLoginOutFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtils.showShort(getString(R.string.logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.showShort(getString(R.string.philips_code_logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
         LogUtils.d("退出失败  " + result.getMsg());
     }
 

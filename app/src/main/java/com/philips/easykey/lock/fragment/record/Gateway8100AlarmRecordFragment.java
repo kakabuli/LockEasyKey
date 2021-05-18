@@ -194,7 +194,7 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
         }
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
         changeView(false);
     }
 
@@ -205,7 +205,7 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
             refreshLayout.finishLoadMore();
         }
         LogUtils.d("获取开锁记录异常  网关锁");
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
         changeView(false);
     }
 

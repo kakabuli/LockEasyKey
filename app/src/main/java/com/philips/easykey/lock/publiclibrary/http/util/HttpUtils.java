@@ -1,7 +1,6 @@
 package com.philips.easykey.lock.publiclibrary.http.util;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -86,196 +85,214 @@ public class HttpUtils<T> {
         int code = Integer.parseInt(errorMsg);
         switch (code) {
             case 100:
-                errorMsg = activity.getString(R.string.account_or_password_empty);
+                errorMsg = activity.getString(R.string.philips_code_account_or_password_empty);
                 break;
             case 101:
-                errorMsg = activity.getString(R.string.account_or_password_error);
+                errorMsg = activity.getString(R.string.philips_code_account_or_password_error);
                 break;
-            case 806:
-                errorMsg = activity.getString(R.string.illegal_data);
+            case 102:
+                errorMsg = activity.getString(R.string.philips_code_sn_wrong);
                 break;
-            case 801:
-                errorMsg = activity.getString(R.string.e_yi_login);
-                break;
-            case 595:
-                errorMsg = activity.getString(R.string.information_verification_fail);
-                break;
-            case 500:
-                errorMsg = activity.getString(R.string.server_error);
-                break;
-            case 404:
-                errorMsg = activity.getString(R.string.device_not_found);
-                break;
-            case 999:
-                errorMsg = activity.getString(R.string.resource_not_find);
-                break;
-            case 509:
-                errorMsg = activity.getString(R.string.server_process_timeout);
-                break;
-            case 501:
-                errorMsg = activity.getString(R.string.ye_wu_process_fail);
-                break;
-            case 400:
-                errorMsg = activity.getString(R.string.request_data_format_incorrect);
-                break;
-            case 401:
-                errorMsg = activity.getString(R.string.data_parameter_incorrect);
-                break;
-            case 402:
-                errorMsg = activity.getString(R.string.fu_quan_user_not_find);
-                break;
-      /*      case 444:
-                errorMsg = activity.getString(R.string.not_login);
-                break;*/
-            case 413:
-                errorMsg = activity.getString(R.string.image_size_too_large);
-                break;
-            case 406:
-                errorMsg = activity.getString(R.string.not_show_verification);
-                break;
-            case 408:
-                errorMsg = activity.getString(R.string.virification_error);
-                break;
-            case 607:
-                errorMsg = activity.getString(R.string.upload_file_fail);
-                break;
-            case 601:
-                errorMsg = activity.getString(R.string.get_nickname_fail);
-                break;
-            case 602:
-                errorMsg = activity.getString(R.string.modify_push_switch_fail);
-                break;
-            case 603:
-                errorMsg = activity.getString(R.string.modify_nickname_fail);
-                break;
-            case 204:
-                errorMsg = activity.getString(R.string.register_account_fail);
-                break;
-            case 208:
-                errorMsg = activity.getString(R.string.modify_password_fail);
-                break;
-            case 301:
-                errorMsg = activity.getString(R.string.character_length_chao_guo_limit);
-                break;
-            case 302:
-                errorMsg = activity.getString(R.string.liu_yan_fail);
-                break;
-            case 704:
-                errorMsg = activity.getString(R.string.verification_send_too_many);
-                break;
-            case 435:
-                errorMsg = activity.getString(R.string.password_only_number_and_letter_6_15);
-                break;
-            case 780:
-                errorMsg = activity.getString(R.string.logout_fail);
-                break;
-            case 431:
-                errorMsg = activity.getString(R.string.upload_pushid_fail);
-                break;
-            case 781:
-                errorMsg = activity.getString(R.string.add_device_fail);
-                break;
-            case 803:
-                errorMsg = activity.getString(R.string.open_lock_fail_not_permission);
-                break;
-            case 782:
-                errorMsg = activity.getString(R.string.operation_fail);
-                break;
-            case 785:
-                errorMsg = activity.getString(R.string.open_lock_fail);
+            case 113:
+                errorMsg = activity.getString(R.string.philips_code_update_mission_do_not_exist);
                 break;
             case 201:
-                errorMsg = activity.getString(R.string.not_bind);
+                errorMsg = activity.getString(R.string.philips_code_not_bind);
                 break;
             case 202:
-                errorMsg = activity.getString(R.string.has_bind);
+                errorMsg = activity.getString(R.string.philips_code_has_bind);
                 break;
-            case 409:
-                errorMsg = activity.getString(R.string.device_repeat_register);
+            case 204:
+                errorMsg = activity.getString(R.string.philips_code_register_account_fail);
                 break;
-            case 410:
-                errorMsg = activity.getString(R.string.user_not_exist);
+            case 208:
+                errorMsg = activity.getString(R.string.philips_code_modify_password_fail);
                 break;
-            case 411:
-                errorMsg = activity.getString(R.string.fu_quan_user_not_find);
+            case 210:
+                errorMsg = activity.getString(R.string.philips_code_no_result);
                 break;
-            case 433:
-                errorMsg = activity.getString(R.string.not_manager);
+            case 301:
+                errorMsg = activity.getString(R.string.philips_code_character_length_exceeds_limit);
                 break;
-            case 412:
-                errorMsg = activity.getString(R.string.device_register_fail_repeat_record);
+            case 302:
+                errorMsg = activity.getString(R.string.philips_code_liu_yan_fail);
                 break;
-            case 445:
-                errorMsg = activity.getString(R.string.invalid_random_code);
+            case 400:
+                errorMsg = activity.getString(R.string.philips_code_request_data_format_incorrect);
+                break;
+            case 401:
+                errorMsg = activity.getString(R.string.philips_code_data_parameter_incorrect);
+                break;
+            case 402:
+                errorMsg = activity.getString(R.string.philips_code_to_empower_the_user_not_found);
+                break;
+            case 403:
+                errorMsg = activity.getString(R.string.philips_code_device_not_found);
+                break;
+            case 404:
+                errorMsg = activity.getString(R.string.philips_code_res_not_found);
                 break;
             case 405:
-                errorMsg = activity.getString(R.string.user_repeat_register);
+                errorMsg = activity.getString(R.string.philips_code_user_repeat_register);
                 break;
-            case 991:
-                errorMsg = activity.getString(R.string.production_fail);
-                break;
-            case 812:
-                errorMsg = activity.getString(R.string.has_nodification_manager_confirm);
-                break;
-            case 813:
-                errorMsg = activity.getString(R.string.has_bind_gateway);
-                break;
-            case 871:
-                errorMsg = activity.getString(R.string.bind_gateway_fail);
-                break;
-            case 946:
-                errorMsg = activity.getString(R.string.mimi_bind_gateway_fail);
-                break;
-            case 947:
-                errorMsg = activity.getString(R.string.approval_mimi_bind_gateway_fail);
-                break;
-            case 816:
-                errorMsg = activity.getString(R.string.approval_fail);
-                break;
-            case 819:
-                errorMsg = activity.getString(R.string.get_list_fail);
-                break;
-            case 847:
-                errorMsg = activity.getString(R.string.not_gateway_manager);
-                break;
-            case 845:
-                errorMsg = activity.getString(R.string.unbind_fail);
-                break;
-            case 820:
-                errorMsg = activity.getString(R.string.get_gateway_device_list_fail);
-                break;
-            case 823:
-                errorMsg = activity.getString(R.string.get_open_lock_record_fail);
-                break;
-            case 436:
-                errorMsg = activity.getString(R.string.data_not_map);
-                break;
-            case 419:
-                errorMsg = activity.getString(R.string.not_peremeter_peremeter_not_match);
-                break;
-            case 567:
-                errorMsg = activity.getString(R.string.pi_liang_register_user_fail);
-                break;
-            case 592:
-                errorMsg = activity.getString(R.string.sn_password_mac_map_incorrect);
-                break;
-            case 539:
-                errorMsg = activity.getString(R.string.api_interface_update_fail);
+            case 406:
+                errorMsg = activity.getString(R.string.philips_code_not_show_verification);
                 break;
             case 407:
-                errorMsg = activity.getString(R.string.mqtt_server_connect_fail);
+                errorMsg = activity.getString(R.string.philips_code_mqtt_server_connect_fail);
+                break;
+            case 408:
+                errorMsg = activity.getString(R.string.philips_code_virification_error);
+                break;
+            case 409:
+                errorMsg = activity.getString(R.string.philips_code_device_repeat_register);
+                break;
+            case 410:
+                errorMsg = activity.getString(R.string.philips_code_user_not_exist);
+                break;
+            case 411:
+                errorMsg = activity.getString(R.string.philips_code_to_empower_the_user_not_found);
+                break;
+            case 412:
+                errorMsg = activity.getString(R.string.philips_code_device_register_fail_repeat_record);
+                break;
+            case 413:
+                errorMsg = activity.getString(R.string.philips_code_image_size_too_large);
                 break;
             case 414:
-                errorMsg = activity.getString(R.string.do_not_register_user_memenet);
+                errorMsg = activity.getString(R.string.philips_code_do_not_register_user_memenet);
                 break;
-            case 499:
-                errorMsg = activity.getString(R.string.too_many_request);
-                break;
-            case 711:
-                errorMsg = activity.getString(R.string.register_memenet_fail);
+            case 415:
+                errorMsg = activity.getString(R.string.philips_code_device_register_fail_duplicate_record);
                 break;
             case 416:
-                errorMsg=activity.getString(R.string.user_exit);
+                errorMsg=activity.getString(R.string.philips_code_user_exsit);
+                break;
+            case 419:
+                errorMsg = activity.getString(R.string.philips_code_not_peremeter_peremeter_not_match);
+                break;
+            case 431:
+                errorMsg = activity.getString(R.string.philips_code_upload_pushid_fail);
+                break;
+            case 433:
+                errorMsg = activity.getString(R.string.philips_code_not_manager);
+                break;
+            case 435:
+                errorMsg = activity.getString(R.string.philips_code_password_only_number_and_letter_6_15);
+                break;
+            case 436:
+                errorMsg = activity.getString(R.string.philips_code_data_not_map);
+                break;
+    /*      case 444:
+                errorMsg = activity.getString(R.string.not_login);
+                break;*/
+            case 445:
+                errorMsg = activity.getString(R.string.philips_code_invalid_random_code);
+                break;
+            case 499:
+                errorMsg = activity.getString(R.string.philips_code_too_many_request);
+                break;
+            case 500:
+                errorMsg = activity.getString(R.string.philips_code_server_error);
+                break;
+            case 501:
+                errorMsg = activity.getString(R.string.philips_code_business_process_fail);
+                break;
+            case 509:
+                errorMsg = activity.getString(R.string.philips_code_server_process_timeout);
+                break;
+            case 539:
+                errorMsg = activity.getString(R.string.philips_code_api_interface_update_fail);
+                break;
+            case 567:
+                errorMsg = activity.getString(R.string.philips_code_failed_to_register_users_in_batch);
+                break;
+            case 592:
+                errorMsg = activity.getString(R.string.philips_code_sn_password_mac_map_incorrect);
+                break;
+            case 595:
+                errorMsg = activity.getString(R.string.philips_code_information_verification_fail);
+                break;
+            case 601:
+                errorMsg = activity.getString(R.string.philips_code_get_nickname_fail);
+                break;
+            case 602:
+                errorMsg = activity.getString(R.string.philips_code_modify_push_switch_fail);
+                break;
+            case 603:
+                errorMsg = activity.getString(R.string.philips_code_modify_nickname_fail);
+                break;
+            case 607:
+                errorMsg = activity.getString(R.string.philips_code_upload_file_fail);
+                break;
+            case 704:
+                errorMsg = activity.getString(R.string.philips_code_verification_send_too_many);
+                break;
+            case 711:
+                errorMsg = activity.getString(R.string.philips_code_register_memenet_fail);
+                break;
+            case 780:
+                errorMsg = activity.getString(R.string.philips_code_logout_fail);
+                break;
+            case 781:
+                errorMsg = activity.getString(R.string.philips_code_add_device_fail);
+                break;
+            case 782:
+                errorMsg = activity.getString(R.string.philips_code_operation_fail);
+                break;
+            case 785:
+                errorMsg = activity.getString(R.string.philips_code_open_lock_fail);
+                break;
+            case 801:
+                errorMsg = activity.getString(R.string.philips_code_malicious_login);
+                break;
+            case 803:
+                errorMsg = activity.getString(R.string.philips_code_open_lock_fail_not_permission);
+                break;
+            case 806:
+                errorMsg = activity.getString(R.string.philips_code_illegal_data);
+                break;
+            case 812:
+                errorMsg = activity.getString(R.string.philips_code_has_nodification_manager_confirm);
+                break;
+            case 813:
+                errorMsg = activity.getString(R.string.philips_code_has_bind_gateway);
+                break;
+            case 816:
+                errorMsg = activity.getString(R.string.philips_code_approval_fail);
+                break;
+            case 819:
+                errorMsg = activity.getString(R.string.philips_code_get_list_fail);
+                break;
+            case 820:
+                errorMsg = activity.getString(R.string.philips_code_get_gateway_device_list_fail);
+                break;
+            case 823:
+                errorMsg = activity.getString(R.string.philips_code_get_open_lock_record_fail);
+                break;
+            case 845:
+                errorMsg = activity.getString(R.string.philips_code_unbind_fail);
+                break;
+            case 847:
+                errorMsg = activity.getString(R.string.philips_code_not_gateway_manager);
+                break;
+            case 871:
+                errorMsg = activity.getString(R.string.philips_code_bind_gateway_fail);
+                break;
+            case 946:
+                errorMsg = activity.getString(R.string.philips_code_mimi_bind_gateway_fail);
+                break;
+            case 947:
+                errorMsg = activity.getString(R.string.philips_code_approval_mimi_bind_gateway_fail);
+                break;
+            case 991:
+                errorMsg = activity.getString(R.string.philips_code_production_fail);
+                break;
+            case 998:
+                errorMsg = activity.getString(R.string.philips_code_no_permission);
+                break;
+            case 999:
+                errorMsg = activity.getString(R.string.philips_code_resource_not_find);
                 break;
         }
         return errorMsg;
