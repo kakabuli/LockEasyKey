@@ -204,7 +204,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
     @OnClick({R.id.back,R.id.rl_detail_share_setting,R.id.rl_detail_share,R.id.rl_detail_password,
             R.id.rl_detail_album,R.id.tv_right_mode,R.id.rl_detail_record,R.id.iv_detail_setting,
-            R.id.ivVideo,R.id.iv_detail_delete})
+            R.id.ivVideo,R.id.iv_detail_delete,R.id.tvLastRecord})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()){
@@ -212,6 +212,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                 finish();
                 break;
             case R.id.rl_detail_record:
+            case R.id.tvLastRecord:
                 intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                 startActivity(intent);

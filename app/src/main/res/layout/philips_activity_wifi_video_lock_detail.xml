@@ -109,8 +109,8 @@
         android:layout_marginTop="42pt"
         android:gravity="center_horizontal"
         android:text="2021.03.29  10:00   小明指纹00开锁"
-        android:textColor="@color/c666666"
-        android:textSize="12pt"
+        android:textColor="@color/color_333333"
+        android:textSize="14pt"
         app:layout_constraintTop_toBottomOf="@+id/ivVideo" />
 
 
