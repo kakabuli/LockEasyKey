@@ -153,7 +153,7 @@
     <string name="close_touch_id">关闭Touch ID</string>
     <string name="open_face_id">开启Face ID</string>
     <string name="close_face_id">关闭Face ID</string>
-    <string name="kaadas_touch_id">“凯迪仕”的触控ID</string>
+    <string name="kaadas_touch_id">“飞利浦”的触控ID</string>
     <string name="verify_telephone_fingerprint">通过Home键验证已有手机指纹</string>
     <string name="hand_pwd_drraw_the_ailure">绘制错误，请重新绘制</string>
     <string name="hand_pwd_drraw_the_old_ailure">请绘制旧手势密码</string>
@@ -2419,6 +2419,9 @@
     <string name="philips_cdt_record_icon">记录图标</string>
 
     <!-- my -->
+    <string name="philips_nickname_verify_error">请输入20位以内的字符</string>
+    <string name="philips_feedback_record">反馈记录</string>
+    <string name="philips_terms_of_use">使用条款</string>
     <string name="philips_system_setting">系统设置</string>
     <string name="philips_contact_us">联系我们</string>
     <string name="philips_set_nickname">设置名字</string>
