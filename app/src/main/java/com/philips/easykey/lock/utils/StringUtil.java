@@ -252,6 +252,26 @@ public class StringUtil {
     }
 
     /**
+     * 判断名称为不为null,不为空,长度小于16位
+     * true 符合约束条件
+     */
+    public static boolean nicknameJudge(String str ,int strMaxLen) {
+        if (TextUtils.isEmpty(str)) {
+            return false;
+        }
+        int length = 0;
+        try {
+            length = str.getBytes("UTF-8").length;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (length > strMaxLen) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 检查密码是否简单
      * true 密码简单
      */
