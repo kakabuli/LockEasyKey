@@ -1,24 +1,28 @@
 package com.philips.easykey.lock.activity.my;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalUpdateNickNamePresenter;
+import com.philips.easykey.lock.mvp.view.personalview.IPersonalUpdateNickNameView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.mvp.view.personalview.IPersonalUpdateNickNameView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +39,8 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
     EditText etNickName;
     @BindView(R.id.delete)
     ImageView delete;
+    @BindView(R.id.bt_ok)
+    Button btOk;
     private String userName;
 
     @Override
@@ -71,11 +77,30 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
             etNickName.setText(userName);
             etNickName.setSelection(userName.length());
         }
+        etNickName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    btOk.setBackgroundResource(R.drawable.philips_button_0066a1_3);
+                } else {
+                    btOk.setBackgroundResource(R.drawable.philips_button_b3c8e6_3);
+                }
+            }
+        });
     }
 
 
-    @OnClick({R.id.delete,R.id.bt_ok})
+    @OnClick({R.id.delete, R.id.bt_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.delete:
@@ -88,9 +113,9 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
                         ToastUtils.showShort(R.string.nickName_not_empty);
                         return;
                     }
-                    if (!StringUtil.nicknameJudge(editText)) {
+                    if (!StringUtil.nicknameJudge(editText, 20)) {
 
-                        ToastUtils.showShort(R.string.nickname_verify_error);
+                        ToastUtils.showShort(R.string.philips_nickname_verify_error);
                         return;
                     }
 

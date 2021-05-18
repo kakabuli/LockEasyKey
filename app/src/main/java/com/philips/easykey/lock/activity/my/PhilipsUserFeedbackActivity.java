@@ -62,7 +62,7 @@ public class PhilipsUserFeedbackActivity extends BaseActivity<IUserFeedbackView,
         tvContent.setText(getString(R.string.user_feedback));
         ivRight.setVisibility(View.GONE);
         tvRight.setVisibility(View.VISIBLE);
-        tvRight.setText("反馈记录");
+        tvRight.setText(getString(R.string.philips_feedback_record));
         rg.setOnCheckedChangeListener(this);
         et.addTextChangedListener(this);
 
