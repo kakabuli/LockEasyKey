@@ -255,12 +255,12 @@ public class BluetoothPasswordManagerDetailActivity extends BaseBleActivity<IPas
 
     @Override
     public void updateNickNameFailed(Throwable throwable) {
-        ToastUtils.showShort(getString(R.string.modify_nickname_fail));
+        ToastUtils.showShort(getString(R.string.philips_code_modify_nickname_fail));
     }
 
     @Override
     public void updateNickNameFailedServer(BaseResult result) {
-        ToastUtils.showShort(getString(R.string.modify_nickname_fail));
+        ToastUtils.showShort(getString(R.string.philips_code_modify_nickname_fail));
     }
 
     @Override

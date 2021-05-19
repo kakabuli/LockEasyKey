@@ -217,7 +217,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
         }
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
         changeView(false);
     }
 
@@ -228,7 +228,7 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             refreshLayout.finishLoadMore();
         }
         LogUtils.d("获取开锁记录异常  网关锁");
-        ToastUtils.showShort(R.string.get_open_lock_record_fail);
+        ToastUtils.showShort(R.string.philips_code_get_open_lock_record_fail);
         changeView(false);
     }
 

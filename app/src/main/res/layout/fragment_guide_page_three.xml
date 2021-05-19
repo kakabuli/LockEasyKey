@@ -65,7 +65,7 @@
                 android:layout_marginLeft="@dimen/dp_113"
                 android:layout_marginRight="@dimen/dp_113"
                 android:background="@drawable/guide_page_btn_bj"
-                android:text="@string/immediate_experience"
+                android:text="@string/philips_immediate_experience"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
