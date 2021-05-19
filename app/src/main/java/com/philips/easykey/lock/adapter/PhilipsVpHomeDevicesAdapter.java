@@ -9,6 +9,8 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
+import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
+import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
@@ -77,11 +79,13 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
                 mOnClickCallingListener.onClick(v,data);
             }
         });
+
         tvDeviceName.setText(StringUtil.processEmptyString(data.getDeviceName()));
-        tvLastRecord.setText(StringUtils
-                .getString(R.string.philips_last_record,
-                        TimeUtils.millis2String(data.getLastRecordTime(), TimeUtils.getSafeDateFormat("yyyy-MM-dd HH:mm")),
-                        StringUtil.processEmptyString(data.getLastRecordDetail())));
+        if(data.getLastRecordDetail() != null){
+            BleUtil.setTextViewOperationRecordByType(tvLastRecord,data.getLastRecordDetail());
+            tvLastRecord.setText(DateUtils.secondToDate2(data.getLastRecordDetail().getCreateTime())
+                    + " " + tvLastRecord.getText().toString().trim());
+        }
 
     }
 

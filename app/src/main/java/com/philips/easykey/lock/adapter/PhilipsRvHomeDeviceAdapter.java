@@ -9,6 +9,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
+import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
+import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +30,15 @@ public class PhilipsRvHomeDeviceAdapter extends BaseQuickAdapter<PhilipsDeviceBe
     protected void convert(@NotNull BaseViewHolder holder, PhilipsDeviceBean bean) {
         if(bean == null) return;
 
+        TextView tvLastRecord = holder.findView(R.id.tvLastRecord);
         holder.setText(R.id.tvDeviceName, StringUtil.processEmptyString(bean.getDeviceName()));
-        holder.setText(R.id.tvLastRecord, StringUtils
-                .getString(R.string.philips_last_record,
-                        TimeUtils.millis2String(bean.getLastRecordTime(), TimeUtils.getSafeDateFormat("yyyy-MM-dd HH:mm")),
-                        StringUtil.processEmptyString(bean.getLastRecordDetail())));
-        
+
+        if(bean.getLastRecordDetail() != null){
+            BleUtil.setTextViewOperationRecordByType(tvLastRecord,bean.getLastRecordDetail());
+            tvLastRecord.setText(DateUtils.secondToDate2(bean.getLastRecordDetail().getCreateTime())
+                    + " " + tvLastRecord.getText().toString().trim());
+        }
+
         if(bean.getPower() <= 30){
             holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low);
         }else if(bean.getPower() > 30 && bean.getPower() <= 60){
