@@ -505,78 +505,76 @@ public class MyApplication extends Application {
             allBindDeviceDisposable.dispose();
         }
         allBindDeviceDisposable = mqttService.mqttPublish(MqttConstant.MQTT_REQUEST_APP, allBindDevice)
-                .filter(new Predicate<MqttData>() {
-                    @Override
-                    public boolean test(MqttData mqttData) throws Exception {
-                        return mqttData.getFunc().equalsIgnoreCase(MqttConstant.GET_ALL_BIND_DEVICE);
-                    }
-                })
+                .filter(mqttData -> mqttData.getFunc().equalsIgnoreCase(MqttConstant.GET_ALL_BIND_DEVICE))
                 .timeout(10 * 1000, TimeUnit.MILLISECONDS)
                 .compose(RxjavaHelper.observeOnMainThread())
-                .subscribe(new Consumer<MqttData>() {
-                    @Override
-                    public void accept(MqttData mqttData) throws Exception {
-                        if (allBindDeviceDisposable != null && !allBindDeviceDisposable.isDisposed()) {
-                            allBindDeviceDisposable.dispose();
+                .subscribe(mqttData -> {
+                    if (allBindDeviceDisposable != null && !allBindDeviceDisposable.isDisposed()) {
+                        allBindDeviceDisposable.dispose();
+                    }
+                    String payload = mqttData.getPayload();
+
+                    allBindDevices = new Gson().fromJson(payload, AllBindDevices.class);
+
+                    if (!"200".equals(allBindDevices.getCode())) {  ///服务器获取设备列表失败
+                        LogUtils.d("   获取列表失败  " + allBindDevices.getCode());
+                        useHomeShowDeviceFromLocal();
+                        return;
+                    }
+
+                    //使用服务器的数据
+                    if (!loclHomeShowDevices.isEmpty()) {
+                        loclHomeShowDevices.clear();
+                    }
+
+                    List<AllBindDevices.ReturnDataBean.GwListBean> gwList = allBindDevices.getData().getGwList();
+                    if (gwList != null) {
+                        int allgwSize = gwList.size();
+                        for (int j = 0; j < allgwSize; j++) {
+                            SPUtils.put(Constants.RELAYTYPE + gwList.get(j).getDeviceSN(), gwList.get(j).getRelayType());
                         }
-                        String payload = mqttData.getPayload();
+                    }
 
-                        allBindDevices = new Gson().fromJson(payload, AllBindDevices.class);
+                    SPUtils.put(Constants.ALL_DEVICES_DATA, payload);
 
-                        if (!"200".equals(allBindDevices.getCode())) {  ///服务器获取设备列表失败
-                            LogUtils.d("   获取列表失败  " + allBindDevices.getCode());
-                            useHomeShowDeviceFromLocal();
-                            return;
+                    long serverCurrentTime = Long.parseLong(allBindDevices.getTimestamp());
+                    SPUtils.put(KeyConstants.SERVER_CURRENT_TIME, serverCurrentTime);
+
+                    if (allBindDevices != null) {
+                        homeShowDevices = allBindDevices.getHomeShow();
+                        com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
+                        LogUtils.d("设备更新  application");
+                        getDevicesFromServer.onNext(allBindDevices);
+                        // 增加一个数据回调监听
+                        if(mOnHomeShowDeviceChangeListener != null) {
+                            mOnHomeShowDeviceChangeListener.dataChanged();
+                            com.blankj.utilcode.util.LogUtils.d("mOnHomeShowDeviceChangeListener.dataChanged()");
                         }
 
-                        //使用服务器的数据
-                        if (!loclHomeShowDevices.isEmpty()) {
-                            loclHomeShowDevices.clear();
-                        }
-
-                        List<AllBindDevices.ReturnDataBean.GwListBean> gwList = allBindDevices.getData().getGwList();
-                        if (gwList != null) {
-                            int allgwSize = gwList.size();
-                            for (int j = 0; j < allgwSize; j++) {
-                                SPUtils.put(Constants.RELAYTYPE + gwList.get(j).getDeviceSN(), gwList.get(j).getRelayType());
-                            }
-                        }
-
-                        SPUtils.put(Constants.ALL_DEVICES_DATA, payload);
-
-                        long serverCurrentTime = Long.parseLong(allBindDevices.getTimestamp());
-                        SPUtils.put(KeyConstants.SERVER_CURRENT_TIME, serverCurrentTime);
-
-                        if (allBindDevices != null) {
-                            homeShowDevices = allBindDevices.getHomeShow();
-                            LogUtils.d("设备更新  application");
-                            getDevicesFromServer.onNext(allBindDevices);
-
-                            //缓存WiFi锁设备信息 到Dao
-                            if (allBindDevices.getData() != null && allBindDevices.getData().getWifiList() != null) {
+                        //缓存WiFi锁设备信息 到Dao
+                        if (allBindDevices.getData() != null && allBindDevices.getData().getWifiList() != null) {
 //                                LogUtils.d("--kaadas--allBindDevices.getData().getWifiList=="+allBindDevices.getData().getWifiList());
-                                List<WifiLockInfo> wifiList = allBindDevices.getData().getWifiList();
-                                WifiLockInfoDao wifiLockInfoDao = getDaoWriteSession().getWifiLockInfoDao();
-                                wifiLockInfoDao.deleteAll();
-                                wifiLockInfoDao.insertInTx(wifiList);
-                            }
+                            List<WifiLockInfo> wifiList = allBindDevices.getData().getWifiList();
+                            WifiLockInfoDao wifiLockInfoDao = getDaoWriteSession().getWifiLockInfoDao();
+                            wifiLockInfoDao.deleteAll();
+                            wifiLockInfoDao.insertInTx(wifiList);
+                        }
 
-                            //缓存晾衣机设备信息到Dao
-                            if (allBindDevices.getData() != null && allBindDevices.getData().getHangerList() != null) {
-                                List<ClothesHangerMachineAllBean> hangerList = allBindDevices.getData().getHangerList();
-                                ClothesHangerMachineAllBeanDao clothesHangerMachineAllBeanDao = getDaoWriteSession().getClothesHangerMachineAllBeanDao();
-                                clothesHangerMachineAllBeanDao.deleteAll();
-                                clothesHangerMachineAllBeanDao.insertInTx(hangerList);
-                            }
+                        //缓存晾衣机设备信息到Dao
+                        if (allBindDevices.getData() != null && allBindDevices.getData().getHangerList() != null) {
+                            List<ClothesHangerMachineAllBean> hangerList = allBindDevices.getData().getHangerList();
+                            ClothesHangerMachineAllBeanDao clothesHangerMachineAllBeanDao = getDaoWriteSession().getClothesHangerMachineAllBeanDao();
+                            clothesHangerMachineAllBeanDao.deleteAll();
+                            clothesHangerMachineAllBeanDao.insertInTx(hangerList);
+                        }
 
-                            //缓存产品型号信息列表 到Dao，主要是图片下载地址（下载过的图片不再下载）
-                            if (allBindDevices.getData() != null && allBindDevices.getData().getProductInfoList() != null) {
-                                productLists = allBindDevices.getData().getProductInfoList();
+                        //缓存产品型号信息列表 到Dao，主要是图片下载地址（下载过的图片不再下载）
+                        if (allBindDevices.getData() != null && allBindDevices.getData().getProductInfoList() != null) {
+                            productLists = allBindDevices.getData().getProductInfoList();
 //                                LogUtils.d("--kaadas--productLists=="+productLists);
-                                ProductInfoDao productInfoDao = getDaoWriteSession().getProductInfoDao();
-                                productInfoDao.deleteAll();
-                                productInfoDao.insertInTx(productLists);
-                            }
+                            ProductInfoDao productInfoDao = getDaoWriteSession().getProductInfoDao();
+                            productInfoDao.deleteAll();
+                            productInfoDao.insertInTx(productLists);
                         }
                     }
                 }, new Consumer<Throwable>() {
@@ -734,6 +732,7 @@ public class MyApplication extends Application {
     public void setHomeShowDevice(List<HomeShowBean> homeShowDeviceList) {
         homeShowDevices = homeShowDeviceList;
         loclHomeShowDevices = homeShowDeviceList;
+        com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
     }
 
     public List<HomeShowBean> getHomeShowDevices() {
@@ -743,11 +742,22 @@ public class MyApplication extends Application {
                 tem.add(homeShowBean);
             }
         }
+        com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
         return tem;
     }
 
     public List<HomeShowBean> getAllDevices() {
         return homeShowDevices;
+    }
+
+    private OnHomeShowDeviceChangeListener mOnHomeShowDeviceChangeListener;
+
+    public void setOnHomeShowDeviceChangeListener(OnHomeShowDeviceChangeListener onHomeShowDeviceChangeListener) {
+        mOnHomeShowDeviceChangeListener = onHomeShowDeviceChangeListener;
+    }
+
+    public interface OnHomeShowDeviceChangeListener {
+        void dataChanged();
     }
 
     public String getNickByDeviceId(String deviceId) {

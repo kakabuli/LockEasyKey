@@ -96,6 +96,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         btnAddDevice.setOnClickListener(v -> rcQRCodePermissions());
         ivAddDevice.setOnClickListener(v -> rcQRCodePermissions());
 
+        initTabData();
+        initDevices();
+        MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
+
         return root;
     }
 
@@ -212,13 +216,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         } else if(position == 2) {
             changedWillShowDevice(7);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        initTabData();
-        initDevices();
     }
 
     private void initTabData() {
