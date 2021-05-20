@@ -9,4 +9,172 @@
     <string name="philips_cdt_wifi">Wifi</string>
     <string name="philips_cdt_record_icon">record icon</string>
     <string name="philips_device_count">/%1$d</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 密码开门 -->
+    <string name="philips_operation_record_1_0_250">Unlock with temporary PIN</string>
+    <string name="philips_operation_record_1_0_252">Unlock with one-time PIN</string>
+    <string name="philips_operation_record_1_0_253">Unlock by \""%1$s\"" with visitor PIN</string>
+    <string name="philips_operation_record_1_0_254">Unlock by \""%1$s\"" with master PIN</string>
+    <string name="philips_operation_record_1_0_000">Unlock by \""%1$s\"" with PIN</string>
+
+    <!--卡片开门-->
+    <string name="philips_operation_record_1_3">Unlock by \""%1$s\"" with Key tag</string>
+
+    <!-- 指纹开门-->
+    <string name="philips_operation_record_1_4_254">Master fingerprint unlock by \""%1$s\""</string>
+    <string name="philips_operation_record_1_4_000">Finger unlock by \""%1$s\""</string>
+
+    <!-- 人脸开门-->
+    <string name="philips_operation_record_1_7_000">Face ID unlock by \""%1$s\""</string>
+
+    <!-- 手机开门-->
+    <string name="philips_operation_record_1_8_000">App unlock by \""%1$s\""</string>
+
+    <!-- 机械方式开门-->
+    <string name="philips_operation_record_1_9_000">Key unlock by \""%1$s\""</string>
+
+    <!--室内OPEN键开门-->
+    <string name="philips_operation_record_1_10_000">Unlock with OPEN button</string>
+
+    <!--室内感应把手开门-->
+    <string name="philips_operation_record_1_11_000">Unlock with infrared sensor </string>
+
+    <!--关闭门锁-->
+    <string name="philips_operation_record_2_00_000">Door is locked</string>
+
+    <!--添加密码-->
+    <string name="philips_operation_record_3_0_254">Add \""Master PIN\""</string>
+    <string name="philips_operation_record_3_0_000">Add \""PIN %1$s\""</string>
+    <!--添加卡片-->
+    <string name="philips_operation_record_3_3_000">Add \""Key tag %1$s\""</string>
+    <!--添加指纹-->
+    <string name="philips_operation_record_3_4_254">Add \""Master fingerprint\""</string>
+    <string name="philips_operation_record_3_4_000">Add \""Fingerprint %1$s\""</string>
+    <!--添加面容识别-->
+    <string name="philips_operation_record_3_7_000">Add \""Face ID %1$s\""</string>
+
+    <!--删除密码-->
+    <string name="philips_operation_record_4_0_254">Delete \""Master PIN\""</string>
+    <string name="philips_operation_record_4_0_000">Delete \""PIN %1$s\""</string>
+    <!--删除卡片-->
+    <string name="philips_operation_record_4_3_000">Delete \""Key tag %1$s\""</string>
+    <!--删除指纹-->
+    <string name="philips_operation_record_4_4_254">Delete \""Master fingerprint\""</string>
+    <string name="philips_operation_record_4_4_000">Delete \""Fingerprint %1$s\""</string>
+    <!--删除面容识别-->
+    <string name="philips_operation_record_4_7_000">Delete \""Face ID %1$s\""</string>
+    <!--修改管理员密码-->
+    <string name="philips_operation_record_5_0_254">Modify \""Master PIN\""</string>
+    <!--自动模式-->
+    <string name="philips_operation_record_6_0">Set to auto mode</string>
+    <!--手动模式-->
+    <string name="philips_operation_record_7_0">Set to manual mode</string>
+    <!--常用模式-->
+    <string name="philips_operation_record_8_0">Disable dual-verification</string>
+    <!--安全模式-->
+    <string name="philips_operation_record_9_0">Enable dual-verification</string>
+    <!--反锁模式-->
+    <string name="philips_operation_record_10_0">Inside deadlock enabled</string>
+    <!--布防模式-->
+    <string name="philips_operation_record_11_0">The deployment function enabled</string>
+
+    <!--修改密码昵称-->
+    <string name="philips_operation_record_12_0">\""PIN %1$s\"" changed to \""%2$s\""</string>
+    <!--修改卡片昵称-->
+    <string name="philips_operation_record_12_3">\""Key tag %1$s\"" changed to \""%2$s\""</string>
+    <!--修改指纹昵称-->
+    <string name="philips_operation_record_12_4">\""Finger %1$s\"" changed to \""%2$s\""</string>
+    <!--修改面容昵称-->
+    <string name="philips_operation_record_12_7">\""Face ID %1$s\"" changed to \""%2$s\""</string>
+    <!--添加分享用户-->
+    <string name="philips_operation_record_13_0">Successfully shared device whith \""%1$s\""</string>
+    <!--删除分享用户-->
+    <string name="philips_operation_record_14_254">Successfully removed \""%1$s\"" access to smart lock</string>
+    <string name="philips_operation_record_14_000">\""%2$s\"" Access has been removed by \""%1$s\""</string>
+    <!--修改管理员指纹-->
+    <string name="philips_operation_record_15_0">Modify \""Master fingerprint\""</string>
+    <!--添加管理员指纹-->
+    <string name="philips_operation_record_16_0">Add \""Master fingerprint\""</string>
+    <!--开启节能模式-->
+    <string name="philips_operation_record_17_0">Enable power save mode</string>
+    <!--关闭节能模式-->
+    <string name="philips_operation_record_18_0">Disable power save mode</string>
+
+    <!--报警事件-->
+    <!--1 锁定报警-->
+    <string name="philips_wifi_video_lock_alarm_type_1">System freeze</string>
+    <!--2 胁迫密码报警-->
+    <string name="philips_wifi_video_lock_alarm_type_2">Duress PIN unlock by \""%1$s\""</string>
+    <!--3 试错3次锁定报警-->
+    <string name="philips_wifi_video_lock_alarm_type_3">System freeze</string>
+    <!--4 防撬报警-->
+    <string name="philips_wifi_video_lock_alarm_type_4">Detected door being prying </string>
+    <!--8 机械钥匙报警-->
+    <string name="philips_wifi_video_lock_alarm_type_8">The door lock is being mechanically opened</string>
+    <!--16 低电量-->
+    <string name="philips_wifi_video_lock_alarm_type_16">Low power level, please replace battery\nEco mode enabled automatically</string>
+    <!--32 锁体异常-->
+    <string name="philips_wifi_video_lock_alarm_type_32">The door lock is in abnormal state, please check the lock body</string>
+    <!--64 布防报警-->
+    <string name="philips_wifi_video_lock_alarm_type_64">The door lock has been unlocked from inside</string>
+    <!-- 96 门铃-->
+    <string name="philips_wifi_video_lock_alarm_type_96">Someone presses doorbell</string>
+    <!--112 pir动作-->
+    <string name="philips_wifi_video_lock_alarm_type_112">Abnormal motion alert</string>
+
 </resources>

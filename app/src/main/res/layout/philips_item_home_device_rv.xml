@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingEnd="16pt">
 
         <ImageView
             android:id="@+id/ivRecordIcon"
@@ -41,7 +42,6 @@
             android:id="@+id/ivPower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16pt"
             android:layout_marginTop="5pt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,13 +61,15 @@
 
         <TextView
             android:id="@+id/tvLastRecord"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="113pt"
             android:layout_marginTop="13pt"
-            android:gravity="center_horizontal"
+            android:gravity="start|center_vertical"
             android:textColor="@color/color_333333"
             android:textSize="12pt"
-            app:layout_constraintStart_toStartOf="@+id/tvDeviceName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivRecordIcon"
             app:layout_constraintTop_toBottomOf="@+id/tvDeviceName"
             tools:text="2021.03.29  10:00   小明指纹00开锁" />
 

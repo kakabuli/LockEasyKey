@@ -12,14 +12,15 @@ public class KeepAliveRuning implements IKeepAliveRuning {
 
     @Override
     public void onRuning(Context context) {
-
+        if(BuildConfig.DEBUG)
         Log.d("runing?KeepAliveRuning", "true");
 
         ClassLoader classLoader = KeepAliveRuning.class.getClassLoader();
         Class<?> clz;
         try {
             clz = classLoader.loadClass("com.philips.easykey.lock.publiclibrary.xm.DoorbellingService");
-            Log.d("shula" , clz.getName());
+            if(BuildConfig.DEBUG)
+            Log.d("shulan" , clz.getName());
             Intent intent = new Intent(context, clz);
             if(!KeepAliveUtils.isServiceRunning(context,clz.getName()))
                 context.startService(intent);
