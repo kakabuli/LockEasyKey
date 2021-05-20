@@ -1299,6 +1299,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.PhilipsForgetPwdActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.PhilipsRegisterActivity"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"

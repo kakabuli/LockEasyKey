@@ -3,7 +3,6 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
@@ -40,7 +38,6 @@ import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceTypeBean;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
-import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
@@ -109,7 +106,19 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         Button btnAddDevice = root.findViewById(R.id.btnAddDevice);
         btnAddDevice.setOnClickListener(v -> rcQRCodePermissions());
         ivAddDevice.setOnClickListener(v -> rcQRCodePermissions());
+
+        initTabData();
+        initDevices();
+        MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
+
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initTabData();
+        initOperationRecord();
     }
 
     @Override
@@ -227,14 +236,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initTabData();
-        initDevices();
-        initOperationRecord();
-    }
-
     private void initTabData() {
         ArrayList<PhilipsDeviceTypeBean> list = new ArrayList<>();
         PhilipsDeviceTypeBean bean1 = new PhilipsDeviceTypeBean();
@@ -300,20 +301,16 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         if(records.size() == 1){
             return records.get(0);
         }
-        if(records.size() > 1){
-            long[] createTime = new long[2];
-            createTime[0] = records.get(0).getCreateTime();
-            createTime[1] = 0;
-            for(int i = 0;i < records.size();i++){
-                if(createTime[0] <= records.get(i).getCreateTime()){
-                    createTime[0] = records.get(i).getCreateTime();
-                    createTime[1] = i;
-                    continue;
-                }
+        records.size();
+        long[] createTime = new long[2];
+        createTime[0] = records.get(0).getCreateTime();
+        for(int i = 0;i < records.size();i++){
+            if(createTime[0] <= records.get(i).getCreateTime()){
+                createTime[0] = records.get(i).getCreateTime();
+                createTime[1] = i;
             }
-            return (records.get((int) createTime[1]));
         }
-        return null;
+        return (records.get((int) createTime[1]));
     }
 
     private void changedWillShowDevice(int type) {
@@ -513,12 +510,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                                         if(operationRecordResult.getData().size() >= 1){
                                             long[] createTime = new long[2];
                                             createTime[0] = operationRecordResult.getData().get(0).getCreateTime();
-                                            createTime[1] = 0;
                                             for(int i = 0;i < operationRecordResult.getData().size();i++){
                                                 if(createTime[0] <= operationRecordResult.getData().get(i).getCreateTime()){
                                                     createTime[0] = operationRecordResult.getData().get(i).getCreateTime();
                                                     createTime[1] = i;
-                                                    continue;
                                                 }
                                             }
                                             bean.setLastRecordDetail(operationRecordResult.getData().get((int) createTime[1]));

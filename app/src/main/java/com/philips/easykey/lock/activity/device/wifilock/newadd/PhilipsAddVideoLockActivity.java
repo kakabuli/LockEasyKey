@@ -33,7 +33,6 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiLockVid
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiVideoLockBindErrorBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.xm.bean.QrCodeBean;
-import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.QrCodeUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.WifiVideoPasswordFactorManager;
@@ -372,7 +371,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         }
     }
 
-    public void startTask4(PhilipsAddVideoLockTask4Fragment task4Fragment) {
+    public void startTask4(@NonNull PhilipsAddVideoLockTask4Fragment task4Fragment) {
         task4Fragment.startCountDown();
     }
 

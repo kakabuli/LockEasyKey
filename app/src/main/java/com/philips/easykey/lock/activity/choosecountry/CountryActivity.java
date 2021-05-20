@@ -9,17 +9,15 @@ import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;
@@ -36,28 +34,26 @@ import butterknife.ButterKnife;
  */
 public class CountryActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
-    String TAG = "CountryActivity";
     private List<CountrySortModel> mAllCountryList;
-    private EditText country_edt_search;
-    private ListView country_lv_countryList;
-    private ImageView country_iv_clearText;
-    private CountrySortAdapter adapter;
-    private SideBar sideBar;
+    private EditText mCountryEdtSearch;
+    private ListView mCountryLvCountryList;
+    private ImageView mCountryIvClearText;
+    private CountrySortAdapter mAdapter;
+    private SideBar mSideBar;
     private TextView dialog;
-    private CountryComparator pinyinComparator;
-    private GetCountryNameSort countryChangeUtil;
-    private CharacterParserUtil characterParserUtil;
+    private CountryComparator mPinyinComparator;
+    private GetCountryNameSort mCountryChangeUtil;
+    private CharacterParserUtil mCharacterParserUtil;
     @BindView(R.id.iv_head_left)
     public ImageView iv_head_left;//结束
     @BindView(R.id.tv_head_txt)
     public TextView tv_head_txt;
-    private String[] countryList;
+    private String[] mCountryList;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.d("CountryActivity启动 ");
 
         setContentView(R.layout.activity_country_choose);
         ButterKnife.bind(this);
@@ -65,7 +61,6 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
         init();
         setListener();
         getCountryList();
-        LogUtils.d("CountryActivity启动完成 ");
 
     }
 
@@ -74,20 +69,20 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
      * 初始化界面
      */
     private void init() {
-        country_edt_search = (EditText) findViewById(R.id.country_et_search);
-        country_lv_countryList = (ListView) findViewById(R.id.country_lv_list);
-        country_iv_clearText = (ImageView) findViewById(R.id.country_iv_cleartext);
-        dialog = (TextView) findViewById(R.id.country_dialog);
-        sideBar = (SideBar) findViewById(R.id.country_sidebar);
-        sideBar.setTextView(dialog);
-        mAllCountryList = new ArrayList<CountrySortModel>();
-        pinyinComparator = new CountryComparator();
-        countryChangeUtil = new GetCountryNameSort();
-        characterParserUtil = new CharacterParserUtil();
+        mCountryEdtSearch = findViewById(R.id.country_et_search);
+        mCountryLvCountryList = findViewById(R.id.country_lv_list);
+        mCountryIvClearText = findViewById(R.id.country_iv_cleartext);
+        dialog = findViewById(R.id.country_dialog);
+        mSideBar = findViewById(R.id.country_sidebar);
+        mSideBar.setTextView(dialog);
+        mAllCountryList = new ArrayList<>();
+        mPinyinComparator = new CountryComparator();
+        mCountryChangeUtil = new GetCountryNameSort();
+        mCharacterParserUtil = new CharacterParserUtil();
         // 将联系人进行排序，按照A~Z的顺序
-        Collections.sort(mAllCountryList, pinyinComparator);
-        adapter = new CountrySortAdapter(this, mAllCountryList);
-        country_lv_countryList.setAdapter(adapter);
+        Collections.sort(mAllCountryList, mPinyinComparator);
+        mAdapter = new CountrySortAdapter(this, mAllCountryList);
+        mCountryLvCountryList.setAdapter(mAdapter);
     }
 
 
@@ -95,15 +90,12 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
      * 添加监听
      */
     private void setListener() {
-        country_iv_clearText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                country_edt_search.setText("");
-                Collections.sort(mAllCountryList, pinyinComparator);
-                adapter.updateListView(mAllCountryList);
-            }
+        mCountryIvClearText.setOnClickListener(v -> {
+            mCountryEdtSearch.setText("");
+            Collections.sort(mAllCountryList, mPinyinComparator);
+            mAdapter.updateListView(mAllCountryList);
         });
-        country_edt_search.addTextChangedListener(new TextWatcher() {
+        mCountryEdtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
@@ -116,56 +108,50 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
 
             @Override
             public void afterTextChanged(Editable s) {
-                String searchContent = country_edt_search.getText().toString();
+                String searchContent = mCountryEdtSearch.getText().toString();
                 if (searchContent.equals("")) {
-                    country_iv_clearText.setVisibility(View.INVISIBLE);
+                    mCountryIvClearText.setVisibility(View.INVISIBLE);
                 } else {
-                    country_iv_clearText.setVisibility(View.VISIBLE);
+                    mCountryIvClearText.setVisibility(View.VISIBLE);
                 }
                 if (searchContent.length() > 0) {
                     // 按照输入内容进行匹配
-                    ArrayList<CountrySortModel> fileterList = (ArrayList<CountrySortModel>) countryChangeUtil.search(searchContent, mAllCountryList);
-                    adapter.updateListView(fileterList);
+                    ArrayList<CountrySortModel> fileterList = (ArrayList<CountrySortModel>) mCountryChangeUtil.search(searchContent, mAllCountryList);
+                    mAdapter.updateListView(fileterList);
                 } else {
-                    adapter.updateListView(mAllCountryList);
+                    mAdapter.updateListView(mAllCountryList);
                 }
-                country_lv_countryList.setSelection(0);
+                mCountryLvCountryList.setSelection(0);
             }
         });
         // 右侧sideBar监听
-        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
-            @Override
-            public void onTouchingLetterChanged(String s) {
-                // 该字母首次出现的位置
-                int position = adapter.getPositionForSection(s.charAt(0));
-                if (position != -1) {
-                    country_lv_countryList.setSelection(position);
-                }
+        mSideBar.setOnTouchingLetterChangedListener(s -> {
+            // 该字母首次出现的位置
+            int position = mAdapter.getPositionForSection(s.charAt(0));
+            if (position != -1) {
+                mCountryLvCountryList.setSelection(position);
             }
         });
-        country_lv_countryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
-                String countryName = null;
-                String countryNumber = null;
-                String searchContent = country_edt_search.getText().toString();
-                if (searchContent.length() > 0) {
-                    // 按照输入内容进行匹配
-                    ArrayList<CountrySortModel> fileterList = (ArrayList<CountrySortModel>) countryChangeUtil.search(searchContent, mAllCountryList);
-                    countryName = fileterList.get(position).countryName;
-                    countryNumber = fileterList.get(position).countryNumber;
-                } else {
-                    // 点击后返回
-                    countryName = mAllCountryList.get(position).countryName;
-                    countryNumber = mAllCountryList.get(position).countryNumber;
-                }
-                Intent intent = new Intent();
-                intent.putExtra("countryName", countryName);
-                intent.putExtra("countryNumber", countryNumber);
-                setResult(RESULT_OK, intent);
-                Log.e(TAG, "countryName: + " + countryName + "countryNumber: " + countryNumber);
-                finish();
+        mCountryLvCountryList.setOnItemClickListener((adapterView, view, position, arg3) -> {
+            String countryName;
+            String countryNumber;
+            String searchContent = mCountryEdtSearch.getText().toString();
+            if (searchContent.length() > 0) {
+                // 按照输入内容进行匹配
+                ArrayList<CountrySortModel> fileterList = (ArrayList<CountrySortModel>) mCountryChangeUtil.search(searchContent, mAllCountryList);
+                countryName = fileterList.get(position).countryName;
+                countryNumber = fileterList.get(position).countryNumber;
+            } else {
+                // 点击后返回
+                countryName = mAllCountryList.get(position).countryName;
+                countryNumber = mAllCountryList.get(position).countryNumber;
             }
+            Intent intent = new Intent();
+            intent.putExtra("countryName", countryName);
+            intent.putExtra("countryNumber", countryNumber);
+            setResult(RESULT_OK, intent);
+            LogUtils.d("countryName: + " + countryName + "countryNumber: " + countryNumber);
+            finish();
         });
     }
 
@@ -180,11 +166,11 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
             String language = (String) SPUtils.get("lag", "");
             // 设置应用语言类型
             if (language.equals("zh")) {
-                countryList = getResources().getStringArray(R.array.country_code_list_ch);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_ch);
             } else if (language.equals("tw")) {
-                countryList = getResources().getStringArray(R.array.country_code_list_tw);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_tw);
             } else {
-                countryList = getResources().getStringArray(R.array.country_code_list_en);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_en);
             }
         } else {
             Resources resources = getResources();
@@ -193,29 +179,29 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
             Locale locale = getResources().getConfiguration().locale;
             String language = locale.getLanguage();
             if (language.equals("zh")) {
-                countryList = getResources().getStringArray(R.array.country_code_list_ch);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_ch);
             } else if (language.equals("tw")) {
-                countryList = getResources().getStringArray(R.array.country_code_list_tw);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_tw);
             } else {
-                countryList = getResources().getStringArray(R.array.country_code_list_en);
+                mCountryList = getResources().getStringArray(R.array.country_code_list_en);
             }
         }
-        for (int i = 0, length = countryList.length; i < length; i++) {
-            String[] country = countryList[i].split("\\*");
+        for (int i = 0, length = mCountryList.length; i < length; i++) {
+            String[] country = mCountryList[i].split("\\*");
             String countryName = country[0];
             String countryNumber = country[1];
-            String countrySortKey = characterParserUtil.getSelling(countryName);
+            String countrySortKey = mCharacterParserUtil.getSelling(countryName);
             CountrySortModel countrySortModel = new CountrySortModel(countryName, countryNumber, countrySortKey);
-            String sortLetter = countryChangeUtil.getSortLetterBySortKey(countrySortKey);
+            String sortLetter = mCountryChangeUtil.getSortLetterBySortKey(countrySortKey);
             if (sortLetter == null) {
-                sortLetter = countryChangeUtil.getSortLetterBySortKey(countryName);
+                sortLetter = mCountryChangeUtil.getSortLetterBySortKey(countryName);
             }
             countrySortModel.sortLetters = sortLetter;
             mAllCountryList.add(countrySortModel);
         }
-        Collections.sort(mAllCountryList, pinyinComparator);
-        adapter.updateListView(mAllCountryList);
-        Log.e(TAG, "changdu" + mAllCountryList.size());
+        Collections.sort(mAllCountryList, mPinyinComparator);
+        mAdapter.updateListView(mAllCountryList);
+        LogUtils.d("length " + mAllCountryList.size());
     }
 
 

@@ -12,7 +12,7 @@
     <string name="philips_login">登录</string>
     <string name="have_you_account_symbol">您还没有账号？</string>
     <string name="philips_register_now">立即注册</string>
-    <string name="register">注册</string>
+    <string name="philips_register">注册</string>
     <string name="philips_get_verification">获取验证码</string>
     <string name="philips_hint_input_verification">请输入验证码</string>
     <string name="philips_verification_code">验证码</string>
@@ -2654,5 +2654,10 @@
     <string name="philips_wifi_video_lock_alarm_type_96">有人按门铃</string>
     <!--112 pir动作-->
     <string name="philips_wifi_video_lock_alarm_type_112">发生移动告警</string>
+    <string name="philips_china">中国</string>
+    <string name="philips_terms_of_use2">《使用条款》</string>
+    <string name="philips_privacy_policy">《隐私政策》</string>
+    <string name="philips_register_agreement_tip">已阅读并同意</string>
+    <string name="philips_and">和</string>
 
 </resources>
