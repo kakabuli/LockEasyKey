@@ -8,6 +8,8 @@
     <TextView
         android:id="@+id/tv_device_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"/>
+        android:layout_height="48pt"
+        android:gravity="center_vertical"
+        android:textColor="#333333"
+        android:textSize="17pt"/>
 </LinearLayout>
