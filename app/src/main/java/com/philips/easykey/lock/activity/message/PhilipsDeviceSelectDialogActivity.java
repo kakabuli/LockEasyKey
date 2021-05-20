@@ -67,7 +67,6 @@ public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActiv
         });
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this);
         verticalLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rcvDeviceSelect.addItemDecoration(new SpacesItemDecoration(0, 0, 40, 0));
         rcvDeviceSelect.setLayoutManager(verticalLayoutManager);
         rcvDeviceSelect.setAdapter(deviceSelectAdapter);
     }

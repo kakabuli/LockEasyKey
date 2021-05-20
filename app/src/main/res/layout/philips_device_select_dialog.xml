@@ -3,51 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:text="@string/philips_activity_device_select_all_device"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/dialog_bj"
+        android:layout_marginTop="64pt"
+        android:layout_marginLeft="16pt"
+        android:layout_marginRight="14pt"
+        android:background="@drawable/philips_retangle_ffffff_3"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="48pt"
+            android:layout_marginLeft="16pt"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="17pt"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
             android:text="@string/philips_smart_lock"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_device_select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginLeft="16pt"
+            android:layout_marginBottom="24pt"/>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_close"
-        android:src="@mipmap/close"
+        android:src="@drawable/philips_message_icon_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="44pt"/>
 
 </RelativeLayout>
