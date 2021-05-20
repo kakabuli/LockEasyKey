@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.bean;
 
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,8 +14,7 @@ public class PhilipsDeviceBean {
 
     private String deviceName;
     private int power;
-    private long lastRecordTime;
-    private String lastRecordDetail;
+    private WifiLockOperationRecord lastRecordDetail;
     private int deviceType;              // 模拟 6：视频锁  7：晾衣机
     private String wifiSn;
     private int powerSave;
@@ -42,19 +43,11 @@ public class PhilipsDeviceBean {
         this.power = power;
     }
 
-    public long getLastRecordTime() {
-        return lastRecordTime;
-    }
-
-    public void setLastRecordTime(long lastRecordTime) {
-        this.lastRecordTime = lastRecordTime;
-    }
-
-    public String getLastRecordDetail() {
+    public WifiLockOperationRecord getLastRecordDetail() {
         return lastRecordDetail;
     }
 
-    public void setLastRecordDetail(String lastRecordDetail) {
+    public void setLastRecordDetail(WifiLockOperationRecord lastRecordDetail) {
         this.lastRecordDetail = lastRecordDetail;
     }
 
@@ -80,8 +73,7 @@ public class PhilipsDeviceBean {
         return "PhilipsDeviceBean{" +
                 "deviceName='" + deviceName + '\'' +
                 ", power=" + power +
-                ", lastRecordTime=" + lastRecordTime +
-                ", lastRecordDetail='" + lastRecordDetail + '\'' +
+                ", lastRecordDetail='" + lastRecordDetail.toString() + '\'' +
                 ", deviceType=" + deviceType +
                 ", wifiSn='" + wifiSn + '\'' +
                 ", powerSave=" + powerSave +

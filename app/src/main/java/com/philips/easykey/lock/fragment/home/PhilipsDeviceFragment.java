@@ -3,6 +3,7 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.PhilipsAddDeviceActivity;
@@ -35,14 +39,23 @@ import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.bean.PhilipsDeviceTypeBean;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
+import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
+import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.disposables.Disposable;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -95,7 +108,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         Button btnAddDevice = root.findViewById(R.id.btnAddDevice);
         btnAddDevice.setOnClickListener(v -> rcQRCodePermissions());
         ivAddDevice.setOnClickListener(v -> rcQRCodePermissions());
-
         return root;
     }
 
@@ -219,6 +231,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         super.onResume();
         initTabData();
         initDevices();
+        initOperationRecord();
     }
 
     private void initTabData() {
@@ -259,10 +272,9 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             // TODO: 2021/5/17 等待正确json来替换
             PhilipsDeviceBean deviceBean = new PhilipsDeviceBean();
             deviceBean.setDeviceName(bean.getDeviceNickName());
-            deviceBean.setLastRecordDetail("小明指纹00开锁");
-            deviceBean.setLastRecordTime(1619075698000L);
             deviceBean.setDeviceType(bean.getDeviceType());
             if(bean.getObject() instanceof WifiLockInfo) {
+                deviceBean.setLastRecordDetail(getLastOperationRecord(((WifiLockInfo) bean.getObject()).getWifiSN()));
                 deviceBean.setWifiSn(((WifiLockInfo) bean.getObject()).getWifiSN());
                 deviceBean.setPowerSave(((WifiLockInfo) bean.getObject()).getPowerSave());
                 deviceBean.setPower(((WifiLockInfo) bean.getObject()).getPower());
@@ -276,6 +288,31 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mVpHomeDevicesAdapter.notifyDataSetChanged();
         mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
         mTvCount.setText(getString(R.string.philips_device_count, mWillShowDeviceBeans.size()));
+    }
+
+    private WifiLockOperationRecord getLastOperationRecord(String wifiSn) {
+        String localRecord = (String) SPUtils.get(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSn,"");
+        List<WifiLockOperationRecord> records = new Gson().fromJson(localRecord, new TypeToken<List<WifiLockOperationRecord>>() {
+        }.getType());
+        if(records == null) return null;
+        if(records.size() <= 0) return null;
+        if(records.size() == 1){
+            return records.get(0);
+        }
+        if(records.size() > 1){
+            long[] createTime = new long[2];
+            createTime[0] = records.get(0).getCreateTime();
+            createTime[1] = 0;
+            for(int i = 0;i < records.size();i++){
+                if(createTime[0] <= records.get(i).getCreateTime()){
+                    createTime[0] = records.get(i).getCreateTime();
+                    createTime[1] = i;
+                    continue;
+                }
+            }
+            return (records.get((int) createTime[1]));
+        }
+        return null;
     }
 
     private void changedWillShowDevice(int type) {
@@ -440,6 +477,66 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                     @Override
                     public void afterTextChanged(String toString) {
 
+                    }
+                });
+    }
+
+    private void initOperationRecord() {
+        for(HomeShowBean bean : MyApplication.getInstance().getHomeShowDevices()){
+            if(bean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK
+                    || bean.getDeviceType() == HomeShowBean.TYPE_WIFI_LOCK){
+                saveOperationRecordForNet(((WifiLockInfo)bean.getObject()).getWifiSN());
+            }
+        }
+    }
+
+    private void saveOperationRecordForNet(String wifiSN) {
+        getOpenRecordFromServer(1,wifiSN);
+    }
+
+    public void getOpenRecordFromServer(int page, String wifiSn) {
+        XiaokaiNewServiceImp.wifiLockGetOperationList(wifiSn, page)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
+                .subscribe(new BaseObserver<GetWifiLockOperationRecordResult>() {
+                    @Override
+                    public void onSuccess(GetWifiLockOperationRecordResult operationRecordResult) {
+                        if (operationRecordResult.getData() != null && operationRecordResult.getData().size() > 0) {  //服务器没有数据  提示用户
+                            if (page == 1) {
+                                SPUtils.put(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSn, new Gson().toJson(operationRecordResult.getData()));
+                                for(PhilipsDeviceBean bean : mWillShowDeviceBeans){
+                                    if(bean.getWifiSn().equals(wifiSn)){
+                                        if(operationRecordResult.getData().size() >= 1){
+                                            long[] createTime = new long[2];
+                                            createTime[0] = operationRecordResult.getData().get(0).getCreateTime();
+                                            createTime[1] = 0;
+                                            for(int i = 0;i < operationRecordResult.getData().size();i++){
+                                                if(createTime[0] <= operationRecordResult.getData().get(i).getCreateTime()){
+                                                    createTime[0] = operationRecordResult.getData().get(i).getCreateTime();
+                                                    createTime[1] = i;
+                                                    continue;
+                                                }
+                                            }
+                                            bean.setLastRecordDetail(operationRecordResult.getData().get((int) createTime[1]));
+                                            mRvHomeDeviceAdapter.notifyDataSetChanged();
+                                            mVpHomeDevicesAdapter.notifyDataSetChanged();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
                     }
                 });
     }

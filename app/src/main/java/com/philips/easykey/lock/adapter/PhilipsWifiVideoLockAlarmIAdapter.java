@@ -6,7 +6,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,12 +15,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
+import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.RotateTransformation;
 
 import java.util.List;
-
-import com.blankj.utilcode.util.SizeUtils;
 
 public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVideoLockAlarmRecord, BaseViewHolder> {
     List<WifiVideoLockAlarmRecord> data;
@@ -63,7 +61,6 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
 
         }
 
-
         ImageView ivContent = helper.getView(R.id.iv_content);
         ImageView ivPlay = helper.getView(R.id.iv_paly);
 
@@ -79,39 +76,7 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
             rlPic.setVisibility(View.VISIBLE);
         }
 
-        switch (record.getType()){
-            case 0x10://您的智能门锁低电量，请及时更换
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvRight.getContext().getString(R.string.wifi_lock_alarm_low_power)
-                        + "</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_1) +"</font>"));
-                rlPic.setVisibility(View.GONE);
-                break;
-            case 0x20:// 您的门锁有故障，请注意
-                tvRight.setText(tvRight.getContext().getString(R.string.wifi_lock_alarm_problem));
-                break;
-            case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
-                tvRight.setText(tvRight.getContext().getString(R.string.wifi_lock_alarm_lock_5min_1));
-                break;
-            case 0x08:// 门锁正在被机械方式开启，请回家或联系保安查看
-                tvRight.setText(tvDayTime.getContext().getString(R.string.wifi_lock_alarm_opens));
-                break;
-            case 0x04:// 已监测到您的门锁被撬，请联系家人或小区保安
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getString(R.string.pick_proof)
-                        +"</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_2) +"</font>"));
-                break;
-            case 0x70:// 徘徊报警
-                tvRight.setText(tvDayTime.getContext().getText(R.string.wandering_alarm));
-                break;
-            case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
-                tvRight.setText(tvDayTime.getContext().getString(R.string.wifi_lock_alarm_hijack));
-                break;
-            case 0x01:// 锁定报警
-                tvRight.setText(tvRight.getContext().getString(R.string.lock_alarm));
-                break;
-            case 0x40:// 布防报警
-                tvRight.setText(Html.fromHtml("<font color='#666666'>"+ tvDayTime.getContext().getString(R.string.warring_defence)
-                        +"</font>" + "<br><font color='#999999'>"+ tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_3) +"</font>"));
-                break;
-        }
+        BleUtil.setTextViewAlarmByType(helper.getView(R.id.tv_right),record.getType());
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
             Glide.with(ivContent.getContext()).load(record.getThumbUrl())
@@ -134,11 +99,6 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
                     if(mListener != null){
                         mListener.onVideoRecordCallBackLinstener(record);
                     }
-                    /*
-                    Intent intent = new Intent(mContext, WifiLockVideoDeviceRecordActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_SN,record.getWifiSN());
-                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD_DATA,record);
-                    mContext.startActivity(intent);*/
                 }
             }
         });

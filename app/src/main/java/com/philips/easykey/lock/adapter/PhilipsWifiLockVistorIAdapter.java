@@ -86,10 +86,6 @@ public class PhilipsWifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLoc
                     if(mListener != null){
                         mListener.onVideoRecordCallBackLinstener(record);
                     }
-                    /*Intent intent = new Intent(mContext, WifiLockVideoDeviceRecordActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_SN,record.getWifiSN());
-                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD_DATA,record);
-                    mContext.startActivity(intent);*/
                 }
             }
         });

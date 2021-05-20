@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,11 +29,14 @@ import com.philips.easykey.lock.mvp.presenter.wifilock.PhilipsWifiVideoLockDetai
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsWifiVideoLockDetailView;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
+import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
+import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -160,7 +164,38 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             }
             initLockMode();
             remainingCapacity(wifiLockInfo.getPower());
+            initOperationRecord();
         }
+    }
+
+    private void initOperationRecord() {
+        String localRecord = (String) SPUtils.get(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSn,"");
+        List<WifiLockOperationRecord> records = new Gson().fromJson(localRecord, new TypeToken<List<WifiLockOperationRecord>>() {
+        }.getType());
+        if(records == null) return;
+        if(records.size() <= 0) return;
+        if(records.size() == 1){
+            BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get(0));
+            mTvLastRecord.setText(TimeUtils.millis2String(records.get(0).getCreateTime() * 1000,
+                    TimeUtils.getSafeDateFormat("yyyy-MM-dd HH:mm") + " ")
+                    + mTvLastRecord.getText().toString().trim());
+            return;
+        }
+
+        long[] createTime = new long[2];
+        createTime[0] = records.get(0).getCreateTime();
+        createTime[1] = 0;
+        for(int i = 0;i < records.size();i++){
+            if(createTime[0] <= records.get(i).getCreateTime()){
+                createTime[0] = records.get(i).getCreateTime();
+                createTime[1] = i;
+                continue;
+            }
+        }
+
+        BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get((int) createTime[1]));
+        mTvLastRecord.setText(DateUtils.secondToDate2(records.get((int) createTime[1]).getCreateTime())
+                + " " + mTvLastRecord.getText().toString().trim());
     }
 
     /**

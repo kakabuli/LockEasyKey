@@ -21,9 +21,6 @@ public class WifiLockOpenRecordPresenter<T> extends BasePresenter<IWifiLockOpenR
 //    private List<WifiLockOperationRecord> wifiLockOperationRecords = new ArrayList<>();
 
     public void getOpenRecordFromServer(int page, String wifiSn) {
-//        if (page == 1) {  //如果是获取第一页的数据，那么清楚所有的开锁记录
-//            wifiLockOperationRecords.clear();
-//        }
         XiaokaiNewServiceImp.wifiLockGetOperationList(wifiSn, page)
                 .timeout(10 *1000, TimeUnit.MILLISECONDS)
                 .subscribe(new BaseObserver<GetWifiLockOperationRecordResult>() {
@@ -72,8 +69,7 @@ public class WifiLockOpenRecordPresenter<T> extends BasePresenter<IWifiLockOpenR
                     public void onSubscribe1(Disposable d) {
                         compositeDisposable.add(d);
                     }
-                })
-        ;
+                });
     }
 
 }

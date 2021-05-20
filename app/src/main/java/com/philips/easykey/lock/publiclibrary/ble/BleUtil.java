@@ -1,15 +1,14 @@
 package com.philips.easykey.lock.publiclibrary.ble;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 
-import com.blankj.utilcode.util.Utils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockOperationRecord;
 import com.philips.easykey.lock.publiclibrary.ble.bean.OpenLockRecord;
 import com.philips.easykey.lock.publiclibrary.ble.bean.OperationLockRecord;
 import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
@@ -688,7 +687,7 @@ public class BleUtil {
                 content = context.getString(R.string.wifi_lock_alarm_lock_broken);
                 break;
             case MECHANICAL_KEY://8机械方式报警
-                content = context.getString(R.string.wifi_lock_alarm_opens);
+                content = context.getString(R.string.philips_wifi_video_lock_alarm_type_8);
                 break;
             case LOW_POWER://16低电压
                 content = context.getString(R.string.wifi_lock_alarm_low_power);
@@ -702,7 +701,7 @@ public class BleUtil {
             case CLOSE_FACE://128低电量关人脸
                 content = context.getString(R.string.wifi_lock_alarm_lower_power_close_face);
                 break;
-            case PIR_ALARM:
+            case PIR_ALARM://pir
                 content = context.getString(R.string.wandering_alarm) + "~";
                 break;
             default:
@@ -716,44 +715,36 @@ public class BleUtil {
      * @param type  	报警类型：1锁定 2劫持 3三次错误 4防撬 8机械方式报警 16低电压 32锁体异常 64布防 128低电量关人脸 96门铃 112pir报警
      * @return
      */
-    public static int getAlarmByType(int type) {
-        int content = -1;
+    public static void setTextViewAlarmByType(TextView tvRight,int type) {
         switch (type) {
-            case LOCK_WARRING: //锁定
-                content = R.string.wifi_lock_alarm_lock_5min;
+            case 0x01:// 锁定报警
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_1);
                 break;
-            case HIJACK: //2劫持
-                content = R.string.wifi_lock_alarm_hijack;
+            case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
+                tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2, ""));
                 break;
-            case THREE_TIMES_ERROR: //3三次错误
-                content = R.string.wifi_lock_alarm_many_failed;
+            case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_3);
                 break;
-            case BROKEN: //4防撬
-                content = R.string.wifi_lock_alarm_lock_broken;
+            case 0x04:// 已监测到您的门锁被撬，请联系家人或小区保安
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_4);
                 break;
-            case MECHANICAL_KEY://8机械方式报警
-                content = R.string.wifi_lock_alarm_opens;
+            case 0x08:// 门锁正在被机械方式开启，请回家或联系保安查看
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_8);
                 break;
-            case LOW_POWER://16低电压
-                content = R.string.wifi_lock_alarm_low_power;
+            case 0x10://您的智能门锁低电量，请及时更换
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_16);
                 break;
-            case DOOR_NOT_LOCK: //32锁体异常
-                content = R.string.alarm_notification_content_32;
+            case 0x20:// 您的门锁有故障，请注意
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_32);
                 break;
-            case ARM://64布防
-                content = R.string.wifi_lock_alarm_safe;
+            case 0x40:// 布防报警
+                tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_64);
                 break;
-            case CLOSE_FACE://128低电量关人脸
-                content = R.string.wifi_lock_alarm_lower_power_close_face;
-                break;
-            case PIR_ALARM:
-                content = R.string.wandering_alarm;
-                break;
-            default:
-                content = R.string.warring_unkonw;
+            case 0x70:// 徘徊报警
+                tvRight.setText(tvRight.getContext().getText(R.string.philips_wifi_video_lock_alarm_type_112));
                 break;
         }
-        return content;
     }
 
     /**
@@ -764,7 +755,7 @@ public class BleUtil {
         String content = "";
         switch (type){
             case DOOR_BELL:
-                content = context.getString(R.string.wifi_video_lock_alarm_doorbell);
+                content = context.getString(R.string.philips_wifi_video_lock_alarm_type_96);
         }
         return content;
     }
@@ -970,4 +961,214 @@ public class BleUtil {
         return title;
     }
 
+
+    /** 根据wifi锁操作记录类型，设置记录内容
+     *
+     */
+    public static void setTextViewOperationRecordByType(TextView mTvContent, WifiLockOperationRecord record) {
+        Context mContext = mTvContent.getContext();
+        String sNum = (record.getPwdNum() > 9 ? ""+ record.getPwdNum() : "0"+ record.getPwdNum());
+        /**
+         * 1开锁
+         * 2关锁
+         * 3添加密钥
+         * 4删除密钥
+         * 5修改管理员密码
+         * 6自动模式
+         * 7手动模式
+         * 8常用模式切换
+         * 9安全模式切换
+         * 10反锁模式
+         * 11布防模式
+         * 12修改密码昵称
+         * 13添加分享用户
+         * 14删除分享用户
+         * 15修改管理指纹
+         * 16添加管理员指纹
+         * 17开启节能模式
+         * 18关闭节能模式
+         */
+        switch (record.getType()){
+            case 1://开锁
+                switch (record.getPwdType()){
+                    /**
+                     * 0密码 3卡片 4指纹 7面容识别 8APP用户 9机械钥匙 10室内open键开锁 11室内感应把手开锁
+                     */
+                    case 0:
+                        /**
+                         * 254管理员 253访客 252一次性 250离线
+                         */
+                        switch (record.getPwdNum()){
+                            case 254:
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
+                                break;
+                            case 253:
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_253,record.getUserNickname()));
+                                break;
+                            case 252:
+                                mTvContent.setText(R.string.philips_operation_record_1_0_252);
+                                break;
+                            case 250:
+                                mTvContent.setText(R.string.philips_operation_record_1_0_250);
+                                break;
+                            default:
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_000,record.getUserNickname()));
+                                break;
+                        }
+                        break;
+                    case 3:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_3,record.getUserNickname()));
+                        break;
+                    case 4:
+                        if(record.getPwdNum() == 254){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_4_254,record.getUserNickname()));
+                        }else {
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_4_000,record.getUserNickname()));
+                        }
+                        break;
+                    case 7:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_7_000,record.getUserNickname()));
+                        break;
+                    case 8:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_8_000,record.getUserNickname()));
+                        break;
+                    case 9:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_9_000,record.getUserNickname()));
+                        break;
+                    case 10:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_10_000));
+                        break;
+                    case 11:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_11_000));
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2://关锁
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_2_00_000));
+                break;
+            case 3://添加密钥
+                switch (record.getPwdType()) {
+                    //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
+                    case 0:
+                        if(record.getPwdNum() == 254){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_0_254));
+                        }else{
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_0_000,sNum));
+                        }
+                        break;
+                    case 3:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_3_000,sNum));
+                        break;
+                    case 4:
+                        if(record.getPwdNum() == 254){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_4_254));
+                        }else{
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_4_000,sNum));
+                        }
+                        break;
+                    case 7:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_3_7_000,sNum));
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 4://删除密钥
+                switch (record.getPwdType()) {
+                    //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
+                    case 0:
+                        if(record.getPwdNum() == 254){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_254));
+                        }else{
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_000,sNum));
+                        }
+                        break;
+                    case 3:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,sNum));
+                        break;
+                    case 4:
+                        if(record.getPwdNum() == 254){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_254));
+                        }else{
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_000,sNum));
+                        }
+                        break;
+                    case 7:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,sNum));
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 5://修改管理员密码
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_5_0_254));
+                break;
+            case 6://自动模式
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_6_0));
+                break;
+            case 7://手动模式
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_7_0));
+                break;
+            case 8://常用模式切换
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_8_0));
+                break;
+            case 9://安全模式切换
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_9_0));
+                break;
+            case 10://反锁模式
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_10_0));
+                break;
+            case 11://布防模式
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_11_0));
+                break;
+            case 12://修改密码昵称
+                switch (record.getPwdType()) {
+                    //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
+                    case 0:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_12_0,sNum,record.getPwdNickname()));
+                        break;
+                    case 3:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_12_3,sNum,record.getPwdNickname()));
+                        break;
+                    case 4:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_12_4,sNum,record.getPwdNickname()));
+                        break;
+                    case 7:
+                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_12_7,sNum,record.getPwdNickname()));
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 13://添加分享用户
+                mTvContent.setText(mContext.getString(R.string.philips_operation_record_13_0,
+                        (!TextUtils.isEmpty(record.getShareUserNickname()) ? record.getShareUserNickname() : record.getShareAccount())));
+                break;
+            case 14://删除分享用户
+                if(MyApplication.getInstance().getWifiLockInfoBySn(record.getWifiSN()).getIsAdmin() == 1){
+                    mTvContent.setText(mContext.getString(R.string.philips_operation_record_14_254,
+                            (!TextUtils.isEmpty(record.getShareUserNickname()) ? record.getShareUserNickname() : record.getShareAccount())));
+                }else{
+                    mTvContent.setText(mContext.getString(R.string.philips_operation_record_14_000,
+                            (!TextUtils.isEmpty(record.getUserNickname()) ? record.getUserNickname() : record.getWifiSN()),
+                            (!TextUtils.isEmpty(record.getShareUserNickname()) ? record.getShareUserNickname() : record.getShareAccount())));
+                }
+                break;
+            case 15: //15修改管理指纹
+                mTvContent.setText(R.string.philips_operation_record_15_0);
+                break;
+            case 16: //16添加管理员指纹
+                mTvContent.setText(R.string.philips_operation_record_16_0);
+                break;
+            case 17: //17开启节能模式
+                mTvContent.setText(R.string.philips_operation_record_17_0);
+                break;
+            case 18: //18关闭节能模式
+                mTvContent.setText(R.string.philips_operation_record_18_0);
+                break;
+        }
+
+    }
 }

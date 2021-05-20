@@ -72,6 +72,7 @@ public class KeepAliveManager {
                 application.startService(new Intent(application, HideForegroundService.class));
             }
         } catch (Exception e) {
+            if(BuildConfig.DEBUG)
             Log.d("HideForegroundService--", e.getMessage());
 
         }
@@ -91,6 +92,7 @@ public class KeepAliveManager {
 //            application.stopService(guardIntent);
             application.stopService(new Intent(application, JobHandlerService.class));
         } catch (Exception e) {
+            if(BuildConfig.DEBUG)
             Log.d(TAG , "stopWork-->" + e.getMessage());
         }
     }
