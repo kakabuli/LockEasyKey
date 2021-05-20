@@ -138,14 +138,17 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
                 break;
             case R.id.normal_layout:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(!ckNormal.isChecked()){
-                            ckNormal.setChecked(true);
-                            ckAm.setChecked(false);
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(!ckNormal.isChecked()){
+                        ckNormal.setChecked(true);
+                        ckAm.setChecked(false);
                     }
                 }
 
@@ -153,13 +156,17 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
                 break;
             case R.id.am_layout:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(!ckAm.isChecked()){
-                            ckNormal.setChecked(false);
-                            ckAm.setChecked(true);
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(!ckAm.isChecked()){
+                        ckNormal.setChecked(false);
+                        ckAm.setChecked(true);
                     }
                 }
 
@@ -243,8 +250,8 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed) + "", "\n" + getString(R.string.dialog_wifi_video_power_status) + "\n",
-                getString(R.string.philips_confirm) + "", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -381,5 +388,32 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
                 }
             });
         }
+    }
+
+    public void powerSaveModeStatus(){
+        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(this, getString(R.string.philips_videolock_power_save_mode_title),
+                getString(R.string.philips_videolock_power_save_mode_content),
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF",new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 }

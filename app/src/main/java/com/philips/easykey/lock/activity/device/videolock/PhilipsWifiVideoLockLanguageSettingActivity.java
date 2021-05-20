@@ -161,13 +161,17 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
                 break;
             case R.id.en_layout:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(!enImg.isChecked()){
-                            zhImg.setChecked(false);
-                            enImg.setChecked(true);
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(!enImg.isChecked()){
+                        zhImg.setChecked(false);
+                        enImg.setChecked(true);
                     }
                 }
 
@@ -175,17 +179,19 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
                 break;
             case R.id.zh_layout:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(!zhImg.isChecked()){
-                            zhImg.setChecked(true);
-                            enImg.setChecked(false);
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(!zhImg.isChecked()){
+                        zhImg.setChecked(true);
+                        enImg.setChecked(false);
                     }
                 }
-
-
                 break;
         }
     }
@@ -267,7 +273,7 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
@@ -404,5 +410,32 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
                 }
             });
         }
+    }
+
+    public void powerSaveModeStatus(){
+        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(this, getString(R.string.philips_videolock_power_save_mode_title),
+                getString(R.string.philips_videolock_power_save_mode_content),
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF",new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 }

@@ -110,18 +110,22 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
                 break;
             case R.id.rl_real_time_period:
                 if(avi.isShow()) {
-                    try {
-                        if (wifiLockInfo.getPowerSave() == 0) {
-                            Intent intent = new Intent(this, WifiVideoLockRealTimePeriodActivity.class);
-                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_START, startTime);
-                            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_END, endTime);
-                            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_PERIOD, snoozeStartTime);
-                            startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_CODE);
-                            mPresenter.release();
-                        }else{
-                            powerStatusDialog();
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
+                        powerStatusDialog();
+                        return;
+                    }
+                    try {
+                        Intent intent = new Intent(this, WifiVideoLockRealTimePeriodActivity.class);
+                        intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_START, startTime);
+                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_END, endTime);
+                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_PERIOD, snoozeStartTime);
+                        startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_CODE);
+                        mPresenter.release();
                     }catch (Exception e){
 
                     }
@@ -130,31 +134,39 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
                 break;
             case R.id.rl_video_connect_open:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(ivVideoConnectOpen.isSelected()){
-                            createKeepAliveDialog();
-                        }else{
-                            ivVideoConnectOpen.setSelected(true);
-                            ivVideoConnectPower.setSelected(false);
-                            keepAliveStatus = 1;
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(ivVideoConnectOpen.isSelected()){
+                        createKeepAliveDialog();
+                    }else{
+                        ivVideoConnectOpen.setSelected(true);
+                        ivVideoConnectPower.setSelected(false);
+                        keepAliveStatus = 1;
                     }
                 }
                 break;
             case R.id.rl_video_connect_power:
                 if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        if(!ivVideoConnectPower.isSelected()){
-                            createKeepAliveDialog();
-                        }else{
-                            ivVideoConnectOpen.setSelected(true);
-                            ivVideoConnectPower.setSelected(false);
-                            keepAliveStatus = 0;
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        if(wifiLockInfo.getPower() < 30){
+                            powerSaveModeStatus();
+                            return;
                         }
-                    }else{
                         powerStatusDialog();
+                        return;
+                    }
+                    if(!ivVideoConnectPower.isSelected()){
+                        createKeepAliveDialog();
+                    }else{
+                        ivVideoConnectOpen.setSelected(true);
+                        ivVideoConnectPower.setSelected(false);
+                        keepAliveStatus = 0;
                     }
                 }
                 break;
@@ -162,31 +174,33 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
     }
 
     private void createKeepAliveDialog() {
-        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.activity_wifi_video_real_time_close),
-                getString(R.string.activity_wifi_video_real_time_close_no_remote),
-                getString(R.string.activity_wifi_video_real_time_belling_video), getString(R.string.philips_cancel), getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
+        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(this,
+                getString(R.string.philips_videolock_change_power_save_mode_title),
+                getString(R.string.philips_videolock_change_power_save_mode_content),
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF",new AlertDialogUtil.ClickListener() {
+            @Override
+            public void left() {
 
-                    }
+            }
 
-                    @Override
-                    public void right() {
-                        ivVideoConnectOpen.setSelected(false);
-                        keepAliveStatus = 0;
-                        ivVideoConnectPower.setSelected(true);
-                    }
+            @Override
+            public void right() {
+                ivVideoConnectOpen.setSelected(false);
+                keepAliveStatus = 0;
+                ivVideoConnectPower.setSelected(true);
+            }
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    }
+            }
 
-                    @Override
-                    public void afterTextChanged(String toString) {
+            @Override
+            public void afterTextChanged(String toString) {
 
-                    }
-                });
+            }
+        });
     }
 
     private boolean isEqual(int[] s1,int[] s2){
@@ -402,7 +416,7 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
@@ -541,5 +555,30 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
         }
     }
 
+    public void powerSaveModeStatus(){
+        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(this, getString(R.string.philips_videolock_power_save_mode_title),
+                getString(R.string.philips_videolock_power_save_mode_content),
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF",new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
 
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
+    }
 }

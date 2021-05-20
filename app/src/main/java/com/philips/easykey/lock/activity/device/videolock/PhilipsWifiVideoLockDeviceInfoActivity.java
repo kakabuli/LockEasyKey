@@ -264,41 +264,89 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
                 break;
             case R.id.rl_lock_model_firmware_version://门锁固件版本
                 if(wifiLockInfo.getIsAdmin() != 1) return;
+
+                if(wifiLockInfo.getPower() < 30){
+                    showLowBattery();
+                    return;
+                }
+
                 if(wifiLockInfo.getPowerSave() == 1){
                     powerStatusDialog();
                     return;
                 }
                 if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(lockFirwareInfo,getString(R.string.dialog_wifi_video_mcu_moudle_version) + lockFirwareVersion,wifiSN);
+                    updateDialog(lockFirwareInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
                 break;
             case R.id.rl_tv_lock_firware_number://视频模组版本
                 if(wifiLockInfo.getIsAdmin() != 1) return;
+
+                if(wifiLockInfo.getPower() < 30){
+                    showLowBattery();
+                    return;
+                }
+
                 if(wifiLockInfo.getPowerSave() == 1){
                     powerStatusDialog();
                     return;
                 }
                 if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoMoudleInfo,getString(R.string.dialog_wifi_video_moudle_version) + videoMcuVersion,wifiSN);
+                    updateDialog(videoMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
                 break;
             case R.id.rl_lock_wifi_firware_number://视频模组微控制器版本
                 if(wifiLockInfo.getIsAdmin() != 1) return;
+
+                if(wifiLockInfo.getPower() < 30){
+                    showLowBattery();
+                    return;
+                }
+
                 if(wifiLockInfo.getPowerSave() == 1){
                     powerStatusDialog();
                     return;
                 }
                 if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoMcuInfo,getString(R.string.dialog_wifi_video_mcu_moudle_version) + videoMcuVersion,wifiSN);
+                    updateDialog(videoMcuInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
                 break;
             case R.id.rl_child_system_firware_number://wifi固件版本
                 if(wifiLockInfo.getIsAdmin() != 1) return;
+
+                if(wifiLockInfo.getPower() < 30){
+                    showLowBattery();
+                    return;
+                }
+
                 if(wifiLockInfo.getPowerSave() == 1){
                     powerStatusDialog();
                     return;
                 }
                 if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoWifiMoudleInfo,getString(R.string.dialog_wifi_wifi_firmware_version) + videoWifiMoudleVersion,wifiSN);
+                    updateDialog(videoWifiMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
                 break;
         }
+    }
+
+    private void showLowBattery() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.philips_deviceinfo_update_ota_battery_low),
+                "#333333",getString(R.string.philips_cancel), getString(R.string.query),
+                "#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+                    }
+                });
     }
 
     @Override
@@ -463,9 +511,9 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     }
 
     public void updateDialog(CheckOTAResult.UpdateFileInfo appInfo,String content,String wifiSN){
-        AlertDialogUtil.getInstance().noEditTwoButtonDialogWidthDialog_color(this, "", getString(R.string.dialog_wifi_video_check_ota)
-                        + content+"\n" + getString(R.string.dialog_wifi_video_ota_update),
-                getString(R.string.philips_cancel),getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,content,
+                "#333333",getString(R.string.philips_cancel),getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF",new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -492,7 +540,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

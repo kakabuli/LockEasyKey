@@ -79,6 +79,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     private PhilipsVpHomeDevicesAdapter mVpHomeDevicesAdapter;
     private PhilipsRvHomeDeviceAdapter mRvHomeDeviceAdapter;
     private boolean isCardShow = true;
+    private boolean firstLoadOperationRecord = true;
 
     private int mCurrentTab = 0;
 
@@ -457,8 +458,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.set_failed), "\n"+ getString(R.string.dialog_wifi_video_power_status) +"\n",
-                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(getActivity(), getString(R.string.philips_videolock_device_fragment_power_save_mode_title),
+                getString(R.string.philips_videolock_device_fragment_power_save_mode_title),
+                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
+                "#0066A1","#FFFFFF", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -482,12 +485,14 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     }
 
     private void initOperationRecord() {
+        if(!firstLoadOperationRecord) return;
         for(HomeShowBean bean : MyApplication.getInstance().getHomeShowDevices()){
             if(bean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK
                     || bean.getDeviceType() == HomeShowBean.TYPE_WIFI_LOCK){
                 saveOperationRecordForNet(((WifiLockInfo)bean.getObject()).getWifiSN());
             }
         }
+        firstLoadOperationRecord = false;
     }
 
     private void saveOperationRecordForNet(String wifiSN) {

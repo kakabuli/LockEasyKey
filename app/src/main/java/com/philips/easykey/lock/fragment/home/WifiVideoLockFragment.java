@@ -583,7 +583,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(getActivity(), getString(R.string.philips_fragment_wifi_video_dialog_1), getString(R.string.philips_fragment_wifi_video_dialog_2),
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(getActivity(), getString(R.string.philips_deviceinfo__power_save_mode),"",
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

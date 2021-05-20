@@ -2532,6 +2532,15 @@
     <string name="philips_code_production_fail">生产失败</string>
     <string name="philips_code_no_permission">无权限</string>
     <string name="philips_code_resource_not_find">资源未找到</string>
+    <string name="philips_deviceinfo_update_ota_battery_low">门锁电量低于30%，不能升级的哦~</string>
+    <string name="philips_deviceinfo__power_save_mode">省电模式已开启，请开锁后再试</string>
+    <string name="philips_videolock_deviceinfo_update_ota">系统升级时，门锁请勿断电</string>
+    <string name="philips_videolock_change_power_save_mode_title">确定切换至省电模式吗？</string>
+    <string name="philips_videolock_change_power_save_mode_content">省电模式状态下，无法使用APP远程查看门外情况</string>
+    <string name="philips_videolock_power_save_mode_title">当前处于节能模式状态</string>
+    <string name="philips_videolock_power_save_mode_content">已开启节能模式，请更换电池后再试</string>
+    <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
+    <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">使用临时密码开门</string>
