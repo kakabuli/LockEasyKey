@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_width="@dimen/dp_43"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_21"
+        android:background="@drawable/retangle_15acf9_10"
+        android:gravity="center"
+        android:text="@string/skip"
+        android:visibility="gone"
+        android:textColor="#3FC4FC"
+        android:textSize="@dimen/sp_12" />
+
+    <ImageView
+        android:id="@+id/iv_guide"
+        android:layout_width="270pt"
+        android:layout_height="227pt"
+        app:srcCompat="@drawable/philips_guide_two"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="137pt"
+        />
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_above="@id/iv_guide"
+        android:layout_marginBottom="81pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/philips_guide_page_two_hint"
+        android:textColor="#0066A1"
+        android:textSize="16pt" />
+
+    <TextView
+        android:layout_above="@id/tv_1"
+        android:layout_marginBottom="12pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/philips_one_trigger_open"
+        android:textColor="#0066A1"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="30pt" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48pt"
+        android:layout_centerHorizontal="true"
+        >
+
+        <ImageView
+            android:layout_width="6pt"
+            android:layout_height="6pt"
+            android:background="@drawable/guide_indicator_select" />
+
+        <ImageView
+            android:layout_width="6pt"
+            android:layout_height="6pt"
+            android:layout_marginLeft="24pt"
+            android:background="@drawable/guide_indicator_select" />
+
+        <ImageView
+            android:layout_width="6pt"
+            android:layout_height="6pt"
+            android:layout_marginLeft="24pt"
+            android:background="@drawable/guide_indicator_unselect" />
+    </LinearLayout>
+</RelativeLayout>

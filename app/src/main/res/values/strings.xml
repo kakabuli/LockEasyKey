@@ -365,12 +365,12 @@
     <string name="device_connect_network_fail">设备联网失败</string>
     <string name="device_offline">设备离线</string>
     <string name="skip">跳过</string>
-    <string name="smart_unlock">智能解锁</string>
-    <string name="guide_page_one_hint">指纹、卡片、密码等多重开锁，安全快捷</string>
-    <string name="one_trigger_open">一触即开</string>
-    <string name="guide_page_two_hint">指纹识别，解锁开门，一步到位</string>
-    <string name="remote_control">远程监控</string>
-    <string name="guide_page_three_hint">实时了解门锁动态，守护您的家</string>
+    <string name="philips_smart_unlock">智能开锁</string>
+    <string name="philips_guide_page_one_hint">多重开锁方式，安全快捷</string>
+    <string name="philips_one_trigger_open">远程监控</string>
+    <string name="philips_guide_page_two_hint">一键生成密码，远程操控开门</string>
+    <string name="philips_remote_control">实时防御</string>
+    <string name="philips_guide_page_three_hint">触发报警功能，自动抓拍视频报警</string>
     <string name="philips_immediate_experience">立即体验</string>
     <string name="device_name">设备名称</string>
     <string name="message_free">消息免打扰</string>
@@ -2541,6 +2541,7 @@
     <string name="philips_videolock_power_save_mode_content">已开启节能模式，请更换电池后再试</string>
     <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
     <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
+    <string name="philips_splash_app_name">Philips EasyKey</string>
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">使用临时密码开门</string>
