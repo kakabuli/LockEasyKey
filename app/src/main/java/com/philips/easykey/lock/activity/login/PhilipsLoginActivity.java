@@ -183,7 +183,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
     @Override
     public void onDebouncingClick(@NonNull @NotNull View view) {
         if(view.getId() == R.id.tvForgotPwd) {
-            Intent intent = new Intent(this, ForgetPasswordActivity.class);
+            Intent intent = new Intent(this, PhilipsForgetPwdActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.tvRegister) {
             Intent intent = new Intent(this, RegisterActivity.class);

@@ -3,8 +3,10 @@ package com.philips.easykey.lock.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.choosecountry.CountryActivity;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -27,6 +30,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import io.reactivex.disposables.Disposable;
@@ -45,10 +49,14 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
     private TextView mTvGetCode;
     private Button mBtnComplete;
     private ImageView mIvShowOrHide;
+    private TextView mTvSelectCountry;
 
     private boolean isCountdown = false;
     private boolean isShowPwd = false;
 
+    private String mCountryCode = "86";
+
+    private final int mCountryReqCode = 1233;
     private final long mCountDownTotalTime = 60000;
 
     private final CountDownTimer mCountDownTimer = new CountDownTimer(mCountDownTotalTime, 1000) {
@@ -84,8 +92,12 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
         mEtPwd = findViewById(R.id.etPwd);
         mBtnComplete = findViewById(R.id.btnComplete);
         mIvShowOrHide = findViewById(R.id.ivShowOrHide);
+        mTvSelectCountry = findViewById(R.id.tvSelectCountry);
+        initTextChangeListener();
+        initAccountFromLocal();
 
-        applyDebouncingClickListener(findViewById(R.id.ivBack), mTvGetCode, mIvShowOrHide, mBtnComplete);
+        applyDebouncingClickListener(findViewById(R.id.ivBack), mTvGetCode, mIvShowOrHide,
+                mBtnComplete, mTvSelectCountry);
 
     }
 
@@ -99,15 +111,88 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
         if(view.getId() == R.id.ivBack) {
             finish();
         } else if(view.getId() == R.id.tvGetCode) {
-            if(isCountdown) {
-                return;
-            }
+            if(isCountdown) return;
             getVerification();
         } else if(view.getId() == R.id.ivShowOrHide) {
             changePasswordStatus();
         } else if(view.getId() == R.id.btnComplete) {
             resetPwd();
+        } else if(view.getId() == R.id.tvSelectCountry) {
+            Intent intent = new Intent(this, CountryActivity.class);
+            startActivityForResult(intent, mCountryReqCode);
         }
+    }
+
+    private void initAccountFromLocal() {
+        String phone = (String) SPUtils.get(SPUtils.PHONEN, "");
+        if (phone != null && phone.length() != 0) {
+            mEtPhoneOrMail.setText(phone);
+            mEtPhoneOrMail.setSelection(phone.length());
+        }
+    }
+
+    private void initTextChangeListener() {
+        mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableComplete(isCanEnableComplete());
+            }
+        });
+        mEtPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableComplete(isCanEnableComplete());
+            }
+        });
+        mEtVerificationCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableComplete(isCanEnableComplete());
+            }
+        });
+    }
+
+    private boolean isCanEnableComplete() {
+        String pwd = mEtPwd.getText().toString();
+        String code = mEtVerificationCode.getText().toString();
+        String account = mEtPhoneOrMail.getText().toString();
+        if(TextUtils.isEmpty(pwd)) {
+            return false;
+        }
+        if(TextUtils.isEmpty(code)) {
+            return false;
+        }
+        return !TextUtils.isEmpty(account);
     }
 
     private void changePasswordStatus() {
@@ -120,19 +205,21 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 12:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    String countryName = bundle.getString("countryName");
-                    String countryNumber = bundle.getString("countryNumber");
-                    LogUtils.d("davi 选择的国家==" + countryName + " 区号==" + countryNumber);
-//                    tvAreaCode.setText(countryNumber);
-//                    tvCountry.setText(countryName);
-                }
-                break;
+        if (requestCode == mCountryReqCode) {
+            if (resultCode == RESULT_OK) {
+                Bundle bundle = data.getExtras();
+                String countryName = bundle.getString("countryName");
+                mCountryCode = bundle.getString("countryNumber");
+                LogUtils.d("davi 选择的国家==" + countryName + " 区号==" + mCountryCode);
+                mTvSelectCountry.setText(countryName);
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void enableComplete(boolean enable) {
+        mBtnComplete.setEnabled(enable);
+        mBtnComplete.setBackgroundResource(enable?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
     //获取验证码
@@ -148,9 +235,8 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
                     return;
                 } else {
-                    // TODO: 2021/5/13 获取国家代码
-//                    String countryCode = tvAreaCode.getText().toString().trim().replace("+", "");
-//                    sendRandomByPhone(account, countryCode);
+                    String countryCode = mCountryCode.trim().replace("+", "");
+                    sendRandomByPhone(account, countryCode);
                 }
             } else {
                 //邮箱
@@ -201,9 +287,8 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                     return;
                 }
                 showLoading("");
-                // TODO: 2021/5/13 国家代码
-//                String countryCode = tvAreaCode.getText().toString().trim().replace("+", "");
-//                resetPassword(countryCode + account, pwd,1, code);
+                String countryCode = mCountryCode.trim().replace("+", "");
+                resetPassword(countryCode + account, pwd,1, code);
             } else {
                 LogUtils.d("邮箱注册：" + RegexUtils.isEmail(account));
                 if (RegexUtils.isEmail(account)) {
@@ -211,7 +296,6 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                     resetPassword(account, pwd,2, code);
                 } else {
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
-                    return;
                 }
             }
 
@@ -282,7 +366,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
                     @Override
                     public void onSubscribe1(Disposable d) {
-//                        compositeDisposable.add(d);
+
                     }
                 });
 
@@ -312,7 +396,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
                     @Override
                     public void onSubscribe1(Disposable d) {
-//                        compositeDisposable.add(d);
+
                     }
                 });
 
@@ -340,7 +424,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
                     @Override
                     public void onSubscribe1(Disposable d) {
-//                        compositeDisposable.add(d);
+
                     }
                 });
     }

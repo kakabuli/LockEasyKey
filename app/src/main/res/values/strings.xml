@@ -2644,5 +2644,6 @@
     <string name="philips_wifi_video_lock_alarm_type_96">有人按门铃</string>
     <!--112 pir动作-->
     <string name="philips_wifi_video_lock_alarm_type_112">发生移动告警</string>
+    <string name="philips_china">中国</string>
 
 </resources>
