@@ -3,6 +3,7 @@ package com.philips.easykey.lock.activity.login;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -57,6 +58,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
     private Button mBtnLogin;
     private TextView mTvSelectCountry;
     private ImageView mIvShowOrHide;
+    private EditText mEtVerificationCode;
+    private TextView mTvGetCode;
+    private ImageView mIvPhone;
+    private TextView mTvPhone;
+    private ImageView mIvVerification;
+    private TextView mTvCode;
 
     private final int mCountryReqCode = 1233;
     private String mCountryCode = "86";
@@ -64,6 +71,23 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
     private boolean isShowDialog = false;
 
     private boolean isShowPwd = false;
+    private boolean isCountdown = false;
+
+    private final long mCountDownTotalTime = 60000;
+
+    private final CountDownTimer mCountDownTimer = new CountDownTimer(mCountDownTotalTime, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            String value = String.valueOf((int) (millisUntilFinished / 1000));
+            mTvGetCode.setText(value);
+        }
+
+        @Override
+        public void onFinish() {
+            isCountdown = false;
+            mTvGetCode.setText(getString(R.string.philips_get_verification));
+        }
+    };
 
     @Override
     public void initData(@Nullable Bundle bundle) {
@@ -82,6 +106,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         mBtnLogin = findViewById(R.id.btnLogin);
         mTvSelectCountry = findViewById(R.id.tvSelectCountry);
         mIvShowOrHide = findViewById(R.id.ivShowOrHide);
+        mTvGetCode = findViewById(R.id.tvGetCode);
+        mEtVerificationCode = findViewById(R.id.etVerificationCode);
+        mIvPhone = findViewById(R.id.ivPhone);
+        mTvPhone = findViewById(R.id.tvPhone);
+        mIvVerification = findViewById(R.id.ivVerification);
+        mTvCode = findViewById(R.id.tvCode);
 
         changeLoginBtnStyle(false);
         mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
@@ -129,8 +159,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         });
 
         applyDebouncingClickListener(findViewById(R.id.tvForgotPwd), findViewById(R.id.tvRegister),
-                mBtnLogin, findViewById(R.id.ivVerification), findViewById(R.id.ivWechat),
-                mTvSelectCountry, mIvShowOrHide);
+                mBtnLogin, mIvVerification, findViewById(R.id.ivWechat),
+                mTvSelectCountry, mIvShowOrHide, mTvCode);
         setStatusBarColor(R.color.white);
 
     }
@@ -163,12 +193,21 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         } else if(view.getId() == R.id.ivWechat) {
             // TODO: 2021/5/12 微信登录
         } else if(view.getId() == R.id.ivVerification) {
-            // TODO: 2021/5/12 验证码登录
+            // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
+//            changeToVCodeLogin();
+        } else if(view.getId() == R.id.ivPhone){
+            changeToAccountLogin();
         } else if(view.getId() == R.id.tvSelectCountry) {
             Intent intent = new Intent(this, CountryActivity.class);
             startActivityForResult(intent, mCountryReqCode);
         } else if(view.getId() == R.id.ivShowOrHide) {
             changePasswordStatus();
+        } else if(view.getId() == R.id.tvCode) {
+            if(mCountDownTimer != null) {
+                mCountDownTimer.start();
+                isCountdown = true;
+                // TODO: 2021/5/20 验证码登录
+            }
         }
     }
 
@@ -185,6 +224,32 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private boolean isVCodeLogin = false;
+
+    private void changeToVCodeLogin() {
+        isVCodeLogin = true;
+        mEtVerificationCode.setVisibility(View.VISIBLE);
+        mTvGetCode.setVisibility(View.VISIBLE);
+        mEtPwd.setVisibility(View.INVISIBLE);
+        mIvShowOrHide.setVisibility(View.INVISIBLE);
+        mIvPhone.setVisibility(View.VISIBLE);
+        mTvPhone.setVisibility(View.VISIBLE);
+        mIvVerification.setVisibility(View.GONE);
+        mTvCode.setVisibility(View.GONE);
+    }
+
+    private void changeToAccountLogin() {
+        isVCodeLogin = false;
+        mEtVerificationCode.setVisibility(View.GONE);
+        mTvGetCode.setVisibility(View.GONE);
+        mEtPwd.setVisibility(View.VISIBLE);
+        mIvShowOrHide.setVisibility(View.VISIBLE);
+        mIvPhone.setVisibility(View.GONE);
+        mTvPhone.setVisibility(View.GONE);
+        mIvVerification.setVisibility(View.VISIBLE);
+        mTvCode.setVisibility(View.VISIBLE);
     }
 
     private void changeLoginBtnStyle(boolean isCanLogin) {
