@@ -186,7 +186,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
             Intent intent = new Intent(this, PhilipsForgetPwdActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.tvRegister) {
-            Intent intent = new Intent(this, RegisterActivity.class);
+            Intent intent = new Intent(this, PhilipsRegisterActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.btnLogin) {
             login();
