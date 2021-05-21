@@ -172,6 +172,18 @@ public class WiFiLockPassword {
         public void setItems(List<String> items) {
             this.items = items;
         }
+
+        @Override
+        public String toString() {
+            return "PwdListBean{" +
+                    "createTime=" + createTime +
+                    ", endTime=" + endTime +
+                    ", num=" + num +
+                    ", startTime=" + startTime +
+                    ", type=" + type +
+                    ", items=" + items +
+                    '}';
+        }
     }
 
     public static class FingerprintListBean {
@@ -205,6 +217,14 @@ public class WiFiLockPassword {
 
         public void setNum(int num) {
             this.num = num;
+        }
+
+        @Override
+        public String toString() {
+            return "FingerprintListBean{" +
+                    "createTime=" + createTime +
+                    ", num=" + num +
+                    '}';
         }
     }
 

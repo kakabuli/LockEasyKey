@@ -1,6 +1,8 @@
 package com.philips.easykey.lock.activity.device.videolock;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.philips.easykey.lock.R;
@@ -12,6 +14,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends AppC
 
 
     private ImageView mBack;
+    private EditText mEtReceiver;
     private String wifiSn = "";
 
 
@@ -27,11 +30,15 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends AppC
 
     private void initData() {
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
+
     }
 
     private void initListener() {
 
         mBack.setOnClickListener(v -> {
+            Intent intent = new Intent(this,PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity.class);
+            intent.putExtra("duress_alarm_phone",mEtReceiver.getText().toString().trim());
+            setResult(RESULT_OK,intent);
             finish();
         });
     }
@@ -42,6 +49,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends AppC
 
     private void initView() {
         mBack = findViewById(R.id.back);
+        mEtReceiver = findViewById(R.id.et_receiver);
     }
 
 }
