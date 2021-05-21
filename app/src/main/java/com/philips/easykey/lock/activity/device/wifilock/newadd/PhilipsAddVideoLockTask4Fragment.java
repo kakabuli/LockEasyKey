@@ -32,6 +32,8 @@ public class PhilipsAddVideoLockTask4Fragment extends Fragment {
     private TextView mTvCount;
     private PhilipsWifiVideoCircleProgress mCircleProgress;
 
+    private PhilipsAddVideoLockActivity mAddVideoLockActivity;
+
     public static PhilipsAddVideoLockTask4Fragment getInstance() {
         return new PhilipsAddVideoLockTask4Fragment();
     }
@@ -43,6 +45,9 @@ public class PhilipsAddVideoLockTask4Fragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.philips_fragment_add_video_lock_task4, container, false);
         initTaskUI(root);
+        if(getActivity() instanceof PhilipsAddVideoLockActivity) {
+            mAddVideoLockActivity = (PhilipsAddVideoLockActivity) getActivity();
+        }
         return root;
     }
 
@@ -95,11 +100,17 @@ public class PhilipsAddVideoLockTask4Fragment extends Fragment {
             if(mCircleProgress != null) {
                 mCircleProgress.updateProcess(100-sec);
             }
+            if(sec == 0) {
+                // 超时失败
+                if(mAddVideoLockActivity != null) {
+                    mAddVideoLockActivity.showFirstTask4Fail();
+                }
+            }
         }
 
         @Override
         public void onFinish() {
-            // TODO: 2021/5/8 显示失败的页面
+
         }
     };
 
