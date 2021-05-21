@@ -63,7 +63,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     public String mWifiName;
     private String mWifiPwd;
     private String mRandomCode;
-    private int mTimes = 1;
+    private int mTimes = 0;
 
     private WifiLockVideoBindBean mWifiLockVideoBindBean;
     private PhilipsOpenLocationDialog mOpenLocationDialog;
@@ -260,6 +260,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         FragmentUtils.showHide(2, mFragments);
         getDeviceBindingStatus();
         if(mFragments.get(2) instanceof PhilipsAddVideoLockTask3Fragment) {
+            ((PhilipsAddVideoLockTask3Fragment)mFragments.get(2)).initUIData();
             ((PhilipsAddVideoLockTask3Fragment)mFragments.get(2)).refreshQrCode();
         }
     }
@@ -294,6 +295,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mTvTitle.setText(R.string.philips_confirm_management_pwd);
         mIvHelp.setVisibility(View.GONE);
+        mTimes = 0;
         FragmentUtils.showHide(4, mFragments);
     }
 

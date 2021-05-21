@@ -134,7 +134,7 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
         new Handler().postDelayed(() -> {
             if(mMessageDialog != null){
                 mMessageDialog.dismiss();
-                getActivity().finish();
+                if (getActivity()!=null) getActivity().finish();
             }
         }, 3000); // 延迟3秒消失
     }

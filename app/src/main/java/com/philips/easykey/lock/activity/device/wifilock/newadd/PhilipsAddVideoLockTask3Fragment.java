@@ -67,6 +67,11 @@ public class PhilipsAddVideoLockTask3Fragment extends Fragment {
 
     }
 
+    public void initUIData() {
+        isChoose = false;
+        refreshNext();
+    }
+
     public void refreshQrCode() {
         if(mAddVideoLockActivity != null) {
             Bitmap qrCode = mAddVideoLockActivity.getQrCode();
@@ -75,7 +80,6 @@ public class PhilipsAddVideoLockTask3Fragment extends Fragment {
             }
         }
     }
-
 
     private void refreshNext() {
         mBtnNext.setBackgroundResource(isChoose?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_invalid_bg);
