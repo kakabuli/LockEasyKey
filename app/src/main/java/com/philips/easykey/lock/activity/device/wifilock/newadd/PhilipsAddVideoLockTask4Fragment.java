@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.widget.PhilipsWifiVideoCircleProgress;
 
