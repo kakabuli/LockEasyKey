@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David on 2019/4/15
  */
-public class GuidePageThreeFragment extends Fragment implements View.OnClickListener {
+public class PhilipsGuidePageThreeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.tv_skip)
     TextView tvSkip;
     @BindView(R.id.btn)
@@ -31,7 +31,7 @@ public class GuidePageThreeFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_guide_page_three, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_guide_page_three, container, false);
         }
         ButterKnife.bind(this, mView);
         tvSkip.setOnClickListener(this);

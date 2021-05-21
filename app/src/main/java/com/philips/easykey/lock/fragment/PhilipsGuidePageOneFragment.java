@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David on 2019/4/15
  */
-public class GuidePageTwoFragment extends Fragment implements View.OnClickListener {
+public class PhilipsGuidePageOneFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.tv_skip)
     TextView tvSkip;
     private View mView;
@@ -28,7 +28,7 @@ public class GuidePageTwoFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_guide_page_two, container, false);
+            mView = inflater.inflate(R.layout.philips_fragment_guide_page_one, container, false);
         }
         ButterKnife.bind(this, mView);
         tvSkip.setOnClickListener(this);
@@ -45,9 +45,6 @@ public class GuidePageTwoFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.tv_skip:
                 startActivity(new Intent(getActivity(), PhilipsLoginActivity.class));
-                if(getActivity() == null) {
-                    return;
-                }
                 getActivity().finish();
                 break;
         }

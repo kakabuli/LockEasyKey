@@ -286,7 +286,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name=".activity.PhilipsWelcomeActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -508,7 +508,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.login.GuidePageActivity"
+            android:name=".activity.login.PhilipsGuidePageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity

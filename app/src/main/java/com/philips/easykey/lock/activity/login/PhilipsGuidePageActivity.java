@@ -7,10 +7,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.fragment.GuidePageOneFragment;
-import com.philips.easykey.lock.fragment.GuidePageThreeFragment;
-import com.philips.easykey.lock.fragment.GuidePageTwoFragment;
+import com.philips.easykey.lock.fragment.PhilipsGuidePageOneFragment;
+import com.philips.easykey.lock.fragment.PhilipsGuidePageThreeFragment;
+import com.philips.easykey.lock.fragment.PhilipsGuidePageTwoFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by David on 2019/4/15
  */
-public class GuidePageActivity extends BaseAddToApplicationActivity implements ViewPager.OnPageChangeListener {
+public class PhilipsGuidePageActivity extends BaseAddToApplicationActivity implements ViewPager.OnPageChangeListener {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
     private List<Fragment> fragments;
@@ -31,15 +32,16 @@ public class GuidePageActivity extends BaseAddToApplicationActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_page);
         ButterKnife.bind(this);
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
         initView();
     }
 
     private void initView() {
 
         fragments = new ArrayList<Fragment>();
-        fragments.add(new GuidePageOneFragment());
-        fragments.add(new GuidePageTwoFragment());
-        fragments.add(new GuidePageThreeFragment());
+        fragments.add(new PhilipsGuidePageOneFragment());
+        fragments.add(new PhilipsGuidePageTwoFragment());
+        fragments.add(new PhilipsGuidePageThreeFragment());
 //        pager.setOffscreenPageLimit(3);
 
         viewPager.setAdapter(new FragmentPagerAdapter(this.getSupportFragmentManager()) {

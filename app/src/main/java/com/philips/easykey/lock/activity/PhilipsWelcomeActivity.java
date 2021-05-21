@@ -12,7 +12,7 @@ import android.util.Log;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
-import com.philips.easykey.lock.activity.login.GuidePageActivity;
+import com.philips.easykey.lock.activity.login.PhilipsGuidePageActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyFingerPrintActivity;
 import com.philips.easykey.lock.activity.login.PersonalVerifyGesturePasswordActivity;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
@@ -28,6 +28,7 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 import com.philips.easykey.lock.mvp.view.ISplashView;
@@ -37,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<ISplashView>> implements ISplashView {
+public class PhilipsWelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<ISplashView>> implements ISplashView {
     Handler handler = new Handler();
     private PackageInfo packageInfo;
     private int mVersionCode;
@@ -54,9 +55,9 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtils.d("WelcomeActivity启动 ");
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.philips_activity_splash);
 //        CheckLanguageUtil.getInstance().checkLag();//语言
-        mainIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+        mainIntent = new Intent(PhilipsWelcomeActivity.this, MainActivity.class);
         MyLog.getInstance().save("onCreate..............:" + MainActivity.isRunning);
         executeGeTui();
         initData();
@@ -65,7 +66,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
 
         if(TextUtils.equals(func,"doorbell") &&!TextUtils.isEmpty(wifiSN)){
             if((time + 180000) > System.currentTimeMillis()){
-                Intent intent = new Intent(WelcomeActivity.this, PhilipsWifiVideoLockCallingActivity.class);
+                Intent intent = new Intent(PhilipsWelcomeActivity.this, PhilipsWifiVideoLockCallingActivity.class);
                 intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,1);
                 intent.putExtra("VIDEO_CALLING_IS_MAINACTIVITY",true);
                 intent.putExtra(KeyConstants.WIFI_SN,wifiSN);
@@ -91,19 +92,19 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                         if (!showGuidePage) {
                             //第一次
                             SPUtils.putProtect(KeyConstants.SHOW_GUIDE_PAGE, true);
-                            startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
+                            startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsGuidePageActivity.class));
                             finish();
                         } else {
-                            startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
+                            startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsLoginActivity.class));
                             finish();
                         }
                     } else if (!TextUtils.isEmpty(fingerPwd)) {
                         //存在指纹密码
-                        startActivity(new Intent(WelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
+                        startActivity(new Intent(PhilipsWelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
                         finish();
                     } else if (!TextUtils.isEmpty(pwd)) {
                         //存在手势密码
-                        Intent intent = new Intent(WelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
+                        Intent intent = new Intent(PhilipsWelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
                         intent.putExtra(KeyConstants.SOURCE, "WelcomeActivity");
                         startActivity(intent);
                         finish();
@@ -122,7 +123,7 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
             currentTime = System.currentTimeMillis();
         }
         LogUtils.d("WelcomeActivity启动完成 ");
-
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.c1475A4);
     }
 
     @Override
@@ -185,19 +186,19 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
                     if (!showGuidePage) {
                         //第一次
                         SPUtils.putProtect(KeyConstants.SHOW_GUIDE_PAGE, true);
-                        startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
+                        startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsGuidePageActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
+                        startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsLoginActivity.class));
                         finish();
                     }
                 } else if (!TextUtils.isEmpty(fingerPwd)) {
                     //存在指纹密码
-                    startActivity(new Intent(WelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
+                    startActivity(new Intent(PhilipsWelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
                     finish();
                 } else if (!TextUtils.isEmpty(pwd)) {
                     //存在手势密码
-                    Intent intent = new Intent(WelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
+                    Intent intent = new Intent(PhilipsWelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
                     intent.putExtra(KeyConstants.SOURCE, "WelcomeActivity");
                     startActivity(intent);
                     finish();
@@ -223,19 +224,19 @@ public class WelcomeActivity extends BaseActivity<ISplashView, SplashPresenter<I
             if (!showGuidePage) {
                 //第一次
                 SPUtils.putProtect(KeyConstants.SHOW_GUIDE_PAGE, true);
-                startActivity(new Intent(WelcomeActivity.this, GuidePageActivity.class));
+                startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsGuidePageActivity.class));
                 finish();
             } else {
-                startActivity(new Intent(WelcomeActivity.this, PhilipsLoginActivity.class));
+                startActivity(new Intent(PhilipsWelcomeActivity.this, PhilipsLoginActivity.class));
                 finish();
             }
         } else if (!TextUtils.isEmpty(fingerPwd)) {
             //存在指纹密码
-            startActivity(new Intent(WelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
+            startActivity(new Intent(PhilipsWelcomeActivity.this, PersonalVerifyFingerPrintActivity.class));
             finish();
         } else if (!TextUtils.isEmpty(pwd)) {
             //存在手势密码
-            Intent intent = new Intent(WelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
+            Intent intent = new Intent(PhilipsWelcomeActivity.this, PersonalVerifyGesturePasswordActivity.class);
             intent.putExtra(KeyConstants.SOURCE, "WelcomeActivity");
             startActivity(intent);
             finish();
