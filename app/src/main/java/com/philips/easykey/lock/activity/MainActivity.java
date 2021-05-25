@@ -23,12 +23,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.gson.Gson;
+import com.huawei.agconnect.config.AGConnectServicesConfig;
+import com.huawei.hms.aaid.HmsInstanceId;
+import com.huawei.hms.common.ApiException;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
@@ -374,7 +378,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
               String huawei = (String) SPUtils.get(GeTui.HUAWEI_KEY, "");
             if (TextUtils.isEmpty(huawei)) {
                 // 初始化,生成token失败
-//                getToken();
+                getToken();
             } else {
                 uploadToken(3,huawei);
             }
@@ -744,7 +748,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
      * If there is no local AAID, this method will automatically generate an AAID when it is called because the Huawei Push server needs to generate a token based on the AAID.
      * This method is a synchronous method, and you cannot call it in the main thread. Otherwise, the main thread may be blocked.
      */
-    /*private void getToken() {
+    private void getToken() {
         new Thread() {
             @Override
             public void run() {
@@ -761,7 +765,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 }
             }
         }.start();
-    }*/
+    }
 
     @Override
     protected void onDestroy() {
