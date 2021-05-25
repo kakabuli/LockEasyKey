@@ -30,7 +30,7 @@ import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.publiclibrary.ota.OtaBaseActivity;
 import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.widget.CircleProgress;
 import com.philips.easykey.lock.widget.OtaMutiProgress;

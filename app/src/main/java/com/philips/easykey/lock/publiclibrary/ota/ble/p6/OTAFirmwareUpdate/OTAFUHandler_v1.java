@@ -48,7 +48,7 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.p6.CommonUtils.Constants;
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.CommonUtils.ConvertUtils;
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.CommonUtils.Utils;
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.IUpdateStatusListener;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 import java.io.File;

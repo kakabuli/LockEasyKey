@@ -3,7 +3,7 @@ package com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockAlramView;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockAlarmEventDao;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockAlarmEventDaoDao;
 

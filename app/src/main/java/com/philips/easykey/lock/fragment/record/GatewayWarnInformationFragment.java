@@ -21,7 +21,7 @@ import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockAl
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockAlramView;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockAlarmEventDao;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

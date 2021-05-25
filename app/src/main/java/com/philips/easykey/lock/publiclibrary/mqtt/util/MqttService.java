@@ -19,7 +19,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.PublishResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.DoorbellingResult;
 import com.philips.easykey.lock.utils.AppUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.blankj.utilcode.util.ToastUtils;
 

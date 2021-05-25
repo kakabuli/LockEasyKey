@@ -6,7 +6,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockSafeModeView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;

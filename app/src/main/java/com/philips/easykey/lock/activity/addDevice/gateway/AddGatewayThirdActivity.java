@@ -14,7 +14,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.GatewayBindPresenter;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.BindGatewayResultBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceGatewayBindListView;

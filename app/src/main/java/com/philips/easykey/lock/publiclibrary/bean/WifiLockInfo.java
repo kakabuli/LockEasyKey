@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.bean;
 
 import com.google.gson.annotations.SerializedName;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.convert.SingleFireSwitchInfoConvert;
 import com.philips.easykey.lock.utils.greenDao.convert.WifiVideoAliveTimeBeanConvert;
 import com.philips.easykey.lock.utils.greenDao.convert.WifiVideoLockSetPirConvert;

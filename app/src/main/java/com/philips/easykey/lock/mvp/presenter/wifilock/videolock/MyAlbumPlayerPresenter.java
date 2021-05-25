@@ -27,7 +27,7 @@ import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectError;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectJsonError;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.philips.easykey.lock.publiclibrary.xm.bean.DeviceInfo;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.AudioFrame;

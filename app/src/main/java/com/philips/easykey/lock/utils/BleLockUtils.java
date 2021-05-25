@@ -2,6 +2,7 @@ package com.philips.easykey.lock.utils;
 
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothLockFunctionBean;

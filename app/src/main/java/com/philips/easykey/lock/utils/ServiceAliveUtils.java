@@ -5,7 +5,7 @@ import android.app.Service;
 import android.content.Context;
 
 import com.philips.easykey.lock.MyApplication;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.Iterator;
 import java.util.List;

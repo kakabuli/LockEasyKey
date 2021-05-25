@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 
 import java.io.IOException;

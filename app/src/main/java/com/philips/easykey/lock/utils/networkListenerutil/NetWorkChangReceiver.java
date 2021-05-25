@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.NotifyRefreshActivity;
 import java.util.List;

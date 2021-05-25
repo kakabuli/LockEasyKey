@@ -2,7 +2,7 @@ package com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordManagerView;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 
 import java.util.ArrayList;

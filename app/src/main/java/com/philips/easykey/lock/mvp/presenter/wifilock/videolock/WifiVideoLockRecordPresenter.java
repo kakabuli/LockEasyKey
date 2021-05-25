@@ -8,7 +8,7 @@ import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoRecordView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.philips.easykey.lock.publiclibrary.xm.bean.DeviceInfo;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.AudioFrame;
 import com.xmitech.sdk.H264Frame;

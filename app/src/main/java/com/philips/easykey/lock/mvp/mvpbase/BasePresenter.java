@@ -8,7 +8,7 @@ import android.os.Looper;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.lang.ref.WeakReference;
 

@@ -36,7 +36,7 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.p6.OTAFirmwareUpdate.OTAFU
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.OTAFirmwareUpdate.OTAFUHandler_v1;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.GpsUtil;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.CircleProgress;
 import com.philips.easykey.lock.widget.OtaMutiProgress;

@@ -14,7 +14,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordLis
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;

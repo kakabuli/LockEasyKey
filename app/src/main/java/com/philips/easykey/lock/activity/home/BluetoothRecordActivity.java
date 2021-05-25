@@ -19,7 +19,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BlePresenter;
 import com.philips.easykey.lock.mvp.mvpbase.IBleView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

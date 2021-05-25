@@ -22,7 +22,7 @@ import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockRecordView;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.SelectOpenLockResultBean;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockRecord;

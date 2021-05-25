@@ -31,7 +31,7 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.dialog.InfoDialog;
 
 import java.util.ArrayList;

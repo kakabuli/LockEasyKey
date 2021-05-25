@@ -23,7 +23,7 @@ import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.WiFiLockChooseT
 import com.philips.easykey.lock.mvp.view.deviceaddview.WiFiLockChooseToAddView;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;

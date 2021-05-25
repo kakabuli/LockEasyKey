@@ -5,7 +5,7 @@ import com.philips.easykey.lock.mvp.view.IFaceOtaView;
 import com.philips.easykey.lock.publiclibrary.ble.BleCommandFactory;
 import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleDataBean;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 import java.util.concurrent.TimeUnit;

@@ -18,7 +18,7 @@ import com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter.Clot
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddTourthView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.DropEditText;

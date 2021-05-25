@@ -28,7 +28,7 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
 import com.philips.easykey.lock.publiclibrary.ota.face.FaceOtaActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.liulishuo.filedownloader.FileDownloader;

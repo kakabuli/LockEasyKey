@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.utils;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

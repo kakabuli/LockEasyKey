@@ -13,7 +13,7 @@ import com.philips.easykey.lock.publiclibrary.ota.ble.ti.Ti2FileOtaUpgradeActivi
 import com.philips.easykey.lock.publiclibrary.ota.ble.ti.TiOtaUpgradeActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 

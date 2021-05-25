@@ -8,7 +8,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.DeleteMessageResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetMessageResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalMessageView;
 
 

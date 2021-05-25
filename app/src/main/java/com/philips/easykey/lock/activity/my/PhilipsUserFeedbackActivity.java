@@ -21,7 +21,7 @@ import com.philips.easykey.lock.mvp.presenter.UserFeedbackPresenter;
 import com.philips.easykey.lock.mvp.view.IUserFeedbackView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

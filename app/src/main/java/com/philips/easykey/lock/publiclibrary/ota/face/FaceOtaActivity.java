@@ -22,7 +22,7 @@ import com.philips.easykey.lock.mvp.view.IFaceOtaView;
 import com.philips.easykey.lock.publiclibrary.ota.DownFileUtils;
 import com.philips.easykey.lock.publiclibrary.ota.ble.OtaConstants;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 
 import java.io.File;

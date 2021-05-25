@@ -22,7 +22,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.WifiLockVid
 import com.philips.easykey.lock.publiclibrary.xm.bean.QrCodeBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.QrCodeUtils;
 
 import butterknife.BindView;

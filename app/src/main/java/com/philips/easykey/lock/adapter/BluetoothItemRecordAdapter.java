@@ -14,7 +14,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.BluetoothItemRecordBean;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 

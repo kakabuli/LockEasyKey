@@ -2,7 +2,7 @@ package com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter;
 
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordManagerView;
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordShareView;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 public class GatewayLockPasswordSharePresenter<T> extends GatewayLockPasswordPresenter<IGatewayLockPasswordShareView> {
 

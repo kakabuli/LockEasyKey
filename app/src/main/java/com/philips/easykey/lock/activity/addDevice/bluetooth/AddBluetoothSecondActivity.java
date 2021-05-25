@@ -14,7 +14,7 @@ import com.philips.easykey.lock.mvp.presenter.ble.BindBleSecondPresenter;
 import com.philips.easykey.lock.mvp.view.IBindBleSecondView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
