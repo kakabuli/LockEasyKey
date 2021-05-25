@@ -21,6 +21,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LogUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
@@ -188,7 +189,12 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             mPresenter.checkOtaInfo(wifiSN,wifiLockInfo.getWifiVersion() + "",1);
             mPresenter.checkOtaInfo(wifiSN,wifiLockInfo.getMcu_version() + "",5);
             mPresenter.checkOtaInfo(wifiSN,wifiLockInfo.getCamera_version() + "",4);
-            mPresenter.checkOtaInfo(wifiSN, wifiLockInfo.getLockFirmwareVersion() + "", 2);
+            if(BleLockUtils.isSupportPanelMultiOTA(wifiLockInfo.getFunctionSet())){
+                mPresenter.checkOtaInfo(wifiSN, wifiLockInfo.getBackPanelVersion() + "", 7);
+                mPresenter.checkOtaInfo(wifiSN, wifiLockInfo.getFrontPanelVersion() + "", 6);
+            }else{
+                mPresenter.checkOtaInfo(wifiSN, wifiLockInfo.getLockFirmwareVersion() + "", 2);
+            }
         }
     }
 
@@ -438,6 +444,10 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
                 mImgLockCheckWifiFirwareNumber.setVisibility(View.VISIBLE);
                 videoMcuVersion = version;
                 videoMcuInfo = appInfo;
+                break;
+            case 6:
+                break;
+            case 7:
                 break;
         }
     }

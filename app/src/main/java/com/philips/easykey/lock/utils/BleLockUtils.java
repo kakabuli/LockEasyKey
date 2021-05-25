@@ -550,6 +550,45 @@ public class BleLockUtils {
         return integers.contains(63);
     }
 
+    public static boolean isSupportVideoPanelMultiOTA(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(87);
+    }
+
+    public static boolean isSupportLockOTA(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(20);
+    }
+
+    public static boolean isSupportSinglePanelOTA(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(86);
+    }
+
     /**
      * 根据功能集判断显示蓝牙锁的界面
      *
