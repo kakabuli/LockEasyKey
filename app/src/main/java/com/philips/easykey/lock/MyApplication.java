@@ -8,6 +8,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
@@ -71,9 +73,11 @@ import com.xmitech.sdk.log.LogCodec;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.greendao.database.Database;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -150,6 +154,33 @@ public class MyApplication extends Application {
         //去掉在Android 9以上调用反射警告提醒弹窗 （Detected problems with API compatibility(visit g.co/dev/appcompat for more info)
         closeAndroidPDialog();
         setRxJavaErrorHandler();
+        initFont();
+    }
+
+    private void initFont() {
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = getResources().getConfiguration().locale;
+        }
+        Typeface typeface;
+        if(locale.getLanguage().startsWith("zh")){
+            typeface = Typeface.createFromAsset(getAssets(),"fonts/msyh.ttc");
+        }else{
+            typeface = Typeface.createFromAsset(getAssets(),"fonts/centrale_sans_book.otf");
+        }
+        Field field = null;
+        try {
+            field = Typeface.class.getDeclaredField("MONOSPACE");
+            field.setAccessible(true);
+            field.set(null,typeface);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void initMMKV(MyApplication myApplication) {

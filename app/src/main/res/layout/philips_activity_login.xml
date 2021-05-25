@@ -12,10 +12,10 @@
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50pt"
+        app:layout_constraintBottom_toTopOf="@+id/tvBrandName"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="81pt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/philips_login_logo" />
 
     <TextView
