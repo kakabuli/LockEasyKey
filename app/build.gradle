@@ -39,8 +39,8 @@ android {
 
 //                HUAWEI_APP_ID   : "100038281",
 
-                XIAOMI_APP_ID   : "2882303761517594031",
-                XIAOMI_APP_KEY  : "5931759473031",
+                XIAOMI_APP_ID   : "2882303761519924663",
+                XIAOMI_APP_KEY  : "5861992467663",
 
                 OPPO_APP_KEY    : "d96Ms9tgI2gwkcc0g4K8gWocc",
                 OPPO_APP_SECRET : "24205939F1fedeF4a5734af4cAB30612",
@@ -106,6 +106,7 @@ android {
 
     buildTypes {
         release {
+            debuggable rootProject.ext.isDeBug
             minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
