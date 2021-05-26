@@ -40,7 +40,7 @@ import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.Rom;

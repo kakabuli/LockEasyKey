@@ -14,7 +14,7 @@ import com.philips.easykey.lock.publiclibrary.ble.bean.OperationLockRecord;
 import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 import java.util.ArrayList;

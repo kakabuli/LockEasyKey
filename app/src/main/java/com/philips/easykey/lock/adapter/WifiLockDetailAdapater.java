@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.WifiLockFunctionBean;
 import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 

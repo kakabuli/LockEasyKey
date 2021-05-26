@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.utils;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.zip.CRC32;

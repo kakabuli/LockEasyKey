@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalVerifyFingerPrintView;
 
 import io.reactivex.Observer;

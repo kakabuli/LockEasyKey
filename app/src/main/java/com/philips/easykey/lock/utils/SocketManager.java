@@ -2,6 +2,7 @@ package com.philips.easykey.lock.utils;
 
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockApPresenter;
 
 import java.io.IOException;

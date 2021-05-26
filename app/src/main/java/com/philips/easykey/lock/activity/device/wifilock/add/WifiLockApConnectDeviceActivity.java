@@ -18,7 +18,7 @@ import com.philips.easykey.lock.mvp.presenter.wifilock.WifiApWifiSetUpPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockAPWifiSetUpView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SocketManager;

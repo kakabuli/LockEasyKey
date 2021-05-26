@@ -18,7 +18,7 @@ import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockPa
 import com.philips.easykey.lock.mvp.view.gatewaylockview.IGatewayLockPasswordTempView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;

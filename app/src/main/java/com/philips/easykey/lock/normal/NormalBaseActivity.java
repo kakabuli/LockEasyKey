@@ -29,7 +29,7 @@ import com.philips.easykey.lock.shulan.config.ForegroundNotification;
 import com.philips.easykey.lock.shulan.config.ForegroundNotificationClickListener;
 import com.philips.easykey.lock.shulan.config.RunMode;
 import com.philips.easykey.lock.utils.LoadingDialog;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 
 import io.reactivex.disposables.CompositeDisposable;

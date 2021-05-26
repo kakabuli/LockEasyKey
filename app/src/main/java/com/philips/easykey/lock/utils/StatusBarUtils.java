@@ -16,6 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.LogUtils;
+
 /**
  * 状态栏相关工具类
  *

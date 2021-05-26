@@ -19,7 +19,7 @@ import com.philips.easykey.lock.mvp.view.ISafeModeView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;

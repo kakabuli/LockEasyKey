@@ -34,7 +34,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DetectionEmailPhone;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MD5Utils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NetUtil;

@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.Arrays;
 import java.util.List;

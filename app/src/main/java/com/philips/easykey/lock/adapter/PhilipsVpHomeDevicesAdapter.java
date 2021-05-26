@@ -11,7 +11,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;

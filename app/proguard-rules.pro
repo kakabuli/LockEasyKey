@@ -467,3 +467,12 @@ public static java.lang.String TABLENAME;
 -keep class org.eclipse.paho.android.service.** { *; }
 -keep class org.eclipse.paho.client.mqttv3.** { *; }
 # -----------------eclipse mqtt--------------------------------------------------
+
+#------------------------------ 打包时候移除所有日志 ---------------------------------------
+-assumenosideeffects class com.blankj.utilcode.util.LogUtils {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** e(...);
+}
+#------------------------------ 打包时候移除所有日志 ---------------------------------------

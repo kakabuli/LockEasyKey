@@ -31,7 +31,7 @@ import com.philips.easykey.lock.utils.BatteryView;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -123,7 +123,7 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
                         return;
                     }
                 } catch (Exception e) {
-                    com.philips.easykey.lock.utils.LogUtils.d("--kaadas--:" + e.getMessage());
+                    LogUtils.d("--kaadas--:" + e.getMessage());
                 }
             }
         }

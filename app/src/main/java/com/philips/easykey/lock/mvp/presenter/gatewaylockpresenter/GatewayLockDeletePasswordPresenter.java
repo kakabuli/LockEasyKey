@@ -9,7 +9,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.LockPwdFuncBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockPwd;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockPwdDao;
 

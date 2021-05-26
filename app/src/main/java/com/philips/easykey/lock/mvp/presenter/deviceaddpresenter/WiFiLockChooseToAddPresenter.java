@@ -2,7 +2,7 @@ package com.philips.easykey.lock.mvp.presenter.deviceaddpresenter;
 
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.deviceaddview.WiFiLockChooseToAddView;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.WiFiLockUtils;
 import io.reactivex.disposables.Disposable;
 

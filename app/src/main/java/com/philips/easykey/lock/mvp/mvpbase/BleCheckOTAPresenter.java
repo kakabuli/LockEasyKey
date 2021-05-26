@@ -2,7 +2,7 @@ package com.philips.easykey.lock.mvp.mvpbase;
 
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;

@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
@@ -51,7 +50,7 @@ import com.philips.easykey.lock.publiclibrary.ota.gatewayota.GatewayOTADialogAct
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.PermissionUtil;
@@ -182,7 +181,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                                 SelectMarket(isForced, upgradeBean);
                             }
                         }
-                        Log.e(GeTui.VideoLog, "currentCode:" + cuurentversioncode + " servercode:" + upgradeBean.getVersionCode());
+                        LogUtils.e("currentCode:" + cuurentversioncode + " servercode:" + upgradeBean.getVersionCode());
 
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
@@ -191,13 +190,13 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                     }
 
                 } else {
-                    Log.e(GeTui.VideoLog, "update.....获取数据为null");
+                    LogUtils.e("update.....获取数据为null");
                 }
             }
 
             @Override
             public void ShowUpgradePresenterFail() {
-                Log.e(GeTui.VideoLog, "update.....fail.......失败");
+                LogUtils.e("update.....fail.......失败");
             }
         });
         registerWifiReceiver();
@@ -279,7 +278,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     }
 
     private void drumpMarket(String packageName) {
-        Log.e(GeTui.VideoLog, "跳入的市场是:" + packageName);
+        LogUtils.e("跳入的市场是:" + packageName);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri uri = Uri.parse("market://details?id=" + getPackageName());//app包名
         intent.setData(uri);
@@ -407,10 +406,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     protected void onResume() {
 
         String sip_package_json = getIntent().getStringExtra("stringType");
-        Log.e(GeTui.VideoLog, "..........MainActivity.........:" + sip_package_json);
+        LogUtils.e("..........MainActivity.........:" + sip_package_json);
 
         MyLog.getInstance().save("MainAcvity...onResume.." + !isCreate);
-        Log.e(GeTui.VideoLog, "MainAcvity...onResume.." + !isCreate);
+        LogUtils.e("MainAcvity...onResume.." + !isCreate);
         isCreate = false;
 
         super.onResume();
@@ -440,7 +439,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e(GeTui.VideoLog, "MainAcvity .. onStop..");
+        LogUtils.e("MainAcvity .. onStop..");
         MyLog.getInstance().save("MainAcvity .. onStop..");
     }
 
@@ -493,10 +492,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public void uploadpush(BaseResult baseResult) {
         String code = baseResult.getCode();
         if (code.equals("200")) {
-            Log.e(GeTui.VideoLog, "push上传成功");
+            LogUtils.e("push上传成功");
             SPUtils.put(Constants.PUSHID, true);
         } else {
-            Log.e(GeTui.VideoLog, "push上传失败");
+            LogUtils.e("push上传失败");
         }
     }
 

@@ -37,7 +37,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.EditTextWatcher;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayBaseInfo;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;

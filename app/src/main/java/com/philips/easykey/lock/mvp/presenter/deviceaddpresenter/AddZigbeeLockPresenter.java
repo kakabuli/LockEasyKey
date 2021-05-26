@@ -11,7 +11,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetJoinAllowBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;

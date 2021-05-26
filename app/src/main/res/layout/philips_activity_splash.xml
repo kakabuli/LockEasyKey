@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/iv_1"
-        android:layout_width="77pt"
-        android:layout_height="98pt"
+        android:layout_width="78pt"
+        android:layout_height="100pt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="194pt"
         app:srcCompat="@drawable/philips_splash_logo"

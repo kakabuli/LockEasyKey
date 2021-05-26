@@ -24,7 +24,7 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.ModifySwitchNickBean
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.dialog.InfoDialog;
 
 import java.util.ArrayList;

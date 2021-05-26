@@ -20,7 +20,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.ClothesHang
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.ClothesHangerMachineBean.SetHangerMotorResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 

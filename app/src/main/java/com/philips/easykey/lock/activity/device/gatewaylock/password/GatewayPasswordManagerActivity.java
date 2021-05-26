@@ -26,7 +26,7 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.manager.GatewayLockPasswordManager;

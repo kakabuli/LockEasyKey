@@ -18,7 +18,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rsa;
 

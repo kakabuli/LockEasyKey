@@ -19,7 +19,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
 import butterknife.BindView;

@@ -14,7 +14,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

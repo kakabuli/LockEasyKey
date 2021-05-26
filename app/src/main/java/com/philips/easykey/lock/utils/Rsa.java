@@ -3,6 +3,8 @@ package com.philips.easykey.lock.utils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

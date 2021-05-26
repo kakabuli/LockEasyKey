@@ -9,7 +9,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.WiFiLockCardAndFingerShowBean;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 

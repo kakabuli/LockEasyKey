@@ -9,7 +9,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.rxutils.TimeOutException;
 import com.philips.easykey.lock.utils.AES;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 
 import java.io.IOException;

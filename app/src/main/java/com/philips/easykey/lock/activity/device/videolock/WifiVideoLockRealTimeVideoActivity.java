@@ -14,7 +14,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiLockRealTimeVideoPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockRealTimeVideoView;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

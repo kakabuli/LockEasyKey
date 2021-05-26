@@ -3,6 +3,7 @@ package com.philips.easykey.lock.utils;
 import android.graphics.Bitmap;
 
 
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.MyApplication;
 
 import java.io.File;

@@ -23,7 +23,7 @@ import com.philips.easykey.lock.publiclibrary.bean.ForeverPassword;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;

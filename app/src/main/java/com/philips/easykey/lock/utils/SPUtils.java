@@ -3,6 +3,8 @@ package com.philips.easykey.lock.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;

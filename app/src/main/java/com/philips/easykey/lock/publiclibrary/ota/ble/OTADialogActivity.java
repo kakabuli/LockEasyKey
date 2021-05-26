@@ -14,7 +14,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseBleCheckInfoActivity;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 

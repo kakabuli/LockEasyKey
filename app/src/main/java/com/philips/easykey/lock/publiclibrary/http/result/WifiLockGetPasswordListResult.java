@@ -2,7 +2,7 @@ package com.philips.easykey.lock.publiclibrary.http.result;
 
 import com.google.gson.annotations.SerializedName;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 

@@ -20,7 +20,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
 import java.util.List;

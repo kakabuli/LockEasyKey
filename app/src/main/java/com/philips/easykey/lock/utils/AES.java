@@ -3,6 +3,8 @@ package com.philips.easykey.lock.utils;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.BuildConfig;
 
 import java.io.ByteArrayOutputStream;

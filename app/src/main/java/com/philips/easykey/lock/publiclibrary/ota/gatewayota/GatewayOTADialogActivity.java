@@ -18,7 +18,7 @@ import com.philips.easykey.lock.mvp.presenter.GatewayOTAPresenter;
 import com.philips.easykey.lock.mvp.view.GatewayOTAView;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GatewayOtaNotifyBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import androidx.core.text.HtmlCompat;

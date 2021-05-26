@@ -3,7 +3,7 @@ package com.philips.easykey.lock.activity.device.wifilock.password;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 import java.io.UnsupportedEncodingException;

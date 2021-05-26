@@ -10,7 +10,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.inf.OnBindClickListener;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastBean;
 import com.philips.easykey.lock.bean.BluetoothLockBroadcastListBean;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

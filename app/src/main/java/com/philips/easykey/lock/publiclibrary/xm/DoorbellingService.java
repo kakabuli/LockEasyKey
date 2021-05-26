@@ -23,7 +23,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
 import com.philips.easykey.lock.utils.AppUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
 import com.philips.easykey.lock.utils.ServiceAliveUtils;
 

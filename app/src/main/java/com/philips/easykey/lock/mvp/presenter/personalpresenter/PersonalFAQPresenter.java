@@ -5,7 +5,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.GetFAQResult;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalFAQView;
 
 

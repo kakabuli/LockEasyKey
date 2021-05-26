@@ -21,7 +21,7 @@ import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 

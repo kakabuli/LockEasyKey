@@ -2,7 +2,7 @@ package com.philips.easykey.lock.publiclibrary.ota;
 
 
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;

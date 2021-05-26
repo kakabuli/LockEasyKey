@@ -13,7 +13,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.LoginObserver;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MD5Utils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.SPUtils;

@@ -10,7 +10,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.GetDevicePowerBea
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 

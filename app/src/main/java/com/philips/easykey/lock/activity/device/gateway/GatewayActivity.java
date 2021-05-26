@@ -27,7 +27,7 @@ import com.philips.easykey.lock.mvp.view.gatewayView.GatewayView;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 

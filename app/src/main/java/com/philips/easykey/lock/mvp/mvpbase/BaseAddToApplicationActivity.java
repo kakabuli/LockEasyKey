@@ -14,7 +14,7 @@ import com.philips.easykey.lock.shulan.KeepAliveManager;
 import com.philips.easykey.lock.shulan.config.ForegroundNotification;
 import com.philips.easykey.lock.shulan.config.ForegroundNotificationClickListener;
 import com.philips.easykey.lock.shulan.config.RunMode;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 
 public class BaseAddToApplicationActivity extends AppCompatActivity {

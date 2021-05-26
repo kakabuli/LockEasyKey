@@ -12,7 +12,7 @@ import com.philips.easykey.lock.bean.PhilipsDuressBean;
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.OTAFirmwareUpdate.OTAFlashRowModel_v1;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

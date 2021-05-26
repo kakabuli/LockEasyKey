@@ -5,7 +5,7 @@ import android.view.SurfaceView;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockRealTimeVideoView;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.xmitech.sdk.AudioFrame;
 import com.xmitech.sdk.H264Frame;
 import com.xmitech.sdk.interfaces.AVFilterListener;

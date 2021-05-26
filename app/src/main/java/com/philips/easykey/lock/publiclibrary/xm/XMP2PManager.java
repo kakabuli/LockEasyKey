@@ -7,7 +7,7 @@ import android.view.SurfaceView;
 
 import com.philips.easykey.lock.publiclibrary.xm.bean.DeviceInfo;
 import com.philips.easykey.lock.utils.ConstantConfig;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.p2p.pppp_api.st_PPCS_Session;
 import com.xm.sdk.apis.XMStreamComCtrl;

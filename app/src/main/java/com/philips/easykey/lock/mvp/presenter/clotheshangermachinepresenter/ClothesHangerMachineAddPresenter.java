@@ -2,7 +2,7 @@ package com.philips.easykey.lock.mvp.presenter.clotheshangermachinepresenter;
 
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.clotheshangermachineview.IClothesHangerMachineAddView;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 
 import io.reactivex.disposables.Disposable;

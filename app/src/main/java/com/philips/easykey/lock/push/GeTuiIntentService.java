@@ -17,7 +17,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
 import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.ftp.GeTui;

@@ -25,7 +25,7 @@ import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockMoreVi
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 

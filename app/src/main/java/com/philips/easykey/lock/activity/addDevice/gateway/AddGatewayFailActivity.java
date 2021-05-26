@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;

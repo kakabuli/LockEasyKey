@@ -2,7 +2,7 @@ package com.philips.easykey.lock.publiclibrary.ble;
 
 import android.text.TextUtils;
 
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 

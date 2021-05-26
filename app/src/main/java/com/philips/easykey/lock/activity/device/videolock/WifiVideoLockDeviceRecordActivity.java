@@ -30,7 +30,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.H264Frame;
 import com.xmitech.sdk.MP4Info;

@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.philips.easykey.lock.publiclibrary.ota.ble.p6.CommonUtils.Logger;
 import com.philips.easykey.lock.publiclibrary.ota.ble.ti.BluetoothLEController.BluetoothLEDevice;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 
 import java.lang.reflect.Method;

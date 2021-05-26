@@ -9,7 +9,7 @@ import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleDataBean;
 import com.philips.easykey.lock.publiclibrary.ble.responsebean.BleStateBean;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
 

@@ -17,7 +17,7 @@ import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.AddZigbeeLockPr
 import com.philips.easykey.lock.mvp.view.deviceaddview.IAddZigbeeLockView;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.DeviceOnLineBean;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.handPwdUtil.Constants;
 

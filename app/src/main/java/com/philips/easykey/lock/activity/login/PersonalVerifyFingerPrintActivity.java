@@ -24,7 +24,7 @@ import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalFingerPr
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
 import com.blankj.utilcode.util.ToastUtils;

@@ -22,7 +22,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockRecordPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoRecordView;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

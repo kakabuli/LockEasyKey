@@ -1,7 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.ble;
 
 
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 

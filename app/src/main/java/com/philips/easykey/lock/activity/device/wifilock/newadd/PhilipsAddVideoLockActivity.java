@@ -445,7 +445,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     }
 
     private void adminPasswordError() {
-        showInputPwdFailDialog(mTimes > 5);
+        showInputPwdFailDialog(mTimes >= 5);
     }
 
     public void bindDevice(String wifiSN, String lockNickName, String uid,

@@ -36,7 +36,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
