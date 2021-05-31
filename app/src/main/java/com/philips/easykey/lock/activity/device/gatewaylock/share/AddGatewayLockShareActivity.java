@@ -21,29 +21,29 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class AddGatewayLockShareActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.et_telephone)
     EditText etTelephone;
-    @BindView(R.id.btn_confirm)
     Button btnConfirm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_add_family_member);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        etTelephone = findViewById(R.id.et_telephone);
+        btnConfirm = findViewById(R.id.btn_confirm);
+
         initView();
         initListener();
        

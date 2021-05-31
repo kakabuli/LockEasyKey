@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.login.ForgetPasswordActivity;
+import com.philips.easykey.lock.activity.login.PhilipsForgetPwdActivity;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -32,20 +32,13 @@ import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 import com.philips.easykey.lock.utils.handPwdUtil.GestureContentView;
 import com.philips.easykey.lock.utils.handPwdUtil.GestureDrawline;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationActivity {
-    @BindView(R.id.text_tip)
-    TextView mTextTip;
 
-    @BindView(R.id.gesture_container)
+    TextView mTextTip;
     FrameLayout gestureContainer;
 
-    @BindView(R.id.gesture_pwd_back)
     ImageView gesturePwdBack;
-    @BindView(R.id.more)
     TextView more;
 
     private GestureContentView mGestureContentView;
@@ -58,7 +51,23 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_update_verify_hand_pwd);
-        ButterKnife.bind(this);
+
+        mTextTip = findViewById(R.id.text_tip);
+        gestureContainer = findViewById(R.id.gesture_container);
+        gesturePwdBack = findViewById(R.id.gesture_pwd_back);
+        more = findViewById(R.id.more);
+
+        gesturePwdBack.setOnClickListener(v -> finish());
+        more.setOnClickListener(v -> {
+            String password = (String) SPUtils.get(SPUtils.PASSWORD, "");
+            if (TextUtils.isEmpty(password)) { //如果本地密码保存为空
+                MyApplication.getInstance().tokenInvalid(false);
+                Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PhilipsLoginActivity.class);
+                startActivity(intent);
+            } else {
+                showInputPassword();
+            }
+        });
 
         Intent intent = getIntent();
         source = intent.getStringExtra(KeyConstants.SOURCE);
@@ -127,23 +136,6 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
         }
 
 
-    }
-
-    @OnClick(R.id.gesture_pwd_back)
-    public void onViewClicked() {
-        finish();
-    }
-
-    @OnClick(R.id.more)
-    public void onClick() {
-        String password = (String) SPUtils.get(SPUtils.PASSWORD, "");
-        if (TextUtils.isEmpty(password)) { //如果本地密码保存为空
-            MyApplication.getInstance().tokenInvalid(false);
-            Intent intent = new Intent(PhilipsPersonalUpdateVerifyGesturePwd.this, PhilipsLoginActivity.class);
-            startActivity(intent);
-        } else {
-            showInputPassword();
-        }
     }
 
 
@@ -235,7 +227,7 @@ public class PhilipsPersonalUpdateVerifyGesturePwd extends BaseAddToApplicationA
                     @Override
                     public void left() {
                         Intent intent = new Intent();
-                        intent.setClass(PhilipsPersonalUpdateVerifyGesturePwd.this, ForgetPasswordActivity.class);
+                        intent.setClass(PhilipsPersonalUpdateVerifyGesturePwd.this, PhilipsForgetPwdActivity.class);
                         startActivity(intent);
                     }
 

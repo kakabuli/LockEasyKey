@@ -13,18 +13,12 @@ import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockSafeModeView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAMActivity extends BaseActivity<IWifiLockSafeModeView, WifiLockSafeModePresenter<IWifiLockSafeModeView>> implements
         View.OnClickListener, IWifiLockSafeModeView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.lock_mode)
     TextView lockMode;
     private String wifiSn;
 
@@ -32,7 +26,12 @@ public class WifiLockAMActivity extends BaseActivity<IWifiLockSafeModeView, Wifi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_am);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        lockMode = findViewById(R.id.lock_mode);
+
+        back.setOnClickListener(v -> finish());
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         mPresenter.init(wifiSn);
@@ -58,8 +57,4 @@ public class WifiLockAMActivity extends BaseActivity<IWifiLockSafeModeView, Wifi
         }
     }
 
-    @OnClick(R.id.back)
-    public void onViewClicked() {
-        finish();
-    }
 }

@@ -27,29 +27,20 @@ import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.IFamilyMemberDeatilView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/2/20
  */
 public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatilView, FamilyMemberDetailPresenter<IFamilyMemberDeatilView>> implements IFamilyMemberDeatilView, View.OnClickListener {
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
-    @BindView(R.id.tv_content)
-    TextView tvContent;
 
-    @BindView(R.id.tv_number)
+    ImageView ivBack;
+    TextView tvContent;
     TextView tvNumber;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.iv_editor)
     ImageView ivEditor;
-    @BindView(R.id.tv_time)
     TextView tvTime;
     BluetoothSharedDeviceBean.DataBean dataBean;
     BleLockInfo bleLockInfo;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     private String nickname;
     String data;
@@ -58,7 +49,15 @@ public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatil
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_family_member_detail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvNumber = findViewById(R.id.tv_number);
+        tvName = findViewById(R.id.tv_name);
+        ivEditor = findViewById(R.id.iv_editor);
+        tvTime = findViewById(R.id.tv_time);
+        btnDelete = findViewById(R.id.btn_delete);
+
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         ivEditor.setOnClickListener(this);

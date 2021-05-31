@@ -27,8 +27,6 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
@@ -37,19 +35,12 @@ public class BluetoothPasswordManagerDetailActivity extends BaseBleActivity<IPas
         implements View.OnClickListener, IPasswordDetailView {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.iv_editor)
     ImageView ivEditor;
-    @BindView(R.id.tv_time)
     TextView tvTime;
     private BleLockInfo bleLockInfo;
     private AddPasswordBean.Password password;
@@ -59,7 +50,15 @@ public class BluetoothPasswordManagerDetailActivity extends BaseBleActivity<IPas
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_password_manager_detail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvNumber = findViewById(R.id.tv_number);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvName = findViewById(R.id.tv_name);
+        ivEditor = findViewById(R.id.iv_editor);
+        tvTime = findViewById(R.id.tv_time);
+
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.user_password));

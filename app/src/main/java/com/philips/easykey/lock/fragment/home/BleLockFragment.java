@@ -54,48 +54,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class BleLockFragment extends BaseBleFragment<IBleLockView, BleLockPresenter<IBleLockView>>
         implements View.OnClickListener, IBleLockView {
 
     List<BluetoothRecordBean> showDatas = new ArrayList<>();
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
-    @BindView(R.id.iv_external_big)
     ImageView ivExternalBig;
-    @BindView(R.id.iv_external_middle)
     ImageView ivExternalMiddle;
-    @BindView(R.id.iv_external_small)
     ImageView ivExternalSmall;
-    @BindView(R.id.iv_inner_small)
     ImageView ivInnerSmall;
-    @BindView(R.id.iv_inner_middle)
     ImageView ivInnerMiddle;
-    @BindView(R.id.tv_inner)
     TextView tvInner;
-    @BindView(R.id.tv_external)
     TextView tvExternal;
-    @BindView(R.id.rl_device_dynamic)
     RelativeLayout rlDeviceDynamic;
-    @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.create_time)
     TextView createTime;
-    @BindView(R.id.rl_icon)
     RelativeLayout rlIcon;
-    @BindView(R.id.tv_open_lock_times)
     TextView tvOpenLockTimes;
-    @BindView(R.id.rl_has_data)
     RelativeLayout rlHasData;
-    @BindView(R.id.tv_no_data)
     TextView tvNoData;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.iv_device_dynamic)
     ImageView ivDeviceDynamic;
-    @BindView(R.id.tv_device_status)
     TextView tvDeviceStatus;
     private BleLockInfo bleLockInfo;
     private boolean isOpening;
@@ -116,6 +97,7 @@ public class BleLockFragment extends BaseBleFragment<IBleLockView, BleLockPresen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isDestroy = false;
+
     }
 
     @Override
@@ -207,7 +189,26 @@ public class BleLockFragment extends BaseBleFragment<IBleLockView, BleLockPresen
         View view = inflater.inflate(R.layout.fragment_ble_lock_layout, null);
         LogUtils.d("蓝牙界面   onCreateView  " + this);
         LogUtils.d("蓝牙界面   onCreateView  " + bleLockInfo.getServerLockInfo().toString());
-        ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        ivExternalBig = view.findViewById(R.id.iv_external_big);
+        ivExternalMiddle = view.findViewById(R.id.iv_external_middle);
+        ivExternalSmall = view.findViewById(R.id.iv_external_small);
+        ivInnerSmall = view.findViewById(R.id.iv_inner_small);
+        ivInnerMiddle = view.findViewById(R.id.iv_inner_middle);
+        tvInner = view.findViewById(R.id.tv_inner);
+        tvExternal = view.findViewById(R.id.tv_external);
+        rlDeviceDynamic = view.findViewById(R.id.rl_device_dynamic);
+        tvMore = view.findViewById(R.id.tv_more);
+        createTime = view.findViewById(R.id.create_time);
+        rlIcon = view.findViewById(R.id.rl_icon);
+        tvOpenLockTimes = view.findViewById(R.id.tv_open_lock_times);
+        rlHasData = view.findViewById(R.id.rl_has_data);
+        tvNoData = view.findViewById(R.id.tv_no_data);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+        ivDeviceDynamic = view.findViewById(R.id.iv_device_dynamic);
+        tvDeviceStatus = view.findViewById(R.id.tv_device_status);
+
         initRecycleView();
         rlDeviceDynamic.setOnClickListener(this);
         tvMore.setOnClickListener(this);

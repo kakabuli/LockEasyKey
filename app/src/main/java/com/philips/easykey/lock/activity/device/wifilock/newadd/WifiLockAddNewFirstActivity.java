@@ -20,26 +20,16 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.button_next)
     TextView buttonNext;
-    @BindView(R.id.tv_reconnect)
     TextView tvReconnect;
-    @BindView(R.id.iv_img_lock)
     ImageView ivImgLock;
 
     private String wifiModelType = "";
@@ -53,7 +43,82 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
         setContentView(R.layout.activity_wifi_lock_add_new_first);
         Intent intent = getIntent();
         wifiModelType = intent.getStringExtra("wifiModelType") + "";
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        buttonNext = findViewById(R.id.button_next);
+        tvReconnect = findViewById(R.id.tv_reconnect);
+        ivImgLock = findViewById(R.id.iv_img_lock);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> {
+            if(wifiModelType.contains("VIDEO")){
+                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
+            }else{
+                startActivity(new Intent(this,WifiLockHelpActivity.class));
+            }
+        });
+        buttonNext.setOnClickListener(v -> {
+            //检查权限，检查是否连接wifi
+            permissionDisposable = rxPermissions
+                    .request(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .subscribe(granted -> {
+                        if (granted) {
+                            // All requested permissions are granted
+                        } else {
+                            // At least one permission is denied
+                            ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
+                        }
+                    });
+            if (wifiModelType != null) {
+                if (!(wifiModelType.equals("WiFi&BLE"))) {
+                    //打开wifi
+                    WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
+                    if (!wifiUtils.isWifiEnable()) {
+                        wifiUtils.openWifi();
+                        ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
+                        return;
+                    }
+                }
+            }
+            else {
+
+                return;
+
+            }
+            if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {
+                showWifiDialog();
+                WifiUtils.getInstance(MyApplication.getInstance()).openWifi();
+                return;
+            }
+            if (!GpsUtil.isOPen(MyApplication.getInstance())) {
+                GpsUtil.openGPS(MyApplication.getInstance());
+                showLocationPermission();
+//                    Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            LogUtils.d("--Kaadas--wifiModelType=="+wifiModelType);
+//                startActivity(new Intent(this,WifiLockAddNewSecondActivity.class));
+            Intent wifiIntent = new Intent(this, WifiLockAddNewSecondActivity.class);
+            wifiIntent.putExtra("wifiModelType", wifiModelType);
+            startActivity(wifiIntent);
+        });
+        tvReconnect.setOnClickListener(v -> {
+            if(wifiModelType.contains("VIDEO")){
+                Intent thirdIntent = new Intent(this, WifiLockAddNewThirdActivity.class);
+                thirdIntent.putExtra("wifiModelType", wifiModelType);
+                thirdIntent.putExtra("distribution", true);
+                startActivity(thirdIntent);
+            }else {
+                //startActivity(new Intent(this,WifiLockOldUserFirstActivity.class));
+                Intent reconnectWifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
+                reconnectWifiIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(reconnectWifiIntent);
+            }
+        });
+
         if(wifiModelType.contains("VIDEO")){
             ivImgLock.setImageResource(R.mipmap.wifi_video_lock_img_lock);
             notice.setText(getText(R.string.wifi_lock_new_add_first_notice3));
@@ -64,80 +129,6 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
 
     }
 
-    @OnClick({R.id.back, R.id.help, R.id.button_next, R.id.tv_reconnect})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                if(wifiModelType.contains("VIDEO")){
-                    startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                }else{
-                    startActivity(new Intent(this,WifiLockHelpActivity.class));
-                }
-
-                break;
-            case R.id.button_next:
-                //检查权限，检查是否连接wifi
-                permissionDisposable = rxPermissions
-                        .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                        .subscribe(granted -> {
-                            if (granted) {
-                                // All requested permissions are granted
-                            } else {
-                                // At least one permission is denied
-                                ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
-                            }
-                        });
-                if (wifiModelType != null) {
-                    if (!(wifiModelType.equals("WiFi&BLE"))) {
-                        //打开wifi
-                        WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
-                        if (!wifiUtils.isWifiEnable()) {
-                            wifiUtils.openWifi();
-                            ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
-                            return;
-                        }
-                    }
-                }
-                else {
-
-                    return;
-
-                }
-                if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {
-                    showWifiDialog();
-                    WifiUtils.getInstance(MyApplication.getInstance()).openWifi();
-                    return;
-                }
-                if (!GpsUtil.isOPen(MyApplication.getInstance())) {
-                    GpsUtil.openGPS(MyApplication.getInstance());
-                    showLocationPermission();
-//                    Toast.makeText(this, getString(R.string.locak_no_open_please_open_local), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                LogUtils.d("--Kaadas--wifiModelType=="+wifiModelType);
-//                startActivity(new Intent(this,WifiLockAddNewSecondActivity.class));
-                Intent wifiIntent = new Intent(this, WifiLockAddNewSecondActivity.class);
-                wifiIntent.putExtra("wifiModelType", wifiModelType);
-                startActivity(wifiIntent);
-                break;
-            case R.id.tv_reconnect:
-                if(wifiModelType.contains("VIDEO")){
-                    Intent thirdIntent = new Intent(this, WifiLockAddNewThirdActivity.class);
-                    thirdIntent.putExtra("wifiModelType", wifiModelType);
-                    thirdIntent.putExtra("distribution", true);
-                    startActivity(thirdIntent);
-                }else {
-                    //startActivity(new Intent(this,WifiLockOldUserFirstActivity.class));
-                    Intent reconnectWifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
-                    reconnectWifiIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(reconnectWifiIntent);
-                }
-                break;
-        }
-    }
 
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(

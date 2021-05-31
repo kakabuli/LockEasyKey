@@ -45,10 +45,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 
 /**
  * Created by David.
@@ -56,23 +52,17 @@ import butterknife.Unbinder;
 
 public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHomeView>> implements IHomeView, View.OnClickListener {
 
-    @BindView(R.id.ll_has_device)
     LinearLayout llHasDevice;
-    @BindView(R.id.btn_add_device)
     Button btnAddDevice;
 
-    @BindView(R.id.rg_home)
     RadioGroup mRadioGroup;
-    @BindView(R.id.vp_home)
     ViewPager viewPager;
-    @BindView(R.id.ll_no_device)
     LinearLayout llNoDevice;
-    @BindView(R.id.sc_title)
     HorizontalScrollView scTitle;
     private List<Fragment> fragments = new ArrayList<>();
     private List<Integer> realPositions = new ArrayList<>();  //保存的实际position
     private List<HomeShowBean> devices = new ArrayList<>();
-    private Unbinder bind;
+
     boolean hasDevice = false;//是否有设备  默认没有设备
     private List<ISelectChangeListener> listeners = new ArrayList<>();
     private MainActivity activity;
@@ -115,7 +105,14 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_home, null);
-        bind = ButterKnife.bind(this, view);
+
+        llHasDevice = view.findViewById(R.id.ll_has_device);
+        btnAddDevice = view.findViewById(R.id.btn_add_device);
+        mRadioGroup = view.findViewById(R.id.rg_home);
+        viewPager = view.findViewById(R.id.vp_home);
+        llNoDevice = view.findViewById(R.id.ll_no_device);
+        scTitle = view.findViewById(R.id.sc_title);
+
         btnAddDevice.setOnClickListener(this);
         hasDevice = false;
         changePage();
@@ -385,12 +382,6 @@ public class HomePageFragment extends BaseFragment<IHomeView, HomePreseneter<IHo
         UnderLineRadioBtn radioBtn = (UnderLineRadioBtn) mRadioGroup.getChildAt(0);
         radioBtn.setChecked(true);
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        bind.unbind();
     }
 
 

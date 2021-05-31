@@ -37,31 +37,23 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluetoothSharedDeviceManagementView, BluetoothSharedDeviceManagementPresenter<IBluetoothSharedDeviceManagementView>> implements IBluetoothSharedDeviceManagementView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
 
     BluetoothSharedDeviceManagementAdapter bluetoothSharedDeviceManagementAdapter;
     List<BluetoothSharedDeviceBean.DataBean> list = new ArrayList<>();
     boolean isNotData = true;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
-    @BindView(R.id.ll_add_user)
     RelativeLayout llAddUser;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
 
     private BleLockInfo bleLockInfo;//蓝牙锁信息
@@ -72,7 +64,15 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_shared_device_management);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);//返回
+        tvContent = findViewById(R.id.tv_content);//标题
+        recycleview = findViewById(R.id.recycleview);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        llAddUser = findViewById(R.id.ll_add_user);
+        llHasData = findViewById(R.id.ll_has_data);
+
         bluetoothSharedDeviceManagementAdapter = new BluetoothSharedDeviceManagementAdapter(list, R.layout.item_has_bluetooth_shared_device);
         recycleview.setLayoutManager(new LinearLayoutManager(this));
         recycleview.setAdapter(bluetoothSharedDeviceManagementAdapter);

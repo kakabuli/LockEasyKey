@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,23 +17,14 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddNewInputAdminPasswotdActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.ap_password_edit)
     EditText apPasswordEdit;
-    @BindView(R.id.button_next)
     TextView buttonNext;
-    @BindView(R.id.iv_password_status)
     ImageView ivPasswordStatus;//密码状态图标
     boolean passwordHide = true;//密码图标
     int times = 1;
@@ -43,53 +33,51 @@ public class WifiLockAddNewInputAdminPasswotdActivity extends BaseAddToApplicati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_input_admin_passwotd);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        apPasswordEdit = findViewById(R.id.ap_password_edit);
+        buttonNext = findViewById(R.id.button_next);
+        ivPasswordStatus = findViewById(R.id.iv_password_status);
+
+        back.setOnClickListener(v -> showWarring());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+        buttonNext.setOnClickListener(v -> {
+            //输入管理员密码  下一步
+            String adminPassword = apPasswordEdit.getText().toString().trim();
+            if (!StringUtil.randomJudge(adminPassword)) {
+                ToastUtils.showShort(R.string.philips_random_verify_error);
+                return;
+            }
+
+            LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
+            Intent intent = new Intent(this, WifiLockAddNewCheckAdminPasswordActivity.class);
+            intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD, adminPassword);
+            intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
+            intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA, data);
+            startActivity(intent);
+            finish();
+        });
+        ivPasswordStatus.setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                /* etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);*/
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivPasswordStatus.setImageResource(R.mipmap.eye_close_has_color);
+
+            } else {
+                //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                //etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivPasswordStatus.setImageResource(R.mipmap.eye_open_has_color);
+            }
+        });
 
         data =  getIntent().getByteArrayExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA);
         times =  getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES,1);
-    }
-
-    @OnClick({R.id.back, R.id.help, R.id.button_next,R.id.iv_password_status})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-            case R.id.button_next: //输入管理员密码  下一步
-                String adminPassword = apPasswordEdit.getText().toString().trim();
-                if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.philips_random_verify_error);
-                    return;
-                }
-
-                LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 " + (data == null));
-                Intent intent = new Intent(this, WifiLockAddNewCheckAdminPasswordActivity.class);
-                intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD, adminPassword);
-                intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
-                intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA, data);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.iv_password_status:
-                passwordHide = !passwordHide;
-                if (passwordHide) {
-                    apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    /* etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);*/
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivPasswordStatus.setImageResource(R.mipmap.eye_close_has_color);
-
-                } else {
-                    //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
-                    //etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivPasswordStatus.setImageResource(R.mipmap.eye_open_has_color);
-                }
-                break;
-        }
     }
 
     @Override

@@ -39,18 +39,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 
 public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.iv_myalbum_delete)
     ImageView ivMyAlbumDelete;
 
     private MyAlbumAdapter adapter;
@@ -70,7 +64,31 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_video_album);
 
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        recycleview = findViewById(R.id.recycleview);
+        ivMyAlbumDelete = findViewById(R.id.iv_myalbum_delete);
+
+        back.setOnClickListener(v -> {
+            if(showDeleteItem){
+                revoke();
+            }else{
+                finish();
+            }
+        });
+        ivMyAlbumDelete.setOnClickListener(v -> {
+            if(showDeleteItem){
+                if(isSelectFileItem()){
+                    showDeleteSelectFileItemDialog();
+                }else{
+                    revoke();
+                    ToastUtils.showShort(getString(R.string.wifi_video_lock_delete_show_toast) + "");
+                }
+            }else {
+                showDeleteItem = true;
+                showDeleteItem(true);
+            }
+        });
+
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         String filePath = FileTool.getVideoLockPath(this,wifiSn).getPath();
         LogUtils.d("shulan  filePath-->" + filePath);
@@ -203,32 +221,6 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
                 }
             }
         }catch (Exception e){
-        }
-    }
-
-    @OnClick({R.id.back,R.id.iv_myalbum_delete})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                if(showDeleteItem){
-                    revoke();
-                }else{
-                    finish();
-                }
-                break;
-            case R.id.iv_myalbum_delete:
-                if(showDeleteItem){
-                    if(isSelectFileItem()){
-                        showDeleteSelectFileItemDialog();
-                    }else{
-                        revoke();
-                        ToastUtils.showShort(getString(R.string.wifi_video_lock_delete_show_toast) + "");
-                    }
-                }else {
-                    showDeleteItem = true;
-                    showDeleteItem(true);
-                }
-                break;
         }
     }
 

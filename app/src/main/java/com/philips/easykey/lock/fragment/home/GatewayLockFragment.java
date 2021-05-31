@@ -45,46 +45,28 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, GatewayLockHomePresenter<IGatewayLockHomeView>> implements View.OnClickListener, IGatewayLockHomeView, View.OnLongClickListener {
 
 
     List<BluetoothRecordBean> mOpenLockList = new ArrayList<>();
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
-    @BindView(R.id.iv_external_big)
     ImageView ivExternalBig;
-    @BindView(R.id.iv_external_middle)
     ImageView ivExternalMiddle;
-    @BindView(R.id.iv_external_small)
     ImageView ivExternalSmall;
-    @BindView(R.id.iv_inner_small)
     ImageView ivInnerSmall;
-    @BindView(R.id.iv_inner_middle)
     ImageView ivInnerMiddle;
-    @BindView(R.id.tv_inner)
     TextView tvInner;
-    @BindView(R.id.tv_external)
     TextView tvExternal;
-    @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.rl_device_dynamic)
     RelativeLayout rlDeviceDynamic;
-    @BindView(R.id.rl_icon)
     RelativeLayout rlIcon;
-    @BindView(R.id.rl_has_data)
     RelativeLayout rlHasData;
-    @BindView(R.id.tv_no_data)
     TextView tvNoData;
-    @BindView(R.id.create_time)
     TextView createTime;
-    @BindView(R.id.device_state)
     TextView deviceState;
-    @BindView(R.id.tv_open_lock_times)
     TextView tvOpenLockTimes;
-    @BindView(R.id.iv_device_dynamic)
     ImageView ivDeviceDynamic;
     private GwLockInfo gatewayLockInfo;
     private String gatewayId;
@@ -99,7 +81,25 @@ public class GatewayLockFragment extends BaseFragment<IGatewayLockHomeView, Gate
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gateway_lock_layout, null);
-        ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        ivExternalBig = view.findViewById(R.id.iv_external_big);
+        ivExternalMiddle = view.findViewById(R.id.iv_external_middle);
+        ivExternalSmall = view.findViewById(R.id.iv_external_small);
+        ivInnerSmall = view.findViewById(R.id.iv_inner_small);
+        ivInnerMiddle = view.findViewById(R.id.iv_inner_middle);
+        tvInner = view.findViewById(R.id.tv_inner);
+        tvExternal = view.findViewById(R.id.tv_external);
+        tvMore = view.findViewById(R.id.tv_more);
+        rlDeviceDynamic = view.findViewById(R.id.rl_device_dynamic);
+        rlIcon = view.findViewById(R.id.rl_icon);
+        rlHasData = view.findViewById(R.id.rl_has_data);
+        tvNoData = view.findViewById(R.id.tv_no_data);
+        createTime = view.findViewById(R.id.create_time);
+        deviceState = view.findViewById(R.id.device_state);
+        tvOpenLockTimes = view.findViewById(R.id.tv_open_lock_times);
+        ivDeviceDynamic = view.findViewById(R.id.iv_device_dynamic);
+
         initRecycleView();
         initListener();
         initData();

@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,27 +30,17 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import java.util.Arrays;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewayLockPasswordShareActivity extends BaseActivity<IGatewayLockPasswordShareView,
         GatewayLockPasswordSharePresenter<IGatewayLockPasswordShareView>>
         implements IGatewayLockPasswordShareView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
-    @BindView(R.id.tv_short_message)
     TextView tvShortMessage;
-    @BindView(R.id.tv_wei_xin)
     TextView tvWeiXin;
-    @BindView(R.id.tv_copy)
     TextView tvCopy;
-    @BindView(R.id.tv_pwd_type)
     TextView tvPwdType;
 
     private String gatewayId;
@@ -65,7 +54,41 @@ public class GatewayLockPasswordShareActivity extends BaseActivity<IGatewayLockP
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_lock_password_share);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        tvNumber = findViewById(R.id.tv_number);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvShortMessage = findViewById(R.id.tv_short_message);
+        tvWeiXin = findViewById(R.id.tv_wei_xin);
+        tvCopy = findViewById(R.id.tv_copy);
+        tvPwdType = findViewById(R.id.tv_pwd_type);
+
+        back.setOnClickListener(v -> {
+            Intent managerIntent = new Intent(GatewayLockPasswordShareActivity.this, GatewayPasswordManagerActivity.class);
+            startActivity(managerIntent);
+        });
+        btnDelete.setOnClickListener(v -> {
+            mPresenter.deletePassword(gatewayId, deviceId, gatewayPasswordPlanBean.getPasswordNumber());
+            alertDialog = AlertDialogUtil.getInstance().noButtonDialog(this, getString(R.string.delete_be_being));
+            alertDialog.setCancelable(false);
+        });
+        tvShortMessage.setOnClickListener(v -> {
+            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+            SharedUtil.getInstance().sendShortMessage(message, this);
+        });
+        tvWeiXin.setOnClickListener(v -> {
+            if (SharedUtil.isWeixinAvilible(this)) {
+                String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+                SharedUtil.getInstance().sendWeiXin(message);
+            } else {
+                ToastUtils.showShort(R.string.telephone_not_install_wechat);
+            }
+        });
+        tvCopy.setOnClickListener(v -> {
+            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+            SharedUtil.getInstance().copyTextToSystem(this, message);
+        });
+
         initData();
 
     }
@@ -137,37 +160,6 @@ public class GatewayLockPasswordShareActivity extends BaseActivity<IGatewayLockP
             }
         }
         tvPwdType.setText(notice);
-    }
-
-
-    @OnClick({R.id.back, R.id.btn_delete, R.id.tv_short_message, R.id.tv_wei_xin, R.id.tv_copy})
-    public void onViewClicked(View view) {
-        String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
-        switch (view.getId()) {
-            case R.id.back:
-
-                Intent managerIntent = new Intent(GatewayLockPasswordShareActivity.this, GatewayPasswordManagerActivity.class);
-                startActivity(managerIntent);
-                break;
-            case R.id.btn_delete:
-                mPresenter.deletePassword(gatewayId, deviceId, gatewayPasswordPlanBean.getPasswordNumber());
-                alertDialog = AlertDialogUtil.getInstance().noButtonDialog(this, getString(R.string.delete_be_being));
-                alertDialog.setCancelable(false);
-                break;
-            case R.id.tv_short_message:
-                SharedUtil.getInstance().sendShortMessage(message, this);
-                break;
-            case R.id.tv_wei_xin:
-                if (SharedUtil.isWeixinAvilible(this)) {
-                    SharedUtil.getInstance().sendWeiXin(message);
-                } else {
-                    ToastUtils.showShort(R.string.telephone_not_install_wechat);
-                }
-                break;
-            case R.id.tv_copy:
-                SharedUtil.getInstance().copyTextToSystem(this, message);
-                break;
-        }
     }
 
 

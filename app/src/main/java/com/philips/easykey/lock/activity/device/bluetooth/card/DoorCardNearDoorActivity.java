@@ -20,21 +20,16 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class DoorCardNearDoorActivity extends BaseActivity<IBleView, BlePresenter<IBleView>>
         implements View.OnClickListener, IBleView{
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.btn)
     Button btn;
     int bluetoothConnectStatus=-1;
     int bluetoothConnectSuccess=1;
@@ -44,7 +39,13 @@ public class DoorCardNearDoorActivity extends BaseActivity<IBleView, BlePresente
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_door_card_near_door);
-        ButterKnife.bind(this);
+
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        btn = findViewById(R.id.btn);
+
         ivBack.setOnClickListener(this);
         btn.setOnClickListener(this);
         tvContent.setText(R.string.add_door_card);

@@ -26,22 +26,14 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IWifiVideoLockSetLanguageView, WifiVideoLockSetLanguagePresenter<IWifiVideoLockSetLanguageView>>
         implements IWifiVideoLockSetLanguageView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.zh_img)
     CheckBox zhImg;
-    @BindView(R.id.en_img)
     CheckBox enImg;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
 
 
@@ -61,7 +53,51 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phlilips_activity_wifi_video_lock_language_setting);
 
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        zhImg = findViewById(R.id.zh_img);
+        enImg = findViewById(R.id.en_img);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+
+        back.setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(avi.isShow()) setLanguage();
+            } else {
+                finish();
+            }
+        });
+        findViewById(R.id.en_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(!enImg.isChecked()){
+                    zhImg.setChecked(false);
+                    enImg.setChecked(true);
+                }
+            };
+        });
+        findViewById(R.id.zh_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(!zhImg.isChecked()){
+                    zhImg.setChecked(true);
+                    enImg.setChecked(false);
+                }
+            }
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -143,57 +179,6 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
         }
         return super.onKeyDown(keyCode,event);
 
-    }
-
-    @OnClick({R.id.back,R.id.zh_layout,R.id.en_layout})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                if(wifiLockInfo.getPowerSave() == 0){
-
-                        if(avi.isShow())
-                            setLanguage();
-
-                }else{
-                    finish();
-
-                }
-                break;
-            case R.id.en_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!enImg.isChecked()){
-                        zhImg.setChecked(false);
-                        enImg.setChecked(true);
-                    }
-                }
-
-;
-                break;
-            case R.id.zh_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!zhImg.isChecked()){
-                        zhImg.setChecked(true);
-                        enImg.setChecked(false);
-                    }
-                }
-                break;
-        }
     }
 
     private void setLanguage() {

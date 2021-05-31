@@ -1,9 +1,6 @@
 package com.philips.easykey.lock.activity.device.videolock;
 
 import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,33 +45,19 @@ import java.util.List;
 public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWifiVideoLockDetailView, PhilipsWifiVideoLockDetailPresenter<IPhilipsWifiVideoLockDetailView>>
         implements IPhilipsWifiVideoLockDetailView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_device_name)
     TextView mTvDeviceName;
-    @BindView(R.id.iv_detail_setting)
     ImageView mIvDetailSetting;
-    @BindView(R.id.ivWifi)
     ImageView mIvWifi;
-    @BindView(R.id.ivPower)
     ImageView mIvPower;
-    @BindView(R.id.tv_right_mode)
     TextView mTvRightMode;
-    @BindView(R.id.ivVideo)
     ImageView mIvVideo;
-    @BindView(R.id.tvLastRecord)
     TextView mTvLastRecord;
-    @BindView(R.id.rl_detail_record)
-    RelativeLayout mRlDetailReocrd;
-    @BindView(R.id.rl_detail_album)
+    RelativeLayout mRlDetailRecord;
     RelativeLayout mRlDetailAlbum;
-    @BindView(R.id.rl_detail_password)
     RelativeLayout mRlDetailPassword;
-    @BindView(R.id.rl_detail_share)
     RelativeLayout mRlDetailShare;
-    @BindView(R.id.rl_detail_share_setting)
     RelativeLayout mRlDetailShareSetting;
-    @BindView(R.id.iv_detail_delete)
     ImageView mIvDetailDelete;
 
     private String wifiSn = "";
@@ -91,7 +74,102 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_video_lock_detail);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        mTvDeviceName = findViewById(R.id.tv_device_name);
+        mIvDetailSetting = findViewById(R.id.iv_detail_setting);
+        mIvWifi = findViewById(R.id.ivWifi);
+        mIvPower = findViewById(R.id.ivPower);
+        mTvRightMode = findViewById(R.id.tv_right_mode);
+        mIvVideo = findViewById(R.id.ivVideo);
+        mTvLastRecord = findViewById(R.id.tvLastRecord);
+        mRlDetailRecord = findViewById(R.id.rl_detail_record);
+        mRlDetailAlbum = findViewById(R.id.rl_detail_album);
+        mRlDetailPassword = findViewById(R.id.rl_detail_password);
+        mRlDetailShare = findViewById(R.id.rl_detail_share);
+        mRlDetailShareSetting = findViewById(R.id.rl_detail_share_setting);
+        mIvDetailDelete = findViewById(R.id.iv_detail_delete);
+
+        back.setOnClickListener(v -> finish());
+        mRlDetailRecord.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
+            startActivity(intent);
+        });
+        mTvLastRecord.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
+            startActivity(intent);
+        });
+        mRlDetailAlbum.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            startActivity(intent);
+        });
+        mRlDetailPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockPasswordTypeActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            startActivity(intent);
+        });
+        mRlDetailShare.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            startActivity(intent);
+        });
+        mRlDetailShareSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDeviceInfoActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            startActivity(intent);
+        });
+        mIvDetailSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockMoreActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            startActivityForResult(intent, TO_MORE_REQUEST_CODE);
+        });
+        mIvVideo.setOnClickListener(v -> {
+            try {
+                if(wifiLockInfo.getPowerSave() == 0){
+                    Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockCallingActivity.class);
+                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
+                    intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                    startActivity(intent);
+
+                }else{
+                    powerStatusDialog();
+                }
+            }catch (Exception e){
+
+            }
+        });
+        mIvDetailDelete.setOnClickListener(v -> {
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
+                    getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+
+                        @Override
+                        public void right() {
+                            showLoading(getString(R.string.is_deleting));
+                            if(isWifiVideoLockType){
+                                mPresenter.deleteVideoDevice(wifiLockInfo.getWifiSN());
+                            }else{
+                                mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
+                            }
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+
+                        @Override
+                        public void afterTextChanged(String toString) {
+                        }
+                    });
+        });
+
         StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
         initData();
     }
@@ -243,94 +321,6 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         }
 
         mTvRightMode.setText(R.string.real_time_video_setting_normal);
-    }
-
-    @OnClick({R.id.back,R.id.rl_detail_share_setting,R.id.rl_detail_share,R.id.rl_detail_password,
-            R.id.rl_detail_album,R.id.tv_right_mode,R.id.rl_detail_record,R.id.iv_detail_setting,
-            R.id.ivVideo,R.id.iv_detail_delete,R.id.tvLastRecord})
-    public void onViewClicked(View view) {
-        Intent intent;
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_detail_record:
-            case R.id.tvLastRecord:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
-                startActivity(intent);
-                break;
-            case R.id.tv_right_mode:
-                break;
-            case R.id.rl_detail_album:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                startActivity(intent);
-                break;
-            case R.id.rl_detail_password:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockPasswordTypeActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                startActivity(intent);
-                break;
-            case R.id.rl_detail_share:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockFamilyManagerActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                startActivity(intent);
-                break;
-            case R.id.rl_detail_share_setting:
-                intent = new Intent(this, PhilipsWifiVideoLockDeviceInfoActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                startActivity(intent);
-                break;
-            case R.id.iv_detail_setting:
-                intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockMoreActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                startActivityForResult(intent, TO_MORE_REQUEST_CODE);
-                break;
-            case R.id.ivVideo:
-                try {
-                    if(wifiLockInfo.getPowerSave() == 0){
-                        intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockCallingActivity.class);
-                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
-                        intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                        startActivity(intent);
-
-                    }else{
-                        powerStatusDialog();
-                    }
-                }catch (Exception e){
-
-                }
-                break;
-            case R.id.iv_detail_delete:
-                AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
-                        getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
-                            @Override
-                            public void left() {
-
-                            }
-
-                            @Override
-                            public void right() {
-                                showLoading(getString(R.string.is_deleting));
-                                if(isWifiVideoLockType){
-                                    mPresenter.deleteVideoDevice(wifiLockInfo.getWifiSN());
-                                }else{
-                                    mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
-                                }
-
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
-
-                            @Override
-                            public void afterTextChanged(String toString) {
-                            }
-                        });
-                break;
-        }
     }
 
     @Override

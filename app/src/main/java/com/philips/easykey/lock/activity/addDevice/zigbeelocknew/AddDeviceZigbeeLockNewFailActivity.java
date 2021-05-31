@@ -4,12 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import com.blankj.utilcode.util.ToastUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -18,52 +16,40 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddDeviceZigbeeLockNewFailActivity extends BaseAddToApplicationActivity {
 
-
-    @BindView(R.id.button_again)
     Button buttonAgain;
-    @BindView(R.id.hand_bind)
     Button handBind;
-    @BindView(R.id.back)
     ImageView back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_add_zigbeenewlock_fail);
-        ButterKnife.bind(this);
-    }
 
-    @OnClick({R.id.button_again, R.id.hand_bind,R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                startActivity(new Intent(this, DeviceAdd2Activity.class));
-                break;
-            case R.id.button_again:
+        buttonAgain = findViewById(R.id.button_again);
+        handBind = findViewById(R.id.hand_bind);
+        back = findViewById(R.id.back);
 
+        back.setOnClickListener(v -> startActivity(new Intent(this, DeviceAdd2Activity.class)));
+        buttonAgain.setOnClickListener(v -> {
 
-                String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
-                if (strings.length>0){
-                    ToastUtils.showShort(R.string.philips_activity_deviceadd2);
-                    PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
-                }else {
-                    Intent intent = new Intent(this, QrCodeScanActivity.class);
-                    startActivityForResult(intent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
-                }
-                //再来一次
-                break;
-            case R.id.hand_bind:
-                //退出
-                Intent outIntent = new Intent(this, DeviceAdd2Activity.class);
-                startActivity(outIntent);
-                break;
-        }
+            String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
+            if (strings.length>0){
+                ToastUtils.showShort(R.string.philips_activity_deviceadd2);
+                PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
+            }else {
+                Intent intent = new Intent(this, QrCodeScanActivity.class);
+                startActivityForResult(intent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
+            }
+            //再来一次
+        });
+        handBind.setOnClickListener(v -> {
+            //退出
+            Intent outIntent = new Intent(this, DeviceAdd2Activity.class);
+            startActivity(outIntent);
+        });
     }
 
     @Override

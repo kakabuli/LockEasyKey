@@ -18,27 +18,17 @@ import com.philips.easykey.lock.mvp.view.ILanguageSetView;
 import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class BluetoothLockLanguageSettingActivity extends BaseBleActivity<ILanguageSetView, LanguageSetPresenter<ILanguageSetView>>
         implements ILanguageSetView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.zh_img)
     CheckBox zhImg;
-    @BindView(R.id.zh_layout)
     RelativeLayout zhLayout;
-    @BindView(R.id.en_img)
     CheckBox enImg;
-    @BindView(R.id.en_layout)
     RelativeLayout enLayout;
-    @BindView(R.id.btn_save)
     Button btnSave;
     private Context context;
     private String languageCurrent = "";
@@ -47,7 +37,15 @@ public class BluetoothLockLanguageSettingActivity extends BaseBleActivity<ILangu
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_lock_language_setting);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        zhImg = findViewById(R.id.zh_img);
+        zhLayout = findViewById(R.id.zh_layout);
+        enImg = findViewById(R.id.en_img);
+        enLayout = findViewById(R.id.en_layout);
+        btnSave = findViewById(R.id.btn_save);
         bleLockInfo = mPresenter.getBleLockInfo();
         if (mPresenter.isAuth(bleLockInfo, false)) {
             mPresenter.getDeviceInfo();
@@ -59,6 +57,27 @@ public class BluetoothLockLanguageSettingActivity extends BaseBleActivity<ILangu
         tvContent.setText(getString(R.string.lock_language));
         ivBack.setOnClickListener(this);
 
+        zhLayout.setOnClickListener(v -> {
+            zhImg.setChecked(true);
+            enImg.setChecked(false);
+            languageCurrent = "zh";
+        });
+        enLayout.setOnClickListener(v -> {
+            zhImg.setChecked(false);
+            enImg.setChecked(true);
+            languageCurrent = "en";
+        });
+        btnSave.setOnClickListener(v -> {
+            if (mPresenter.isAuth(bleLockInfo, true)){
+                if ("zh".equals(languageCurrent)){
+                    mPresenter.setLanguage("zh");
+                }else if ("en".equals(languageCurrent)){
+                    mPresenter.setLanguage("en");
+                }
+            }
+            showLoading(getString(R.string.is_setting));
+        });
+
     }
 
     @Override
@@ -68,33 +87,6 @@ public class BluetoothLockLanguageSettingActivity extends BaseBleActivity<ILangu
 
     private void initData() {
     }
-
-    @OnClick({R.id.zh_layout, R.id.en_layout, R.id.btn_save})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.zh_layout:
-                zhImg.setChecked(true);
-                enImg.setChecked(false);
-                languageCurrent = "zh";
-                break;
-            case R.id.en_layout:
-                zhImg.setChecked(false);
-                enImg.setChecked(true);
-                languageCurrent = "en";
-                break;
-            case R.id.btn_save:
-                if (mPresenter.isAuth(bleLockInfo, true)){
-                    if ("zh".equals(languageCurrent)){
-                        mPresenter.setLanguage("zh");
-                    }else if ("en".equals(languageCurrent)){
-                        mPresenter.setLanguage("en");
-                    }
-                }
-                showLoading(getString(R.string.is_setting));
-                break;
-        }
-    }
-
 
     @Override
     public void onClick(View v) {

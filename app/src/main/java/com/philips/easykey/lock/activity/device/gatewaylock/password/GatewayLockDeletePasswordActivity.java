@@ -28,9 +28,6 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import java.util.Arrays;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by David
@@ -38,13 +35,10 @@ import butterknife.OnClick;
 public class GatewayLockDeletePasswordActivity extends BaseActivity<IGatewayLockPasswordShareView,
         GatewayLockPasswordSharePresenter<IGatewayLockPasswordShareView>>
         implements IGatewayLockPasswordShareView{
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     private String gatewayId;
     private String deviceId;
@@ -57,7 +51,40 @@ public class GatewayLockDeletePasswordActivity extends BaseActivity<IGatewayLock
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_lock_delete_passwrod);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        tvNumber = findViewById(R.id.tv_number);
+        btnDelete = findViewById(R.id.btn_delete);
+
+        back.setOnClickListener(v -> finish());
+        btnDelete.setOnClickListener(v -> {
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(context, getString(R.string.sure_delete_password),
+                    getString(R.string.philips_cancel), getString(R.string.delete),
+                    "#333333",
+                    "#FF3B30", new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+                        }
+                        @Override
+                        public void right() {
+                            if (!TextUtils.isEmpty(gatewayId) ){
+                                mPresenter.deletePassword(gatewayId,deviceId,gatewayPasswordPlanBean.getPasswordNumber());
+                                alertDialog=AlertDialogUtil.getInstance().noButtonDialog(context,getString(R.string.delete_be_being));
+                                alertDialog.setCancelable(false);
+                            }else {
+                                LogUtils.d("  gatewayId  为空   删除失败 ");
+                            }
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+                        @Override
+                        public void afterTextChanged(String toString) {
+                        }
+                    });
+        });
+
         initView();
         context=this;
     }
@@ -127,46 +154,6 @@ public class GatewayLockDeletePasswordActivity extends BaseActivity<IGatewayLock
         }
         tvNumber.setText(notice);
     }
-
-    @OnClick({R.id.back, R.id.btn_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.btn_delete:
-                AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(context, getString(R.string.sure_delete_password),
-                        getString(R.string.philips_cancel), getString(R.string.delete),
-                        "#333333",
-                        "#FF3B30", new AlertDialogUtil.ClickListener() {
-                    @Override
-                    public void left() {
-                    }
-                    @Override
-                    public void right() {
-                        if (!TextUtils.isEmpty(gatewayId) ){
-                            mPresenter.deletePassword(gatewayId,deviceId,gatewayPasswordPlanBean.getPasswordNumber());
-                            alertDialog=AlertDialogUtil.getInstance().noButtonDialog(context,getString(R.string.delete_be_being));
-                            alertDialog.setCancelable(false);
-                        }else {
-                            LogUtils.d("  gatewayId  为空   删除失败 ");
-                        }
-                    }
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
-                            @Override
-                            public void afterTextChanged(String toString) {
-                            }
-                });
-                break;
-        }
-    }
-
-
-
-
-
 
     @Override
     public void getLockInfoSuccess(int maxPwd) {

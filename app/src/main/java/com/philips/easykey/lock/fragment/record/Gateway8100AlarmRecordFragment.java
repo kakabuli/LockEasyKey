@@ -32,9 +32,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by David on 2019/4/22
@@ -44,12 +41,8 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
 
     List<BluetoothRecordBean> mOpenLockList = new ArrayList<>(); //全部数据
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.no_have_record)
     TextView noHaveRecord;
-    Unbinder unbinder;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
     private String gatewayId;
@@ -63,7 +56,12 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_gateway_open_lock_record, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        noHaveRecord = view.findViewById(R.id.no_have_record);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
+
         initRecycleView();
         initData();
         initRefresh();
@@ -153,13 +151,6 @@ public class Gateway8100AlarmRecordFragment extends BaseFragment<IGatewayAlarmLo
                 recycleview.setVisibility(View.GONE);
             }
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-
     }
 
 

@@ -31,9 +31,6 @@ import com.philips.easykey.lock.utils.SocketManager;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -41,15 +38,10 @@ import io.reactivex.functions.Function;
 public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAPWifiSetUpView, WifiApWifiSetUpPresenter<WifiApWifiSetUpPresenter>>
         implements IWifiLockAPWifiSetUpView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.cb_send_admin_password)
     CheckBox cbSendAdminPassword;
-    @BindView(R.id.cb_check_admin_password)
     CheckBox cbCheckAdminPassword;
-    @BindView(R.id.cb_check_lock)
     CheckBox cbCheckLock;
     private String adminPassword;
     private String wifiName;
@@ -60,29 +52,20 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_ap_check_lock);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        cbSendAdminPassword = findViewById(R.id.cb_send_admin_password);
+        cbCheckAdminPassword = findViewById(R.id.cb_check_admin_password);
+        cbCheckLock = findViewById(R.id.cb_check_lock);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+
         adminPassword = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD);
         wifiName = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
         Log.e("凯迪仕", "onCreate: adminPassword " + adminPassword + "   wifiName " + wifiName);
         thread.start();
-    }
-
-    @OnClick({R.id.back, R.id.help, R.id.cb_send_admin_password, R.id.cb_check_admin_password, R.id.cb_check_lock})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-            case R.id.cb_send_admin_password:
-                break;
-            case R.id.cb_check_admin_password:
-                break;
-            case R.id.cb_check_lock:
-                break;
-        }
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.SurfaceView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,22 +15,14 @@ import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockRealTimeVideoView;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.blankj.utilcode.util.LogUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockRealTimeVideoActivity extends BaseActivity<IWifiLockRealTimeVideoView,
         WifiLockRealTimeVideoPresenter<IWifiLockRealTimeVideoView>> implements IWifiLockRealTimeVideoView {
 
-    @BindView(R.id.iv_setting)
     ImageView ivSetting;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.surface_view)
     SurfaceView mSufaceView;
-    @BindView(R.id.tv_temporary_password)
     TextView tvTemporaryPassword;
-    @BindView(R.id.lly_temporary_password)
     LinearLayout llyTemporaryPassword;
 
     @Override
@@ -39,7 +30,27 @@ public class WifiVideoLockRealTimeVideoActivity extends BaseActivity<IWifiLockRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_real_time_video);
 
-        ButterKnife.bind(this);
+        ivSetting = findViewById(R.id.iv_setting);
+        back = findViewById(R.id.back);
+        mSufaceView = findViewById(R.id.surface_view);
+        tvTemporaryPassword = findViewById(R.id.tv_temporary_password);
+        llyTemporaryPassword = findViewById(R.id.lly_temporary_password);
+
+        back.setOnClickListener(v -> {
+            mPresenter.release();
+            finish();
+        });
+        ivSetting.setOnClickListener(v -> startActivity(new Intent(WifiVideoLockRealTimeVideoActivity.this, PhilipsWifiVideoLockRealTimeActivity.class)));
+        findViewById(R.id.iv_mute).setOnClickListener(v -> {
+            int ret = -999;
+            ret= XMP2PManager.getInstance().startAudioStream();
+            if(ret>=0){
+                if(!XMP2PManager.getInstance().isEnableAudio()){
+                    XMP2PManager.getInstance().enableAudio(true);
+                }
+            }
+        });
+
         LogUtils.d( "WifiLockRealTimeVideoActivity onCreate: ");
         mPresenter.startRealTimeVideo(mSufaceView);
     }
@@ -47,36 +58,6 @@ public class WifiVideoLockRealTimeVideoActivity extends BaseActivity<IWifiLockRe
     @Override
     protected WifiLockRealTimeVideoPresenter<IWifiLockRealTimeVideoView> createPresent() {
         return new WifiLockRealTimeVideoPresenter<>();
-    }
-
-
-    @OnClick({R.id.back, R.id.iv_setting,R.id.iv_screenshot,R.id.iv_mute,R.id.iv_calling,R.id.iv_recoring})
-    public void onViewClicked(View view) {
-        int ret = -999;
-        switch (view.getId()){
-            case R.id.back:
-                mPresenter.release();
-                finish();
-                break;
-            case R.id.iv_setting:
-                startActivity(new Intent(WifiVideoLockRealTimeVideoActivity.this, PhilipsWifiVideoLockRealTimeActivity.class));
-                break;
-            case R.id.iv_screenshot:
-                break;
-            case R.id.iv_mute:
-                ret= XMP2PManager.getInstance().startAudioStream();
-                if(ret>=0){
-                    if(!XMP2PManager.getInstance().isEnableAudio()){
-                        XMP2PManager.getInstance().enableAudio(true);
-                    }
-                }
-                break;
-            case R.id.iv_calling:
-                break;
-            case R.id.iv_recoring:
-                break;
-
-        }
     }
 
     @Override

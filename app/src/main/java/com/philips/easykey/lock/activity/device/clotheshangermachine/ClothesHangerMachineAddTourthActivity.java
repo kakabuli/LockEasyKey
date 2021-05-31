@@ -23,22 +23,14 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.DropEditText;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothesHangerMachineAddTourthView,
         ClothesHangerMachineAddTourthPresenter<IClothesHangerMachineAddTourthView>> implements IClothesHangerMachineAddTourthView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.ap_ssid_text)
     DropEditText apSsidText;
-    @BindView(R.id.ap_password_edit)
     EditText apPasswordEdit;
-    @BindView(R.id.iv_eye)
     ImageView ivEye;
-    @BindView(R.id.confirm_btn)
     TextView confirmBtn;
 
     private MessageDialog messageDialog;
@@ -60,7 +52,49 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_tourth);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        apSsidText = findViewById(R.id.ap_ssid_text);
+        apPasswordEdit = findViewById(R.id.ap_password_edit);
+        ivEye = findViewById(R.id.iv_eye);
+        confirmBtn = findViewById(R.id.confirm_btn);
+
+        back.setOnClickListener(v -> finish());
+        ivEye.setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivEye.setImageResource(R.mipmap.eye_close_has_color);
+            } else {
+                apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivEye.setImageResource(R.mipmap.eye_open_has_color);
+            }
+        });
+        confirmBtn.setOnClickListener(v -> {
+            sSsid = apSsidText.getText().toString();
+            String sPassword = apPasswordEdit.getText().toString();
+            if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
+                ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
+                return;
+            }
+            if (sPassword.length() < 8){
+                ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
+                return;
+            }
+
+            Intent intent = new Intent(ClothesHangerMachineAddTourthActivity.this,ClothesHangerMachineAddFifthActivity.class);
+            intent.putExtra("wifiModelType",wifiModelType);
+            intent.putExtra(KeyConstants.CLOTHES_HANGER_PASSWORD_TIMES,times);
+            intent.putExtra(KeyConstants.ClOTHES_HANGER_MACHINE_WIFI_SSID,sSsid);
+            intent.putExtra(KeyConstants.ClOTHES_HANGER_MACHINE_WIFI_PASSWORD,sPassword);
+            intent.putExtra(KeyConstants.BLE_VERSION, bleVersion);
+            intent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
+            intent.putExtra(KeyConstants.BLE_MAC, deviceMAC);
+            intent.putExtra(KeyConstants.DEVICE_NAME, deviceName);
+            startActivityForResult(intent,TO_CHECK_WIFI_PASSWORD);
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType") + "";
         bleVersion = getIntent().getIntExtra(KeyConstants.BLE_VERSION,4);
@@ -102,50 +136,6 @@ public class ClothesHangerMachineAddTourthActivity extends BaseActivity<IClothes
         return new ClothesHangerMachineAddTourthPresenter<>();
     }
 
-
-    @OnClick({R.id.back,R.id.confirm_btn,R.id.iv_eye})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_eye:
-                passwordHide = !passwordHide;
-                if (passwordHide) {
-                    apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivEye.setImageResource(R.mipmap.eye_close_has_color);
-                } else {
-                    apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivEye.setImageResource(R.mipmap.eye_open_has_color);
-                }
-                break;
-            case R.id.confirm_btn:
-                sSsid = apSsidText.getText().toString();
-                String sPassword = apPasswordEdit.getText().toString();
-                if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
-                    return;
-                }
-                if (sPassword.length() < 8){
-                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
-                    return;
-                }
-
-                Intent intent = new Intent(ClothesHangerMachineAddTourthActivity.this,ClothesHangerMachineAddFifthActivity.class);
-                intent.putExtra("wifiModelType",wifiModelType);
-                intent.putExtra(KeyConstants.CLOTHES_HANGER_PASSWORD_TIMES,times);
-                intent.putExtra(KeyConstants.ClOTHES_HANGER_MACHINE_WIFI_SSID,sSsid);
-                intent.putExtra(KeyConstants.ClOTHES_HANGER_MACHINE_WIFI_PASSWORD,sPassword);
-                intent.putExtra(KeyConstants.BLE_VERSION, bleVersion);
-                intent.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
-                intent.putExtra(KeyConstants.BLE_MAC, deviceMAC);
-                intent.putExtra(KeyConstants.DEVICE_NAME, deviceName);
-                startActivityForResult(intent,TO_CHECK_WIFI_PASSWORD);
-                break;
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

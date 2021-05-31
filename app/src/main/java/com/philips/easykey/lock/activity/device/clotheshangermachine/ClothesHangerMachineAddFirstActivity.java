@@ -27,16 +27,11 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.button_next)
     TextView button_next;
-    @BindView(R.id.back)
     ImageView back;
 
     private String wifiModelType = "";
@@ -47,7 +42,38 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_first);
-        ButterKnife.bind(this);
+
+        button_next = findViewById(R.id.button_next);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(v -> finish());
+        button_next.setOnClickListener(v -> {
+            //检查权限，检查是否连接wifi
+            permissionDisposable = rxPermissions
+                    .request(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .subscribe(granted -> {
+                        if (granted) {
+                            // All requested permissions are granted
+                        } else {
+                            // At least one permission is denied
+                            ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
+                        }
+                    });
+            if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {
+                showWifiDialog();
+                WifiUtils.getInstance(MyApplication.getInstance()).openWifi();
+                return;
+            }
+            if (!GpsUtil.isOPen(MyApplication.getInstance())) {
+                GpsUtil.openGPS(MyApplication.getInstance());
+                showLocationPermission();
+                return;
+            }
+            Intent intent = new Intent(this, ClothesHangerMachineAddSecondActivity.class);
+            intent.putExtra("wifiModelType",wifiModelType);
+            startActivity(intent);
+            finish();
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType") + "";
         saveWifiName();
@@ -67,44 +93,6 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
     protected void onDestroy() {
         super.onDestroy();
     }
-
-    @OnClick({R.id.button_next,R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.button_next:
-                //检查权限，检查是否连接wifi
-                permissionDisposable = rxPermissions
-                        .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                        .subscribe(granted -> {
-                            if (granted) {
-                                // All requested permissions are granted
-                            } else {
-                                // At least one permission is denied
-                                ToastUtils.showShort(getString(R.string.philips_granted_local_please_open_wifi));
-                            }
-                        });
-                if (!WifiUtils.getInstance(MyApplication.getInstance()).isWifiEnable()) {
-                    showWifiDialog();
-                    WifiUtils.getInstance(MyApplication.getInstance()).openWifi();
-                    return;
-                }
-                if (!GpsUtil.isOPen(MyApplication.getInstance())) {
-                    GpsUtil.openGPS(MyApplication.getInstance());
-                    showLocationPermission();
-                    return;
-                }
-                Intent intent = new Intent(this, ClothesHangerMachineAddSecondActivity.class);
-                intent.putExtra("wifiModelType",wifiModelType);
-                startActivity(intent);
-                finish();
-                break;
-        }
-    }
-
-
 
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleOneButtonDialog(

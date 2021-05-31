@@ -18,17 +18,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class OTADialogActivity extends BaseBleCheckInfoActivity<IOtaView, OtaPresenter<IOtaView>> implements IOtaView {
-    @BindView(R.id.tv_hint)
+
     TextView tvHint;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_left)
     TextView tvLeft;
-    @BindView(R.id.tv_right)
     TextView tvRight;
     private BleLockInfo bleLockInfo;
     private String sn;
@@ -39,7 +34,11 @@ public class OTADialogActivity extends BaseBleCheckInfoActivity<IOtaView, OtaPre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otadialog);
 
-        ButterKnife.bind(this);
+        tvHint = findViewById(R.id.tv_hint);
+        tvContent = findViewById(R.id.tv_content);
+        tvLeft = findViewById(R.id.tv_left);
+        tvRight = findViewById(R.id.tv_right);
+
         bleLockInfo = (BleLockInfo) getIntent().getSerializableExtra(KeyConstants.BLE_DEVICE_INFO);
         String content = String.format(getString(R.string.oad_content), bleLockInfo.getServerLockInfo().getLockNickName());
         tvContent.setText(content);

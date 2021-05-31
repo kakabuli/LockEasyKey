@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,23 +13,14 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingView, GatwayLockSettingPresenter<CatwayLockSettingView>> implements CatwayLockSettingView {
 
-    @BindView(R.id.setArmLocked)
     TextView setArmLocked;
-    @BindView(R.id.setAM)
     TextView setAM;
-    @BindView(R.id.getArmLocked)
     TextView getArmLocked;
-    @BindView(R.id.getAM)
     TextView getAM;
-    @BindView(R.id.input_armlock)
     EditText inputArmlock;
-    @BindView(R.id.input_AM)
     EditText inputAM;
 
     private String gatewayId;
@@ -41,7 +31,25 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-        ButterKnife.bind(this);
+
+        setArmLocked = findViewById(R.id.setArmLocked);
+        setAM = findViewById(R.id.setAM);
+        getArmLocked = findViewById(R.id.getArmLocked);
+        getAM = findViewById(R.id.getAM);
+        inputArmlock = findViewById(R.id.input_armlock);
+        inputAM = findViewById(R.id.input_AM);
+
+        setArmLocked.setOnClickListener(v -> {
+            armlock=Integer.parseInt(inputArmlock.getText().toString().trim());
+            mPresenter.setArmLocked(MyApplication.getInstance().getUid(), gatewayId, deviceId, armlock);
+        });
+        setAM.setOnClickListener(v -> {
+            am=Integer.parseInt(inputAM.getText().toString().trim());
+            mPresenter.setAM(MyApplication.getInstance().getUid(),gatewayId,deviceId,am);
+        });
+        getArmLocked.setOnClickListener(v -> mPresenter.getArmLocked(MyApplication.getInstance().getUid(),gatewayId,deviceId));
+        getAM.setOnClickListener(v -> mPresenter.getAm(MyApplication.getInstance().getUid(),gatewayId,deviceId));
+
         initData();
     }
 
@@ -56,27 +64,6 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
     @Override
     protected GatwayLockSettingPresenter<CatwayLockSettingView> createPresent() {
         return new GatwayLockSettingPresenter<>();
-    }
-
-    @OnClick({R.id.setArmLocked, R.id.setAM, R.id.getArmLocked, R.id.getAM})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.setArmLocked:
-                    armlock=Integer.parseInt(inputArmlock.getText().toString().trim());
-                    mPresenter.setArmLocked(MyApplication.getInstance().getUid(), gatewayId, deviceId, armlock);
-                break;
-            case R.id.setAM:
-                    am=Integer.parseInt(inputAM.getText().toString().trim());
-                    mPresenter.setAM(MyApplication.getInstance().getUid(),gatewayId,deviceId,am);
-                break;
-            case R.id.getArmLocked:
-                mPresenter.getArmLocked(MyApplication.getInstance().getUid(),gatewayId,deviceId);
-                break;
-            case R.id.getAM:
-                mPresenter.getAm(MyApplication.getInstance().getUid(),gatewayId,deviceId);
-
-                break;
-        }
     }
 
     @Override

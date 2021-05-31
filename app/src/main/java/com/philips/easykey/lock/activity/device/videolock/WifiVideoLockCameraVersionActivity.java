@@ -24,32 +24,19 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoLockOTAView, PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView>>
         implements IWifiVideoLockOTAView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_lock_firware_number)
     TextView tvLockFirwareNumber;
-    @BindView(R.id.tv_lock_wifi_firware_number)
     TextView tvLockWifiFirwareNumber;
-    @BindView(R.id.tv_child_system_firware_number)
     TextView tvChildSystemFirwareNumber;
-    @BindView(R.id.tv_hardware_version)
     TextView tvHardwareVersion;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.iv_child_system_firware_number)
     ImageView ivChildSystemFirwareNumber;
-    @BindView(R.id.iv_lock_wifi_firware_number)
     ImageView ivLockWifiFirwareNumber;
-    @BindView(R.id.iv_lock_firware_number)
     ImageView ivLockFirwareNimner;
 
     private String wifiSN ;
@@ -67,7 +54,43 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_camera_version);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvLockFirwareNumber = findViewById(R.id.tv_lock_firware_number);
+        tvLockWifiFirwareNumber = findViewById(R.id.tv_lock_wifi_firware_number);
+        tvChildSystemFirwareNumber = findViewById(R.id.tv_child_system_firware_number);
+        tvHardwareVersion = findViewById(R.id.tv_hardware_version);
+        avi = findViewById(R.id.avi);
+        ivChildSystemFirwareNumber = findViewById(R.id.iv_child_system_firware_number);
+        ivLockWifiFirwareNumber = findViewById(R.id.iv_lock_wifi_firware_number);
+        ivLockFirwareNimner = findViewById(R.id.iv_lock_firware_number);
+
+        back.setOnClickListener(v -> finish());
+        findViewById(R.id.rl_child_system_firware_number).setOnClickListener(v -> {
+            if(wifiLockInfo.getIsAdmin() == 1){
+                if(avi.isShow()){
+                    if(wifiLockInfo.getWifiVersion() != null)
+                        updateOTA(wifiSN,wifiLockInfo.getWifiVersion() + "",1);
+                }
+            }
+        });
+        findViewById(R.id.rl_lock_wifi_firware_number).setOnClickListener(v -> {
+            if(wifiLockInfo.getIsAdmin() == 1){
+                if(avi.isShow()){
+                    if(wifiLockInfo.getMcu_version() != null)
+                        updateOTA(wifiSN,wifiLockInfo.getMcu_version() + "",5);
+                }
+            }
+        });
+        findViewById(R.id.rl_tv_lock_firware_number).setOnClickListener(v -> {
+            if(wifiLockInfo.getIsAdmin() == 1){
+                if(avi.isShow()){
+                    if(wifiLockInfo.getCamera_version() != null)
+                        updateOTA(wifiSN,wifiLockInfo.getCamera_version() + "",4);
+                }
+            }
+        });
 
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
@@ -111,42 +134,6 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     @Override
     protected PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView> createPresent() {
         return new PhilipsWifiVideoLockOTAPresenter<>();
-    }
-
-
-    @OnClick({R.id.back,R.id.rl_child_system_firware_number,R.id.rl_lock_wifi_firware_number,R.id.rl_tv_lock_firware_number})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_child_system_firware_number:
-                if(wifiLockInfo.getIsAdmin() == 1){
-                    if(avi.isShow()){
-                        if(wifiLockInfo.getWifiVersion() != null)
-                            updateOTA(wifiSN,wifiLockInfo.getWifiVersion() + "",1);
-                    }
-                }
-                break;
-            case R.id.rl_lock_wifi_firware_number:
-                if(wifiLockInfo.getIsAdmin() == 1){
-                    if(avi.isShow()){
-                        if(wifiLockInfo.getMcu_version() != null)
-                            updateOTA(wifiSN,wifiLockInfo.getMcu_version() + "",5);
-                    }
-                }
-                break;
-            case R.id.rl_tv_lock_firware_number:
-                if(wifiLockInfo.getIsAdmin() == 1){
-                    if(avi.isShow()){
-                        if(wifiLockInfo.getCamera_version() != null)
-                            updateOTA(wifiSN,wifiLockInfo.getCamera_version() + "",4);
-                    }
-                }
-                break;
-
-        }
-
     }
 
     private void updateOTA(String wifiSN,String version,int type) {

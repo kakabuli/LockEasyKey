@@ -11,7 +11,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -35,20 +34,14 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthView, WifiVideoLockFifthPresenter<IWifiLockVideoFifthView>> implements IWifiLockVideoFifthView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.circle_progress_bar2)
     WifiCircleProgress circleProgressBar2;
 
     private Handler handler = new Handler();
@@ -74,7 +67,13 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_connect_device);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        circleProgressBar2 = findViewById(R.id.circle_progress_bar2);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiVideoLockHelpActivity.class)));
 
 //        thread.start();
         sSsid = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
@@ -219,21 +218,6 @@ public class WifiVideoLockScanActivity extends BaseActivity<IWifiLockVideoFifthV
     @Override
     protected WifiVideoLockFifthPresenter<IWifiLockVideoFifthView> createPresent() {
         return new WifiVideoLockFifthPresenter<>();
-    }
-
-
-    @OnClick({R.id.back, R.id.help, R.id.circle_progress_bar2})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                break;
-            case R.id.circle_progress_bar2:
-                break;
-        }
     }
 
     public void onScanSuccess(WifiLockVideoBindBean wifiLockVideoBindBean) {

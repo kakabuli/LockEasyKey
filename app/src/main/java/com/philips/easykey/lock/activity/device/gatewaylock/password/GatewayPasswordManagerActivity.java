@@ -37,30 +37,21 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by David
  */
 public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPasswordManagerView, GatewayLockPasswordManagerPresenter<IGatewayLockPasswordManagerView>>
         implements IGatewayLockPasswordManagerView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
     /*   GatewayPasswordAdapter gatewayPasswordAdapter;*/
 
-    @BindView(R.id.ll_add_password)
     LinearLayout llAddPassword;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
     //List<ForeverPassword> pwdList = new ArrayList<>();
     private boolean isSync = false; //是不是正在同步锁中的密码
@@ -85,7 +76,15 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_password_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        recycleview = findViewById(R.id.recycleview);
+        llAddPassword = findViewById(R.id.ll_add_password);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+
         initView();
         initListener();
         initData();

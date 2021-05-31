@@ -24,36 +24,36 @@ import com.philips.easykey.lock.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/25
  */
 public class GatewayStressPasswordAddActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.recycleview)
+
     RecyclerView recyclerView;
-    @BindView(R.id.et_name)
     EditText etName;
     List<ShiXiaoNameBean> list = new ArrayList<>();
     ShiXiaoNameAdapter shiXiaoNameAdapter;
     View mView;
-    @BindView(R.id.et_password)
     EditText etPassword;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_stress_password_add);
-        ButterKnife.bind(this);
+
+        recyclerView = findViewById(R.id.recycleview);
+        etName = findViewById(R.id.et_name);
+        etPassword = findViewById(R.id.et_password);
+        btnRandomGeneration = findViewById(R.id.btn_random_generation);
+        btnConfirmGeneration = findViewById(R.id.btn_confirm_generation);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+
         initRecycleview();
         tvContent.setText(getText(R.string.add_password));
         ivBack.setOnClickListener(this);

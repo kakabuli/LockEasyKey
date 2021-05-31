@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:background="#F2F2F2">
 
-        <include layout="@layout/head_one"></include>
+        <include layout="@layout/head_one"/>
 
         <TextView
             android:id="@+id/tv_hint"

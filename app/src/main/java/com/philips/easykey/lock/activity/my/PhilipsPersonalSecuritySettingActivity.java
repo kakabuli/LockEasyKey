@@ -21,38 +21,21 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.cachefloder.ACache;
 import com.philips.easykey.lock.utils.cachefloder.CacheFloder;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPersonalSecuritySettingView, PersonalSecuritySettingPresenter<IPersonalSecuritySettingView>> implements IPersonalSecuritySettingView {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.security_setting_switch_text)
     TextView securitySettingSwitchText;
-    @BindView(R.id.update_hand_pwd_layout)
     RelativeLayout updateHandPwdLayout;
-    @BindView(R.id.iv_open_hand_pwd)
     ImageView ivOpenHandPwd;
-    @BindView(R.id.iv_open_touch_id)
     ImageView ivOpenTouchId;
-    @BindView(R.id.rl_open_hand_pwd)
     RelativeLayout rlOpenHandPwd;
-    @BindView(R.id.rl_open_touch_id)
     RelativeLayout rlOpenTouchId;
-    @BindView(R.id.touch_id_status)
     TextView touchIdStatus;
-    @BindView(R.id.rl_open_face_id)
     RelativeLayout rlOpenFaceId;
-    @BindView(R.id.face_id_status)
     TextView faceIdStatus;
-    @BindView(R.id.iv_open_face_id)
     ImageView ivOpenFaceId;
     boolean handPassword = false;
     boolean touchId = false;
@@ -62,7 +45,70 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_personal_security_setting);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        securitySettingSwitchText = findViewById(R.id.security_setting_switch_text);
+        updateHandPwdLayout = findViewById(R.id.update_hand_pwd_layout);
+        ivOpenHandPwd = findViewById(R.id.iv_open_hand_pwd);
+        ivOpenTouchId = findViewById(R.id.iv_open_touch_id);
+        rlOpenHandPwd = findViewById(R.id.rl_open_hand_pwd);
+        rlOpenTouchId = findViewById(R.id.rl_open_touch_id);
+        touchIdStatus = findViewById(R.id.touch_id_status);
+        rlOpenFaceId = findViewById(R.id.rl_open_face_id);
+        faceIdStatus = findViewById(R.id.face_id_status);
+        ivOpenFaceId = findViewById(R.id.iv_open_face_id);
+
+        ivBack.setOnClickListener(v -> finish());
+        updateHandPwdLayout.setOnClickListener(v -> {
+            String code = CacheFloder.readHandPassword(ACache.get(MyApplication.getInstance()), MyApplication.getInstance().getUid() + "handPassword");
+            if (code != null) {
+                Intent personalUpdateVerifyIntent = new Intent(this, PhilipsPersonalUpdateVerifyGesturePwd.class);
+                personalUpdateVerifyIntent.putExtra(KeyConstants.SOURCE, "PersonalSecuritySettingActivity_Update");
+                startActivity(personalUpdateVerifyIntent);
+            } else {
+                showHandPwdDilog();
+            }
+        });
+        rlOpenHandPwd.setOnClickListener(v -> {
+            //开启
+            handPassword = !handPassword;
+            if (handPassword) {
+                ivOpenHandPwd.setImageResource(R.drawable.philips_icon_switch_open);
+                Intent open = new Intent(this, PersonalUpdateGesturePwdActivity.class);
+                startActivity(open);
+            } else {
+                Intent personalUpdateVerifyIntent = new Intent(this, PhilipsPersonalUpdateVerifyGesturePwd.class);
+                personalUpdateVerifyIntent.putExtra(KeyConstants.SOURCE, "PhilipsPersonalSecuritySettingActivity");
+                startActivityForResult(personalUpdateVerifyIntent, 100);
+            }
+        });
+        rlOpenTouchId.setOnClickListener(v -> {
+            //指纹密码
+            touchId = !touchId;
+            //判断是否支持指纹识别
+            if (touchId) {
+                Boolean flag = mPresenter.isSupportFinger();
+                if (flag == false) {
+                    //手机不支持指纹识别
+                    ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
+                    touchIdStatus.setText(getString(R.string.open_touch_id));
+                    ToastUtils.showShort(R.string.no_support_fingeprint);
+                } else {
+                    mPresenter.isOpenFingerPrint();
+                }
+            } else {
+                ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
+                touchIdStatus.setText(getString(R.string.open_touch_id));
+                ACache.get(MyApplication.getInstance()).remove(MyApplication.getInstance().getUid() + "fingerStatus");
+            }
+        });
+        rlOpenFaceId.setOnClickListener(v -> {
+            faceId = !faceId;
+            setFaceIdUI(faceId);
+        });
+
         initView();
     }
 
@@ -77,64 +123,6 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
         mPresenter.setFingerPrintFlag();
         tvContent.setText(R.string.philips_system_setting);
         setFaceIdUI(faceId);
-    }
-
-    @OnClick({R.id.update_hand_pwd_layout, R.id.iv_back, R.id.rl_open_hand_pwd, R.id.rl_open_touch_id, R.id.rl_open_face_id})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.update_hand_pwd_layout:
-                String code = CacheFloder.readHandPassword(ACache.get(MyApplication.getInstance()), MyApplication.getInstance().getUid() + "handPassword");
-                if (code != null) {
-                    Intent personalUpdateVerifyIntent = new Intent(this, PhilipsPersonalUpdateVerifyGesturePwd.class);
-                    personalUpdateVerifyIntent.putExtra(KeyConstants.SOURCE, "PersonalSecuritySettingActivity_Update");
-                    startActivity(personalUpdateVerifyIntent);
-                } else {
-                    showHandPwdDilog();
-                }
-                break;
-            case R.id.rl_open_hand_pwd:
-                //开启
-                handPassword = !handPassword;
-                if (handPassword) {
-                    ivOpenHandPwd.setImageResource(R.drawable.philips_icon_switch_open);
-                    Intent open = new Intent(this, PersonalUpdateGesturePwdActivity.class);
-                    startActivity(open);
-                } else {
-                    Intent personalUpdateVerifyIntent = new Intent(this, PhilipsPersonalUpdateVerifyGesturePwd.class);
-                    personalUpdateVerifyIntent.putExtra(KeyConstants.SOURCE, "PhilipsPersonalSecuritySettingActivity");
-                    startActivityForResult(personalUpdateVerifyIntent, 100);
-                }
-                break;
-            case R.id.rl_open_touch_id:
-                //指纹密码
-                touchId = !touchId;
-                //判断是否支持指纹识别
-                if (touchId) {
-                    Boolean flag = mPresenter.isSupportFinger();
-                    if (flag == false) {
-                        //手机不支持指纹识别
-                        ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
-                        touchIdStatus.setText(getString(R.string.open_touch_id));
-                        ToastUtils.showShort(R.string.no_support_fingeprint);
-                    } else {
-                        mPresenter.isOpenFingerPrint();
-                    }
-                } else {
-                    ivOpenTouchId.setImageResource(R.drawable.philips_icon_switch_close);
-                    touchIdStatus.setText(getString(R.string.open_touch_id));
-                    ACache.get(MyApplication.getInstance()).remove(MyApplication.getInstance().getUid() + "fingerStatus");
-                }
-                break;
-            case R.id.rl_open_face_id:
-                faceId = !faceId;
-                setFaceIdUI(faceId);
-                break;
-
-        }
-
     }
 
     private void showHandPwdDilog() {

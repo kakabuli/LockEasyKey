@@ -23,9 +23,6 @@ import com.philips.easykey.lock.widget.WifiCircleProgress;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -33,9 +30,7 @@ import io.reactivex.functions.Consumer;
 public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesHangerMachineAddFifthView,
         ClothesHangerMachineAddFifthPresenter<IClothesHangerMachineAddFifthView>> implements IClothesHangerMachineAddFifthView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.circle_progress_bar2)
     WifiCircleProgress circleProgressBar2;
 
     private MessageDialog messageDialog;
@@ -57,7 +52,19 @@ public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesH
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_fifth);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        circleProgressBar2 = findViewById(R.id.circle_progress_bar2);
+        back.setOnClickListener(v -> {
+            Intent data = new Intent(ClothesHangerMachineAddFifthActivity.this,ClothesHangerMachineAddTourthActivity.class);
+            data.putExtra(KeyConstants.CLOTHES_HANGER_PASSWORD_TIMES,times + 1);
+            data.putExtra(KeyConstants.BLE_VERSION, bleVersion);
+            data.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
+            data.putExtra(KeyConstants.BLE_MAC, deviceMAC);
+            data.putExtra(KeyConstants.DEVICE_NAME, deviceName);
+            setResult(RESULT_OK,data);
+            finish();
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType") + "";
         times = getIntent().getIntExtra(KeyConstants.CLOTHES_HANGER_PASSWORD_TIMES,0);
@@ -129,29 +136,7 @@ public class ClothesHangerMachineAddFifthActivity extends BaseActivity<IClothesH
         finish();
     }
 
-    @OnClick({R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                Intent data = new Intent(ClothesHangerMachineAddFifthActivity.this,ClothesHangerMachineAddTourthActivity.class);
-                data.putExtra(KeyConstants.CLOTHES_HANGER_PASSWORD_TIMES,times + 1);
-                data.putExtra(KeyConstants.BLE_VERSION, bleVersion);
-                data.putExtra(KeyConstants.BLE_DEVICE_SN, deviceSN);
-                data.putExtra(KeyConstants.BLE_MAC, deviceMAC);
-                data.putExtra(KeyConstants.DEVICE_NAME, deviceName);
-                setResult(RESULT_OK,data);
-                finish();
-                break;
-
-        }
-    }
-
-    private Runnable timeoutRunnable = new Runnable() {
-        @Override
-        public void run() {
-            onScanFailed();
-        }
-    };
+    private Runnable timeoutRunnable = this::onScanFailed;
 
     private void onScanFailed() {
         Intent intent = new Intent(ClothesHangerMachineAddFifthActivity.this,ClothesHangerMachineAddTourthFailedActivity.class);

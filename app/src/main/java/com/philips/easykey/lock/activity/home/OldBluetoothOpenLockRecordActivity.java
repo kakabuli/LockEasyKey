@@ -34,41 +34,39 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by David on 2019/4/22
  */
 public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLockRecordView, OpenLockRecordPresenter<IOpenLockRecordView>>
         implements IOpenLockRecordView, View.OnClickListener {
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
     List<BluetoothRecordBean> list = new ArrayList<>();
     BluetoothRecordAdapter bluetoothRecordAdapter;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
     private BleLockInfo bleLockInfo;
     private BluetoothRecordActivity activity;
     private boolean isLoadingBleRecord;  //正在加载锁上数据
     private int currentPage = 1;   //当前的开锁记录时间
     View view;
-    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_bluetooth_open_lock_record);
-        unbinder = ButterKnife.bind(this);
+
+        recycleview = findViewById(R.id.recycleview);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+
         tvSynchronizedRecord.setOnClickListener(this);
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.equipment_dynamic);
@@ -110,13 +108,6 @@ public class OldBluetoothOpenLockRecordActivity extends BaseBleActivity<IOpenLoc
             }
         });
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
-    }
-
 
     @Override
     public void onLoseRecord(List<Integer> numbers) {

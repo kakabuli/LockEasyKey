@@ -24,29 +24,18 @@ import com.philips.easykey.lock.activity.choosewifi.WifiBean;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.blankj.utilcode.util.LogUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import android.content.Context;
-import com.blankj.utilcode.util.ToastUtils;
-
 
 public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.lv_wifi_list)
     ListView lv_wifi_list;
 
     private String wifiName;  //wifi名字
@@ -63,7 +52,13 @@ public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_list_choose);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        lv_wifi_list = findViewById(R.id.lv_wifi_list);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
 
         getInfo();
         setListener();
@@ -107,17 +102,7 @@ public class WifiLockScanWifiListActivity extends BaseAddToApplicationActivity {
             listView.setAdapter(new WiFiListAdapter(this,wifiBeanList));
         }
     }
-    @OnClick({R.id.back, R.id.help})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-        }
-    }
+
     /****
      * 添加监听
      */

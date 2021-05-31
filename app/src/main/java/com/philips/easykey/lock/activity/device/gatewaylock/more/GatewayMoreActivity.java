@@ -33,45 +33,29 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockServiceInfoDao;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 /**
  * Created by David on 2019/4/15
  */
 public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, GatewayLockMorePresenter<GatewayLockMoreView>>
         implements View.OnClickListener, GatewayLockMoreView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.iv_message_free)
     ImageView ivMessageFree;
-    @BindView(R.id.rl_message_free)
     RelativeLayout rlMessageFree;
-    @BindView(R.id.rl_door_lock_language_switch)
     RelativeLayout rlDoorLockLanguageSwitch;
-    @BindView(R.id.iv_silent_mode)
     ImageView ivSilentMode;
-    @BindView(R.id.rl_silent_mode)
     RelativeLayout rlSilentMode;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     boolean getAutoLockSuccess = false;
     boolean silentModeStatus;
     String name;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.rl_am)
     RelativeLayout rlAm;
-    @BindView(R.id.iv_am)
     ImageView ivAm;
 
     private HomeShowBean showBean;
@@ -94,7 +78,22 @@ public class GatewayMoreActivity extends BaseActivity<GatewayLockMoreView, Gatew
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_more);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        ivMessageFree = findViewById(R.id.iv_message_free);
+        rlMessageFree = findViewById(R.id.rl_message_free);
+        rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
+        ivSilentMode = findViewById(R.id.iv_silent_mode);
+        rlSilentMode = findViewById(R.id.rl_silent_mode);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        rlAm = findViewById(R.id.rl_am);
+        ivAm = findViewById(R.id.iv_am);
+
         context = this;
         initView();
         initData();

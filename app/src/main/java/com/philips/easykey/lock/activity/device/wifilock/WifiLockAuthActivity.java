@@ -2,7 +2,6 @@ package com.philips.easykey.lock.activity.device.wifilock;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 
 import androidx.annotation.Nullable;
@@ -38,32 +37,20 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLockAuthPresenter<IWifiLockAuthView>>
         implements IWifiLockAuthView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_bluetooth_name)
     TextView tvBluetoothName;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
-    @BindView(R.id.iv_power)
     BatteryView ivPower;
-    @BindView(R.id.tv_power)
     TextView tvPower;
-    @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.iv_lock_icon)
     ImageView ivLockIcon;
-    @BindView(R.id.iv_delete)
     ImageView ivDelete;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private static final int TO_MORE_REQUEST_CODE = 101;
     private Handler handler = new Handler();
@@ -76,11 +63,21 @@ public class WifiLockAuthActivity extends BaseActivity<IWifiLockAuthView, WifiLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_lock_authorization);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        ButterKnife.bind(this);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvBluetoothName = findViewById(R.id.tv_bluetooth_name);
+        tvType = findViewById(R.id.tv_type);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);
+        tvDate = findViewById(R.id.tv_date);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        ivLockIcon = findViewById(R.id.iv_lock_icon);
+        ivDelete = findViewById(R.id.iv_delete);
+        titleBar = findViewById(R.id.title_bar);
+
         productList = MyApplication.getInstance().getProductInfos();
 
         Intent intent = getIntent();

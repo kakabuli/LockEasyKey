@@ -36,9 +36,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by David on 2019/4/22
@@ -47,12 +44,8 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
 
     List<BluetoothRecordBean> mOpenLockList = new ArrayList<>(); //全部数据
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.no_have_record)
     TextView noHaveRecord;
-    Unbinder unbinder;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
     private String gatewayId;
@@ -65,7 +58,11 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_gateway_open_lock_record, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        noHaveRecord = view.findViewById(R.id.no_have_record);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
         initRecycleView();
         initData();
         initRefresh();
@@ -92,16 +89,13 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
             }
         });
 
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                if (!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(deviceId)){
-                    if (lastPage==0){
-                        mPresenter.openGatewayLockRecord(gatewayId,deviceId,MyApplication.getInstance().getUid(),page,20);
-                        refreshLayout.finishRefresh(5*1000);
-                    }else{
-                        refreshLayout.finishLoadMore();
-                    }
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            if (!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(deviceId)){
+                if (lastPage==0){
+                    mPresenter.openGatewayLockRecord(gatewayId,deviceId,MyApplication.getInstance().getUid(),page,20);
+                    refreshLayout.finishRefresh(5*1000);
+                }else{
+                    refreshLayout.finishLoadMore();
                 }
             }
         });
@@ -154,13 +148,6 @@ public class GatewayOpenLockRecordFragment extends BaseFragment<IGatewayLockReco
                 recycleview.setVisibility(View.GONE);
             }
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-
     }
 
 

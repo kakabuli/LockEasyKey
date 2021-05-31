@@ -10,15 +10,10 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineAddThirdFailedActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.button_next)
     TextView button_next;
 
     private String wifiModelType = "";
@@ -27,7 +22,17 @@ public class ClothesHangerMachineAddThirdFailedActivity extends BaseAddToApplica
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_third_failed);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        button_next = findViewById(R.id.button_next);
+
+        back.setOnClickListener(v -> finish());
+        button_next.setOnClickListener(v -> {
+            Intent clothesMachineIntent = new Intent(this, ClothesHangerMachineAddFirstActivity.class);
+            clothesMachineIntent.putExtra("wifiModelType",wifiModelType);
+            startActivity(clothesMachineIntent);
+            finish();
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType");
     }
@@ -35,22 +40,6 @@ public class ClothesHangerMachineAddThirdFailedActivity extends BaseAddToApplica
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @OnClick({R.id.back,R.id.button_next})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.button_next:
-                Intent clothesMachineIntent = new Intent(this, ClothesHangerMachineAddFirstActivity.class);
-                clothesMachineIntent.putExtra("wifiModelType",wifiModelType);
-                startActivity(clothesMachineIntent);
-                finish();
-                break;
-
-        }
     }
 
 }

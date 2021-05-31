@@ -26,23 +26,17 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockShareAddUserView, WiFiLockShareAddUserPresenter<IWiFiLockShareAddUserView>>
         implements View.OnClickListener, IWiFiLockShareAddUserView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.et_telephone)
     EditText etTelephone;
-    @BindView(R.id.btn_confirm)
     Button btnConfirm;
-    @BindView(R.id.tv_nick_name)
     TextView mTvNickName;
-    @BindView(R.id.et_nick_name)
     EditText mEtNickName;
     private String wifiSn;
     private String nickName;
@@ -53,7 +47,13 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_add_family_member);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        etTelephone = findViewById(R.id.et_telephone);
+        btnConfirm = findViewById(R.id.btn_confirm);
+        mTvNickName = findViewById(R.id.tv_nick_name);
+        mEtNickName = findViewById(R.id.et_nick_name);
+
         ivBack.setOnClickListener(this);
         btnConfirm.setOnClickListener(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);

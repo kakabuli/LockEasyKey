@@ -20,22 +20,16 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.bean.GwLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/22
  */
 public class GatewayEquipmentDynamicActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_open_lock_record)
     TextView tvOpenLockRecord;
-    @BindView(R.id.tv_warn_information)
     TextView tvWarnInformation;
-    @BindView(R.id.content)
     FrameLayout content;
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -50,7 +44,13 @@ public class GatewayEquipmentDynamicActivity extends BaseAddToApplicationActivit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_equipment_dynamic);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvOpenLockRecord = findViewById(R.id.tv_open_lock_record);
+        tvWarnInformation = findViewById(R.id.tv_warn_information);
+        content = findViewById(R.id.content);
+
         initData();
         initListener();
         initView();

@@ -25,22 +25,15 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoLockAMModeView, WifiVideoLockAMModePresenter<IWifiVideoLockAMModeView>>
         implements IWifiVideoLockAMModeView{
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.ck_normal)
     CheckBox ckNormal;
-    @BindView(R.id.ck_am)
     CheckBox ckAm;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
 
     private String wifiSn;
@@ -57,6 +50,52 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
+
+        back = findViewById(R.id.back);
+        ckNormal = findViewById(R.id.ck_normal);
+        ckAm = findViewById(R.id.ck_am);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+
+        back.setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(avi.isShow()) setAMMode();
+            }else{
+                finish();
+            }
+        });
+        findViewById(R.id.normal_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(!ckNormal.isChecked()){
+                    ckNormal.setChecked(true);
+                    ckAm.setChecked(false);
+                }
+            }
+        });
+        findViewById(R.id.am_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(!ckAm.isChecked()){
+                    ckNormal.setChecked(false);
+                    ckAm.setChecked(true);
+                }
+            }
+        });
 
         if(wifiLockInfo != null){
             if(wifiLockInfo.getAmMode() == 0 ){
@@ -121,58 +160,6 @@ public class PhilipsWifiVideoLockAMModeActivity extends BaseActivity<IWifiVideoL
         }
         return super.onKeyDown(keyCode,event);
 
-    }
-
-    @OnClick({R.id.back,R.id.normal_layout,R.id.am_layout})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                if(wifiLockInfo.getPowerSave() == 0){
-                    if(avi.isShow())
-                        setAMMode();
-
-                }else{
-                    finish();
-
-                }
-                break;
-            case R.id.normal_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!ckNormal.isChecked()){
-                        ckNormal.setChecked(true);
-                        ckAm.setChecked(false);
-                    }
-                }
-
-
-                break;
-            case R.id.am_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!ckAm.isChecked()){
-                        ckNormal.setChecked(false);
-                        ckAm.setChecked(true);
-                    }
-                }
-
-
-                break;
-        }
     }
 
     private void setAMMode() {

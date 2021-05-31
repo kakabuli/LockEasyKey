@@ -24,22 +24,14 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdateNickNameView, PersonalUpdateNickNamePresenter<IPersonalUpdateNickNameView>> implements IPersonalUpdateNickNameView, View.OnClickListener {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.et_nickName)
     EditText etNickName;
-    @BindView(R.id.delete)
     ImageView delete;
-    @BindView(R.id.bt_ok)
     Button btOk;
     private String userName;
 
@@ -47,7 +39,38 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_update_nickname);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        etNickName = findViewById(R.id.et_nickName);
+        delete = findViewById(R.id.delete);
+        btOk = findViewById(R.id.bt_ok);
+
+        delete.setOnClickListener(v -> etNickName.setText(""));
+        btOk.setOnClickListener(v -> {
+            String editText = etNickName.getText().toString().trim();
+            if (NetUtil.isNetworkAvailable()) {
+                if (TextUtils.isEmpty(editText)) {
+                    ToastUtils.showShort(R.string.nickName_not_empty);
+                    return;
+                }
+                if (!StringUtil.nicknameJudge(editText, 20)) {
+
+                    ToastUtils.showShort(R.string.philips_nickname_verify_error);
+                    return;
+                }
+
+                if (editText.equals(userName)) {
+                    ToastUtils.showShort(R.string.nickname_repeat);
+                    return;
+                }
+                mPresenter.updateNickName(MyApplication.getInstance().getUid(), editText);
+
+            } else {
+                ToastUtils.showShort(R.string.philips_noNet);
+            }
+        });
+
         initView();
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.philips_set_nickname));
@@ -97,40 +120,6 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
                 }
             }
         });
-    }
-
-
-    @OnClick({R.id.delete, R.id.bt_ok})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.delete:
-                etNickName.setText("");
-                break;
-            case R.id.bt_ok:
-                String editText = etNickName.getText().toString().trim();
-                if (NetUtil.isNetworkAvailable()) {
-                    if (TextUtils.isEmpty(editText)) {
-                        ToastUtils.showShort(R.string.nickName_not_empty);
-                        return;
-                    }
-                    if (!StringUtil.nicknameJudge(editText, 20)) {
-
-                        ToastUtils.showShort(R.string.philips_nickname_verify_error);
-                        return;
-                    }
-
-                    if (editText.equals(userName)) {
-                        ToastUtils.showShort(R.string.nickname_repeat);
-                        return;
-                    }
-                    mPresenter.updateNickName(MyApplication.getInstance().getUid(), editText);
-
-                } else {
-                    ToastUtils.showShort(R.string.philips_noNet);
-                }
-                break;
-
-        }
     }
 
     @Override

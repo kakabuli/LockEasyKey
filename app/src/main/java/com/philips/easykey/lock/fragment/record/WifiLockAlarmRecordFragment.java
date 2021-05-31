@@ -33,24 +33,17 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmRecordView, WifiLockAlarmRecordPresenter<IWifiLockAlarmRecordView>>
         implements IWifiLockAlarmRecordView, View.OnClickListener {
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     WifiLockAlarmGroupRecordAdapter wifiLockAlarmGroupRecordAdapter;
-    @BindView(R.id.rl_head)
     RelativeLayout rlHead;
     private int currentPage = 1;   //当前的开锁记录时间
     View view;
-    private Unbinder unbinder;
     private String wifiSn;
     List<WifiLockAlarmRecordGroup> list = new ArrayList<>();
 
@@ -58,7 +51,10 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = View.inflate(getActivity(), R.layout.fragment_bluetooth_warn_information, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        rlHead = view.findViewById(R.id.rl_head);
 
         wifiSn = getArguments().getString(KeyConstants.WIFI_SN);
         initRecycleView();
@@ -105,7 +101,6 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
     public void onDestroyView() {
         super.onDestroyView();
 //        ((ViewGroup) view.getParent()).removeView(view);
-        unbinder.unbind();
     }
 
 

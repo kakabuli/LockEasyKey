@@ -26,31 +26,21 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 import java.util.Arrays;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockPasswordShareView, GatewayLockPasswordSharePresenter<IGatewayLockPasswordShareView>>
         implements View.OnClickListener, IGatewayLockPasswordShareView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-     @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
-    @BindView(R.id.tv_short_message)
     TextView tvShortMessage;
-    @BindView(R.id.tv_wei_xin)
     TextView tvWeiXin;
-    @BindView(R.id.tv_copy)
     TextView tvCopy;
-    @BindView(R.id.iv_editor)
     ImageView ivEditor;
-    @BindView(R.id.tv_password)
     TextView tvPassword;
     private String password;
     String shiXiao;
@@ -64,7 +54,17 @@ public class GatewayPlanPasswordShareActivity extends BaseActivity<IGatewayLockP
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_plan_password_share);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvNumber = findViewById(R.id.tv_number);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvShortMessage = findViewById(R.id.tv_short_message);
+        tvWeiXin = findViewById(R.id.tv_wei_xin);
+        tvCopy = findViewById(R.id.tv_copy);
+        ivEditor = findViewById(R.id.iv_editor);
+        tvPassword = findViewById(R.id.tv_password);
+
         intent = getIntent();
         gatewayPasswordPlanBean = (GatewayPasswordPlanBean) intent.getSerializableExtra(KeyConstants.GATEWAY_PASSWORD_BEAN);
         password = intent.getStringExtra(KeyConstants.TO_DETAIL_PASSWORD);

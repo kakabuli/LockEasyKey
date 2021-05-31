@@ -25,29 +25,19 @@ import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.blankj.utilcode.util.ToastUtils;
 
 public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHangerMachineDetailView, ClothesHangerMachineDetailPresenter<IClothesHangerMachineDetailView>>
         implements IClothesHangerMachineDetailView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_module_number)
     TextView tvModuleNumber;
-    @BindView(R.id.tv_version)
     TextView tvVersion;
-    @BindView(R.id.tv_module_version)
     TextView tvModuleVersion;
-    @BindView(R.id.rl_check_version)
     RelativeLayout rlCheckVersion;
 
     private String wifiSN = "";
@@ -59,7 +49,26 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_detail);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvModuleNumber = findViewById(R.id.tv_module_number);
+        tvVersion = findViewById(R.id.tv_version);
+        tvModuleVersion = findViewById(R.id.tv_module_version);
+        rlCheckVersion = findViewById(R.id.rl_check_version);
+
+        back.setOnClickListener(v -> finish());
+        rlCheckVersion.setOnClickListener(v -> mPresenter.checkOTAInfo(wifiSN,tvVersion.getText().toString().trim() + "",
+                tvModuleVersion.getText().toString().trim() + ""));
+        rlDeviceName.setOnClickListener(v -> {
+            Intent settingNameIntent = new Intent(ClothesHangerMachineDetailActivity.this,ClothesHangerMachineSettingNameActivity.class);
+            settingNameIntent.putExtra(KeyConstants.WIFI_SN,wifiSN);
+            startActivityForResult(settingNameIntent,SETTING_NICKNAME_REQUSE);
+        });
+        findViewById(R.id.btn_delete).setOnClickListener(v -> showDeleteDevice());
+
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
         hangerInfo = MyApplication.getInstance().getClothesHangerMachineBySn(wifiSN);
@@ -103,27 +112,6 @@ public class ClothesHangerMachineDetailActivity extends BaseActivity<IClothesHan
     @Override
     protected ClothesHangerMachineDetailPresenter<IClothesHangerMachineDetailView> createPresent() {
         return new ClothesHangerMachineDetailPresenter<>();
-    }
-
-    @OnClick({R.id.back,R.id.rl_check_version,R.id.rl_device_name,R.id.btn_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_check_version:
-                mPresenter.checkOTAInfo(wifiSN,tvVersion.getText().toString().trim() + "",
-                        tvModuleVersion.getText().toString().trim() + "");
-                break;
-            case R.id.rl_device_name:
-                Intent settingNameIntent = new Intent(ClothesHangerMachineDetailActivity.this,ClothesHangerMachineSettingNameActivity.class);
-                settingNameIntent.putExtra(KeyConstants.WIFI_SN,wifiSN);
-                startActivityForResult(settingNameIntent,SETTING_NICKNAME_REQUSE);
-                break;
-            case R.id.btn_delete:
-                showDeleteDevice();
-                break;
-        }
     }
 
     @Override

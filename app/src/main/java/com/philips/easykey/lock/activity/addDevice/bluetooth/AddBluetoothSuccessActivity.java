@@ -37,22 +37,13 @@ import com.philips.easykey.lock.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessView, BindBleSuccessPresenter<IBindBleSuccessView>> implements IBindBleSuccessView {
 
-
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.save)
     Button save;
-    @BindView(R.id.lock)
     ImageView lock;
-    @BindView(R.id.back)
     ImageView back;
 
     private List<AddBluetoothPairSuccessBean> mList;
@@ -64,7 +55,11 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_add_success);
-        ButterKnife.bind(this);
+        inputName = findViewById(R.id.input_name);
+        recycler = findViewById(R.id.recycler);
+        save = findViewById(R.id.save);
+        lock = findViewById(R.id.lock);
+        back = findViewById(R.id.back);
         deviceName = getIntent().getStringExtra(KeyConstants.DEVICE_NAME);
         initData();
         initView();
@@ -97,6 +92,24 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
 
     private void initListener() {
         inputName.addTextChangedListener(new EditTextWatcher(this, null, inputName, 50));
+        back.setOnClickListener(v -> {
+            Intent backIntent = new Intent(this, MainActivity.class);
+            startActivity(backIntent);
+        });
+        save.setOnClickListener(v -> {
+            String name = inputName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(R.string.not_empty);
+                return;
+            }
+            if (!StringUtil.nicknameJudge(name)) {
+                ToastUtils.showShort(R.string.nickname_verify_error);
+                return;
+            }
+
+            showLoading(getString(R.string.is_saving_name));
+            mPresenter.modifyDeviceNickname(deviceName, MyApplication.getInstance().getUid(), inputName.getText().toString().trim());
+        });
     }
 
     @Override
@@ -153,30 +166,6 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
 
     }
 
-    @OnClick({R.id.save,R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent backIntent = new Intent(this, MainActivity.class);
-                startActivity(backIntent);
-                break;
-            case R.id.save:
-                String name = inputName.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(R.string.not_empty);
-                    return;
-                }
-                if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
-                    return;
-                }
-
-                showLoading(getString(R.string.is_saving_name));
-                mPresenter.modifyDeviceNickname(deviceName, MyApplication.getInstance().getUid(), inputName.getText().toString().trim());
-                break;
-        }
-    }
-
     @Override
     public void modifyDeviceNicknameSuccess() {
         hiddenLoading();
@@ -213,7 +202,4 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
         return true;
     }
 
-    @OnClick()
-    public void onViewClicked() {
-    }
 }

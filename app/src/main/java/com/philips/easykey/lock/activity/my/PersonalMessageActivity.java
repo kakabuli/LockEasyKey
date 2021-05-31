@@ -39,26 +39,15 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class PersonalMessageActivity extends BaseActivity<IPersonalMessageView, PersonalMessagePresenter<IPersonalMessageView>> implements PersonalMessageAdapter.OnDeleteClickLister, IPersonalMessageView, PersonalMessageAdapter.OnItemClickLister, View.OnClickListener {
 
 
-    @BindView(R.id.message_recycler)
     SlideRecyclerView messageRecycler;
-
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.rl_no_message)
     RelativeLayout rlNoMessage;
-    @BindView(R.id.ll_has_message)
     LinearLayout llHasMessage;
 
     private ArrayList<PersonalMessageBean> mPersonalMessageList;
@@ -71,7 +60,15 @@ public class PersonalMessageActivity extends BaseActivity<IPersonalMessageView, 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_message);
-        ButterKnife.bind(this);
+
+        messageRecycler = findViewById(R.id.message_recycler);
+        mRefreshLayout = findViewById(R.id.refreshLayout);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        rlNoMessage = findViewById(R.id.rl_no_message);
+        llHasMessage = findViewById(R.id.ll_has_message);
+
         initView();
         changeView();
         initData();

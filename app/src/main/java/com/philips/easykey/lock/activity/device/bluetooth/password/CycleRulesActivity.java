@@ -14,34 +14,22 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class CycleRulesActivity extends BaseAddToApplicationActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.user_cycle_everyday)
     CheckBox userCycleEveryday;
-    @BindView(R.id.user_cycle_7)
     CheckBox userCycle7;
-    @BindView(R.id.user_cycle_1)
     CheckBox userCycle1;
-    @BindView(R.id.user_cycle_2)
     CheckBox userCycle2;
-    @BindView(R.id.user_cycle_3)
     CheckBox userCycle3;
-    @BindView(R.id.user_cycle_4)
     CheckBox userCycle4;
-    @BindView(R.id.user_cycle_5)
     CheckBox userCycle5;
-    @BindView(R.id.user_cycle_6)
     CheckBox userCycle6;
     String data = "";//数据
-    @BindView(R.id.tv_content)
     TextView tvContent;
 
     @Override
@@ -49,7 +37,16 @@ public class CycleRulesActivity extends BaseAddToApplicationActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cycle_rules);
 
-        ButterKnife.bind(this);
+        ivBack = findViewById(R.id.iv_back);
+        userCycleEveryday = findViewById(R.id.user_cycle_everyday);
+        userCycle7 = findViewById(R.id.user_cycle_7);
+        userCycle1 = findViewById(R.id.user_cycle_1);
+        userCycle2 = findViewById(R.id.user_cycle_2);
+        userCycle3 = findViewById(R.id.user_cycle_3);
+        userCycle4 = findViewById(R.id.user_cycle_4);
+        userCycle5 = findViewById(R.id.user_cycle_5);
+        userCycle6 = findViewById(R.id.user_cycle_6);
+        tvContent = findViewById(R.id.tv_content);
 
         tvContent.setText(getResources().getString(R.string.cycle_rules_loop));
         ivBack.setOnClickListener(this);

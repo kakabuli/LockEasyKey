@@ -47,27 +47,17 @@ import com.philips.easykey.lock.utils.NetUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, SearchDevicePresenter<ISearchDeviceView>>
         implements ISearchDeviceView, OnBindClickListener {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.search_recycler)
     RecyclerView searchRecycler;
-    @BindView(R.id.recycler_layout)
     LinearLayout recyclerLayout;
-    @BindView(R.id.research)
     Button research;
-    @BindView(R.id.device_add_search)
     ImageView deviceAddSearch;
-    @BindView(R.id.tv_is_searching)
     TextView tvIsSearching;
 
     private DeviceSearchAdapter deviceSearchAdapter;
@@ -96,7 +86,31 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
             }
         }
 
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        searchRecycler = findViewById(R.id.search_recycler);
+        recyclerLayout = findViewById(R.id.recycler_layout);
+        research = findViewById(R.id.research);
+        deviceAddSearch = findViewById(R.id.device_add_search);
+        tvIsSearching = findViewById(R.id.tv_is_searching);
+
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> {
+            Intent helpIntent = new Intent(this, DeviceAddHelpActivity.class);
+            startActivity(helpIntent);
+        });
+        research.setOnClickListener(v -> {
+            //获取数据
+            if (GpsUtil.isOPen(this)){
+                initAnimation();
+                tvIsSearching.setVisibility(View.VISIBLE);
+                mPresenter.searchDevices();
+            }else {
+                ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
+            }
+        });
+
         showRecycler(false);
         initView();
         initData();
@@ -194,29 +208,6 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
         if (ivGreenObjectAnimator!=null){
             ivGreenObjectAnimator.cancel();
             ivGreenObjectAnimator.setupEndValues();
-        }
-    }
-
-    @OnClick({R.id.back, R.id.help, R.id.research})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                Intent helpIntent = new Intent(this, DeviceAddHelpActivity.class);
-                startActivity(helpIntent);
-                break;
-            case R.id.research:
-                //获取数据
-                if (GpsUtil.isOPen(this)){
-                    initAnimation();
-                    tvIsSearching.setVisibility(View.VISIBLE);
-                    mPresenter.searchDevices();
-                }else {
-                    ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
-                }
-                break;
         }
     }
 

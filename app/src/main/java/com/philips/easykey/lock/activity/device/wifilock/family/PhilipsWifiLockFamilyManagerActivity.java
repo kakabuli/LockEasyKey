@@ -34,29 +34,21 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLockFamilyManagerView,
         WifiLockFamilyManagerPresenter<IWifiLockFamilyManagerView>> implements IWifiLockFamilyManagerView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
 
     PhilipsWifiLockShareUserAdapter wifiLockShareUserAdapter;
     List< WifiLockShareResult.WifiLockShareUser> shareUsers = new ArrayList<>();
     boolean isNotData = true;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
-    @BindView(R.id.ll_add_user)
     RelativeLayout llAddUser;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
 
     public static final int REQUEST_CODE = 100;
@@ -67,7 +59,14 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_shared_device_management);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        recycleview = findViewById(R.id.recycleview);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        llAddUser = findViewById(R.id.ll_add_user);
+        llHasData = findViewById(R.id.ll_has_data);
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 

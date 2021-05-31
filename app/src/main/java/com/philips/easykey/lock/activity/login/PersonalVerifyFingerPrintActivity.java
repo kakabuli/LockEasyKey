@@ -35,24 +35,15 @@ import com.philips.easykey.lock.utils.manager.BiometricPromptManager;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 import com.philips.easykey.lock.widget.CircleImageView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 /**
  * 指纹验证解锁页面 从启动页跳转
  */
 public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVerifyFingerPrintView, PersonalFingerPrintPresenter<IPersonalVerifyFingerPrintView>> implements IPersonalVerifyFingerPrintView {
 
 
-    @BindView(R.id.finger_click)
     LinearLayout fingerClick;
-
-    @BindView(R.id.finger_more)
     TextView fingerMore;
-
-    @BindView(R.id.finger_image)
     CircleImageView fingerImage;
-    @BindView(R.id.fingeprint_img)
     ImageView fingeprintImg;
 
     private BottomMenuDialog.Builder dialogBuilder;
@@ -68,7 +59,27 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_fingerprint_verify);
         mContext = this;
-        ButterKnife.bind(this);
+
+        fingerClick = findViewById(R.id.finger_click);
+        fingerMore = findViewById(R.id.finger_more);
+        fingerImage = findViewById(R.id.finger_image);
+        fingeprintImg = findViewById(R.id.fingeprint_img);
+
+        fingerClick.setOnClickListener(v -> {
+            //已经打开
+            View mView = LayoutInflater.from(this).inflate(R.layout.personal_fingerprint_security, null);
+            TextView mFingerCancel = mView.findViewById(R.id.finger_cancel);
+            AlertDialog alertDialog = AlertDialogUtil.getInstance().common(this, mView);
+            mFingerCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+            initTouchId();
+        });
+        fingerMore.setOnClickListener(v -> showMoreDialog());
+
         initView();
         initData();
     }
@@ -204,28 +215,6 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
     }
 
 
-    @OnClick({R.id.finger_click, R.id.finger_more})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.finger_click:
-                //已经打开
-                View mView = LayoutInflater.from(this).inflate(R.layout.personal_fingerprint_security, null);
-                TextView mFingerCancel = mView.findViewById(R.id.finger_cancel);
-                AlertDialog alertDialog = AlertDialogUtil.getInstance().common(this, mView);
-                mFingerCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-                initTouchId();
-                break;
-            case R.id.finger_more:
-                showMoreDialog();
-                break;
-        }
-    }
-
     //展示头像对话框
     private void showMoreDialog() {
         dialogBuilder = new BottomMenuDialog.Builder(this);
@@ -268,7 +257,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
         dialogBuilder.addMenu(R.string.select_register, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(mContext, RegisterActivity.class);
+                Intent registerIntent = new Intent(mContext, PhilipsRegisterActivity.class);
                 startActivity(registerIntent);
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();

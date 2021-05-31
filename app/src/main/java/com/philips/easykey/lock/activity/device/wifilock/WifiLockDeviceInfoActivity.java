@@ -30,41 +30,23 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView {
 
-
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.rl_face_model_firmware_version)
     RelativeLayout rlFaceModelFirmwareVersion;
-    @BindView(R.id.tv_face_model_firmware_version)
     TextView tvFaceModelFirmwareVersion;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-    @BindView(R.id.iv_wifilock)
     ImageView ivWifilock;
-    @BindView(R.id.wifi_version)
     TextView wifiVersion;
-    @BindView(R.id.iv_wifimodel)
     ImageView ivWifimodel;
-    @BindView(R.id.rl_wifi_model_firmware_version)
     RelativeLayout rlWifiModelFirmwareVersion;
-    @BindView(R.id.rl_lock_model_firmware_version)
     RelativeLayout rlLockModelFirmwareVersion;
-    @BindView(R.id.rl_camera_version)
     RelativeLayout rlCameraVersion;
-    @BindView(R.id.rl_lock_firware_number)
     RelativeLayout rlLockFirwareNumber;
     private WifiLockInfo wifiLockInfo;
     private String wifiSN;
@@ -79,7 +61,67 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_device_info);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        rlFaceModelFirmwareVersion = findViewById(R.id.rl_face_model_firmware_version);
+        tvFaceModelFirmwareVersion = findViewById(R.id.tv_face_model_firmware_version);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        ivWifilock = findViewById(R.id.iv_wifilock);
+        wifiVersion = findViewById(R.id.wifi_version);
+        ivWifimodel = findViewById(R.id.iv_wifimodel);
+        rlWifiModelFirmwareVersion = findViewById(R.id.rl_wifi_model_firmware_version);
+        rlLockModelFirmwareVersion = findViewById(R.id.rl_lock_model_firmware_version);
+        rlCameraVersion = findViewById(R.id.rl_camera_version);
+        rlLockFirwareNumber = findViewById(R.id.rl_lock_firware_number);
+
+        back.setOnClickListener(v -> finish());
+        rlFaceModelFirmwareVersion.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(faceModelFirmwareVersion)) {
+                showLoading(getString(R.string.is_check_version));
+                multiOTAflag = false;
+                mPresenter.checkOtaInfo(wifiSN, faceModelFirmwareVersion, 3);
+            } else {
+                ToastUtils.showShort(getString(R.string.info_error));
+            }
+        });
+        rlLockModelFirmwareVersion.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(lockFirmwareVersion)) {
+                showLoading(getString(R.string.is_check_version));
+                if(BleLockUtils.isSupportPanelMultiOTA(wifiLockInfo.getFunctionSet())){
+                    multiOTAflag = true;
+                    mPresenter.checkMultiOTAInfo(wifiSN,wifiLockInfo.getFrontPanelVersion() + "",wifiLockInfo.getBackPanelVersion() + "");
+                }else {
+                    multiOTAflag = false;
+                    mPresenter.checkOtaInfo(wifiSN, lockFirmwareVersion, 2);
+                }
+            } else {
+                ToastUtils.showShort(getString(R.string.info_error));
+            }
+        });
+        rlWifiModelFirmwareVersion.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(sWifiVersion)) {
+                showLoading(getString(R.string.is_check_version));
+                multiOTAflag = false;
+                mPresenter.checkOtaInfo(wifiSN, sWifiVersion, 1);
+            } else {
+                ToastUtils.showShort(getString(R.string.info_error));
+            }
+        });
+        rlLockFirwareNumber.setOnClickListener(v -> {
+            Intent intent = new Intent(this, WifiVideoLockFirwareNumberActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
+            startActivity(intent);
+        });
+        rlCameraVersion.setOnClickListener(v -> {
+            Intent intent1 = new Intent(this, WifiVideoLockCameraVersionActivity.class);
+            intent1.putExtra(KeyConstants.WIFI_SN, wifiSN);
+            startActivity(intent1);
+        });
+
+
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
         productList = MyApplication.getInstance().getProductInfos();
@@ -140,60 +182,6 @@ public class WifiLockDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, 
     @Override
     protected WifiLockMorePresenter<IWifiLockMoreView> createPresent() {
         return new WifiLockMorePresenter<>();
-    }
-
-    @OnClick(R.id.back)
-    public void onClick() {
-        finish();
-    }
-
-    @OnClick({R.id.rl_face_model_firmware_version, R.id.rl_lock_model_firmware_version, R.id.rl_wifi_model_firmware_version,R.id.rl_camera_version,R.id.rl_lock_firware_number})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_face_model_firmware_version:
-                if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(faceModelFirmwareVersion)) {
-                    showLoading(getString(R.string.is_check_version));
-                    multiOTAflag = false;
-                    mPresenter.checkOtaInfo(wifiSN, faceModelFirmwareVersion, 3);
-                } else {
-                    ToastUtils.showShort(getString(R.string.info_error));
-                }
-                break;
-            case R.id.rl_lock_model_firmware_version:
-                if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(lockFirmwareVersion)) {
-                    showLoading(getString(R.string.is_check_version));
-                    if(BleLockUtils.isSupportPanelMultiOTA(wifiLockInfo.getFunctionSet())){
-                        multiOTAflag = true;
-                        mPresenter.checkMultiOTAInfo(wifiSN,wifiLockInfo.getFrontPanelVersion() + "",wifiLockInfo.getBackPanelVersion() + "");
-                    }else {
-                        multiOTAflag = false;
-                        mPresenter.checkOtaInfo(wifiSN, lockFirmwareVersion, 2);
-                    }
-                } else {
-                    ToastUtils.showShort(getString(R.string.info_error));
-                }
-                break;
-            case R.id.rl_wifi_model_firmware_version:
-                if (!TextUtils.isEmpty(wifiSN) && !TextUtils.isEmpty(sWifiVersion)) {
-                    showLoading(getString(R.string.is_check_version));
-                    multiOTAflag = false;
-                    mPresenter.checkOtaInfo(wifiSN, sWifiVersion, 1);
-                } else {
-                    ToastUtils.showShort(getString(R.string.info_error));
-                }
-                break;
-            case R.id.rl_lock_firware_number:
-                Intent intent = new Intent(this, WifiVideoLockFirwareNumberActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSN);
-                startActivity(intent);
-                break;
-            case R.id.rl_camera_version:
-                Intent intent1 = new Intent(this, WifiVideoLockCameraVersionActivity.class);
-                intent1.putExtra(KeyConstants.WIFI_SN, wifiSN);
-                startActivity(intent1);
-                break;
-
-        }
     }
 
     @Override

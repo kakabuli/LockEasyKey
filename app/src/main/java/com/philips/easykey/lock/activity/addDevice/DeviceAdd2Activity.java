@@ -36,34 +36,19 @@ import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, DeviceZigBeeDetailPresenter<DeviceZigBeeDetailView>> implements DeviceZigBeeDetailView {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.scan)
     ImageView scan;
-    @BindView(R.id.ble_lock)
     RelativeLayout bleLock;
-    @BindView(R.id.wifi_lock)
     RelativeLayout wifiLock;
-    @BindView(R.id.zigbee_lock)
     RelativeLayout zigbeeLock;
-    @BindView(R.id.cat_eye)
     LinearLayout catEye;
-    @BindView(R.id.rg4300)
     LinearLayout rg4300;
-    @BindView(R.id.gw6032)
     LinearLayout gw6032;
-    @BindView(R.id.gw6010)
     LinearLayout gw6010;
-    @BindView(R.id.single_switch)
     LinearLayout singleSwitch;
-    @BindView(R.id.double_switch)
     LinearLayout doubleSwitch;
     private boolean flag = false; //判断是否有绑定的网列表
     private int isAdmin = 1; //管理员，非1不是管理员
@@ -73,13 +58,168 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_add2);
-        ButterKnife.bind(this);
+        initView();
+        initOnClickListener();
         initData();
     }
 
     @Override
     protected DeviceZigBeeDetailPresenter<DeviceZigBeeDetailView> createPresent() {
         return new DeviceZigBeeDetailPresenter<>();
+    }
+
+    private void initView() {
+        back = findViewById(R.id.back);
+        scan = findViewById(R.id.scan);
+        bleLock = findViewById(R.id.ble_lock);
+        wifiLock = findViewById(R.id.wifi_lock);
+        zigbeeLock = findViewById(R.id.zigbee_lock);
+        catEye = findViewById(R.id.cat_eye);
+        rg4300 = findViewById(R.id.rg4300);
+        gw6032 = findViewById(R.id.gw6032);
+        gw6010 = findViewById(R.id.gw6010);
+        singleSwitch = findViewById(R.id.single_switch);
+        doubleSwitch = findViewById(R.id.double_switch);
+    }
+
+    private void initOnClickListener() {
+        back.setOnClickListener(v -> finish());
+        scan.setOnClickListener(v -> {
+            String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
+            if (strings.length>0){
+                ToastUtils.showShort(R.string.philips_activity_deviceadd2);
+                PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
+            }else {
+                Intent scanIntent = new Intent(this, QrCodeScanActivity.class);
+                scanIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
+                startActivityForResult(scanIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
+            }
+        });
+        bleLock.setOnClickListener(v -> {
+            Intent bluetoothIntent = new Intent(DeviceAdd2Activity.this, AddBluetoothFirstActivity.class);
+            startActivity(bluetoothIntent);
+        });
+        findViewById(R.id.face_lock).setOnClickListener(v -> {
+            Intent faceIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+            String faveType = "WiFi";
+            faceIntent.putExtra("wifiModelType", faveType);
+            startActivity(faceIntent);
+        });
+        findViewById(R.id.video_lock).setOnClickListener(v -> {
+            //视频WIFI锁
+            Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+            String wifiModelType = "WiFi&VIDEO";
+            wifiIntent.putExtra("wifiModelType", wifiModelType);
+            startActivity(wifiIntent);
+        });
+        wifiLock.setOnClickListener(v -> {
+            //                startActivity(new Intent(this,WifiLockAddNewFirstActivity.class));
+            Intent chooseAddIntent = new Intent(this, WifiLockAddNewToChooseActivity.class);
+            chooseAddIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
+            startActivityForResult(chooseAddIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
+        });
+        zigbeeLock.setOnClickListener(v -> {
+            if ((flag == true && isAdmin == 0) || (flag == true && isAdmin == 1)) {
+                Intent zigbeeIntent = new Intent(DeviceAdd2Activity.this, DeviceBindGatewayListActivity.class);
+                int type = 3;
+                zigbeeIntent.putExtra("type", type);
+                startActivity(zigbeeIntent);
+
+            } else if (flag == false) {
+                AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(DeviceAdd2Activity.this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+                        //跳转到配置网关添加的流程
+                        Intent gatewayIntent = new Intent(DeviceAdd2Activity.this, AddGatewayFirstActivity.class);
+                        startActivity(gatewayIntent);
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                    @Override
+                    public void afterTextChanged(String toString) {
+                    }
+                });
+            }
+        });
+        catEye.setOnClickListener(v -> {
+            if ((flag == true && isAdmin == 0) || (flag == true && isAdmin == 1)) {
+
+                Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
+                int type = 2;
+                catEyeIntent.putExtra("type", type);
+                startActivity(catEyeIntent);
+
+            } else if (flag == false) {
+                AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+                    @Override
+                    public void right() {
+                        //跳转到配置网关添加的流程
+                        Intent gatewayIntent = new Intent(DeviceAdd2Activity.this, AddGatewayFirstActivity.class);
+                        startActivity(gatewayIntent);
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                    @Override
+                    public void afterTextChanged(String toString) {
+                    }
+                });
+//                    Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
+//                    int type =2;
+//                    catEyeIntent.putExtra("type", type);
+//                    startActivity(catEyeIntent);
+            }
+//                else{
+//                    Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
+//                    int type =2;
+//                    catEyeIntent.putExtra("type", type);
+//                    startActivity(catEyeIntent);
+//                }
+        });
+        gw6010.setOnClickListener(v -> {
+            //跳转到添加网关
+            Intent addGateway = new Intent(this, AddGatewayFirstActivity.class);
+            startActivity(addGateway);
+        });
+        gw6032.setOnClickListener(v -> {
+            //跳转到添加网关
+            Intent addGateway = new Intent(this, AddGatewayFirstActivity.class);
+            startActivity(addGateway);
+        });
+        findViewById(R.id._3d_lock).setOnClickListener(v -> {
+            Intent k11fIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+            String k11fType = "WiFi";
+            k11fIntent.putExtra("wifiModelType", k11fType);
+            startActivity(k11fIntent);
+        });
+        findViewById(R.id.k11f_lock).setOnClickListener(v -> {
+            Intent k11fIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+            String k11fType = "WiFi";
+            k11fIntent.putExtra("wifiModelType", k11fType);
+            startActivity(k11fIntent);
+        });
+        findViewById(R.id.k20v_lock).setOnClickListener(v -> {
+            //视频WIFI锁
+            Intent k20vIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+            String k20vModelType = "WiFi&VIDEO";
+            k20vIntent.putExtra("wifiModelType", k20vModelType);
+            startActivity(k20vIntent);
+        });
+        findViewById(R.id.clothes_machine).setOnClickListener(v -> {
+            Intent clothesMachineAddIntent = new Intent(this, ClothesHangerMachineAddActivity.class);
+            clothesMachineAddIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
+            startActivityForResult(clothesMachineAddIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
+        });
     }
 
     private void initData() {
@@ -99,152 +239,6 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
             }
         }
     }
-
-    @OnClick({R.id.back, R.id.scan, R.id.ble_lock, R.id.wifi_lock, R.id.zigbee_lock, R.id.cat_eye, R.id.rg4300, R.id.gw6032, R.id.gw6010, R.id.single_switch,
-            R.id.double_switch,R.id.video_lock,R.id.face_lock,R.id.k20v_lock,R.id.k11f_lock,R.id._3d_lock,R.id.clothes_machine})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.scan:
-                String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
-                if (strings.length>0){
-                    ToastUtils.showShort(R.string.philips_activity_deviceadd2);
-                    PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
-                }else {
-                    Intent scanIntent = new Intent(this, QrCodeScanActivity.class);
-                    scanIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
-                    startActivityForResult(scanIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
-                }
-                break;
-            case R.id.ble_lock:
-                Intent bluetoothIntent = new Intent(DeviceAdd2Activity.this, AddBluetoothFirstActivity.class);
-                startActivity(bluetoothIntent);
-                break;
-            case R.id.face_lock:
-                Intent faceIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
-                String faveType = "WiFi";
-                faceIntent.putExtra("wifiModelType", faveType);
-                startActivity(faceIntent);
-                break;
-            case R.id.video_lock:
-                //视频WIFI锁
-                Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
-                String wifiModelType = "WiFi&VIDEO";
-                wifiIntent.putExtra("wifiModelType", wifiModelType);
-                startActivity(wifiIntent);
-                break;
-            case R.id.wifi_lock:
-//                startActivity(new Intent(this,WifiLockAddNewFirstActivity.class));
-                Intent chooseAddIntent = new Intent(this, WifiLockAddNewToChooseActivity.class);
-                chooseAddIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
-                startActivityForResult(chooseAddIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
-                break;
-            case R.id.zigbee_lock:
-                if ((flag == true && isAdmin == 0) || (flag == true && isAdmin == 1)) {
-                    Intent zigbeeIntent = new Intent(DeviceAdd2Activity.this, DeviceBindGatewayListActivity.class);
-                    int type = 3;
-                    zigbeeIntent.putExtra("type", type);
-                    startActivity(zigbeeIntent);
-
-                } else if (flag == false) {
-                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(DeviceAdd2Activity.this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-
-                        @Override
-                        public void right() {
-                            //跳转到配置网关添加的流程
-                            Intent gatewayIntent = new Intent(DeviceAdd2Activity.this, AddGatewayFirstActivity.class);
-                            startActivity(gatewayIntent);
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
-                        @Override
-                        public void afterTextChanged(String toString) {
-                        }
-                    });
-                }
-                break;
-            case R.id.cat_eye:
-                if ((flag == true && isAdmin == 0) || (flag == true && isAdmin == 1)) {
-
-                    Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
-                    int type = 2;
-                    catEyeIntent.putExtra("type", type);
-                    startActivity(catEyeIntent);
-
-                } else if (flag == false) {
-                    AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(this, getString(R.string.no_usable_gateway), getString(R.string.add_zigbee_device_first_pair_gateway), getString(R.string.philips_cancel), getString(R.string.configuration), "#1F96F7", new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-                        @Override
-                        public void right() {
-                            //跳转到配置网关添加的流程
-                            Intent gatewayIntent = new Intent(DeviceAdd2Activity.this, AddGatewayFirstActivity.class);
-                            startActivity(gatewayIntent);
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
-                        @Override
-                        public void afterTextChanged(String toString) {
-                        }
-                    });
-//                    Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
-//                    int type =2;
-//                    catEyeIntent.putExtra("type", type);
-//                    startActivity(catEyeIntent);
-                }
-//                else{
-//                    Intent catEyeIntent = new Intent(this, DeviceBindGatewayListActivity.class);
-//                    int type =2;
-//                    catEyeIntent.putExtra("type", type);
-//                    startActivity(catEyeIntent);
-//                }
-                break;
-            case R.id.rg4300:
-                break;
-            case R.id.gw6032:
-            case R.id.gw6010:
-                //跳转到添加网关
-                Intent addGateway = new Intent(this, AddGatewayFirstActivity.class);
-                startActivity(addGateway);
-                break;
-            case R.id.single_switch:
-                break;
-            case R.id.double_switch:
-                break;
-
-            case R.id._3d_lock:
-            case R.id.k11f_lock:
-                Intent k11fIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
-                String k11fType = "WiFi";
-                k11fIntent.putExtra("wifiModelType", k11fType);
-                startActivity(k11fIntent);
-                break;
-            case R.id.k20v_lock:
-                //视频WIFI锁
-                Intent k20vIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
-                String k20vModelType = "WiFi&VIDEO";
-                k20vIntent.putExtra("wifiModelType", k20vModelType);
-                startActivity(k20vIntent);
-                break;
-            case R.id.clothes_machine:
-                Intent clothesMachineAddIntent = new Intent(this, ClothesHangerMachineAddActivity.class);
-                clothesMachineAddIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
-                startActivityForResult(clothesMachineAddIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
-
-                break;
-        }
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

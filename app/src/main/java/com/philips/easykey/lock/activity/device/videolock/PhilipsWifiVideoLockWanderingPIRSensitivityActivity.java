@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
@@ -22,20 +21,13 @@ import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockWanderingPIRSensitivityActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView   {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.iv_sensitivity_1)
     CheckBox ivSensitivity1;
-    @BindView(R.id.iv_sensitivity_2)
     CheckBox ivSensitivity2;
-    @BindView(R.id.iv_sensitivity_3)
     CheckBox ivSensitivity3;
 
     private String wifiSn;
@@ -48,7 +40,57 @@ public class PhilipsWifiVideoLockWanderingPIRSensitivityActivity extends BaseAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_wandering_pir_sensitivity);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        ivSensitivity1 = findViewById(R.id.iv_sensitivity_1);
+        ivSensitivity2 = findViewById(R.id.iv_sensitivity_2);
+        ivSensitivity3 = findViewById(R.id.iv_sensitivity_3);
+
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_SENSITIVITY,pir);
+            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            setResult(RESULT_OK,intent);
+            finish();
+        });
+        findViewById(R.id.rl_sensitivity_1).setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(!ivSensitivity1.isChecked()){
+                    ivSensitivity1.setChecked(true);
+                    ivSensitivity2.setChecked(false);
+                    ivSensitivity3.setChecked(false);
+                    pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_3;
+                }
+            }else{
+                powerStatusDialog();
+            }
+        });
+        findViewById(R.id.rl_sensitivity_2).setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+
+                if(!ivSensitivity2.isChecked()){
+                    ivSensitivity2.setChecked(true);
+                    ivSensitivity1.setChecked(false);
+                    ivSensitivity3.setChecked(false);
+                    pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_2;
+                }
+            }else{
+                powerStatusDialog();
+            }
+        });
+        findViewById(R.id.rl_sensitivity_3).setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(!ivSensitivity3.isChecked()){
+                    ivSensitivity3.setChecked(true);
+                    ivSensitivity2.setChecked(false);
+                    ivSensitivity1.setChecked(false);
+                    pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_1;
+                }
+
+            }else{
+                powerStatusDialog();
+            }
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -89,58 +131,6 @@ public class PhilipsWifiVideoLockWanderingPIRSensitivityActivity extends BaseAct
             return true;
         }
         return super.onKeyDown(keyCode,event);
-    }
-
-    @OnClick({R.id.back,R.id.rl_sensitivity_1,R.id.rl_sensitivity_2,R.id.rl_sensitivity_3})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                Intent intent = new Intent();
-                intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_SENSITIVITY,pir);
-                intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                setResult(RESULT_OK,intent);
-                finish();
-                break;
-            case R.id.rl_sensitivity_1:
-                if(wifiLockInfo.getPowerSave() == 0){
-
-                    if(!ivSensitivity1.isChecked()){
-                        ivSensitivity1.setChecked(true);
-                        ivSensitivity2.setChecked(false);
-                        ivSensitivity3.setChecked(false);
-                        pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_3;
-                    }
-                }else{
-                    powerStatusDialog();
-                }
-                break;
-            case R.id.rl_sensitivity_2:
-                if(wifiLockInfo.getPowerSave() == 0){
-
-                    if(!ivSensitivity2.isChecked()){
-                        ivSensitivity2.setChecked(true);
-                        ivSensitivity1.setChecked(false);
-                        ivSensitivity3.setChecked(false);
-                        pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_2;
-                    }
-                }else{
-                    powerStatusDialog();
-                }
-                break;
-            case R.id.rl_sensitivity_3:
-                if(wifiLockInfo.getPowerSave() == 0){
-                    if(!ivSensitivity3.isChecked()){
-                        ivSensitivity3.setChecked(true);
-                        ivSensitivity2.setChecked(false);
-                        ivSensitivity1.setChecked(false);
-                        pir = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_1;
-                    }
-
-                }else{
-                    powerStatusDialog();
-                }
-                break;
-        }
     }
 
     @Override

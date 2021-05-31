@@ -16,46 +16,32 @@ import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.PermissionUtil;
-import com.blankj.utilcode.util.ToastUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class AddGatewaySecondActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.scan_gateway)
     LinearLayout scanGateway;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_gateway_add_second);
-        ButterKnife.bind(this);
-    }
+        back = findViewById(R.id.back);
+        scanGateway = findViewById(R.id.scan_gateway);
 
-    @OnClick({R.id.back, R.id.scan_gateway})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.scan_gateway:
+        back.setOnClickListener(v -> finish());
+        scanGateway.setOnClickListener(v -> {
+            String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
+            if (strings.length>0){
+                ToastUtils.showShort(R.string.philips_activity_deviceadd2);
+                PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
+            }else {
+                Intent scanIntent=new Intent(this,QrCodeScanActivity.class);
+                startActivityForResult(scanIntent, KeyConstants.SCANGATEWAY_REQUEST_CODE);
+            }
+        });
 
-
-                String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
-                if (strings.length>0){
-                    ToastUtils.showShort(R.string.philips_activity_deviceadd2);
-                    PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
-                }else {
-                    Intent scanIntent=new Intent(this,QrCodeScanActivity.class);
-                    startActivityForResult(scanIntent, KeyConstants.SCANGATEWAY_REQUEST_CODE);
-                }
-                break;
-        }
     }
 
     @Override

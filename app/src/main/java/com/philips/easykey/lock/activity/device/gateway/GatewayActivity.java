@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.gateway;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
@@ -31,39 +29,24 @@ import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by David on 2019/4/25
  */
 public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<GatewayView>> implements GatewayView {
 
-    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     GatewayAdapter gatewayAdapter;
-    @BindView(R.id.tv_gateway_status)
     TextView tvGatewayStatus;
-    @BindView(R.id.gateway_nick_name)
     TextView gatewayNickName;
-    @BindView(R.id.unbindGateway)
     TextView unbindGateway;
-    @BindView(R.id.testunbindGateway)
     TextView testunbindGateway;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.see_more)
     ImageView seeMore;
-    @BindView(R.id.share)
     ImageView share;
-    @BindView(R.id.con_device)
     TextView conDevice;
-    @BindView(R.id.no_device_layout)
     LinearLayout noDeviceLayout;
-    @BindView(R.id.gateway_logo)
     ImageView gateway_logo;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
 
     private List<HomeShowBean> homeShowBeans;
@@ -74,11 +57,54 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        ButterKnife.bind(this);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        tvGatewayStatus = findViewById(R.id.tv_gateway_status);
+        gatewayNickName = findViewById(R.id.gateway_nick_name);
+        unbindGateway = findViewById(R.id.unbindGateway);
+        testunbindGateway = findViewById(R.id.testunbindGateway);
+        back = findViewById(R.id.back);
+        seeMore = findViewById(R.id.see_more);
+        share = findViewById(R.id.share);
+        conDevice = findViewById(R.id.con_device);
+        noDeviceLayout = findViewById(R.id.no_device_layout);
+        gateway_logo = findViewById(R.id.gateway_logo);
+        titleBar = findViewById(R.id.title_bar);
+
+        unbindGateway.setOnClickListener(v -> {
+            //解绑网关
+            if (gatewayInfo != null) {
+                mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayInfo.getServerInfo().getDeviceSN());
+            }
+        });
+        testunbindGateway.setOnClickListener(v -> {
+            //测试解绑网关
+            if (gatewayInfo != null) {
+                mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(), gatewayInfo.getServerInfo().getDeviceSN(), gatewayInfo.getServerInfo().getDeviceSN());
+            }
+        });
+        back.setOnClickListener(v -> finish());
+        seeMore.setOnClickListener(v -> {
+            //基本信息
+            if (gatewayInfo!=null) {
+                Intent intent = new Intent(this, GatewaySettingActivity.class);
+                //   intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayInfo.getServerInfo().getDeviceNickName());
+                if(!TextUtils.isEmpty(gatewayNickName.getText())){
+                    intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayNickName.getText().toString());
+                }else {
+                    intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayInfo.getServerInfo().getDeviceNickName());
+                }
+                intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayNickName.getText().toString());
+                intent.putExtra(KeyConstants.GATEWAY_ID, gatewayInfo.getServerInfo().getDeviceSN());
+                intent.putExtra(KeyConstants.IS_ADMIN, gatewayInfo.getServerInfo().getIsAdmin());
+                intent.putExtra(KeyConstants.GW_MODEL,gatewayInfo.getServerInfo().getModel());
+
+                startActivityForResult(intent, KeyConstants.GATEWAY_NICK_NAME);
+            }
+        });
+
         initView();
         initData();
         initListener();
@@ -337,53 +363,6 @@ public class GatewayActivity extends BaseActivity<GatewayView, GatewayPresenter<
     public void networkChangeSuccess() {
         if (gatewayAdapter != null) {
             gatewayAdapter.notifyDataSetChanged();
-        }
-    }
-
-
-    @OnClick({R.id.unbindGateway, R.id.testunbindGateway, R.id.back, R.id.see_more, R.id.share})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            //解绑网关
-            case R.id.unbindGateway:
-                if (gatewayInfo != null) {
-                    mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayInfo.getServerInfo().getDeviceSN());
-                }
-                break;
-            //测试解绑网关
-            case R.id.testunbindGateway:
-                if (gatewayInfo != null) {
-                    mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(), gatewayInfo.getServerInfo().getDeviceSN(), gatewayInfo.getServerInfo().getDeviceSN());
-                }
-                break;
-            case R.id.back:
-                finish();
-                break;
-            case R.id.see_more:
-                //基本信息
-                if (gatewayInfo!=null) {
-                    Intent intent = new Intent(this, GatewaySettingActivity.class);
-                 //   intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayInfo.getServerInfo().getDeviceNickName());
-                    if(!TextUtils.isEmpty(gatewayNickName.getText())){
-                        intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayNickName.getText().toString());
-                    }else {
-                        intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayInfo.getServerInfo().getDeviceNickName());
-                    }
-                    intent.putExtra(KeyConstants.GATEWAY_NICKNAME, gatewayNickName.getText().toString());
-                    intent.putExtra(KeyConstants.GATEWAY_ID, gatewayInfo.getServerInfo().getDeviceSN());
-                    intent.putExtra(KeyConstants.IS_ADMIN, gatewayInfo.getServerInfo().getIsAdmin());
-                    intent.putExtra(KeyConstants.GW_MODEL,gatewayInfo.getServerInfo().getModel());
-
-                    startActivityForResult(intent, KeyConstants.GATEWAY_NICK_NAME);
-                }
-                break;
-            case R.id.share:
-               /* //分享
-                Intent shareIntent = new Intent(this, GatewaySharedActivity.class);
-                shareIntent.putExtra(KeyConstants.GATEWAY_ID, gatewayInfo.getServerInfo().getDeviceSN());
-                startActivity(shareIntent);*/
-                break;
-
         }
     }
 

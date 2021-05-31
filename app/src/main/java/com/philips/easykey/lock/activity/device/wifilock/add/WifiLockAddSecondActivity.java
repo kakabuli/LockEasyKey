@@ -18,23 +18,15 @@ import com.philips.easykey.lock.utils.GpsUtil;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class WifiLockAddSecondActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
     final RxPermissions rxPermissions = new RxPermissions(this);
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.bt_ap)
     Button btAp;
-    @BindView(R.id.bt_smart_config)
     Button btSmartConfig;
     private Disposable permissionDisposable;
 
@@ -42,7 +34,19 @@ public class WifiLockAddSecondActivity extends BaseAddToApplicationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_lock_add_second);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        btAp = findViewById(R.id.bt_ap);
+        btSmartConfig = findViewById(R.id.bt_smart_config);
+
+        back.setOnClickListener(v -> finish());
+        btAp.setOnClickListener(v -> {
+            Intent intent = new Intent(WifiLockAddSecondActivity.this, WifiLockSetUpActivity.class);
+            startActivity(intent);
+        });
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
 
         //获取权限  定位权限
         permissionDisposable = rxPermissions
@@ -71,21 +75,4 @@ public class WifiLockAddSecondActivity extends BaseAddToApplicationActivity {
         super.onBackPressed();
     }
 
-    @OnClick({R.id.back, R.id.bt_ap, R.id.bt_smart_config, R.id.help})
-    public void onViewClicked(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.bt_ap:
-                    intent = new Intent(WifiLockAddSecondActivity.this, WifiLockSetUpActivity.class);
-                    startActivity(intent);
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-
-        }
-    }
 }

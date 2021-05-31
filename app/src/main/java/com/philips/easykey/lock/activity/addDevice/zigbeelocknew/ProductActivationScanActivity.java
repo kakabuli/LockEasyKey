@@ -16,15 +16,11 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class ProductActivationScanActivity extends CaptureActivity {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
 
     private boolean falshLight = false;
@@ -41,7 +37,12 @@ public class ProductActivationScanActivity extends CaptureActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        touchLightLayout = findViewById(R.id.touch_light_layout);
+
+        back.setOnClickListener(v -> finish());
+        touchLightLayout.setOnClickListener(v -> openFlashLight(falshLight));
+
         initView();
         checkVersion();
     }
@@ -129,18 +130,6 @@ public class ProductActivationScanActivity extends CaptureActivity {
 //            }
 //        }
 
-    }
-
-    @OnClick({R.id.back, R.id.touch_light_layout})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.touch_light_layout:
-                openFlashLight(falshLight);
-                break;
-        }
     }
 
     /*

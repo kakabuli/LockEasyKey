@@ -21,19 +21,12 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import androidx.core.text.HtmlCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewayOTADialogActivity extends BaseActivity<GatewayOTAView, GatewayOTAPresenter<GatewayOTAView>> implements GatewayOTAView {
 
 
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_left)
     TextView tvLeft;
-    @BindView(R.id.tv_right)
     TextView tvRight;
     private GatewayOtaNotifyBean notifyBean;
 
@@ -47,7 +40,18 @@ public class GatewayOTADialogActivity extends BaseActivity<GatewayOTAView, Gatew
         super.onCreate(savedInstanceState);
         LogUtils.d("网关ota升级通知 GatewayOTADialogActivity ");
         setContentView(R.layout.activity_otadialog1);
-        ButterKnife.bind(this);
+
+        tvContent = findViewById(R.id.tv_content);
+        tvLeft = findViewById(R.id.tv_left);
+        tvRight = findViewById(R.id.tv_right);
+
+        tvLeft.setOnClickListener(v -> finish());
+        tvRight.setOnClickListener(v -> {
+            if (notifyBean != null) {
+                mPresenter.confirmGatewayOtaUpgrade(notifyBean, MyApplication.getInstance().getUid());
+            }
+        });
+
         initData();
         initView();
     }
@@ -105,20 +109,6 @@ public class GatewayOTADialogActivity extends BaseActivity<GatewayOTAView, Gatew
         this.setFinishOnTouchOutside(true);
     }
 
-    @OnClick({R.id.tv_left, R.id.tv_right})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_left:
-                finish();
-                break;
-            case R.id.tv_right:
-                if (notifyBean != null) {
-                    mPresenter.confirmGatewayOtaUpgrade(notifyBean, MyApplication.getInstance().getUid());
-                }
-
-                break;
-        }
-    }
 
     @Override
     public void gatewayUpgradeingNow(String deviceId) {

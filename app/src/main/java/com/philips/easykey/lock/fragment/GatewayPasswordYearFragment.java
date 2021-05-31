@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
@@ -58,48 +56,28 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
     long startMilliseconds = 0;//开始毫秒数
     long endMilliseconds = 0;//结束毫秒数
     int timeStatus = 0;//时间策略
-    @BindView(R.id.pwd_manager_icon)
+
     ImageView pwdManagerIcon;
-    @BindView(R.id.et_password)
     EditText etPassword;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.pwd_manager_grant_iv)
     ImageView pwdManagerGrantIv;
-    @BindView(R.id.et_name)
     EditText etName;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.rb_one)
     RadioButton rbOne;
-    @BindView(R.id.rb_two)
     RadioButton rbTwo;
-    @BindView(R.id.rb_three)
     RadioButton rbThree;
-    @BindView(R.id.rg)
     RadioGroup rg;
-    @BindView(R.id.ll_effective_time)
     LinearLayout llEffectiveTime;
-    @BindView(R.id.ll_deadline)
     LinearLayout llDeadline;
-    @BindView(R.id.ll_custom)
     LinearLayout llCustom;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
-    @BindView(R.id.tv_take_effect_date)
     TextView tvTakeEffectDate;
-    @BindView(R.id.tv_take_effect_am_pm)
     TextView tvTakeEffectAmPm;
-    @BindView(R.id.tv_take_effect_time)
     TextView tvTakeEffectTime;
-    @BindView(R.id.tv_deadline_date)
     TextView tvDeadlineDate;
-    @BindView(R.id.tv_deadline_am_pm)
     TextView tvDeadlineAmPm;
-    @BindView(R.id.tv_deadline_time)
     TextView tvDeadlineTime;
     ShiXiaoNameAdapter shiXiaoNameAdapter;
-    @BindView(R.id.ll_nick_name)
     LinearLayout llNickName;
 
     private CustomDatePicker mTimerPicker;
@@ -112,7 +90,29 @@ public class GatewayPasswordYearFragment extends BaseFragment<IGatewayLockPasswo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mFragmentView = inflater.inflate(R.layout.fragment_password_gateway_time, container, false);
-        ButterKnife.bind(this, mFragmentView);
+
+        pwdManagerIcon = mFragmentView.findViewById(R.id.pwd_manager_icon);
+        etPassword = mFragmentView.findViewById(R.id.et_password);
+        btnRandomGeneration = mFragmentView.findViewById(R.id.btn_random_generation);
+        pwdManagerGrantIv = mFragmentView.findViewById(R.id.pwd_manager_grant_iv);
+        etName = mFragmentView.findViewById(R.id.et_name);
+        recycleview = mFragmentView.findViewById(R.id.recycleview);
+        rbOne = mFragmentView.findViewById(R.id.rb_one);
+        rbTwo = mFragmentView.findViewById(R.id.rb_two);
+        rbThree = mFragmentView.findViewById(R.id.rb_three);
+        rg = mFragmentView.findViewById(R.id.rg);
+        llEffectiveTime = mFragmentView.findViewById(R.id.ll_effective_time);
+        llDeadline = mFragmentView.findViewById(R.id.ll_deadline);
+        llCustom = mFragmentView.findViewById(R.id.ll_custom);
+        btnConfirmGeneration = mFragmentView.findViewById(R.id.btn_confirm_generation);
+        tvTakeEffectDate = mFragmentView.findViewById(R.id.tv_take_effect_date);
+        tvTakeEffectAmPm = mFragmentView.findViewById(R.id.tv_take_effect_am_pm);
+        tvTakeEffectTime = mFragmentView.findViewById(R.id.tv_take_effect_time);
+        tvDeadlineDate = mFragmentView.findViewById(R.id.tv_deadline_date);
+        tvDeadlineAmPm = mFragmentView.findViewById(R.id.tv_deadline_am_pm);
+        tvDeadlineTime = mFragmentView.findViewById(R.id.tv_deadline_time);
+        llNickName = mFragmentView.findViewById(R.id.ll_nick_name);
+
         initTimerPicker();
 
 

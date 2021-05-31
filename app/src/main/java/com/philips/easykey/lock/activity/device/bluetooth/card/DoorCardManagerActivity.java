@@ -35,35 +35,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, CardManagerPresenter<ICardManagerView>>
         implements View.OnClickListener, ICardManagerView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
     DoorCardManagerAdapter doorCardManagerAdapter;
     boolean isNotData = true;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.ll_add)
     LinearLayout llAdd;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     List<GetPasswordResult.DataBean.Card> list = new ArrayList<>();
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     private BleLockInfo bleLockInfo;
     private boolean isSync = false;
@@ -73,7 +63,17 @@ public class DoorCardManagerActivity extends BaseBleActivity<ICardManagerView, C
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_door_card_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        recycleview = findViewById(R.id.recycleview);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+        llAdd = findViewById(R.id.ll_add);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        ivRight = findViewById(R.id.iv_right);
+        refreshLayout = findViewById(R.id.refreshLayout);
+
         if(MyApplication.getInstance().getBleService().getBleLockInfo() != null){
 
             bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();

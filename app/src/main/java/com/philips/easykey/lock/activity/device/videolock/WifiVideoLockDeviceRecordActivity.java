@@ -35,30 +35,17 @@ import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.H264Frame;
 import com.xmitech.sdk.MP4Info;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlayerView, MyAlbumPlayerPresenter<IMyAlbumPlayerView>>  implements IMyAlbumPlayerView {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.duration_seek_bar)
     SeekBar durationSeekBar;
-    @BindView(R.id.video_surface)
     SurfaceView surfaceView;
-    @BindView(R.id.lly_bottom_bar)
     LinearLayout llyBootomBar;
-    @BindView(R.id.iv_play_start)
     ImageView ivPlayStart;
-    @BindView(R.id.iv_pause)
     ImageView ivPause;
-    @BindView(R.id.tv_duration)
     TextView tvDuration;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.tv_name)
     TextView tvName;
 
     private Dialog dialog;
@@ -73,7 +60,18 @@ public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlay
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_video_album_detail);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        durationSeekBar = findViewById(R.id.duration_seek_bar);
+        surfaceView = findViewById(R.id.video_surface);
+        llyBootomBar = findViewById(R.id.lly_bottom_bar);
+        ivPlayStart = findViewById(R.id.iv_play_start);
+        ivPause = findViewById(R.id.iv_pause);
+        tvDuration = findViewById(R.id.tv_duration);
+        tvTime = findViewById(R.id.tv_time);
+        tvName = findViewById(R.id.tv_name);
+
+        back.setOnClickListener(v -> finish());
 
         mWifiVideoLockAlarmRecord = (WifiVideoLockAlarmRecord) getIntent().getSerializableExtra(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD_DATA);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
@@ -151,21 +149,6 @@ public class WifiVideoLockDeviceRecordActivity extends BaseActivity<IMyAlbumPlay
     @Override
     protected MyAlbumPlayerPresenter<IMyAlbumPlayerView> createPresent() {
         return new MyAlbumPlayerPresenter<>();
-    }
-
-    @OnClick({R.id.back,R.id.iv_play_start,R.id.iv_pause})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_play_start:
-
-                break;
-            case R.id.iv_pause:
-
-                break;
-        }
     }
 
     @Override

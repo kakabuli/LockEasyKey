@@ -28,41 +28,24 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockBaseInfo;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockBaseInfoDao;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockInformationView, GatewayLockInformationPresenter<GatewayLockInformationView>> implements GatewayLockInformationView {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-    @BindView(R.id.tv_software_version)
     TextView tvSoftwareVersion;
-    @BindView(R.id.rl_software_version)
     RelativeLayout rlSoftwareVersion;
-    @BindView(R.id.tv_hardware_version)
     TextView tvHardwareVersion;
-    @BindView(R.id.rl_hardware_version)
     RelativeLayout rlHardwareVersion;
-    @BindView(R.id.tv_module_mark)
     TextView tvModuleMark;
-    @BindView(R.id.rl_module_mark)
     RelativeLayout rlModuleMark;
-    @BindView(R.id.tv_device_auth_name)
     TextView tv_device_auth_name;
 
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
 
     private String gatewayId;
@@ -75,7 +58,24 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_device_information);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        tvSoftwareVersion = findViewById(R.id.tv_software_version);
+        rlSoftwareVersion = findViewById(R.id.rl_software_version);
+        tvHardwareVersion = findViewById(R.id.tv_hardware_version);
+        rlHardwareVersion = findViewById(R.id.rl_hardware_version);
+        tvModuleMark = findViewById(R.id.tv_module_mark);
+        rlModuleMark = findViewById(R.id.rl_module_mark);
+        tv_device_auth_name = findViewById(R.id.tv_device_auth_name);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+
+        ivBack.setOnClickListener(v -> finish());
+
         initView();
         initData();
 
@@ -142,12 +142,10 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
                             return;
                         }
 
-                        if (deviceNickname != null) {
-                            if (deviceNickname.equals(name)) {
-                                ToastUtils.showShort(getString(R.string.device_nick_name_no_update));
-                                alertDialog.dismiss();
-                                return;
-                            }
+                        if (deviceNickname.equals(name)) {
+                            ToastUtils.showShort(getString(R.string.device_nick_name_no_update));
+                            alertDialog.dismiss();
+                            return;
                         }
                         if (gatewayId != null && deviceId != null) {
                             mPresenter.updateZigbeeLockName(gatewayId, deviceId, name);
@@ -189,11 +187,6 @@ public class GatewayDeviceInformationActivity extends BaseActivity<GatewayLockIn
         tvContent.setText(R.string.device_info);
     }
 
-
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        finish();
-    }
 
     @Override
     public void getLockInfoSuccess(GetGatewayLockInfoBean.ReturnDataBean returnDataBean) {

@@ -38,78 +38,43 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView, View.OnClickListener {
 
 
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.iv_message_free)
     ImageView ivMessageFree;
-    @BindView(R.id.rl_message_free)
     RelativeLayout rlMessageFree;
-    @BindView(R.id.rl_safe_mode)
     RelativeLayout rlSafeMode;
-
-    @BindView(R.id.rl_am)
     RelativeLayout rlAm;
-    @BindView(R.id.iv_am)
     TextView ivAm;
-
-    @BindView(R.id.rl_powerSave)
     RelativeLayout rlPowerSave;
-    @BindView(R.id.iv_powerSave)
     TextView ivPowerSave;
-//    @BindView(R.id.rl_faceStatus)
+//    (R.id.rl_faceStatus)
 //    RelativeLayout rlFaceStatus;
 
-    @BindView(R.id.rl_door_lock_language_switch)
     RelativeLayout rlDoorLockLanguageSwitch;
-    @BindView(R.id.iv_silent_mode)
     ImageView ivSilentMode;
-    @BindView(R.id.rl_silent_mode)
     RelativeLayout rlSilentMode;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.rl_check_firmware_update)
     RelativeLayout rlCheckFirmwareUpdate;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     String name;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.rl_check_face_ota)
     RelativeLayout rlCheckFaceOta;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_language)
     TextView tvLanguage;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.wifi_name)
     TextView wifiName;
-    @BindView(R.id.rl_wifi_name)
     RelativeLayout rlWifiName;
-    @BindView(R.id.rl_message_push)
     RelativeLayout rlMessagePush;
-    @BindView(R.id.rl_wandering_alarm)
     RelativeLayout rlWanderingAlarm;
-    @BindView(R.id.rl_real_time_video)
     RelativeLayout rlRealTimeVideo;
-    @BindView(R.id.rl_lock_type)
     RelativeLayout rlLockType;
-    @BindView(R.id.rl_open_force)
     RelativeLayout rlOpenForce;
-    @BindView(R.id.rl_door_direction)
     RelativeLayout rlDoorDirection;
-    @BindView(R.id.tv_door_direction)
     TextView tvDoorDirection;
-    @BindView(R.id.tv_open_force)
     TextView tvOpenForce;
-    @BindView(R.id.tv_lock_type)
     TextView tvLockType;
 
     private WifiLockInfo wifiLockInfo;
@@ -122,7 +87,38 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_more);
-        ButterKnife.bind(this);
+
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        ivMessageFree = findViewById(R.id.iv_message_free);
+        rlMessageFree = findViewById(R.id.rl_message_free);
+        rlSafeMode = findViewById(R.id.rl_safe_mode);
+        rlAm = findViewById(R.id.rl_am);
+        ivAm = findViewById(R.id.iv_am);
+        rlPowerSave = findViewById(R.id.rl_powerSave);
+        ivPowerSave = findViewById(R.id.iv_powerSave);
+        rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
+        ivSilentMode = findViewById(R.id.iv_silent_mode);
+        rlSilentMode = findViewById(R.id.rl_silent_mode);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        rlCheckFirmwareUpdate = findViewById(R.id.rl_check_firmware_update);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        rlCheckFaceOta = findViewById(R.id.rl_check_face_ota);
+        back = findViewById(R.id.back);
+        tvLanguage = findViewById(R.id.tv_language);
+        headTitle = findViewById(R.id.head_title);
+        wifiName = findViewById(R.id.wifi_name);
+        rlWifiName = findViewById(R.id.rl_wifi_name);
+        rlMessagePush = findViewById(R.id.rl_message_push);
+        rlWanderingAlarm = findViewById(R.id.rl_wandering_alarm);
+        rlRealTimeVideo = findViewById(R.id.rl_real_time_video);
+        rlLockType = findViewById(R.id.rl_lock_type);
+        rlOpenForce = findViewById(R.id.rl_open_force);
+        rlDoorDirection = findViewById(R.id.rl_door_direction);
+        tvDoorDirection = findViewById(R.id.tv_door_direction);
+        tvOpenForce = findViewById(R.id.tv_open_force);
+        tvLockType = findViewById(R.id.tv_lock_type);
+
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
 

@@ -44,71 +44,45 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by David
  */
 public class GatewayLockFunctionActivity extends BaseActivity<GatewayLockDetailView, GatewayLockDetailPresenter<GatewayLockDetailView>> implements View.OnClickListener, GatewayLockDetailView {
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
-    @BindView(R.id.tv_name)
-    TextView tvName;//门锁
-    @BindView(R.id.iv_power)
-    BatteryView ivPower;
 
-    @BindView(R.id.tv_power)
+    ImageView ivBack;
+    TextView tvName;//门锁
+    BatteryView ivPower;
     TextView tvPower;//电量大小
-    @BindView(R.id.tv_date)
     TextView tvDate;//日期
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
     List<BluetoothLockFunctionBean> list = new ArrayList<>();
-    @BindView(R.id.iv_one)
     ImageView ivOne;
-    @BindView(R.id.tv_name_one)
     TextView tvNameOne;
-    @BindView(R.id.ll_one)
     LinearLayout llOne;
-    @BindView(R.id.iv_two)
     ImageView ivTwo;
-    @BindView(R.id.tv_name_two)
     TextView tvNameTwo;
-    @BindView(R.id.ll_two)
     LinearLayout llTwo;
-    @BindView(R.id.iv_three)
     ImageView ivThree;
-    @BindView(R.id.tv_name_three)
     TextView tvNameThree;
-    @BindView(R.id.ll_three)
     LinearLayout llThree;
-   /* @BindView(R.id.iv_four)
+   /* (R.id.iv_four)
     ImageView ivFour;
-    @BindView(R.id.tv_name_four)
+    (R.id.tv_name_four)
     TextView tvNameFour;
-    @BindView(R.id.tv_number_four)
+    (R.id.tv_number_four)
     TextView tvNumberFour;
-    @BindView(R.id.ll_four)
+    (R.id.ll_four)
     LinearLayout llFour;*/
 
 
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
     int lockStatus = -1;
-    @BindView(R.id.iv_safe_protection)
     ImageView ivSafeProtection;
-    @BindView(R.id.iv_four)
     ImageView ivFour;
-    @BindView(R.id.tv_name_four)
     TextView tvNameFour;
-    @BindView(R.id.ll_four)
     LinearLayout llFour;
-    @BindView(R.id.gateway_lock_image)
     ImageView gatewayLockImage;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private String   gatewayId;
     private String deviceId;
@@ -130,11 +104,33 @@ public class GatewayLockFunctionActivity extends BaseActivity<GatewayLockDetailV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_lock_function);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        ButterKnife.bind(this);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvName = findViewById(R.id.tv_name);//门锁
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);//电量大小
+        tvDate = findViewById(R.id.tv_date);//日期
+        llPower = findViewById(R.id.ll_power);
+        ivOne = findViewById(R.id.iv_one);
+        tvNameOne = findViewById(R.id.tv_name_one);
+        llOne = findViewById(R.id.ll_one);
+        ivTwo = findViewById(R.id.iv_two);
+        tvNameTwo = findViewById(R.id.tv_name_two);
+        llTwo = findViewById(R.id.ll_two);
+        ivThree = findViewById(R.id.iv_three);
+        tvNameThree = findViewById(R.id.tv_name_three);
+        llThree = findViewById(R.id.ll_three);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivSafeProtection = findViewById(R.id.iv_safe_protection);
+        ivFour = findViewById(R.id.iv_four);
+        tvNameFour = findViewById(R.id.tv_name_four);
+        llFour = findViewById(R.id.ll_four);
+        gatewayLockImage = findViewById(R.id.gateway_lock_image);
+        tvType = findViewById(R.id.tv_type);
+        titleBar = findViewById(R.id.title_bar);
+
         initView();
         initData();
         initClick();

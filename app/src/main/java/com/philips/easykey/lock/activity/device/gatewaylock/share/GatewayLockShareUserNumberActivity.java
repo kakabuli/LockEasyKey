@@ -25,26 +25,18 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/2/20
  */
 public class GatewayLockShareUserNumberActivity extends BaseActivity<IGatewayDeleteShareView, GatewayDeleteSharePresenter<IGatewayDeleteShareView>> implements IGatewayDeleteShareView,View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.iv_editor)
     ImageView ivEditor;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     String data;
     private DeviceShareUserResultBean.DataBean dataBean;
@@ -59,7 +51,15 @@ public class GatewayLockShareUserNumberActivity extends BaseActivity<IGatewayDel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_family_member_detail);
         context=this;
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvNumber = findViewById(R.id.tv_number);
+        tvName = findViewById(R.id.tv_name);
+        ivEditor = findViewById(R.id.iv_editor);
+        tvTime = findViewById(R.id.tv_time);
+        btnDelete = findViewById(R.id.btn_delete);
+
         initListener();
         initView();
 

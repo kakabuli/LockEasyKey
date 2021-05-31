@@ -13,14 +13,12 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/15
  */
 public class PhilipsGuidePageOneFragment extends Fragment implements View.OnClickListener {
-    @BindView(R.id.tv_skip)
+
     TextView tvSkip;
     private View mView;
 
@@ -30,7 +28,9 @@ public class PhilipsGuidePageOneFragment extends Fragment implements View.OnClic
         if (mView == null) {
             mView = inflater.inflate(R.layout.philips_fragment_guide_page_one, container, false);
         }
-        ButterKnife.bind(this, mView);
+
+        tvSkip = mView.findViewById(R.id.tv_skip);
+
         tvSkip.setOnClickListener(this);
         return mView;
     }

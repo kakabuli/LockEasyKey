@@ -15,16 +15,11 @@ import com.philips.easykey.lock.R;
 import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddGatewayScanActivity extends CaptureActivity {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private boolean falshLight=false;
 
@@ -39,25 +34,19 @@ public class AddGatewayScanActivity extends CaptureActivity {
         MyApplication.getInstance().addActivity(this);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        touchLightLayout = findViewById(R.id.touch_light_layout);
+        titleBar = findViewById(R.id.title_bar);
+
+        back.setOnClickListener(v -> finish());
+        touchLightLayout.setOnClickListener(v -> openFlashLight(falshLight));
+
         initView();
         checkVersion();
         //动态设置状态栏高度
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
         titleBar.setLayoutParams(lp);
-    }
-
-    @OnClick({R.id.back, R.id.touch_light_layout})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.touch_light_layout:
-                openFlashLight(falshLight);
-                break;
-        }
     }
 
     private void checkVersion() {

@@ -48,36 +48,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/10
  */
 public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAuthBleDetailPresenter<IOldBleDetailView>> implements IOldBleDetailView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_bluetooth_name)
     TextView tvBluetoothName;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
-    @BindView(R.id.iv_power)
     BatteryView ivPower;
-    @BindView(R.id.tv_power)
     TextView tvPower;
-    @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.iv_lock_icon)
     ImageView ivLockIcon;
-    @BindView(R.id.iv_delete)
     ImageView ivDelete;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private BleLockInfo bleLockInfo;
     private static final int TO_MORE_REQUEST_CODE = 101;
@@ -95,7 +82,21 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        ButterKnife.bind(this);
+
+
+        ivBack = findViewById(R.id.iv_back);
+        tvBluetoothName = findViewById(R.id.tv_bluetooth_name);
+        tvType = findViewById(R.id.tv_type);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);
+        tvDate = findViewById(R.id.tv_date);
+        llPower = findViewById(R.id.ll_power);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        ivLockIcon = findViewById(R.id.iv_lock_icon);
+        ivDelete = findViewById(R.id.iv_delete);
+        titleBar = findViewById(R.id.title_bar);
+
         productList = MyApplication.getInstance().getProductInfos();
         Intent intent = getIntent();
         changeLockIcon(intent);

@@ -16,14 +16,12 @@ import com.philips.easykey.lock.utils.StatusBarUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/15
  */
 public class PhilipsGuidePageActivity extends BaseAddToApplicationActivity implements ViewPager.OnPageChangeListener {
-    @BindView(R.id.view_pager)
+
     ViewPager viewPager;
     private List<Fragment> fragments;
 
@@ -31,7 +29,9 @@ public class PhilipsGuidePageActivity extends BaseAddToApplicationActivity imple
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_page);
-        ButterKnife.bind(this);
+
+        viewPager = findViewById(R.id.view_pager);
+
         StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
         initView();
     }

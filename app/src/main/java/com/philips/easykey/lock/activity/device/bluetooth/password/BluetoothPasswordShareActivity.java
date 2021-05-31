@@ -25,37 +25,24 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SharedUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class BluetoothPasswordShareActivity extends BaseBleActivity<IPasswordDetailView, PasswordDetailPresenter<IPasswordDetailView>>
         implements View.OnClickListener, IPasswordDetailView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.tv_short_message)
     TextView tvShortMessage;
-    @BindView(R.id.tv_wei_xin)
     TextView tvWeiXin;
-    @BindView(R.id.tv_copy)
     TextView tvCopy;
-    @BindView(R.id.iv_editor)
     ImageView ivEditor;
-    @BindView(R.id.tv_password)
     TextView tvPassword;
     private int type;
     private BleLockInfo bleLockInfo;
@@ -70,7 +57,20 @@ public class BluetoothPasswordShareActivity extends BaseBleActivity<IPasswordDet
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_password_share);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvNumber = findViewById(R.id.tv_number);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvName = findViewById(R.id.tv_name);
+        tvTime = findViewById(R.id.tv_time);
+        tvShortMessage = findViewById(R.id.tv_short_message);
+        tvWeiXin = findViewById(R.id.tv_wei_xin);
+        tvCopy = findViewById(R.id.tv_copy);
+        ivEditor = findViewById(R.id.iv_editor);
+        tvPassword = findViewById(R.id.tv_password);
+
         bleLockInfo = mPresenter.getBleLockInfo();
         intent = getIntent();
         type = intent.getIntExtra(KeyConstants.TO_DETAIL_TYPE, 1);

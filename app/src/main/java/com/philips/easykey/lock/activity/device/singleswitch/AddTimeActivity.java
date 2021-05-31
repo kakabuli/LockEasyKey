@@ -16,23 +16,14 @@ import com.philips.easykey.lock.utils.TimeUtil;
 
 import java.util.Arrays;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddTimeActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_start_time)
     TextView tvStartTime;
-    @BindView(R.id.tv_end_time)
     TextView tvEndTime;
-    @BindView(R.id.tv_repeat_rule)
     TextView tvRepeatRule;
-    @BindView(R.id.tv_add_device)
     TextView tvAddDevice;
-    @BindView(R.id.button_next)
     Button buttonNext;
     public static final int REQUEST_CODE = 100;
     private int[] days;
@@ -42,44 +33,38 @@ public class AddTimeActivity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_time);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        tvStartTime = findViewById(R.id.tv_start_time);
+        tvEndTime = findViewById(R.id.tv_end_time);
+        tvRepeatRule = findViewById(R.id.tv_repeat_rule);
+        tvAddDevice = findViewById(R.id.tv_add_device);
+        buttonNext = findViewById(R.id.button_next);
+
+        tvStartTime.setOnClickListener(v -> {
+            TimeUtil.getInstance().getHourMinute(this, new TimeUtil.TimeListener() {
+                @Override
+                public void time(String hour, String minute) {
+                    tvStartTime.setText(hour + ":" + minute);
+                }
+            });
+        });
+        tvEndTime.setOnClickListener(v -> {
+            TimeUtil.getInstance().getHourMinute(this, new TimeUtil.TimeListener() {
+                @Override
+                public void time(String hour, String minute) {
+                    tvEndTime.setText(hour + ":" + minute);
+                }
+            });
+        });
+        tvRepeatRule.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CycleRulesActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+        });
 
         tvRepeatRule.setText(getString(R.string.no_repeat));
         tvAddDevice.setText(getString(R.string.to_add));
     }
-
-    @OnClick({R.id.back, R.id.tv_start_time, R.id.tv_end_time, R.id.tv_repeat_rule, R.id.tv_add_device, R.id.button_next})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                break;
-            case R.id.tv_start_time:
-                TimeUtil.getInstance().getHourMinute(this, new TimeUtil.TimeListener() {
-                    @Override
-                    public void time(String hour, String minute) {
-                        tvStartTime.setText(hour + ":" + minute);
-                    }
-                });
-                break;
-            case R.id.tv_end_time:
-                TimeUtil.getInstance().getHourMinute(this, new TimeUtil.TimeListener() {
-                    @Override
-                    public void time(String hour, String minute) {
-                        tvEndTime.setText(hour + ":" + minute);
-                    }
-                });
-                break;
-            case R.id.tv_repeat_rule:
-                Intent intent = new Intent(this, CycleRulesActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
-                break;
-            case R.id.tv_add_device:
-                break;
-            case R.id.button_next:
-                break;
-        }
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

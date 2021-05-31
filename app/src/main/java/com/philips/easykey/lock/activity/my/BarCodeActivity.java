@@ -14,18 +14,11 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class BarCodeActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
     String bar_url="";
-    @BindView(R.id.tv_content)
     TextView tv_content;
-    @BindView(R.id.bar_code_webview)
     WebView bar_code_webview;
-    @BindView(R.id.iv_back)
     ImageView ivBack;//返回
 
     @Override
@@ -33,7 +26,11 @@ public class BarCodeActivity extends BaseAddToApplicationActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_code);
         bar_url=getIntent().getStringExtra(KeyConstants.BAR_CODE);
-        ButterKnife.bind(this);
+
+        tv_content = findViewById(R.id.tv_content);
+        bar_code_webview = findViewById(R.id.bar_code_webview);
+        ivBack = findViewById(R.id.iv_back);
+
         ivBack.setOnClickListener(this);
         if(TextUtils.isEmpty(bar_url)){
             ToastUtils.showShort(getString(R.string.bar_code_scan_qr_failed));

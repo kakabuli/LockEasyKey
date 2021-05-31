@@ -14,21 +14,13 @@ import com.philips.easykey.lock.fragment.help.WifiVideoLockCommonProblemHelpFrag
 import com.philips.easykey.lock.fragment.help.WifiVideoLockToConfigureHelpFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockHelpActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.v_left)
     View vLeft;
-    @BindView(R.id.v_right)
     View vRight;
-    @BindView(R.id.content)
     FrameLayout content;
-    @BindView(R.id.tv_left)
     TextView tvLeft;
-    @BindView(R.id.tv_right)
     TextView tvRight;
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -40,51 +32,48 @@ public class WifiVideoLockHelpActivity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_video_lock_help);
-        ButterKnife.bind(this);
+
+        vLeft = findViewById(R.id.v_left);
+        vRight = findViewById(R.id.v_right);
+        content = findViewById(R.id.content);
+        tvLeft = findViewById(R.id.tv_left);
+        tvRight = findViewById(R.id.tv_right);
+
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        findViewById(R.id.rl_left).setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            hideAll(fragmentTransaction);
+            vLeft.setVisibility(View.VISIBLE);
+            vRight.setVisibility(View.GONE);
+            tvLeft.setTextColor(Color.parseColor("#1F96F7"));
+            tvRight.setTextColor(Color.parseColor("#333333"));
+            if( mWifiVideoLockToConfigureHelpFragment != null){
+                fragmentTransaction.show(mWifiVideoLockToConfigureHelpFragment);
+            }else{
+                mWifiVideoLockToConfigureHelpFragment = new WifiVideoLockToConfigureHelpFragment();
+                fragmentTransaction.add(R.id.content,mWifiVideoLockToConfigureHelpFragment);
+            }
+            fragmentTransaction.commit();
+        });
+        findViewById(R.id.rl_right).setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            hideAll(fragmentTransaction);
+            vLeft.setVisibility(View.GONE);
+            vRight.setVisibility(View.VISIBLE);
+            tvRight.setTextColor(Color.parseColor("#1F96F7"));
+            tvLeft.setTextColor(Color.parseColor("#333333"));
+            if( mWifiVideoLockCommonProblemHelpFragment != null){
+                fragmentTransaction.show(mWifiVideoLockCommonProblemHelpFragment);
+            }else{
+                mWifiVideoLockCommonProblemHelpFragment = new WifiVideoLockCommonProblemHelpFragment();
+                fragmentTransaction.add(R.id.content,mWifiVideoLockCommonProblemHelpFragment);
+            }
+            fragmentTransaction.commit();
+        });
 
         initFragment();
     }
 
-    @OnClick({R.id.back,R.id.rl_left,R.id.rl_right})
-    public void onClick(View v) {
-        FragmentTransaction fragmentTransaction;
-        switch (v.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_left:
-                fragmentTransaction = manager.beginTransaction();
-                hideAll(fragmentTransaction);
-                vLeft.setVisibility(View.VISIBLE);
-                vRight.setVisibility(View.GONE);
-                tvLeft.setTextColor(Color.parseColor("#1F96F7"));
-                tvRight.setTextColor(Color.parseColor("#333333"));
-                if( mWifiVideoLockToConfigureHelpFragment != null){
-                    fragmentTransaction.show(mWifiVideoLockToConfigureHelpFragment);
-                }else{
-                    mWifiVideoLockToConfigureHelpFragment = new WifiVideoLockToConfigureHelpFragment();
-                    fragmentTransaction.add(R.id.content,mWifiVideoLockToConfigureHelpFragment);
-                }
-                fragmentTransaction.commit();
-                break;
-            case R.id.rl_right:
-                fragmentTransaction = manager.beginTransaction();
-                hideAll(fragmentTransaction);
-                vLeft.setVisibility(View.GONE);
-                vRight.setVisibility(View.VISIBLE);
-                tvRight.setTextColor(Color.parseColor("#1F96F7"));
-                tvLeft.setTextColor(Color.parseColor("#333333"));
-                if( mWifiVideoLockCommonProblemHelpFragment != null){
-                    fragmentTransaction.show(mWifiVideoLockCommonProblemHelpFragment);
-                }else{
-                    mWifiVideoLockCommonProblemHelpFragment = new WifiVideoLockCommonProblemHelpFragment();
-                    fragmentTransaction.add(R.id.content,mWifiVideoLockCommonProblemHelpFragment);
-                }
-                fragmentTransaction.commit();
-                break;
-        }
-
-    }
 
     private void hideAll(FragmentTransaction ft) {
         if (ft == null) {

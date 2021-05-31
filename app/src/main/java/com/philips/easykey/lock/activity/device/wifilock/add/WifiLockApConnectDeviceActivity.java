@@ -24,27 +24,17 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SocketManager;
 import com.philips.easykey.lock.utils.WifiUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWifiSetUpView, WifiApWifiSetUpPresenter<WifiApWifiSetUpPresenter>>
         implements IWifiLockAPWifiSetUpView {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.cb_send_wifi_account_password)
     CheckBox cbSendWifiAccountPassword;
-    @BindView(R.id.cb_success)
     CheckBox cbSuccess;
-    @BindView(R.id.bind_success)
     CheckBox bindSuccess;
-    @BindView(R.id.tv_support_list)
     EditText tvSupportList;
     private SocketManager socketManager = SocketManager.getInstance();
     private int func;
@@ -58,7 +48,17 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_connect_device);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        ivAnim = findViewById(R.id.iv_anim);
+        cbSendWifiAccountPassword = findViewById(R.id.cb_send_wifi_account_password);
+        cbSuccess = findViewById(R.id.cb_success);
+        bindSuccess = findViewById(R.id.bind_success);
+        tvSupportList = findViewById(R.id.tv_support_list);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
 
         sSsid = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
         sPassword = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD);
@@ -249,15 +249,4 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
 
     }
 
-    @OnClick({R.id.back, R.id.help})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-        }
-    }
 }

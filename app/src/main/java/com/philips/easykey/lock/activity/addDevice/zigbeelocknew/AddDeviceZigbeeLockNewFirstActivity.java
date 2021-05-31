@@ -5,35 +5,31 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.blankj.utilcode.util.LogUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddDeviceZigbeeLockNewFirstActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_layout)
     RelativeLayout headLayout;
-    @BindView(R.id.cancel_bind)
     Button cancelBind;
     private String gatewayId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_cateye_suit_first);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headLayout = findViewById(R.id.head_layout);
+        cancelBind = findViewById(R.id.cancel_bind);
+        back.setOnClickListener(v -> finish());
+
         initData();
     }
 
@@ -52,15 +48,6 @@ public class AddDeviceZigbeeLockNewFirstActivity extends BaseAddToApplicationAct
           startActivity(successIntent);
           finish();
       }
-    }
-
-    @OnClick({R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-        }
     }
 
 }

@@ -11,15 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 public class SwipchLinkNo extends BaseAddToApplicationActivity implements View.OnClickListener {
 
-    @BindView(R.id.btn_swipch_ok)
     RelativeLayout btn_swipch_ok;
-    @BindView(R.id.back)
     ImageView back;
 
     private String wifiSn;
@@ -28,7 +23,9 @@ public class SwipchLinkNo extends BaseAddToApplicationActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipch_link_no);
-        ButterKnife.bind(this);
+        btn_swipch_ok = findViewById(R.id.btn_swipch_ok);
+        back = findViewById(R.id.back);
+
 
         btn_swipch_ok.setOnClickListener(this);
         back.setOnClickListener(this);

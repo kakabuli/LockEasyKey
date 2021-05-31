@@ -30,15 +30,11 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView, PersonalFAQPresenter<IPersonalFAQView>>
         implements IPersonalFAQView, View.OnClickListener {
 
-    @BindView(R.id.faq_recyclerView)
     RecyclerView faqRecyclerView;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
     private List<FAQBean> mFaqList;
@@ -49,7 +45,10 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person_faq_lock_help, null);
-        ButterKnife.bind(this, view);
+
+        faqRecyclerView = view.findViewById(R.id.faq_recyclerView);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
         mFaqList = new ArrayList<>();
 
         initView();

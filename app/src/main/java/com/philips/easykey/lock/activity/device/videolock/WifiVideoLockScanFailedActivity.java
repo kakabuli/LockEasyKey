@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.videolock;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,17 +10,11 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockScanFailedActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.notice)
     TextView notice;
 
     private String wifiModelType;
@@ -32,62 +25,53 @@ public class WifiVideoLockScanFailedActivity extends BaseAddToApplicationActivit
         setContentView(R.layout.activity_wifi_lock_video_scan_failed);
 
         wifiModelType = getIntent().getStringExtra("wifiModelType");
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        notice = findViewById(R.id.notice);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiVideoLockHelpActivity.class)));
+        findViewById(R.id.re_scan).setOnClickListener(v -> {
+            finish();
+            //退出当前界面
+            Intent intent = new Intent(WifiVideoLockScanFailedActivity.this, WifiLockAddNewFirstActivity.class);
+            intent.putExtra("wifiModelType",wifiModelType);
+            startActivity(intent);
+        });
+
     }
 
-    @OnClick({R.id.back, R.id.help,R.id.notice,R.id.re_scan,R.id.cancel})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                break;
-           /* case R.id.notice:
-                startActivity(new Intent(WifiLockVideoScanFailedActivity.this, WifiLcokSupportWifiActivity.class));
-                break;*/
-            case R.id.re_scan:
-                finish();
-                //退出当前界面
-                Intent intent = new Intent(WifiVideoLockScanFailedActivity.this, WifiLockAddNewFirstActivity.class);
-                intent.putExtra("wifiModelType",wifiModelType);
-                startActivity(intent);
-                break;
-            case R.id.cancel:
-                break;
-        }
-    }
 
    /* public static class WifiVideoLockSafeModelActivity extends BaseActivity<IWifiLockSafeModeView, WifiLockSafeModePresenter<IWifiLockSafeModeView>> implements
             View.OnClickListener,IWifiLockSafeModeView {
 
 
-        @BindView(R.id.iv_back)
+        (R.id.iv_back)
         ImageView ivBack;
-        @BindView(R.id.tv_content)
+        (R.id.tv_content)
         TextView tvContent;
-        @BindView(R.id.iv_right)
+        (R.id.iv_right)
         ImageView ivRight;
-        @BindView(R.id.iv_safe_mode)
+        (R.id.iv_safe_mode)
         ImageView ivSafeMode;
-        @BindView(R.id.rl_safe_mode)
+        (R.id.rl_safe_mode)
         RelativeLayout rlSafeMode;
-        @BindView(R.id.notice1)
+        (R.id.notice1)
         RelativeLayout notice1;
-        @BindView(R.id.all)
+        (R.id.all)
         LinearLayout all;
-        @BindView(R.id.iv_1)
+        (R.id.iv_1)
         ImageView iv1;
-        @BindView(R.id.tv_1)
+        (R.id.tv_1)
         TextView tv1;
-        @BindView(R.id.iv_2)
+        (R.id.iv_2)
         ImageView iv2;
-        @BindView(R.id.tv_2)
+        (R.id.tv_2)
         TextView tv2;
-        @BindView(R.id.no_card)
+        (R.id.no_card)
         LinearLayout noCard;
-        @BindView(R.id.rl_notice)
+        (R.id.rl_notice)
         RelativeLayout rlNotice;
         private String wifiSn;
 

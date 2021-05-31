@@ -40,35 +40,24 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by David
  */
 public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockStressDetailView, GatewayLockStressDetailPresenter<IGatewayLockStressDetailView>> implements IGatewayLockStressDetailView {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.ll_add_password)
     LinearLayout llAddPassword;
-    @BindView(R.id.recycleview_password)
     RecyclerView recycleviewPassword;
-    @BindView(R.id.iv_app_notification)
     ImageView ivAppNotification;
-    @BindView(R.id.rl_app_notification)
     RelativeLayout rlAppNotification;
 
     List<String> pwdList = new ArrayList<>();
     //boolean appNotificationStatus = true;
     GatewayLockStressPasswordAdapter gatewayLockStressPasswordAdapter;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
 
     private LoadingDialog loadingDialog;
@@ -81,7 +70,81 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_lock_stress_password_manager);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        llAddPassword = findViewById(R.id.ll_add_password);
+        recycleviewPassword = findViewById(R.id.recycleview_password);
+        ivAppNotification = findViewById(R.id.iv_app_notification);
+        rlAppNotification = findViewById(R.id.rl_app_notification);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+
+        back.setOnClickListener(v -> finish());
+        llAddPassword.setOnClickListener(v -> {
+            if (isAddLockPwd == 0) {
+                ToastUtils.showShort(R.string.be_beging_get_lock_pwd_no_add_pwd);
+                return;
+            } else if (isAddLockPwd == 1) {
+                ToastUtils.showShort(R.string.get_lock_pwd_throwable);
+                return;
+            } else if (isAddLockPwd == 2) {
+                if (pwdList.size() < 1) {
+                    Intent intent = new Intent(this, GatewayLockStressAddActivity.class);
+                    intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
+                    intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
+                    startActivity(intent);
+                } else {
+                    AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.password_full_and_delete_exist_code), getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+
+                        @Override
+                        public void right() {
+
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+                        @Override
+                        public void afterTextChanged(String toString) {
+                        }
+                    });
+
+                }
+            }
+        });
+        rlAppNotification.setOnClickListener(v -> {
+            //同步
+            mPresenter.getLockPwd(gatewayId, deviceId, "09");
+            loadingDialog.show(getString(R.string.get_stress_pwd_stop));
+        });
+        tvSynchronizedRecord.setOnClickListener(v -> {
+            isopenlockPushSwitch = !isopenlockPushSwitch;
+            mPresenter.updatePushSwitch(isopenlockPushSwitch);
+//                if(isopenlockPushSwitch){
+//                     // 打开状态
+//                    ivAppNotification.setImageResource(R.mipmap.iv_close);
+//                }else{
+//                    // 关闭状态
+//                    ivAppNotification.setImageResource(R.mipmap.iv_open);
+//                }
+
+//                if (appNotificationStatus) {
+//                    //打开状态 现在关闭
+//                    ivAppNotification.setImageResource(R.mipmap.iv_close);
+//                    SPUtils.put(KeyConstants.APP_NOTIFICATION_STATUS, false);
+//                } else {
+//                    //关闭状态 现在打开
+//                    ivAppNotification.setImageResource(R.mipmap.iv_open);
+//                    SPUtils.put(KeyConstants.APP_NOTIFICATION_STATUS, true);
+//                }
+//                appNotificationStatus = !appNotificationStatus;
+        });
+
         initView();
         initRecycleview();
         initData();
@@ -177,80 +240,6 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
         } else {
             llHasData.setVisibility(View.GONE);
             tvNoUser.setVisibility(View.VISIBLE);
-        }
-    }
-
-
-    @OnClick({R.id.back, R.id.ll_add_password, R.id.rl_app_notification,R.id.tv_synchronized_record})
-    public void onViewClicked(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.ll_add_password:
-                if (isAddLockPwd == 0) {
-                    ToastUtils.showShort(R.string.be_beging_get_lock_pwd_no_add_pwd);
-                    return;
-                } else if (isAddLockPwd == 1) {
-                    ToastUtils.showShort(R.string.get_lock_pwd_throwable);
-                    return;
-                } else if (isAddLockPwd == 2) {
-                    if (pwdList.size() < 1) {
-                        intent = new Intent(this, GatewayLockStressAddActivity.class);
-                        intent.putExtra(KeyConstants.GATEWAY_ID, gatewayId);
-                        intent.putExtra(KeyConstants.DEVICE_ID, deviceId);
-                        startActivity(intent);
-                    } else {
-                        AlertDialogUtil.getInstance().singleButtonNoTitleDialog(this, getString(R.string.password_full_and_delete_exist_code), getString(R.string.hao_de), "#1F96F7", new AlertDialogUtil.ClickListener() {
-                            @Override
-                            public void left() {
-
-                            }
-
-                            @Override
-                            public void right() {
-
-                            }
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
-                            @Override
-                            public void afterTextChanged(String toString) {
-                            }
-                        });
-
-                    }
-                }
-                break;
-             //同步
-            case R.id.tv_synchronized_record:
-                mPresenter.getLockPwd(gatewayId, deviceId, "09");
-                loadingDialog.show(getString(R.string.get_stress_pwd_stop));
-                break;
-
-            case R.id.rl_app_notification:
-                isopenlockPushSwitch = !isopenlockPushSwitch;
-                mPresenter.updatePushSwitch(isopenlockPushSwitch);
-//                if(isopenlockPushSwitch){
-//                     // 打开状态
-//                    ivAppNotification.setImageResource(R.mipmap.iv_close);
-//                }else{
-//                    // 关闭状态
-//                    ivAppNotification.setImageResource(R.mipmap.iv_open);
-//                }
-
-//                if (appNotificationStatus) {
-//                    //打开状态 现在关闭
-//                    ivAppNotification.setImageResource(R.mipmap.iv_close);
-//                    SPUtils.put(KeyConstants.APP_NOTIFICATION_STATUS, false);
-//                } else {
-//                    //关闭状态 现在打开
-//                    ivAppNotification.setImageResource(R.mipmap.iv_open);
-//                    SPUtils.put(KeyConstants.APP_NOTIFICATION_STATUS, true);
-//                }
-//                appNotificationStatus = !appNotificationStatus;
-                break;
         }
     }
 

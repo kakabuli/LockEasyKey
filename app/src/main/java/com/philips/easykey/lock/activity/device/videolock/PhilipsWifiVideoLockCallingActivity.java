@@ -68,81 +68,43 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 import com.blankj.utilcode.util.ToastUtils;
 
 public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockVideoCallingView,
         WifiVideoLockCallingPresenter<IWifiLockVideoCallingView>> implements IWifiLockVideoCallingView{
 
-    @BindView(R.id.iv_answer_icon)
     ImageView ivAnswerIcon;
-    @BindView(R.id.iv_refuse_icon)
     ImageView ivRefuseIcon;
-    @BindView(R.id.iv_refuse_icon_1)
     ImageView ivRefuseIcon1;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
-
-
-    @BindView(R.id.iv_setting)
     ImageView ivSetting;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.surface_view)
     SurfaceView mSufaceView;
-    @BindView(R.id.tv_temporary_password)
     TextView tvTemporaryPassword;
-
-    @BindView(R.id.rl_video_layout)
     RelativeLayout rlVideoLayout;
-    @BindView(R.id.rl_mark_layout)
     RelativeLayout rlMarkLayout;
-    @BindView(R.id.iv_screenshot)
     ImageView ivScreenshot;
-    @BindView(R.id.iv_mute)
     ImageView ivMute;
-    @BindView(R.id.iv_calling)
     ImageView ivCalling;
-    @BindView(R.id.iv_recoring)
     ImageView ivRecoring;
-    @BindView(R.id.iv_album)
     ImageView ivAlbum;
-    @BindView(R.id.lly_record)
     RelativeLayout llyRecord;
-    @BindView(R.id.iv_screenshot_bitmap)
     ImageView ivScreenshotBitmap;
-    @BindView(R.id.ll_screenshot)
     RelativeLayout mRlScreenShot;
-    @BindView(R.id.iv_record_spot)
     ImageView ivRecordSpot;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.iv_real_time_refuse_icon)
     ImageView ivRealTimeRefuseIcon;
-    @BindView(R.id.rl_calling_time)
     RelativeLayout rlCallingTime;
-    @BindView(R.id.iv_big_head_pic)
     ImageView ivBigHeadPic;
-    @BindView(R.id.tv_video_timestamp)
     TextView tvVideoTimeStamp;
-    @BindView(R.id.tv_calling_tip)
     TextView tvCallingTips;
-    @BindView(R.id.tv_doorbell)
     TextView tvDoorbell;
-    @BindView(R.id.iv_cache)
     ImageView ivCache;
-    @BindView(R.id.rl_title_bar)
     RelativeLayout rlTitleBar;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
-    @BindView(R.id.head_title)
     TextView mTvHeadTitle;
-    @BindView(R.id.iv_temporary_pwd)
     ImageView mIvTemporaryPwd;
 
     private Bitmap myBitmap;
@@ -185,11 +147,12 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.philips_activity_wifi_lock_video_calling);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        ButterKnife.bind(this);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        initUI();
+        initOnClickListener();
+
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
         isCalling = getIntent().getIntExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
@@ -239,6 +202,167 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         rlTitleBar.setLayoutParams(rllp);
     }
 
+    private void initUI() {
+        ivAnswerIcon = findViewById(R.id.iv_answer_icon);
+        ivRefuseIcon = findViewById(R.id.iv_refuse_icon);
+        ivRefuseIcon1 = findViewById(R.id.iv_refuse_icon_1);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+        ivSetting = findViewById(R.id.iv_setting);
+        back = findViewById(R.id.back);
+        mSufaceView = findViewById(R.id.surface_view);
+        tvTemporaryPassword = findViewById(R.id.tv_temporary_password);
+        rlVideoLayout = findViewById(R.id.rl_video_layout);
+        rlMarkLayout = findViewById(R.id.rl_mark_layout);
+        ivScreenshot = findViewById(R.id.iv_screenshot);
+        ivMute = findViewById(R.id.iv_mute);
+        ivCalling = findViewById(R.id.iv_calling);
+        ivRecoring = findViewById(R.id.iv_recoring);
+        ivAlbum = findViewById(R.id.iv_album);
+        llyRecord = findViewById(R.id.lly_record);
+        ivScreenshotBitmap = findViewById(R.id.iv_screenshot_bitmap);
+        mRlScreenShot = findViewById(R.id.ll_screenshot);
+        ivRecordSpot = findViewById(R.id.iv_record_spot);
+        tvTime = findViewById(R.id.tv_time);
+        ivRealTimeRefuseIcon = findViewById(R.id.iv_real_time_refuse_icon);
+        rlCallingTime = findViewById(R.id.rl_calling_time);
+        ivBigHeadPic = findViewById(R.id.iv_big_head_pic);
+        tvVideoTimeStamp = findViewById(R.id.tv_video_timestamp);
+        tvCallingTips = findViewById(R.id.tv_calling_tip);
+        tvDoorbell = findViewById(R.id.tv_doorbell);
+        ivCache = findViewById(R.id.iv_cache);
+        rlTitleBar = findViewById(R.id.rl_title_bar);
+        titleBar = findViewById(R.id.title_bar);
+        mTvHeadTitle = findViewById(R.id.head_title);
+        mIvTemporaryPwd = findViewById(R.id.iv_temporary_pwd);
+    }
+
+    private void initOnClickListener() {
+        back.setOnClickListener(v -> finish());
+        findViewById(R.id.mark_back).setOnClickListener(v -> finish());
+        ivRealTimeRefuseIcon.setOnClickListener(v -> {
+            mPresenter.stopConnect();
+            avi.hide();
+            tvTips.setVisibility(View.GONE);
+            finish();
+        });
+        ivRefuseIcon1.setOnClickListener(v -> {
+            mPresenter.stopConnect();
+            avi.hide();
+            tvTips.setVisibility(View.GONE);
+            finish();
+        });
+        ivRefuseIcon.setOnClickListener(v -> {
+            mPresenter.stopConnect();
+            avi.hide();
+            tvTips.setVisibility(View.GONE);
+            finish();
+        });
+        ivAnswerIcon.setOnClickListener(v -> {
+            if(this.isConnect){
+                rlVideoLayout.setVisibility(View.VISIBLE);
+                rlMarkLayout.setVisibility(View.GONE);
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(isShowAudio && mPresenter.startAudioStream() >= 0) {
+                            if (!mPresenter.isEnableAudio()) {
+                                mPresenter.enableAudio(true);
+                                isMute = false;
+                                isShowAudio = false;
+                            }
+                        }
+                    }
+                }).start();
+            }else{
+                ivAnswerIcon.setVisibility(View.GONE);
+                ivRefuseIcon.setVisibility(View.GONE);
+                tvDoorbell.setVisibility(View.GONE);
+                avi.setVisibility(View.VISIBLE);
+                avi.show();
+                tvTips.setVisibility(View.VISIBLE);
+                isDoorbelling = false;
+            }
+        });
+        ivMute.setOnClickListener(v -> {
+            if(!isMute){
+                if(mPresenter.stopAudioStream() >= 0){
+                    if(mPresenter.isEnableAudio()){
+                        mPresenter.enableAudio(false);
+                        isMute = true;
+                        ivMute.setImageResource(R.drawable.philips_video_icon_mute);
+                        showShort(getString(R.string.wifi_video_lock_mute_on));
+                    }
+                }
+
+            }else{
+                if(mPresenter.startAudioStream() >=0){
+                    if(!mPresenter.isEnableAudio()){
+                        mPresenter.enableAudio(true);
+                        isMute = false;
+                        ivMute.setImageResource(R.drawable.philips_video_icon_mute);
+                        showShort(getString(R.string.philips_wifi_video_lock_mute_off));
+                    }
+                }
+
+            }
+        });
+        ivSetting.setOnClickListener(v -> {
+            isLastPirture = true;
+            Intent settingIntent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockRealTimeActivity.class);
+            settingIntent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            startActivity(settingIntent);
+            mPresenter.release();
+        });
+        ivAlbum.setOnClickListener(v -> {
+            isLastPirture = true;
+            Intent intent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            startActivity(intent);
+            mPresenter.release();
+        });
+        ivRecoring.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                ToastUtils.showShort(getString(R.string.wifi_video_lock_read_and_write_permission));
+            }else{
+                if(!ivRecoring.isSelected()){
+                    ivRecoring.setSelected(true);
+                    llyRecord.setVisibility(View.VISIBLE);
+                    if(wifiLockInfo != null){
+                        String filePath = FileTool.getVideoLockPath(this,wifiLockInfo.getWifiSN()).getPath() + File.separator +System.currentTimeMillis()+".mp4"  ;
+                        LogUtils.d("shulan videocalling filepath-->" + filePath);
+                        mPresenter.startRecordMP4(filePath);
+                        showShort(getString(R.string.wifi_video_lock_screen_recording_enable));
+                    }
+
+                }else{
+                    ivRecoring.setSelected(false);
+                    llyRecord.setVisibility(View.GONE);
+                    mPresenter.stopRecordMP4();
+                    showShort(getString(R.string.wifi_video_lock_screen_recording_disable));
+                }
+                llyRecord.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+        ivScreenshot.setOnClickListener(v -> mPresenter.snapImage());
+        mIvTemporaryPwd.setOnClickListener(v -> {
+            if(!mIvTemporaryPwd.isSelected()){
+                tvTemporaryPassword.setText(getPassword() + "#");
+//                    tvTemporaryPassword.setText(XMP2PManager.getInstance().getMode() + "");//test查看讯美p2p连接直连还是转发
+                tvTemporaryPassword.setVisibility(View.VISIBLE);
+                mIvTemporaryPwd.setSelected(true);
+            }else{
+                mIvTemporaryPwd.setSelected(false);
+                tvTemporaryPassword.setVisibility(View.GONE);
+            }
+
+        });
+    }
+
     @Deprecated
     private void changeIcon() {
         ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
@@ -273,33 +397,30 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     }
 
     private void initLinstener() {
-        ivCalling.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if (ContextCompat.checkSelfPermission(PhilipsWifiVideoLockCallingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions( PhilipsWifiVideoLockCallingActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
-                        ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission) + "");
-                    }else{
-                        if(isFirstAudio){
+        ivCalling.setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                if (ContextCompat.checkSelfPermission(PhilipsWifiVideoLockCallingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions( PhilipsWifiVideoLockCallingActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+                    ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission) + "");
+                }else{
+                    if(isFirstAudio){
 
-                            if(mPresenter.isTalkback()){
-                                ivCalling.setSelected(false);
-                                mPresenter.talkback(false);
-                                mPresenter.stopTalkback();
-                                tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-                            }else{
-                                ivCalling.setSelected(true);
-                                mPresenter.talkback(true);
-                                mPresenter.startTalkback();
-                                showShort(getString(R.string.wifi_video_lock_open_talk_back));
-                                tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
-                            }
+                        if(mPresenter.isTalkback()){
+                            ivCalling.setSelected(false);
+                            mPresenter.talkback(false);
+                            mPresenter.stopTalkback();
+                            tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
+                        }else{
+                            ivCalling.setSelected(true);
+                            mPresenter.talkback(true);
+                            mPresenter.startTalkback();
+                            showShort(getString(R.string.wifi_video_lock_open_talk_back));
+                            tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
                         }
                     }
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -315,131 +436,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-
-    @OnClick({R.id.back,R.id.mark_back,R.id.iv_answer_icon, R.id.iv_refuse_icon,R.id.iv_setting,
-            R.id.iv_mute,R.id.iv_screenshot,R.id.iv_calling,R.id.iv_recoring,R.id.iv_album,R.id.iv_temporary_pwd,R.id.iv_real_time_refuse_icon})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.mark_back:
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_real_time_refuse_icon:
-            case R.id.iv_refuse_icon_1:
-            case R.id.iv_refuse_icon:
-                mPresenter.stopConnect();
-                avi.hide();
-                tvTips.setVisibility(View.GONE);
-                finish();
-                break;
-            case R.id.iv_answer_icon:
-                if(this.isConnect){
-                    rlVideoLayout.setVisibility(View.VISIBLE);
-                    rlMarkLayout.setVisibility(View.GONE);
-                    new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if(isShowAudio && mPresenter.startAudioStream() >= 0) {
-                                if (!mPresenter.isEnableAudio()) {
-                                    mPresenter.enableAudio(true);
-                                    isMute = false;
-                                    isShowAudio = false;
-                                }
-                            }
-                        }
-                    }).start();
-                }else{
-                    ivAnswerIcon.setVisibility(View.GONE);
-                    ivRefuseIcon.setVisibility(View.GONE);
-                    tvDoorbell.setVisibility(View.GONE);
-                    avi.setVisibility(View.VISIBLE);
-                    avi.show();
-                    tvTips.setVisibility(View.VISIBLE);
-                    isDoorbelling = false;
-                }
-                break;
-            case R.id.iv_mute:
-                if(!isMute){
-                    if(mPresenter.stopAudioStream() >= 0){
-                        if(mPresenter.isEnableAudio()){
-                            mPresenter.enableAudio(false);
-                            isMute = true;
-                            ivMute.setImageResource(R.drawable.philips_video_icon_mute);
-                            showShort(getString(R.string.wifi_video_lock_mute_on));
-                        }
-                    }
-
-                }else{
-                    if(mPresenter.startAudioStream() >=0){
-                        if(!mPresenter.isEnableAudio()){
-                            mPresenter.enableAudio(true);
-                            isMute = false;
-                            ivMute.setImageResource(R.drawable.philips_video_icon_mute);
-                            showShort(getString(R.string.philips_wifi_video_lock_mute_off));
-                        }
-                    }
-
-                }
-                break;
-            case R.id.iv_setting:
-                isLastPirture = true;
-                Intent settingIntent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockRealTimeActivity.class);
-                settingIntent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                startActivity(settingIntent);
-                mPresenter.release();
-                break;
-            case R.id.iv_album:
-                isLastPirture = true;
-                Intent intent = new Intent(PhilipsWifiVideoLockCallingActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                startActivity(intent);
-                mPresenter.release();
-                break;
-            case R.id.iv_recoring:
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                    ToastUtils.showShort(getString(R.string.wifi_video_lock_read_and_write_permission));
-                }else{
-                    if(!ivRecoring.isSelected()){
-                        ivRecoring.setSelected(true);
-                        llyRecord.setVisibility(View.VISIBLE);
-                        if(wifiLockInfo != null){
-                            String filePath = FileTool.getVideoLockPath(this,wifiLockInfo.getWifiSN()).getPath() + File.separator +System.currentTimeMillis()+".mp4"  ;
-                            LogUtils.d("shulan videocalling filepath-->" + filePath);
-                            mPresenter.startRecordMP4(filePath);
-                            showShort(getString(R.string.wifi_video_lock_screen_recording_enable));
-                        }
-
-                    }else{
-                        ivRecoring.setSelected(false);
-                        llyRecord.setVisibility(View.GONE);
-                        mPresenter.stopRecordMP4();
-                        showShort(getString(R.string.wifi_video_lock_screen_recording_disable));
-                    }
-                    llyRecord.setVisibility(View.VISIBLE);
-
-
-                }
-                break;
-            case R.id.iv_screenshot:
-                mPresenter.snapImage();
-                break;
-            case R.id.iv_temporary_pwd:
-                if(!mIvTemporaryPwd.isSelected()){
-                    tvTemporaryPassword.setText(getPassword() + "#");
-//                    tvTemporaryPassword.setText(XMP2PManager.getInstance().getMode() + "");//test查看讯美p2p连接直连还是转发
-                    tvTemporaryPassword.setVisibility(View.VISIBLE);
-                    mIvTemporaryPwd.setSelected(true);
-                }else{
-                    mIvTemporaryPwd.setSelected(false);
-                    tvTemporaryPassword.setVisibility(View.GONE);
-                }
-
-                break;
-        }
     }
 
     private void showShort(String ss) {

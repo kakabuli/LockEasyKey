@@ -20,23 +20,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddNewNotActivateActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.iv_wei_xin_code)
     ImageView ivWeiXinCode;
-    @BindView(R.id.lock_activated)
     TextView lockActivated;
 
     private String wifiModelType;
@@ -45,7 +35,22 @@ public class WifiLockAddNewNotActivateActivity extends BaseAddToApplicationActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_not_activate);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        ivWeiXinCode = findViewById(R.id.iv_wei_xin_code);
+        lockActivated = findViewById(R.id.lock_activated);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(WifiLockAddNewNotActivateActivity.this,WifiLockHelpActivity.class)));
+        lockActivated.setOnClickListener(v -> {
+            Intent wifiIntent = new Intent(this, WifiLockAddNewThirdActivity.class);
+            wifiIntent.putExtra("wifiModelType", wifiModelType);
+            startActivity(wifiIntent);
+        });
+
         Intent intent = getIntent();
         wifiModelType = intent.getStringExtra("wifiModelType");
         ivWeiXinCode.setOnLongClickListener(new View.OnLongClickListener() {
@@ -101,21 +106,4 @@ public class WifiLockAddNewNotActivateActivity extends BaseAddToApplicationActiv
         return false;
     }
 
-    @OnClick({R.id.back, R.id.help, R.id.lock_activated})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(WifiLockAddNewNotActivateActivity.this,WifiLockHelpActivity.class));
-                break;
-            case R.id.lock_activated:
-//                startActivity(new Intent(this,WifiLockAddNewThirdActivity.class));
-                Intent wifiIntent = new Intent(this, WifiLockAddNewThirdActivity.class);
-                wifiIntent.putExtra("wifiModelType", wifiModelType);
-                startActivity(wifiIntent);
-                break;
-        }
-    }
 }

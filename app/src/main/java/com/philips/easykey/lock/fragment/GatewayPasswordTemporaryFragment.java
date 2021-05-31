@@ -36,9 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 /**
  * Created by David
@@ -47,24 +44,17 @@ import butterknife.ButterKnife;
 public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockPasswordTempView,
         GatewayLockPasswordTempPresenter<IGatewayLockPasswordTempView>>
         implements View.OnClickListener, IGatewayLockPasswordTempView {
-    @BindView(R.id.recycleview)
+
     RecyclerView recyclerView;
-    @BindView(R.id.et_name)
     EditText etName;
     List<ShiXiaoNameBean> list = new ArrayList<>();
     ShiXiaoNameAdapter shiXiaoNameAdapter;
     View mView;
-    @BindView(R.id.et_password)
     EditText etPassword;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
-    @BindView(R.id.pwd_manager_icon)
     ImageView pwdManagerIcon;
-    @BindView(R.id.pwd_manager_grant_iv)
     ImageView pwdManagerGrantIv;
-    @BindView(R.id.ll_nick_name)
     LinearLayout llNickName;
     private String gatewayId;
     private String deviceId;
@@ -79,7 +69,15 @@ public class GatewayPasswordTemporaryFragment extends BaseFragment<IGatewayLockP
         gatewayId = ((GatewayPasswordAddActivity) getActivity()).gatewayId;
         deviceId = ((GatewayPasswordAddActivity) getActivity()).deviceId;
 
-        ButterKnife.bind(this, mView);
+        recyclerView = mView.findViewById(R.id.recycleview);
+        etName = mView.findViewById(R.id.et_name);
+        etPassword = mView.findViewById(R.id.et_password);
+        btnRandomGeneration = mView.findViewById(R.id.btn_random_generation);
+        btnConfirmGeneration = mView.findViewById(R.id.btn_confirm_generation);
+        pwdManagerIcon = mView.findViewById(R.id.pwd_manager_icon);
+        pwdManagerGrantIv = mView.findViewById(R.id.pwd_manager_grant_iv);
+        llNickName = mView.findViewById(R.id.ll_nick_name);
+
         btnRandomGeneration.setOnClickListener(this);
         btnConfirmGeneration.setOnClickListener(this);
 

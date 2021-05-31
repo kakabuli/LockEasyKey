@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,37 +15,28 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLcokSupportWifiActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.rv_route_list)
     RecyclerView rvRouteList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_wifi);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        rvRouteList = findViewById(R.id.rv_route_list);
+
+        back.setOnClickListener(v -> finish());
+
         List<RouteBean> routeBeans = initRouteBean();
         rvRouteList.setLayoutManager(new LinearLayoutManager(this));
         RouteListAdapter routeListAdapter = new RouteListAdapter(routeBeans);
         rvRouteList.setAdapter(routeListAdapter);
-    }
-
-    @OnClick(R.id.back)
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-        }
     }
 
 

@@ -28,8 +28,6 @@ import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by hushucong
  * on 2020/6/28
@@ -48,7 +46,6 @@ public class WifiLockAddNewToChooseActivity extends BaseActivity<WiFiLockChooseT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_choose_and_scan);
-        ButterKnife.bind(this);
 
         wifi_lock_choose_to_scan = findViewById(R.id.wifi_lock_choose_to_scan);
         wifi_lock_choose_to_input = findViewById(R.id.wifi_lock_choose_to_input);

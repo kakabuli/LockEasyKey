@@ -24,29 +24,17 @@ import com.philips.easykey.lock.utils.OfflinePasswordFactorManager;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseActivity<IBindBleView, BindBleWiFiSwitchPresenter<IBindBleView>> implements IBindBleView  {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.circle_progress_bar)
     WifiCircleProgress circleProgressBar;
-    @BindView(R.id.tv_state_send_pwd)
     TextView tvStateSendPwd;
-    @BindView(R.id.iv_state_send_pwd)
     ImageView ivStateSendPwd;
-    @BindView(R.id.tv_state_lock_check_pwd)
     TextView tvStateLockCheckPwd;
-    @BindView(R.id.iv_state_lock_check_pwd)
     ImageView ivStateLockCheckPwd;
-    @BindView(R.id.tv_state_lock_checking)
     TextView tvStateLockChecking;
-    @BindView(R.id.iv_state_lock_checking)
     ImageView ivStateLockChecking;
     private Animation animation;
     private String adminPassword;
@@ -67,7 +55,20 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_check_admin_password);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        circleProgressBar = findViewById(R.id.circle_progress_bar);
+        tvStateSendPwd = findViewById(R.id.tv_state_send_pwd);
+        ivStateSendPwd = findViewById(R.id.iv_state_send_pwd);
+        tvStateLockCheckPwd = findViewById(R.id.tv_state_lock_check_pwd);
+        ivStateLockCheckPwd = findViewById(R.id.iv_state_lock_check_pwd);
+        tvStateLockChecking = findViewById(R.id.tv_state_lock_checking);
+        ivStateLockChecking = findViewById(R.id.iv_state_lock_checking);
+
+        back.setOnClickListener(v -> showWarring());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+
         adminPassword = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD);
 //        data = getIntent().getByteArrayExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA);
         times = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, 1);
@@ -163,17 +164,6 @@ public class WifiLockAddNewBLEWIFISwitchCheckAdminPasswordActivity extends BaseA
             firstThread.interrupt();
         }
     };
-    @OnClick({R.id.back, R.id.help, R.id.circle_progress_bar})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed() {

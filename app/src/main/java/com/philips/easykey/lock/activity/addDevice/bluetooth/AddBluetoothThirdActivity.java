@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,19 +21,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.OfflinePasswordFactorManager;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBlePresenter<IBindBleView>> implements IBindBleView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.already_pair_network)
     Button alreadyPairNetwork;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.tv_notice)
     TextView tvNotice;
     private boolean isBind;
     private String password1;
@@ -54,6 +46,21 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
         isBind = intent.getBooleanExtra(KeyConstants.IS_BIND, true);
         version = intent.getIntExtra(KeyConstants.BLE_VERSION, 0);
         sn = intent.getStringExtra(KeyConstants.BLE_DEVICE_SN);
+        back = findViewById(R.id.back);
+        alreadyPairNetwork = findViewById(R.id.already_pair_network);
+        help = findViewById(R.id.help);
+        tvNotice = findViewById(R.id.tv_notice);
+
+        back.setOnClickListener(v -> {
+            Intent result = new Intent();
+            result.putExtra(KeyConstants.IS_BIND, mPresenter.isBind());
+            setResult(RESULT_OK, result);
+            finish();
+        });
+        help.setOnClickListener(v -> {
+            Intent i = new Intent(this, DeviceAddHelpActivity.class);
+            startActivity(i);
+        });
 
         mac = intent.getStringExtra(KeyConstants.BLE_MAC);
         deviceName = intent.getStringExtra( KeyConstants.DEVICE_NAME);
@@ -61,7 +68,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
         //pwd1设置给Presenter使用
         mPresenter.setPwd1(password1, isBind, version, sn,mac,deviceName);
         mPresenter.listenConnectState();
-        ButterKnife.bind(this);
+
 
         LogUtils.d("是否绑定流程   " + isBind);
 
@@ -90,25 +97,6 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
         result.putExtra(KeyConstants.IS_BIND, mPresenter.isBind());
         setResult(RESULT_OK, result);
         super.onBackPressed();
-    }
-
-    @OnClick({R.id.back, R.id.already_pair_network, R.id.help})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent result = new Intent();
-                result.putExtra(KeyConstants.IS_BIND, mPresenter.isBind());
-                setResult(RESULT_OK, result);
-                finish();
-                break;
-            case R.id.already_pair_network:
-
-                break;
-            case R.id.help:
-                Intent intent = new Intent(this, DeviceAddHelpActivity.class);
-                startActivity(intent);
-                break;
-        }
     }
 
     @Override

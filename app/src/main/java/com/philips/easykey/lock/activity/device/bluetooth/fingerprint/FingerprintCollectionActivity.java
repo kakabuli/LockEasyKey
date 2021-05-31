@@ -22,19 +22,15 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class FingerprintCollectionActivity extends BaseBleActivity<IAddFingerprintEndView,AddFingerprintEndPresenter<IAddFingerprintEndView>>
         implements View.OnClickListener,IAddFingerprintEndView  {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
     private BleLockInfo bleLockInfo;
 
@@ -42,7 +38,11 @@ public class FingerprintCollectionActivity extends BaseBleActivity<IAddFingerpri
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_collection);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.add_fingerprint);
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();

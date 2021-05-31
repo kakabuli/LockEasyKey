@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,41 +15,26 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.gateway.AddGatewayFirstActivity;
-import com.philips.easykey.lock.activity.addDevice.zigbee.AddZigbeeLockFirstActivity;
 import com.philips.easykey.lock.adapter.AddZigbeeBindGatewayAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.bean.deviceAdd.AddZigbeeBindGatewayBean;
 import com.philips.easykey.lock.mvp.presenter.deviceaddpresenter.DeviceGatewayBindListPresenter;
 import com.philips.easykey.lock.publiclibrary.bean.GatewayInfo;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.GwWiFiBaseInfo;
-import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
-import com.philips.easykey.lock.utils.NetUtil;
-import com.philips.easykey.lock.utils.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.mvp.view.deviceaddview.DeviceGatewayBindListView;
-import com.philips.easykey.lock.utils.handPwdUtil.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBindListView, DeviceGatewayBindListPresenter<DeviceGatewayBindListView>> implements DeviceGatewayBindListView{
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.add_gateway)
     ImageView addGateway;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.button_next)
     Button buttonNext;
-    @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
 
     private List<AddZigbeeBindGatewayBean> mList=new ArrayList<>();
@@ -64,7 +48,11 @@ public class DeviceBindGatewayListActivity extends BaseActivity<DeviceGatewayBin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zigbee_bindgateway);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        addGateway = findViewById(R.id.add_gateway);
+        recycler = findViewById(R.id.recycler);
+        buttonNext = findViewById(R.id.button_next);
+        refresh = findViewById(R.id.refresh);
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 0);
         initData();

@@ -14,13 +14,8 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ClothesHangerMachineAddSuccessActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
 
     private MessageDialog messageDialog;
@@ -33,7 +28,13 @@ public class ClothesHangerMachineAddSuccessActivity extends BaseAddToApplication
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_success);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> {
+            Intent data = new Intent(ClothesHangerMachineAddSuccessActivity.this, MainActivity.class);
+            startActivity(data);
+            finish();
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType") + "";
         initView();
@@ -80,18 +81,6 @@ public class ClothesHangerMachineAddSuccessActivity extends BaseAddToApplication
         Intent data = new Intent(ClothesHangerMachineAddSuccessActivity.this, MainActivity.class);
         startActivity(data);
         finish();
-    }
-
-    @OnClick({R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                Intent data = new Intent(ClothesHangerMachineAddSuccessActivity.this, MainActivity.class);
-                startActivity(data);
-                finish();
-                break;
-
-        }
     }
 
 }

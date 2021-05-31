@@ -76,36 +76,22 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by asqw1 on 2018/3/14.
  */
 
 public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<IDeviceView>> implements IDeviceView {
-    @BindView(R.id.no_device_image)
+
     ImageView noDeviceImage;
-
-    @BindView(R.id.device_recycler)
     RecyclerView deviceRecycler;
-
-    @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
-    @BindView(R.id.buy)
     Button buy;
-    @BindView(R.id.no_device_layout)
     RelativeLayout noDeviceLayout;
-    @BindView(R.id.device_add)
     ImageView deviceAdd;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
 
     private View mView;
-
-    private Unbinder unbinder;
 
     private DeviceDetailAdapter deviceDetailAdapter;
 
@@ -130,7 +116,27 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_device, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
+
+        noDeviceImage = mView.findViewById(R.id.no_device_image);
+        deviceRecycler = mView.findViewById(R.id.device_recycler);
+        refresh = mView.findViewById(R.id.refresh);
+        buy = mView.findViewById(R.id.buy);
+        noDeviceLayout = mView.findViewById(R.id.no_device_layout);
+        deviceAdd = mView.findViewById(R.id.device_add);
+        titleBar = mView.findViewById(R.id.title_bar);
+
+        deviceAdd.setOnClickListener(v -> {
+            Intent deviceAdd = new Intent(getActivity(), DeviceAdd2Activity.class);
+            startActivity(deviceAdd);
+        });
+        buy.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse("http://www.kaadas.com/");//此处填链接
+            intent.setData(content_url);
+            startActivity(intent);
+        });
+
         deviceRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         homeShowBeanList = MyApplication.getInstance().getAllDevices();
         mqttService = MyApplication.getInstance().getMqttService();
@@ -473,30 +479,6 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
 
             }
         });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-
-    @OnClick({R.id.device_add, R.id.buy})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.device_add:
-                Intent deviceAdd = new Intent(getActivity(), DeviceAdd2Activity.class);
-                startActivity(deviceAdd);
-                break;
-            case R.id.buy:
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("http://www.kaadas.com/");//此处填链接
-                intent.setData(content_url);
-                startActivity(intent);
-                break;
-        }
     }
 
     @Override

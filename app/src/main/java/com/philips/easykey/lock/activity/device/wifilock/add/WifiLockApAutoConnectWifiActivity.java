@@ -24,15 +24,11 @@ import com.philips.easykey.lock.utils.WifiUtil;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActivity {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
     private Handler handler = new Handler();
 
@@ -44,7 +40,11 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_ap_auto_connect_wifi);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
 
         //获取权限  定位权限
         permissionDisposable = rxPermissions
@@ -154,11 +154,6 @@ public class WifiLockApAutoConnectWifiActivity extends BaseAddToApplicationActiv
     @Override
     public void onBackPressed() {
         ToastUtils.showShort(getString(R.string.is_connect_wifi_please_wait));
-    }
-
-    @OnClick(R.id.help)
-    public void onClick() {
-        startActivity(new Intent(this, WifiLockHelpActivity.class));
     }
 
 

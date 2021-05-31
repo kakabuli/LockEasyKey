@@ -16,9 +16,6 @@ import com.philips.easykey.lock.utils.LoadingDialog;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Create By lxj  on 2019/1/7
  * Describe Activity 基类
@@ -28,7 +25,6 @@ public abstract class BaseActivity<T extends IBaseView, V
     protected V mPresenter;
     private LoadingDialog loadingDialog;
     private Handler bHandler = new Handler();
-    private Unbinder unbinder;
 
     private boolean isRegistered = false;
     private NetWorkChangReceiver netWorkChangReceiver;
@@ -44,7 +40,6 @@ public abstract class BaseActivity<T extends IBaseView, V
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        unbinder = ButterKnife.bind(this);
 
     }
 
@@ -54,7 +49,6 @@ public abstract class BaseActivity<T extends IBaseView, V
         //销毁时，删除回调，防止内存泄漏
         bHandler.removeCallbacksAndMessages(null);
         MyApplication.getInstance().removeActivity(this);
-        unbinder.unbind();
         super.onDestroy();
     }
 

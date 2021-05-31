@@ -36,22 +36,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideoSixthView
         , WifiVideoLockSixthPresenter<IWifiLockVideoSixthView>> implements IWifiLockVideoSixthView {
 
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.save)
     Button save;
-    @BindView(R.id.lock)
     ImageView lock;
-    @BindView(R.id.back)
     ImageView back;
 
     private List<AddBluetoothPairSuccessBean> mList;
@@ -75,7 +66,56 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_lock_video_add_success);
-        ButterKnife.bind(this);
+
+        inputName = findViewById(R.id.input_name);
+        recycler = findViewById(R.id.recycler);
+        save = findViewById(R.id.save);
+        lock = findViewById(R.id.lock);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(v -> {
+             /*Intent backIntent = new Intent(this, MainActivity.class);
+                startActivity(backIntent);*/
+            if (TextUtils.isEmpty(name)) {
+                name = wifiSN;
+            }
+            showLoading(getString(R.string.is_saving_name));
+            if(!isUpdate){
+                    /*mPresenter.bindDevice(wifiLockVideoBindBean.getWfId(),name,wifiLockVideoBindBean.getUserId(),
+                            password,sSsid,func,3,
+                            wifiLockVideoBindBean.getEventparams().getDevice_sn(),wifiLockVideoBindBean.getEventparams().getMac(),
+                            wifiLockVideoBindBean.getEventparams().getDevice_did(),wifiLockVideoBindBean.getEventparams().getP2p_password()
+                    );*/
+                mPresenter.setNickName(wifiSN, name);
+            }else{
+                mPresenter.setNickName(wifiSN, name);
+            }
+        });
+        save.setOnClickListener(v -> {
+            name = inputName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(R.string.not_empty);
+                return;
+            }
+            if (!StringUtil.nicknameJudge(name)) {
+                ToastUtils.showShort(R.string.nickname_verify_error);
+                return;
+            }
+
+            showLoading(getString(R.string.is_saving_name));
+            if(!isUpdate){
+                    /*mPresenter.bindDevice(wifiLockVideoBindBean.getWfId(),name,wifiLockVideoBindBean.getUserId(),
+                            password,sSsid,func,3,
+                            wifiLockVideoBindBean.getEventparams().getDevice_sn(),wifiLockVideoBindBean.getEventparams().getMac(),
+                            wifiLockVideoBindBean.getEventparams().getDevice_did(),wifiLockVideoBindBean.getEventparams().getP2p_password()
+                    );*/
+                mPresenter.setNickName(wifiSN, name);
+            }else{
+                mPresenter.setNickName(wifiSN, name);
+            }
+        });
+        findViewById(R.id.tv_support_list).setOnClickListener(v -> startActivity(new Intent(this, WifiLcokSupportWifiActivity.class)));
+
         initData();
         initView();
         initListener();
@@ -182,58 +222,6 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.save, R.id.back,R.id.tv_support_list})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                /*Intent backIntent = new Intent(this, MainActivity.class);
-                startActivity(backIntent);*/
-                if (TextUtils.isEmpty(name)) {
-                    name = wifiSN;
-                }
-                showLoading(getString(R.string.is_saving_name));
-                if(!isUpdate){
-                    /*mPresenter.bindDevice(wifiLockVideoBindBean.getWfId(),name,wifiLockVideoBindBean.getUserId(),
-                            password,sSsid,func,3,
-                            wifiLockVideoBindBean.getEventparams().getDevice_sn(),wifiLockVideoBindBean.getEventparams().getMac(),
-                            wifiLockVideoBindBean.getEventparams().getDevice_did(),wifiLockVideoBindBean.getEventparams().getP2p_password()
-                    );*/
-                    mPresenter.setNickName(wifiSN, name);
-                }else{
-                    mPresenter.setNickName(wifiSN, name);
-                }
-                break;
-            case R.id.save:
-                name = inputName.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(R.string.not_empty);
-                    return;
-                }
-                if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
-                    return;
-                }
-
-                showLoading(getString(R.string.is_saving_name));
-                if(!isUpdate){
-                    /*mPresenter.bindDevice(wifiLockVideoBindBean.getWfId(),name,wifiLockVideoBindBean.getUserId(),
-                            password,sSsid,func,3,
-                            wifiLockVideoBindBean.getEventparams().getDevice_sn(),wifiLockVideoBindBean.getEventparams().getMac(),
-                            wifiLockVideoBindBean.getEventparams().getDevice_did(),wifiLockVideoBindBean.getEventparams().getP2p_password()
-                    );*/
-                    mPresenter.setNickName(wifiSN, name);
-                }else{
-                    mPresenter.setNickName(wifiSN, name);
-                }
-
-
-                break;
-            case R.id.tv_support_list:
-                startActivity(new Intent(this, WifiLcokSupportWifiActivity.class));
-                break;
-        }
-    }
-
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -248,11 +236,6 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
         startActivity(backIntent);
         return true;
     }
-
-    @OnClick()
-    public void onViewClicked() {
-    }
-
 
     @Override
     public void onBindSuccess(String wifiSn) {

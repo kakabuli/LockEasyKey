@@ -34,22 +34,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLockSuccessSaveView, AddZigbeeLockSuccessSavePresenter<AddZigbeeLockSuccessSaveView>> implements AddZigbeeLockSuccessSaveView {
 
-
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.save)
     Button save;
-    @BindView(R.id.lock)
     ImageView lock;
-    @BindView(R.id.back)
     ImageView back;
 
     private List<AddBluetoothPairSuccessBean> mList;
@@ -63,7 +54,31 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_add_success);
-        ButterKnife.bind(this);
+
+        inputName = findViewById(R.id.input_name);
+        recycler = findViewById(R.id.recycler);
+        save = findViewById(R.id.save);
+        lock = findViewById(R.id.lock);
+        back = findViewById((R.id.back));
+
+        back.setOnClickListener(v -> {
+            Intent backIntent = new Intent(this, MainActivity.class);
+            startActivity(backIntent);
+        });
+        save.setOnClickListener(v -> {
+            //保存
+            String name = inputName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(getString(R.string.nickname_not_null));
+                return;
+            }
+            if (!TextUtils.isEmpty(deviceId) && !TextUtils.isEmpty(gatewayId)) {
+                mPresenter.updateZigbeeLockName(gatewayId, deviceId, name);
+            } else {
+                ToastUtils.showShort(R.string.gateway_or_device_null);
+            }
+        });
+
         initData();
         initView();
         initListener();
@@ -148,31 +163,6 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
             });
         }
 
-    }
-
-
-    @OnClick({R.id.save,R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent backIntent = new Intent(this, MainActivity.class);
-                startActivity(backIntent);
-                break;
-            case R.id.save:
-                //保存
-                String name = inputName.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(getString(R.string.nickname_not_null));
-                    return;
-                }
-                if (!TextUtils.isEmpty(deviceId) && !TextUtils.isEmpty(gatewayId)) {
-                    mPresenter.updateZigbeeLockName(gatewayId, deviceId, name);
-                } else {
-                    ToastUtils.showShort(R.string.gateway_or_device_null);
-                }
-
-                break;
-        }
     }
 
 

@@ -29,38 +29,23 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class OldDeviceInfoActivity extends BaseBleCheckInfoActivity<IOldDeviceInfoView, OldDeviceInfoPresenter>
         implements IOldDeviceInfoView, View.OnClickListener {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-    @BindView(R.id.rl_bluetooth_module_version)
     RelativeLayout rlBluetoothModuleVersion;
-    @BindView(R.id.tv_bluetooth_module_version)
     TextView tvBluetoothModuleVersion;
-    @BindView(R.id.tv_lock_software_version)
     TextView tvLockSoftwareVersion;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.ble_mode)
     TextView bleMode;
-    @BindView(R.id.device_info_right)
     ImageView deviceInfoRight;
     private BleLockInfo bleLockInfo;
     String deviceNickname;//设备名称
@@ -73,7 +58,20 @@ public class OldDeviceInfoActivity extends BaseBleCheckInfoActivity<IOldDeviceIn
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_bluetooth_more);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        rlBluetoothModuleVersion = findViewById(R.id.rl_bluetooth_module_version);
+        tvBluetoothModuleVersion = findViewById(R.id.tv_bluetooth_module_version);
+        tvLockSoftwareVersion = findViewById(R.id.tv_lock_software_version);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        bleMode = findViewById(R.id.ble_mode);
+        deviceInfoRight = findViewById(R.id.device_info_right);
 
         productList = MyApplication.getInstance().getProductInfos();
         if(MyApplication.getInstance().getBleService().getBleLockInfo() != null){

@@ -14,30 +14,20 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class GatewayLockAuthorizationActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
-    @BindView(R.id.iv_power)
     ImageView ivPower;
-    @BindView(R.id.tv_power)
     TextView tvPower;
-    @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
     int lockStatus = -1;
 
@@ -46,7 +36,17 @@ public class GatewayLockAuthorizationActivity extends BaseAddToApplicationActivi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_lock_authorization);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvName = findViewById(R.id.tv_name);
+        tvType = findViewById(R.id.tv_type);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);
+        tvDate = findViewById(R.id.tv_date);
+        llPower = findViewById(R.id.ll_power);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+
         ivBack.setOnClickListener(this);
         tvOpenClock.setOnClickListener(this);
         tvType.setText( " ");

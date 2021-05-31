@@ -17,20 +17,13 @@ import com.philips.easykey.lock.mvp.presenter.singlefireswitchpresenter.SingleFi
 import com.philips.easykey.lock.mvp.view.singlefireswitchview.SingleFireSwitchView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.BindingSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements SingleFireSwitchView {
 
-public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView {
-
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.circle_progress_bar)
     WifiCircleProgress circleProgressBar;
 
     private WifiLockInfo wifiLockInfoChange;
@@ -42,7 +35,12 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_wait_to_set_switch);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        circleProgressBar = findViewById(R.id.circle_progress_bar);
+
+        back.setOnClickListener(v -> finish());
+
         initData();
         initView();
     }
@@ -140,14 +138,6 @@ public class WifiLockWaitForSwitchActivity extends BaseActivity<SingleFireSwitch
 //        intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
 //        intent.putExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE, wifiLockInfoChange);
         setResult(RESULT_OK, intent);
-    }
-    @OnClick({R.id.back})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-        }
     }
 
     @Override

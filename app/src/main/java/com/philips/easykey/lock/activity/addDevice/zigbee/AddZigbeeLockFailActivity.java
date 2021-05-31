@@ -13,44 +13,37 @@ import com.philips.easykey.lock.activity.addDevice.DeviceAdd2Activity;
 import com.philips.easykey.lock.activity.addDevice.DeviceBindGatewayListActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddZigbeeLockFailActivity extends BaseAddToApplicationActivity {
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.button_reconnection)
     Button buttonReconnection;
-    @BindView(R.id.button_out)
     Button buttonOut;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_zigbeelock_add_fail);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        buttonReconnection = findViewById(R.id.button_reconnection);
+        buttonOut = findViewById(R.id.button_out);
+
+        back.setOnClickListener(v -> {
+            Intent backIntent=new Intent(this, DeviceBindGatewayListActivity.class);
+            startActivity(backIntent);
+            finish();
+        });
+        buttonOut.setOnClickListener(v -> {
+            Intent outIntent=new Intent(this, DeviceAdd2Activity.class);
+            startActivity(outIntent);
+            finish();
+        });
+        buttonReconnection.setOnClickListener(v -> {
+            Intent reconnectionIntent=new Intent(this, DeviceBindGatewayListActivity.class);
+            startActivity(reconnectionIntent);
+        });
+
     }
 
-    @OnClick({R.id.back, R.id.button_reconnection, R.id.button_out})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent backIntent=new Intent(this, DeviceBindGatewayListActivity.class);
-                startActivity(backIntent);
-                finish();
-                break;
-            case R.id.button_reconnection:
-                Intent reconnectionIntent=new Intent(this, DeviceBindGatewayListActivity.class);
-                startActivity(reconnectionIntent);
-                break;
-            case R.id.button_out:
-                Intent outIntent=new Intent(this, DeviceAdd2Activity.class);
-                startActivity(outIntent);
-                finish();
-                break;
-        }
-    }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {

@@ -60,8 +60,6 @@ import com.philips.easykey.lock.widget.MyGridItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import android.app.AlertDialog;
 
@@ -69,43 +67,24 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
         implements View.OnClickListener, IWifiLockView, View.OnLongClickListener {
 
 
-    @BindView(R.id.iv_external_big)
     ImageView ivBackGround; //背景图片
-    @BindView(R.id.iv_inner_small)
     ImageView ivTopIcon;  //上方小图标
-    @BindView(R.id.iv_center_icon)
     ImageView ivCenterIcon;  //中间图标wi
-    @BindView(R.id.rl_icon)
     RelativeLayout rlIcon;
-    @BindView(R.id.tv_external)
     TextView tvTopStates;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.rl_has_data)
     RelativeLayout rlHasData;
-    @BindView(R.id.tv_no_data)
     TextView tvNoData;
-    @BindView(R.id.create_time)
     TextView createTime;
-    @BindView(R.id.iv_device_dynamic)
     ImageView ivDeviceDynamic;
-    @BindView(R.id.tv_update_time)
     TextView tvUpdateTime;
-    @BindView(R.id.tv_open_lock_times)
     TextView tvOpenLockTimes;
-    @BindView(R.id.lly_record_bar)
     LinearLayout llyRecordBar;
-    @BindView(R.id.detail_function_recyclerView)
     RecyclerView detailFunctionRecyclerView;
-    @BindView(R.id.detail_function_onLine)
     RecyclerView detailFunctionOnLine;
-    @BindView(R.id.rll_share_user_layout)
     LinearLayout rllShareUserLayout;
-    @BindView(R.id.rll_share_user_function_layout)
     LinearLayout rllShareUserFunctionLayout;
     private WifiLockDetailAdapater adapater;
     private WifiLockDetailOneLineAdapater oneLineAdapater;
@@ -124,7 +103,27 @@ public class WifiLockFragment extends BaseFragment<IWifiLockView, WifiLockPresen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wifi_lock_layout, null);
-        ButterKnife.bind(this, view);
+
+        ivBackGround = view.findViewById(R.id.iv_external_big);
+        ivTopIcon = view.findViewById(R.id.iv_inner_small);
+        ivCenterIcon = view.findViewById(R.id.iv_center_icon);
+        rlIcon = view.findViewById(R.id.rl_icon);
+        tvTopStates = view.findViewById(R.id.tv_external);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+        recycleview = view.findViewById(R.id.recycleview);
+        tvMore = view.findViewById(R.id.tv_more);
+        rlHasData = view.findViewById(R.id.rl_has_data);
+        tvNoData = view.findViewById(R.id.tv_no_data);
+        createTime = view.findViewById(R.id.create_time);
+        ivDeviceDynamic = view.findViewById(R.id.iv_device_dynamic);
+        tvUpdateTime = view.findViewById(R.id.tv_update_time);
+        tvOpenLockTimes = view.findViewById(R.id.tv_open_lock_times);
+        llyRecordBar = view.findViewById(R.id.lly_record_bar);
+        detailFunctionRecyclerView = view.findViewById(R.id.detail_function_recyclerView);
+        detailFunctionOnLine = view.findViewById(R.id.detail_function_onLine);
+        rllShareUserLayout = view.findViewById(R.id.rll_share_user_layout);
+        rllShareUserFunctionLayout = view.findViewById(R.id.rll_share_user_function_layout);
+
         initRecycleView();
         wifiSN = (String) getArguments().getSerializable(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);

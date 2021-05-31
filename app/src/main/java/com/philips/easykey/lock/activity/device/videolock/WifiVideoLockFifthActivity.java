@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,23 +24,14 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.QrCodeUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifthView, WifiVideoLockFifthPresenter<IWifiLockVideoFifthView>> implements IWifiLockVideoFifthView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.lock_not_activated)
     TextView tvFail;
-    @BindView(R.id.lock_activated)
     TextView tvNext;
-    @BindView(R.id.iv_qrcode)
     ImageView ivQrcode;
-    @BindView(R.id.head)
     TextView head;
 
     private String wifiSn;
@@ -62,7 +52,28 @@ public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifth
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_fifth);
 
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        tvFail = findViewById(R.id.lock_not_activated);
+        tvNext = findViewById(R.id.lock_activated);
+        ivQrcode = findViewById(R.id.iv_qrcode);
+        head = findViewById(R.id.head);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiVideoLockHelpActivity.class)));
+        findViewById(R.id.lock_activated).setOnClickListener(v -> {
+            Intent intent = new Intent(this, WifiVideoLockScanActivity.class);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
+            intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
+            intent.putExtra("wifiModelType",wifiModelType);
+            startActivity(intent);
+            finish();
+        });
+        findViewById(R.id.lock_not_activated).setOnClickListener(v -> showWarring());
 
         sSsid = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
         sPassword =getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD);
@@ -94,32 +105,6 @@ public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifth
         return new WifiVideoLockFifthPresenter<>();
     }
 
-    @OnClick({R.id.back,R.id.help,R.id.lock_not_activated,R.id.lock_activated})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                break;
-            case R.id.lock_activated:
-                Intent intent = new Intent(this, WifiVideoLockScanActivity.class);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
-                intent.putExtra("wifiModelType",wifiModelType);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.lock_not_activated:
-                showWarring();
-                break;
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -178,22 +163,19 @@ public class WifiVideoLockFifthActivity extends BaseActivity<IWifiLockVideoFifth
     public void onDeviceBinding(WifiLockVideoBindBean mWifiLockVideoBindBean) {
         LogUtils.d("---------------------ss------------");
         if(!WifiVideoLockFifthActivity.this.isFinishing()){
-            mPresenter.handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(WifiVideoLockFifthActivity.this, WifiVideoLockScanActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
-                    intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
-                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA ,mWifiLockVideoBindBean);
-                    intent.putExtra("wifiModelType",wifiModelType);
-                    startActivity(intent);
-                    LogUtils.d("---------------------aaa------------");
-                    finish();
-                }
+            mPresenter.handler.post(() -> {
+                Intent intent = new Intent(WifiVideoLockFifthActivity.this, WifiVideoLockScanActivity.class);
+                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
+                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
+                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
+                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
+                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
+                intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA ,mWifiLockVideoBindBean);
+                intent.putExtra("wifiModelType",wifiModelType);
+                startActivity(intent);
+                LogUtils.d("---------------------aaa------------");
+                finish();
             });
         }
 

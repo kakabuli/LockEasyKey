@@ -300,18 +300,9 @@
                 <action android:name="android.intent.action.oppopush" />
             </intent-filter>
         </activity> <!-- 登录 -->
-        <activity
-            android:name=".activity.login.LoginActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 注册 -->
-        <activity
-            android:name=".activity.login.RegisterActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 忘记密码 -->
-        <activity
-            android:name=".activity.login.ForgetPasswordActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 我的消息 -->
+        <!-- 注册 -->
+        <!-- 忘记密码 -->
+        <!-- 我的消息 -->
         <activity
             android:name=".activity.my.PersonalMessageActivity"
             android:launchMode="singleTop"

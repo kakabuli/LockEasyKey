@@ -37,27 +37,18 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by David
  */
 public class AddDoorCardSuccessActivity extends BaseActivity<IAddFingerSuccessView, AddFingerSuccessPresenter<IAddFingerSuccessView>>
         implements View.OnClickListener, IAddFingerSuccessView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_success_page_number)
     TextView tvSuccessPageNumber;
-    @BindView(R.id.et_door_card_name)
     EditText etDoorCardName;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.btn_save)
     Button btnSave;
     List<ShiXiaoNameBean> list = new ArrayList<>();
     ShiXiaoNameAdapter shiXiaoNameAdapter;
@@ -68,7 +59,15 @@ public class AddDoorCardSuccessActivity extends BaseActivity<IAddFingerSuccessVi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_door_card_success);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvSuccessPageNumber = findViewById(R.id.tv_success_page_number);
+        etDoorCardName = findViewById(R.id.et_door_card_name);
+        recycleview = findViewById(R.id.recycleview);
+        btnSave = findViewById(R.id.btn_save);
+
         ivBack.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         tvContent.setText(getString(R.string.add_door_card));

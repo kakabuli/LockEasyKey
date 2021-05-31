@@ -21,8 +21,6 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
@@ -30,13 +28,9 @@ import butterknife.ButterKnife;
 public class GatewayPasswordAddActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
 
-    @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.sliding_tab_layout)
     SlidingTabLayout slidingTabLayout;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
     private ListFragmentPagerAdapter mPagerAdapter;
     private List<Fragment> mFragments = new ArrayList<Fragment>();
@@ -50,7 +44,12 @@ public class GatewayPasswordAddActivity extends BaseAddToApplicationActivity imp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_password_add);
-        ButterKnife.bind(this);
+
+        viewPager = findViewById(R.id.viewpager);
+        slidingTabLayout = findViewById(R.id.sliding_tab_layout);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+
         gatewayModel =getIntent().getStringExtra(KeyConstants.GATEWAY_MODEL);
         gatewayId = getIntent().getStringExtra(KeyConstants.GATEWAY_ID);
         deviceId = getIntent().getStringExtra(KeyConstants.DEVICE_ID);

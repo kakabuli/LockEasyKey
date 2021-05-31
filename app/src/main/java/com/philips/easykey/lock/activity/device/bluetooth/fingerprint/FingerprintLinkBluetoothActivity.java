@@ -18,21 +18,17 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerprintSearchView, AddFingerprintSearchPresenter<IAddPringerprintSearchView>>
         implements View.OnClickListener, IAddPringerprintSearchView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    //    @BindView(R.id.btn_confirm_generation)
+    //    (R.id.btn_confirm_generation)
 //    Button btnConfirmGeneration;
     boolean bluetoothConnected = true;//蓝牙是否连接
     private BleLockInfo bleLockInfo;
@@ -40,7 +36,11 @@ public class FingerprintLinkBluetoothActivity extends BaseActivity<IAddPringerpr
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_link_bluetooth);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.add_fingerprint);

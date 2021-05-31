@@ -49,8 +49,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,38 +59,25 @@ import static android.app.Activity.RESULT_OK;
 
 public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswordWeekView, GatewayLockPasswordWeekPresenter<IGatewayLockPasswordWeekView>>
         implements View.OnClickListener, IGatewayLockPasswordWeekView {
-    @BindView(R.id.recycleview)
+
     RecyclerView recyclerView;
-    @BindView(R.id.et_name)
     EditText etName;
     List<ShiXiaoNameBean> list = new ArrayList<>();
     ShiXiaoNameAdapter shiXiaoNameAdapter;
     View mView;
-    @BindView(R.id.ll_rule_repeat)
     LinearLayout llRuleRepeat;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.et_password)
     EditText etPassword;
     public static final int REQUEST_CODE = 100;
     String weekRule;
-    @BindView(R.id.tv_rule_repeat)
     TextView tvRuleRepeat;
-    @BindView(R.id.ll_time)
     LinearLayout llTime;
-    @BindView(R.id.pwd_manager_icon)
     ImageView pwdManagerIcon;
-    @BindView(R.id.pwd_manager_grant_iv)
     ImageView pwdManagerGrantIv;
-    @BindView(R.id.tv_start)
     TextView tvStart;
-    @BindView(R.id.tv_end)
     TextView tvEnd;
-    @BindView(R.id.tv_hint)
     TextView tvHint;
-    @BindView(R.id.ll_nick_name)
     LinearLayout llNickName;
     private int[] days;
     String strStart;//开始
@@ -114,7 +99,22 @@ public class GatewayPasswordWeekFragment extends BaseFragment<IGatewayLockPasswo
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_password_gateway_period , container, false);
         }
-        ButterKnife.bind(this, mView);
+
+        recyclerView = mView.findViewById(R.id.recycleview);
+        etName = mView.findViewById(R.id.et_name);
+        llRuleRepeat = mView.findViewById(R.id.ll_rule_repeat);
+        btnConfirmGeneration = mView.findViewById(R.id.btn_confirm_generation);
+        btnRandomGeneration = mView.findViewById(R.id.btn_random_generation);
+        etPassword = mView.findViewById(R.id.et_password);
+        tvRuleRepeat = mView.findViewById(R.id.tv_rule_repeat);
+        llTime = mView.findViewById(R.id.ll_time);
+        pwdManagerIcon = mView.findViewById(R.id.pwd_manager_icon);
+        pwdManagerGrantIv = mView.findViewById(R.id.pwd_manager_grant_iv);
+        tvStart = mView.findViewById(R.id.tv_start);
+        tvEnd = mView.findViewById(R.id.tv_end);
+        tvHint = mView.findViewById(R.id.tv_hint);
+        llNickName = mView.findViewById(R.id.ll_nick_name);
+
         llRuleRepeat.setOnClickListener(this);
         btnConfirmGeneration.setOnClickListener(this);
         btnRandomGeneration.setOnClickListener(this);

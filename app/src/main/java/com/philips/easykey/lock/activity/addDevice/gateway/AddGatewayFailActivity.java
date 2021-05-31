@@ -14,18 +14,11 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.button_again)
     Button buttonAgain;
-    @BindView(R.id.button_unbind)
     Button buttonUnbind;
 
     private String code;
@@ -34,7 +27,26 @@ public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_gateway_add_fail);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        buttonAgain = findViewById(R.id.button_again);
+        buttonUnbind = findViewById(R.id.button_unbind);
+
+        back.setOnClickListener(v -> {
+            Intent scanIntent=new Intent(this,AddGatewaySecondActivity.class);
+            startActivity(scanIntent);
+            finish();
+        });
+        buttonAgain.setOnClickListener(v -> {
+            //重新连接
+            Intent reConnection=new Intent(this,AddGatewayFirstActivity.class);
+            startActivity(reConnection);
+        });
+        buttonUnbind.setOnClickListener(v -> {
+            Intent addDeviceIntent=new Intent(this, DeviceAdd2Activity.class);
+            startActivity(addDeviceIntent);
+            finish();
+        });
+
 //        initView();
     }
 
@@ -55,27 +67,6 @@ public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
         }
     }
 
-
-    @OnClick({R.id.back, R.id.button_again, R.id.button_unbind})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent scanIntent=new Intent(this,AddGatewaySecondActivity.class);
-                startActivity(scanIntent);
-                finish();
-                break;
-            case R.id.button_again:
-                //重新连接
-                Intent reConnection=new Intent(this,AddGatewayFirstActivity.class);
-                startActivity(reConnection);
-                break;
-            case R.id.button_unbind:
-                Intent addDeviceIntent=new Intent(this, DeviceAdd2Activity.class);
-                startActivity(addDeviceIntent);
-                finish();
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed() {

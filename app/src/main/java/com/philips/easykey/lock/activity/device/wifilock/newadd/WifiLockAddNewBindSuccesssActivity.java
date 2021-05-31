@@ -34,19 +34,13 @@ import com.philips.easykey.lock.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 //activity_wifi_lock_add_new_bind_successs
 public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAddSuccessView
         , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView {
 
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.lock)
     ImageView lock;
 
 
@@ -59,7 +53,30 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_add_success);
-        ButterKnife.bind(this);
+
+        inputName = findViewById(R.id.input_name);
+        recycler = findViewById(R.id.recycler);
+        lock = findViewById(R.id.lock);
+
+        findViewById(R.id.back).setOnClickListener(v -> {
+            Intent backIntent = new Intent(this, MainActivity.class);
+            startActivity(backIntent);
+        });
+        findViewById(R.id.save).setOnClickListener(v -> {
+            String name = inputName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(R.string.not_empty);
+                return;
+            }
+            if (!StringUtil.nicknameJudge(name)) {
+                ToastUtils.showShort(R.string.nickname_verify_error);
+                return;
+            }
+
+            showLoading(getString(R.string.is_saving_name));
+            mPresenter.setNickName(wifiSN, name);
+        });
+
         initData();
         initView();
         initListener();
@@ -138,31 +155,6 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
         }
     }
 
-    @OnClick({R.id.save, R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent backIntent = new Intent(this, MainActivity.class);
-                startActivity(backIntent);
-                break;
-            case R.id.save:
-                String name = inputName.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(R.string.not_empty);
-                    return;
-                }
-                if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
-                    return;
-                }
-
-                showLoading(getString(R.string.is_saving_name));
-                mPresenter.setNickName(wifiSN, name);
-                break;
-        }
-    }
-
-
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -175,10 +167,6 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
         Intent backIntent = new Intent(this, MainActivity.class);
         startActivity(backIntent);
         return true;
-    }
-
-    @OnClick()
-    public void onViewClicked() {
     }
 
     @Override

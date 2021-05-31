@@ -12,17 +12,11 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockFirwareNumberActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.tv_hardware_version)
     TextView tvHardwareVersion;
-    @BindView(R.id.tv_hard_version)
     TextView tvHardVersion;
-    @BindView(R.id.iv_hard_version)
     ImageView ivHardVersion;
 
     private String wifiSN;
@@ -32,7 +26,12 @@ public class WifiVideoLockFirwareNumberActivity extends BaseAddToApplicationActi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_firware_number);
-        ButterKnife.bind(this);
+
+        tvHardwareVersion = findViewById(R.id.tv_hardware_version);
+        tvHardVersion = findViewById(R.id.tv_hard_version);
+        ivHardVersion = findViewById(R.id.iv_hard_version);
+
+        findViewById(R.id.back).setOnClickListener(v -> finish());
 
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
@@ -53,17 +52,6 @@ public class WifiVideoLockFirwareNumberActivity extends BaseAddToApplicationActi
             }else{
                 ivHardVersion.setVisibility(View.GONE);
             }
-        }
-
-    }
-
-
-    @OnClick(R.id.back)
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
         }
 
     }

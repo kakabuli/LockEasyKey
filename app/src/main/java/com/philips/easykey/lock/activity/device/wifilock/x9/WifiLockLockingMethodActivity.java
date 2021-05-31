@@ -17,33 +17,20 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
-import butterknife.BindInt;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 
 public class WifiLockLockingMethodActivity extends BaseActivity<IWifiLockLockingMethodView, WifiLockLockingMethodPresenter<IWifiLockLockingMethodView>>
         implements IWifiLockLockingMethodView {
 
-    @BindView(R.id.auto_layout)
     RelativeLayout rlAutoLayout;
-    @BindView(R.id.second_5_layout)
     RelativeLayout rlSecond5Layout;
-    @BindView(R.id.second_10_layout)
     RelativeLayout rlSecond10Layout;
-    @BindView(R.id.second_15_layout)
     RelativeLayout rlSecond15Layout;
-    @BindView(R.id.close_layout)
     RelativeLayout rlCloseLayout;
-    @BindView(R.id.ck_auto)
     CheckBox ckAuto;
-    @BindView(R.id.ck_second_5)
     CheckBox ckSecond5;
-    @BindView(R.id.ck_second_10)
     CheckBox ckSecond10;
-    @BindView(R.id.ck_second_15)
     CheckBox ckSecond15;
-    @BindView(R.id.ck_close)
     CheckBox ckClose;
 
     private String wifiSn = "";
@@ -53,7 +40,24 @@ public class WifiLockLockingMethodActivity extends BaseActivity<IWifiLockLocking
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_locking_method);
-        ButterKnife.bind(this);
+
+        rlAutoLayout = findViewById(R.id.auto_layout);
+        rlSecond5Layout = findViewById(R.id.second_5_layout);
+        rlSecond10Layout = findViewById(R.id.second_10_layout);
+        rlSecond15Layout = findViewById(R.id.second_15_layout);
+        rlCloseLayout = findViewById(R.id.close_layout);
+        ckAuto = findViewById(R.id.ck_auto);
+        ckSecond5 = findViewById(R.id.ck_second_5);
+        ckSecond10 = findViewById(R.id.ck_second_10);
+        ckSecond15 = findViewById(R.id.ck_second_15);
+        ckClose = findViewById(R.id.ck_close);
+
+        findViewById(R.id.back).setOnClickListener(v -> setLockingMethod());
+        findViewById(R.id.auto_layout).setOnClickListener(v -> showLockingMethod(1));
+        findViewById(R.id.second_5_layout).setOnClickListener(v -> showLockingMethod(2));
+        findViewById(R.id.second_10_layout).setOnClickListener(v -> showLockingMethod(3));
+        findViewById(R.id.second_15_layout).setOnClickListener(v -> showLockingMethod(4));
+        findViewById(R.id.close_layout).setOnClickListener(v -> showLockingMethod(5));
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -141,30 +145,6 @@ public class WifiLockLockingMethodActivity extends BaseActivity<IWifiLockLocking
     public void onBackPressed() {
         super.onBackPressed();
         setLockingMethod();
-    }
-
-    @OnClick({R.id.back,R.id.auto_layout,R.id.second_5_layout,R.id.second_10_layout,R.id.second_15_layout,R.id.close_layout})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                setLockingMethod();
-                break;
-            case R.id.auto_layout:
-                showLockingMethod(1);
-                break;
-            case R.id.second_5_layout:
-                showLockingMethod(2);
-                break;
-            case R.id.second_10_layout:
-                showLockingMethod(3);
-                break;
-            case R.id.second_15_layout:
-                showLockingMethod(4);
-                break;
-            case R.id.close_layout:
-                showLockingMethod(5);
-                break;
-        }
     }
 
     @Override

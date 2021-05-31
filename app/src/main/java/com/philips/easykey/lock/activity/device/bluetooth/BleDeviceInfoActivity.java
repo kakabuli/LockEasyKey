@@ -37,41 +37,22 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoView, BleDeviceInfoPresenter> implements IDeviceInfoView, View.OnClickListener {
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-    @BindView(R.id.rl_bluetooth_module_version)
     RelativeLayout rlBluetoothModuleVersion;
-    @BindView(R.id.tv_bluetooth_module_version)
     TextView tvBluetoothModuleVersion;
-    @BindView(R.id.tv_lock_software_version)
     TextView tvLockSoftwareVersion;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.rv_3d_algorithm)
     TextView tv3dAlgorithm;
-    @BindView(R.id.tv_3d_camera)
     TextView tv3dCamera;
-    @BindView(R.id.lr_3d_algorithm)
     RelativeLayout lr3dAlgorithm;
-    @BindView(R.id.lr_3d_camera)
     RelativeLayout lr3dCamera;
     private BleLockInfo bleLockInfo;
     private String deviceNickname;
@@ -91,7 +72,24 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
         setContentView(R.layout.activity_bluetooth_authorization_device_information);
 
         FileDownloader.setup(this);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        rlBluetoothModuleVersion = findViewById(R.id.rl_bluetooth_module_version);
+        tvBluetoothModuleVersion = findViewById(R.id.tv_bluetooth_module_version);
+        tvLockSoftwareVersion = findViewById(R.id.tv_lock_software_version);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        tv3dAlgorithm = findViewById(R.id.rv_3d_algorithm);
+        tv3dCamera = findViewById(R.id.tv_3d_camera);
+        lr3dAlgorithm = findViewById(R.id.lr_3d_algorithm);
+        lr3dCamera = findViewById(R.id.lr_3d_camera);
+
+        tvDeviceName.setOnClickListener(v -> deviceName());
 
         productList = MyApplication.getInstance().getProductInfos();
         if(MyApplication.getInstance().getBleService().getBleLockInfo() != null){
@@ -336,8 +334,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
         downFileUtils.downFile(currentAppInfo.getFileUrl(), filePath);
     }
 
-    @OnClick(R.id.tv_device_name)
-    public void onClick() {
+    public void deviceName() {
         //设备名字
         View mView = LayoutInflater.from(this).inflate(R.layout.have_edit_dialog, null);
         TextView tvTitle = mView.findViewById(R.id.tv_title);

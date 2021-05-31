@@ -38,22 +38,16 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class OperationRecordFragment extends BaseBleFragment<IOperationRecordView, OperationRecordPresenter<IOpenLockRecordView>>
         implements View.OnClickListener, IOperationRecordView {
-    @BindView(R.id.recycleview)
+
     RecyclerView recyclerView;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;//刷新
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
     private View mView;
     private int type = 0; //默认是开锁记录0   1为警报记录
     private int currentPage = 1;   //当前的开锁记录时间
-    private Unbinder unbinder;
     private BluetoothRecordAdapter openLockRecordAdapter;
     private List<OperationSection> showList = new ArrayList<>();
     private boolean isLoadingBleRecord;  //正在加载锁上数据
@@ -74,7 +68,11 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
         if (mView == null) {
             mView = inflater.inflate(R.layout.philips_fragment_bluetooth_open_lock_record, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
+
+        recyclerView = mView.findViewById(R.id.recycleview);
+        refreshLayout = mView.findViewById(R.id.refreshLayout);
+        tvSynchronizedRecord = mView.findViewById(R.id.tv_synchronized_record);
+
         LogUtils.d("当前类型是  " + type);
         tvSynchronizedRecord.setOnClickListener(this);
         initRefresh();
@@ -96,7 +94,6 @@ public class OperationRecordFragment extends BaseBleFragment<IOperationRecordVie
     public void onDestroyView() {
         super.onDestroyView();
         ((ViewGroup) mView.getParent()).removeView(mView);
-        unbinder.unbind();
 
     }
 

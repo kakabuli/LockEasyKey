@@ -40,10 +40,6 @@ import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.widget.CircleImageView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -56,18 +52,11 @@ import static android.app.Activity.RESULT_OK;
  */
 public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView, MyFragmentPresenter<IMyFragmentView>> implements IMyFragmentView {
 
-    @BindView(R.id.faq_layout)
     RelativeLayout faqLayout;
-    Unbinder unbinder;
-    @BindView(R.id.head_second)
     RelativeLayout headSecond;
-    @BindView(R.id.iv_photo)
     CircleImageView ivPhoto;
-    @BindView(R.id.rl_user_feedback)
     RelativeLayout rlUserFeedback;
-    @BindView(R.id.tv_nick_name)
     TextView tvNickName;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
 
     private View mPersonlCenterView;
@@ -79,7 +68,39 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
         if (mPersonlCenterView == null) {
             mPersonlCenterView = inflater.inflate(R.layout.philips_fragment_my, container, false);
         }
-        unbinder = ButterKnife.bind(this, mPersonlCenterView);
+
+        faqLayout = mPersonlCenterView.findViewById(R.id.faq_layout);
+        headSecond = mPersonlCenterView.findViewById(R.id.head_second);
+        ivPhoto = mPersonlCenterView.findViewById(R.id.iv_photo);
+        rlUserFeedback = mPersonlCenterView.findViewById(R.id.rl_user_feedback);
+        tvNickName = mPersonlCenterView.findViewById(R.id.tv_nick_name);
+        tvNumber = mPersonlCenterView.findViewById(R.id.tv_number);
+
+        headSecond.setOnClickListener(v -> {
+            Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
+            startActivity(updateHeadData);
+        });
+        mPersonlCenterView.findViewById(R.id.system_setting).setOnClickListener(v -> {
+            Intent mSercurityIntent = new Intent(getActivity(), PhilipsPersonalSecuritySettingActivity.class);
+            startActivity(mSercurityIntent);
+        });
+        rlUserFeedback.setOnClickListener(v -> {
+            Intent mUserFeedbackintent = new Intent(getActivity(), PhilipsUserFeedbackActivity.class);
+            startActivity(mUserFeedbackintent);
+        });
+        faqLayout.setOnClickListener(v -> {
+            Intent mFaq = new Intent(getActivity(), PersonalFAQActivity.class);
+            startActivity(mFaq);
+        });
+        mPersonlCenterView.findViewById(R.id.about_app).setOnClickListener(v -> {
+            Intent mSystemSetting = new Intent(getActivity(), PersonalSystemSettingActivity.class);
+            startActivity(mSystemSetting);
+        });
+        mPersonlCenterView.findViewById(R.id.contact_us).setOnClickListener(v -> {
+            Intent aboutIntent = new Intent(getActivity(), AboutUsActivity.class);
+            startActivity(aboutIntent);
+        });
+
         return mPersonlCenterView;
     }
 
@@ -133,42 +154,6 @@ public class PhilipsPersonalCenterFragment extends BaseFragment<IMyFragmentView,
     @Override
     protected MyFragmentPresenter<IMyFragmentView> createPresent() {
         return new MyFragmentPresenter<>();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @OnClick({R.id.head_second,R.id.system_setting, R.id.rl_user_feedback, R.id.faq_layout, R.id.about_app, R.id.contact_us})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.head_second:
-                Intent updateHeadData = new Intent(getActivity(), PhilipsPersonalUpdateHeadDataActivity.class);
-                startActivity(updateHeadData);
-                break;
-            case R.id.system_setting:
-                Intent mSercurityIntent = new Intent(getActivity(), PhilipsPersonalSecuritySettingActivity.class);
-                startActivity(mSercurityIntent);
-                break;
-            case R.id.rl_user_feedback:
-                Intent mUserFeedbackintent = new Intent(getActivity(), PhilipsUserFeedbackActivity.class);
-                startActivity(mUserFeedbackintent);
-                break;
-            case R.id.faq_layout:
-                Intent mFaq = new Intent(getActivity(), PersonalFAQActivity.class);
-                startActivity(mFaq);
-                break;
-            case R.id.about_app:
-                Intent mSystemSetting = new Intent(getActivity(), PersonalSystemSettingActivity.class);
-                startActivity(mSystemSetting);
-                break;
-            case R.id.contact_us:
-                Intent aboutIntent = new Intent(getActivity(), AboutUsActivity.class);
-                startActivity(aboutIntent);
-                break;
-        }
     }
 
     private void showImage(String photoPath) {

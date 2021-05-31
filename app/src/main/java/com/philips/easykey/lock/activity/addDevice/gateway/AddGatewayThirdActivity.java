@@ -22,14 +22,9 @@ import com.philips.easykey.lock.mvp.view.deviceaddview.GatewayBindView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class AddGatewayThirdActivity extends BaseActivity<GatewayBindView, GatewayBindPresenter<GatewayBindView>> implements GatewayBindView {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.cancel_bind)
     Button cancelBind;
     private String deviceSN;
 
@@ -37,7 +32,9 @@ public class AddGatewayThirdActivity extends BaseActivity<GatewayBindView, Gatew
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_gateway_add_three);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        cancelBind = findViewById(R.id.cancel_bind);
+        back.setOnClickListener(v -> finish());
         Intent scanIntent = getIntent();
         deviceSN = scanIntent.getStringExtra("deviceSN");
 
@@ -62,20 +59,6 @@ public class AddGatewayThirdActivity extends BaseActivity<GatewayBindView, Gatew
     @Override
     protected GatewayBindPresenter<GatewayBindView> createPresent() {
         return new GatewayBindPresenter();
-    }
-
-    @OnClick({R.id.back, R.id.cancel_bind})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.cancel_bind:
-//                Intent cancelBind = new Intent(this, DeviceGatewayBindListView.class);
-//                startActivity(cancelBind);
-//                finish();
-                break;
-        }
     }
 
 

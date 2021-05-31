@@ -10,53 +10,43 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddNewScanFailedActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.re_scan)
     TextView reScan;
-    @BindView(R.id.tv_other_method)
     TextView tvOtherMethod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_scan_failed);
-        ButterKnife.bind(this);
-    }
 
-    @OnClick({R.id.back, R.id.help, R.id.re_scan, R.id.tv_other_method})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this,WifiLockHelpActivity.class));
-                break;
-            case R.id.re_scan:
-                finish();
-                startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
-                break;
-            case R.id.tv_other_method:
-                finish();
-                startActivity(new Intent(this,WifiLockOldUserFirstActivity.class));
-                break;
-        }
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        ivAnim = findViewById(R.id.iv_anim);
+        notice = findViewById(R.id.notice);
+        reScan = findViewById(R.id.re_scan);
+        tvOtherMethod = findViewById(R.id.tv_other_method);
+
+        back.setOnClickListener(v -> {
+            startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
+            finish();
+        });
+        help.setOnClickListener(v ->  startActivity(new Intent(this,WifiLockHelpActivity.class)));
+        reScan.setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
+        });
+        tvOtherMethod.setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(this,WifiLockOldUserFirstActivity.class));
+        });
+
     }
 
     @Override

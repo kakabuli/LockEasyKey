@@ -19,25 +19,22 @@ import com.philips.easykey.lock.bean.SingleSwitchTimerShowBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SingleSwitchFragment extends Fragment {
 
 
-    @BindView(R.id.iv_switch_state)
     ImageView ivSwitchState;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.rv_timer_list)
     RecyclerView rvTimerList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_single_switch_layout, null);
-        ButterKnife.bind(this, view);
 
+        ivSwitchState = view.findViewById(R.id.iv_switch_state);
+        tvName = view.findViewById(R.id.tv_name);
+        rvTimerList = view.findViewById(R.id.rv_timer_list);
 
         return view;
     }

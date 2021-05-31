@@ -31,9 +31,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by David on 2019/4/22
@@ -41,12 +38,8 @@ import butterknife.Unbinder;
 public class GatewayWarnInformationFragment extends BaseFragment<GatewayLockAlramView, GatewayLockAlarmPresenter<GatewayLockAlramView>> implements GatewayLockAlramView{
     List<BluetoothRecordBean> mOpenLockList = new ArrayList<>(); //全部数据
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.no_have_record)
     TextView noHaveRecord;
-    Unbinder unbinder;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
     private String gatewayId;
@@ -59,7 +52,11 @@ public class GatewayWarnInformationFragment extends BaseFragment<GatewayLockAlra
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_gateway_warn_information, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        noHaveRecord = view.findViewById(R.id.no_have_record);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
         initRecycleView();
         initData();
         initRefresh();
@@ -142,13 +139,6 @@ public class GatewayWarnInformationFragment extends BaseFragment<GatewayLockAlra
                 recycleview.setVisibility(View.GONE);
             }
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-
     }
 
     private void groupData(List<GatewayLockAlarmEventDao> alarmEventDaoList) {

@@ -48,17 +48,11 @@ import com.philips.easykey.lock.utils.greenDao.db.GatewayServiceInfoDao;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, GatewaySettingPresenter<GatewaySettingView>> implements GatewaySettingView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     private List<GatewaySettingItemBean> gatewaySettingItemBeans = new ArrayList<>();
     private GatewaySettingAdapter gatewaySettingAdapter;
@@ -81,7 +75,68 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_setting);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        recycler = findViewById(R.id.recycler);
+        btnDelete = findViewById(R.id.btn_delete);
+
+        back.setOnClickListener(v -> finish());
+        btnDelete.setOnClickListener(v -> {
+            AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                @Override
+                public void left() {
+
+                }
+
+                @Override
+                public void right() {
+                    if (gatewayId != null) {
+                        mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayId);//正常解绑
+                        //mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(),gatewayId,gatewayId); //测试解绑
+                        deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
+                        deleteDialog.setCancelable(false);
+                    }
+
+                }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(String toString) {
+
+                }
+            });
+                /*else{
+                    //取消分享
+                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+                        @Override
+                        public void right() {
+                            if (gatewayId != null) {
+                                String phone= (String) SPUtils.get(SPUtils.PHONEN,"");
+                                if (!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(uid)){
+                                    mPresenter.deleteShareDevice(1,gatewayId,"",uid,"86"+phone,"",2);//正常解绑
+                                    deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
+                                    deleteDialog.setCancelable(false);
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+
+
+
+                }*/
+        });
+
         context=this;
         initView();
         initRecycler();
@@ -511,73 +566,6 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
     @Override
     protected GatewaySettingPresenter<GatewaySettingView> createPresent() {
         return new GatewaySettingPresenter<>();
-    }
-
-
-    @OnClick({R.id.back, R.id.btn_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.btn_delete:
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-
-                        @Override
-                        public void right() {
-                            if (gatewayId != null) {
-                                mPresenter.unBindGateway(MyApplication.getInstance().getUid(), gatewayId);//正常解绑
-                                //mPresenter.testUnbindGateway(MyApplication.getInstance().getUid(),gatewayId,gatewayId); //测试解绑
-                                deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
-                                deleteDialog.setCancelable(false);
-                            }
-
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                        }
-
-                        @Override
-                        public void afterTextChanged(String toString) {
-
-                        }
-                    });
-                /*else{
-                    //取消分享
-                    AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.device_delete_dialog_head), getString(R.string.device_delete_gateway_dialog_content), getString(R.string.cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-                        @Override
-                        public void right() {
-                            if (gatewayId != null) {
-                                String phone= (String) SPUtils.get(SPUtils.PHONEN,"");
-                                if (!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(gatewayId)&&!TextUtils.isEmpty(uid)){
-                                    mPresenter.deleteShareDevice(1,gatewayId,"",uid,"86"+phone,"",2);//正常解绑
-                                    deleteDialog = AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.delete_be_being));
-                                    deleteDialog.setCancelable(false);
-                                }
-
-                            }
-
-                        }
-                    });
-
-
-
-
-
-                }*/
-
-
-                break;
-        }
     }
 
     @Override

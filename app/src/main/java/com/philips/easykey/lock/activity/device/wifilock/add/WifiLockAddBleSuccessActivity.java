@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +11,10 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
@@ -37,22 +33,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddBleSuccessActivity extends BaseActivity<IWifiLockAddSuccessView
         , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView {
 
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.save)
     Button save;
-    @BindView(R.id.lock)
     ImageView lock;
-    @BindView(R.id.back)
     ImageView back;
 
     private List<AddBluetoothPairSuccessBean> mList;
@@ -66,7 +53,32 @@ public class WifiLockAddBleSuccessActivity extends BaseActivity<IWifiLockAddSucc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_add_success);
-        ButterKnife.bind(this);
+
+        inputName = findViewById(R.id.input_name);
+        recycler = findViewById(R.id.recycler);
+        save = findViewById(R.id.save);
+        lock = findViewById(R.id.lock);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(v -> {
+            Intent backIntent = new Intent(this, MainActivity.class);
+            startActivity(backIntent);
+        });
+        save.setOnClickListener(v -> {
+            String name = inputName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(R.string.not_empty);
+                return;
+            }
+            if (!StringUtil.nicknameJudge(name)) {
+                ToastUtils.showShort(R.string.nickname_verify_error);
+                return;
+            }
+
+            showLoading(getString(R.string.is_saving_name));
+            mPresenter.setNickName(wifiSN, name);
+        });
+
         initData();
         initView();
         initListener();
@@ -120,25 +132,22 @@ public class WifiLockAddBleSuccessActivity extends BaseActivity<IWifiLockAddSucc
         if (mList != null) {
             mAdapter = new AddBluetoothPairSuccessAdapter(mList);
             recycler.setAdapter(mAdapter);
-            mAdapter.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                    inputName.setCursorVisible(true);
-                    for (int i = 0; i < mList.size(); i++) {
-                        mList.get(i).setSelected(false);
-                    }
-                    AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
-                    String name = addBluetoothPairSuccessBean.getName();
-                    inputName.setText(name);
-                    if (name != null) {
-                        inputName.setSelection(name.length());
-                    }
-                    inputName.setFocusable(true);
-                    inputName.setFocusableInTouchMode(true);
-                    inputName.requestFocus();
-                    mList.get(position).setSelected(true);
-                    mAdapter.notifyDataSetChanged();
+            mAdapter.setOnItemClickListener((adapter, view, position) -> {
+                inputName.setCursorVisible(true);
+                for (int i = 0; i < mList.size(); i++) {
+                    mList.get(i).setSelected(false);
                 }
+                AddBluetoothPairSuccessBean addBluetoothPairSuccessBean = mList.get(position);
+                String name = addBluetoothPairSuccessBean.getName();
+                inputName.setText(name);
+                if (name != null) {
+                    inputName.setSelection(name.length());
+                }
+                inputName.setFocusable(true);
+                inputName.setFocusableInTouchMode(true);
+                inputName.requestFocus();
+                mList.get(position).setSelected(true);
+                mAdapter.notifyDataSetChanged();
             });
         }
         String name = inputName.getText().toString().trim();
@@ -167,31 +176,6 @@ public class WifiLockAddBleSuccessActivity extends BaseActivity<IWifiLockAddSucc
 
     }
 
-    @OnClick({R.id.save, R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                Intent backIntent = new Intent(this, MainActivity.class);
-                startActivity(backIntent);
-                break;
-            case R.id.save:
-                String name = inputName.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(R.string.not_empty);
-                    return;
-                }
-                if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
-                    return;
-                }
-
-                showLoading(getString(R.string.is_saving_name));
-                mPresenter.setNickName(wifiSN, name);
-                break;
-        }
-    }
-
-
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -204,10 +188,6 @@ public class WifiLockAddBleSuccessActivity extends BaseActivity<IWifiLockAddSucc
         Intent backIntent = new Intent(this, MainActivity.class);
         startActivity(backIntent);
         return true;
-    }
-
-    @OnClick()
-    public void onViewClicked() {
     }
 
     @Override

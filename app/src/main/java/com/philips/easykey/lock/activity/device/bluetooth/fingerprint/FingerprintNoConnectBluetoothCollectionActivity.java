@@ -11,20 +11,15 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class FingerprintNoConnectBluetoothCollectionActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.btn_finish)
     Button btnFinish;
 
 
@@ -32,7 +27,12 @@ public class FingerprintNoConnectBluetoothCollectionActivity extends BaseAddToAp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_no_connect_bluetooth_collection);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        btnFinish = findViewById(R.id.btn_finish);
+
         ivBack.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
         tvContent.setText(R.string.add_fingerprint);

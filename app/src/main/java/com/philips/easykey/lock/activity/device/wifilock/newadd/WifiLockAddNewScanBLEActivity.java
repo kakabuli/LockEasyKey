@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
@@ -42,10 +41,6 @@ import com.philips.easykey.lock.utils.NetUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.ScanDeviceRadarView;
 
@@ -54,11 +49,8 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 
     public static final int REQUEST_CALL_PERMISSION = 10111; //拨号请求码
     private ScanDeviceRadarView mRadarView;
-    @BindView(R.id.recycler_layout)
     LinearLayout recyclerLayout;
-    @BindView(R.id.search_recycler)
     RecyclerView searchRecycler;
-    @BindView(R.id.research)
     TextView research;
 
     private DividerItemDecoration dividerItemDecoration;
@@ -77,29 +69,45 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_ble_scan_radar);
-        ButterKnife.bind(this);
-        mRadarView = (ScanDeviceRadarView) findViewById(R.id.radar_view);
 
-        radarViewThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //这里写入子线程需要做的工作
-                mRadarView.setSearching(true);
+        recyclerLayout = findViewById(R.id.recycler_layout);
+        searchRecycler = findViewById(R.id.search_recycler);
+        research = findViewById(R.id.research);
+
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        findViewById(R.id.help).setOnClickListener(v -> {
+            goToHelpActivity = true;
+            Intent helpIntent = new Intent(this, WifiLockHelpActivity.class);
+            startActivity(helpIntent);
+        });
+        research.setOnClickListener(v -> {
+            //获取数据
+            if (GpsUtil.isOPen(this)){
+                initAnimation();
+//                    tvIsSearching.setVisibility(View.VISIBLE);
+                mPresenter.searchDevices();
+            }else {
+                ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
             }
+        });
+
+        mRadarView = findViewById(R.id.radar_view);
+
+        radarViewThread = new Thread(() -> {
+            //这里写入子线程需要做的工作
+            mRadarView.setSearching(true);
         });
 
         radarViewThread.start();
 //        mRadarView.setSearching(true);
 //        mRadarView.addPoint();
 //        mRadarView.addPoint();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int i=checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
-            if (i==-1){
-                if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)){
-                    ToastUtils.showShort(getString(R.string.aler_no_entry_location));
-                    finish();
-                    return;
-                }
+        int i=checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (i==-1){
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)){
+                ToastUtils.showShort(getString(R.string.aler_no_entry_location));
+                finish();
+                return;
             }
         }
         showRecycler(false);
@@ -213,30 +221,6 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
 //            ivGreenObjectAnimator.cancel();
 //            ivGreenObjectAnimator.setupEndValues();
 //        }
-    }
-
-    @OnClick({R.id.back, R.id.help, R.id.research})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                goToHelpActivity = true;
-                Intent helpIntent = new Intent(this, WifiLockHelpActivity.class);
-                startActivity(helpIntent);
-                break;
-            case R.id.research:
-                //获取数据
-                if (GpsUtil.isOPen(this)){
-                    initAnimation();
-//                    tvIsSearching.setVisibility(View.VISIBLE);
-                    mPresenter.searchDevices();
-                }else {
-                    ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
-                }
-                break;
-        }
     }
 
     @Override
