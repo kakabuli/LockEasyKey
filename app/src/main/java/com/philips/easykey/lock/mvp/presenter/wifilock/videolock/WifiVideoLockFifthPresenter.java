@@ -45,7 +45,6 @@ public class WifiVideoLockFifthPresenter<T> extends BasePresenter<IWifiLockVideo
      *
      */
     public void getDeviceBindingStatus(){
-        LogUtils.d("ssssssssssssssssssssss");
         if(mqttService != null){
             toDisposable(getDeviceBindingDisposable);
             getDeviceBindingDisposable = mqttService.listenerDataBack()

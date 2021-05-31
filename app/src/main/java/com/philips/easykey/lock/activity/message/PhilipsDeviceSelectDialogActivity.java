@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.DeviceSelectAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -23,6 +24,7 @@ public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActiv
     private DeviceSelectAdapter deviceSelectAdapter;
     private int RESULT_OK = 100;
     private int RESULT_CLOSE = 101;
+    private final List<HomeShowBean> mDevices = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,26 +38,17 @@ public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActiv
             finish();
         });
 
+        initData();
         initView();
     }
 
+    private void initData(){
+        mDevices.clear();
+        mDevices.addAll(MyApplication.getInstance().getHomeShowDevices());
+    }
+
     private void initView(){
-        List<HomeShowBean> HomeShowData = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            HomeShowBean homeShowBean = new HomeShowBean();
-            if(i == 0){
-                homeShowBean.setDeviceNickName("wifi锁");
-                homeShowBean.setDeviceType(HomeShowBean.TYPE_WIFI_LOCK);
-            }else if(i == 1){
-                homeShowBean.setDeviceNickName("视频锁");
-                homeShowBean.setDeviceType(HomeShowBean.TYPE_WIFI_VIDEO_LOCK);
-            }else {
-                homeShowBean.setDeviceNickName("DDL708-1HW");
-                homeShowBean.setDeviceType(HomeShowBean.TYPE_WIFI_VIDEO_LOCK);
-            }
-            HomeShowData.add(homeShowBean);
-        }
-        deviceSelectAdapter = new DeviceSelectAdapter(HomeShowData, new DeviceSelectAdapter.DeviceSelectCallBackLinstener() {
+        deviceSelectAdapter = new DeviceSelectAdapter(mDevices, new DeviceSelectAdapter.DeviceSelectCallBackLinstener() {
             @Override
             public void onDeviceSelectCallBackLinstener(HomeShowBean homeShowBean) {
                 Intent intent = new Intent();

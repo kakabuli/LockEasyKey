@@ -120,9 +120,9 @@ public class MyApplication extends Application {
 
     // 小米
     // user your appid the key.
-    private static final String M_APP_ID = "2882303761517594031";
+    private static final String M_APP_ID = "2882303761519924663";
     // user your appid the key.
-    private static final String M_APP_KEY = "5931759473031";
+    private static final String M_APP_KEY = "5861992467663";
 
     @Override
     public void onCreate() {

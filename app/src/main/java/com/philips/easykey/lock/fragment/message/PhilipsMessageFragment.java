@@ -83,7 +83,6 @@ public class PhilipsMessageFragment extends BaseFragment<IMessageView, MessageFr
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(titleBar.getLayoutParams());
         lp.setMargins(0, getStatusBarHeight(), 0, 0);
         titleBar.setLayoutParams(lp);
-        badgeNumberView.setText(32);
         setTvDoorLockMsgAndTvSystemMsgColor(true);
         vpMessage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

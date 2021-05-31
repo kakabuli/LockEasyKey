@@ -2,12 +2,13 @@ package com.philips.easykey.lock.fragment.message;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
 import com.philips.easykey.lock.adapter.PhilipsSevenDayDataStatisticsAdapter;
@@ -28,7 +29,10 @@ import com.philips.easykey.lock.bean.TodayLockStatisticsBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.DoorLockMessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.view.IDoorLockMessageView;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.widget.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -46,6 +50,12 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     ImageView ivVideoLockMsgRight;
     ImageView ivTodayLockStatisticsLeft;
     ImageView ivTodayLockStatisticsRight;
+    TextView tvNoMessage;
+    RelativeLayout llDeviceType;
+    ScrollView scrollView;
+    TextView createTime;
+    TextView tvOpenLockTimes;
+
     private PhilipsVideoLockWarningInformAdapter videoLockWarningInformAdapter;
     private PhilipsTodayLockStatisticsAdapter lockStatisticsAdapter;
     private PhilipsSevenDayDataStatisticsAdapter sevendayDataStatisticsAdapter;
@@ -59,6 +69,8 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     private int todayLockStatisticsMoveLeftDistance = 0;
     private int todayLockStatisticsMoveRightDistance = 0;
     private int itemDecorationLeft = SizeUtils.dp2px(4);
+    private final List<HomeShowBean> mDevices = new ArrayList<>();
+    private WifiLockInfo wifiLockInfo;
 
     @Nullable
     @Override
@@ -76,6 +88,11 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         ivVideoLockMsgRight = mView.findViewById(R.id.iv_video_lock_msg_right);
         ivTodayLockStatisticsLeft = mView.findViewById(R.id.iv_today_lock_statistics_left);
         ivTodayLockStatisticsRight = mView.findViewById(R.id.iv_today_lock_statistics_right);
+        tvNoMessage = mView.findViewById(R.id.tv_no_message);
+        llDeviceType = mView.findViewById(R.id.ll_device_type);
+        scrollView = mView.findViewById(R.id.scrollView);
+        createTime = mView.findViewById(R.id.create_time);
+        tvOpenLockTimes = mView.findViewById(R.id.tv_open_lock_times);
 
         mView.findViewById(R.id.ll_device_type).setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
@@ -86,8 +103,9 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         mView.findViewById(R.id.iv_today_lock_statistics_left).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(todayLockStatisticsMoveLeftDistance,0));
         mView.findViewById(R.id.iv_today_lock_statistics_right).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance,0));
 
-
         initView();
+        initDevices();
+        MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
         return mView;
     }
 
@@ -112,7 +130,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         rcvVideoLockMsg.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
-        if(wifiVideoLockAlarmRecordData.size() < 5){
+        if (wifiVideoLockAlarmRecordData.size() < 5) {
             ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
             ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
         }
@@ -120,7 +138,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(wifiVideoLockAlarmRecordData.size() < 5)return;
+                if (wifiVideoLockAlarmRecordData.size() < 5) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 //找到即将移出屏幕Item的position
                 int position = layoutManager.findFirstVisibleItemPosition();
@@ -131,23 +149,23 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
                 //算出该Item还未移出屏幕的高度
                 int itemRight = firstVisiableChildView.getRight();
                 earlyWarningMsgMoveLeftDistance = itemWidth + itemDecorationLeft;
-                earlyWarningMsgMoveRightDistance = itemWidth  + itemDecorationLeft;
-                if(itemWidth > itemRight){
+                earlyWarningMsgMoveRightDistance = itemWidth + itemDecorationLeft;
+                if (itemWidth > itemRight) {
                     earlyWarningMsgMoveRightDistance = earlyWarningMsgMoveRightDistance + (itemWidth - itemRight) + itemDecorationLeft;
                     earlyWarningMsgMoveLeftDistance = earlyWarningMsgMoveLeftDistance + itemRight + itemDecorationLeft;
                 }
                 int firstCompletelyVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
                 int lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
-                if (firstCompletelyVisibleItemPosition == 0){
+                if (firstCompletelyVisibleItemPosition == 0) {
                     ivVideoLockMsgLeft.setVisibility(View.VISIBLE);
                     ivVideoLockMsgRight.setVisibility(View.VISIBLE);
                     ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_selected_01);
                     ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_default_01);
-                }else if(lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1){
+                } else if (lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1) {
                     ivVideoLockMsgRight.setVisibility(View.VISIBLE);
                     ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_default_01);
                     ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_selected_01);
-                }else {
+                } else {
                     ivVideoLockMsgRight.setVisibility(View.VISIBLE);
                     ivVideoLockMsgRight.setImageResource(R.drawable.philips_icon_more_right_selected_01);
                     ivVideoLockMsgLeft.setImageResource(R.drawable.philips_icon_more_left_selected_01);
@@ -186,7 +204,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvTodayLockStatistics.setLayoutManager(horizontalLayoutManager1);
         rcvTodayLockStatistics.setAdapter(lockStatisticsAdapter);
-        if(TodayLockStatisticsData.size() < 5){
+        if (TodayLockStatisticsData.size() < 5) {
             ivTodayLockStatisticsLeft.setVisibility(View.INVISIBLE);
             ivTodayLockStatisticsRight.setVisibility(View.INVISIBLE);
         }
@@ -194,7 +212,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(TodayLockStatisticsData.size() < 5)return;
+                if (TodayLockStatisticsData.size() < 5) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 //找到即将移出屏幕Item的position
                 int position = layoutManager.findFirstVisibleItemPosition();
@@ -205,24 +223,24 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
                 //算出该Item还未移出屏幕的高度
                 int itemRight = firstVisiableChildView.getRight();
                 todayLockStatisticsMoveLeftDistance = itemWidth + itemDecorationLeft;
-                todayLockStatisticsMoveRightDistance = itemWidth  + itemDecorationLeft;
-                if(itemWidth > itemRight){
+                todayLockStatisticsMoveRightDistance = itemWidth + itemDecorationLeft;
+                if (itemWidth > itemRight) {
                     todayLockStatisticsMoveRightDistance = todayLockStatisticsMoveRightDistance + (itemWidth - itemRight) + itemDecorationLeft;
                     todayLockStatisticsMoveLeftDistance = todayLockStatisticsMoveLeftDistance + itemRight + itemDecorationLeft;
                 }
                 int firstCompletelyVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
                 int lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
-                if (firstCompletelyVisibleItemPosition == 0){
+                if (firstCompletelyVisibleItemPosition == 0) {
                     ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsLeft.setImageResource(R.drawable.philips_icon_more_left_selected_02);
                     ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_default_02);
-                }else if(lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1){
+                } else if (lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1) {
                     ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsLeft.setImageResource(R.drawable.philips_icon_more_left_default_02);
                     ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_selected_02);
-                }else {
+                } else {
                     ivTodayLockStatisticsLeft.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsRight.setVisibility(View.VISIBLE);
                     ivTodayLockStatisticsRight.setImageResource(R.drawable.philips_icon_more_right_selected_02);
@@ -251,13 +269,39 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         rcvSevenDayDataStatistics.setAdapter(sevendayDataStatisticsAdapter);
     }
 
-    private void refreshLayoutData(HomeShowBean homeShowBean) {
-        tvLockName.setText(homeShowBean.getDeviceNickName());
-        if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_LOCK) {
-            llVideoLockMsg.setVisibility(View.GONE);
-        } else if (homeShowBean.getDeviceType() == HomeShowBean.TYPE_WIFI_VIDEO_LOCK) {
-            llVideoLockMsg.setVisibility(View.VISIBLE);
+    private void initDevices() {
+        mDevices.clear();
+        mDevices.addAll(MyApplication.getInstance().getHomeShowDevices());
+        if (mDevices.isEmpty()) {
+            tvNoMessage.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            llDeviceType.setVisibility(View.GONE);
+        } else {
+            tvNoMessage.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+            llDeviceType.setVisibility(View.VISIBLE);
+            refreshLayoutData((WifiLockInfo)mDevices.get(0).getObject());
         }
+    }
+
+    private void refreshLayoutData(WifiLockInfo mWifiLockInfo) {
+        wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockInfo.getWifiSN());
+        long createTime2 = wifiLockInfo.getCreateTime();
+
+        if (createTime2 == 0) {
+            createTime.setText("0");
+        } else {
+            long currentTimeMillis = System.currentTimeMillis();
+            long day = ((currentTimeMillis / 1000) - createTime2) / (60 * 24 * 60);
+            if (day < 0) {
+                day = 0;
+            }
+            createTime.setText(day + "");
+        }
+        //WiFi信息并展示
+        int count = (int) SPUtils.get(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiLockInfo.getWifiSN(), 0);
+        tvOpenLockTimes.setText("" + count);
+        tvLockName.setText(mWifiLockInfo.getLockNickname());
     }
 
     @Override
@@ -265,8 +309,14 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             HomeShowBean homeShowBean = (HomeShowBean) data.getSerializableExtra("homeShowBean");
-            refreshLayoutData(homeShowBean);
+            refreshLayoutData((WifiLockInfo)homeShowBean.getObject());
         }
+    }
+
+    @Override
+    public void onWifiLockActionUpdate() {
+        wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiLockInfo.getWifiSN());
+        refreshLayoutData(wifiLockInfo);
     }
 
 }
