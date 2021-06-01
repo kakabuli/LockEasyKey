@@ -33,9 +33,9 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
         manifestPlaceholders = [
-                GETUI_APP_ID    : "5zODhkZOQd66zCoOgxX152",
-                GETUI_APP_KEY   : "2MYvnQfX4k7JHqC7KNaCuA",
-                GETUI_APP_SECRET: "dePIsxVaor6Dibp8YMs8TA",
+                GETUI_APP_ID    : "0dtUPXbIGi5Q4CaoJmxLM1",
+                GETUI_APP_KEY   : "rbVKQZgQuN6KrQTr1mqDR2",
+                GETUI_APP_SECRET: "4cs1tqxcO58MRTIcIqOzDA",
 
 //                HUAWEI_APP_ID   : "100038281",
 
@@ -48,8 +48,8 @@ android {
                 MEIZU_APP_ID    : "118878",
                 MEIZU_APP_KEY   : "6121ecee371449c2b536b58452d78cb8",
 
-                VIVO_APP_ID     : "18137",
-                VIVO_APP_KEY    : "11e24474-cf3b-447c-9052-feb08012f033"
+                VIVO_APP_ID     : "105486535",
+                VIVO_APP_KEY    : "521f130d408815f5c591dfc77d88c0b7"
         ]
 
     }
