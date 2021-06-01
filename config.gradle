@@ -52,7 +52,7 @@ ext {
 
 def checkRelease() {
     def runTasks = gradle.startParameter.taskNames
-    for (String task : runTasks) {
+    for (def task : runTasks) {
         // 我这里根据task为"assemble"和非"Debug"认定为release
         if (task.contains("assemble") && !task.contains("Debug")) {
             return true
