@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.clotheshangermachine;
 import android.Manifest;
 import android.content.Intent;
 import android.hardware.Camera;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
@@ -29,17 +28,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplicationActivity implements CameraScan.OnScanResultCallback {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private CameraScan mCameraScan;
     private boolean isOpenLight = false;
@@ -55,7 +48,27 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         MyApplication.getInstance().addActivity(this);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        touchLightLayout = findViewById(R.id.touch_light_layout);
+        titleBar = findViewById(R.id.title_bar);
+
+        back.setOnClickListener(v -> finish());
+        touchLightLayout.setOnClickListener(v -> {
+            //                mZBarView.openFlashlight(); // 打开闪光灯
+            if (!isOpenLight){
+                isOpenLight = true;
+                if(mCameraScan != null) {
+                    mCameraScan.enableTorch(true);
+                }
+            }else {
+                isOpenLight = false;
+                if(mCameraScan != null) {
+                    mCameraScan.enableTorch(false);
+                }
+            }
+        });
+
         checkVersion();
         scan = getIntent().getIntExtra(KeyConstants.SCAN_TYPE, 0);
         PreviewView previewView = findViewById(R.id.previewView);
@@ -129,29 +142,6 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
             mCamera.release();
         }
         return canUse;
-    }
-
-    @OnClick({R.id.back, R.id.touch_light_layout})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.touch_light_layout:
-//                mZBarView.openFlashlight(); // 打开闪光灯
-                if (!isOpenLight){
-                    isOpenLight = true;
-                    if(mCameraScan != null) {
-                        mCameraScan.enableTorch(true);
-                    }
-                }else {
-                    isOpenLight = false;
-                    if(mCameraScan != null) {
-                        mCameraScan.enableTorch(false);
-                    }
-                }
-                break;
-        }
     }
 
     private String result = "";

@@ -13,13 +13,10 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseFragment;
 import com.philips.easykey.lock.mvp.presenter.SystemMessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.view.ISystemMessageView;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class PhilipsSystemMessageFragment extends BaseFragment<ISystemMessageView, SystemMessageFragmentPresenter<ISystemMessageView>> implements ISystemMessageView {
 
     private View mView;
-    private Unbinder unbinder;
 
     @Nullable
     @Override
@@ -27,7 +24,6 @@ public class PhilipsSystemMessageFragment extends BaseFragment<ISystemMessageVie
         if (mView == null) {
             mView = inflater.inflate(R.layout.philips_fragment_system_message, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
         return mView;
     }
 
@@ -36,9 +32,4 @@ public class PhilipsSystemMessageFragment extends BaseFragment<ISystemMessageVie
         return new SystemMessageFragmentPresenter<>();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

@@ -38,28 +38,16 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PhilipsWiFiLockPasswordManagerActivity extends BaseActivity<IWifiLockPasswordManagerView, WifiLockPasswordManagerPresenter<IWifiLockPasswordManagerView>>
         implements IWifiLockPasswordManagerView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.tv_no_password)
     TextView tvNoPassword;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.ll_no_password)
     LinearLayout llNoPassword;
-    @BindView(R.id.iv_no_password)
     ImageView ivNoPassword;
-    @BindView(R.id.tv_how_to_add)
     TextView tvHowToAdd;
 
 
@@ -78,7 +66,21 @@ public class PhilipsWiFiLockPasswordManagerActivity extends BaseActivity<IWifiLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wi_fi_lock_password_manager);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        recycleview = findViewById(R.id.recycleview);
+        tvNoPassword = findViewById(R.id.tv_no_password);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        llNoPassword = findViewById(R.id.ll_no_password);
+        ivNoPassword = findViewById(R.id.iv_no_password);
+        tvHowToAdd = findViewById(R.id.tv_how_to_add);
+
+        back.setOnClickListener(v -> finish());
+        tvHowToAdd.setOnClickListener(v -> {
+            Intent nextIntent = new Intent(this, WifiLockAddFaceFirstActivity.class);
+            startActivity(nextIntent);
+        });
 
         type = getIntent().getIntExtra(KeyConstants.KEY_TYPE, 1);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
@@ -270,16 +272,4 @@ public class PhilipsWiFiLockPasswordManagerActivity extends BaseActivity<IWifiLo
         }
     }
 
-    @OnClick({R.id.back, R.id.tv_how_to_add})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.tv_how_to_add:
-                Intent nextIntent = new Intent(this, WifiLockAddFaceFirstActivity.class);
-                startActivity(nextIntent);
-                break;
-        }
-    }
 }

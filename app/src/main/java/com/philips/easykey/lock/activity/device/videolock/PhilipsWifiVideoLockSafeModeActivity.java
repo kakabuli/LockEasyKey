@@ -26,22 +26,15 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockSafeModeActivity extends BaseActivity<IWifiVideoLockSafeModeView, WifiVideoLockSafeModePresenter<IWifiVideoLockSafeModeView>>
         implements IWifiVideoLockSafeModeView{
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.ck_normal)
     CheckBox ckNormal;
-    @BindView(R.id.ck_safe)
     CheckBox ckSafe;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
 
     private String wifiSn;
@@ -60,6 +53,54 @@ public class PhilipsWifiVideoLockSafeModeActivity extends BaseActivity<IWifiVide
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
+
+        back = findViewById(R.id.back);
+        ckNormal = findViewById(R.id.ck_normal);
+        ckSafe = findViewById(R.id.ck_safe);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+
+        back.setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(avi.isShow()) setSafeMode();
+            }else{
+                finish();
+            }
+        });
+        findViewById(R.id.normal_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+
+                    powerStatusDialog();
+                    return;
+                }
+                if(!ckNormal.isChecked()){
+                    ckNormal.setChecked(true);
+                    ckSafe.setChecked(false);
+                }
+            }
+        });
+        findViewById(R.id.safe_layout).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+
+                    powerStatusDialog();
+                    return;
+                }
+                if(!ckSafe.isChecked()){
+                    ckNormal.setChecked(false);
+                    ckSafe.setChecked(true);
+                }
+            }
+        });
 
         if(wifiLockInfo != null){
             if(wifiLockInfo.getSafeMode() == 0 ){
@@ -134,61 +175,6 @@ public class PhilipsWifiVideoLockSafeModeActivity extends BaseActivity<IWifiVide
         }
         return super.onKeyDown(keyCode,event);
 
-    }
-
-
-    @OnClick({R.id.back,R.id.safe_layout,R.id.normal_layout})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                if(wifiLockInfo.getPowerSave() == 0){
-                    if(avi.isShow())
-                        setSafeMode();
-
-                }else{
-
-                    finish();
-                }
-                break;
-            case R.id.normal_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!ckNormal.isChecked()){
-                        ckNormal.setChecked(true);
-                        ckSafe.setChecked(false);
-                    }
-                }
-
-
-                break;
-            case R.id.safe_layout:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!ckSafe.isChecked()){
-                        ckNormal.setChecked(false);
-                        ckSafe.setChecked(true);
-                    }
-                }
-
-
-                break;
-        }
     }
 
     private void setSafeMode() {

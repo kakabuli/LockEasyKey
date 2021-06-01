@@ -20,25 +20,18 @@ import com.philips.easykey.lock.widget.NoScrollViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by asqw1 on 2018/3/14.
  */
 
 public class DeviceTotalFragment extends Fragment {
-    @BindView(R.id.rb_device)
+
     RadioButton rbDevice;
-    @BindView(R.id.rv_scene)
     RadioButton rvScene;
-    @BindView(R.id.rg_device)
     RadioGroup rgDevice;
-    @BindView(R.id.vp_device)
     NoScrollViewPager vpDevice;
-    Unbinder unbinder;
+
     private View mView;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -53,20 +46,33 @@ public class DeviceTotalFragment extends Fragment {
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_device_total, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
+
+        rbDevice = mView.findViewById(R.id.rb_device);
+        rvScene = mView.findViewById(R.id.rv_scene);
+        rgDevice = mView.findViewById(R.id.rg_device);
+        vpDevice = mView.findViewById(R.id.vp_device);
+
+        rbDevice.setOnClickListener(v -> rgDevice.check(R.id.rb_device));
+        rvScene.setOnClickListener(v -> rgDevice.check(R.id.rv_scene));
+        mView.findViewById(R.id.iv_add_device).setOnClickListener(v -> {
+            if (vpDevice.getCurrentItem() == 0){
+                //添加设备
+                startActivity(new Intent(getContext(),DeviceAdd2Activity.class));
+            }else if (vpDevice.getCurrentItem() == 1){
+                //添加场景
+            }
+        });
+
         fragments.add(new DeviceFragment());
         fragments.add(new SceneFragment());
-        rbDevice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                switch (compoundButton.getId()){
-                    case R.id.rb_device:
-                        vpDevice.setCurrentItem(0);
-                        break;
-                    case R.id.rv_scene:
-                        vpDevice.setCurrentItem(1);
-                        break;
-                }
+        rbDevice.setOnCheckedChangeListener((compoundButton, b) -> {
+            switch (compoundButton.getId()){
+                case R.id.rb_device:
+                    vpDevice.setCurrentItem(0);
+                    break;
+                case R.id.rv_scene:
+                    vpDevice.setCurrentItem(1);
+                    break;
             }
         });
         vpDevice.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -99,34 +105,4 @@ public class DeviceTotalFragment extends Fragment {
         super.onResume();
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @OnClick({R.id.rb_device, R.id.rv_scene, R.id.rg_device, R.id.vp_device, R.id.iv_add_device})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.rb_device:
-                rgDevice.check(R.id.rb_device);
-                break;
-            case R.id.rv_scene:
-                rgDevice.check(R.id.rv_scene);
-                break;
-            case R.id.rg_device:
-                break;
-            case R.id.vp_device:
-                break;
-            case R.id.iv_add_device:
-                if (vpDevice.getCurrentItem() == 0){
-                    //添加设备
-                    startActivity(new Intent(getContext(),DeviceAdd2Activity.class));
-                }else if (vpDevice.getCurrentItem() == 1){
-                    //添加场景
-                }
-                break;
-        }
-    }
 }

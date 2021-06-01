@@ -45,47 +45,28 @@ import com.philips.easykey.lock.utils.greenDao.manager.WifiLockInfoManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 
 public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, WifiVideoLockPresenter<IWifiVideoLockView>>
         implements View.OnClickListener, IWifiVideoLockView, View.OnLongClickListener {
 
 
-    @BindView(R.id.iv_external_big)
     ImageView ivBackGround; //背景图片
-    @BindView(R.id.iv_inner_small)
     ImageView ivTopIcon;  //上方小图标
-    @BindView(R.id.iv_center_icon)
     ImageView ivCenterIcon;  //中间图标wi
-    @BindView(R.id.rl_icon)
     RelativeLayout rlIcon;
-    @BindView(R.id.tv_external)
     TextView tvTopStates;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.lly_record_bar)
     LinearLayout llyRecordBar;
-    @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.rl_has_data)
     RelativeLayout rlHasData;
-    @BindView(R.id.tv_no_data)
     TextView tvNoData;
-    @BindView(R.id.create_time)
     TextView createTime;
-    @BindView(R.id.iv_device_dynamic)
     ImageView ivDeviceDynamic;
-    @BindView(R.id.tv_update_time)
     TextView tvUpdateTime;
-    @BindView(R.id.tv_open_lock_times)
     TextView tvOpenLockTimes;
-    @BindView(R.id.tv_center_content)
     TextView tvCenterContent;
-    @BindView(R.id.tv_center_mode)
     TextView tvCenterMode;
 
     private WifiLockInfo wifiLockInfo;
@@ -99,7 +80,25 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wifi_video_lock_layout, null);
-        ButterKnife.bind(this, view);
+
+        ivBackGround = view.findViewById(R.id.iv_external_big);
+        ivTopIcon = view.findViewById(R.id.iv_inner_small);
+        ivCenterIcon = view.findViewById(R.id.iv_center_icon);
+        rlIcon = view.findViewById(R.id.rl_icon);
+        tvTopStates = view.findViewById(R.id.tv_external);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+        recycleview = view.findViewById(R.id.recycleview);
+        llyRecordBar = view.findViewById(R.id.lly_record_bar);
+        tvMore = view.findViewById(R.id.tv_more);
+        rlHasData = view.findViewById(R.id.rl_has_data);
+        tvNoData = view.findViewById(R.id.tv_no_data);
+        createTime = view.findViewById(R.id.create_time);
+        ivDeviceDynamic = view.findViewById(R.id.iv_device_dynamic);
+        tvUpdateTime = view.findViewById(R.id.tv_update_time);
+        tvOpenLockTimes = view.findViewById(R.id.tv_open_lock_times);
+        tvCenterContent = view.findViewById(R.id.tv_center_content);
+        tvCenterMode = view.findViewById(R.id.tv_center_mode);
+
         initRecycleView();
 //        wifiLockInfo = (WifiLockInfo) getArguments().getSerializable(KeyConstants.WIFI_VIEDO_LOCK_INFO);
         wifiSN = (String) getArguments().getSerializable(KeyConstants.WIFI_SN);

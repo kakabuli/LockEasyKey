@@ -9,12 +9,9 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PasswordTestActivity extends BaseActivity<ITestGwTestView, TestGwPresenter<ITestGwTestView>> implements ITestGwTestView {
 
-    @BindView(R.id.tv_id)
     EditText tvId;
     private String gatewayId;
     private String deviceId;
@@ -23,7 +20,9 @@ public class PasswordTestActivity extends BaseActivity<ITestGwTestView, TestGwPr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_test);
-        ButterKnife.bind(this);
+
+        tvId = findViewById(R.id.tv_id);
+
         getData();
     }
 

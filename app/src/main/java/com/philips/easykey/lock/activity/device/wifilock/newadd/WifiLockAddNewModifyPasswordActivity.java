@@ -16,15 +16,10 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SocketManager;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
 
     private int times;
@@ -33,7 +28,28 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_modify_password);
-        ButterKnife.bind(this);
+
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+
+        findViewById(R.id.back).setOnClickListener(v -> showWarring());
+        findViewById(R.id.help).setOnClickListener(v -> startActivity(new Intent(this,WifiLockHelpActivity.class)));
+        findViewById(R.id.continue_check).setOnClickListener(v -> {
+            String wifiName = NetUtil.getWifiName();
+            LogUtils.d("连接状态  wifiName   " +wifiName+"  isConnected " +SocketManager.getInstance().isConnected());
+            if (!(!TextUtils.isEmpty(wifiName ) && wifiName.contains("kaadas_AP")) || !SocketManager.getInstance().isConnected()){
+                ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_modify_password);
+                startActivity(new Intent(this,WifiLockAddNewModifyPasswordDisconnectActivity.class));
+                socketManager.destroy();
+                return;
+            }
+            Intent intent = new Intent(this, WifiLockAddNewInputAdminPasswotdActivity.class);
+            LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 "  );
+            intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
+            startActivity(intent);
+            finish();
+        });
+
         times = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES,1);
         thread.start();
     }
@@ -68,32 +84,6 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
         }
     };
 
-    @OnClick({R.id.back, R.id.help, R.id.continue_check})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this,WifiLockHelpActivity.class));
-                break;
-            case R.id.continue_check:
-                String wifiName = NetUtil.getWifiName();
-                LogUtils.d("连接状态  wifiName   " +wifiName+"  isConnected " +SocketManager.getInstance().isConnected());
-                if (!(!TextUtils.isEmpty(wifiName ) && wifiName.contains("kaadas_AP")) || !SocketManager.getInstance().isConnected()){
-                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_modify_password);
-                    startActivity(new Intent(this,WifiLockAddNewModifyPasswordDisconnectActivity.class));
-                    socketManager.destroy();
-                    return;
-                }
-                Intent intent = new Intent(this, WifiLockAddNewInputAdminPasswotdActivity.class);
-                LogUtils.d(getLocalClassName()+"次数是   " + times + "  data 是否为空 "  );
-                intent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
-                startActivity(intent);
-                finish();
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed() {

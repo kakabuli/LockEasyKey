@@ -33,32 +33,46 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingView, SystemSettingPresenter<ISystemSettingView>> implements ISystemSettingView{
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.version_num)
     TextView versionNum;
-    @BindView(R.id.user_agreement_layout)
     RelativeLayout userAgreementLayout;
-    @BindView(R.id.cache_data)
     TextView cacheData;
-    @BindView(R.id.clear_cache_layout)
     RelativeLayout clearCacheLayout;
-    @BindView(R.id.primary_layout)
     RelativeLayout primary_layout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_system_setting);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        versionNum = findViewById(R.id.version_num);
+        userAgreementLayout = findViewById(R.id.user_agreement_layout);
+        cacheData = findViewById(R.id.cache_data);
+        clearCacheLayout = findViewById(R.id.clear_cache_layout);
+        primary_layout = findViewById(R.id.primary_layout);
+
+        ivBack.setOnClickListener(v -> finish());
+        findViewById(R.id.rl_language_setting).setOnClickListener(v -> {
+            Intent intent = new Intent(this, PersonalLanguageSettingActivity.class);
+            startActivity(intent);
+        });
+        versionNum.setOnClickListener(v -> checkVersion());
+        findViewById(R.id.tv_web).setOnClickListener(v -> SharedUtil.getInstance().jumpWebsite(this,getResources().getString(R.string.Philips_website)));
+        userAgreementLayout.setOnClickListener(v -> {
+            Intent agreementIntent = new Intent(this, PersonalUserAgreementActivity.class);
+            startActivity(agreementIntent);
+        });
+        clearCacheLayout.setOnClickListener(v -> clearData());
+        primary_layout.setOnClickListener(v -> {
+            Intent privacyIntent = new Intent(this, PrivacyActivity.class);
+            startActivity(privacyIntent);
+        });
         initView();
         tvContent.setText(R.string.menu_item_about);
         upgradePresenter=new UpgradePresenter();
@@ -83,40 +97,6 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
         return new SystemSettingPresenter<>();
     }
 
-
-    @OnClick({R.id.iv_back,R.id.rl_language_setting,R.id.version_num, R.id.user_agreement_layout, R.id.clear_cache_layout,R.id.primary_layout,R.id.tv_web})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.rl_language_setting:
-                Intent intent = new Intent(this, PersonalLanguageSettingActivity.class);
-                startActivity(intent);
-                break;
-            /*case R.id.language_setting_layout:
-                Intent languageIntent = new Intent(this, PersonalLanguageSettingActivity.class);
-                startActivity(languageIntent);
-                break;*/
-            case R.id.version_num:
-                checkVersion();
-                break;
-            case R.id.tv_web:
-                SharedUtil.getInstance().jumpWebsite(this,getResources().getString(R.string.Philips_website));
-                break;
-            case R.id.user_agreement_layout:
-                Intent agreementIntent = new Intent(this, PersonalUserAgreementActivity.class);
-                startActivity(agreementIntent);
-                break;
-            case R.id.clear_cache_layout:
-                clearData();
-                break;
-            case R.id.primary_layout:
-                Intent privacyIntent = new Intent(this, PrivacyActivity.class);
-                startActivity(privacyIntent);
-                break;
-        }
-    }
 
     private void clearData() {
         AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.delete_cache_data), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {

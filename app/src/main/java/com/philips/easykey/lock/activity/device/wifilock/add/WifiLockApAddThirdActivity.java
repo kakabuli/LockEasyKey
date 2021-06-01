@@ -8,7 +8,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,25 +25,16 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class WifiLockApAddThirdActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.tv_notice)
     TextView tvNotice;
     final RxPermissions rxPermissions = new RxPermissions(this);
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.bt_ap)
     Button btAp;
-    @BindView(R.id.bt_smart_config)
     Button btSmartConfig;
     private Disposable permissionDisposable;
     private boolean isAp = true;
@@ -53,7 +43,22 @@ public class WifiLockApAddThirdActivity extends BaseAddToApplicationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_device_wifi_lock_third);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        tvNotice = findViewById(R.id.tv_notice);
+        head = findViewById(R.id.head);
+        btAp = findViewById(R.id.bt_ap);
+        btSmartConfig = findViewById(R.id.bt_smart_config);
+
+        back.setOnClickListener(v -> finish());
+        btAp.setOnClickListener(v -> {
+            saveWifiName();
+            Intent intent = new Intent(WifiLockApAddThirdActivity.this, WifiLockApAutoConnectWifiActivity.class);
+            startActivity(intent);
+        });
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+
         isAp = getIntent().getBooleanExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         //获取权限  定位权限
         permissionDisposable = rxPermissions
@@ -81,26 +86,6 @@ public class WifiLockApAddThirdActivity extends BaseAddToApplicationActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-    @OnClick({R.id.back, R.id.bt_ap, R.id.bt_smart_config, R.id.help})
-    public void onViewClicked(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.bt_ap:
-                saveWifiName();
-                intent = new Intent(WifiLockApAddThirdActivity.this, WifiLockApAutoConnectWifiActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-
-        }
-    }
-
 
     private void saveWifiName() {
         WifiManager wifiMgr = (WifiManager) MyApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);

@@ -18,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import butterknife.OnClick;
 
 /**
  * author :

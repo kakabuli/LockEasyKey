@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.wifilock.x9;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 
@@ -18,20 +17,13 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockOpenDirectionActivity extends BaseActivity<IWifiLockOpenDirectionView, WifiLockOpenDirectionPresenter<IWifiLockOpenDirectionView>>
         implements IWifiLockOpenDirectionView {
 
-    @BindView(R.id.left_layout)
     RelativeLayout rlLeftLayout;
-    @BindView(R.id.right_layout)
     RelativeLayout rlRightLayout;
-    @BindView(R.id.ck_left)
     CheckBox ckLeft;
-    @BindView(R.id.ck_right)
     CheckBox ckRight;
 
     private String wifiSn = "";
@@ -42,7 +34,21 @@ public class WifiLockOpenDirectionActivity extends BaseActivity<IWifiLockOpenDir
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_open_direction);
-        ButterKnife.bind(this);
+
+        rlLeftLayout = findViewById(R.id.left_layout);
+        rlRightLayout = findViewById(R.id.right_layout);
+        ckLeft = findViewById(R.id.ck_left);
+        ckRight = findViewById(R.id.ck_right);
+
+        findViewById(R.id.back).setOnClickListener(v -> setOpenDirection());
+        findViewById(R.id.left_layout).setOnClickListener(v -> {
+            ckLeft.setChecked(true);
+            ckRight.setChecked(false);
+        });
+        findViewById(R.id.right_layout).setOnClickListener(v -> {
+            ckLeft.setChecked(false);
+            ckRight.setChecked(true);
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -79,22 +85,7 @@ public class WifiLockOpenDirectionActivity extends BaseActivity<IWifiLockOpenDir
         setOpenDirection();
     }
 
-    @OnClick({R.id.back,R.id.left_layout,R.id.right_layout})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                setOpenDirection();
-                break;
-            case R.id.left_layout:
-                ckLeft.setChecked(true);
-                ckRight.setChecked(false);
-                break;
-            case R.id.right_layout:
-                ckLeft.setChecked(false);
-                ckRight.setChecked(true);
-                break;
-        }
-    }
+
 
     private void setOpenDirection() {
         int openDirection = getOpenDirection();

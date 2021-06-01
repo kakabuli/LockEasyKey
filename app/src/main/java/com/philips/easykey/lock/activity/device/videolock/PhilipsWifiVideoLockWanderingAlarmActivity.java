@@ -27,33 +27,19 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 public class PhilipsWifiVideoLockWanderingAlarmActivity extends BaseActivity<IWifiVideoLockWanderingAlarmView, WifiVideoLockWanderingAlarmPresenter<IWifiVideoLockWanderingAlarmView>>
         implements IWifiVideoLockWanderingAlarmView  {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.rl_wandering_pir_sensitivity)
     RelativeLayout rlWanderingPIRSensitivity;
-    @BindView(R.id.rl_wandering_judge_time)
     RelativeLayout rlWanderingJudgeTime;
-    @BindView(R.id.iv_wandering_alarm)
     ImageView ivWanderingAlarm;
-    @BindView(R.id.tv_wandering_pir_sensitivity_right)
     TextView tvWanderingPirSensitivityRight;
-    @BindView(R.id.tv_wandering_judge_time_right)
     TextView tvWanderingJudgeTimeRight;
-    @BindView(R.id.rl_wandering_alarm)
     RelativeLayout rlWanderingAlarm;
-    @BindView(R.id.btn_restore)
     Button mBtnRestore;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
 
     private String wifiSn;
@@ -72,7 +58,99 @@ public class PhilipsWifiVideoLockWanderingAlarmActivity extends BaseActivity<IWi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_wandering_alarm);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        rlWanderingPIRSensitivity = findViewById(R.id.rl_wandering_pir_sensitivity);
+        rlWanderingJudgeTime = findViewById(R.id.rl_wandering_judge_time);
+        ivWanderingAlarm = findViewById(R.id.iv_wandering_alarm);
+        tvWanderingPirSensitivityRight = findViewById(R.id.tv_wandering_pir_sensitivity_right);
+        tvWanderingJudgeTimeRight = findViewById(R.id.tv_wandering_judge_time_right);
+        rlWanderingAlarm = findViewById(R.id.rl_wandering_alarm);
+        mBtnRestore = findViewById(R.id.btn_restore);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+
+        back.setOnClickListener(v -> {
+            if (wifiLockInfo.getPowerSave() == 0){
+                if(avi.isShow()) setWanderingAlarm();
+            } else {
+                finish();
+            }
+        });
+        rlWanderingPIRSensitivity.setOnClickListener(v -> {
+            if(avi.isShow()){
+                Intent intent = new Intent(this, PhilipsWifiVideoLockWanderingPIRSensitivityActivity.class);
+                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_SENSITIVITY,pirSen);
+                startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_WANDERING_SENSITIVITY_CODE);
+                mPresenter.release();
+            }
+        });
+        rlWanderingJudgeTime.setOnClickListener(v -> {
+            if(avi.isShow()){
+                Intent wanderingJudeTimeIntent = new Intent(this, PhilipsWifiVideoLockWanderingJudgeTimeActivity.class);
+                wanderingJudeTimeIntent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                wanderingJudeTimeIntent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_TIME,stayTime);
+                startActivityForResult(wanderingJudeTimeIntent,KeyConstants.WIFI_VIDEO_LOCK_WANDERING_STAY_TIME_CODE);
+                mPresenter.release();
+            }
+        });
+        rlWanderingAlarm.setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(ivWanderingAlarm.isSelected()){
+                    ivWanderingAlarm.setSelected(false);
+                    rlWanderingPIRSensitivity.setVisibility(View.GONE);
+                    rlWanderingJudgeTime.setVisibility(View.GONE);
+                    mBtnRestore.setVisibility(View.GONE);
+                    stayStatus = 0;
+                }else{
+                    ivWanderingAlarm.setSelected(true);
+                    rlWanderingPIRSensitivity.setVisibility(View.VISIBLE);
+                    rlWanderingJudgeTime.setVisibility(View.VISIBLE);
+                    mBtnRestore.setVisibility(View.VISIBLE);
+                    stayStatus = 1;
+                }
+            }
+        });
+        ivWanderingAlarm.setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(ivWanderingAlarm.isSelected()){
+                    ivWanderingAlarm.setSelected(false);
+                    rlWanderingPIRSensitivity.setVisibility(View.GONE);
+                    rlWanderingJudgeTime.setVisibility(View.GONE);
+                    mBtnRestore.setVisibility(View.GONE);
+                    stayStatus = 0;
+                }else{
+                    ivWanderingAlarm.setSelected(true);
+                    rlWanderingPIRSensitivity.setVisibility(View.VISIBLE);
+                    rlWanderingJudgeTime.setVisibility(View.VISIBLE);
+                    mBtnRestore.setVisibility(View.VISIBLE);
+                    stayStatus = 1;
+                }
+            }
+        });
+        mBtnRestore.setOnClickListener(v -> {
+            tvWanderingPirSensitivityRight.setText(R.string.activity_wifi_video_wamdering_midd);
+            pirSen = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_2;
+            stayTime = 10;
+            tvWanderingJudgeTimeRight.setText(stayTime + getString(R.string.activity_wifi_video_wamdering_sceond));
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -116,74 +194,6 @@ public class PhilipsWifiVideoLockWanderingAlarmActivity extends BaseActivity<IWi
 
             }
 
-        }
-    }
-
-
-    @OnClick({R.id.back,R.id.rl_wandering_pir_sensitivity,R.id.rl_wandering_judge_time,
-            R.id.rl_wandering_alarm,R.id.iv_wandering_alarm,R.id.btn_restore})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                if(wifiLockInfo.getPowerSave() == 0){
-                    if(avi.isShow())
-                        setWanderingAlarm();
-                }else {
-
-                    finish();
-                }
-                break;
-            case R.id.rl_wandering_pir_sensitivity:
-                if(avi.isShow()){
-                    Intent intent = new Intent(this, PhilipsWifiVideoLockWanderingPIRSensitivityActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                    intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_SENSITIVITY,pirSen);
-                    startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_WANDERING_SENSITIVITY_CODE);
-                    mPresenter.release();
-                }
-                break;
-            case R.id.rl_wandering_judge_time:
-                if(avi.isShow()){
-                    Intent wanderingJudeTimeIntent = new Intent(this, PhilipsWifiVideoLockWanderingJudgeTimeActivity.class);
-                    wanderingJudeTimeIntent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                    wanderingJudeTimeIntent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_TIME,stayTime);
-                    startActivityForResult(wanderingJudeTimeIntent,KeyConstants.WIFI_VIDEO_LOCK_WANDERING_STAY_TIME_CODE);
-                    mPresenter.release();
-                }
-
-                break;
-            case R.id.rl_wandering_alarm:
-            case R.id.iv_wandering_alarm:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(ivWanderingAlarm.isSelected()){
-                        ivWanderingAlarm.setSelected(false);
-                        rlWanderingPIRSensitivity.setVisibility(View.GONE);
-                        rlWanderingJudgeTime.setVisibility(View.GONE);
-                        mBtnRestore.setVisibility(View.GONE);
-                        stayStatus = 0;
-                    }else{
-                        ivWanderingAlarm.setSelected(true);
-                        rlWanderingPIRSensitivity.setVisibility(View.VISIBLE);
-                        rlWanderingJudgeTime.setVisibility(View.VISIBLE);
-                        mBtnRestore.setVisibility(View.VISIBLE);
-                        stayStatus = 1;
-                    }
-                }
-                break;
-            case R.id.btn_restore:
-                tvWanderingPirSensitivityRight.setText(R.string.activity_wifi_video_wamdering_midd);
-                pirSen = KeyConstants.WIFI_VIDEO_LOCK_PIR_SEN_2;
-                stayTime = 10;
-                tvWanderingJudgeTimeRight.setText(stayTime + getString(R.string.activity_wifi_video_wamdering_sceond));
-                break;
         }
     }
 

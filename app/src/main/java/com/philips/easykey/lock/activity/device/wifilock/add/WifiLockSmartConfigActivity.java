@@ -24,32 +24,20 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.cb_send_wifi_account_password)
     CheckBox cbSendWifiAccountPassword;
-    @BindView(R.id.cb_success)
     CheckBox cbSuccess;
-    @BindView(R.id.tv_support_list)
     EditText tvSupportList;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.bind_success)
     CheckBox bindSuccess;
-    @BindView(R.id.ll_bind_success)
     LinearLayout llBindSuccess;
 
     private EsptouchAsyncTask4 mTask;
@@ -59,7 +47,18 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_connect_device);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        cbSendWifiAccountPassword = findViewById(R.id.cb_send_wifi_account_password);
+        cbSuccess = findViewById(R.id.cb_success);
+        tvSupportList = findViewById(R.id.tv_support_list);
+        ivAnim = findViewById(R.id.iv_anim);
+        bindSuccess = findViewById(R.id.bind_success);
+        llBindSuccess = findViewById(R.id.ll_bind_success);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(WifiLockSmartConfigActivity.this, WifiLockHelpActivity.class)));
 
         //通过设置android:background时，得到AnimationDrawable 用如下方法
         final AnimationDrawable animationDrawable = (AnimationDrawable) ivAnim.getBackground();
@@ -105,25 +104,6 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
         //通过设置android:background时，得到AnimationDrawable 用如下方法
         llBindSuccess.setVisibility(View.GONE);
     }
-
-    @OnClick({R.id.back, R.id.help, R.id.cb_send_wifi_account_password, R.id.cb_success, R.id.tv_support_list})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(WifiLockSmartConfigActivity.this, WifiLockHelpActivity.class));
-                break;
-            case R.id.cb_send_wifi_account_password:
-                break;
-            case R.id.cb_success:
-                break;
-            case R.id.tv_support_list:
-                break;
-        }
-    }
-
 
     private static class EsptouchAsyncTask4 extends AsyncTask<byte[], IEsptouchResult, List<IEsptouchResult>> {
         private WeakReference<WifiLockSmartConfigActivity> mActivity;

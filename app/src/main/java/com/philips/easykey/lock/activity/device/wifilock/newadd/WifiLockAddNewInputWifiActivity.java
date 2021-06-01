@@ -22,27 +22,15 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SocketManager;
 import com.philips.easykey.lock.widget.DropEditText;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.ap_ssid_text)
     DropEditText apSsidText;
-    @BindView(R.id.ap_password_edit)
     EditText apPasswordEdit;
-    @BindView(R.id.iv_eye)
     ImageView ivEye;
-    @BindView(R.id.confirm_btn)
     TextView confirmBtn;
-    @BindView(R.id.tv_support_list)
     TextView tvSupportList;
 
 
@@ -59,7 +47,63 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_input_wifi);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        help = findViewById(R.id.help);
+        apSsidText = findViewById(R.id.ap_ssid_text);
+        apPasswordEdit = findViewById(R.id.ap_password_edit);
+        ivEye = findViewById(R.id.iv_eye);
+        confirmBtn = findViewById(R.id.confirm_btn);
+        tvSupportList = findViewById(R.id.tv_support_list);
+
+        back.setOnClickListener(v -> showWarring());
+        help.setOnClickListener(v -> startActivity(new Intent(this,WifiLockHelpActivity.class)));
+        confirmBtn.setOnClickListener(v -> {
+            sSsid = apSsidText.getText().toString();
+            String sPassword = apPasswordEdit.getText().toString();
+            if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
+                ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
+                return;
+            }
+            if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
+//                    AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, "", getString(R.string.no_support_no_pwd_wifi), getString(R.string.ok_wifi_lock), null);
+                Intent intent = new Intent(this,WifiLockAddNewCheckWifiActivity.class);
+                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
+                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
+                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
+                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
+                startActivity(intent);
+                return;
+
+            }
+            if (sPassword.length()<8){
+                ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
+                return;
+            }
+            Intent intent = new Intent(this,WifiLockAddNewCheckWifiActivity.class);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
+            intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
+            startActivity(intent);
+        });
+        ivEye.setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivEye.setImageResource(R.mipmap.eye_close_has_color);
+            } else {
+                apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivEye.setImageResource(R.mipmap.eye_open_has_color);
+            }
+        });
+        tvSupportList.setOnClickListener(v -> startActivity(new Intent(this,WifiLcokSupportWifiActivity.class)));
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         randomCode = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE);
@@ -68,68 +112,6 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
 
         String wifiName = (String) SPUtils.get(KeyConstants.WIFI_LOCK_CONNECT_NAME, "");
         apSsidText.setText(wifiName.trim());
-    }
-
-
-    @OnClick({R.id.back, R.id.help, R.id.confirm_btn, R.id.tv_support_list,R.id.iv_eye})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this,WifiLockHelpActivity.class));
-                break;
-            case R.id.confirm_btn:
-
-                sSsid = apSsidText.getText().toString();
-                String sPassword = apPasswordEdit.getText().toString();
-                if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                    ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
-                    return;
-                }
-                if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空
-//                    AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, "", getString(R.string.no_support_no_pwd_wifi), getString(R.string.ok_wifi_lock), null);
-                    Intent intent = new Intent(this,WifiLockAddNewCheckWifiActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
-                    intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-                    startActivity(intent);
-                    return;
-
-                }
-                if (sPassword.length()<8){
-                    ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
-                    return;
-                }
-                Intent intent = new Intent(this,WifiLockAddNewCheckWifiActivity.class);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD, sPassword);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_TIMES, times);
-                startActivity(intent);
-
-                break;
-            case R.id.iv_eye:
-                passwordHide = !passwordHide;
-                if (passwordHide) {
-                    apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivEye.setImageResource(R.mipmap.eye_close_has_color);
-                } else {
-                    apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivEye.setImageResource(R.mipmap.eye_open_has_color);
-                }
-                break;
-            case R.id.tv_support_list:
-                startActivity(new Intent(this,WifiLcokSupportWifiActivity.class));
-                break;
-        }
     }
 
 

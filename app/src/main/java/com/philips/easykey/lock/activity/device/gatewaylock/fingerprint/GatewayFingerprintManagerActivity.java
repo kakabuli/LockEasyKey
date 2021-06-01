@@ -25,28 +25,21 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class GatewayFingerprintManagerActivity extends BaseAddToApplicationActivity
         implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
     GatewayFingerprintManagerAdapter gatewayFingerprintManagerAdapter;
     boolean isNotData = true;
-    @BindView(R.id.ll_add)
     LinearLayout llAdd;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     List<GetPasswordResult.DataBean.Fingerprint> list = new ArrayList<>();
 
@@ -55,7 +48,14 @@ public class GatewayFingerprintManagerActivity extends BaseAddToApplicationActiv
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_fingerprint_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);//标题
+        recycleview = findViewById(R.id.recycleview);
+        llAdd = findViewById(R.id.ll_add);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+
         tvContent.setText(getString(R.string.fingerprint));
         ivBack.setOnClickListener(this);
         llAdd.setOnClickListener(this);

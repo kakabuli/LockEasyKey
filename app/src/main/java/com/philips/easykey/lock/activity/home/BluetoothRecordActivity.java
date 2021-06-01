@@ -21,8 +21,6 @@ import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.blankj.utilcode.util.LogUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/22
@@ -30,15 +28,11 @@ import butterknife.ButterKnife;
  */
 public class BluetoothRecordActivity extends BaseBleActivity<IBleView, BlePresenter<IBleView>>
         implements View.OnClickListener, IBleView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_open_lock_record)
     TextView tvOpenLockRecord;
-    @BindView(R.id.tv_warn_information)
     TextView tvWarnInformation;
-    @BindView(R.id.content)
     FrameLayout content;
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -62,7 +56,13 @@ public class BluetoothRecordActivity extends BaseBleActivity<IBleView, BlePresen
             }
         }
         LogUtils.d("是否支持操作记录   ");
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvOpenLockRecord = findViewById(R.id.tv_open_lock_record);
+        tvWarnInformation = findViewById(R.id.tv_warn_information);
+        content = findViewById(R.id.content);
+
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.device_dynamic));
         tvOpenLockRecord.setOnClickListener(this);

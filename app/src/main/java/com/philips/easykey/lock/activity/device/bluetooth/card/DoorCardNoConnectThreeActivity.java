@@ -11,28 +11,27 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/18
  */
 public class DoorCardNoConnectThreeActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
-    @BindView(R.id.tv_content)
-    TextView tvContent;
-    @BindView(R.id.iv_right)
-    ImageView ivRight;
-    @BindView(R.id.btn_finish)
-    Button btnFinish;
 
+    ImageView ivBack;
+    TextView tvContent;
+    ImageView ivRight;
+    Button btnFinish;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_door_card_no_connect_three);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        btnFinish = findViewById(R.id.btn_finish);
+
         ivBack.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
         tvContent.setText(R.string.add_door_card);

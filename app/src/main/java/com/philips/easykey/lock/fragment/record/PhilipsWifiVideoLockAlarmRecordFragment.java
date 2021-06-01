@@ -33,33 +33,25 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 import com.philips.easykey.core.tool.FileTool;
 
 
 public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiVideoLockAlarmRecordView, WifiVideoLockAlarmRecordPresenter<IWifiVideoLockAlarmRecordView>>
         implements IWifiVideoLockAlarmRecordView {
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     PhilipsWifiVideoLockAlarmIAdapter wifiLockAlarmGroupRecordAdapter;
-    @BindView(R.id.rl_head)
     RelativeLayout rlHead;
-    @BindView(R.id.tv_no_more)
     TextView tvNoMore;
     private int currentPage = 1;   //当前的开锁记录时间
     View view;
-    private Unbinder unbinder;
     private String wifiSn;
     List<WifiVideoLockAlarmRecord> list = new ArrayList<>();
     private WifiLockInfo wifiLockInfoBySn;
@@ -69,7 +61,12 @@ public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiV
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = View.inflate(getActivity(), R.layout.philips_fragment_bluetooth_open_lock_record, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        rlHead = view.findViewById(R.id.rl_head);
+        tvNoMore = view.findViewById(R.id.tv_no_more);
+
         wifiSn = getArguments().getString(KeyConstants.WIFI_SN);
         wifiLockInfoBySn = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
         initRecycleView();
@@ -102,41 +99,38 @@ public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiV
                     powerStatusDialog();
                     return;
                 }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String path = FileTool.getVideoCacheFolder(getActivity(),record.getWifiSN()).getPath();
-                        String fileName = path +  File.separator + record.get_id() + ".mp4";
-                        if (new File(fileName).exists()){
-                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
-                            intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
-                            intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
-                            try{
-                                fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
+                getActivity().runOnUiThread(() -> {
+                    String path = FileTool.getVideoCacheFolder(getActivity(),record.getWifiSN()).getPath();
+                    String fileName = path +  File.separator + record.get_id() + ".mp4";
+                    if (new File(fileName).exists()){
+                        Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
+                        intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
+                        intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
+                        try{
+                            fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
 
-                            }catch (Exception e){
+                        }catch (Exception e){
 
-                            }
-
-                            intent.putExtra("NAME",fileName);
-                            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                            intent.putExtra("record",record);
-                            startActivity(intent);
-                        }else{
-                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
-                            intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
-                            intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
-                            try {
-
-                                fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
-                            }catch (Exception e){
-
-                            }
-                            intent.putExtra("NAME",fileName);
-                            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                            intent.putExtra("record",record);
-                            startActivity(intent);
                         }
+
+                        intent.putExtra("NAME",fileName);
+                        intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+                        intent.putExtra("record",record);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
+                        intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
+                        intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
+                        try {
+
+                            fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
+                        }catch (Exception e){
+
+                        }
+                        intent.putExtra("NAME",fileName);
+                        intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+                        intent.putExtra("record",record);
+                        startActivity(intent);
                     }
                 });
 
@@ -150,12 +144,9 @@ public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiV
 
 
     private void initRefresh() {
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.setEnableLoadMore(true);
-                mPresenter.getWifiVideoLockGetAlarmList(1, wifiSn);
-            }
+        refreshLayout.setOnRefreshListener(refreshlayout -> {
+            refreshlayout.setEnableLoadMore(true);
+            mPresenter.getWifiVideoLockGetAlarmList(1, wifiSn);
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -176,7 +167,6 @@ public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiV
     public void onDestroyView() {
         super.onDestroyView();
 //        ((ViewGroup) view.getParent()).removeView(view);
-        unbinder.unbind();
     }
 
 

@@ -26,9 +26,6 @@ import java.util.List;
 import java.util.Locale;
 
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by ty on 2017/6/3.
  */
@@ -44,10 +41,8 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
     private CountryComparator mPinyinComparator;
     private GetCountryNameSort mCountryChangeUtil;
     private CharacterParserUtil mCharacterParserUtil;
-    @BindView(R.id.iv_head_left)
-    public ImageView iv_head_left;//结束
-    @BindView(R.id.tv_head_txt)
-    public TextView tv_head_txt;
+    public ImageView mIvHeadLeft;//结束
+    public TextView mTvHeadTxt;
     private String[] mCountryList;
 
 
@@ -56,8 +51,10 @@ public class CountryActivity extends BaseAddToApplicationActivity implements Vie
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_country_choose);
-        ButterKnife.bind(this);
-        iv_head_left.setOnClickListener(this);
+        mIvHeadLeft = findViewById(R.id.iv_head_left);
+        mTvHeadTxt = findViewById(R.id.tv_head_txt);
+
+        mIvHeadLeft.setOnClickListener(this);
         init();
         setListener();
         getCountryList();

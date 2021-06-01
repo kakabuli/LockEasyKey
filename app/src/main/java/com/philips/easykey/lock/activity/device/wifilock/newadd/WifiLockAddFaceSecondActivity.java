@@ -10,42 +10,29 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.password.PhilipsWiFiLockPasswordManagerActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddFaceSecondActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-//    @BindView(R.id.help)
+//    (R.id.help)
 //    ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.button_next)
     TextView buttonNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_how_to_add_face_pwd_second);
-        ButterKnife.bind(this);
 
-    }
+        back = findViewById(R.id.back);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        ivAnim = findViewById(R.id.iv_anim);
+        buttonNext = findViewById(R.id.button_next);
 
-    @OnClick({R.id.back, R.id.button_next})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.button_next:
-                startActivity(new Intent(this, PhilipsWiFiLockPasswordManagerActivity.class));
-                break;
-        }
+        back.setOnClickListener(v -> finish());
+        buttonNext.setOnClickListener(v -> startActivity(new Intent(this, PhilipsWiFiLockPasswordManagerActivity.class)));
     }
 }

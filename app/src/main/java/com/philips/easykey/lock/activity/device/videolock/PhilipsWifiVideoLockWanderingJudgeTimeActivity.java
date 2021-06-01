@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
@@ -22,26 +21,16 @@ import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockWanderingJudgeTimeActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView{
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.iv_judge_time_1)
     CheckBox ivJudgeTime1;
-    @BindView(R.id.iv_judge_time_2)
     CheckBox ivJudgeTime2;
-    @BindView(R.id.iv_judge_time_3)
     CheckBox ivJudgeTime3;
-    @BindView(R.id.iv_judge_time_4)
     CheckBox ivJudgeTime4;
-    @BindView(R.id.iv_judge_time_5)
     CheckBox ivJudgeTime5;
-    @BindView(R.id.iv_judge_time_6)
     CheckBox ivJudgeTime6;
 
     private String wifiSn;
@@ -53,7 +42,29 @@ public class PhilipsWifiVideoLockWanderingJudgeTimeActivity extends BaseActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_wandering_judge_time);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        ivJudgeTime1 = findViewById(R.id.iv_judge_time_1);
+        ivJudgeTime2 = findViewById(R.id.iv_judge_time_2);
+        ivJudgeTime3 = findViewById(R.id.iv_judge_time_3);
+        ivJudgeTime4 = findViewById(R.id.iv_judge_time_4);
+        ivJudgeTime5 = findViewById(R.id.iv_judge_time_5);
+        ivJudgeTime6 = findViewById(R.id.iv_judge_time_6);
+
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_TIME,stay_time);
+            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            setResult(RESULT_OK,intent);
+            finish();
+        });
+        findViewById(R.id.rl_judge_time_6).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_6));
+        findViewById(R.id.rl_judge_time_5).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_5));
+        findViewById(R.id.rl_judge_time_4).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_4));
+        findViewById(R.id.rl_judge_time_3).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_3));
+        findViewById(R.id.rl_judge_time_2).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_2));
+        findViewById(R.id.rl_judge_time_1).setOnClickListener(v -> setJudgeTime(R.id.rl_judge_time_1));
+
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         stay_time = getIntent().getIntExtra(KeyConstants.WIFI_VIDEO_WANDERING_TIME,30);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -93,38 +104,6 @@ public class PhilipsWifiVideoLockWanderingJudgeTimeActivity extends BaseActivity
             return true;
         }
         return super.onKeyDown(keyCode,event);
-    }
-
-
-    @OnClick({R.id.back,R.id.rl_judge_time_6,R.id.rl_judge_time_5,R.id.rl_judge_time_4,R.id.rl_judge_time_3,R.id.rl_judge_time_2,R.id.rl_judge_time_1})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                Intent intent = new Intent();
-                intent.putExtra(KeyConstants.WIFI_VIDEO_WANDERING_TIME,stay_time);
-                intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-                setResult(RESULT_OK,intent);
-                finish();
-                break;
-            case R.id.rl_judge_time_6:
-                setJudgeTime(R.id.rl_judge_time_6);
-                break;
-            case R.id.rl_judge_time_5:
-                setJudgeTime(R.id.rl_judge_time_5);
-                break;
-            case R.id.rl_judge_time_4:
-                setJudgeTime(R.id.rl_judge_time_4);
-                break;
-            case R.id.rl_judge_time_3:
-                setJudgeTime(R.id.rl_judge_time_3);
-                break;
-            case R.id.rl_judge_time_2:
-                setJudgeTime(R.id.rl_judge_time_2);
-                break;
-            case R.id.rl_judge_time_1:
-                setJudgeTime(R.id.rl_judge_time_1);
-                break;
-        }
     }
 
     private void setJudgeTimeInit(int id){

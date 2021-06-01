@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
+
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,23 +20,14 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.rl_replace_wifi)
     RelativeLayout rlReplaceWifi;
-    @BindView(R.id.tv_wifi_name)
     TextView tvWifiName;
-    @BindView(R.id.tv_wifi_strength)
     TextView tvWifiStrength;
-    @BindView(R.id.tv_rssid)
     TextView tvRssid;
-    @BindView(R.id.tv_mac)
     TextView tvMAC;
 
     private String wifiSn;
@@ -46,7 +37,41 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_wifi_detail);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        rlReplaceWifi = findViewById(R.id.rl_replace_wifi);
+        tvWifiName = findViewById(R.id.tv_wifi_name);
+        tvWifiStrength = findViewById(R.id.tv_wifi_strength);
+        tvRssid = findViewById(R.id.tv_rssid);
+        tvMAC = findViewById(R.id.tv_mac);
+
+        back.setOnClickListener(v -> finish());
+        rlReplaceWifi.setOnClickListener(v -> {
+            //老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2
+            LogUtils.d("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
+            if (TextUtils.isEmpty(String.valueOf(wifiLockInfo.getDistributionNetwork()))) {
+                Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
+                String wifiModelType = "WiFi";
+                wifiIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(wifiIntent);
+                //startActivity(new Intent(this, WifiLockOldUserFirstActivity.class));
+            } else if (wifiLockInfo.getDistributionNetwork() == 0 || wifiLockInfo.getDistributionNetwork() == 1) {
+                Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
+                String wifiModelType = "WiFi";
+                wifiIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(wifiIntent);
+            } else if (wifiLockInfo.getDistributionNetwork() == 2) {
+                Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
+                String wifiModelType = "WiFi&BLE";
+                wifiIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(wifiIntent);
+            } else if(wifiLockInfo.getDistributionNetwork() == 3){
+                showWifiDialog();
+            }else {
+                LogUtils.d("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
+
+            }
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -62,42 +87,6 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
                 tvRssid.setText(wifiLockInfo.getRSSI() + "");
             if(wifiLockInfo.getLockMac() != null)
                 tvMAC.setText(wifiLockInfo.getLockMac() + "");
-        }
-    }
-
-    @OnClick({R.id.back, R.id.rl_replace_wifi})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_replace_wifi:
-                //老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2
-                LogUtils.d("--kaadas--老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2--->" + wifiLockInfo.getDistributionNetwork());
-                if (TextUtils.isEmpty(String.valueOf(wifiLockInfo.getDistributionNetwork()))) {
-                    Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
-                    String wifiModelType = "WiFi";
-                    wifiIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(wifiIntent);
-                    //startActivity(new Intent(this, WifiLockOldUserFirstActivity.class));
-                } else if (wifiLockInfo.getDistributionNetwork() == 0 || wifiLockInfo.getDistributionNetwork() == 1) {
-                    Intent wifiIntent = new Intent(this, WifiLockOldUserFirstActivity.class);
-                    String wifiModelType = "WiFi";
-                    wifiIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(wifiIntent);
-                } else if (wifiLockInfo.getDistributionNetwork() == 2) {
-                    Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
-                    String wifiModelType = "WiFi&BLE";
-                    wifiIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(wifiIntent);
-                } else if(wifiLockInfo.getDistributionNetwork() == 3){
-                    showWifiDialog();
-                }else {
-                    LogUtils.d("--kaadas--wifiLockInfo.getDistributionNetwork()为" + wifiLockInfo.getDistributionNetwork());
-
-                }
-                break;
-
         }
     }
 

@@ -12,22 +12,13 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class PersonalMessageDetailActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.tv_detail)
     TextView tvDetail;
     private Long time;
     private String title;
@@ -37,7 +28,14 @@ public class PersonalMessageDetailActivity extends BaseAddToApplicationActivity 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_message_detail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        tvTitle = findViewById(R.id.tv_title);
+        tvTime = findViewById(R.id.tv_time);
+        tvDetail = findViewById(R.id.tv_detail);
+
         Intent messageIntent = getIntent();
         time = messageIntent.getLongExtra(KeyConstants.MESSAGE_DETAIL_TIME, 0);
         title = messageIntent.getStringExtra(KeyConstants.MESSAGE_DETAIL_TITLE);

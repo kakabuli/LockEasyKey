@@ -25,37 +25,22 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAuthDeviceInfoActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.iv_message_free)
     ImageView ivMessageFree;
-    @BindView(R.id.rl_message_free)
     RelativeLayout rlMessageFree;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.rl_face_model_firmware_version)
     RelativeLayout rlFaceModelFirmwareVersion;
-    @BindView(R.id.tv_face_model_firmware_version)
     TextView tvFaceModelFirmwareVersion;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-//    @BindView(R.id.tv_lock_software_version)
+//    (R.id.tv_lock_software_version)
 //    TextView tvLockSoftwareVersion;
-    @BindView(R.id.wifi_version)
     TextView wifiVersion;
     private WifiLockInfo wifiLockInfo;
     private String wifiSn;
@@ -67,7 +52,25 @@ public class WifiLockAuthDeviceInfoActivity extends BaseActivity<IWifiLockMoreVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_auth_device_info);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        ivMessageFree = findViewById(R.id.iv_message_free);
+        rlMessageFree = findViewById(R.id.rl_message_free);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        rlFaceModelFirmwareVersion = findViewById(R.id.rl_face_model_firmware_version);
+        tvFaceModelFirmwareVersion = findViewById(R.id.tv_face_model_firmware_version);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        wifiVersion = findViewById(R.id.wifi_version);
+
+        ivMessageFree.setOnClickListener(v -> {
+            int status = wifiLockInfo.getPushSwitch() == 2 ? 1 : 2;
+            showLoading(getString(R.string.is_setting));
+            mPresenter.updateSwitchStatus(status, wifiLockInfo.getWifiSN());
+        });
+        back.setOnClickListener(v -> finish());
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -125,19 +128,6 @@ public class WifiLockAuthDeviceInfoActivity extends BaseActivity<IWifiLockMoreVi
         return new WifiLockMorePresenter<>();
     }
 
-    @OnClick({R.id.iv_message_free, R.id.rl_message_free,R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_message_free:
-                int status = wifiLockInfo.getPushSwitch() == 2 ? 1 : 2;
-                showLoading(getString(R.string.is_setting));
-                mPresenter.updateSwitchStatus(status, wifiLockInfo.getWifiSN());
-                break;
-            case R.id.back:
-                finish();
-                break;
-        }
-    }
 
     @Override
     public void onDeleteDeviceSuccess() {

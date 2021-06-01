@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.videolock;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,17 +15,11 @@ import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.io.File;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockPreViewActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.preview_img)
     PhotoView preview_img;
-    @BindView(R.id.back)
     ImageView iv_back;
-    @BindView(R.id.tv_name)
     TextView tvName;
 
     private String stringExtra;
@@ -40,7 +33,17 @@ public class PhilipsWifiVideoLockPreViewActivity extends BaseAddToApplicationAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_video_preview);
-        ButterKnife.bind(this);
+
+        preview_img = findViewById(R.id.preview_img);
+        iv_back = findViewById(R.id.back);
+        tvName = findViewById(R.id.tv_name);
+
+        iv_back.setOnClickListener(v -> finish());
+        findViewById(R.id.iv_myalbum_delete).setOnClickListener(v -> {
+            if(!stringExtra.isEmpty() && new File(stringExtra).exists()){
+                showDeleteDialog(stringExtra);
+            }
+        });
 
         stringExtra = getIntent().getStringExtra(KeyConstants.VIDEO_PIC_PATH);
         String name = getIntent().getStringExtra("NAME");
@@ -51,20 +54,6 @@ public class PhilipsWifiVideoLockPreViewActivity extends BaseAddToApplicationAct
 
         //.apply(new RequestOptions().transform(new RotateTransformation(90)))
         Glide.with(this).load(stringExtra).into(preview_img);
-    }
-
-    @OnClick({R.id.back,R.id.iv_myalbum_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_myalbum_delete:
-                if(!stringExtra.isEmpty() && new File(stringExtra).exists()){
-                    showDeleteDialog(stringExtra);
-                }
-                break;
-        }
     }
 
     private void showDeleteDialog(String filepath) {

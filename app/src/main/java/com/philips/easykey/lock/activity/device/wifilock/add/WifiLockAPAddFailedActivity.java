@@ -13,24 +13,14 @@ import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAPAddFailedActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.to_look_support_route)
     LinearLayout toLookSupportRoute;
-    @BindView(R.id.bt_repair)
     TextView btRepair;
-
-    @BindView(R.id.tv_support_list)
     EditText tvSupportList;
-    @BindView(R.id.help)
     ImageView help;
     private boolean isAp;
 
@@ -38,7 +28,58 @@ public class WifiLockAPAddFailedActivity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_wifi_lock_failed);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        toLookSupportRoute = findViewById(R.id.to_look_support_route);
+        btRepair = findViewById(R.id.bt_repair);
+        tvSupportList = findViewById(R.id.tv_support_list);
+        help = findViewById(R.id.help);
+
+        back.setOnClickListener(v -> {
+            Intent intent;
+            if (isAp) {
+                intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAPAddFirstActivity.class);
+            } else {
+                intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAddFirstActivity.class);
+                intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
+            }
+            startActivity(intent);
+            finish();
+        });
+        btRepair.setOnClickListener(v -> {
+            Intent intent;
+            if (isAp) {
+                intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAPAddFirstActivity.class);
+            } else {
+                intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAddFirstActivity.class);
+                intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
+            }
+            startActivity(intent);
+            finish();
+        });
+        toLookSupportRoute.setOnClickListener(v -> {
+            //跳转查看支持WiFi列表
+            startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLcokSupportWifiActivity.class));
+        });
+        tvSupportList.setOnClickListener(v -> {
+            //跳转查看支持WiFi列表
+            startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLcokSupportWifiActivity.class));
+        });
+        help.setOnClickListener(v -> {
+            //跳转查看支持WiFi列表
+            startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLockHelpActivity.class));
+        });
+        findViewById(R.id.et_other_method).setOnClickListener(v -> {
+            finish();
+            Intent intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAddFirstActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.cancel).setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        });
+
         isAp = getIntent().getBooleanExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, true);
         toLookSupportRoute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,44 +103,4 @@ public class WifiLockAPAddFailedActivity extends BaseAddToApplicationActivity {
         }
     }
 
-    @OnClick({R.id.back, R.id.to_look_support_route, R.id.bt_repair,  R.id.tv_support_list, R.id.help, R.id.et_other_method, R.id.cancel})
-    public void onClick(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.back:
-            case R.id.bt_repair:
-                if (isAp) {
-                    intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAPAddFirstActivity.class);
-                    startActivity(intent);
-                } else {
-                    intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAddFirstActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
-                    startActivity(intent);
-                }
-                finish();
-                break;
-            case R.id.to_look_support_route:
-                //跳转查看支持WiFi列表
-                startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLcokSupportWifiActivity.class));
-                break;
-            case R.id.tv_support_list:
-                //跳转查看支持WiFi列表
-                startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLcokSupportWifiActivity.class));
-                break;
-            case R.id.help:
-                //跳转查看支持WiFi列表
-                startActivity(new Intent(WifiLockAPAddFailedActivity.this, WifiLockHelpActivity.class));
-                break;
-            case R.id.et_other_method:
-                finish();
-                intent = new Intent(WifiLockAPAddFailedActivity.this, WifiLockAddFirstActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.cancel:
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-
-        }
-    }
 }

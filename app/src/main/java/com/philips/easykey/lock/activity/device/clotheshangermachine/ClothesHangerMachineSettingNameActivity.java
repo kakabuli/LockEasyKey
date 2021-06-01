@@ -19,18 +19,12 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineSettingNameActivity extends BaseActivity<IClothesHangerMachineNicknameView, ClothesHangerMachineNicknamePresenter<IClothesHangerMachineNicknameView>>
         implements IClothesHangerMachineNicknameView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_save)
     TextView tvSave;
-    @BindView(R.id.et_nick_name)
     EditText etNickname;
 
     private String wifiSN = "";
@@ -40,7 +34,17 @@ public class ClothesHangerMachineSettingNameActivity extends BaseActivity<ICloth
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_nickname);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        tvSave = findViewById(R.id.tv_save);
+        etNickname = findViewById(R.id.et_nick_name);
+
+        back.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            if(!etNickname.getText().toString().trim().isEmpty()){
+                mPresenter.setNickname(wifiSN,etNickname.getText().toString().trim());
+            }
+        });
 
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         hangerInfo = MyApplication.getInstance().getClothesHangerMachineBySn(wifiSN);
@@ -73,20 +77,6 @@ public class ClothesHangerMachineSettingNameActivity extends BaseActivity<ICloth
     @Override
     protected ClothesHangerMachineNicknamePresenter<IClothesHangerMachineNicknameView> createPresent() {
         return new ClothesHangerMachineNicknamePresenter<>();
-    }
-
-    @OnClick({R.id.back,R.id.tv_save})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.tv_save:
-                if(!etNickname.getText().toString().trim().isEmpty()){
-                    mPresenter.setNickname(wifiSN,etNickname.getText().toString().trim());
-                }
-                break;
-        }
     }
 
     @Override

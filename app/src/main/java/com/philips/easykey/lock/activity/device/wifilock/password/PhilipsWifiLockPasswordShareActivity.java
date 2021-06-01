@@ -24,32 +24,17 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import androidx.core.text.HtmlCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PhilipsWifiLockPasswordShareActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.tv_notice)
     TextView tvNotice;
-    @BindView(R.id.tv_password_1)
     TextView tvPassword1;
-    @BindView(R.id.tv_password_2)
     TextView tvPassword2;
-    @BindView(R.id.tv_password_3)
     TextView tvPassword3;
-    @BindView(R.id.tv_password_4)
     TextView tvPassword4;
-    @BindView(R.id.tv_password_5)
     TextView tvPassword5;
-    @BindView(R.id.tv_password_6)
     TextView tvPassword6;
-    @BindView(R.id.tv_password_7)
     TextView tvPassword7;
-    @BindView(R.id.tv_time)
     TextView tvTime;
 
     private String password;
@@ -59,7 +44,36 @@ public class PhilipsWifiLockPasswordShareActivity extends BaseAddToApplicationAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_password_share);
-        ButterKnife.bind(this);
+
+        headTitle = findViewById(R.id.head_title);
+        tvNotice = findViewById(R.id.tv_notice);
+        tvPassword1 = findViewById(R.id.tv_password_1);
+        tvPassword2 = findViewById(R.id.tv_password_2);
+        tvPassword3 = findViewById(R.id.tv_password_3);
+        tvPassword4 = findViewById(R.id.tv_password_4);
+        tvPassword5 = findViewById(R.id.tv_password_5);
+        tvPassword6 = findViewById(R.id.tv_password_6);
+        tvPassword7 = findViewById(R.id.tv_password_7);
+        tvTime = findViewById(R.id.tv_time);
+
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        findViewById(R.id.tv_short_message).setOnClickListener(v -> {
+            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            SharedUtil.getInstance().sendShortMessage(message, this);
+        });
+        findViewById(R.id.tv_wei_xin).setOnClickListener(v -> {
+            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            if (SharedUtil.isWeixinAvilible(this)) {
+                SharedUtil.getInstance().sendWeiXin(message);
+            } else {
+                ToastUtils.showShort(R.string.telephone_not_install_wechat);
+            }
+        });
+        findViewById(R.id.tv_copy).setOnClickListener(v -> {
+            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            SharedUtil.getInstance().copyTextToSystem(this, message);
+        });
+
         String wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
 
@@ -169,26 +183,4 @@ public class PhilipsWifiLockPasswordShareActivity extends BaseAddToApplicationAc
         return "";
     }
 
-    @OnClick({R.id.back, R.id.tv_short_message, R.id.tv_wei_xin, R.id.tv_copy})
-    public void onClick(View view) {
-        String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.tv_short_message:
-                SharedUtil.getInstance().sendShortMessage(message, this);
-                break;
-            case R.id.tv_wei_xin:
-                if (SharedUtil.isWeixinAvilible(this)) {
-                    SharedUtil.getInstance().sendWeiXin(message);
-                } else {
-                    ToastUtils.showShort(R.string.telephone_not_install_wechat);
-                }
-                break;
-            case R.id.tv_copy:
-                SharedUtil.getInstance().copyTextToSystem(this, message);
-                break;
-        }
-    }
 }

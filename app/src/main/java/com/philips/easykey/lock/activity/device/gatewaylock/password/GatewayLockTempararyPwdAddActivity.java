@@ -26,23 +26,15 @@ import com.philips.easykey.lock.utils.greenDao.bean.GatewayPasswordPlanBean;
 
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class GatewayLockTempararyPwdAddActivity extends BaseActivity<IGatewayLockPasswordTempView,
         GatewayLockPasswordTempPresenter<IGatewayLockPasswordTempView>> implements IGatewayLockPasswordTempView {
 
     View mView;
-    @BindView(R.id.pwd_manager_icon)
     ImageView pwdManagerIcon;
-    @BindView(R.id.et_password)
     EditText etPassword;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
-    @BindView(R.id.back)
     ImageView back;
     private String gatewayId;
     private String deviceId;
@@ -52,7 +44,63 @@ public class GatewayLockTempararyPwdAddActivity extends BaseActivity<IGatewayLoc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_lock_activity_password_temporary);
-        ButterKnife.bind(this);
+
+        pwdManagerIcon = findViewById(R.id.pwd_manager_icon);
+        etPassword = findViewById(R.id.et_password);
+        btnRandomGeneration = findViewById(R.id.btn_random_generation);
+        btnConfirmGeneration = findViewById(R.id.btn_confirm_generation);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(v -> finish());
+        btnRandomGeneration.setOnClickListener(v -> {
+            String password = StringUtil.makeRandomPassword();
+            if (etPassword != null) {
+                etPassword.setText(password);
+                etPassword.setSelection(password.length());
+            }
+        });
+        btnConfirmGeneration.setOnClickListener(v -> {
+            if (!NetUtil.isNetworkAvailable()) {
+                AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.no_find_network));
+                return;
+            }
+            String strForeverPassword = etPassword.getText().toString().trim();
+            if (!StringUtil.randomJudge(strForeverPassword)) {
+                ToastUtils.showShort(R.string.philips_random_verify_error);
+                return;
+            }
+            if (StringUtil.checkSimplePassword(strForeverPassword)) {
+                AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(context, getString(R.string.password_simple_please_reset), getString(R.string.go_on), getString(R.string.reinstall), "#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+                        etPassword.setText("");
+                        return;
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                    @Override
+                    public void afterTextChanged(String toString) {
+                    }
+                });
+                return;
+            }
+
+
+            if(!TextUtils.isEmpty(gatewayModel) && gatewayModel.equals(KeyConstants.SMALL_GW2)){
+                mPresenter.sysPassworByhttp(MyApplication.getInstance().getUid(),gatewayId,deviceId,strForeverPassword,null);
+            }else{
+                mPresenter.setTempPassword(deviceId, gatewayId, strForeverPassword);
+            }
+
+            showLoading(getString(R.string.take_effect_be_being));
+        });
+
         context = this;
         getData();
     }
@@ -70,66 +118,6 @@ public class GatewayLockTempararyPwdAddActivity extends BaseActivity<IGatewayLoc
     protected GatewayLockPasswordTempPresenter<IGatewayLockPasswordTempView> createPresent() {
         return new GatewayLockPasswordTempPresenter<>();
     }
-
-
-    @OnClick({R.id.btn_random_generation, R.id.btn_confirm_generation, R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.btn_random_generation:
-                String password = StringUtil.makeRandomPassword();
-                if (etPassword != null) {
-                    etPassword.setText(password);
-                    etPassword.setSelection(password.length());
-                }
-                break;
-            case R.id.btn_confirm_generation:
-                if (!NetUtil.isNetworkAvailable()) {
-                    AlertDialogUtil.getInstance().noButtonDialog(context, getString(R.string.no_find_network));
-                    return;
-                }
-                String strForeverPassword = etPassword.getText().toString().trim();
-                if (!StringUtil.randomJudge(strForeverPassword)) {
-                    ToastUtils.showShort(R.string.philips_random_verify_error);
-                    return;
-                }
-                if (StringUtil.checkSimplePassword(strForeverPassword)) {
-                    AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(context, getString(R.string.password_simple_please_reset), getString(R.string.go_on), getString(R.string.reinstall), "#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
-                        @Override
-                        public void left() {
-
-                        }
-
-                        @Override
-                        public void right() {
-                            etPassword.setText("");
-                            return;
-                        }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
-                        @Override
-                        public void afterTextChanged(String toString) {
-                        }
-                    });
-                    return;
-                }
-
-
-                if(!TextUtils.isEmpty(gatewayModel) && gatewayModel.equals(KeyConstants.SMALL_GW2)){
-                      mPresenter.sysPassworByhttp(MyApplication.getInstance().getUid(),gatewayId,deviceId,strForeverPassword,null);
-                }else{
-                      mPresenter.setTempPassword(deviceId, gatewayId, strForeverPassword);
-                }
-
-
-                showLoading(getString(R.string.take_effect_be_being));
-                break;
-        }
-    }
-
 
     @Override
     public void getLockInfoSuccess(int maxPwd) {

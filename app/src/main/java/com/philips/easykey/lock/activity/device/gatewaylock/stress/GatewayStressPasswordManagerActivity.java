@@ -29,33 +29,24 @@ import com.philips.easykey.lock.utils.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class GatewayStressPasswordManagerActivity extends BaseAddToApplicationActivity
         implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview_password)
     RecyclerView recycleviewPassword;
     GatewayStressPasswordAdapter gatewayStressPasswordAdapter;
-    @BindView(R.id.ll_add_password)
     LinearLayout llAddPassword;
     List<ForeverPassword> pwdList = new ArrayList<>();
     List<GetPasswordResult.DataBean.Fingerprint> finperprintList = new ArrayList<>();
-    @BindView(R.id.ll_add_fingerprint)
     LinearLayout llAddFingerprint;
-    @BindView(R.id.recycleview_fingerprint)
     RecyclerView recycleviewFingerprint;
-    @BindView(R.id.iv_app_notification)
     ImageView ivAppNotification;
-    @BindView(R.id.rl_app_notification)
     RelativeLayout rlAppNotification;
     GatewayStressFingerprintAdapter gatewayStressFingerprintAdapter;
     boolean appNotificationStatus = true;
@@ -65,7 +56,16 @@ public class GatewayStressPasswordManagerActivity extends BaseAddToApplicationAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gateway_stress_password_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        recycleviewPassword = findViewById(R.id.recycleview_password);
+        llAddPassword = findViewById(R.id.ll_add_password);
+        llAddFingerprint = findViewById(R.id.ll_add_fingerprint);
+        recycleviewFingerprint = findViewById(R.id.recycleview_fingerprint);
+        ivAppNotification = findViewById(R.id.iv_app_notification);
+        rlAppNotification = findViewById(R.id.rl_app_notification);
+
         tvContent.setText(getString(R.string.stress_warn));
         ivBack.setOnClickListener(this);
         llAddPassword.setOnClickListener(this);

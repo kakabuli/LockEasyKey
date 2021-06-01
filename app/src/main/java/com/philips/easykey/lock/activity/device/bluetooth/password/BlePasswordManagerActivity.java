@@ -36,35 +36,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManagerView, PasswordManagerPresenter<IPasswordManagerView>>
         implements View.OnClickListener, IPasswordManagerView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
     BluetoothPasswordAdapter bluetoothPasswordAdapter;
     boolean isNotPassword = true;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.ll_add_password)
     LinearLayout llAddPassword;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     List<ForeverPassword> list = new ArrayList<>();
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
     private BleLockInfo bleLockInfo;
     private boolean isSync = false; //是不是正在同步锁中的密码
@@ -75,7 +65,17 @@ public class BlePasswordManagerActivity extends BaseBleActivity<IPasswordManager
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_password_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);//返回
+        tvContent = findViewById(R.id.tv_content);//标题
+        recycleview = findViewById(R.id.recycleview);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+        llAddPassword = findViewById(R.id.ll_add_password);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        ivRight = findViewById(R.id.iv_right);
+
         tvContent.setText(getString(R.string.password));
         if(MyApplication.getInstance().getBleService().getBleLockInfo() != null){
 

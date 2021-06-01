@@ -41,22 +41,15 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.OnClickListener {
-    @BindView(R.id.tv_content)
+
     TextView tv_content;
-    @BindView(R.id.iv_back)
     ImageView iv_back;
-    @BindView(R.id.circle_progress_bar2)
     CircleProgress mCircleProgress2;
-    @BindView(R.id.mutiprogree_ota)
     OtaMutiProgress mutiProgress;
-    @BindView(R.id.start_upgrade)
     Button start_upgrade;
     int j = 1;
-    @BindView(R.id.warring)
     TextView warring;
     private BluetoothGattCharacteristic systemIDChar;
     static private final String TAG = "OTA  升级";
@@ -105,7 +98,13 @@ public class Ti2FileOtaUpgradeActivity extends OtaBaseActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ota_upgrade);
-        ButterKnife.bind(this);
+
+        tv_content = findViewById(R.id.tv_content);
+        iv_back = findViewById(R.id.iv_back);
+        mCircleProgress2 = findViewById(R.id.circle_progress_bar2);
+        mutiProgress = findViewById(R.id.mutiprogree_ota);
+        start_upgrade = findViewById(R.id.start_upgrade);
+        warring = findViewById(R.id.warring);
 
         FileDownloader.setup(this);
 

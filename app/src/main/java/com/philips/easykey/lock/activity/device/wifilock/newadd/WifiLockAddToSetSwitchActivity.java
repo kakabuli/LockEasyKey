@@ -17,19 +17,11 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.AddSingleFireSwitchBean;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class WifiLockAddToSetSwitchActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements SingleFireSwitchView {
 
-public class WifiLockAddToSetSwitchActivity extends BaseActivity<SingleFireSwitchView, SingleFireSwitchSettingPresenter<SingleFireSwitchView>> implements View.OnClickListener,SingleFireSwitchView {
-
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.button_next)
     TextView buttonNext;
 
     private WifiLockInfo wifiLockInfoChange;
@@ -41,7 +33,22 @@ public class WifiLockAddToSetSwitchActivity extends BaseActivity<SingleFireSwitc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_scan_for_switch);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        head = findViewById(R.id.head);
+        ivAnim = findViewById(R.id.iv_anim);
+        buttonNext = findViewById(R.id.button_next);
+
+        back.setOnClickListener(v -> finish());
+        buttonNext.setOnClickListener(v -> {
+            Intent intent = new Intent(this, WifiLockWaitForSwitchActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+            intent.putExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE, wifiLockInfoChange);
+//                startActivity(intent);
+            startActivityForResult(intent,TO_SET_ALL_REQUEST_CODE);
+//                finish();
+        });
+
         //通过设置android:background时，得到AnimationDrawable 用如下方法
         final AnimationDrawable animationDrawable = (AnimationDrawable) ivAnim.getBackground();
         animationDrawable.start();
@@ -60,27 +67,6 @@ public class WifiLockAddToSetSwitchActivity extends BaseActivity<SingleFireSwitc
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfoChange = (WifiLockInfo) getIntent().getSerializableExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE);
         
-    }
-
-    @OnClick({R.id.back, R.id.button_next})
-    public void onClick(View view) {
-        Intent intent;
-
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-
-            case R.id.button_next:
-
-                intent = new Intent(this, WifiLockWaitForSwitchActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                intent.putExtra(KeyConstants.WIFI_LOCK_INFO_CHANGE, wifiLockInfoChange);
-//                startActivity(intent);
-                startActivityForResult(intent,TO_SET_ALL_REQUEST_CODE);
-//                finish();
-                break;
-        }
     }
 
     @Override

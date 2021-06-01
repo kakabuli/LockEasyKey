@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -39,46 +38,28 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/10
  */
 public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, OldAndAuthBleDetailPresenter<IOldBleDetailView>> implements IOldBleDetailView, View.OnClickListener {
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_bluetooth_name)
     TextView tvBluetoothName;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
-    @BindView(R.id.iv_power)
     BatteryView ivPower;
-    @BindView(R.id.tv_power)
     TextView tvPower;
-    @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.iv_delete)
     ImageView ivDelete;
-    @BindView(R.id.rl_device_share)
     RelativeLayout rlDeviceShare;
-    @BindView(R.id.ll_bluetooth_18)
     LinearLayout llBluetooth18;
-    @BindView(R.id.rl_bluetooth_17)
     RelativeLayout rlBluetooth17;
-    @BindView(R.id.device_image)
     ImageView deviceImage;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
 
     private BleLockInfo bleLockInfo;
@@ -93,24 +74,35 @@ public class OldBleDetailActivity extends BaseBleActivity<IOldBleDetailView, Old
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_bluetooth_lock_detail);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        ButterKnife.bind(this);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvBluetoothName = findViewById(R.id.tv_bluetooth_name);
+        tvType = findViewById(R.id.tv_type);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);
+        tvDate = findViewById(R.id.tv_date);
+        llPower = findViewById(R.id.ll_power);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        ivDelete = findViewById(R.id.iv_delete);
+        rlDeviceShare = findViewById(R.id.rl_device_share);
+        llBluetooth18 = findViewById(R.id.ll_bluetooth_18);
+        rlBluetooth17 = findViewById(R.id.rl_bluetooth_17);
+        deviceImage = findViewById(R.id.device_image);
+        titleBar = findViewById(R.id.title_bar);
+
         bleLockInfo = mPresenter.getBleLockInfo();
         ivBack.setOnClickListener(this);
         tvOpenClock.setOnClickListener(this);
         initListener();
         hasMoreItem = true;
         showMoreItem();
-        lockRunnable = new Runnable() {
-            @Override
-            public void run() {
-                isOpening = false;
-                if (bleLockInfo.isAuth()) {
-                    changLockStatus(0);
-                }
+        lockRunnable = () -> {
+            isOpening = false;
+            if (bleLockInfo.isAuth()) {
+                changLockStatus(0);
             }
         };
 

@@ -32,18 +32,12 @@ import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesHangerMachineAddThirdView,
         ClothesHangerMachineAddThirdPresenter<IClothesHangerMachineAddThirdView>> implements IClothesHangerMachineAddThirdView, OnBindClickListener {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.recyclerview)
     RecyclerView searchRecycler;
-    @BindView(R.id.iv_research)
     ImageView ivReSearch;
 
     private ClothesHangerMachineBleWiFiSearchAdapter clothesHangerMachineBleWiFiSearchAdapter;
@@ -61,7 +55,19 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_add_third);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        searchRecycler = findViewById(R.id.recyclerview);
+        ivReSearch = findViewById(R.id.iv_research);
+
+        back.setOnClickListener(v -> finish());
+        ivReSearch.setOnClickListener(v -> {
+            if (GpsUtil.isOPen(this)){
+                mPresenter.searchDevices();
+            }else {
+                ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
+            }
+        });
 
         wifiModelType = getIntent().getStringExtra("wifiModelType") + "";
 
@@ -120,22 +126,6 @@ public class ClothesHangerMachineAddThirdActivity extends BaseActivity<IClothesH
     @Override
     protected ClothesHangerMachineAddThirdPresenter<IClothesHangerMachineAddThirdView> createPresent() {
         return new ClothesHangerMachineAddThirdPresenter<>();
-    }
-
-    @OnClick({R.id.back,R.id.iv_research})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_research:
-                if (GpsUtil.isOPen(this)){
-                    mPresenter.searchDevices();
-                }else {
-                    ToastUtils.showLong(R.string.check_phone_not_open_gps_please_open);
-                }
-                break;
-        }
     }
 
     //当没有搜索到蓝牙设备时，显示对话框。

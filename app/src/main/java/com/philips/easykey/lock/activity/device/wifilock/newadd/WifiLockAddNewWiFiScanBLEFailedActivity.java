@@ -7,27 +7,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.addDevice.DeviceAddHelpActivity;
 import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddNewWiFiScanBLEFailedActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.re_scan)
     TextView reScan;
 
 
@@ -35,25 +24,24 @@ public class WifiLockAddNewWiFiScanBLEFailedActivity extends BaseAddToApplicatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_wifi_scan_ble_failed);
-        ButterKnife.bind(this);
-    }
 
-    @OnClick({R.id.back, R.id.help, R.id.re_scan})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-            case R.id.re_scan:
-                finish();
-                startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
-                break;
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        ivAnim = findViewById(R.id.iv_anim);
+        notice = findViewById(R.id.notice);
+        reScan = findViewById(R.id.re_scan);
 
-        }
+        back.setOnClickListener(v -> {
+            startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
+            finish();
+        });
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+        reScan.setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
+        });
+
     }
 
     @Override

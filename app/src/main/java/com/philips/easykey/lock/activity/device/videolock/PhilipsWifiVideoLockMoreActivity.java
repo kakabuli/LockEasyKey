@@ -36,61 +36,33 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreView, WifiVideoLockMorePresenter<IWifiVideoLockMoreView>>
         implements IWifiVideoLockMoreView, View.OnClickListener {
 
-
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.rl_safe_mode)
     RelativeLayout rlSafeMode;
-    @BindView(R.id.iv_safe_mode)
     TextView ivSafeMode;
-
-    @BindView(R.id.rl_am)
     RelativeLayout rlAm;
-    @BindView(R.id.iv_am)
     TextView ivAm;
-
-    @BindView(R.id.rl_door_lock_language_switch)
     RelativeLayout rlDoorLockLanguageSwitch;
-    @BindView(R.id.iv_silent_mode)
     ImageView ivSilentMode;
-    @BindView(R.id.rl_silent_mode)
     RelativeLayout rlSilentMode;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     String name;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.tv_language)
     TextView tvLanguage;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.wifi_name)
     TextView wifiName;
-    @BindView(R.id.rl_wifi_name)
     RelativeLayout rlWifiName;
-    @BindView(R.id.rl_message_push)
     RelativeLayout rlMessagePush;
-    @BindView(R.id.rl_wandering_alarm)
     RelativeLayout rlWanderingAlarm;
-    @BindView(R.id.tv_wandering_alarm_right)
     TextView tvWanderingAlarmRight;
-    @BindView(R.id.rl_real_time_video)
     RelativeLayout rlRealTimeVideo;
-    @BindView(R.id.rl_duress_alarm)
     RelativeLayout rlDuressAlarm;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
 
 
@@ -110,7 +82,31 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_video_lock_more);
-        ButterKnife.bind(this);
+
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        rlSafeMode = findViewById(R.id.rl_safe_mode);
+        ivSafeMode = findViewById(R.id.iv_safe_mode);
+        rlAm = findViewById(R.id.rl_am);
+        ivAm = findViewById(R.id.iv_am);
+        rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
+        ivSilentMode = findViewById(R.id.iv_silent_mode);
+        rlSilentMode = findViewById(R.id.rl_silent_mode);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        back = findViewById(R.id.back);
+        tvLanguage = findViewById(R.id.tv_language);
+        headTitle = findViewById(R.id.head_title);
+        wifiName = findViewById(R.id.wifi_name);
+        rlWifiName = findViewById(R.id.rl_wifi_name);
+        rlMessagePush = findViewById(R.id.rl_message_push);
+        rlWanderingAlarm = findViewById(R.id.rl_wandering_alarm);
+        tvWanderingAlarmRight = findViewById(R.id.tv_wandering_alarm_right);
+        rlRealTimeVideo = findViewById(R.id.rl_real_time_video);
+        rlDuressAlarm = findViewById(R.id.rl_duress_alarm);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
 

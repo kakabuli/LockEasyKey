@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,20 +22,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.clothesHangerMachineUtil.ClothesHangerMachineUtil;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHangerMachineAddView, ClothesHangerMachineAddPresenter<IClothesHangerMachineAddView>>
         implements IClothesHangerMachineAddView {
 
-    @BindView(R.id.wifi_lock_choose_to_scan)
     LinearLayout wifi_lock_choose_to_scan;
-    @BindView(R.id.wifi_lock_choose_to_input)
     EditText wifi_lock_choose_to_input;
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.add)
     TextView add;
 
     private MessageDialog messageDialog;
@@ -50,7 +42,30 @@ public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHanger
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_choose_and_scan);
-        ButterKnife.bind(this);
+
+        wifi_lock_choose_to_scan = findViewById(R.id.wifi_lock_choose_to_scan);
+        wifi_lock_choose_to_input = findViewById(R.id.wifi_lock_choose_to_input);
+        back = findViewById(R.id.back);
+        add = findViewById(R.id.add);
+
+        back.setOnClickListener(v -> finish());
+        add.setOnClickListener(v -> {
+            String name = wifi_lock_choose_to_input.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort(R.string.not_empty);
+                return;
+            }
+            if (!StringUtil.nicknameJudge(name)) {
+                ToastUtils.showShort(R.string.nickname_verify_error);
+                return;
+            }
+            mPresenter.searchClothesMachine(name);
+        });
+        wifi_lock_choose_to_scan.setOnClickListener(v -> {
+            Intent scanIntent = new Intent(this, ClothesHangerMachineQrCodeScanActivity.class);
+            scanIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
+            startActivityForResult(scanIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
+        });
     }
 
     @Override
@@ -66,32 +81,6 @@ public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHanger
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @OnClick({R.id.back,R.id.add,R.id.wifi_lock_choose_to_scan})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.add:
-                String name = wifi_lock_choose_to_input.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.showShort(R.string.not_empty);
-                    return;
-                }
-                if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
-                    return;
-                }
-                mPresenter.searchClothesMachine(name);
-                break;
-            case R.id.wifi_lock_choose_to_scan:
-                Intent scanIntent = new Intent(this, ClothesHangerMachineQrCodeScanActivity.class);
-                scanIntent.putExtra(KeyConstants.SCAN_TYPE, 1);
-                startActivityForResult(scanIntent, KeyConstants.SCANGATEWAYNEW_REQUEST_CODE);
-                break;
-        }
     }
 
     @Override

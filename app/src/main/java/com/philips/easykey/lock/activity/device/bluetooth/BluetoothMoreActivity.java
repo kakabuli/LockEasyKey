@@ -30,51 +30,32 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by David on 2019/4/15
  */
 public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreView, BleDeviceMorePresenter<IDeviceMoreView>> implements IDeviceMoreView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.rl_device_name)
     RelativeLayout rlDeviceName;
-    @BindView(R.id.iv_message_free)
     ImageView ivMessageFree;
-    @BindView(R.id.rl_message_free)
     RelativeLayout rlMessageFree;
-    @BindView(R.id.rl_safe_mode)
     RelativeLayout rlSafeMode;
-    @BindView(R.id.iv_am)
     ImageView ivAm;
-    @BindView(R.id.rl_am)
     RelativeLayout rlAm;
-    @BindView(R.id.rl_door_lock_language_switch)
     RelativeLayout rlDoorLockLanguageSwitch;
-    @BindView(R.id.iv_silent_mode)
     ImageView ivSilentMode;
-    @BindView(R.id.rl_silent_mode)
     RelativeLayout rlSilentMode;
-    @BindView(R.id.rl_device_information)
     RelativeLayout rlDeviceInformation;
-    @BindView(R.id.rl_check_firmware_update)
     RelativeLayout rlCheckFirmwareUpdate;
-    @BindView(R.id.btn_delete)
     Button btnDelete;
     boolean amAutoLockStatus;
     boolean silentModeStatus;
     String name;
-    @BindView(R.id.tv_device_name)
     TextView tvDeviceName;
     String deviceNickname;//设备名称
-    @BindView(R.id.rl_check_face_ota)
     RelativeLayout rlCheckFaceOta;
     private BleLockInfo bleLockInfo;
 
@@ -91,7 +72,26 @@ public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreV
         } else {
             rlAm.setVisibility(View.GONE);
         }
-        ButterKnife.bind(this);
+
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        rlDeviceName = findViewById(R.id.rl_device_name);
+        ivMessageFree = findViewById(R.id.iv_message_free);
+        rlMessageFree = findViewById(R.id.rl_message_free);
+        rlSafeMode = findViewById(R.id.rl_safe_mode);
+        ivAm = findViewById(R.id.iv_am);
+        rlAm = findViewById(R.id.rl_am);
+        rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
+        ivSilentMode = findViewById(R.id.iv_silent_mode);
+        rlSilentMode = findViewById(R.id.rl_silent_mode);
+        rlDeviceInformation = findViewById(R.id.rl_device_information);
+        rlCheckFirmwareUpdate = findViewById(R.id.rl_check_firmware_update);
+        btnDelete = findViewById(R.id.btn_delete);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        rlCheckFaceOta = findViewById(R.id.rl_check_face_ota);
+
         initClick();
         initData();
         boolean isAuth = mPresenter.isAuth(bleLockInfo, false);
@@ -473,8 +473,4 @@ public class BluetoothMoreActivity extends BaseBleCheckInfoActivity<IDeviceMoreV
     public void onDeviceStateChange(boolean isConnected) {  //设备连接状态改变   连接成功时提示正在鉴权，连接失败时直接提示用户
     }
 
-    @OnClick(R.id.rl_check_face_ota)
-    public void onClick() {
-
-    }
 }

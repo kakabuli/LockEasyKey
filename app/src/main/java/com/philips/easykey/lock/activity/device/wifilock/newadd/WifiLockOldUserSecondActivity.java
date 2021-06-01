@@ -7,7 +7,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,23 +21,14 @@ import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockOldUserSecondActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.button_next)
     TextView buttonNext;
 
     private String wifiModelType;
@@ -49,39 +39,39 @@ public class WifiLockOldUserSecondActivity extends BaseAddToApplicationActivity 
         setContentView(R.layout.activity_wifi_lock_old_user_second);
         Intent intent = getIntent();
         wifiModelType = intent.getStringExtra("wifiModelType");
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        ivAnim = findViewById(R.id.iv_anim);
+        buttonNext = findViewById(R.id.button_next);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this,WifiLockHelpActivity.class)));
+        buttonNext.setOnClickListener(v -> {
+            //在连接前   保存密码
+            saveWifiName();
+//              startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
+            LogUtils.d("--Kaadas--wifiModelType==：" + wifiModelType);
+            if(wifiModelType == null || wifiModelType.equals("WiFi")){
+                startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
+            }
+            else if(wifiModelType.equals("WiFi&BLE")){
+                //新流程
+                startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
+            }
+            else {
+                ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_fifth_1);
+            }
+        });
+
         //通过设置android:background时，得到AnimationDrawable 用如下方法
         final AnimationDrawable animationDrawable = (AnimationDrawable) ivAnim.getBackground();
         animationDrawable.start();
     }
 
-    @OnClick({R.id.back, R.id.help, R.id.button_next})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this,WifiLockHelpActivity.class));
-                break;
-            case R.id.button_next:
-                //在连接前   保存密码
-                saveWifiName();
-//              startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
-                LogUtils.d("--Kaadas--wifiModelType==：" + wifiModelType);
-                if(wifiModelType == null || wifiModelType.equals("WiFi")){
-                    startActivity(new Intent(this,WifiLockAddNewScanActivity.class));
-                }
-                else if(wifiModelType.equals("WiFi&BLE")){
-                    //新流程
-                    startActivity(new Intent(this,WifiLockAddNewScanBLEActivity.class));
-                }
-                else {
-                    ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_new_fifth_1);
-                }
-                break;
-        }
-    }
+
     private void saveWifiName() {
         WifiManager wifiMgr = (WifiManager) MyApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifiMgr.getConnectionInfo();

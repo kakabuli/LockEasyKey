@@ -12,23 +12,13 @@ import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivit
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockChangeAdminPasswordActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.already_modify)
     TextView alreadyModify;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
 
     int times;
@@ -38,7 +28,26 @@ public class WifiLockChangeAdminPasswordActivity extends BaseAddToApplicationAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_change_admin_password);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        alreadyModify = findViewById(R.id.already_modify);
+        ivAnim = findViewById(R.id.iv_anim);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+        alreadyModify.setOnClickListener(v -> {
+            if(video){
+                finish();
+            }else{
+                Intent wifiIntent = new Intent(this, WifiLockHasModifyPasswordAndDisconnectActivity.class);
+//                wifiIntent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
+                startActivity(wifiIntent);
+            }
+        });
+
         Intent intent = getIntent();
         times = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, 1);
         video = intent.getBooleanExtra("video",false);
@@ -47,24 +56,4 @@ public class WifiLockChangeAdminPasswordActivity extends BaseAddToApplicationAct
         animationDrawable.start();
     }
 
-    @OnClick({R.id.back, R.id.help, R.id.already_modify})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-            case R.id.already_modify:
-                if(video){
-                    finish();
-                }else{
-                    Intent wifiIntent = new Intent(this, WifiLockHasModifyPasswordAndDisconnectActivity.class);
-//                wifiIntent.putExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES, times);
-                    startActivity(wifiIntent);
-                }
-                break;
-        }
-    }
 }

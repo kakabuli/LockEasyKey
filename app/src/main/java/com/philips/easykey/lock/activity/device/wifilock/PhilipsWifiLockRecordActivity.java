@@ -27,24 +27,16 @@ import com.blankj.utilcode.util.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRecordView,
         WifiVideoLockRecordPresenter<IWifiLockVideoRecordView>> implements IWifiLockVideoRecordView,View.OnClickListener  {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_open_lock_record)
     TextView tvOpenLockRecord;
-    @BindView(R.id.tv_warn_information)
     TextView tvWarnInformation;
-    @BindView(R.id.tv_visitor_record)
     TextView tvVistorRecord;
-    @BindView(R.id.vp_home)
     ViewPager viewPager;
-    @BindView(R.id.iv_record_screen)
     ImageView mIvRecordScreen;
     PhilipsWifiLockOpenRecordFragment openRecordFragment;
     WifiLockAlarmRecordFragment alarmRecordFragment;
@@ -60,7 +52,15 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_equipment_dynamic);
         LogUtils.d("是否支持操作记录   ");
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        tvOpenLockRecord = findViewById(R.id.tv_open_lock_record);
+        tvWarnInformation = findViewById(R.id.tv_warn_information);
+        tvVistorRecord = findViewById(R.id.tv_visitor_record);
+        viewPager = findViewById(R.id.vp_home);
+        mIvRecordScreen = findViewById(R.id.iv_record_screen);
+
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.philips_dynamic_record_message));
         tvOpenLockRecord.setOnClickListener(this);

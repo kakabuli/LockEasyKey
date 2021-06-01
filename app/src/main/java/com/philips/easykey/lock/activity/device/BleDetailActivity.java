@@ -63,88 +63,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/10
  */
 public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDeviceDetailPresenter<IDeviceDetailView>>
         implements IDeviceDetailView, View.OnClickListener {
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_bluetooth_name)
     TextView tvBluetoothName;//蓝牙门锁
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.iv_power)
     BatteryView ivPower;//电量图片
-    @BindView(R.id.tv_power)
     TextView tvPower;//电量大小
-    @BindView(R.id.tv_date)
     TextView tvDate;//日期
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
 
     private BluetoothFunctionAdapater adapater;
     private BluetoothFunctionOneLineAdapater oneLineAdapater;
-    @BindView(R.id.iv_one)
     ImageView ivOne;
-    @BindView(R.id.tv_name_one)
     TextView tvNameOne;
-    @BindView(R.id.tv_number_one)
     TextView tvNumberOne;
-    @BindView(R.id.ll_one)
     LinearLayout llOne;
-    @BindView(R.id.iv_two)
     ImageView ivTwo;
-    @BindView(R.id.tv_name_two)
     TextView tvNameTwo;
-    @BindView(R.id.tv_number_two)
     TextView tvNumberTwo;
-    @BindView(R.id.ll_two)
     LinearLayout llTwo;
-    @BindView(R.id.iv_three)
     ImageView ivThree;
-    @BindView(R.id.tv_name_three)
     TextView tvNameThree;
-    @BindView(R.id.tv_number_three)
     TextView tvNumberThree;
-    @BindView(R.id.ll_three)
     LinearLayout llThree;
-    @BindView(R.id.iv_four)
     ImageView ivFour;
-    @BindView(R.id.tv_name_four)
     TextView tvNameFour;
-    @BindView(R.id.tv_number_four)
     TextView tvNumberFour;
-    @BindView(R.id.ll_four)
     LinearLayout llFour;
-    @BindView(R.id.iv_five)
     ImageView ivFive;
-    @BindView(R.id.tv_name_five)
     TextView tvNameFive;
-    @BindView(R.id.tv_number_five)
     TextView tvNumberFive;
-    @BindView(R.id.ll_five)
     LinearLayout llFive;
-    @BindView(R.id.iv_six)
     ImageView ivSix;
-    @BindView(R.id.tv_name_six)
     TextView tvNameSix;
-    @BindView(R.id.tv_number_six)
     TextView tvNumberSix;
-    @BindView(R.id.ll_six)
     LinearLayout llSix;
-    @BindView(R.id.tv_open_clock)
     TextView tvOpenClock;
-    @BindView(R.id.iv_lock_icon)
     ImageView ivLockIcon;
-    @BindView(R.id.detail_function_recyclerView)
     RecyclerView detailFunctionRecyclerView;
-    @BindView(R.id.detail_function_onLine)
     RecyclerView detailFunctionOnLine;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private BleLockInfo bleLockInfo;
     private static final int TO_MORE_REQUEST_CODE = 101;
@@ -188,7 +150,44 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         LogUtils.d("全功能界面  2 ");
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvBluetoothName = findViewById(R.id.tv_bluetooth_name);//蓝牙门锁
+        tvType = findViewById(R.id.tv_type);
+        ivPower = findViewById(R.id.iv_power);//电量图片
+        tvPower = findViewById(R.id.tv_power);//电量大小
+        tvDate = findViewById(R.id.tv_date);//日期
+        llPower = findViewById(R.id.ll_power);
+        ivOne = findViewById(R.id.iv_one);
+        tvNameOne = findViewById(R.id.tv_name_one);
+        tvNumberOne = findViewById(R.id.tv_number_one);
+        llOne = findViewById(R.id.ll_one);
+        ivTwo = findViewById(R.id.iv_two);
+        tvNameTwo = findViewById(R.id.tv_name_two);
+        tvNumberTwo = findViewById(R.id.tv_number_two);
+        llTwo = findViewById(R.id.ll_two);
+        ivThree = findViewById(R.id.iv_three);
+
+        tvNameThree = findViewById(R.id.tv_name_three);
+        tvNumberThree = findViewById(R.id.tv_number_three);
+        llThree = findViewById(R.id.ll_three);
+        ivFour = findViewById(R.id.iv_four);
+        tvNameFour = findViewById(R.id.tv_name_four);
+        tvNumberFour = findViewById(R.id.tv_number_four);
+        llFour = findViewById(R.id.ll_four);
+        ivFive = findViewById(R.id.iv_five);
+        tvNameFive = findViewById(R.id.tv_name_five);
+        tvNumberFive = findViewById(R.id.tv_number_five);
+        llFive = findViewById(R.id.ll_five);
+        ivSix = findViewById(R.id.iv_six);
+        tvNameSix = findViewById(R.id.tv_name_six);
+        tvNumberSix = findViewById(R.id.tv_number_six);
+        llSix = findViewById(R.id.ll_six);
+        tvOpenClock = findViewById(R.id.tv_open_clock);
+        ivLockIcon = findViewById(R.id.iv_lock_icon);
+        detailFunctionRecyclerView = findViewById(R.id.detail_function_recyclerView);
+        detailFunctionOnLine = findViewById(R.id.detail_function_onLine);
+        titleBar = findViewById(R.id.title_bar);
         productList = MyApplication.getInstance().getProductInfos();
 
         Intent intent = getIntent();

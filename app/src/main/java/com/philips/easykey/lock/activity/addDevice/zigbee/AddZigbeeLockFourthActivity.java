@@ -21,15 +21,10 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.handPwdUtil.Constants;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView,AddZigbeeLockPresenter<IAddZigbeeLockView>> implements IAddZigbeeLockView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.add_cateye_awating)
     ImageView addCateyeAwating;
 
     private Animation operatingAnim;
@@ -38,7 +33,16 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_zigbeelock_add_scan);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        addCateyeAwating = findViewById(R.id.add_cateye_awating);
+
+        back.setOnClickListener(v -> {
+            Intent backIntent=new Intent(this, DeviceBindGatewayListActivity.class);
+            startActivity(backIntent);
+            finish();
+        });
+
         initAnimation();
         startAnimation();
 
@@ -66,12 +70,6 @@ public class AddZigbeeLockFourthActivity extends BaseActivity<IAddZigbeeLockView
     }
 
 
-    @OnClick(R.id.back)
-    public void onViewClicked() {
-        Intent backIntent=new Intent(this, DeviceBindGatewayListActivity.class);
-        startActivity(backIntent);
-        finish();
-    }
     /**
      * 初始化动画
      */

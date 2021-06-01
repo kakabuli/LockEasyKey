@@ -52,38 +52,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleLockPresenter<IOldBleLockView>>
         implements View.OnClickListener, IOldBleLockView {
 
     List<BluetoothRecordBean> list = new ArrayList<>();
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
-    @BindView(R.id.iv_external_big)
     ImageView ivExternalBig;
-    @BindView(R.id.iv_external_middle)
     ImageView ivExternalMiddle;
-    @BindView(R.id.iv_external_small)
     ImageView ivExternalSmall;
-    @BindView(R.id.iv_inner_small)
     ImageView ivInnerSmall;
-    @BindView(R.id.iv_inner_middle)
     ImageView ivInnerMiddle;
-    @BindView(R.id.tv_inner)
     TextView tvInner;
-    @BindView(R.id.tv_external)
     TextView tvExternal;
-    @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.rl_has_data)
     RelativeLayout rlHasData;
-    @BindView(R.id.tv_no_data)
     TextView tvNoData;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.rl_icon)
     RelativeLayout rlIcon;
     private BleLockInfo bleLockInfo;
     private boolean isOpening;
@@ -129,7 +115,21 @@ public class OldBleLockFragment extends BaseBleFragment<IOldBleLockView, OldBleL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_old_ble_lock_layout, null);
-        ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        ivExternalBig = view.findViewById(R.id.iv_external_big);
+        ivExternalMiddle = view.findViewById(R.id.iv_external_middle);
+        ivExternalSmall = view.findViewById(R.id.iv_external_small);
+        ivInnerSmall = view.findViewById(R.id.iv_inner_small);
+        ivInnerMiddle = view.findViewById(R.id.iv_inner_middle);
+        tvInner = view.findViewById(R.id.tv_inner);
+        tvExternal = view.findViewById(R.id.tv_external);
+        tvMore = view.findViewById(R.id.tv_more);
+        rlHasData = view.findViewById(R.id.rl_has_data);
+        tvNoData = view.findViewById(R.id.tv_no_data);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+        rlIcon = view.findViewById(R.id.rl_icon);
+
         initRecycleView();
         tvMore.setOnClickListener(this);
         tvSynchronizedRecord.setOnClickListener(this);

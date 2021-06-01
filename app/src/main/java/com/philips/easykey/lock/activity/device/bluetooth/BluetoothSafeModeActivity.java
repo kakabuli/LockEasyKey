@@ -22,40 +22,26 @@ import com.philips.easykey.lock.utils.BleLockUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/15
  */
 public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, SafeModePresenter<ISafeModeView>>
         implements ISafeModeView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.iv_safe_mode)
     ImageView ivSafeMode;
-    @BindView(R.id.rl_safe_mode)
     RelativeLayout rlSafeMode;
     boolean safeModeStatus;
-    @BindView(R.id.no_card)
     LinearLayout noCard;
-    @BindView(R.id.all)
     LinearLayout all;
-    @BindView(R.id.rl_notice)
     RelativeLayout rlNotice;
-    @BindView(R.id.notice1)
     RelativeLayout notice1;
-    @BindView(R.id.iv_1)
     ImageView iv1;
-    @BindView(R.id.tv_1)
     TextView tv1;
-    @BindView(R.id.iv_2)
     ImageView iv2;
-    @BindView(R.id.tv_2)
     TextView tv2;
     private BleLockInfo bleLockInfo;
     private String name;
@@ -64,7 +50,21 @@ public class BluetoothSafeModeActivity extends BaseBleActivity<ISafeModeView, Sa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_safe_mode);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        ivSafeMode = findViewById(R.id.iv_safe_mode);
+        rlSafeMode = findViewById(R.id.rl_safe_mode);
+        noCard = findViewById(R.id.no_card);
+        all = findViewById(R.id.all);
+        rlNotice = findViewById(R.id.rl_notice);
+        notice1 = findViewById(R.id.notice1);
+        iv1 = findViewById(R.id.iv_1);
+        tv1 = findViewById(R.id.tv_1);
+        iv2 = findViewById(R.id.iv_2);
+        tv2 = findViewById(R.id.tv_2);
+
         bleLockInfo = mPresenter.getBleLockInfo();
         initData();
         if (mPresenter.isAuth(bleLockInfo, false)) {

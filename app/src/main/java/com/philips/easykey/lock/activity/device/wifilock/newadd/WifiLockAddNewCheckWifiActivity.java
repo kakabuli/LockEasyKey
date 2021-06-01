@@ -28,30 +28,18 @@ import com.philips.easykey.lock.utils.SocketManager;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWifiSetUpView, WifiApWifiSetUpPresenter<WifiApWifiSetUpPresenter>>
         implements IWifiLockAPWifiSetUpView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.circle_progress_bar2)
     WifiCircleProgress circleProgressBar2;
-    @BindView(R.id.tv_send_wifi_info)
     TextView tvSendWifiInfo;
-    @BindView(R.id.iv_send_wifi_info)
     ImageView ivSendWifiInfo;
-    @BindView(R.id.tv_set_success)
     TextView tvSetSuccess;
-    @BindView(R.id.iv_set_success)
     ImageView ivSetSuccess;
-    @BindView(R.id.tv_bind_success)
     TextView tvBindSuccess;
-    @BindView(R.id.iv_bind_success)
     ImageView ivBindSuccess;
 
     private Animation animation;
@@ -68,8 +56,19 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_check_wifi);
-        ButterKnife.bind(this);
 
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        circleProgressBar2 = findViewById(R.id.circle_progress_bar2);
+        tvSendWifiInfo = findViewById(R.id.tv_send_wifi_info);
+        ivSendWifiInfo = findViewById(R.id.iv_send_wifi_info);
+        tvSetSuccess = findViewById(R.id.tv_set_success);
+        ivSetSuccess = findViewById(R.id.iv_set_success);
+        tvBindSuccess = findViewById(R.id.tv_bind_success);
+        ivBindSuccess = findViewById(R.id.iv_bind_success);
+
+        back.setOnClickListener(v -> showWarring());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
 
         sSsid = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
         sPassword = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_PASSWORD);
@@ -105,17 +104,6 @@ public class WifiLockAddNewCheckWifiActivity extends BaseActivity<IWifiLockAPWif
         startActivity(new Intent(this, WifiLockAddNewBindFailedActivity.class));
     }
 
-    @OnClick({R.id.back, R.id.help})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-        }
-    }
 
     private Thread thread = new Thread() {
         @Override

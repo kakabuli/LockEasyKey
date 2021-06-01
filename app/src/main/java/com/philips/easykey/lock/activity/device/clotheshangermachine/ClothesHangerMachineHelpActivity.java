@@ -8,21 +8,18 @@ import android.widget.ImageView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ClothesHangerMachineHelpActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothes_hanger_machine_help);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> finish());
     }
 
     @Override
@@ -45,13 +42,4 @@ public class ClothesHangerMachineHelpActivity extends BaseAddToApplicationActivi
         super.onDestroy();
     }
 
-
-    @OnClick({R.id.back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-        }
-    }
 }

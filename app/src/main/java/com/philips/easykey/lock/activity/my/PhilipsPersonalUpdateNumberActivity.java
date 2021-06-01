@@ -14,25 +14,24 @@ import com.philips.easykey.lock.mvp.view.personalview.IPersonalUpdateNumberView;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsPersonalUpdateNumberActivity extends BaseActivity<IPersonalUpdateNumberView, PersonalUpdateNumberPresenter<IPersonalUpdateNumberView>> implements IPersonalUpdateNumberView {
 
 
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.tv_hint)
     TextView tvHint;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_personal_update_number);
-        ButterKnife.bind(this);
+
+        tvContent = findViewById(R.id.tv_content);
+        tvNumber = findViewById(R.id.tv_number);
+        tvHint = findViewById(R.id.tv_hint);
+
+        findViewById(R.id.iv_back).setOnClickListener(v -> finish());
         initView();
     }
 
@@ -64,14 +63,4 @@ public class PhilipsPersonalUpdateNumberActivity extends BaseActivity<IPersonalU
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.btn_next_or_complete})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.btn_next_or_complete:
-                break;
-        }
-    }
 }

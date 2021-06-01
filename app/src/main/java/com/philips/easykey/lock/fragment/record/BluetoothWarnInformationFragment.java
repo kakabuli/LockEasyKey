@@ -34,19 +34,14 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by David on 2019/4/22
  */
 public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRecordView, WarringRecordPresenter<IWarringRecordView>>
         implements IWarringRecordView, View.OnClickListener {
     List<BluetoothRecordBean> list = new ArrayList<>();
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     BluetoothWarnMessageAdapter bluetoothWarnMessageAdapter;
     public static final int LOCK_WARRING = 1;
@@ -57,20 +52,23 @@ public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRe
     public static final int LOW_POWER = 0x10;
     public static final int DOOR_NOT_LOCK = 0x20;
     public static final int ARM = 0x40;
-    @BindView(R.id.tv_synchronized_record)
+
     TextView tvSynchronizedRecord;
     private boolean isLoadingBleRecord;  //正在加载锁上数据
     private int currentPage = 1;   //当前的开锁记录时间
     BluetoothRecordActivity activity;
     private BleLockInfo bleLockInfo;
     View view;
-    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = View.inflate(getActivity(), R.layout.fragment_bluetooth_warn_information, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+
         tvSynchronizedRecord.setOnClickListener(this);
         activity = (BluetoothRecordActivity) getActivity();
         bleLockInfo = activity.getBleDeviceInfo();
@@ -118,13 +116,6 @@ public class BluetoothWarnInformationFragment extends BaseBleFragment<IWarringRe
         bluetoothWarnMessageAdapter = new BluetoothWarnMessageAdapter(list);
         recycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycleview.setAdapter(bluetoothWarnMessageAdapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        ((ViewGroup) view.getParent()).removeView(view);
-        unbinder.unbind();
     }
 
     @Override

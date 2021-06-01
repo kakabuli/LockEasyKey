@@ -3,7 +3,6 @@ package com.philips.easykey.lock.activity.device.wifilock.x9;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 
@@ -18,20 +17,12 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockOpenForceActivity extends BaseActivity<IWifiLockOpenForceView, WifiLockOpenForcePresenter<IWifiLockOpenForceView>>
         implements IWifiLockOpenForceView{
 
-    @BindView(R.id.low_layout)
     RelativeLayout rlLowLayout;
-    @BindView(R.id.high_layout)
     RelativeLayout rlHighLayout;
-    @BindView(R.id.ck_low)
     CheckBox ckLow;
-    @BindView(R.id.ck_high)
     CheckBox ckHigh;
 
     private String wifiSn = "";
@@ -41,7 +32,21 @@ public class WifiLockOpenForceActivity extends BaseActivity<IWifiLockOpenForceVi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_open_force);
-        ButterKnife.bind(this);
+
+        rlLowLayout = findViewById(R.id.low_layout);
+        rlHighLayout = findViewById(R.id.high_layout);
+        ckLow = findViewById(R.id.ck_low);
+        ckHigh = findViewById(R.id.ck_high);
+
+        findViewById(R.id.back).setOnClickListener(v -> setOpenForce());
+        findViewById(R.id.low_layout).setOnClickListener(v -> {
+            ckLow.setChecked(true);
+            ckHigh.setChecked(false);
+        });
+        findViewById(R.id.high_layout).setOnClickListener(v -> {
+            ckLow.setChecked(false);
+            ckHigh.setChecked(true);
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -76,23 +81,6 @@ public class WifiLockOpenForceActivity extends BaseActivity<IWifiLockOpenForceVi
     public void onBackPressed() {
         super.onBackPressed();
         setOpenForce();
-    }
-
-    @OnClick({R.id.back,R.id.low_layout,R.id.high_layout})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                setOpenForce();
-                break;
-            case R.id.low_layout:
-                ckLow.setChecked(true);
-                ckHigh.setChecked(false);
-                break;
-            case R.id.high_layout:
-                ckLow.setChecked(false);
-                ckHigh.setChecked(true);
-                break;
-        }
     }
 
     private void setOpenForce() {

@@ -23,21 +23,16 @@ import com.philips.easykey.lock.publiclibrary.bean.BleLockInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 /**
  * Created by David
  */
 public class BluetoothUserPasswordAddActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
 
-    @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.sliding_tab_layout)
     SlidingTabLayout slidingTabLayout;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
     private ListFragmentPagerAdapter mPagerAdapter;
     private List<Fragment> mFragments = new ArrayList<Fragment>();
@@ -50,7 +45,12 @@ public class BluetoothUserPasswordAddActivity extends BaseAddToApplicationActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_user_password_add);
-        ButterKnife.bind(this);
+
+        viewPager = findViewById(R.id.viewpager);
+        slidingTabLayout = findViewById(R.id.sliding_tab_layout);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+
         bleLockInfo =MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         tvContent.setText(getString(R.string.pwd_header_add_tv));

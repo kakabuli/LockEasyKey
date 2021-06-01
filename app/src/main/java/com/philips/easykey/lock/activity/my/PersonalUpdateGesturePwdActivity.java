@@ -19,19 +19,11 @@ import com.philips.easykey.lock.utils.handPwdUtil.GestureDrawline;
 import com.philips.easykey.lock.utils.handPwdUtil.LockIndicator;
 
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PersonalUpdateGesturePwdActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.gesture_pwd_back)
     ImageView gesturePwdBack;
-    @BindView(R.id.lock_indicator)
     LockIndicator lockIndicator;
-    @BindView(R.id.text_tip)
     TextView mTextTip;
-    @BindView(R.id.gesture_container)
     FrameLayout gestureContainer;
 
     private GestureContentView mGestureContentView;
@@ -43,7 +35,14 @@ public class PersonalUpdateGesturePwdActivity extends BaseAddToApplicationActivi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_update_hand_pwd);
-        ButterKnife.bind(this);
+
+        gesturePwdBack = findViewById(R.id.gesture_pwd_back);
+        lockIndicator = findViewById(R.id.lock_indicator);
+        mTextTip = findViewById(R.id.text_tip);
+        gestureContainer = findViewById(R.id.gesture_container);
+
+        findViewById(R.id.gesture_pwd_back).setOnClickListener(v -> finish());
+
         initView();
     }
 
@@ -110,10 +109,5 @@ public class PersonalUpdateGesturePwdActivity extends BaseAddToApplicationActivi
     private void updateCodeList(String inputCode) {
         // 更新选择的图案
         lockIndicator.setPath(inputCode);
-    }
-
-    @OnClick(R.id.gesture_pwd_back)
-    public void onViewClicked() {
-        finish();
     }
 }

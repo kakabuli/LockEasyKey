@@ -23,33 +23,19 @@ import com.philips.easykey.lock.widget.BadgeNumberView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class PhilipsMessageFragment extends BaseFragment<IMessageView, MessageFragmentPresenter<IMessageView>> implements IMessageView {
 
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
-    @BindView(R.id.tv_door_lock_msg)
     TextView tvDoorLockMsg;
-    @BindView(R.id.v_door_lock_msg)
     View vDoorLockMsg;
-    @BindView(R.id.tv_system_msg)
     TextView tvSystemMsg;
-    @BindView(R.id.v_system_msg)
     View vSystemMsg;
-    @BindView(R.id.vp_message)
     ViewPager vpMessage;
-    @BindView(R.id.rl_door_lock_msg)
     RelativeLayout rlDoorLockMsg;
-    @BindView(R.id.badge_number_view)
     BadgeNumberView badgeNumberView;
-    @BindView(R.id.rl_system_msg)
     RelativeLayout rlSystemMsg;
     private View mView;
-    private Unbinder unbinder;
     private FragmentPagerAdapter adapter;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -59,7 +45,30 @@ public class PhilipsMessageFragment extends BaseFragment<IMessageView, MessageFr
         if (mView == null) {
             mView = inflater.inflate(R.layout.philips_fragment_message, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
+
+        titleBar = mView.findViewById(R.id.title_bar);
+        tvDoorLockMsg = mView.findViewById(R.id.tv_door_lock_msg);
+        vDoorLockMsg = mView.findViewById(R.id.v_door_lock_msg);
+        tvSystemMsg = mView.findViewById(R.id.tv_system_msg);
+        vSystemMsg = mView.findViewById(R.id.v_system_msg);
+        vpMessage = mView.findViewById(R.id.vp_message);
+        rlDoorLockMsg = mView.findViewById(R.id.rl_door_lock_msg);
+        badgeNumberView = mView.findViewById(R.id.badge_number_view);
+        rlSystemMsg = mView.findViewById(R.id.rl_system_msg);
+
+        rlDoorLockMsg.setOnClickListener(v -> {
+            setTvDoorLockMsgAndTvSystemMsgColor(true);
+            if (fragments.size() > 0) {
+                vpMessage.setCurrentItem(0);
+            }
+        });
+        rlSystemMsg.setOnClickListener(v -> {
+            setTvDoorLockMsgAndTvSystemMsgColor(false);
+            if (fragments.size() > 1) {
+                vpMessage.setCurrentItem(1);
+            }
+        });
+
         initView();
         initFragment();
         return mView;
@@ -146,27 +155,4 @@ public class PhilipsMessageFragment extends BaseFragment<IMessageView, MessageFr
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @OnClick({R.id.rl_door_lock_msg, R.id.rl_system_msg})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.rl_door_lock_msg:
-                setTvDoorLockMsgAndTvSystemMsgColor(true);
-                if (fragments.size() > 0) {
-                    vpMessage.setCurrentItem(0);
-                }
-                break;
-            case R.id.rl_system_msg:
-                setTvDoorLockMsgAndTvSystemMsgColor(false);
-                if (fragments.size() > 1) {
-                    vpMessage.setCurrentItem(1);
-                }
-                break;
-        }
-    }
 }

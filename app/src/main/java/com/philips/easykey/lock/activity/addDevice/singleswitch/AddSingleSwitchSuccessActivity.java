@@ -25,27 +25,15 @@ import com.philips.easykey.lock.utils.EditTextWatcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class AddSingleSwitchSuccessActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.lock)
     ImageView lock;
-    @BindView(R.id.input_name)
     EditText inputName;
-    @BindView(R.id.rv_name)
     RecyclerView rvName;
-    @BindView(R.id.et_position)
     EditText etPosition;
-    @BindView(R.id.rv_position)
     RecyclerView rvPosition;
-    @BindView(R.id.save)
     Button save;
     private List<AddBluetoothPairSuccessBean> nameList;
     private List<AddBluetoothPairSuccessBean> positionList;
@@ -56,7 +44,14 @@ public class AddSingleSwitchSuccessActivity extends BaseAddToApplicationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_single_switch_success);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        lock = findViewById(R.id.lock);
+        inputName = findViewById(R.id.input_name);
+        rvName = findViewById(R.id.rv_name);
+        etPosition = findViewById(R.id.et_position);
+        rvPosition = findViewById(R.id.rv_position);
+        save = findViewById(R.id.save);
 
         initData();
         initListener();
@@ -185,8 +180,5 @@ public class AddSingleSwitchSuccessActivity extends BaseAddToApplicationActivity
             });
         }
     }
-    @OnClick(R.id.back)
-    public void onViewClicked() {
 
-    }
 }

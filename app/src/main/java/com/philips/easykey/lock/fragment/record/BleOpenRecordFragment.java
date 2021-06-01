@@ -37,29 +37,23 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by David on 2019/4/22
  */
 public class BleOpenRecordFragment extends BaseBleFragment<IOpenLockRecordView, OpenLockRecordPresenter<IOpenLockRecordView>>
         implements IOpenLockRecordView, View.OnClickListener {
-    @BindView(R.id.recycleview)
+
     RecyclerView recycleview;
     List<BluetoothRecordBean> showDatas = new ArrayList<>();
     BluetoothRecordAdapter bluetoothRecordAdapter;
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
     private BleLockInfo bleLockInfo;
     private BluetoothRecordActivity activity;
     private boolean isLoadingBleRecord;  //正在加载锁上数据
     private int currentPage = 1;   //当前的开锁记录时间
     View view;
-    private Unbinder unbinder;
 
     //    DaoSession daoSession;
 //    List<DBOpenLockRecord> dbList;
@@ -67,7 +61,11 @@ public class BleOpenRecordFragment extends BaseBleFragment<IOpenLockRecordView, 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = View.inflate(getActivity(), R.layout.philips_fragment_bluetooth_open_lock_record, null);
-        unbinder = ButterKnife.bind(this, view);
+
+        recycleview = view.findViewById(R.id.recycleview);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        tvSynchronizedRecord = view.findViewById(R.id.tv_synchronized_record);
+
         tvSynchronizedRecord.setOnClickListener(this);
         activity = (BluetoothRecordActivity) getActivity();
         bleLockInfo = activity.getBleDeviceInfo();
@@ -116,12 +114,6 @@ public class BleOpenRecordFragment extends BaseBleFragment<IOpenLockRecordView, 
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        ((ViewGroup) view.getParent()).removeView(view);
-        unbinder.unbind();
-    }
 
     @Override
     public void onLoseRecord(List<Integer> numbers) {

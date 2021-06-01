@@ -73,24 +73,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import static com.philips.easykey.lock.utils.PermissionUtil.REQUEST_AUDIO_PERMISSION_REQUEST_CODE;
 
 public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivityPresenter<IMainActivityView>>
         implements ViewPager.OnPageChangeListener, IMainActivityView, RadioGroup.OnCheckedChangeListener {
-    @BindView(R.id.rb_one)
-    RadioButton rbOne;
-    @BindView(R.id.rb_two)
-    RadioButton rbTwo;
-    @BindView(R.id.rb_three)
-    RadioButton rbThree;
 
-    @BindView(R.id.rg)
-    RadioGroup rg;
-    @BindView(R.id.home_view_pager)
-    NoScrollViewPager homeViewPager;
+    RadioButton mRbOne;
+    RadioButton mRbTwo;
+    RadioButton mRbThree;
+
+    RadioGroup mRg;
+    NoScrollViewPager mHomeViewPager;
 
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -113,10 +106,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         LogUtils.d("MainActivity启动 ");
-        ButterKnife.bind(this);
+        initView();
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
         isRunning = true;
-        rg.setOnCheckedChangeListener(this);
+        mRg.setOnCheckedChangeListener(this);
         MqttService mqttService = MyApplication.getInstance().getMqttService();
         if (mqttService != null) {
             boolean connected = false;
@@ -138,7 +131,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //        evevt = this;
         instance = this;
         isCreate = true;
-        homeViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        mHomeViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
                 return fragments.get(i);
@@ -151,7 +144,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         });
 
         //首页的fragment不重新加载，导致各种问题
-        homeViewPager.setOffscreenPageLimit(fragments.size());
+        mHomeViewPager.setOffscreenPageLimit(fragments.size());
 
 //        boolean isfromlogin= getIntent().getBooleanExtra(Constants.ISFROMLOGIN,false);
 //        boolean ispush= (boolean) SPUtils.get(Constants.PUSHID,false);
@@ -209,10 +202,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //        rb_shop.setVisibility(View.GONE);
         LogUtils.d("MainActivity启动完成 ");
 
-        checkNotificatoinEnabled();
+        checkNotificationEnabled();
     }
 
-    private void checkNotificatoinEnabled() {
+    private void checkNotificationEnabled() {
         if(!NotificationUtil.isNotifyEnabled(this)){
             AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.philips_activity_main_notification),
                     getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#A4A4A4", "#1F96F7", new AlertDialogUtil.ClickListener() {
@@ -237,6 +230,14 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                         }
                     });
         }
+    }
+
+    private void initView() {
+        mRbOne = findViewById(R.id.rb_one);
+        mRbTwo = findViewById(R.id.rb_two);
+        mRbThree = findViewById(R.id.rb_three);
+        mRg = findViewById(R.id.rg);
+        mHomeViewPager = findViewById(R.id.home_view_pager);
     }
 
     private static List<String> packages;
@@ -343,16 +344,16 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_one:
-                homeViewPager.setCurrentItem(0);
+                mHomeViewPager.setCurrentItem(0);
                 break;
             case R.id.rb_two:
-                homeViewPager.setCurrentItem(1);
+                mHomeViewPager.setCurrentItem(1);
                 break;
 //            case R.id.rb_shop:
 //                homeViewPager.setCurrentItem(2);
 //                break;
             case R.id.rb_three:
-                homeViewPager.setCurrentItem(3);
+                mHomeViewPager.setCurrentItem(3);
                 break;
         }
     }
@@ -606,7 +607,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
     public NoScrollViewPager getViewPager() {
 
-        return homeViewPager;
+        return mHomeViewPager;
     }
 
     Timer timer;

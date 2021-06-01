@@ -29,53 +29,29 @@ import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVideoLockOTAView, PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView>>
         implements IWifiVideoLockOTAView  {
 
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.head_title)
     TextView headTitle;
-    @BindView(R.id.tv_device_name)
     TextView mTvDevicename;
-    @BindView(R.id.tv_device_model)
     TextView tvDeviceModel;
-    @BindView(R.id.tv_serial_number)
     TextView tvSerialNumber;
-    @BindView(R.id.tv_lock_firmware_version)
     TextView tvLockFirmwareVersion;
-    @BindView(R.id.iv_wifilock)
     ImageView ivWifilock;
-    @BindView(R.id.img_lock_check_firmware_version)
     ImageView mImgLockCheckFirmwareVersion;
-    @BindView(R.id.tv_video_serial_number)
     TextView mTvVideoSerialNumer;
-    @BindView(R.id.iv_child_system_firware_number)
     ImageView ivChildSystemFirwareNumber;
-    @BindView(R.id.iv_lock_wifi_firware_number)
     ImageView ivLockWifiFirwareNumber;
-    @BindView(R.id.iv_lock_firware_number)
     ImageView ivLockFirwareNimner;
-    @BindView(R.id.tv_lock_firware_number)
     TextView tvLockFirwareNumber;
-    @BindView(R.id.tv_lock_wifi_firware_number)
     TextView tvLockWifiFirwareNumber;
-    @BindView(R.id.tv_child_system_firware_number)
     TextView tvChildSystemFirwareNumber;
-    @BindView(R.id.img_lock_check_firware_number)
     ImageView mImgLockCheckFirwareNumner;
-    @BindView(R.id.img_lock_check_wifi_firware_number)
     ImageView mImgLockCheckWifiFirwareNumber;
-    @BindView(R.id.img_child_check_system_firware_number)
     ImageView mImgChildCheckSystemFirwareNumber;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView mTvTips;
 
     private WifiLockInfo wifiLockInfo;
@@ -98,7 +74,94 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_video_lock_device_info);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        headTitle = findViewById(R.id.head_title);
+        mTvDevicename = findViewById(R.id.tv_device_name);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+        tvSerialNumber = findViewById(R.id.tv_serial_number);
+        tvLockFirmwareVersion = findViewById(R.id.tv_lock_firmware_version);
+        ivWifilock = findViewById(R.id.iv_wifilock);
+        mImgLockCheckFirmwareVersion = findViewById(R.id.img_lock_check_firmware_version);
+        mTvVideoSerialNumer = findViewById(R.id.tv_video_serial_number);
+        ivChildSystemFirwareNumber = findViewById(R.id.iv_child_system_firware_number);
+        ivLockWifiFirwareNumber = findViewById(R.id.iv_lock_wifi_firware_number);
+        ivLockFirwareNimner = findViewById(R.id.iv_lock_firware_number);
+        tvLockFirwareNumber = findViewById(R.id.tv_lock_firware_number);
+        tvLockWifiFirwareNumber = findViewById(R.id.tv_lock_wifi_firware_number);
+        tvChildSystemFirwareNumber = findViewById(R.id.tv_child_system_firware_number);
+        mImgLockCheckFirwareNumner = findViewById(R.id.img_lock_check_firware_number);
+        mImgLockCheckWifiFirwareNumber = findViewById(R.id.img_lock_check_wifi_firware_number);
+        mImgChildCheckSystemFirwareNumber = findViewById(R.id.img_child_check_system_firware_number);
+        avi = findViewById(R.id.avi);
+        mTvTips = findViewById(R.id.tv_tips);
+
+        back.setOnClickListener(v -> finish());
+        findViewById(R.id.rl_lock_model_firmware_version).setOnClickListener(v -> {
+            //门锁固件版本
+            if(wifiLockInfo.getIsAdmin() != 1) return;
+
+            if(wifiLockInfo.getPower() < 30){
+                showLowBattery();
+                return;
+            }
+
+            if(wifiLockInfo.getPowerSave() == 1){
+                powerStatusDialog();
+                return;
+            }
+            if(avi.isShow() && System.currentTimeMillis() - time > 2500)
+                updateDialog(lockFirwareInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
+        });
+        findViewById(R.id.rl_tv_lock_firware_number).setOnClickListener(v -> {
+            //视频模组版本
+            if(wifiLockInfo.getIsAdmin() != 1) return;
+
+            if(wifiLockInfo.getPower() < 30){
+                showLowBattery();
+                return;
+            }
+
+            if(wifiLockInfo.getPowerSave() == 1){
+                powerStatusDialog();
+                return;
+            }
+            if(avi.isShow() && System.currentTimeMillis() - time > 2500)
+                updateDialog(videoMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
+        });
+        findViewById(R.id.rl_lock_wifi_firware_number).setOnClickListener(v -> {
+            //视频模组微控制器版本
+            if(wifiLockInfo.getIsAdmin() != 1) return;
+
+            if(wifiLockInfo.getPower() < 30){
+                showLowBattery();
+                return;
+            }
+
+            if(wifiLockInfo.getPowerSave() == 1){
+                powerStatusDialog();
+                return;
+            }
+            if(avi.isShow() && System.currentTimeMillis() - time > 2500)
+                updateDialog(videoMcuInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
+        });
+        findViewById(R.id.rl_child_system_firware_number).setOnClickListener(v -> {
+            //wifi固件版本
+            if(wifiLockInfo.getIsAdmin() != 1) return;
+
+            if(wifiLockInfo.getPower() < 30){
+                showLowBattery();
+                return;
+            }
+
+            if(wifiLockInfo.getPowerSave() == 1){
+                powerStatusDialog();
+                return;
+            }
+            if(avi.isShow() && System.currentTimeMillis() - time > 2500)
+                updateDialog(videoWifiMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
+        });
+
         wifiSN = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
         productList = MyApplication.getInstance().getProductInfos();
@@ -261,75 +324,6 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     }
 
     private long time = 0;
-
-    @OnClick({ R.id.rl_lock_model_firmware_version,R.id.back,R.id.rl_tv_lock_firware_number,R.id.rl_child_system_firware_number,R.id.rl_lock_wifi_firware_number})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_lock_model_firmware_version://门锁固件版本
-                if(wifiLockInfo.getIsAdmin() != 1) return;
-
-                if(wifiLockInfo.getPower() < 30){
-                    showLowBattery();
-                    return;
-                }
-
-                if(wifiLockInfo.getPowerSave() == 1){
-                    powerStatusDialog();
-                    return;
-                }
-                if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(lockFirwareInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
-                break;
-            case R.id.rl_tv_lock_firware_number://视频模组版本
-                if(wifiLockInfo.getIsAdmin() != 1) return;
-
-                if(wifiLockInfo.getPower() < 30){
-                    showLowBattery();
-                    return;
-                }
-
-                if(wifiLockInfo.getPowerSave() == 1){
-                    powerStatusDialog();
-                    return;
-                }
-                if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
-                break;
-            case R.id.rl_lock_wifi_firware_number://视频模组微控制器版本
-                if(wifiLockInfo.getIsAdmin() != 1) return;
-
-                if(wifiLockInfo.getPower() < 30){
-                    showLowBattery();
-                    return;
-                }
-
-                if(wifiLockInfo.getPowerSave() == 1){
-                    powerStatusDialog();
-                    return;
-                }
-                if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoMcuInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
-                break;
-            case R.id.rl_child_system_firware_number://wifi固件版本
-                if(wifiLockInfo.getIsAdmin() != 1) return;
-
-                if(wifiLockInfo.getPower() < 30){
-                    showLowBattery();
-                    return;
-                }
-
-                if(wifiLockInfo.getPowerSave() == 1){
-                    powerStatusDialog();
-                    return;
-                }
-                if(avi.isShow() && System.currentTimeMillis() - time > 2500)
-                    updateDialog(videoWifiMoudleInfo,getString(R.string.philips_videolock_deviceinfo_update_ota),wifiSN);
-                break;
-        }
-    }
 
     private void showLowBattery() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.philips_deviceinfo_update_ota_battery_low),

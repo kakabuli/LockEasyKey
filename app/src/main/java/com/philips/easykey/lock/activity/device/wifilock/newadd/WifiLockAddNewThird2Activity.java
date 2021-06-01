@@ -13,25 +13,15 @@ import com.philips.easykey.lock.activity.device.wifilock.add.WifiLockHelpActivit
 import com.philips.easykey.lock.activity.device.videolock.WifiVideoLockFourthActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockAddNewThird2Activity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.head)
     TextView head;
-    @BindView(R.id.notice)
     TextView notice;
-    @BindView(R.id.already_modify)
     TextView alreadyModify;
-    @BindView(R.id.iv_anim)
     ImageView ivAnim;
-    @BindView(R.id.title)
     TextView title;
 
 
@@ -42,7 +32,36 @@ public class WifiLockAddNewThird2Activity extends BaseAddToApplicationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_third2);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        head = findViewById(R.id.head);
+        notice = findViewById(R.id.notice);
+        alreadyModify = findViewById(R.id.already_modify);
+        ivAnim = findViewById(R.id.iv_anim);
+        title = findViewById(R.id.title);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> {
+            if(wifiModelType.contains("VIDEO")){
+                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
+            }else{
+                startActivity(new Intent(this,WifiLockHelpActivity.class));
+            }
+        });
+        alreadyModify.setOnClickListener(v -> {
+            if(wifiModelType.contains("VIDEO")){
+                Intent wifiVideoIntent = new Intent(this, WifiVideoLockFourthActivity.class);
+                wifiVideoIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(wifiVideoIntent);
+            }else{
+                //                startActivity(new Intent(this, WifiLockAddNewFifthActivity.class));
+                Intent wifiIntent = new Intent(this, WifiLockAddNewFifthActivity.class);
+                wifiIntent.putExtra("wifiModelType", wifiModelType);
+                startActivity(wifiIntent);
+            }
+        });
+
         Intent intent = getIntent();
         wifiModelType = intent.getStringExtra("wifiModelType");
         //通过设置android:background时，得到AnimationDrawable 用如下方法
@@ -58,32 +77,4 @@ public class WifiLockAddNewThird2Activity extends BaseAddToApplicationActivity {
         }
     }
 
-    @OnClick({R.id.back, R.id.help, R.id.already_modify})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                if(wifiModelType.contains("VIDEO")){
-                    startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                }else{
-                    startActivity(new Intent(this,WifiLockHelpActivity.class));
-                }
-                break;
-            case R.id.already_modify:
-                if(wifiModelType.contains("VIDEO")){
-                    Intent wifiVideoIntent = new Intent(this, WifiVideoLockFourthActivity.class);
-                    wifiVideoIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(wifiVideoIntent);
-                }else{
-                    //                startActivity(new Intent(this, WifiLockAddNewFifthActivity.class));
-                    Intent wifiIntent = new Intent(this, WifiLockAddNewFifthActivity.class);
-                    wifiIntent.putExtra("wifiModelType", wifiModelType);
-                    startActivity(wifiIntent);
-                }
-
-                break;
-        }
-    }
 }

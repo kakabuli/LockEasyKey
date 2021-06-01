@@ -28,16 +28,10 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLockAddSuccessView
         , WifiLockAddSuccessPresenter<IWifiLockAddSuccessView>> implements IWifiLockAddSuccessView {
 
-    @BindView(R.id.tv_right_now_set)
     TextView right_now_set;
-    @BindView(R.id.close)
     ImageView close;
 
 
@@ -49,7 +43,18 @@ public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLoc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_set_single_switch);
-        ButterKnife.bind(this);
+
+        right_now_set = findViewById(R.id.tv_right_now_set);
+        close = findViewById(R.id.close);
+
+        close.setOnClickListener(v -> {
+            MyApplication.getInstance().getAllDevicesByMqtt(true);
+            handler.postDelayed(runnable1, 1000);
+        });
+        right_now_set.setOnClickListener(v -> {
+            MyApplication.getInstance().getAllDevicesByMqtt(true);
+            handler.postDelayed(runnable, 1000);
+        });
 
         initData();
         initView();
@@ -69,23 +74,7 @@ public class WifiLockAddSuccessToSetSwitchActivity extends BaseActivity<IWifiLoc
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
-    @OnClick({R.id.close,R.id.tv_right_now_set})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.close:
 
-                MyApplication.getInstance().getAllDevicesByMqtt(true);
-                handler.postDelayed(runnable1, 1000);
-
-                break;
-            case R.id.tv_right_now_set:
-                MyApplication.getInstance().getAllDevicesByMqtt(true);
-
-                handler.postDelayed(runnable, 1000);
-
-                break;
-        }
-    }
     Runnable runnable1 = new Runnable() {
         @Override
         public void run() {

@@ -27,26 +27,16 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVideoLockRealTimeView, WifiVideoLockRealTimePresenter<IWifiVideoLockRealTimeView>>
-        implements IWifiVideoLockRealTimeView, View.OnClickListener {
+        implements IWifiVideoLockRealTimeView{
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.rl_real_time_period)
     RelativeLayout rlRealTimePeriod;
-    @BindView(R.id.iv_video_connect_open)
     ImageView ivVideoConnectOpen;
-    @BindView(R.id.iv_video_connect_power)
     ImageView ivVideoConnectPower;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
-    @BindView(R.id.tv_period_connect)
     TextView tvPeriodConnect;
 
     private String wifiSn;
@@ -67,7 +57,84 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_real_time_video_setting);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        rlRealTimePeriod = findViewById(R.id.rl_real_time_period);
+        ivVideoConnectOpen = findViewById(R.id.iv_video_connect_open);
+        ivVideoConnectPower = findViewById(R.id.iv_video_connect_power);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+        tvPeriodConnect = findViewById(R.id.tv_period_connect);
+
+        back.setOnClickListener(v -> {
+            if(wifiLockInfo.getPowerSave() == 0){
+                if(avi.isShow())
+                    setRealTime();
+            }else{
+                finish();
+            }
+        });
+        rlRealTimePeriod.setOnClickListener(v -> {
+            if(avi.isShow()) {
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                try {
+                    Intent intent = new Intent(this, WifiVideoLockRealTimePeriodActivity.class);
+                    intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_START, startTime);
+                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_END, endTime);
+                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_PERIOD, snoozeStartTime);
+                    startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_CODE);
+                    mPresenter.release();
+                }catch (Exception e){
+
+                }
+            }
+        });
+        findViewById(R.id.rl_video_connect_open).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(ivVideoConnectOpen.isSelected()){
+                    createKeepAliveDialog();
+                }else{
+                    ivVideoConnectOpen.setSelected(true);
+                    ivVideoConnectPower.setSelected(false);
+                    keepAliveStatus = 1;
+                }
+            }
+        });
+        findViewById(R.id.rl_video_connect_power).setOnClickListener(v -> {
+            if(avi.isShow()){
+                if(wifiLockInfo.getPowerSave() == 1){
+                    if(wifiLockInfo.getPower() < 30){
+                        powerSaveModeStatus();
+                        return;
+                    }
+                    powerStatusDialog();
+                    return;
+                }
+                if(!ivVideoConnectPower.isSelected()){
+                    createKeepAliveDialog();
+                }else{
+                    ivVideoConnectOpen.setSelected(true);
+                    ivVideoConnectPower.setSelected(false);
+                    keepAliveStatus = 0;
+                }
+            }
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -96,82 +163,6 @@ public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVide
         }
     }
 
-
-    @OnClick({R.id.back,R.id.rl_real_time_period,R.id.rl_video_connect_open,R.id.rl_video_connect_power})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                if(wifiLockInfo.getPowerSave() == 0){
-                    if(avi.isShow())
-                        setRealTime();
-                }else{
-                    finish();
-                }
-                break;
-            case R.id.rl_real_time_period:
-                if(avi.isShow()) {
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    try {
-                        Intent intent = new Intent(this, WifiVideoLockRealTimePeriodActivity.class);
-                        intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
-                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_START, startTime);
-                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_END, endTime);
-                        intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_PERIOD, snoozeStartTime);
-                        startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_REAL_TIME_SETTING_CODE);
-                        mPresenter.release();
-                    }catch (Exception e){
-
-                    }
-                }
-
-                break;
-            case R.id.rl_video_connect_open:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(ivVideoConnectOpen.isSelected()){
-                        createKeepAliveDialog();
-                    }else{
-                        ivVideoConnectOpen.setSelected(true);
-                        ivVideoConnectPower.setSelected(false);
-                        keepAliveStatus = 1;
-                    }
-                }
-                break;
-            case R.id.rl_video_connect_power:
-                if(avi.isShow()){
-                    if(wifiLockInfo.getPowerSave() == 1){
-                        if(wifiLockInfo.getPower() < 30){
-                            powerSaveModeStatus();
-                            return;
-                        }
-                        powerStatusDialog();
-                        return;
-                    }
-                    if(!ivVideoConnectPower.isSelected()){
-                        createKeepAliveDialog();
-                    }else{
-                        ivVideoConnectOpen.setSelected(true);
-                        ivVideoConnectPower.setSelected(false);
-                        keepAliveStatus = 0;
-                    }
-                }
-                break;
-        }
-    }
 
     private void createKeepAliveDialog() {
         AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(this,

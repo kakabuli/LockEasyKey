@@ -16,19 +16,13 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
 
-    @BindView(R.id.personal_user_agreement_recycler)
     RecyclerView personalUserAgreementRecycler;
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
 
 
@@ -39,7 +33,12 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_user_agreement);
-        ButterKnife.bind(this);
+
+        personalUserAgreementRecycler = findViewById(R.id.personal_user_agreement_recycler);
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+
         initView();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.user_agreement);

@@ -25,27 +25,19 @@ import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 分享用户详情界面
  */
 public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLockShareUserDetailView, WiFiLockShareUserDetailPresenter
         <IWiFiLockShareUserDetailView>>  implements IWiFiLockShareUserDetailView, View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.confirm)
     Button confirm;
-    @BindView(R.id.tv_number)
     EditText tvNumber;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.btn_delete)
     TextView btnDelete;
     private String nickname;
     String data;
@@ -56,7 +48,15 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_family_member_detail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        confirm = findViewById(R.id.confirm);
+        tvNumber = findViewById(R.id.tv_number);
+        tvName = findViewById(R.id.tv_name);
+        tvTime = findViewById(R.id.tv_time);
+        btnDelete = findViewById(R.id.btn_delete);
+
         ivBack.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         confirm.setOnClickListener(this);

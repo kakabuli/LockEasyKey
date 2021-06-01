@@ -44,36 +44,22 @@ import com.philips.easykey.lock.widget.image.GlideEngine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersonalDataView, PersonalDataPresenter<IPersonalDataView>> implements IPersonalDataView, View.OnClickListener {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.head_portrait_right)
     ImageView headPortraitRight;
-    @BindView(R.id.iv_head)
     CircleImageView ivHead;
-    @BindView(R.id.rl_head)
     RelativeLayout rlHead;
-    @BindView(R.id.head_name_right)
     ImageView headNameRight;
-    @BindView(R.id.head_portrait_name)
     TextView headPortraitName;
-    @BindView(R.id.head_nickname_layout)
     RelativeLayout headNicknameLayout;
-    @BindView(R.id.head_telNum)
     TextView headTelNum;
-    @BindView(R.id.head_telNum_layout)
     RelativeLayout headTelNumLayout;
     private BottomMenuDialog.Builder dialogBuilder;
     private BottomMenuDialog bottomMenuDialog;
@@ -86,7 +72,26 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_personal_data);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        headPortraitRight = findViewById(R.id.head_portrait_right);
+        ivHead = findViewById(R.id.iv_head);
+        rlHead = findViewById(R.id.rl_head);
+        headNameRight = findViewById(R.id.head_name_right);
+        headPortraitName = findViewById(R.id.head_portrait_name);
+        headNicknameLayout = findViewById(R.id.head_nickname_layout);
+        headTelNum = findViewById(R.id.head_telNum);
+        headTelNumLayout = findViewById(R.id.head_telNum_layout);
+
+        headNicknameLayout.setOnClickListener(v -> {
+            Intent mHeadNickName = new Intent(this, PersonalUpdateNickNameActivity.class);
+            startActivity(mHeadNickName);
+        });
+        rlHead.setOnClickListener(v -> showHeadDialog());
+        findViewById(R.id.bt_sign_out_login).setOnClickListener(v -> loginOut());
+
         initView();
         getMessage();
         tvContent.setText(getString(R.string.personal_center));
@@ -133,24 +138,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     }
 
 
-    @OnClick({R.id.head_nickname_layout, R.id.rl_head, R.id.head_telNum_layout,R.id.bt_sign_out_login})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.head_nickname_layout:
-                Intent mHeadNickName = new Intent(this, PersonalUpdateNickNameActivity.class);
-                startActivity(mHeadNickName);
-                break;
-            case R.id.rl_head:
-                showHeadDialog();
-                break;
-            case R.id.head_telNum_layout:
-                //showChangeNumberDialog();
-                break;
-            case R.id.bt_sign_out_login:
-                loginOut();
-                break;
-        }
-    }
+
 
     //展示头像对话框
     private void showHeadDialog() {

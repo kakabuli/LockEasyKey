@@ -56,8 +56,7 @@ import com.philips.easykey.lock.widget.MyGridItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.blankj.utilcode.util.ToastUtils;
 
 import static com.philips.easykey.lock.utils.PermissionUtil.REQUEST_AUDIO_PERMISSION_REQUEST_CODE;
@@ -66,27 +65,16 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
         implements IWifiLockDetailView, View.OnClickListener {
 
 
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_bluetooth_name)
     TextView tvBluetoothName;
-    @BindView(R.id.iv_lock_icon)
     ImageView ivLockIcon;
-    @BindView(R.id.tv_type)
     TextView tvType;
-    @BindView(R.id.tv_lock_type)
     TextView tvLockType;
-    @BindView(R.id.iv_power)
     BatteryView ivPower;
-    @BindView(R.id.tv_power)
     TextView tvPower;
-    @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.ll_power)
     LinearLayout llPower;
-    @BindView(R.id.detail_function_recyclerView)
     RecyclerView detailFunctionRecyclerView;
-    @BindView(R.id.detail_function_onLine)
     RecyclerView detailFunctionOnLine;
     private WifiLockDetailAdapater adapater;
     private WifiLockDetailOneLineAdapater oneLineAdapater;
@@ -104,7 +92,19 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wi_fi_lock_detail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvBluetoothName = findViewById(R.id.tv_bluetooth_name);
+        ivLockIcon = findViewById(R.id.iv_lock_icon);
+        tvType = findViewById(R.id.tv_type);
+        tvLockType = findViewById(R.id.tv_lock_type);
+        ivPower = findViewById(R.id.iv_power);
+        tvPower = findViewById(R.id.tv_power);
+        tvDate = findViewById(R.id.tv_date);
+        llPower = findViewById(R.id.ll_power);
+        detailFunctionRecyclerView = findViewById(R.id.detail_function_recyclerView);
+        detailFunctionOnLine = findViewById(R.id.detail_function_onLine);
+
         productList = MyApplication.getInstance().getProductInfos();
         StatusBarUtils.setWindowStatusBarColor(this,R.color.app_main_status_bar);
         Intent intent = getIntent();

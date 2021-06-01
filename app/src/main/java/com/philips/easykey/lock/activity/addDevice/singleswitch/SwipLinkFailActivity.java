@@ -12,8 +12,6 @@ import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 
-import butterknife.ButterKnife;
-
 public class SwipLinkFailActivity extends BaseAddToApplicationActivity implements View.OnClickListener{
     TextView tv_content,btn_cancel;
     Button btn_next;
@@ -25,7 +23,6 @@ public class SwipLinkFailActivity extends BaseAddToApplicationActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swip_link_fail);
-        ButterKnife.bind(this);
 
         tv_content = findViewById(R.id.tv_content);
         btn_next = findViewById(R.id.btn_next);

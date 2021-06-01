@@ -11,21 +11,16 @@ import android.widget.TextView;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/18
  * 没使用
  */
 public class DoorCardConnectFailActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.btn_connect_fail)
     Button btnConnectFail;
 
 
@@ -33,7 +28,12 @@ public class DoorCardConnectFailActivity extends BaseAddToApplicationActivity im
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_door_card_connect_fail);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        btnConnectFail = findViewById(R.id.btn_connect_fail);
+
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.add_door_card);
         btnConnectFail.setOnClickListener(this);

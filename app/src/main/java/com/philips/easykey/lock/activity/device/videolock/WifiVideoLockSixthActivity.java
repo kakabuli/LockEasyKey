@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -29,20 +28,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.utils.WifiVideoPasswordFactorManager;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixthView
         , WifiVideoLockSixthPresenter<IWifiLockVideoSixthView>> implements IWifiLockVideoSixthView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.ap_password_edit)
     EditText apPasswordEdit;
-    @BindView(R.id.iv_password_status)
     ImageView ivPasswordStatus;//密码状态图标
     boolean passwordHide = true;//密码图标
 
@@ -71,7 +63,45 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_video_sixth_input_admin_passwotd);
 
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        apPasswordEdit = findViewById(R.id.ap_password_edit);
+        ivPasswordStatus = findViewById(R.id.iv_password_status);
+
+        back.setOnClickListener(v -> showWarring());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiVideoLockHelpActivity.class)));
+        findViewById(R.id.button_next).setOnClickListener(v -> {
+            String adminPassword = apPasswordEdit.getText().toString().trim();
+            if (!StringUtil.randomJudge(adminPassword)) {
+                ToastUtils.showShort(R.string.philips_random_verify_error);
+                return;
+            }
+            //打开wifi
+            WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
+            if (!wifiUtils.isWifiEnable()) {
+                ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
+            }
+            if(System.currentTimeMillis() - time > 500){
+                checkAdminPassword(adminPassword);
+                time = System.currentTimeMillis();
+            }
+        });
+        findViewById(R.id.iv_password_status).setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                /* etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);*/
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivPasswordStatus.setImageResource(R.mipmap.eye_close_has_color);
+
+            } else {
+                //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                //etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
+                ivPasswordStatus.setImageResource(R.mipmap.eye_open_has_color);
+            }
+        });
 
         data =  getIntent().getByteArrayExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_DATA);
         times =  getIntent().getIntExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD_TIMES,1);
@@ -94,50 +124,6 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         wifiModelType = getIntent().getStringExtra("wifiModelType");
 
         randomCode = wifiLockVideoBindBean.getEventparams().getRandomCode();
-    }
-
-    @OnClick({R.id.back,R.id.help,R.id.button_next,R.id.iv_password_status})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                showWarring();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiVideoLockHelpActivity.class));
-                break;
-            case R.id.button_next:
-                String adminPassword = apPasswordEdit.getText().toString().trim();
-                if (!StringUtil.randomJudge(adminPassword)) {
-                    ToastUtils.showShort(R.string.philips_random_verify_error);
-                    return;
-                }
-                //打开wifi
-                WifiUtils wifiUtils = WifiUtils.getInstance(MyApplication.getInstance());
-                if (!wifiUtils.isWifiEnable()) {
-                    ToastUtils.showShort(getString(R.string.philips_wifi_no_open_please_open_wifi));
-                }
-                if(System.currentTimeMillis() - time > 500){
-                    checkAdminPassword(adminPassword);
-                    time = System.currentTimeMillis();
-                }
-                break;
-            case R.id.iv_password_status:
-                passwordHide = !passwordHide;
-                if (passwordHide) {
-                    apPasswordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    /* etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);*/
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivPasswordStatus.setImageResource(R.mipmap.eye_close_has_color);
-
-                } else {
-                    //默认状态显示密码--设置文本 要一起写才能起作用 InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
-                    //etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    apPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    apPasswordEdit.setSelection(apPasswordEdit.getText().toString().length());//将光标移至文字末尾
-                    ivPasswordStatus.setImageResource(R.mipmap.eye_open_has_color);
-                }
-                break;
-        }
     }
 
     @Override
@@ -169,29 +155,23 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
 
 
     private void onSuccess(String randomCode,int func) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockAddSuccessActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
-                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
-                intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
-                intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
-                startActivity(intent);
-                finish();
-            }
+        runOnUiThread(() -> {
+            Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockAddSuccessActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
+            intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, randomCode);
+            intent.putExtra(KeyConstants.WIFI_LOCK_FUNC, func);
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
+            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
+            startActivity(intent);
+            finish();
         });
     }
 
     public void onError(int errorCode) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                finish();
-                ToastUtils.showShort(R.string.bind_failed);
-                startActivity(new Intent(WifiVideoLockSixthActivity.this, WifiLockAddNewScanFailedActivity.class));
-            }
+        runOnUiThread(() -> {
+            finish();
+            ToastUtils.showShort(R.string.bind_failed);
+            startActivity(new Intent(WifiVideoLockSixthActivity.this, WifiLockAddNewScanFailedActivity.class));
         });
     }
 
@@ -315,12 +295,9 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
                 }
 
             }else{
-                mPresenter.handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onAdminPasswordError();
-                        times++;
-                    }
+                mPresenter.handler.post(() -> {
+                    onAdminPasswordError();
+                    times++;
                 });
             }
         }
@@ -338,15 +315,12 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
     public void onBindFailed(BaseResult baseResult) {
         LogUtils.d("six-------" + baseResult.getCode());
         mPresenter.unBindDeviceFail(wifiLockVideoBindBean.getWfId());
-        mPresenter.handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockScanFailedActivity.class);
-                intent.putExtra("wifiModelType",wifiModelType);
-                startActivity(intent);
+        mPresenter.handler.post(() -> {
+            Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockScanFailedActivity.class);
+            intent.putExtra("wifiModelType",wifiModelType);
+            startActivity(intent);
 
-                finish();
-            }
+            finish();
         });
     }
 
@@ -357,18 +331,15 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
 
     @Override
     public void onUpdateSuccess(String wifiSn) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockAddSuccessActivity.class);
-                intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
-                intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
-                intent.putExtra("update",true);
-                intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, password);
-                intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
-                startActivity(intent);
-                finish();
-            }
+        runOnUiThread(() -> {
+            Intent intent = new Intent(WifiVideoLockSixthActivity.this, WifiVideoLockAddSuccessActivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiLockVideoBindBean.getWfId());
+            intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID,sSsid);
+            intent.putExtra("update",true);
+            intent.putExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE, password);
+            intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_DEVICE_DATA,wifiLockVideoBindBean);
+            startActivity(intent);
+            finish();
         });
     }
 

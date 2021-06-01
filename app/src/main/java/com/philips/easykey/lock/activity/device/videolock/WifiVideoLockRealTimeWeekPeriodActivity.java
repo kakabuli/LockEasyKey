@@ -22,30 +22,18 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiVideoLockRealTimeWeekPeriodActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
-        implements IWifiLockMoreView, View.OnClickListener  {
+        implements IWifiLockMoreView  {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.iv_week_0)
     CheckBox ivWeek0;
-    @BindView(R.id.iv_week_1)
     CheckBox ivWeek1;
-    @BindView(R.id.iv_week_2)
     CheckBox ivWeek2;
-    @BindView(R.id.iv_week_3)
     CheckBox ivWeek3;
-    @BindView(R.id.iv_week_4)
     CheckBox ivWeek4;
-    @BindView(R.id.iv_week_5)
     CheckBox ivWeek5;
-    @BindView(R.id.iv_week_6)
     CheckBox ivWeek6;
-    @BindView(R.id.iv_week_7)
     CheckBox ivWeek7;
 
     private String wifiSn;
@@ -57,8 +45,165 @@ public class WifiVideoLockRealTimeWeekPeriodActivity extends BaseActivity<IWifiL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_real_time_week_period);
-        ButterKnife.bind(this);
 
+        back = findViewById(R.id.back);
+        ivWeek0 = findViewById(R.id.iv_week_0);
+        ivWeek1 = findViewById(R.id.iv_week_1);
+        ivWeek2 = findViewById(R.id.iv_week_2);
+        ivWeek3 = findViewById(R.id.iv_week_3);
+        ivWeek4 = findViewById(R.id.iv_week_4);
+        ivWeek5 = findViewById(R.id.iv_week_5);
+        ivWeek6 = findViewById(R.id.iv_week_6);
+        ivWeek7 = findViewById(R.id.iv_week_7);
+
+        back.setOnClickListener(v -> setWeekPeriod());
+        ivWeek0.setOnClickListener(v -> {
+            if(ivWeek0.isChecked()){
+                ivWeek0.setChecked(false);
+                ivWeek1.setChecked(false);
+                ivWeek2.setChecked(false);
+                ivWeek3.setChecked(false);
+                ivWeek4.setChecked(false);
+                ivWeek5.setChecked(false);
+                ivWeek6.setChecked(false);
+                ivWeek7.setChecked(false);
+                weekTimp[0] = 0;
+                weekTimp[1] = 0;
+                weekTimp[2] = 0;
+                weekTimp[3] = 0;
+                weekTimp[4] = 0;
+                weekTimp[5] = 0;
+                weekTimp[6] = 0;
+            }else{
+                ivWeek0.setChecked(true);
+                ivWeek1.setChecked(true);
+                ivWeek2.setChecked(true);
+                ivWeek3.setChecked(true);
+                ivWeek4.setChecked(true);
+                ivWeek5.setChecked(true);
+                ivWeek6.setChecked(true);
+                ivWeek7.setChecked(true);
+                weekTimp[0] = 1;
+                weekTimp[1] = 2;
+                weekTimp[2] = 3;
+                weekTimp[3] = 4;
+                weekTimp[4] = 5;
+                weekTimp[5] = 6;
+                weekTimp[6] = 7;
+            }
+        });
+        findViewById(R.id.rl_iv_week_0).setOnClickListener(v -> {
+            if(ivWeek0.isChecked()){
+                ivWeek0.setChecked(false);
+                ivWeek1.setChecked(false);
+                ivWeek2.setChecked(false);
+                ivWeek3.setChecked(false);
+                ivWeek4.setChecked(false);
+                ivWeek5.setChecked(false);
+                ivWeek6.setChecked(false);
+                ivWeek7.setChecked(false);
+                weekTimp[0] = 0;
+                weekTimp[1] = 0;
+                weekTimp[2] = 0;
+                weekTimp[3] = 0;
+                weekTimp[4] = 0;
+                weekTimp[5] = 0;
+                weekTimp[6] = 0;
+            }else{
+                ivWeek0.setChecked(true);
+                ivWeek1.setChecked(true);
+                ivWeek2.setChecked(true);
+                ivWeek3.setChecked(true);
+                ivWeek4.setChecked(true);
+                ivWeek5.setChecked(true);
+                ivWeek6.setChecked(true);
+                ivWeek7.setChecked(true);
+                weekTimp[0] = 1;
+                weekTimp[1] = 2;
+                weekTimp[2] = 3;
+                weekTimp[3] = 4;
+                weekTimp[4] = 5;
+                weekTimp[5] = 6;
+                weekTimp[6] = 7;
+            }
+        });
+        findViewById(R.id.rl_iv_week_1).setOnClickListener(v -> {
+            if(ivWeek1.isChecked()){
+                ivWeek1.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[0] = 0;
+            }else{
+                ivWeek1.setChecked(true);
+                weekTimp[0] = 1;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_2).setOnClickListener(v -> {
+            if(ivWeek2.isChecked()){
+                ivWeek2.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[1] = 0;
+            }else{
+                ivWeek2.setChecked(true);
+                weekTimp[1] = 2;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_3).setOnClickListener(v -> {
+            if(ivWeek3.isChecked()){
+                ivWeek3.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[2] = 0;
+            }else{
+                ivWeek3.setChecked(true);
+                weekTimp[2] = 3;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_4).setOnClickListener(v -> {
+            if(ivWeek4.isChecked()){
+                ivWeek4.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[3] = 0;
+            }else{
+                ivWeek4.setChecked(true);
+                weekTimp[3] = 4;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_5).setOnClickListener(v -> {
+            if(ivWeek5.isChecked()){
+                ivWeek5.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[4] = 0;
+            }else{
+                ivWeek5.setChecked(true);
+                weekTimp[4] = 5;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_6).setOnClickListener(v -> {
+            if(ivWeek6.isChecked()){
+                ivWeek6.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[5] = 0;
+            }else{
+                ivWeek6.setChecked(true);
+                weekTimp[5] = 6;
+            }
+            setEveryDay();
+        });
+        findViewById(R.id.rl_iv_week_7).setOnClickListener(v -> {
+            if(ivWeek7.isChecked()){
+                ivWeek7.setChecked(false);
+                ivWeek0.setChecked(false);
+                weekTimp[6] = 0;
+            }else{
+                ivWeek7.setChecked(true);
+                weekTimp[6] = 7;
+            }
+            setEveryDay();
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -123,130 +268,6 @@ public class WifiVideoLockRealTimeWeekPeriodActivity extends BaseActivity<IWifiL
             return true;
         }
         return super.onKeyDown(keyCode,event);
-    }
-
-    @OnClick({R.id.back,R.id.rl_iv_week_0,R.id.rl_iv_week_1,R.id.rl_iv_week_2,R.id.rl_iv_week_3,R.id.rl_iv_week_4,R.id.rl_iv_week_5,
-    R.id.rl_iv_week_6,R.id.rl_iv_week_7,R.id.iv_week_0})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                setWeekPeriod();
-//                finish();
-                break;
-            case R.id.iv_week_0:
-            case R.id.rl_iv_week_0:
-                if(ivWeek0.isChecked()){
-                    ivWeek0.setChecked(false);
-                    ivWeek1.setChecked(false);
-                    ivWeek2.setChecked(false);
-                    ivWeek3.setChecked(false);
-                    ivWeek4.setChecked(false);
-                    ivWeek5.setChecked(false);
-                    ivWeek6.setChecked(false);
-                    ivWeek7.setChecked(false);
-                    weekTimp[0] = 0;
-                    weekTimp[1] = 0;
-                    weekTimp[2] = 0;
-                    weekTimp[3] = 0;
-                    weekTimp[4] = 0;
-                    weekTimp[5] = 0;
-                    weekTimp[6] = 0;
-                }else{
-                    ivWeek0.setChecked(true);
-                    ivWeek1.setChecked(true);
-                    ivWeek2.setChecked(true);
-                    ivWeek3.setChecked(true);
-                    ivWeek4.setChecked(true);
-                    ivWeek5.setChecked(true);
-                    ivWeek6.setChecked(true);
-                    ivWeek7.setChecked(true);
-                    weekTimp[0] = 1;
-                    weekTimp[1] = 2;
-                    weekTimp[2] = 3;
-                    weekTimp[3] = 4;
-                    weekTimp[4] = 5;
-                    weekTimp[5] = 6;
-                    weekTimp[6] = 7;
-                }
-                break;
-            case R.id.rl_iv_week_1:
-                if(ivWeek1.isChecked()){
-                    ivWeek1.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[0] = 0;
-                }else{
-                    ivWeek1.setChecked(true);
-                    weekTimp[0] = 1;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_2:
-                if(ivWeek2.isChecked()){
-                    ivWeek2.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[1] = 0;
-                }else{
-                    ivWeek2.setChecked(true);
-                    weekTimp[1] = 2;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_3:
-                if(ivWeek3.isChecked()){
-                    ivWeek3.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[2] = 0;
-                }else{
-                    ivWeek3.setChecked(true);
-                    weekTimp[2] = 3;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_4:
-                if(ivWeek4.isChecked()){
-                    ivWeek4.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[3] = 0;
-                }else{
-                    ivWeek4.setChecked(true);
-                    weekTimp[3] = 4;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_5:
-                if(ivWeek5.isChecked()){
-                    ivWeek5.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[4] = 0;
-                }else{
-                    ivWeek5.setChecked(true);
-                    weekTimp[4] = 5;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_6:
-                if(ivWeek6.isChecked()){
-                    ivWeek6.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[5] = 0;
-                }else{
-                    ivWeek6.setChecked(true);
-                    weekTimp[5] = 6;
-                }
-                setEveryDay();
-                break;
-            case R.id.rl_iv_week_7:
-                if(ivWeek7.isChecked()){
-                    ivWeek7.setChecked(false);
-                    ivWeek0.setChecked(false);
-                    weekTimp[6] = 0;
-                }else{
-                    ivWeek7.setChecked(true);
-                    weekTimp[6] = 7;
-                }
-                setEveryDay();
-                break;
-        }
     }
 
     private void setEveryDay(){

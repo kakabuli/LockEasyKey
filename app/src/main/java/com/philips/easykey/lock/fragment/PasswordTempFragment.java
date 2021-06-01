@@ -38,9 +38,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 /**
  * Created by David
@@ -48,18 +45,14 @@ import butterknife.ButterKnife;
 
 public class PasswordTempFragment extends BaseBleFragment<IAddTempView, AddTempPresenter<IAddTempView>>
         implements View.OnClickListener, IAddTempView {
-    @BindView(R.id.recycleview)
+
     RecyclerView recyclerView;
-    @BindView(R.id.et_name)
     EditText etName;
     List<ShiXiaoNameBean> list = new ArrayList<>();
     ShiXiaoNameAdapter shiXiaoNameAdapter;
     View mView;
-    @BindView(R.id.et_password)
     EditText etPassword;
-    @BindView(R.id.btn_random_generation)
     TextView btnRandomGeneration;
-    @BindView(R.id.btn_confirm_generation)
     Button btnConfirmGeneration;
     private BleLockInfo bleLockInfo; //蓝牙设备信息
 
@@ -69,7 +62,13 @@ public class PasswordTempFragment extends BaseBleFragment<IAddTempView, AddTempP
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_password_temporary, container, false);
         }
-        ButterKnife.bind(this, mView);
+
+        recyclerView = mView.findViewById(R.id.recycleview);
+        etName = mView.findViewById(R.id.et_name);
+        etPassword = mView.findViewById(R.id.et_password);
+        btnRandomGeneration = mView.findViewById(R.id.btn_random_generation);
+        btnConfirmGeneration = mView.findViewById(R.id.btn_confirm_generation);
+
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         mPresenter.isAuth(bleLockInfo, false);  //自动连接  但是不提示用户
         initRecycleview();

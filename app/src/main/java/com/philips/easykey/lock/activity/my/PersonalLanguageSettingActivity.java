@@ -23,40 +23,22 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PersonalLanguageSettingActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.zh_text)
     TextView zhText;
-    @BindView(R.id.zh_img)
     CheckBox zhImg;
-    @BindView(R.id.zh_layout)
     RelativeLayout zhLayout;
-    @BindView(R.id.cb_ct)
     CheckBox cbCt;
-    @BindView(R.id.rl_tranitional_chinese)
     RelativeLayout rlTranitionalChinese;
-    @BindView(R.id.en_text)
     TextView enText;
-    @BindView(R.id.en_img)
     CheckBox enImg;
-    @BindView(R.id.en_layout)
     RelativeLayout enLayout;
-    @BindView(R.id.thai_text)
     TextView thaiText;
-    @BindView(R.id.thai_img)
     CheckBox thaiImg;
-    @BindView(R.id.thai_layout)
     RelativeLayout thaiLayout;
-    @BindView(R.id.language_confirm)
     Button languageConfirm;
     private Context context;
     private String languageCurrent = "";
@@ -65,7 +47,68 @@ public class PersonalLanguageSettingActivity extends BaseAddToApplicationActivit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_language_setting);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        zhText = findViewById(R.id.zh_text);
+        zhImg = findViewById(R.id.zh_img);
+        zhLayout = findViewById(R.id.zh_layout);
+        cbCt = findViewById(R.id.cb_ct);
+        rlTranitionalChinese = findViewById(R.id.rl_tranitional_chinese);
+        enText = findViewById(R.id.en_text);
+        enImg = findViewById(R.id.en_img);
+        enLayout = findViewById(R.id.en_layout);
+        thaiText = findViewById(R.id.thai_text);
+        thaiImg = findViewById        (R.id.thai_img);
+        thaiLayout = findViewById(R.id.thai_layout);
+        languageConfirm = findViewById(R.id.language_confirm);
+
+        zhLayout.setOnClickListener(v -> {
+            zhImg.setChecked(true);
+            enImg.setChecked(false);
+            thaiImg.setChecked(false);
+            cbCt.setChecked(false);
+            languageCurrent = "zh";
+            SPUtils.putProtect( "lag", "zh");
+        });
+        rlTranitionalChinese.setOnClickListener(v -> {
+            //繁体中文
+            cbCt.setChecked(true);
+            zhImg.setChecked(false);
+            enImg.setChecked(false);
+            thaiImg.setChecked(false);
+            languageCurrent = "tw";
+            SPUtils.putProtect( "lag", "tw");
+        });
+        enLayout.setOnClickListener(v -> {
+            zhImg.setChecked(false);
+            enImg.setChecked(true);
+            thaiImg.setChecked(false);
+            cbCt.setChecked(false);
+            languageCurrent = "en";
+            SPUtils.putProtect( "lag", "en");
+        });
+        thaiLayout.setOnClickListener(v -> {
+            zhImg.setChecked(false);
+            enImg.setChecked(false);
+            thaiImg.setChecked(true);
+            cbCt.setChecked(false);
+            languageCurrent = "th";
+            SPUtils.putProtect( "lag", "th");
+        });
+        languageConfirm.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(languageCurrent)) {
+//                    SPUtils.putProtect( "checklag", true);
+                switchLanguage(languageCurrent);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
         context = MyApplication.getInstance();
         initData();
         tvContent.setText(R.string.language_setting);
@@ -75,57 +118,6 @@ public class PersonalLanguageSettingActivity extends BaseAddToApplicationActivit
 
     private void initData() {
         checkLag();
-    }
-
-    @OnClick({R.id.zh_layout, R.id.rl_tranitional_chinese, R.id.en_layout, R.id.thai_layout, R.id.language_confirm})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-
-            case R.id.zh_layout:
-                zhImg.setChecked(true);
-                enImg.setChecked(false);
-                thaiImg.setChecked(false);
-                cbCt.setChecked(false);
-                languageCurrent = "zh";
-                SPUtils.putProtect( "lag", "zh");
-                break;
-            case R.id.rl_tranitional_chinese:
-                //繁体中文
-                cbCt.setChecked(true);
-                zhImg.setChecked(false);
-                enImg.setChecked(false);
-                thaiImg.setChecked(false);
-                languageCurrent = "tw";
-                SPUtils.putProtect( "lag", "tw");
-                break;
-            case R.id.en_layout:
-                zhImg.setChecked(false);
-                enImg.setChecked(true);
-                thaiImg.setChecked(false);
-                cbCt.setChecked(false);
-                languageCurrent = "en";
-                SPUtils.putProtect( "lag", "en");
-                break;
-            case R.id.thai_layout:
-                zhImg.setChecked(false);
-                enImg.setChecked(false);
-                thaiImg.setChecked(true);
-                cbCt.setChecked(false);
-                languageCurrent = "th";
-                SPUtils.putProtect( "lag", "th");
-                break;
-            case R.id.language_confirm:
-                if (!TextUtils.isEmpty(languageCurrent)) {
-//                    SPUtils.putProtect( "checklag", true);
-                    switchLanguage(languageCurrent);
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-
-                }
-                break;
-        }
     }
 
     /**

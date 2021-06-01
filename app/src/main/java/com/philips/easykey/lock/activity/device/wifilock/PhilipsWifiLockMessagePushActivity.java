@@ -2,7 +2,6 @@ package com.philips.easykey.lock.activity.device.wifilock;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -19,29 +18,17 @@ import com.philips.easykey.lock.utils.KeyConstants;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PhilipsWifiLockMessagePushActivity extends BaseActivity<IWifiLockMoreView, WifiLockMorePresenter<IWifiLockMoreView>>
         implements IWifiLockMoreView{
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.iv_wandering_alarm)
     ImageView ivWanderingAlarm;
-    @BindView(R.id.rl_wandering_alarm)
     RelativeLayout rlWanderingAlarm;
-    @BindView(R.id.iv_door_bell)
     ImageView ivDoorBell;
-    @BindView(R.id.rl_door_bell)
     RelativeLayout rlDoorBell;
-    @BindView(R.id.rl_lock_info)
     RelativeLayout rlLockInfo;
-    @BindView(R.id.iv_lock_info)
     ImageView ivLockInfo;
-    @BindView(R.id.rl_message_free)
     RelativeLayout rlMessageFree;
-    @BindView(R.id.iv_message_free)
     ImageView ivMessageFree;
 
     private String wifiSn;
@@ -53,7 +40,32 @@ public class PhilipsWifiLockMessagePushActivity extends BaseActivity<IWifiLockMo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_message_push);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        ivWanderingAlarm = findViewById(R.id.iv_wandering_alarm);
+        rlWanderingAlarm = findViewById(R.id.rl_wandering_alarm);
+        ivDoorBell = findViewById(R.id.iv_door_bell);
+        rlDoorBell = findViewById(R.id.rl_door_bell);
+        rlLockInfo = findViewById(R.id.rl_lock_info);
+        ivLockInfo = findViewById(R.id.iv_lock_info);
+        rlMessageFree = findViewById(R.id.rl_message_free);
+        ivMessageFree = findViewById(R.id.iv_message_free);
+
+        back.setOnClickListener(v -> finish());
+        rlMessageFree.setOnClickListener(v -> {
+            if(ivMessageFree.isSelected()){
+                mPresenter.updateSwitchStatus(1,wifiSn);
+            }else{
+                mPresenter.updateSwitchStatus(2,wifiSn);
+            }
+        });
+        ivMessageFree.setOnClickListener(v -> {
+            if(ivMessageFree.isSelected()){
+                mPresenter.updateSwitchStatus(1,wifiSn);
+            }else{
+                mPresenter.updateSwitchStatus(2,wifiSn);
+            }
+        });
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
@@ -70,24 +82,6 @@ public class PhilipsWifiLockMessagePushActivity extends BaseActivity<IWifiLockMo
                 ivMessageFree.setSelected(false);
             }
 
-        }
-    }
-
-
-    @OnClick({R.id.back, R.id.iv_message_free,R.id.rl_message_free})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.rl_message_free:
-            case R.id.iv_message_free:
-                if(ivMessageFree.isSelected()){
-                    mPresenter.updateSwitchStatus(1,wifiSn);
-                }else{
-                    mPresenter.updateSwitchStatus(2,wifiSn);
-                }
-                break;
         }
     }
 

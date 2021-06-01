@@ -21,19 +21,15 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.concurrent.TimeoutException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David on 2019/4/17
  */
 public class DoorCardIdentificationActivity extends BaseBleActivity<IAddCardEndView, AddCardEndPresenter<IAddCardEndView>>
         implements View.OnClickListener, IAddCardEndView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
     private BleLockInfo bleLockInfo;
 
@@ -41,7 +37,11 @@ public class DoorCardIdentificationActivity extends BaseBleActivity<IAddCardEndV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_door_card_identification);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+
         bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.add_door_card);

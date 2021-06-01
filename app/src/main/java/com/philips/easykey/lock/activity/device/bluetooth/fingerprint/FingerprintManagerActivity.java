@@ -35,33 +35,24 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by David
  */
 public class FingerprintManagerActivity extends BaseBleActivity<IFingerprintManagerView, FingerprintManagerPresenter<IFingerprintManagerView>>
         implements View.OnClickListener, IFingerprintManagerView {
-    @BindView(R.id.iv_back)
+
     ImageView ivBack;//返回
-    @BindView(R.id.tv_content)
     TextView tvContent;//标题
 
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
     FingerprintManagerAdapter fingerprintManagerAdapter;
     boolean isNotData = true;
-    @BindView(R.id.tv_synchronized_record)
     TextView tvSynchronizedRecord;
-    @BindView(R.id.ll_add)
     LinearLayout llAdd;
-    @BindView(R.id.ll_has_data)
     LinearLayout llHasData;
-    @BindView(R.id.tv_no_user)
     TextView tvNoUser;
     List<GetPasswordResult.DataBean.Fingerprint> list = new ArrayList<>();
-    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     private BleLockInfo bleLockInfo;
     private boolean isSync = false; //是不是正在同步锁中的指纹
@@ -71,7 +62,16 @@ public class FingerprintManagerActivity extends BaseBleActivity<IFingerprintMana
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint_manager);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);//返回
+        tvContent = findViewById(R.id.tv_content);//标题
+        recycleview = findViewById(R.id.recycleview);
+        tvSynchronizedRecord = findViewById(R.id.tv_synchronized_record);
+        llAdd = findViewById(R.id.ll_add);
+        llHasData = findViewById(R.id.ll_has_data);
+        tvNoUser = findViewById(R.id.tv_no_user);
+        refreshLayout = findViewById(R.id.refreshLayout);
+
         if (MyApplication.getInstance().getBleService() != null || MyApplication.getInstance().getBleService().getBleLockInfo() != null) {
             try {
                 bleLockInfo = MyApplication.getInstance().getBleService().getBleLockInfo();

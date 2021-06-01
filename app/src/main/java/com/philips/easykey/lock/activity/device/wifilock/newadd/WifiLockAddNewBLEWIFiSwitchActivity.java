@@ -28,18 +28,12 @@ import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.widget.WifiCircleProgress;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 
 public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleView, BindBleWiFiSwitchPresenter<IBindBleView>> implements IBindBleView {
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.help)
     ImageView help;
-    @BindView(R.id.circle_progress_bar2)
     WifiCircleProgress circleProgressBar2;
 
     private Handler handler = new Handler();
@@ -59,7 +53,14 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_add_new_connect_device);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        help = findViewById(R.id.help);
+        circleProgressBar2 = findViewById(R.id.circle_progress_bar2);
+
+        back.setOnClickListener(v -> finish());
+        help.setOnClickListener(v -> startActivity(new Intent(this, WifiLockHelpActivity.class)));
+
         //开启数据监听
         mPresenter.listenerCharacterNotify();
 
@@ -247,21 +248,6 @@ public class WifiLockAddNewBLEWIFiSwitchActivity extends BaseActivity<IBindBleVi
     @Override
     protected BindBleWiFiSwitchPresenter<IBindBleView> createPresent() {
         return new BindBleWiFiSwitchPresenter<>();
-    }
-
-
-    @OnClick({R.id.back, R.id.help, R.id.circle_progress_bar2})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(this, WifiLockHelpActivity.class));
-                break;
-            case R.id.circle_progress_bar2:
-                break;
-        }
     }
 
     public void onScanSuccess() {

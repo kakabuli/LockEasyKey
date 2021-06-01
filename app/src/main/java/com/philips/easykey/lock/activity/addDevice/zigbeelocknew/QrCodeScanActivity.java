@@ -23,16 +23,11 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class QrCodeScanActivity extends BaseAddToApplicationActivity implements CameraScan.OnScanResultCallback {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.touch_light_layout)
     LinearLayout touchLightLayout;
-    @BindView(R.id.title_bar)
     RelativeLayout titleBar;
     private CameraScan mCameraScan;
     private boolean isOpenLight = false;
@@ -46,7 +41,25 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         MyApplication.getInstance().addActivity(this);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        touchLightLayout = findViewById(R.id.touch_light_layout);
+        titleBar = findViewById(R.id.title_bar);
+
+        back.setOnClickListener(v -> finish());
+        touchLightLayout.setOnClickListener(v -> {
+            if (!isOpenLight){
+                isOpenLight = true;
+                if(mCameraScan != null) {
+                    mCameraScan.enableTorch(true);
+                }
+            }else {
+                isOpenLight = false;
+                if(mCameraScan != null) {
+                    mCameraScan.enableTorch(false);
+                }
+            }
+        });
+
         checkVersion();
         scan = getIntent().getIntExtra(KeyConstants.SCAN_TYPE, 0);
         //动态设置状态栏高度
@@ -121,29 +134,6 @@ public class QrCodeScanActivity extends BaseAddToApplicationActivity implements 
             mCamera.release();
         }
         return canUse;
-    }
-
-    @OnClick({R.id.back, R.id.touch_light_layout})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.touch_light_layout:
-//                mZBarView.openFlashlight(); // 打开闪光灯
-                if (!isOpenLight){
-                    isOpenLight = true;
-                    if(mCameraScan != null) {
-                        mCameraScan.enableTorch(true);
-                    }
-                }else {
-                    isOpenLight = false;
-                    if(mCameraScan != null) {
-                        mCameraScan.enableTorch(false);
-                    }
-                }
-                break;
-        }
     }
 
     private String result = "";

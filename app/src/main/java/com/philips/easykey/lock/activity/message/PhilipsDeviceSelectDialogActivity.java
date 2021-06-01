@@ -13,18 +13,13 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.DeviceSelectAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
-import com.philips.easykey.lock.widget.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActivity {
 
-    @BindView(R.id.rcv_device_select)
     RecyclerView rcvDeviceSelect;
     private DeviceSelectAdapter deviceSelectAdapter;
     private int RESULT_OK = 100;
@@ -36,7 +31,13 @@ public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActiv
         super.onCreate(savedInstanceState);
         getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         setContentView(R.layout.philips_device_select_dialog);
-        ButterKnife.bind(this);
+
+        rcvDeviceSelect = findViewById(R.id.rcv_device_select);
+        findViewById(R.id.iv_close).setOnClickListener(v -> {
+            setResult(RESULT_CLOSE);
+            finish();
+        });
+
         initData();
         initView();
     }
@@ -64,9 +65,4 @@ public class PhilipsDeviceSelectDialogActivity extends BaseAddToApplicationActiv
         rcvDeviceSelect.setAdapter(deviceSelectAdapter);
     }
 
-    @OnClick(R.id.iv_close)
-    public void onViewClicked() {
-        setResult(RESULT_CLOSE);
-        finish();
-    }
 }

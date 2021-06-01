@@ -23,19 +23,10 @@ import com.philips.easykey.lock.utils.handPwdUtil.GestureContentView;
 import com.philips.easykey.lock.utils.handPwdUtil.GestureDrawline;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationActivity {
 
-
-    @BindView(R.id.text_tip)
     TextView mTextTip;
-
-    @BindView(R.id.gesture_container)
     FrameLayout gestureContainer;
-    @BindView(R.id.hand_more)
     TextView handMore;
 
     private GestureContentView mGestureContentView;
@@ -46,7 +37,13 @@ public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationA
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_verify_hand_pwd);
-        ButterKnife.bind(this);
+
+        mTextTip = findViewById(R.id.text_tip);
+        gestureContainer = findViewById(R.id.gesture_container);
+        handMore = findViewById(R.id.hand_more);
+
+        handMore.setOnClickListener(v -> showMoreDialog());
+
         initView();
         Intent intent = getIntent();
         String source = intent.getStringExtra(KeyConstants.SOURCE);
@@ -162,16 +159,11 @@ public class PersonalVerifyGesturePasswordActivity extends BaseAddToApplicationA
                 if (bottomMenuDialog != null) {
                     bottomMenuDialog.dismiss();
                 }
-                Intent registerIntent = new Intent(PersonalVerifyGesturePasswordActivity.this, RegisterActivity.class);
+                Intent registerIntent = new Intent(PersonalVerifyGesturePasswordActivity.this, PhilipsRegisterActivity.class);
                 startActivity(registerIntent);
             }
         });
         bottomMenuDialog = dialogBuilder.create();
         bottomMenuDialog.show();
-    }
-
-    @OnClick(R.id.hand_more)
-    public void onClick() {
-        showMoreDialog();
     }
 }

@@ -52,21 +52,14 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
-    @BindView(R.id.tv_content)
+
     TextView tv_content;
-    @BindView(R.id.iv_back)
     ImageView iv_back;
-    @BindView(R.id.circle_progress_bar2)
     CircleProgress mCircleProgress2;
-    @BindView(R.id.mutiprogree_ota)
     OtaMutiProgress mutiProgress;
-    @BindView(R.id.start_upgrade)
     Button start_upgrade;
-    @BindView(R.id.warring)
     TextView warring;
     private Intent gattServiceIntent;
     //    private String fileCompletePath;
@@ -234,7 +227,14 @@ public class P6OtaUpgradeActivity extends BaseAddToApplicationActivity implement
         startService(gattServiceIntent);
         BluetoothLeService.registerBroadcastReceiver(this, mGattOTAStatusReceiver, Utils.makeGattUpdateIntentFilter());
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
-        ButterKnife.bind(this);
+
+        tv_content = findViewById(R.id.tv_content);
+        iv_back = findViewById(R.id.iv_back);
+        mCircleProgress2 = findViewById(R.id.circle_progress_bar2);
+        mutiProgress = findViewById(R.id.mutiprogree_ota);
+        start_upgrade = findViewById(R.id.start_upgrade);
+        warring = findViewById(R.id.warring);
+
         FileDownloader.setup(this);
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

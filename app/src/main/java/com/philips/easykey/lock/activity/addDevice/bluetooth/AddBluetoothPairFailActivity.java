@@ -11,40 +11,31 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.addDevice.DeviceAddHelpActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddBluetoothPairFailActivity extends BaseAddToApplicationActivity {
-    @BindView(R.id.back)
+
     ImageView back;
-    @BindView(R.id.repair)
     Button repair;
-    @BindView(R.id.help)
     ImageView help;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_add_fail);
-        ButterKnife.bind(this);
+        back = findViewById(R.id.back);
+        repair = findViewById(R.id.repair);
+        help = findViewById(R.id.help);
+
+        back.setOnClickListener(v -> finish());
+        repair.setOnClickListener(v -> {
+            //重新配对
+            Intent intent = new Intent(this, AddBluetoothPairActivity.class);
+            startActivity(intent);
+        });
+        help.setOnClickListener(v -> {
+            Intent helpIntent = new Intent(this, DeviceAddHelpActivity.class);
+            startActivity(helpIntent);
+        });
     }
 
-    @OnClick({R.id.back, R.id.repair, R.id.help})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.repair:
-                //重新配对
-                Intent intent = new Intent(this, AddBluetoothPairActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.help:
-                Intent helpIntent = new Intent(this, DeviceAddHelpActivity.class);
-                startActivity(helpIntent);
-                break;
-        }
-    }
 }

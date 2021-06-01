@@ -25,43 +25,39 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.SPUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicationActivity {
-    @BindView(R.id.back)
-    ImageView back;
+
     private boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_lock_notice_user_link_wifi_first);
-        ButterKnife.bind(this);
+
+        ImageView back = findViewById(R.id.back);
+        back.setOnClickListener(v -> finish());
+        findViewById(R.id.help).setOnClickListener(v -> startActivity(new Intent(WifiLockNoticeUserLinkWifiFirstActivity.this, WifiLockHelpActivity.class)));
+        findViewById(R.id.go_to_connect).setOnClickListener(v -> {
+            saveWifiName();
+            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+        });
+        findViewById(R.id.et_other_method).setOnClickListener(v -> {
+            Intent intent = new Intent(WifiLockNoticeUserLinkWifiFirstActivity.this, WifiLockAddFirstActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.copy).setOnClickListener(v -> {
+            // 从API11开始android推荐使用android.content.ClipboardManager
+            // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            // 将文本内容放到系统剪贴板里。
+            cm.setText("88888888");
+            ToastUtils.showLong(R.string.copy_success);
+        });
+
         IntentFilter filter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         filter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
         registerReceiver(mReceiver, filter);
-    }
-
-    @OnClick({R.id.back, R.id.help, R.id.go_to_connect, R.id.et_other_method})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.help:
-                startActivity(new Intent(WifiLockNoticeUserLinkWifiFirstActivity.this, WifiLockHelpActivity.class));
-                break;
-            case R.id.go_to_connect:
-                saveWifiName();
-                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                break;
-            case R.id.et_other_method:
-                Intent intent = new Intent(WifiLockNoticeUserLinkWifiFirstActivity.this, WifiLockAddFirstActivity.class);
-                startActivity(intent);
-                break;
-        }
     }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -141,15 +137,5 @@ public class WifiLockNoticeUserLinkWifiFirstActivity extends BaseAddToApplicatio
         if (mReceiver != null) {
             unregisterReceiver(mReceiver);
         }
-    }
-
-    @OnClick(R.id.copy)
-    public void onClick() {
-        // 从API11开始android推荐使用android.content.ClipboardManager
-        // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
-        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        // 将文本内容放到系统剪贴板里。
-        cm.setText("88888888");
-        ToastUtils.showLong(R.string.copy_success);
     }
 }

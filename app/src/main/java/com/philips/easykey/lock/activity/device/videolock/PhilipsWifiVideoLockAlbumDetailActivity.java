@@ -50,9 +50,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.philips.easykey.core.tool.FileTool;
 
 public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlbumPlayerView, MyAlbumPlayerPresenter<IMyAlbumPlayerView>>  implements IMyAlbumPlayerView{
@@ -61,35 +58,20 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
     private String filepath;
     private StatusHelper statusHelper;
 
-    @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.duration_seek_bar)
     SeekBar durationSeekBar;
-    @BindView(R.id.video_surface)
     SurfaceView surfaceView;
-    @BindView(R.id.video_surface_1)
     SurfaceView surfaceView1;
-    @BindView(R.id.lly_bottom_bar)
     LinearLayout llyBootomBar;
-    @BindView(R.id.iv_play_start)
     ImageView ivPlayStart;
-    @BindView(R.id.iv_pause)
     ImageView ivPause;
-    @BindView(R.id.tv_duration)
     TextView tvDuration;
-    @BindView(R.id.tv_time)
     TextView tvTime;
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.avi)
     AVLoadingIndicatorView avi;
-    @BindView(R.id.tv_tips)
     TextView tvTips;
-    @BindView(R.id.iv_cache)
     ImageView ivCache;
-    @BindView(R.id.iv_icon_background)
     ImageView ivIconBackground;
-    @BindView(R.id.iv_myalbum_delete)
     ImageView ivMyAlbumDelete;
 
     private String wifiSn;
@@ -121,7 +103,70 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_lock_video_album_detail);
-        ButterKnife.bind(this);
+
+        back = findViewById(R.id.back);
+        durationSeekBar = findViewById(R.id.duration_seek_bar);
+        surfaceView = findViewById(R.id.video_surface);
+        surfaceView1 = findViewById(R.id.video_surface_1);
+        llyBootomBar = findViewById(R.id.lly_bottom_bar);
+        ivPlayStart = findViewById(R.id.iv_play_start);
+        ivPause = findViewById(R.id.iv_pause);
+        tvDuration = findViewById(R.id.tv_duration);
+        tvTime = findViewById(R.id.tv_time);
+        tvName = findViewById(R.id.tv_name);
+        avi = findViewById(R.id.avi);
+        tvTips = findViewById(R.id.tv_tips);
+        ivCache = findViewById(R.id.iv_cache);
+        ivIconBackground = findViewById(R.id.iv_icon_background);
+        ivMyAlbumDelete = findViewById(R.id.iv_myalbum_delete);
+
+        back.setOnClickListener(v -> finish());
+        ivPlayStart.setOnClickListener(v -> {
+            if (mediaPlayer != null && statusHelper.getMediaStatus() == MediaStatus.PLAYING) {
+//                    pause();
+            } else {
+                ivPlayStart.setVisibility(View.GONE);
+                ivIconBackground.setVisibility(View.GONE);
+                if(!isPlay){
+
+                    play();
+                }else{
+                    surfaceView.setVisibility(View.VISIBLE);
+                    surfaceView1.setVisibility(View.GONE);
+                    playOperation();
+                    isPlay = false;
+                }
+            }
+        });
+        ivPause.setOnClickListener(v -> {
+            if (mediaPlayer != null && statusHelper.getMediaStatus() == MediaStatus.PLAYING) {
+                pause();
+            } else {
+                ivPlayStart.setVisibility(View.GONE);
+                ivIconBackground.setVisibility(View.GONE);
+                if(!isPlay){
+
+                    play();
+                }else{
+                    surfaceView.setVisibility(View.VISIBLE);
+                    surfaceView1.setVisibility(View.GONE);
+                    playOperation();
+                    isPlay = false;
+                }
+            }
+        });
+        ivMyAlbumDelete.setOnClickListener(v -> {
+            pause();
+            if(!filepath.isEmpty() && new File(filepath).exists()){
+                mPresenter.handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showDeleteDialog(filepath);
+                    }
+                },100);
+            }
+        });
+
         LogUtils.d("shulan WifiVideoLockAlbumDetailActivity------------->onCreate");
         filepath = getIntent().getStringExtra(KeyConstants.VIDEO_PIC_PATH);
         String name = getIntent().getStringExtra("NAME");
@@ -416,60 +461,6 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
         if (mediaPlayer != null && !isPlaying) {
             mediaPlayer.start();
             updateButtonController();
-        }
-    }
-
-    @OnClick({R.id.back,R.id.iv_play_start,R.id.iv_pause,R.id.iv_myalbum_delete})
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.iv_play_start:
-                if (mediaPlayer != null && statusHelper.getMediaStatus() == MediaStatus.PLAYING) {
-//                    pause();
-                } else {
-                    ivPlayStart.setVisibility(View.GONE);
-                    ivIconBackground.setVisibility(View.GONE);
-                    if(!isPlay){
-
-                        play();
-                    }else{
-                        surfaceView.setVisibility(View.VISIBLE);
-                        surfaceView1.setVisibility(View.GONE);
-                        playOperation();
-                        isPlay = false;
-                    }
-                }
-                break;
-            case R.id.iv_pause:
-                if (mediaPlayer != null && statusHelper.getMediaStatus() == MediaStatus.PLAYING) {
-                    pause();
-                } else {
-                    ivPlayStart.setVisibility(View.GONE);
-                    ivIconBackground.setVisibility(View.GONE);
-                    if(!isPlay){
-
-                        play();
-                    }else{
-                        surfaceView.setVisibility(View.VISIBLE);
-                        surfaceView1.setVisibility(View.GONE);
-                        playOperation();
-                        isPlay = false;
-                    }
-                }
-                break;
-            case R.id.iv_myalbum_delete:
-                pause();
-                if(!filepath.isEmpty() && new File(filepath).exists()){
-                    mPresenter.handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            showDeleteDialog(filepath);
-                        }
-                    },100);
-                }
-                break;
         }
     }
 

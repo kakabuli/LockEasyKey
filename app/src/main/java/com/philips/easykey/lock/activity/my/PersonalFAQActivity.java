@@ -17,28 +17,16 @@ import com.philips.easykey.lock.fragment.help.PersonalFAQHangerHelpFragment;
 import com.philips.easykey.lock.fragment.help.PersonalFAQLockHelpFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PersonalFAQActivity extends BaseAddToApplicationActivity {
 
-
-    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.iv_right)
     ImageView ivRight;
-    @BindView(R.id.v_left)
     View vLeft;
-    @BindView(R.id.v_right)
     View vRight;
-    @BindView(R.id.content)
     FrameLayout content;
-    @BindView(R.id.tv_left)
     TextView tvLeft;
-    @BindView(R.id.tv_right)
     TextView tvRight;
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -50,50 +38,52 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_faq);
-        ButterKnife.bind(this);
+
+        ivBack = findViewById(R.id.iv_back);
+        tvContent = findViewById(R.id.tv_content);
+        ivRight = findViewById(R.id.iv_right);
+        vLeft = findViewById(R.id.v_left);
+        vRight = findViewById(R.id.v_right);
+        content = findViewById(R.id.content);
+        tvLeft = findViewById(R.id.tv_left);
+        tvRight = findViewById(R.id.tv_right);
+
+        ivBack.setOnClickListener(v -> finish());
+        findViewById(R.id.rl_left).setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = manager.beginTransaction();
+            hideAll(fragmentTransaction);
+            vLeft.setVisibility(View.VISIBLE);
+            vRight.setVisibility(View.GONE);
+            tvLeft.setTextColor(Color.parseColor("#1F96F7"));
+            tvRight.setTextColor(Color.parseColor("#333333"));
+            if( mPersonalFAQLockHelpFragment != null){
+                fragmentTransaction.show(mPersonalFAQLockHelpFragment);
+            }else{
+                mPersonalFAQLockHelpFragment = new PersonalFAQLockHelpFragment();
+                fragmentTransaction.add(R.id.content,mPersonalFAQLockHelpFragment);
+            }
+            fragmentTransaction.commit();
+        });
+        findViewById(R.id.rl_right).setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = manager.beginTransaction();
+            hideAll(fragmentTransaction);
+            vLeft.setVisibility(View.GONE);
+            vRight.setVisibility(View.VISIBLE);
+            tvRight.setTextColor(Color.parseColor("#1F96F7"));
+            tvLeft.setTextColor(Color.parseColor("#333333"));
+            if( mPersonalFAQHangerHelpFragment != null){
+                fragmentTransaction.show(mPersonalFAQHangerHelpFragment);
+            }else{
+                mPersonalFAQHangerHelpFragment = new PersonalFAQHangerHelpFragment();
+                fragmentTransaction.add(R.id.content,mPersonalFAQHangerHelpFragment);
+            }
+            fragmentTransaction.commit();
+        });
 
         tvContent.setText(R.string.faq);
         initFragment();
-    }
-
-    @OnClick({R.id.iv_back,R.id.rl_left,R.id.rl_right})
-    public void onClick(View v) {
-        FragmentTransaction fragmentTransaction;
-        switch (v.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.rl_left:
-                fragmentTransaction = manager.beginTransaction();
-                hideAll(fragmentTransaction);
-                vLeft.setVisibility(View.VISIBLE);
-                vRight.setVisibility(View.GONE);
-                tvLeft.setTextColor(Color.parseColor("#1F96F7"));
-                tvRight.setTextColor(Color.parseColor("#333333"));
-                if( mPersonalFAQLockHelpFragment != null){
-                    fragmentTransaction.show(mPersonalFAQLockHelpFragment);
-                }else{
-                    mPersonalFAQLockHelpFragment = new PersonalFAQLockHelpFragment();
-                    fragmentTransaction.add(R.id.content,mPersonalFAQLockHelpFragment);
-                }
-                fragmentTransaction.commit();
-                break;
-            case R.id.rl_right:
-                fragmentTransaction = manager.beginTransaction();
-                hideAll(fragmentTransaction);
-                vLeft.setVisibility(View.GONE);
-                vRight.setVisibility(View.VISIBLE);
-                tvRight.setTextColor(Color.parseColor("#1F96F7"));
-                tvLeft.setTextColor(Color.parseColor("#333333"));
-                if( mPersonalFAQHangerHelpFragment != null){
-                    fragmentTransaction.show(mPersonalFAQHangerHelpFragment);
-                }else{
-                    mPersonalFAQHangerHelpFragment = new PersonalFAQHangerHelpFragment();
-                    fragmentTransaction.add(R.id.content,mPersonalFAQHangerHelpFragment);
-                }
-                fragmentTransaction.commit();
-                break;
-        }
     }
 
     private void hideAll(FragmentTransaction ft) {

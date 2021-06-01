@@ -38,40 +38,22 @@ import com.philips.easykey.lock.widget.SpacesItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessageView, DoorLockMessageFragmentPresenter<IDoorLockMessageView>> implements IDoorLockMessageView {
 
-    @BindView(R.id.rcv_video_lock_msg)
     RecyclerView rcvVideoLockMsg;
-    @BindView(R.id.rcv_today_lock_statistics)
     RecyclerView rcvTodayLockStatistics;
-    @BindView(R.id.rcv_seven_day_data_statistics)
     RecyclerView rcvSevenDayDataStatistics;
-    @BindView(R.id.tv_lock_name)
     TextView tvLockName;
-    @BindView(R.id.ll_video_lock_msg)
     LinearLayout llVideoLockMsg;
-    @BindView(R.id.iv_video_lock_msg_left)
     ImageView ivVideoLockMsgLeft;
-    @BindView(R.id.iv_video_lock_msg_right)
     ImageView ivVideoLockMsgRight;
-    @BindView(R.id.iv_today_lock_statistics_left)
     ImageView ivTodayLockStatisticsLeft;
-    @BindView(R.id.iv_today_lock_statistics_right)
     ImageView ivTodayLockStatisticsRight;
-    @BindView(R.id.tv_no_message)
     TextView tvNoMessage;
-    @BindView(R.id.ll_device_type)
     RelativeLayout llDeviceType;
-    @BindView(R.id.scrollView)
     ScrollView scrollView;
-    @BindView(R.id.create_time)
     TextView createTime;
-    @BindView(R.id.tv_open_lock_times)
     TextView tvOpenLockTimes;
 
     private PhilipsVideoLockWarningInformAdapter videoLockWarningInformAdapter;
@@ -79,7 +61,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     private PhilipsSevenDayDataStatisticsAdapter sevendayDataStatisticsAdapter;
     private int RESULT_OK = 100;
     private View mView;
-    private Unbinder unbinder;
     private List<WifiVideoLockAlarmRecord> wifiVideoLockAlarmRecordData = new ArrayList<>();
     private List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
     private List<SevendayDataStatisticsBean> sevendayDataStatisticsData = new ArrayList<>();
@@ -97,7 +78,31 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         if (mView == null) {
             mView = inflater.inflate(R.layout.philips_fragment_door_lock_message, container, false);
         }
-        unbinder = ButterKnife.bind(this, mView);
+
+        rcvVideoLockMsg = mView.findViewById(R.id.rcv_video_lock_msg);
+        rcvTodayLockStatistics = mView.findViewById(R.id.rcv_today_lock_statistics);
+        rcvSevenDayDataStatistics = mView.findViewById(R.id.rcv_seven_day_data_statistics);
+        tvLockName = mView.findViewById(R.id.tv_lock_name);
+        llVideoLockMsg = mView.findViewById(R.id.ll_video_lock_msg);
+        ivVideoLockMsgLeft = mView.findViewById(R.id.iv_video_lock_msg_left);
+        ivVideoLockMsgRight = mView.findViewById(R.id.iv_video_lock_msg_right);
+        ivTodayLockStatisticsLeft = mView.findViewById(R.id.iv_today_lock_statistics_left);
+        ivTodayLockStatisticsRight = mView.findViewById(R.id.iv_today_lock_statistics_right);
+        tvNoMessage = mView.findViewById(R.id.tv_no_message);
+        llDeviceType = mView.findViewById(R.id.ll_device_type);
+        scrollView = mView.findViewById(R.id.scrollView);
+        createTime = mView.findViewById(R.id.create_time);
+        tvOpenLockTimes = mView.findViewById(R.id.tv_open_lock_times);
+
+        mView.findViewById(R.id.ll_device_type).setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
+            startActivityForResult(intent, RESULT_OK);
+        });
+        mView.findViewById(R.id.iv_video_lock_msg_left).setOnClickListener(v -> rcvVideoLockMsg.scrollBy(earlyWarningMsgMoveLeftDistance,0));
+        mView.findViewById(R.id.iv_video_lock_msg_right).setOnClickListener(v -> rcvVideoLockMsg.scrollBy(-earlyWarningMsgMoveRightDistance,0));
+        mView.findViewById(R.id.iv_today_lock_statistics_left).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(todayLockStatisticsMoveLeftDistance,0));
+        mView.findViewById(R.id.iv_today_lock_statistics_right).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance,0));
+
         initView();
         initDevices();
         MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
@@ -314,31 +319,4 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         refreshLayoutData(wifiLockInfo);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @OnClick({R.id.ll_device_type, R.id.iv_video_lock_msg_left, R.id.iv_video_lock_msg_right, R.id.iv_today_lock_statistics_left, R.id.iv_today_lock_statistics_right})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_device_type:
-                Intent intent = new Intent(getContext(), PhilipsDeviceSelectDialogActivity.class);
-                startActivityForResult(intent, RESULT_OK);
-                break;
-            case R.id.iv_video_lock_msg_left:
-                rcvVideoLockMsg.scrollBy(earlyWarningMsgMoveLeftDistance, 0);
-                break;
-            case R.id.iv_video_lock_msg_right:
-                rcvVideoLockMsg.scrollBy(-earlyWarningMsgMoveRightDistance, 0);
-                break;
-            case R.id.iv_today_lock_statistics_left:
-                rcvTodayLockStatistics.scrollBy(todayLockStatisticsMoveLeftDistance, 0);
-                break;
-            case R.id.iv_today_lock_statistics_right:
-                rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance, 0);
-                break;
-        }
-    }
 }
