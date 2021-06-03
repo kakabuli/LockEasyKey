@@ -1,7 +1,7 @@
 apply plugin: 'com.mob.sdk'
 MobSDK {
-    appKey "2a9cebda1ff8c"
-    appSecret "5d9346438bdf76631cd9a74ec5bad9ab"
+    appKey "335afd3369d20"
+    appSecret "b0bbed2eeaff029af338a5cd09b9bdc2"
     mobEnv 'x'
     ShareSDK {
         devInfo {
@@ -12,8 +12,8 @@ MobSDK {
             }
             //正式环境
             Wechat {
-                appId "wx496a49943fabac18"
-                appSecret "e59ede27c5b4bc97a78179a566609a4b"
+                appId "wx2424a66f6c8a94df"
+                appSecret "e8195f689fd5d0b409935ed32487642d"
             }
             WechatMoments {
                 appId "wx496a49943fabac18"
