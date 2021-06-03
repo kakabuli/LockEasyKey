@@ -33,17 +33,17 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
         manifestPlaceholders = [
-                GETUI_APP_ID    : "0dtUPXbIGi5Q4CaoJmxLM1",
-                GETUI_APP_KEY   : "rbVKQZgQuN6KrQTr1mqDR2",
-                GETUI_APP_SECRET: "4cs1tqxcO58MRTIcIqOzDA",
+                GETUI_APP_ID    : "0Xktb3BmI77e832N4GKu5",
+                GETUI_APP_KEY   : "HdgiZGfQLr5qNcTa51B0B2",
+                GETUI_APP_SECRET: "cWHc94l8sa7HE3KrnuNjS9",
 
 //                HUAWEI_APP_ID   : "100038281",
 
                 XIAOMI_APP_ID   : "2882303761519924663",
                 XIAOMI_APP_KEY  : "5861992467663",
 
-                OPPO_APP_KEY    : "d96Ms9tgI2gwkcc0g4K8gWocc",
-                OPPO_APP_SECRET : "24205939F1fedeF4a5734af4cAB30612",
+                OPPO_APP_KEY    : "47d960a414264f9e946210361ba4c5e2",
+                OPPO_APP_SECRET : "2333ad8c1b6649939ce436847dd9f7a1",
 
                 MEIZU_APP_ID    : "118878",
                 MEIZU_APP_KEY   : "6121ecee371449c2b536b58452d78cb8",
