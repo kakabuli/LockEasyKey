@@ -1,4 +1,4 @@
-package com.philips.easykey.lock.widget;
+package com.philips.easykey.lock.widget.avindicator;
 
 import android.annotation.TargetApi;
 import android.content.Context;

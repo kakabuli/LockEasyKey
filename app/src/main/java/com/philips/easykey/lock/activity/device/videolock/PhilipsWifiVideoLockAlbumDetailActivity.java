@@ -41,7 +41,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.RotateTransformation;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.H264Frame;
 import com.xmitech.sdk.MP4Info;

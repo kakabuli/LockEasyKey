@@ -49,7 +49,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.greenDao.db.DaoSession;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.MP4Info;

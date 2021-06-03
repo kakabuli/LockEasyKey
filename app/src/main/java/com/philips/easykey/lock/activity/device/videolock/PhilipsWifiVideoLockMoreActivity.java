@@ -34,7 +34,7 @@ import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 
 
 public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLockMoreView, WifiVideoLockMorePresenter<IWifiVideoLockMoreView>>

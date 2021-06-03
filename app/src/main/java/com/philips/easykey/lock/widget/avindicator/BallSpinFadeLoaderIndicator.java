@@ -1,4 +1,4 @@
-package com.philips.easykey.lock.widget;
+package com.philips.easykey.lock.widget.avindicator;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

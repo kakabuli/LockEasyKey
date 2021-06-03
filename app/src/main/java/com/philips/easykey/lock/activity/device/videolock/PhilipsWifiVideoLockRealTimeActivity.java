@@ -25,7 +25,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 
 
 public class PhilipsWifiVideoLockRealTimeActivity extends BaseActivity<IWifiVideoLockRealTimeView, WifiVideoLockRealTimePresenter<IWifiVideoLockRealTimeView>>

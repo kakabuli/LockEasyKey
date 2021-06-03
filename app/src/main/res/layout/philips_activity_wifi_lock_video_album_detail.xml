@@ -86,7 +86,7 @@
         android:src="@mipmap/activity_myalbum_play_start"
         android:layout_centerInParent="true"/>
 
-    <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+    <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
         android:id="@+id/avi"
         style="@style/AVLoadingIndicatorView.Large"
         android:layout_width="35pt"

@@ -429,7 +429,7 @@
             android:layout_below="@id/iv_big_head_pic"
             android:textColor="@color/ce1e1e1"/>
 
-        <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+        <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
             android:id="@+id/avi"
             style="@style/AVLoadingIndicatorView.Large"
             android:layout_width="35pt"

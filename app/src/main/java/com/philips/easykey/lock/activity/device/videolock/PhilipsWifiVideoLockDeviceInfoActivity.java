@@ -24,7 +24,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;

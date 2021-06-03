@@ -92,7 +92,7 @@
     </RelativeLayout>
 
 
-    <com.philips.easykey.lock.widget.AVLoadingIndicatorView
+    <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
         android:id="@+id/avi"
         style="@style/AVLoadingIndicatorView.Large"
         android:layout_width="35pt"

@@ -24,7 +24,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.widget.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 
 
 public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IWifiVideoLockSetLanguageView, WifiVideoLockSetLanguagePresenter<IWifiVideoLockSetLanguageView>>
