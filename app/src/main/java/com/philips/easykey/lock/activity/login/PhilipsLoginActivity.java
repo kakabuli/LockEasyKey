@@ -1,6 +1,9 @@
 package com.philips.easykey.lock.activity.login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -41,6 +44,13 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +62,7 @@ import io.reactivex.disposables.Disposable;
  * E-mail : wengmaowei@kaadas.com
  * desc   : 登录
  */
-public class PhilipsLoginActivity extends NormalBaseActivity {
+public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEventHandler {
 
     private EditText mEtPhoneOrMail, mEtPwd;
     private Button mBtnLogin;
@@ -163,6 +173,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
                 mTvSelectCountry, mIvShowOrHide, mTvCode);
         setStatusBarColor(R.color.white);
 
+        regToWx();
+
     }
 
     @Override
@@ -191,7 +203,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         } else if(view.getId() == R.id.btnLogin) {
             login();
         } else if(view.getId() == R.id.ivWechat) {
-            // TODO: 2021/5/12 微信登录
+            wechatLogin();
         } else if(view.getId() == R.id.ivVerification) {
             // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
 //            changeToVCodeLogin();
@@ -226,6 +238,16 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onReq(BaseReq baseReq) {
+
+    }
+
+    @Override
+    public void onResp(BaseResp baseResp) {
+
+    }
+
     private boolean isVCodeLogin = false;
 
     private void changeToVCodeLogin() {
@@ -238,6 +260,44 @@ public class PhilipsLoginActivity extends NormalBaseActivity {
         mTvPhone.setVisibility(View.VISIBLE);
         mIvVerification.setVisibility(View.GONE);
         mTvCode.setVisibility(View.GONE);
+    }
+
+    // APP_ID 替换为你的应用从官方网站申请到的合法appID
+    private static final String APP_ID = " wx2424a66f6c8a94df";
+
+    // IWXAPI 是第三方app和微信通信的openApi接口
+    private IWXAPI api;
+
+    private void regToWx() {
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this.getApplicationContext(), APP_ID, true);
+
+        // 将应用的appId注册到微信
+        api.registerApp(APP_ID);
+//
+//        //建议动态监听微信启动广播进行注册到微信
+//        registerReceiver(new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//
+//                // 将该app注册到微信
+//                api.registerApp(APP_ID);
+//            }
+//        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
+
+    }
+
+    private void wechatLogin() {
+        if (!api.isWXAppInstalled()) {
+            // TODO: 2021/6/8 抽离文字
+            ToastUtils.showShort("你还没有安装微信");
+            return;
+        }
+        // send oauth request
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_demo_test";
+        api.sendReq(req);
     }
 
     private void changeToAccountLogin() {

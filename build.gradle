@@ -5,7 +5,6 @@ buildscript {
     repositories {
         maven { url "http://mvn.mob.com/android"}
         google()
-        jcenter()
         mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public/'}
         maven { url 'https://developer.huawei.com/repo/'}
@@ -30,7 +29,6 @@ allprojects {
     repositories {
 
         google()
-        jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }

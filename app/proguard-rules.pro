@@ -476,3 +476,17 @@ public static java.lang.String TABLENAME;
     public static *** e(...);
 }
 #------------------------------ 打包时候移除所有日志 ---------------------------------------
+
+#------------------------------------ WeChat -----------------------------------------
+-keep class com.tencent.mm.opensdk.** {
+    *;
+}
+
+-keep class com.tencent.wxop.** {
+    *;
+}
+
+-keep class com.tencent.mm.sdk.** {
+    *;
+}
+#------------------------------------ WeChat -----------------------------------------

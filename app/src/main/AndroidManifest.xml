@@ -34,6 +34,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- android 10.0使用wifi api新添加的权限 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 魅族辅助 SDK -->
+
     <permission
         android:name="${applicationId}.push.permission.MESSAGE"
         android:protectionLevel="signature" />
@@ -52,6 +53,11 @@
         </intent>
     </queries>
     -->
+    <!-- 修复Android 11 版本第三方应用无法拉起微信的适配 -->
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
+
     <meta-data
         android:name="push_kit_auto_init_enabled"
         android:value="true" />
