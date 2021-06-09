@@ -29,15 +29,16 @@
             android:layout_centerInParent="true"
             android:text="@string/philips_setting_stress_alarm"
             android:textColor="@color/color_333333"
-            android:textSize="17pt" />
+            android:textSize="17pt"
+            />
 
         <ImageView
             android:id="@+id/iv_duress_alarm_help"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            app:srcCompat="@drawable/philips_duress_alarm_help"
             android:layout_alignParentEnd="true"
-            android:paddingEnd="16pt"
-            app:srcCompat="@drawable/philips_duress_alarm_help" />
+            android:paddingEnd="16pt"/>
     </RelativeLayout>
 
 
@@ -80,107 +81,104 @@
 
     </RelativeLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rl_duress_alarm_show"
+    <TextView
+        android:id="@+id/tv_recevice_duress_arlam"
+        app:layout_constraintTop_toBottomOf="@+id/relativelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/relativelayout">
+        android:textSize="14pt"
+        android:text="@string/philips_setting_app_stress_alarm"
+        android:layout_marginStart="16pt"
+        android:paddingTop="12pt"
+        android:textColor="@color/color_666666"
+        android:paddingBottom="12pt"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_duress_alarm_app_recevice"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recevice_duress_arlam"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="72pt">
 
         <TextView
-            android:id="@+id/tv_recevice_duress_arlam"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_duress_alarm_app"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16pt"
-            android:paddingTop="12pt"
-            android:paddingBottom="12pt"
-            android:text="@string/philips_setting_app_stress_alarm"
-            android:textColor="@color/color_666666"
-            android:textSize="14pt"
-            />
-
-        <RelativeLayout
-            android:id="@+id/rl_duress_alarm_app_recevice"
-            android:layout_width="match_parent"
-            android:layout_height="72pt"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/tv_recevice_duress_arlam">
-
-            <TextView
-                android:id="@+id/tv_duress_alarm_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16pt"
-                android:layout_marginTop="14pt"
-                android:text="@string/philips_setting_duress_alarm_app_receiver"
-                android:textColor="@color/color_333333"
-                android:textSize="16pt" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_duress_alarm_app"
-                android:layout_marginStart="16pt"
-                android:layout_marginTop="8pt"
-                android:text="@string/philips_setting_app_stress_alarm"
-                android:textColor="@color/color_666666"
-                android:textSize="12pt" />
-
-            <TextView
-                android:id="@+id/tv_duress_alarm_toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
-                android:drawableRight="@drawable/philips_detail_setting_more"
-                android:drawablePadding="10pt"
-                android:textColor="@color/color_666666"
-                android:textSize="15pt" />
-
-        </RelativeLayout>
+            android:layout_marginTop="14pt"
+            android:textColor="@color/color_333333"
+            android:text="@string/philips_setting_duress_alarm_app_receiver"
+            android:textSize="16pt"/>
 
 
         <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="match_parent"
-            android:layout_height="56pt"
-            android:layout_marginTop="12pt"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:paddingStart="16pt"
-            android:text=""
+            android:layout_below="@id/tv_duress_alarm_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16pt"
+            android:layout_marginTop="8pt"
+            android:textColor="@color/color_666666"
+            android:text="@string/philips_setting_app_stress_alarm"
+            android:textSize="12pt"/>
+
+        <TextView
+            android:id="@+id/tv_duress_alarm_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16pt"
+            android:drawableRight="@drawable/philips_detail_setting_more"
+            android:drawablePadding="10pt"
+            android:textColor="@color/color_666666"
+            android:textSize="15pt"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_num"
+        app:layout_constraintTop_toBottomOf="@+id/rl_duress_alarm_app_recevice"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:paddingStart="16pt"
+        android:layout_marginTop="12pt"
+        android:text=""
+        android:gravity="center_vertical"
+        android:textSize="16pt"
+        android:textColor="@color/color_333333"
+        android:layout_height="56pt"></TextView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_duress_alarm_password_add_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_num"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="56pt">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16pt"
             android:textColor="@color/color_333333"
+            android:textSize="15pt"
+            android:layout_centerVertical="true"
+            android:text="@string/philips_setting_duress_alarm_app_add_time"
+            />
+
+        <TextView
+            android:id="@+id/tv_duress_alarm_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16pt"
+            android:layout_centerVertical="true"
             android:textSize="16pt"
-            app:layout_constraintTop_toBottomOf="@+id/rl_duress_alarm_app_recevice"></TextView>
+            android:textColor="@color/color_666666"
+            />
+    </RelativeLayout>
 
-
-        <RelativeLayout
-            android:id="@+id/rl_duress_alarm_password_add_time"
-            android:layout_width="match_parent"
-            android:layout_height="56pt"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/tv_num">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16pt"
-                android:text="@string/philips_setting_duress_alarm_app_add_time"
-                android:textColor="@color/color_333333"
-                android:textSize="15pt" />
-
-            <TextView
-                android:id="@+id/tv_duress_alarm_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                android:textColor="@color/color_666666"
-                android:textSize="16pt" />
-        </RelativeLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

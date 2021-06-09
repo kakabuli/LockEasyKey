@@ -48,9 +48,6 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.ResetDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SearchUSerBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SendEmailBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SendMessageBean;
-import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAccountBean;
-import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAlarmBean;
-import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAlarmSwitchBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpdateBleVersionBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpdateSoftwareVersionBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpgradeMultiOTABean;
@@ -1396,38 +1393,6 @@ public class XiaokaiNewServiceImp {
                 ;
     }
 
-    /**
-     * 设置密钥胁迫报警接收账户
-     *
-     */
-    public static Observable<BaseResult> wifiPwdDuressAccount(SettingPwdDuressAccountBean settingPwdDuressAccountBean) {
-        String timestamp = System.currentTimeMillis() /1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .wifiPwdDuressAccount(timestamp,new HttpUtils<SettingPwdDuressAccountBean>().getBodyToken(settingPwdDuressAccountBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread());
-    }
-
-    /**
-     * 设置密钥胁迫报警开关
-     *
-     */
-    public static Observable<BaseResult> wifiPwdDuressAlarm(SettingPwdDuressAlarmBean settingPwdDuressAlarmBean) {
-        String timestamp = System.currentTimeMillis() /1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .wifiPwdDuressAlarm(timestamp,new HttpUtils<SettingPwdDuressAlarmBean>().getBodyToken(settingPwdDuressAlarmBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread());
-    }
-
-    /**
-     * 修改胁迫报警开关
-     *
-     */
-    public static Observable<BaseResult> wifiPwdDuressAlarmSwitch(SettingPwdDuressAlarmSwitchBean settingPwdDuressAlarmSwitchBean) {
-        String timestamp = System.currentTimeMillis() /1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .wifiDuressAlarmSwitch(timestamp,new HttpUtils<SettingPwdDuressAlarmSwitchBean>().getBodyToken(settingPwdDuressAlarmSwitchBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread());
-    }
 
     ////////////////////////////////////////////           WiFi视频锁api功能            ///////////////////////////////////////////////
 

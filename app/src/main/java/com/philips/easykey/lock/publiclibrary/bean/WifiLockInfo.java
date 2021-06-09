@@ -162,8 +162,6 @@ public class WifiLockInfo implements Serializable {
     private String frontPanelVersion;
     private String backPanelVersion;
 
-    private int duressAlarmSwitch;
-
 
     @Generated(hash = 731569902)
     public WifiLockInfo(Long id, String deviceID, String wifiSN, int isAdmin, String adminUid,
@@ -242,13 +240,6 @@ public class WifiLockInfo implements Serializable {
     public WifiLockInfo() {
     }
 
-    public int getDuressAlarmSwitch() {
-        return duressAlarmSwitch;
-    }
-
-    public void setDuressAlarmSwitch(int duressAlarmSwitch) {
-        this.duressAlarmSwitch = duressAlarmSwitch;
-    }
 
     public String getFrontPanelVersion() {
         return frontPanelVersion;

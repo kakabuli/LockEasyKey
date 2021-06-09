@@ -2659,8 +2659,5 @@
     <string name="philips_privacy_policy">《隐私政策》</string>
     <string name="philips_register_agreement_tip">已阅读并同意</string>
     <string name="philips_and">和</string>
-    <string name="philips_duress_number">编号%1$s</string>
-    <string name="philips_set_duress_account">请设置胁迫报警账号</string>
-    <string name="phliips_user_not_registered">该用户未注册</string>
 
 </resources>
