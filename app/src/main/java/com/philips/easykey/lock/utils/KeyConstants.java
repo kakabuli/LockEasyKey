@@ -385,6 +385,9 @@ public class KeyConstants {
     //X9上锁方式
     public static final int WIFI_LOCK_LOCKING_METHOD = 3003;
 
+    //设置胁迫密钥账号
+    public static final int WIFI_LOCK_SETTING_DURESS_ACCOUNT = 3014;
+
     /**
      * 传递蓝牙设备信息的Key
      */
@@ -414,6 +417,21 @@ public class KeyConstants {
      * 是否是呼叫进来
      */
     public static final String IS_ACCEPT_CALL = "isAcceptCall";
+
+    /**
+     * 传递胁迫密码信息
+     */
+    public static final String DURESS_PASSWORD_INfO = "duressPasswordInfo";
+
+    /**
+     * 胁迫密码账号
+     */
+    public static final String DURESS_AUTHORIZATION_TELEPHONE = "duress_authorization_telephone";
+
+    /**
+     * 传递第i个胁迫密码信息
+     */
+    public static final String DURESS_PASSWORD_POSITION_INfO = "duressPasswordPositionInfo";
 
     /**
      * 升级时，保存的设备蓝牙版本号的Key
