@@ -1,9 +1,6 @@
 package com.philips.easykey.lock.activity.login;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -44,7 +41,6 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -206,7 +202,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
             wechatLogin();
         } else if(view.getId() == R.id.ivVerification) {
             // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
-//            changeToVCodeLogin();
+            changeToVCodeLogin();
         } else if(view.getId() == R.id.ivPhone){
             changeToAccountLogin();
         } else if(view.getId() == R.id.tvSelectCountry) {
@@ -263,7 +259,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
     }
 
     // APP_ID 替换为你的应用从官方网站申请到的合法appID
-    private static final String APP_ID = " wx2424a66f6c8a94df";
+    private static final String APP_ID = "wx2424a66f6c8a94df";
 
     // IWXAPI 是第三方app和微信通信的openApi接口
     private IWXAPI api;
@@ -289,13 +285,14 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
 
     private void wechatLogin() {
         if (!api.isWXAppInstalled()) {
-            // TODO: 2021/6/8 抽离文字
-            ToastUtils.showShort("你还没有安装微信");
+            ToastUtils.showShort(R.string.you_have_not_installed_wechat);
             return;
         }
         // send oauth request
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
+        // 用于保持请求和回调的状态，授权请求后原样带回给第三方。
+        // 该参数可用于防止 csrf 攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加 session 进行校验
         req.state = "wechat_sdk_demo_test";
         api.sendReq(req);
     }
@@ -442,7 +439,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
                     if(TextUtils.isEmpty(mCountryCode)) {
                         return;
                     }
-                    mCountryCode.replace("+", "");
+                    mCountryCode = mCountryCode.replace("+", "");
                     showLoading(getString(R.string.login_in));
                     loginByPhone(mCountryCode + phoneOrMail, pwd, phoneOrMail);
                 }
