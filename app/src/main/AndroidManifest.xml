@@ -1298,6 +1298,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.PhilipsRegisterActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="com.philips.easykey.lock"
+            android:launchMode="singleTask"/>
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"

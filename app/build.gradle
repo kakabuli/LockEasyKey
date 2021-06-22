@@ -79,6 +79,10 @@ android {
         debug {
             v1SigningEnabled true
             v2SigningEnabled true
+            keyAlias 'Philips_EasyKey'
+            keyPassword 'philips2021'
+            storeFile file('../Philips_EasyKey.jks')
+            storePassword 'philips2021'
         }
 
         release {

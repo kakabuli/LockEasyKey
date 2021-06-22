@@ -12,6 +12,8 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWarringRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockAlarmRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
@@ -21,11 +23,13 @@ import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.result.OperationRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.RegisterResult;
+import com.philips.easykey.lock.publiclibrary.http.result.RegisterWeChatAndBindPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SinglePasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SwitchStatusResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolVersionResult;
+import com.philips.easykey.lock.publiclibrary.http.result.WeChatLoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
@@ -835,5 +839,34 @@ public interface IXiaoKaiNewService {
     @POST(HttpUrlConstants.WIFI_LOCK_UPLOAD_MULTI_OTA)
     @Headers({KeyConstants.VERSION})
     Observable<BaseResult> wifiDeviceUploadMultiOta(@Header("timestamp") String timestamp,@Body RequestBody info);
+
+
+    /**
+     * 获取wechat的OpenId
+     */
+    @POST(HttpUrlConstants.GET_WECHAT_OPEN_ID)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetWeChatOpenIdResult> getWeChatOpenId(@Header("timestamp") String timestamp,@Body RequestBody info);
+
+    /**
+     * 获取微信用户绑定的手机号
+     */
+    @POST(HttpUrlConstants.GET_WECHAT_USER_PHONE)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetWeChatUserPhoneResult> getWeChatUserPhone(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 注册微信openid，绑定手机
+     */
+    @POST(HttpUrlConstants.REGISTER_WECHAT_AND_BIND_PHONE)
+    @Headers({KeyConstants.VERSION})
+    Observable<RegisterWeChatAndBindPhoneResult> registerWeChatAndBindPhone(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 微信用户一键登录
+     */
+    @POST(HttpUrlConstants.WECHAT_LOGIN)
+    @Headers({KeyConstants.VERSION})
+    Observable<WeChatLoginResult> weChatLogin(@Header("timestamp") String timestamp, @Body RequestBody info);
 
 }

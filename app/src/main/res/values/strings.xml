@@ -2663,4 +2663,11 @@
     <string name="philips_set_duress_account">请设置胁迫报警账号</string>
     <string name="phliips_user_not_registered">该用户未注册</string>
 
+    <string name="philips_errcode_success">发送成功</string>
+    <string name="philips_errcode_cancel">发送取消</string>
+    <string name="philips_errcode_deny">发送被拒绝</string>
+    <string name="philips_errcode_unsupported">不支持错误</string>
+    <string name="philips_errcode_unknown">发送返回</string>
+    <string name="you_have_not_installed_wechat">你还没有安装微信</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.http;
 
+import androidx.annotation.NonNull;
+
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.bean.PhoneMessage;
 import com.philips.easykey.lock.bean.PushBean;
@@ -10,6 +12,8 @@ import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddUserBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatOpenIdBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatUserPhoneBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.HangerMultiOTABean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.HangerUpgradeMultiOTABean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.HttpAllBindDevicesBean;
@@ -44,6 +48,7 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.MultiOTABean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.OTABean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.PutMessageBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.RegisterByPhoneBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.RegisterWeChatAndBindPhoneBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.ResetDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SearchUSerBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SendEmailBean;
@@ -60,6 +65,7 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.UploadOperationRecor
 import com.philips.easykey.lock.publiclibrary.http.postbean.UploadOtaBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UploadOtaResultBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UploadWarringRecordBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.WeChatLoginBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockBindBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoBindBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoUpdateBindBean;
@@ -87,6 +93,8 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWarringRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockAlarmRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
@@ -95,11 +103,13 @@ import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.result.OperationRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.RegisterResult;
+import com.philips.easykey.lock.publiclibrary.http.result.RegisterWeChatAndBindPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SinglePasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SwitchStatusResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolVersionResult;
+import com.philips.easykey.lock.publiclibrary.http.result.WeChatLoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
@@ -147,8 +157,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .registerByPhone(timestamp,new HttpUtils<RegisterByPhoneBean>().getBodyNoToken(registerByPhoneBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -180,8 +189,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .loginByPhone(timestamp,new HttpUtils<LoginByPhoneBean>().getBodyNoToken(loginByPhoneBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -197,8 +205,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .loginByEmail(timestamp,new HttpUtils<LoginByEmailBean>().getBodyNoToken(loginByEmailBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -216,8 +223,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .forgetPassword(timestamp,new HttpUtils<ForgetPasswordBean>().getBodyNoToken(forgetPasswordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -234,8 +240,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .modifyPassword(timestamp,new HttpUtils<ModifyPasswordBean>().getBodyToken(modifyPasswordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -246,8 +251,7 @@ public class XiaokaiNewServiceImp {
     public static Observable<BaseResult> loginOut() {
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .loginOut()
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -279,8 +283,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .modifyUserNick(timestamp,new HttpUtils<ModifyUserNickBean>().getBodyToken(modifyUserNickBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -297,8 +300,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .putMessage(timestamp,new HttpUtils<PutMessageBean>().getBodyToken(putMessageBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -309,8 +311,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getDeviceGeneralAdministrator(timestamp,new HttpUtils<GetDeviceGeneralAdministratorBean>().getBodyToken(getDeviceGeneralAdministratorBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -332,8 +333,7 @@ public class XiaokaiNewServiceImp {
     public static Observable<UserProtocolVersionResult> getUserProtocolVersion() {
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getUserProtocolVersion()
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -348,8 +348,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getUserProtocolContent(timestamp,new HttpUtils<GetUserProtocolContentBean>().getBodyToken(getUserProtocolContentBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     ////////////////////////////////////////////////门锁管理/////////////////////////////////////////////////////////////
@@ -386,8 +385,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getDevices(timestamp,new HttpUtils<GetDevicesBean>().getBodyToken(getDevicesBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -403,8 +401,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .deleteDevice(timestamp,new HttpUtils<DeleteDeviceBean>().getBodyToken(deleteDeviceBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -454,8 +451,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getpwdBySN(timestamp,new HttpUtils<GetPwdBySNBean>().getBodyToken(getPwdBySNBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -473,8 +469,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .resetDevice(timestamp,new HttpUtils<ResetDeviceBean>().getBodyToken(resetDeviceBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -499,8 +494,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .addPassword(timestamp,new HttpUtils<AddPasswordBean>().getBodyToken(addPasswordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -617,8 +611,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .addUser(timestamp,new HttpUtils<AddUserBean>().getBodyToken(addUserBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -635,8 +628,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .modifyCommonUserNickname(timestamp,new HttpUtils<ModifyCommonUserNicknameBean>().getBodyToken(modifyCommonUserNicknameBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -653,8 +645,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .deleteUser(timestamp,new HttpUtils<DeleteUserBean>().getBodyToken(deleteUserBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -667,8 +658,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .searchUser(timestamp,new HttpUtils<SearchUSerBean>().getBodyToken(searchUSerBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -695,8 +685,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .uploadBinRecord(timestamp,new HttpUtils<UploadBinRecordBean>().getBodyToken(uploadBinRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -716,8 +705,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .uploadAppRecord(timestamp,new HttpUtils<UploadAppRecordBean>().getBodyToken(uploadAppRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -735,8 +723,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getLockRecord(timestamp,new HttpUtils<GetLockRecordBean>().getBodyToken(getLockRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -753,8 +740,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getWarringRecord(timestamp,new HttpUtils<GetWarringRecordBean>().getBodyToken(getWarringRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -771,8 +757,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .sendMessage(timestamp,new HttpUtils<SendMessageBean>().getBodyNoToken(sendMessageBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -788,8 +773,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
                 .sendEamilYZM(timestamp,new HttpUtils<SendEmailBean>().getBodyNoToken(sendEmailBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -896,8 +880,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .uploadWarringRecord(timestamp,new HttpUtils<UploadWarringRecordBean>().getBodyToken(uploadWarringRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -906,8 +889,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .openLockAuth(timestamp,new HttpUtils<OpenLockAuth>().getBodyToken(openLockAuth,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     public static Observable<BaseResult> uploadPushId(String uid, String jpushId, int type) {
@@ -942,8 +924,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getPushSwitch(timestamp,new HttpUtils<PushSwitch>().getBodyToken(pushSwitch,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -952,8 +933,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .updatePushSwitch(timestamp,new HttpUtils<PushSwitchBean>().getBodyToken(pushSwitchBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -976,8 +956,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .uploadOperationRecord(timestamp,new HttpUtils<UploadOperationRecordBean>().getBodyToken(uploadOperationRecordBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
 
     }
 
@@ -995,8 +974,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .updateSoftwareVersion(timestamp,new HttpUtils<UpdateSoftwareVersionBean>().getBodyToken(updateSoftwareVersionBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -1013,8 +991,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .updateBleVersion(timestamp,new HttpUtils<UpdateBleVersionBean>().getBodyToken(updateSoftwareVersionBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -1031,8 +1008,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .modifyFunctionSet(timestamp,new HttpUtils<ModifyFunctionSetBean>().getBodyToken(updateSoftwareVersionBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
 
@@ -1392,8 +1368,7 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .updateSwitchNickname(timestamp,new HttpUtils<ModifySwitchNickBean>().getBodyToken(modifySwitchNickBean,timestamp))
-                .compose(RxjavaHelper.observeOnMainThread())
-                ;
+                .compose(RxjavaHelper.observeOnMainThread());
     }
 
     /**
@@ -1595,4 +1570,62 @@ public class XiaokaiNewServiceImp {
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }
+
+    /**
+     * 获取wechat的OpenId
+     */
+    public static Observable<GetWeChatOpenIdResult> getWeChatOpenId(@NonNull String code) {
+        GetWeChatOpenIdBean bean = new GetWeChatOpenIdBean();
+        bean.setCode(code);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .getWeChatOpenId(timestamp, new HttpUtils<GetWeChatOpenIdBean>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 获取微信用户绑定的手机号
+     */
+    public static Observable<GetWeChatUserPhoneResult> getWeChatUserPhone(@NonNull String openId) {
+        GetWeChatUserPhoneBean bean = new GetWeChatUserPhoneBean();
+        bean.setOpenId(openId);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .getWeChatUserPhone(timestamp, new HttpUtils<GetWeChatUserPhoneBean>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 注册微信openid，绑定手机
+     */
+    public static Observable<RegisterWeChatAndBindPhoneResult> registerWeChatAndBindPhone(@NonNull String openId,
+                                                                                          @NonNull String tel,
+                                                                                          @NonNull String tokens) {
+        RegisterWeChatAndBindPhoneBean bean = new RegisterWeChatAndBindPhoneBean();
+        bean.setOpenId(openId);
+        bean.setTel(tel);
+        bean.setTokens(tokens);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .registerWeChatAndBindPhone(timestamp, new HttpUtils<RegisterWeChatAndBindPhoneBean>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 微信用户一键登录
+     */
+    public static Observable<WeChatLoginResult> weChatLogin(@NonNull String openId, @NonNull String tel) {
+        WeChatLoginBean bean = new WeChatLoginBean();
+        bean.setOpenId(openId);
+        bean.setTel(tel);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .weChatLogin(timestamp, new HttpUtils<WeChatLoginBean>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
 }

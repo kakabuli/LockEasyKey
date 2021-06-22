@@ -485,4 +485,16 @@ public class HttpUrlConstants {
      *  晾衣机设备修改昵称
      */
     public static final String MODIFY_HANGER_NICK_NAME = BASE_URL + "/wifi/hanger/updateNickName";
+
+
+    /*------------------------------------ 微信相关 --------------------------------------*/
+
+    public static final String GET_WECHAT_OPEN_ID = BASE_URL + "/user/wechat/getOpenId";
+
+    public static final String GET_WECHAT_USER_PHONE = BASE_URL + "/user/wechat/getTelByOpenId";
+
+    public static final String REGISTER_WECHAT_AND_BIND_PHONE = BASE_URL + "/user/wechat/putUserByOpenId";
+
+    public static final String WECHAT_LOGIN = BASE_URL + "/user/wechat/getUserByOpenId";
+
 }
