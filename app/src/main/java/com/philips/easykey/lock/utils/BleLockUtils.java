@@ -182,7 +182,7 @@ public class BleLockUtils {
         FUNCTION_SET.put(0xA4, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 17, 19, 20, 21, 22, 23, 33, 34, 38, 44, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74, 75, 76, 86, 88, 89, 90, 93, 94});
         FUNCTION_SET.put(0xA5, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 17, 19, 20, 21, 22, 23, 26, 28, 29, 30, 33, 34, 38, 47, 51, 52, 53, 54, 55, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 88, 89, 90, 91, 92, 93,94});
 
-        
+
         FUNCTION_SET.put(0xFF, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 16, 17, 19, 20, 21, 22}); //默认为FF
     }
 
@@ -529,6 +529,22 @@ public class BleLockUtils {
         //获取改功能集是否存在
         return !(FUNCTION_SET.get(functionSet) == null);
 
+    }
+
+    /**
+     * 人脸识别开关显示
+     */
+    public static boolean isSupportFacereCognitionSwitch(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(92);
     }
 
     public static boolean isSupportFace(String functionSet) {

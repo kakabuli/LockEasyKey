@@ -35,6 +35,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRe
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.WifiLockOperationBean;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
@@ -169,8 +170,10 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
         if (powerSave == 1) {//已启动节能模式
             changeLockStatus(8);
         }
-        if (faceStatus == 1) {//面容识别已关闭
-            changeLockStatus(7);
+        if(BleLockUtils.isSupportFacereCognitionSwitch(wifiLockInfo.getFunctionSet())){
+            if (faceStatus == 0) {//面容识别已关闭
+                changeLockStatus(7);
+            }
         }
         if (safeMode == 1) {//安全模式
             changeLockStatus(6);
