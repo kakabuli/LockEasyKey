@@ -116,7 +116,10 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
 
     private void initListener() {
         mBack.setOnClickListener(v -> {
-            settingDuressAccount();
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
+            startActivity(intent);
+            finish();
         });
         confirm.setOnClickListener(v -> {
             settingDuressAccount();

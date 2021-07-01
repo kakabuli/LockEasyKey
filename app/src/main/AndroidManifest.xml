@@ -76,6 +76,7 @@
         <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity"/>
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"

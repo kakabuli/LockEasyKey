@@ -72,6 +72,12 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
     protected PhilipsWifiVideoLockDuressPresenter<IPhilipsWifiVideoLockDuressView> createPresent() {
         return new PhilipsWifiVideoLockDuressPresenter<>();
     }
