@@ -254,9 +254,8 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         if(records.size() <= 0) return;
         if(records.size() == 1){
             BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get(0));
-            mTvLastRecord.setText(TimeUtils.millis2String(records.get(0).getCreateTime() * 1000,
-                    TimeUtils.getSafeDateFormat("yyyy-MM-dd HH:mm") + " ")
-                    + mTvLastRecord.getText().toString().trim());
+            mTvLastRecord.setText(DateUtils.secondToDate2(records.get(0).getCreateTime())
+                    + " " + mTvLastRecord.getText().toString().trim());
             return;
         }
 
