@@ -368,11 +368,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     protected void onStart() {
         super.onStart();
         isOnBackground = false;
-
         ispush = (boolean) SPUtils.get(Constants.PUSHID, false);
         if(ispush){
             LogUtils.d("上传成功token...");
-            return;
+//            return;
         }
         if (Rom.isEmui()) {
             // no get token
