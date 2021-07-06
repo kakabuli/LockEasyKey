@@ -455,7 +455,8 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
     @Override
     public void unknowError(String errorCode) {
-        ToastUtils.showShort(R.string.unknown_error);
+        //TODO :未知错误没有必要toast
+//        ToastUtils.showShort(R.string.unknown_error);
         hiddenLoading();
     }
 
