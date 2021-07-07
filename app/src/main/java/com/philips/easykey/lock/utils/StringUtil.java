@@ -205,7 +205,7 @@ public class StringUtil {
                 isLetter = true;
             }
         }
-        String regex = "^[a-zA-Z0-9]{6,12}$";
+        String regex = "^[a-zA-Z0-9]{8,15}$";
         boolean isRight = isDigit && isLetter && str.matches(regex);
         return isRight;
     }
