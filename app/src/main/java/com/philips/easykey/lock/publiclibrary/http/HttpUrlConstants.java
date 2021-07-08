@@ -497,4 +497,13 @@ public class HttpUrlConstants {
 
     public static final String WECHAT_LOGIN = BASE_URL + "/user/wechat/getUserByOpenId";
 
+    /**
+     * 门锁当天统计
+     */
+    public static final String DOOR_LOCK_STATISTICS_DAY = BASE_URL + "wifi/statistics/day";
+
+    /**
+     * 门锁七天统计
+     */
+    public static final String DOOR_LOCK_STATISTICS_SEVEN_DAY = BASE_URL + "wifi/statistics/days";
 }

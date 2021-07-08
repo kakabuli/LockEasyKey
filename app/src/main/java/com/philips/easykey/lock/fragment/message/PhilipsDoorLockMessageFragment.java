@@ -2,6 +2,7 @@ package com.philips.easykey.lock.fragment.message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -31,6 +33,8 @@ import com.philips.easykey.lock.mvp.presenter.DoorLockMessageFragmentPresenter;
 import com.philips.easykey.lock.mvp.view.IDoorLockMessageView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
+import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.widget.SpacesItemDecoration;
@@ -102,11 +106,19 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         mView.findViewById(R.id.iv_video_lock_msg_right).setOnClickListener(v -> rcvVideoLockMsg.scrollBy(-earlyWarningMsgMoveRightDistance,0));
         mView.findViewById(R.id.iv_today_lock_statistics_left).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(todayLockStatisticsMoveLeftDistance,0));
         mView.findViewById(R.id.iv_today_lock_statistics_right).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance,0));
-
         initView();
         initDevices();
         MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
         return mView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!mDevices.isEmpty() && wifiLockInfo != null ) {
+            mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiLockInfo.getWifiSN());
+            mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiLockInfo.getWifiSN());
+        }
     }
 
     @Override
@@ -317,6 +329,16 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     public void onWifiLockActionUpdate() {
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiLockInfo.getWifiSN());
         refreshLayoutData(wifiLockInfo);
+    }
+
+    @Override
+    public void getDtatisticsDay(GetStatisticsDayResult getStatisticsDayResult) {
+        LogUtils.d("获取门锁当天记录  数据是  " + getStatisticsDayResult.toString());
+    }
+
+    @Override
+    public void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult) {
+        LogUtils.d("获取门锁七天记录  数据是  " + getStatisticsSevenDayResult.toString());
     }
 
 }

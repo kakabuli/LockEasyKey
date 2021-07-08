@@ -6,8 +6,8 @@ apply plugin: 'com.mob.sdk'
 
 greendao {
     schemaVersion rootProject.ext.greendao_schemaVersion// 数据库版本号
-//    daoPackage 'com.philips.easykey.lock.utils.greenDao.db'//自动生成的dao的包名，包名默认是entity所在的包；
-//    targetGenDir 'src/main/java'//生成数据库文件的目录
+    daoPackage 'com.philips.easykey.lock.utils.greenDao.db'//自动生成的dao的包名，包名默认是entity所在的包；
+    targetGenDir 'src/main/java'//生成数据库文件的目录
 }
 
 bugly {
