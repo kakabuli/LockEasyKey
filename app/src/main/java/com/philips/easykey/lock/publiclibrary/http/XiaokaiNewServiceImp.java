@@ -12,6 +12,7 @@ import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddUserBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.DoorLockStatisticsBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatOpenIdBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatUserPhoneBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.HangerMultiOTABean;
@@ -92,6 +93,8 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetHelpLogResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWarringRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
@@ -1628,4 +1631,31 @@ public class XiaokaiNewServiceImp {
                 .compose(RxjavaHelper.observeOnMainThread());
     }
 
+    /**
+     * 获取门锁当天统计
+     */
+     public static Observable<GetStatisticsDayResult> getDoorLockDtatisticsDay(@NonNull String uid, @NonNull String wifiSN){
+         DoorLockStatisticsBean bean = new DoorLockStatisticsBean();
+         bean.setUid(uid);
+         bean.setWifiSN(wifiSN);
+         String timestamp = System.currentTimeMillis()/1000 + "";
+         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                 .getDoorLockDtatisticsDay(timestamp, new HttpUtils<DoorLockStatisticsBean>().getBodyToken(bean, timestamp))
+                 .subscribeOn(Schedulers.io())
+                 .compose(RxjavaHelper.observeOnMainThread());
+     }
+
+    /**
+     * 获取门锁当天统计
+     */
+    public static Observable<GetStatisticsSevenDayResult> getDoorLockDtatisticsSevenDay(@NonNull String uid, @NonNull String wifiSN){
+        DoorLockStatisticsBean bean = new DoorLockStatisticsBean();
+        bean.setUid(uid);
+        bean.setWifiSN(wifiSN);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .getDoorLockDtatisticsSevenDay(timestamp, new HttpUtils<DoorLockStatisticsBean>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
 }
