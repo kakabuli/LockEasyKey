@@ -1291,6 +1291,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.addDevice.PhilipsAddDeviceActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.addDevice.PhilipsAddDeviceHelpActivity"
+            android:theme="@style/DialogTransparent"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.device.wifilock.newadd.PhilipsAddVideoLockActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.PhilipsLoginActivity"

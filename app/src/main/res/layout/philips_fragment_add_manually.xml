@@ -11,6 +11,7 @@
         android:layout_width="343pt"
         android:layout_height="44pt"
         android:layout_marginTop="10pt"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_search_et_bg"
         android:drawableStart="@drawable/philips_icon_search"
         android:drawablePadding="16pt"
@@ -80,14 +81,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSmartLockStr" />
 
-    <Button
-        android:id="@+id/btnVideoLock"
-        android:layout_width="wrap_content"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDoorLock"
+        android:layout_width="260pt"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="视频锁"
+        android:overScrollMode="never"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="100pt"
+        android:layout_marginEnd="15pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSmartLockStr3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSmartLockStr3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

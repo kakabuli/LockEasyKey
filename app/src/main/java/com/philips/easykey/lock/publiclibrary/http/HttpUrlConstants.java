@@ -506,4 +506,10 @@ public class HttpUrlConstants {
      * 门锁七天统计
      */
     public static final String DOOR_LOCK_STATISTICS_SEVEN_DAY = BASE_URL + "wifi/statistics/days";
+
+
+    /**
+     * 获取所有型号图片列表
+     */
+    public static final String GET_PRODUCTION_MODEL_LIST = BASE_URL + "production/model/list";
 }

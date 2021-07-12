@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#7F000000"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.camera.view.PreviewView
@@ -27,6 +28,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="331pt"
+        android:layout_height="75pt"
+        android:layout_marginStart="22pt"
+        android:layout_marginEnd="22pt"
+        android:layout_marginBottom="202pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/background_5effffff_3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/philips_qr_code_scan_add_tips"
+        android:textColor="@color/white"
+        android:textSize="14pt"
+        android:layout_marginStart="31pt"
+        android:layout_marginBottom="222pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:layout_width="79pt"
+        android:layout_height="65pt"
+        android:layout_marginEnd="27pt"
+        android:layout_marginBottom="202pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/philips_home_scan_img_tips" />
 
     <ImageView
         android:id="@+id/ivFlashLight"

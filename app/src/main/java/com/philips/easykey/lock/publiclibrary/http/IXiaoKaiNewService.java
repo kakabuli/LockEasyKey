@@ -10,6 +10,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetDeviceResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetHelpLogResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetProductionModelListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
@@ -884,4 +885,11 @@ public interface IXiaoKaiNewService {
     @POST(HttpUrlConstants.DOOR_LOCK_STATISTICS_SEVEN_DAY)
     @Headers({KeyConstants.VERSION})
     Observable<GetStatisticsSevenDayResult> getDoorLockDtatisticsSevenDay(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 获取所有型号图片列表
+     */
+    @POST(HttpUrlConstants.GET_PRODUCTION_MODEL_LIST)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetProductionModelListResult> getProductionModelList(@Header("timestamp") String timestamp, @Body RequestBody info);
 }

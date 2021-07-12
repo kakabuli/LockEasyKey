@@ -92,6 +92,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetDeviceResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetHelpLogResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetProductionModelListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPwdBySnResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
@@ -1658,4 +1659,16 @@ public class XiaokaiNewServiceImp {
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }
+
+    /**
+     * 获取门锁当天统计
+     */
+    public static Observable<GetProductionModelListResult> getProductionModelList(){
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .getProductionModelList(timestamp, new HttpUtils<>().getBodyToken(null, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
 }
