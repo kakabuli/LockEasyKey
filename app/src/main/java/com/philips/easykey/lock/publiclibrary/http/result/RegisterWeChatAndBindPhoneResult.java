@@ -65,5 +65,23 @@ public class RegisterWeChatAndBindPhoneResult {
         public void setToken(String token) {
             this.token = token;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "uid='" + uid + '\'' +
+                    ", token='" + token + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterWeChatAndBindPhoneResult{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", nowTime=" + nowTime +
+                ", data=" + data +
+                '}';
     }
 }

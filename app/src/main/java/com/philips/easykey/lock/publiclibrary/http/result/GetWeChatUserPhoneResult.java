@@ -6,12 +6,9 @@ package com.philips.easykey.lock.publiclibrary.http.result;
  * E-mail : wengmaowei@kaadas.com
  * desc   :
  */
-public class GetWeChatUserPhoneResult {
+public class GetWeChatUserPhoneResult extends BaseResult{
 
-
-    private String code;
-    private String msg;
-    private Integer nowTime;
+    private long nowTime;
     private DataBean data;
 
     public String getCode() {
@@ -30,7 +27,7 @@ public class GetWeChatUserPhoneResult {
         this.msg = msg;
     }
 
-    public Integer getNowTime() {
+    public long getNowTime() {
         return nowTime;
     }
 

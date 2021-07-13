@@ -12,6 +12,7 @@ import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddUserBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.CodeLoginBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.DoorLockStatisticsBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatOpenIdBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatUserPhoneBean;
@@ -1582,8 +1583,8 @@ public class XiaokaiNewServiceImp {
         GetWeChatOpenIdBean bean = new GetWeChatOpenIdBean();
         bean.setCode(code);
         String timestamp = System.currentTimeMillis()/1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .getWeChatOpenId(timestamp, new HttpUtils<GetWeChatOpenIdBean>().getBodyToken(bean, timestamp))
+        return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
+                .getWeChatOpenId(timestamp, new HttpUtils<GetWeChatOpenIdBean>().getBodyNoToken(bean, timestamp))
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }
@@ -1595,8 +1596,8 @@ public class XiaokaiNewServiceImp {
         GetWeChatUserPhoneBean bean = new GetWeChatUserPhoneBean();
         bean.setOpenId(openId);
         String timestamp = System.currentTimeMillis()/1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .getWeChatUserPhone(timestamp, new HttpUtils<GetWeChatUserPhoneBean>().getBodyToken(bean, timestamp))
+        return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
+                .getWeChatUserPhone(timestamp, new HttpUtils<GetWeChatUserPhoneBean>().getBodyNoToken(bean, timestamp))
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }
@@ -1626,8 +1627,22 @@ public class XiaokaiNewServiceImp {
         bean.setOpenId(openId);
         bean.setTel(tel);
         String timestamp = System.currentTimeMillis()/1000 + "";
-        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
-                .weChatLogin(timestamp, new HttpUtils<WeChatLoginBean>().getBodyToken(bean, timestamp))
+        return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
+                .weChatLogin(timestamp, new HttpUtils<WeChatLoginBean>().getBodyNoToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 手机验证码登录
+     */
+    public static Observable<WeChatLoginResult> codeLogin(@NonNull String tokens, @NonNull String tel) {
+        CodeLoginBean bean = new CodeLoginBean();
+        bean.setTokens(tokens);
+        bean.setTel(tel);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getNoTokenInstance().create(IXiaoKaiNewService.class)
+                .codeLogin(timestamp, new HttpUtils<CodeLoginBean>().getBodyNoToken(bean, timestamp))
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }

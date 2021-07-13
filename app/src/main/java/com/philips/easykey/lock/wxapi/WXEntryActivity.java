@@ -5,11 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
+import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
+import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
+import com.philips.easykey.lock.publiclibrary.http.util.LoginObserver;
+import com.philips.easykey.lock.utils.KeyConstants;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -22,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * author :
@@ -36,6 +45,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     private final String APP_ID = "wx2424a66f6c8a94df";
     private final String APP_SECRET = "e8195f689fd5d0b409935ed32487642d";
+
+    private  static onWXDataListener mListener;
+    public static void setWXdata(onWXDataListener listener){
+        mListener = listener;
+    }
 
     private static class MyHandler extends Handler {
         private final WeakReference<WXEntryActivity> wxEntryActivityWeakReference;
@@ -58,12 +72,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                     refreshToken = json.getString("refresh_token");
                     scope = json.getString("scope");
                     LogUtils.d(data.getString("result"));
-                    Intent intent = new Intent(wxEntryActivityWeakReference.get(), PhilipsLoginActivity.class);
-                    intent.putExtra("openId", openId);
-                    intent.putExtra("accessToken", accessToken);
-                    intent.putExtra("refreshToken", refreshToken);
-                    intent.putExtra("scope", scope);
-                    wxEntryActivityWeakReference.get().startActivity(intent);
                 } catch (JSONException e) {
                     LogUtils.e(e.getMessage());
                 }
@@ -123,19 +131,21 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 result = R.string.philips_errcode_unknown;
                 break;
         }
-
-        ToastUtils.showShort(getString(result) + ", type=" + resp.getType());
         LogUtils.d("type=" + resp.getType() + "openId=" + resp.openId);
-
         if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
             SendAuth.Resp authResp = (SendAuth.Resp)resp;
             String state = authResp.state;
             final String code = authResp.code;
-            NetworkUtil.sendWxAPI(mMyHandler, String.format("https://api.weixin.qq.com/sns/oauth2/access_token?" +
-                            "appid=%s&secret=%s&code=%s&grant_type=authorization_code", APP_ID, APP_SECRET, code),
-                    NetworkUtil.GET_TOKEN);
+            /*Intent intent = new Intent(this, PhilipsLoginActivity.class);
+            intent.putExtra("code", code);
+            startActivity(intent);*/
+            mListener.data(code);
         }
+
         finish();
+    }
+    public interface onWXDataListener{
+        void data(String code);
     }
 
     private void goToGetMsg() {
@@ -144,6 +154,4 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 //        startActivity(intent);
 //        finish();
     }
-
-
 }

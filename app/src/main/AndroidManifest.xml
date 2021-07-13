@@ -1297,6 +1297,7 @@
         <activity android:name=".activity.device.wifilock.newadd.PhilipsAddVideoLockActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.PhilipsLoginActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.PhilipsForgetPwdActivity"
             android:screenOrientation="portrait"/>

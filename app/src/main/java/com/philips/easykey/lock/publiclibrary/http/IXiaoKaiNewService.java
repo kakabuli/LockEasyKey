@@ -873,6 +873,13 @@ public interface IXiaoKaiNewService {
     Observable<WeChatLoginResult> weChatLogin(@Header("timestamp") String timestamp, @Body RequestBody info);
 
     /**
+     * 微信用户一键登录
+     */
+    @POST(HttpUrlConstants.CODE_LOGIN)
+    @Headers({KeyConstants.VERSION})
+    Observable<WeChatLoginResult> codeLogin(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
      * 门锁当天统计
      */
     @POST(HttpUrlConstants.DOOR_LOCK_STATISTICS_DAY)

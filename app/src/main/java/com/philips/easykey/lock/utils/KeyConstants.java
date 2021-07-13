@@ -472,6 +472,14 @@ public class KeyConstants {
     //国家
     public static final String COUNTRY = "country";
 
+    public static final String WX_OPENID = "openId";
+
+    public static final String WX_ACCESSTOKEN = "accessToken";
+
+    public static final String WX_REFRESHTOKEN = "refreshToken";
+
+    public static final String WX_SCOPE = "scope";
+
     //铃声音量
     public static final String CAT_EYE_VOLUME = "catEyeVolume";
     /**
