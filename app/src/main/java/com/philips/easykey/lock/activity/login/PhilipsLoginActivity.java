@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,8 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.choosecountry.CountryActivity;
+import com.philips.easykey.lock.activity.my.PersonalUserAgreementActivity;
+import com.philips.easykey.lock.activity.my.PrivacyActivity;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
@@ -41,6 +46,7 @@ import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DetectionEmailPhone;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.LinkClickableSpan;
 import com.philips.easykey.lock.utils.MD5Utils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NetUtil;
@@ -74,6 +80,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     private TextView mTvSelectCountry;
     private ImageView mIvShowOrHide;
     private EditText mEtVerificationCode;
+    private TextView mTvAgreement;
     private TextView mTvGetCode;
     private ImageView mIvPhone;
     private TextView mTvPhone;
@@ -137,6 +144,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mTvCode = findViewById(R.id.tvCode);
         mTvForgotPwd = findViewById(R.id.tvForgotPwd);
         mTvRegister = findViewById(R.id.tvRegister);
+        mTvAgreement = findViewById(R.id.tvAgreement);
 
         changeLoginBtnStyle(false);
         mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
@@ -183,13 +191,35 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             }
         });
 
+        mEtVerificationCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String account = mEtPhoneOrMail.getText().toString().trim();
+                if(TextUtils.isEmpty(account)) {
+                    changeLoginBtnStyle(false);
+                } else {
+                    changeLoginBtnStyle(!TextUtils.isEmpty(s.toString()));
+                }
+            }
+        });
+
         applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
                 mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode);
         setStatusBarColor(R.color.white);
 
         regToWx();
-
+        initTerms();
     }
 
     @Override
@@ -197,6 +227,34 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         initLoginData();
         checkVersion();
         initAccountFromLocal();
+    }
+
+    private void initTerms() {
+        String termsOfUseStr = getString(R.string.philips_terms_of_use2);
+        SpannableString termsOfUseSpannable = new SpannableString(termsOfUseStr);
+        LinkClickableSpan termsOfUseSpan = new LinkClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent agreementIntent = new Intent(PhilipsLoginActivity.this, PersonalUserAgreementActivity.class);
+                startActivity(agreementIntent);
+            }
+        };
+        termsOfUseSpannable.setSpan(termsOfUseSpan, 0, termsOfUseStr.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        String privacyPolicyStr = getString(R.string.philips_privacy_policy);
+        SpannableString privacyPolicySpannable = new SpannableString(privacyPolicyStr);
+        LinkClickableSpan privacyPolicySpan = new LinkClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent privacyIntent = new Intent(PhilipsLoginActivity.this, PrivacyActivity.class);
+                startActivity(privacyIntent);
+            }
+        };
+        privacyPolicySpannable.setSpan(privacyPolicySpan, 0, termsOfUseStr.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvAgreement.append(termsOfUseSpannable);
+        mTvAgreement.append(getString(R.string.philips_and));
+        mTvAgreement.append(privacyPolicySpannable);
+        mTvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void initAccountFromLocal() {
@@ -759,7 +817,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
     private void codeLogin(){
         if (NetUtil.isNetworkAvailable()) {
-            final String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
+             String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
+            mCountryCode = mCountryCode.replace("+", "");
+            account = mCountryCode + account;
             if (TextUtils.isEmpty(account)) {
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;

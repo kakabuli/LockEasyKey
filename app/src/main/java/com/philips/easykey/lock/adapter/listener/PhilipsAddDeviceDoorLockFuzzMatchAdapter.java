@@ -1,4 +1,4 @@
-package com.philips.easykey.lock.adapter;
+package com.philips.easykey.lock.adapter.listener;
 
 
 import android.graphics.drawable.Drawable;
@@ -9,34 +9,27 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.bean.deviceAdd.PhilipsAddManuallyDeviceBean;
-import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
-
-public class PhilipsAddDeviceDoorLockAdapter extends BaseQuickAdapter<PhilipsAddManuallyDeviceBean, BaseViewHolder> {
+public class PhilipsAddDeviceDoorLockFuzzMatchAdapter extends BaseQuickAdapter<PhilipsAddManuallyDeviceBean, BaseViewHolder> {
 
     private OnClickListener mOnClickListener;
-    public PhilipsAddDeviceDoorLockAdapter(int convertId, ArrayList<PhilipsAddManuallyDeviceBean> dataList) {
-        super(convertId, dataList);
+    public PhilipsAddDeviceDoorLockFuzzMatchAdapter(int convertId) {
+        super(convertId);
     }
-
 
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, PhilipsAddManuallyDeviceBean data) {
-        ImageView ivPhone = baseViewHolder.findView(R.id.ivPhone);
-        TextView tvName = baseViewHolder.findView(R.id.tvName);
+        TextView tvName = baseViewHolder.findView(R.id.tvDeviceName);
         tvName.setText(data.getName());
-        ivPhone.setImageDrawable(getContext().getDrawable(data.getId()));
-        ivPhone.setOnClickListener(v -> {
-            mOnClickListener.onClick(v,data);
-        });
+
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {
@@ -44,6 +37,6 @@ public class PhilipsAddDeviceDoorLockAdapter extends BaseQuickAdapter<PhilipsAdd
     }
 
     public interface OnClickListener {
-        void onClick(View v, @NotNull PhilipsAddManuallyDeviceBean data);
+        void onClick(View v, @NotNull HashMap<String,Object> data);
     }
 }

@@ -42,6 +42,7 @@
         android:singleLine="true"
         android:maxLines="1"
         android:textColorHint="@color/cCCCCCC"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_et_login_bg"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
@@ -77,6 +78,7 @@
         android:maxLines="1"
         android:textColorHint="@color/cCCCCCC"
         android:inputType="textPassword"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_et_login_bg"
         android:layout_marginEnd="16pt"
         android:layout_marginStart="16pt"
@@ -105,6 +107,7 @@
         android:textSize="16pt"
         android:layout_marginTop="14pt"
         android:background="@drawable/philips_shape_et_login_bg"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         android:paddingStart="14pt"
         android:paddingEnd="14pt"
         android:maxLines="1"
@@ -168,36 +171,15 @@
 
 
     <TextView
-        android:id="@+id/tvOther"
+        android:id="@+id/tvAgreement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/philips_other"
+        android:textColor="@color/c666666"
         android:textSize="12pt"
-        android:textColor="@color/color_666666"
+        android:layout_marginStart="16pt"
         android:layout_marginBottom="105pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/vOtherStart"
-        android:layout_width="49pt"
-        android:layout_height="1pt"
-        android:background="@color/cC0C0C0"
-        android:layout_marginEnd="57pt"
-        app:layout_constraintBottom_toBottomOf="@+id/tvOther"
-        app:layout_constraintEnd_toStartOf="@+id/tvOther"
-        app:layout_constraintTop_toTopOf="@+id/tvOther" />
-
-    <View
-        android:id="@+id/vOtherEnd"
-        android:layout_width="49pt"
-        android:layout_height="1pt"
-        android:background="@color/cC0C0C0"
-        android:layout_marginStart="57pt"
-        app:layout_constraintBottom_toBottomOf="@+id/tvOther"
-        app:layout_constraintStart_toEndOf="@+id/tvOther"
-        app:layout_constraintTop_toTopOf="@+id/tvOther" />
 
     <ImageView
         android:id="@+id/ivVerification"
