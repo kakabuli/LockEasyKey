@@ -6,11 +6,9 @@ package com.philips.easykey.lock.publiclibrary.http.result;
  * E-mail : wengmaowei@kaadas.com
  * desc   :
  */
-public class WeChatLoginResult {
+public class WeChatLoginResult extends BaseResult{
 
 
-    private String code;
-    private String msg;
     private Integer nowTime;
     private DataBean data;
 

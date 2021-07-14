@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.activity.addDevice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -66,6 +67,7 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
             finish();
         } else if(view.getId() == R.id.ivHelp) {
             // TODO: 2021/4/26 跳转到帮助页面
+            startActivity(new Intent(this,PhilipsAddDeviceHelpActivity.class));
         } else if(view.getId() == R.id.tvAddManually) {
             showAddDeviceFromManual();
         } else if(view.getId() == R.id.tvScanAdd) {

@@ -159,10 +159,10 @@
         android:textColor="@color/white"
         android:textSize="16pt"
         android:background="@drawable/philips_shape_btn_login_bg"
-        android:layout_marginBottom="24pt"
+        android:layout_marginBottom="133pt"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        app:layout_constraintBottom_toTopOf="@+id/tvOther"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -174,8 +174,8 @@
         android:text="@string/philips_other"
         android:textSize="12pt"
         android:textColor="@color/color_666666"
-        android:layout_marginBottom="12pt"
-        app:layout_constraintBottom_toTopOf="@+id/ivVerification"
+        android:layout_marginBottom="105pt"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -228,7 +228,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="106pt"
         android:layout_marginBottom="8pt"
-        app:layout_constraintBottom_toTopOf="@+id/tvCode"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhone"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/philips_login_icon_iphone" />
 
@@ -259,12 +259,12 @@
         android:id="@+id/tvWechat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17pt"
         android:text="@string/philips_wechat"
         android:textColor="@color/color_333333"
         android:textSize="12pt"
-        app:layout_constraintBottom_toBottomOf="@+id/tvCode"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ivWechat"
-        app:layout_constraintStart_toStartOf="@+id/ivWechat"
-        app:layout_constraintTop_toTopOf="@+id/tvCode" />
+        app:layout_constraintStart_toStartOf="@+id/ivWechat"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

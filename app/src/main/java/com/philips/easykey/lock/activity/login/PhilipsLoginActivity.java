@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -25,8 +27,12 @@ import com.philips.easykey.lock.activity.choosecountry.CountryActivity;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
+import com.philips.easykey.lock.publiclibrary.http.result.RegisterWeChatAndBindPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
+import com.philips.easykey.lock.publiclibrary.http.result.WeChatLoginResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.publiclibrary.http.util.LoginObserver;
@@ -41,6 +47,9 @@ import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StringUtil;
+import com.philips.easykey.lock.wxapi.NetworkUtil;
+import com.philips.easykey.lock.wxapi.WXEntryActivity;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -58,7 +67,7 @@ import io.reactivex.disposables.Disposable;
  * E-mail : wengmaowei@kaadas.com
  * desc   : 登录
  */
-public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEventHandler {
+public class PhilipsLoginActivity extends NormalBaseActivity{
 
     private EditText mEtPhoneOrMail, mEtPwd;
     private Button mBtnLogin;
@@ -70,9 +79,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
     private TextView mTvPhone;
     private ImageView mIvVerification;
     private TextView mTvCode;
+    private TextView mTvForgotPwd;
+    private TextView mTvRegister;
 
     private final int mCountryReqCode = 1233;
     private String mCountryCode = "86";
+    private String mWXopenId = "";
 
     private boolean isShowDialog = false;
 
@@ -80,6 +92,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
     private boolean isCountdown = false;
 
     private final long mCountDownTotalTime = 60000;
+
+    private final String phoneLogin = "phone";
+    private final String codeType = "code";
+    private final String wxLogin = "wx";
+    private String loginType = phoneLogin;
 
     private final CountDownTimer mCountDownTimer = new CountDownTimer(mCountDownTotalTime, 1000) {
         @Override
@@ -118,6 +135,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         mTvPhone = findViewById(R.id.tvPhone);
         mIvVerification = findViewById(R.id.ivVerification);
         mTvCode = findViewById(R.id.tvCode);
+        mTvForgotPwd = findViewById(R.id.tvForgotPwd);
+        mTvRegister = findViewById(R.id.tvRegister);
 
         changeLoginBtnStyle(false);
         mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
@@ -164,9 +183,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
             }
         });
 
-        applyDebouncingClickListener(findViewById(R.id.tvForgotPwd), findViewById(R.id.tvRegister),
-                mBtnLogin, mIvVerification, findViewById(R.id.ivWechat),
-                mTvSelectCountry, mIvShowOrHide, mTvCode);
+        applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
+                mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
+                mTvSelectCountry, mIvShowOrHide, mTvGetCode);
         setStatusBarColor(R.color.white);
 
         regToWx();
@@ -197,25 +216,31 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
             Intent intent = new Intent(this, PhilipsRegisterActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.btnLogin) {
-            login();
+            if(TextUtils.equals(loginType,phoneLogin)){
+                login();
+            }else if(TextUtils.equals(loginType,codeType)){
+                codeLogin();
+            }else if(TextUtils.equals(loginType,wxLogin)){
+                registerWeChatAndBindPhone();
+            }
         } else if(view.getId() == R.id.ivWechat) {
+            loginType = wxLogin;
             wechatLogin();
         } else if(view.getId() == R.id.ivVerification) {
             // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
+            loginType = codeType;
             changeToVCodeLogin();
         } else if(view.getId() == R.id.ivPhone){
+            loginType = phoneLogin;
             changeToAccountLogin();
         } else if(view.getId() == R.id.tvSelectCountry) {
             Intent intent = new Intent(this, CountryActivity.class);
             startActivityForResult(intent, mCountryReqCode);
         } else if(view.getId() == R.id.ivShowOrHide) {
             changePasswordStatus();
-        } else if(view.getId() == R.id.tvCode) {
-            if(mCountDownTimer != null) {
-                mCountDownTimer.start();
-                isCountdown = true;
-                // TODO: 2021/5/20 验证码登录
-            }
+        } else if(view.getId() == R.id.tvGetCode) {
+            if(isCountdown) return;
+            getVerification();
         }
     }
 
@@ -234,20 +259,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onReq(BaseReq baseReq) {
-
-    }
-
-    @Override
-    public void onResp(BaseResp baseResp) {
-
-    }
-
-    private boolean isVCodeLogin = false;
-
     private void changeToVCodeLogin() {
-        isVCodeLogin = true;
         mEtVerificationCode.setVisibility(View.VISIBLE);
         mTvGetCode.setVisibility(View.VISIBLE);
         mEtPwd.setVisibility(View.INVISIBLE);
@@ -256,6 +268,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         mTvPhone.setVisibility(View.VISIBLE);
         mIvVerification.setVisibility(View.GONE);
         mTvCode.setVisibility(View.GONE);
+        mTvForgotPwd.setVisibility(View.GONE);
+        mTvRegister.setVisibility(View.GONE);
     }
 
     // APP_ID 替换为你的应用从官方网站申请到的合法appID
@@ -295,10 +309,15 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         // 该参数可用于防止 csrf 攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加 session 进行校验
         req.state = "wechat_sdk_demo_test";
         api.sendReq(req);
+        WXEntryActivity.setWXdata(new WXEntryActivity.onWXDataListener() {
+            @Override
+            public void data(String code) {
+                getWeChatOpenId(code);
+            }
+        });
     }
 
     private void changeToAccountLogin() {
-        isVCodeLogin = false;
         mEtVerificationCode.setVisibility(View.GONE);
         mTvGetCode.setVisibility(View.GONE);
         mEtPwd.setVisibility(View.VISIBLE);
@@ -307,6 +326,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         mTvPhone.setVisibility(View.GONE);
         mIvVerification.setVisibility(View.VISIBLE);
         mTvCode.setVisibility(View.VISIBLE);
+        mTvForgotPwd.setVisibility(View.VISIBLE);
+        mTvRegister.setVisibility(View.VISIBLE);
     }
 
     private void changeLoginBtnStyle(boolean isCanLogin) {
@@ -502,6 +523,187 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         }
     }
 
+    public void sendRandomByPhone(String phone, String code) {
+        XiaokaiNewServiceImp.sendMessage(phone, code)
+                .subscribe(new BaseObserver<BaseResult>() {
+                    @Override
+                    public void onSuccess(BaseResult result) {
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        sendRandomFailedServer(baseResult);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        sendRandomFailed(throwable);
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+
+
+    }
+
+    public void sendRandomFailedServer(BaseResult result) {
+        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+    }
+
+    public void sendRandomFailed(Throwable e) {
+        LogUtils.d("验证码发送失败");
+        ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, e));
+    }
+
+    //获取验证码
+    private void getVerification() {
+        if (NetUtil.isNetworkAvailable()) {
+            String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
+            if (TextUtils.isEmpty(account)) {
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                return;
+            }
+            if (StringUtil.isNumeric(account)) {
+                if (!PhoneUtil.isMobileNO(account)) {
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
+                    return;
+                } else {
+                    String countryCode = mCountryCode.trim().replace("+", "");
+                    sendRandomByPhone(account,countryCode);
+                }
+            }
+            if(mCountDownTimer != null) {
+                isCountdown = true;
+                mCountDownTimer.start();
+            }
+        } else {
+            ToastUtils.showShort(R.string.philips_noNet);
+        }
+    }
+
+    public void registerWeChatAndBindPhone() {
+        if (NetUtil.isNetworkAvailable()) {
+            final String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
+            if (TextUtils.isEmpty(account)) {
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                return;
+            }
+            String code = StringUtil.getEdittextContent(mEtVerificationCode);
+            if (TextUtils.isEmpty(code) || code.length() != 6) {
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+                return;
+            }
+            XiaokaiNewServiceImp.registerWeChatAndBindPhone(mWXopenId,account, code)
+                    .subscribe(new BaseObserver<RegisterWeChatAndBindPhoneResult>() {
+                        @Override
+                        public void onSuccess(RegisterWeChatAndBindPhoneResult registerWeChatAndBindPhoneResult) {
+                            loginSuccess(registerWeChatAndBindPhoneResult.getData().getToken(),registerWeChatAndBindPhoneResult.getData().getUid());
+                        }
+
+                        @Override
+                        public void onAckErrorCode(BaseResult baseResult) {
+                        }
+
+                        @Override
+                        public void onFailed(Throwable throwable) {
+                        }
+
+                        @Override
+                        public void onSubscribe1(Disposable d) {
+
+                        }
+                    });
+        } else {
+            ToastUtils.showShort(R.string.philips_noNet);
+        }
+    }
+
+    private void getWeChatOpenId(String code ){
+        XiaokaiNewServiceImp.getWeChatOpenId(code)
+                .subscribe(new BaseObserver<GetWeChatOpenIdResult>() {
+                    @Override
+                    public void onSuccess(GetWeChatOpenIdResult getWeChatOpenIdResult) {
+                        mWXopenId = getWeChatOpenIdResult.getData().getOpenId();
+                        if(TextUtils.isEmpty(mWXopenId))return;
+                        getTelByOpenId(mWXopenId);
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+    }
+
+    //根据微信openId获取手机号，如果返回code = 448,就进入手机获取验证码界面，绑定手机号
+    private void getTelByOpenId(String openId){
+        XiaokaiNewServiceImp.getWeChatUserPhone(openId)
+                .subscribe(new BaseObserver<GetWeChatUserPhoneResult>() {
+                    @Override
+                    public void onSuccess(GetWeChatUserPhoneResult getWeChatUserPhoneResult) {
+                        String tel = getWeChatUserPhoneResult.getData().getTel();
+                        if(TextUtils.isEmpty(tel))return;
+                        weChatLogin(mWXopenId,tel);
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        if(baseResult.getCode().equals("448")){
+                            changeToVCodeLogin();
+                        }
+                    }
+
+
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+    }
+
+    private void weChatLogin(String openId,String tel){
+        XiaokaiNewServiceImp.weChatLogin(openId,tel)
+                .subscribe(new BaseObserver<WeChatLoginResult>() {
+                    @Override
+                    public void onSuccess(WeChatLoginResult weChatLoginResult) {
+                        loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid());
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        LogUtils.d("微信登陆失败   " + baseResult.toString());
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+    }
+
     public void loginByPhone(String phone, String pwd, String noCountryPhone) {
         XiaokaiNewServiceImp.loginByPhone(phone, pwd)
                 .subscribe(new LoginObserver<LoginResult>() {
@@ -555,6 +757,44 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
                 });
     }
 
+    private void codeLogin(){
+        if (NetUtil.isNetworkAvailable()) {
+            final String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
+            if (TextUtils.isEmpty(account)) {
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                return;
+            }
+            String code = StringUtil.getEdittextContent(mEtVerificationCode);
+            if (TextUtils.isEmpty(code) || code.length() != 6) {
+                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+                return;
+            }
+            XiaokaiNewServiceImp.codeLogin(code,account).subscribe(new BaseObserver<WeChatLoginResult>() {
+                @Override
+                public void onSuccess(WeChatLoginResult weChatLoginResult) {
+                    loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid());
+                }
+
+                @Override
+                public void onAckErrorCode(BaseResult baseResult) {
+                    LogUtils.d("手机验证码登录失败   " + baseResult.toString());
+                }
+
+                @Override
+                public void onFailed(Throwable throwable) {
+
+                }
+
+                @Override
+                public void onSubscribe1(Disposable d) {
+
+                }
+            });
+        }else {
+            ToastUtils.showShort(R.string.philips_noNet);
+        }
+    }
+
     //获取用户名称
     private void getUserName(String uid) {
         XiaokaiNewServiceImp.getUserNick(uid).subscribe(new BaseObserver<UserNickResult>() {
@@ -586,6 +826,22 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
         SPUtils.put(SPUtils.USERNAME, userName);
     }
 
+    private void loginSuccess(String token , String uid) {
+        //请求用户名称，由于服务器返回过来的用户名称为空，因此需要重新获取
+        onLoginSuccess();
+        LogUtils.d("登陆成功  数据是  token" + token);
+        //保存数据到本地  以及 内存
+//        SPUtils.put(SPUtils.TOKEN, loginResult.getData().getToken());
+//        SPUtils.put(SPUtils.UID, loginResult.getData().getUid());
+        MMKVUtils.setMMKV(SPUtils.TOKEN,token);
+        MMKVUtils.setMMKV(SPUtils.UID,uid);
+
+
+        MyApplication.getInstance().setToken(token);
+        MyApplication.getInstance().setUid(uid);
+        getUserName(uid);
+    }
+
     private void loginSuccess(LoginResult loginResult, String phone, String pwd) {
         //请求用户名称，由于服务器返回过来的用户名称为空，因此需要重新获取
         onLoginSuccess();
@@ -605,5 +861,4 @@ public class PhilipsLoginActivity extends NormalBaseActivity implements IWXAPIEv
 
         MMKVUtils.setMMKV(SPUtils.STORE_TOKEN,loginResult.getData().getStoreToken());
     }
-
 }

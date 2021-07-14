@@ -45,6 +45,7 @@
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
     <string name="agree_user_protocol">请同意用户协议</string>
     <string name="philips_input_valid_telephone_or_email">请输入有效手机号或邮箱</string>
+    <string name="philips_input_valid_telephone">请输入有效手机号</string>
 
     <string name="philips_account_message_not_empty">账户信息不能为空</string>
     <string name="home_page">首页</string>
@@ -756,6 +757,12 @@
     <string name="gateway">网关</string>
     <string name="cateye">猫眼</string>
     <string name="philips_smart_lock">智能锁</string>
+    <string name="philips_ddl708v_5hw">DDL708\nV-5HW</string>
+    <string name="philips_ddl708vp_5hw">DDL708\nVP-5HW</string>
+    <string name="philips_ddl708_5hw">DDL708\n5HW</string>
+    <string name="philips_ddl708v_8hw">DDL708\nV-8HW</string>
+    <string name="philips_ddl708vp_8hw">DDL708\nVP-8HW</string>
+    <string name="philips_ddl708_8hw">DDL708\n8HW</string>
     <string name="cateye_gateway">猫眼网关</string>
     <string name="three_gateway">6030 网关</string>
     <string name="kaadas_cateye">Kaadas 猫眼</string>
@@ -2394,6 +2401,11 @@
     <string name="philips_device_count">/%1$d</string>
     <string name="philips_add_manually">手动添加</string>
     <string name="philips_flash_light">手电筒</string>
+    <string name="philips_qr_code_scan_add_tips">请将门锁后面板电池盖拆卸后，\n扫描电池盖上二维码进入配网流程</string>
+    <string name="philips_how_to_add_devices">如何添加设备</string>
+    <string name="philips_add_device_method_one">方式一： \n扫码门锁电池盖上的二维码，进行添加</string>
+    <string name="philips_add_device_method_two">方式二： \n查看包装盒上的门锁型号，手动输入进行添加</string>
+    <string name="philips_add_device_service_telephone">服务热线：400-8828-236</string>
     <string name="philips_biometric_login">生物识别登录</string>
     <string name="philips_login_using_your_biometric_credential">使用您的生物识别证书登录</string>
     <string name="philips_hint_please_input_lock_type">请输入门锁型号</string>

@@ -489,13 +489,15 @@ public class HttpUrlConstants {
 
     /*------------------------------------ 微信相关 --------------------------------------*/
 
-    public static final String GET_WECHAT_OPEN_ID = BASE_URL + "/user/wechat/getOpenId";
+    public static final String GET_WECHAT_OPEN_ID = BASE_URL + "user/wechat/getOpenId";
 
-    public static final String GET_WECHAT_USER_PHONE = BASE_URL + "/user/wechat/getTelByOpenId";
+    public static final String GET_WECHAT_USER_PHONE = BASE_URL + "user/wechat/getTelByOpenId";
 
-    public static final String REGISTER_WECHAT_AND_BIND_PHONE = BASE_URL + "/user/wechat/putUserByOpenId";
+    public static final String REGISTER_WECHAT_AND_BIND_PHONE = BASE_URL + "user/wechat/putUserByOpenId";
 
-    public static final String WECHAT_LOGIN = BASE_URL + "/user/wechat/getUserByOpenId";
+    public static final String WECHAT_LOGIN = BASE_URL + "user/wechat/getUserByOpenId";
+
+    public static final String CODE_LOGIN = BASE_URL + "user/login/getUserByTokens";
 
     /**
      * 门锁当天统计
@@ -506,4 +508,10 @@ public class HttpUrlConstants {
      * 门锁七天统计
      */
     public static final String DOOR_LOCK_STATISTICS_SEVEN_DAY = BASE_URL + "wifi/statistics/days";
+
+
+    /**
+     * 获取所有型号图片列表
+     */
+    public static final String GET_PRODUCTION_MODEL_LIST = BASE_URL + "production/model/list";
 }
