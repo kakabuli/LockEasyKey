@@ -119,7 +119,7 @@ public class PhilipsWifiVideoLockDuressPresenter<T> extends BasePresenter<IPhili
                     for(WiFiLockPassword.DuressBean oi : wiFiLockPassword.getPwdDuress()){
                         if(oi.getNum() == bean.getNum()){
                             duressAlarmAccount = oi.getDuressAlarmAccount();
-                            pwdDuressSwitch = oi.getDuressSwitch();
+                            pwdDuressSwitch = oi.getPwdDuressSwitch();
                         }
                     }
                 }
@@ -150,7 +150,7 @@ public class PhilipsWifiVideoLockDuressPresenter<T> extends BasePresenter<IPhili
                     for(WiFiLockPassword.DuressBean oi : wiFiLockPassword.getFingerprintDuress()){
                         if(oi.getNum() == bean.getNum()){
                             duressAlarmAccount = oi.getDuressAlarmAccount();
-                            pwdDuressSwitch = oi.getDuressSwitch();
+                            pwdDuressSwitch = oi.getPwdDuressSwitch();
                         }
                     }
                 }
