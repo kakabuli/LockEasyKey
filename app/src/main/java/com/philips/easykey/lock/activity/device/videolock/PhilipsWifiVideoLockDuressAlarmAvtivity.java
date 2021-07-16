@@ -97,15 +97,16 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
         }
 
 
-
-        if(wifiLockInfo.getDuressAlarmSwitch() == 0){
-            recycler.setVisibility(View.GONE);
-            mIvDuressSelect.setSelected(false);
-            duressAlarmSwitch = 0;
-        }else{
-            recycler.setVisibility(View.VISIBLE);
-            mIvDuressSelect.setSelected(true);
-            duressAlarmSwitch = 1;
+        if(wifiLockInfo != null){
+            if(wifiLockInfo.getDuressAlarmSwitch() == 0){
+                recycler.setVisibility(View.GONE);
+                mIvDuressSelect.setSelected(false);
+                duressAlarmSwitch = 0;
+            }else{
+                recycler.setVisibility(View.VISIBLE);
+                mIvDuressSelect.setSelected(true);
+                duressAlarmSwitch = 1;
+            }
         }
     }
 
@@ -120,8 +121,8 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
         mPhilipsDuressAlarmAdapter.setOnClickDuressNotificationListener((v, position, data) -> {
             Intent intent = new Intent(this,PhilipsWifiVideoLockSettingDuressAlarmAvtivity.class);
             intent.putExtra(KeyConstants.WIFI_SN,data.getWifiSN());
-            intent.putExtra("key_position",position);
-            intent.putExtra("duress_alarm",data);
+            intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,position);
+            intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO,data);
             startActivityForResult(intent,1012);
         });
     }
