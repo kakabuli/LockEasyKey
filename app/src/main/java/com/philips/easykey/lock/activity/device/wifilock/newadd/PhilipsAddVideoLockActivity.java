@@ -408,7 +408,9 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                             mWifiLockVideoBindBean.getEventparams().getDevice_sn(),mWifiLockVideoBindBean.getEventparams().getMac(),
                             mWifiLockVideoBindBean.getEventparams().getDevice_did(),mWifiLockVideoBindBean.getEventparams().getP2p_password());
 
-                } else {
+                } else if(result.result == -3){
+                    unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
+                }else {
                     updateBindDevice(mWifiLockVideoBindBean.getWfId(),
                             mWifiLockVideoBindBean.getUserId(),
                             Rsa.bytesToHexString(result.password),mWifiName,

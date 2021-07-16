@@ -370,6 +370,11 @@ public class HttpUrlConstants {
     public static final String WIFI_LOCK_OPERATION_LIST = BASE_URL + "wifi/operation/list";
 
     /**
+     * 获取wifi锁操作筛选记录
+     */
+    public static final String WIFI_LOCK_OPERATION_FILTER_LIST = BASE_URL + "wifi/operation/filterList";
+
+    /**
      * 获取wifi报警记录
      */
     public static final String WIFI_LOCK_ALARM_LIST = BASE_URL + "wifi/alarm/list";
@@ -450,9 +455,19 @@ public class HttpUrlConstants {
     public static final String WIFI_VIDEO_LOCK_ALARM_LIST = BASE_URL + "wifi/vedio/alarmList";
 
     /**
+     * 获取视频锁报警记录筛选列表
+     */
+    public static final String WIFI_VIDEO_LOCK_ALARM_FILTER_LIST = BASE_URL + "wifi/alarm/filterList";
+
+    /**
      * 获取视频锁门铃记录
      */
     public static final String WIFI_VIDEO_LOCK_DOORBELL_LIST = BASE_URL + "wifi/vedio/doorbellList";
+
+    /**
+     * 获取视频锁门铃筛选记录
+     */
+    public static final String WIFI_VIDEO_LOCK_DOORBELL_FILTER_LIST = BASE_URL + "wifi/doorbell/filterList";
 
     /**
      *  查询wifi锁设备列表

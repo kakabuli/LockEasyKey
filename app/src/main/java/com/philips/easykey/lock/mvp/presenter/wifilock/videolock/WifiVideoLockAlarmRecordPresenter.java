@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockAlarmRecordView;
@@ -7,6 +9,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -73,6 +76,52 @@ public class WifiVideoLockAlarmRecordPresenter<T> extends BasePresenter<IWifiVid
                 compositeDisposable.add(d);
             }
         });
+    }
+
+    public void getWifiVideoLockGetAlarmFilterList(int page, String wifiSn,long startTime,long endTime) {
+
+        XiaokaiNewServiceImp.wifiVideoLockGetAlarmFilterList(wifiSn,page,startTime,endTime)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
+                .subscribe(new BaseObserver<GetWifiVideoLockAlarmScreenedRecordResult>() {
+                    @Override
+                    public void onSuccess(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult) {
+                        List<WifiVideoLockAlarmRecord> alarmRecords = getWifiVideoLockAlarmScreenedRecordResult.getData().getAlarmList();
+                        if (alarmRecords != null && alarmRecords.size() > 0) {
+
+                            if (isSafe()) {
+                                mViewRef.get().onLoadServerRecord(alarmRecords, page);
+                            }
+                        } else {
+                            if (isSafe()) {//服务器没有数据  提示用户
+
+                                if (page == 1) { //第一次获取数据就没有
+                                    mViewRef.get().onServerNoData();
+                                } else {
+                                    mViewRef.get().noMoreData();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        if (isSafe()) {  //
+                            mViewRef.get().onLoadServerRecordFailedServer(baseResult);
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        if (isSafe()) {  //
+                            mViewRef.get().onLoadServerRecordFailed(throwable);
+                        }
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+                });
     }
 
 /*    private void removeGroupData() {

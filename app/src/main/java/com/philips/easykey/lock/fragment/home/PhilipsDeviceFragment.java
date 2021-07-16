@@ -108,7 +108,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         ivAddDevice.setOnClickListener(v -> rcQRCodePermissions());
 
         initTabData();
-        initDevices();
         MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
 
         return root;
@@ -119,6 +118,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         super.onResume();
         initTabData();
         initOperationRecord();
+        initDevices();
     }
 
     @Override

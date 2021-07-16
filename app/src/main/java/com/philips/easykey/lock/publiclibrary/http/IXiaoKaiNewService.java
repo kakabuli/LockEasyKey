@@ -19,7 +19,10 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockAlarmRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockDoorbellScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LockRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
@@ -674,6 +677,13 @@ public interface IXiaoKaiNewService {
     Observable<GetWifiLockOperationRecordResult> wifiLockGetOperationList(@Header("timestamp") String timestamp,@Body RequestBody info);
 
     /**
+     * 获取wifi锁操作筛选记录
+     */
+    @POST(HttpUrlConstants.WIFI_LOCK_OPERATION_FILTER_LIST)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetWifiLockOperationScreenedRecordResult> wifiLockGetOperationFilterList(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
      * 获取wifi报警记录
      */
     @POST(HttpUrlConstants.WIFI_LOCK_ALARM_LIST)
@@ -786,11 +796,25 @@ public interface IXiaoKaiNewService {
     Observable<GetWifiVideoLockAlarmRecordResult> wifiVideoLockGetAlarmList(@Header("timestamp") String timestamp,@Body RequestBody info);
 
     /**
+     * 获取视频锁报警筛选列表记录
+     */
+    @POST(HttpUrlConstants.WIFI_VIDEO_LOCK_ALARM_FILTER_LIST)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetWifiVideoLockAlarmScreenedRecordResult> wifiVideoLockGetAlarmFilterList(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
      * 获取分页查询门铃记录
      */
     @POST(HttpUrlConstants.WIFI_VIDEO_LOCK_DOORBELL_LIST)
     @Headers({KeyConstants.VERSION})
     Observable<GetWifiVideoLockAlarmRecordResult> wifiVideoLockGetDoorbellList(@Header("timestamp") String timestamp,@Body RequestBody info);
+
+    /**
+     * 获取分页查询门铃筛选记录
+     */
+    @POST(HttpUrlConstants.WIFI_VIDEO_LOCK_DOORBELL_FILTER_LIST)
+    @Headers({KeyConstants.VERSION})
+    Observable<GetWifiVideoLockDoorbellScreenedRecordResult> wifiVideoLockGetDoorbellFilterList(@Header("timestamp") String timestamp, @Body RequestBody info);
 
     /**
      *  查询wifi锁设备列表

@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
+import com.philips.easykey.lock.bean.deviceAdd.PhilipsAddManuallyDeviceBean;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,20 +20,20 @@ import java.util.HashMap;
 
 
 
-public class PhilipsAddDeviceDoorLockAdapter extends BaseQuickAdapter<HashMap<String,Object>, BaseViewHolder> {
+public class PhilipsAddDeviceDoorLockAdapter extends BaseQuickAdapter<PhilipsAddManuallyDeviceBean, BaseViewHolder> {
 
     private OnClickListener mOnClickListener;
-    public PhilipsAddDeviceDoorLockAdapter(int convertId, ArrayList<HashMap<String,Object>> dataList) {
+    public PhilipsAddDeviceDoorLockAdapter(int convertId, ArrayList<PhilipsAddManuallyDeviceBean> dataList) {
         super(convertId, dataList);
     }
 
 
     @Override
-    protected void convert(@NotNull BaseViewHolder baseViewHolder, HashMap<String,Object> data) {
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, PhilipsAddManuallyDeviceBean data) {
         ImageView ivPhone = baseViewHolder.findView(R.id.ivPhone);
         TextView tvName = baseViewHolder.findView(R.id.tvName);
-        tvName.setText((String) data.get("DoorlockName"));
-        ivPhone.setImageDrawable((Drawable) data.get("DoorlockImage"));
+        tvName.setText(data.getName());
+        ivPhone.setImageDrawable(getContext().getDrawable(data.getId()));
         ivPhone.setOnClickListener(v -> {
             mOnClickListener.onClick(v,data);
         });
@@ -43,6 +44,6 @@ public class PhilipsAddDeviceDoorLockAdapter extends BaseQuickAdapter<HashMap<St
     }
 
     public interface OnClickListener {
-        void onClick(View v, @NotNull HashMap<String,Object> data);
+        void onClick(View v, @NotNull PhilipsAddManuallyDeviceBean data);
     }
 }

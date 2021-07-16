@@ -5,12 +5,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.Dialog;
 import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.bean.DateBean;
+import com.bigkoo.pickerview.listener.OnPagerChangeListener;
+import com.bigkoo.pickerview.listener.OnSingleChooseListener;
+import com.bigkoo.pickerview.utils.CalendarUtil;
+import com.bigkoo.pickerview.view.CalendarView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -21,9 +33,12 @@ import com.philips.easykey.lock.fragment.record.WifiLockAlarmRecordFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockRecordPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoRecordView;
+import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +61,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
     private boolean isVideoLock = false;
     private List<Fragment> fragments = new ArrayList<>();
     private FragmentPagerAdapter adapter;
+    private Dialog mBottomCalendarDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,8 +82,8 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
         tvOpenLockRecord.setOnClickListener(this);
         tvWarnInformation.setOnClickListener(this);
         tvVistorRecord.setOnClickListener(this);
+        mIvRecordScreen.setOnClickListener(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
-
     }
 
     private void initData() {
@@ -116,8 +132,16 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 public int getCount() {
                     return fragments.size();
                 }
+
+                @Override
+                public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+                    //super.destroyItem(container, position, object);
+                }
             };
             viewPager.setAdapter(adapter);
+            if(isVideoLock){
+                viewPager.setOffscreenPageLimit(3);
+            }
         } else {
             adapter.notifyDataSetChanged();
         }
@@ -272,7 +296,6 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                     viewPager.setCurrentItem(1);
                 }
                 break;
-
             case R.id.tv_visitor_record:
                 //访客记录
                 tvOpenLockRecord.setBackgroundResource(0);
@@ -284,9 +307,73 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.iv_record_screen:
+                showBottomCalendarDialog();
                 break;
         }
     }
+
+   private void showBottomCalendarDialog(){
+       if(mBottomCalendarDialog == null){
+           mBottomCalendarDialog = new Dialog(this, R.style.DialogTransparent);
+       }
+       int[] cDate = CalendarUtil.getCurrentDate();
+       View contentView = LayoutInflater.from(this).inflate(R.layout.philips_calendar_dialog, null);
+       CalendarView calendarView = contentView.findViewById(R.id.calendar);
+       TextView title = contentView.findViewById(R.id.title);
+       ImageView ivLast = contentView.findViewById(R.id.ivLast);
+       ImageView ivNext = contentView.findViewById(R.id.ivNext);
+       calendarView.setInitDate(cDate[0] + "." + cDate[1])
+               .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
+               .init();
+       title.setText(cDate[0] + "年" + cDate[1] + "月");
+       ivLast.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               calendarView.lastMonth();
+           }
+       });
+       ivNext.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               calendarView.nextMonth();
+           }
+       });
+       calendarView.setOnPagerChangeListener(new OnPagerChangeListener() {
+           @Override
+           public void onPagerChanged(int[] date) {
+               title.setText(date[0] + "年" + date[1] + "月");
+           }
+       });
+       calendarView.setOnSingleChooseListener(new OnSingleChooseListener() {
+           @Override
+           public void onSingleChoose(View view, DateBean dateBean) {
+               mBottomCalendarDialog.dismiss();
+               mBottomCalendarDialog = null;
+               String date = dateBean.getSolar()[0] + "-" + dateBean.getSolar()[1] + "-" + dateBean.getSolar()[2];
+               getScreenedRecord(date);
+           }
+       });
+       mBottomCalendarDialog.setContentView(contentView);
+       ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
+       layoutParams.width = getResources().getDisplayMetrics().widthPixels;
+       contentView.setLayoutParams(layoutParams);
+       mBottomCalendarDialog.getWindow().setGravity(Gravity.BOTTOM);
+       mBottomCalendarDialog.setCanceledOnTouchOutside(true);
+       mBottomCalendarDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+       mBottomCalendarDialog.show();
+   }
+
+   private void getScreenedRecord(String date){
+       if(openRecordFragment != null){
+           openRecordFragment.getOpenScreenedRecordFromServer(true , date);
+       }
+       if(vistorRecordFragment != null){
+           vistorRecordFragment.getWifiVideoLockGetDoorbellFilterList(true , date);
+       }
+       if(videoLockAlarmRecordFragment != null){
+           videoLockAlarmRecordFragment.getWifiVideoLockGetAlarmFilterList(true ,date);
+       }
+   }
 
     @Override
     public void finish() {

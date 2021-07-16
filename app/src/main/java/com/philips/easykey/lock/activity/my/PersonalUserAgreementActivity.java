@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +21,10 @@ import java.util.List;
 public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
 
 
-    RecyclerView personalUserAgreementRecycler;
     ImageView ivBack;
     TextView tvContent;
-    ImageView ivRight;
+    TextView tvRight;
+    WebView webView;
 
 
     //总数据
@@ -34,24 +35,22 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_user_agreement);
 
-        personalUserAgreementRecycler = findViewById(R.id.personal_user_agreement_recycler);
         ivBack = findViewById(R.id.iv_back);
         tvContent = findViewById(R.id.tv_content);
-        ivRight = findViewById(R.id.iv_right);
+        tvRight = findViewById(R.id.tv_right);
+        webView = findViewById(R.id.webView);
 
         initView();
         ivBack.setOnClickListener(this);
-        tvContent.setText(R.string.user_agreement);
+        tvContent.setText(R.string.philips_terms_of_use);
+        tvRight.setVisibility(View.VISIBLE);
+        tvRight.setText(R.string.philips_agree);
+        webView.loadUrl("http://app.kaadas.cc/pageFile/philips/Terms_of_use.html");
     }
 
 
     private void initView() {
-        getData();
-        if (personalUserAgreementBeansList != null) {
-            PersonalUserAgreementAdapter mAgreement = new PersonalUserAgreementAdapter(R.layout.personal_user_agrement_item, personalUserAgreementBeansList);
-            personalUserAgreementRecycler.setLayoutManager(new LinearLayoutManager(this));
-            personalUserAgreementRecycler.setAdapter(mAgreement);
-        }
+//        getData();
     }
 
 

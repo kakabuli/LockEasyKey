@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,10 @@ public class PhilipsWifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpe
     private int currentPage = 1;   //当前的开锁记录时间
     View view;
     private String wifiSn;
+    private String screenedDate;
+    private String startTime = " 00:00:00";
+    private String endTime = " 23:59:59";
+    private boolean isScreenedMode = false;//判断是否为筛选消息记录模式
 
     @Nullable
     @Override
@@ -104,18 +110,35 @@ public class PhilipsWifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpe
         recycleview.setAdapter(operationGroupRecordAdapter);
     }
 
-    private void initRefresh() {
+    public void getOpenScreenedRecordFromServer(boolean isScreenedMode , String screenedDate){
+        this.isScreenedMode = isScreenedMode;
+        this.screenedDate = screenedDate;
+        mPresenter.getOpenScreenedRecordFromServer(1, wifiSn,DateUtils.dateChangeTimestamp(screenedDate + startTime)
+                ,DateUtils.dateChangeTimestamp(screenedDate + endTime));
+    }
+
+    public void initRefresh() {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshlayout.setEnableLoadMore(true);
-                mPresenter.getOpenRecordFromServer(1, wifiSn);
+                if(isScreenedMode && !TextUtils.isEmpty(screenedDate)){
+                    mPresenter.getOpenScreenedRecordFromServer(1, wifiSn,DateUtils.dateChangeTimestamp(screenedDate + startTime)
+                            ,DateUtils.dateChangeTimestamp(screenedDate + endTime));
+                }else {
+                    mPresenter.getOpenRecordFromServer(1, wifiSn);
+                }
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                mPresenter.getOpenRecordFromServer(currentPage, wifiSn);
+                if(isScreenedMode && !TextUtils.isEmpty(screenedDate)){
+                    mPresenter.getOpenScreenedRecordFromServer(currentPage, wifiSn,DateUtils.dateChangeTimestamp(screenedDate + startTime)
+                            ,DateUtils.dateChangeTimestamp(screenedDate + endTime));
+                }else {
+                    mPresenter.getOpenRecordFromServer(currentPage, wifiSn);
+                }
             }
         });
     }
@@ -129,6 +152,7 @@ public class PhilipsWifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpe
     @Override
     public void onLoadServerRecord(List<WifiLockOperationRecord> lockRecords, int page) {
         LogUtils.d("收到服务器数据  " + lockRecords.size());
+        recycleview.setVisibility(View.VISIBLE);
         tvNoMore.setVisibility(View.GONE);
         if (page == 1) {
             records.clear();
@@ -210,6 +234,7 @@ public class PhilipsWifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpe
         refreshLayout.setEnableLoadMore(false);  //服务器没有数据时，不让上拉加载更多
         ToastUtils.showShort(R.string.server_no_data_2);
         tvNoMore.setVisibility(View.VISIBLE);
+        recycleview.setVisibility(View.GONE);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.philips.easykey.lock.activity.device.videolock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,16 @@ public class PhilipsWifiVideoLockNickNameActivity extends BaseActivity<IWifiVide
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         mNickName = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_NEW_NAME) + "";
         mEtNickName.setText(mNickName);
+        if(TextUtils.isEmpty(mEtNickName.getText().toString().trim())){
+            changeConfirmBtnStyle(false);
+        }else {
+            changeConfirmBtnStyle(true);
+        }
+    }
+
+    private void changeConfirmBtnStyle(boolean isCanLogin) {
+        confirm.setEnabled(isCanLogin);
+        confirm.setBackgroundResource(isCanLogin?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
     private void initListener() {
@@ -57,6 +68,28 @@ public class PhilipsWifiVideoLockNickNameActivity extends BaseActivity<IWifiVide
             public void onClick(View v) {
                 if(!mNickName.equals(mEtNickName.getText().toString().trim())){
                     mPresenter.setNickName(wifiSn,mEtNickName.getText().toString().trim());
+                }
+            }
+        });
+
+        mEtNickName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String account = mEtNickName.getText().toString().trim();
+                if(TextUtils.isEmpty(account)) {
+                    changeConfirmBtnStyle(false);
+                } else {
+                    changeConfirmBtnStyle(!TextUtils.isEmpty(s.toString()));
                 }
             }
         });
