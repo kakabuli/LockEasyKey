@@ -14,6 +14,7 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -21,17 +22,37 @@ import io.reactivex.functions.Consumer;
 public class DoorLockMessageFragmentPresenter<T> extends BasePresenter<IDoorLockMessageView> {
 
     private Disposable listenActionUpdateDisposable;
+    private Disposable listenerAllDevicesDisposable;
     private String wifiSN;
 
     @Override
     public void attachView(IDoorLockMessageView view) {
         super.attachView(view);
         listenActionUpdate();
-
+        listenerAllDevices();
     }
 
     public void setWifiSN(String wifiSN){
         this.wifiSN = wifiSN;
+    }
+
+    private void listenerAllDevices(){
+        toDisposable(listenerAllDevicesDisposable);
+        listenerAllDevicesDisposable = MyApplication.getInstance().listenerAllDevices()
+                .subscribe(new Consumer<AllBindDevices>() {
+                    @Override
+                    public void accept(AllBindDevices allBindDevices) throws Exception {
+                        if (isSafe()) {
+                            mViewRef.get().onDeviceRefresh(allBindDevices);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+        compositeDisposable.add(listenerAllDevicesDisposable);
     }
 
     private void listenActionUpdate(){

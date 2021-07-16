@@ -74,7 +74,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
             startActivity(privacyIntent);
         });
         initView();
-        tvContent.setText(R.string.menu_item_about);
+        tvContent.setText(R.string.about_us);
         upgradePresenter=new UpgradePresenter();
         initPackages(this);
     }

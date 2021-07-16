@@ -35,6 +35,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.widget.SpacesItemDecoration;
@@ -108,7 +109,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         mView.findViewById(R.id.iv_today_lock_statistics_right).setOnClickListener(v -> rcvTodayLockStatistics.scrollBy(-todayLockStatisticsMoveRightDistance,0));
         initView();
         initDevices();
-        MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
         return mView;
     }
 
@@ -323,6 +323,11 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             HomeShowBean homeShowBean = (HomeShowBean) data.getSerializableExtra("homeShowBean");
             refreshLayoutData((WifiLockInfo)homeShowBean.getObject());
         }
+    }
+
+    @Override
+    public void onDeviceRefresh(AllBindDevices allBindDevices) {
+        initDevices();
     }
 
     @Override

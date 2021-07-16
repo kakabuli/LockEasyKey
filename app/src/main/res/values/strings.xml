@@ -19,6 +19,7 @@
     <string name="input_verification_code">输入验证码</string>
     <string name="register_default_agree">注册默认同意</string>
     <string name="user_protocol">用户协议</string>
+    <string name="philips_agree">同意</string>
     <string name="philips_forget_password">忘记密码</string>
     <string name="have_add_lock">门锁已添加成功</string>
     <string name="have_add_lock_text">快来设置智能开关吧!</string>

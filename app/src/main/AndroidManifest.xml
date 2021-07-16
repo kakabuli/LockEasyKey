@@ -1209,6 +1209,10 @@
             android:name=".activity.message.PhilipsDeviceSelectDialogActivity"
             android:theme="@style/DialogTransparent" />
 
+        <activity
+            android:name=".activity.PhilipsCalendarDialogActivity"
+            android:theme="@style/DialogTransparent" />
+
         <service android:name=".publiclibrary.xm.DoorbellingService" />
         <service android:name=".publiclibrary.ble.BleService" />
         <service android:name=".publiclibrary.ota.ble.p6.BluetoothLeService" />

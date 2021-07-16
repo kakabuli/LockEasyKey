@@ -5,14 +5,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.PhilipsCalendarDialogActivity;
+import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.fragment.record.PhilipsWifiLockOpenRecordFragment;
 import com.philips.easykey.lock.fragment.record.PhilipsWifiLockVistorRecordFragment;
@@ -21,10 +29,12 @@ import com.philips.easykey.lock.fragment.record.WifiLockAlarmRecordFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockRecordPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoRecordView;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -46,6 +56,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
     private boolean isVideoLock = false;
     private List<Fragment> fragments = new ArrayList<>();
     private FragmentPagerAdapter adapter;
+    private int RESULT_OK = 100;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +77,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
         tvOpenLockRecord.setOnClickListener(this);
         tvWarnInformation.setOnClickListener(this);
         tvVistorRecord.setOnClickListener(this);
+        mIvRecordScreen.setOnClickListener(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
     }
@@ -115,6 +127,11 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 @Override
                 public int getCount() {
                     return fragments.size();
+                }
+
+                @Override
+                public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+                    //super.destroyItem(container, position, object);
                 }
             };
             viewPager.setAdapter(adapter);
@@ -284,7 +301,18 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.iv_record_screen:
+                Intent intent = new Intent(this, PhilipsCalendarDialogActivity.class);
+                startActivityForResult(intent, RESULT_OK);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String date =  data.getStringExtra("date");
+
         }
     }
 

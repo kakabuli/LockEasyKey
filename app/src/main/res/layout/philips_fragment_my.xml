@@ -157,7 +157,7 @@
                 android:layout_marginLeft="16pt"
                 android:drawableLeft="@drawable/philips_mine_icon_about"
                 android:drawablePadding="16pt"
-                android:text="@string/menu_item_about"
+                android:text="@string/about_us"
                 android:textColor="#333333"
                 android:textSize="16pt" />
 
