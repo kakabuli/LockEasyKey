@@ -77,6 +77,7 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockUpdateNickNa
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockDeleteShareBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockRecordBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockRecordScreenedBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockShareBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockUpdateInfoBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WifiLockUpdatePushSwitchBean;
@@ -102,7 +103,10 @@ import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatOpenIdResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWeChatUserPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockAlarmRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiLockOperationScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockDoorbellScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LockRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.LoginResult;
 import com.philips.easykey.lock.publiclibrary.http.result.MultiCheckOTAResult;
@@ -1283,6 +1287,22 @@ public class XiaokaiNewServiceImp {
                 .compose(RxjavaHelper.observeOnMainThread());
     }
 
+    /**
+     * 获取wifi锁操作筛选记录
+     *
+     * @param wifiSN
+     * @param page
+     * @return
+     */
+    public static Observable<GetWifiLockOperationScreenedRecordResult> wifiLockGetOperationFilterList(String wifiSN, int page, long startTime, long endTime) {
+        WifiLockRecordScreenedBean wiFiLockWifiSNAndUid = new WifiLockRecordScreenedBean(wifiSN, page,startTime,endTime);
+        String timestamp = System.currentTimeMillis() /1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .wifiLockGetOperationFilterList(timestamp,new HttpUtils<WifiLockRecordScreenedBean>().getBodyToken(wiFiLockWifiSNAndUid,timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
 
     /**
      * 获取wifi报警记录
@@ -1470,6 +1490,18 @@ public class XiaokaiNewServiceImp {
     }
 
     /**
+     *  视频锁报警记录筛选查询
+     */
+    public static Observable<GetWifiVideoLockAlarmScreenedRecordResult> wifiVideoLockGetAlarmFilterList(String wifiSn, int page, long startTime, long endTime) {
+        WifiLockRecordScreenedBean wiFiLockWifiSNAndUid = new WifiLockRecordScreenedBean(wifiSn, page , startTime , endTime);
+        String timestamp = System.currentTimeMillis() /1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .wifiVideoLockGetAlarmFilterList(timestamp,new HttpUtils<WifiLockRecordScreenedBean>().getBodyToken(wiFiLockWifiSNAndUid,timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
      *  视频锁分页查询门铃记录
      */
     public static Observable<GetWifiVideoLockAlarmRecordResult> wifiVideoLockGetDoorbellList(String wifiSn,int page){
@@ -1477,6 +1509,18 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis() /1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .wifiVideoLockGetDoorbellList(timestamp,new HttpUtils<WifiLockRecordBean>().getBodyToken(wiFiLockWifiSNAndUid,timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     *  视频锁分页查询门铃筛选记录
+     */
+    public static Observable<GetWifiVideoLockDoorbellScreenedRecordResult> wifiVideoLockGetDoorbellFilterList(String wifiSn, int page, long startTime, long endTime){
+        WifiLockRecordScreenedBean wiFiLockWifiSNAndUid = new WifiLockRecordScreenedBean(wifiSn, page,startTime,endTime);
+        String timestamp = System.currentTimeMillis() /1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .wifiVideoLockGetDoorbellFilterList(timestamp,new HttpUtils<WifiLockRecordScreenedBean>().getBodyToken(wiFiLockWifiSNAndUid,timestamp))
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }
@@ -1662,7 +1706,7 @@ public class XiaokaiNewServiceImp {
      }
 
     /**
-     * 获取门锁当天统计
+     * 获取门锁7天统计
      */
     public static Observable<GetStatisticsSevenDayResult> getDoorLockDtatisticsSevenDay(@NonNull String uid, @NonNull String wifiSN){
         DoorLockStatisticsBean bean = new DoorLockStatisticsBean();

@@ -55,6 +55,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     ImageView ivVideoLockMsgRight;
     ImageView ivTodayLockStatisticsLeft;
     ImageView ivTodayLockStatisticsRight;
+    TextView tvOpenLockNumber;
     TextView tvNoMessage;
     RelativeLayout llDeviceType;
     ScrollView scrollView;
@@ -91,6 +92,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         llVideoLockMsg = mView.findViewById(R.id.ll_video_lock_msg);
         ivVideoLockMsgLeft = mView.findViewById(R.id.iv_video_lock_msg_left);
         ivVideoLockMsgRight = mView.findViewById(R.id.iv_video_lock_msg_right);
+        tvOpenLockNumber = mView.findViewById(R.id.tv_open_lock_number);
         ivTodayLockStatisticsLeft = mView.findViewById(R.id.iv_today_lock_statistics_left);
         ivTodayLockStatisticsRight = mView.findViewById(R.id.iv_today_lock_statistics_right);
         tvNoMessage = mView.findViewById(R.id.tv_no_message);
@@ -187,27 +189,27 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
         TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
         todayLockStatisticsBean.setStatisticsType(1);
-        todayLockStatisticsBean.setStatisticsCount(10);
+        todayLockStatisticsBean.setStatisticsCount(0);
         TodayLockStatisticsData.add(todayLockStatisticsBean);
 
         TodayLockStatisticsBean todayLockStatisticsBean1 = new TodayLockStatisticsBean();
         todayLockStatisticsBean1.setStatisticsType(2);
-        todayLockStatisticsBean1.setStatisticsCount(3);
+        todayLockStatisticsBean1.setStatisticsCount(0);
         TodayLockStatisticsData.add(todayLockStatisticsBean1);
 
         TodayLockStatisticsBean todayLockStatisticsBean2 = new TodayLockStatisticsBean();
         todayLockStatisticsBean2.setStatisticsType(3);
-        todayLockStatisticsBean2.setStatisticsCount(110);
+        todayLockStatisticsBean2.setStatisticsCount(0);
         TodayLockStatisticsData.add(todayLockStatisticsBean2);
 
         TodayLockStatisticsBean todayLockStatisticsBean3 = new TodayLockStatisticsBean();
         todayLockStatisticsBean3.setStatisticsType(4);
-        todayLockStatisticsBean3.setStatisticsCount(20);
+        todayLockStatisticsBean3.setStatisticsCount(0);
         TodayLockStatisticsData.add(todayLockStatisticsBean3);
 
         TodayLockStatisticsBean todayLockStatisticsBean4 = new TodayLockStatisticsBean();
         todayLockStatisticsBean4.setStatisticsType(3);
-        todayLockStatisticsBean4.setStatisticsCount(55);
+        todayLockStatisticsBean4.setStatisticsCount(0);
         TodayLockStatisticsData.add(todayLockStatisticsBean4);
 
         lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter(TodayLockStatisticsData);
@@ -338,6 +340,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
     @Override
     public void getDtatisticsDay(GetStatisticsDayResult getStatisticsDayResult) {
+        tvOpenLockNumber.setText(getStatisticsDayResult.getData().getAllCount());
         LogUtils.d("获取门锁当天记录  数据是  " + getStatisticsDayResult.toString());
     }
 

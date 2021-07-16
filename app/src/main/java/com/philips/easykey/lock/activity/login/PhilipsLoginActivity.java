@@ -282,7 +282,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 registerWeChatAndBindPhone();
             }
         } else if(view.getId() == R.id.ivWechat) {
-            loginType = wxLogin;
             wechatLogin();
         } else if(view.getId() == R.id.ivVerification) {
             // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
@@ -370,6 +369,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         WXEntryActivity.setWXdata(new WXEntryActivity.onWXDataListener() {
             @Override
             public void data(String code) {
+                loginType = wxLogin;
                 getWeChatOpenId(code);
             }
         });

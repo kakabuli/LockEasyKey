@@ -103,6 +103,21 @@ public class DateUtils {
         return timestamp;
     }
 
+    //标准时间转换成时间戳 2019-04-02 09:13:57
+    public static long dateChangeTimestamp(String time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        long timestamp = 0;
+        try {
+            date = simpleDateFormat.parse(time);
+            timestamp = date.getTime() / 1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return timestamp;
+    }
+
 
     //时间戳转换成时分
     public static String long2HourMin(long time) {

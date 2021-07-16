@@ -216,6 +216,11 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
     <style name="AVLoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>

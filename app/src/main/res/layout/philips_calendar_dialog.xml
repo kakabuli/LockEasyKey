@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:calendarview="http://schemas.android.com/apk/res-auto"
     xmlns:weekview="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rl_dialog"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:onClick="dismiss">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44pt">
 
         <ImageView
+            android:id="@+id/ivLast"
             android:layout_width="20pt"
             android:layout_height="20pt"
             android:layout_marginLeft="24pt"
             android:layout_centerVertical="true"
-            android:background="@drawable/philips_icon_week_last"
-            android:onClick="lastMonth" />
+            android:background="@drawable/philips_icon_week_last" />
 
         <TextView
             android:id="@+id/title"
@@ -35,13 +28,13 @@
             android:textSize="14pt"/>
 
         <ImageView
+            android:id="@+id/ivNext"
             android:layout_width="20pt"
             android:layout_height="20pt"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="24pt"
-            android:background="@drawable/philips_icon_week_next"
-            android:onClick="nextMonth" />
+            android:background="@drawable/philips_icon_week_next" />
 
     </RelativeLayout>
 
@@ -59,5 +52,4 @@
         calendarview:show_lunar="true"
         calendarview:show_term="true"
         calendarview:switch_choose="false" />
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
