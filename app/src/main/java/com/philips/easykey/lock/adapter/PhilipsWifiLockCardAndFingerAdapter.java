@@ -32,9 +32,9 @@ public class PhilipsWifiLockCardAndFingerAdapter extends BaseQuickAdapter<WiFiLo
         int num = bean.getNum();
         if(bean.getTpye() == BleLockUtils.TYPE_FINGER){
 
-            helper.setText(R.id.tv_num, num > 9 ? getContext().getString(R.string.finger) + num : getContext().getString(R.string.finger) + "0" + num);
+            helper.setText(R.id.tv_num, num > 9 ? getContext().getResources().getString(R.string.finger) + num : getContext().getResources().getString(R.string.finger) + "0" + num);
         }else if(bean.getTpye() == BleLockUtils.TYPE_CARD){
-            helper.setText(R.id.tv_num, num > 9 ? getContext().getString(R.string.card) + num : getContext().getString(R.string.card) + "0" + num);
+            helper.setText(R.id.tv_num, num > 9 ? getContext().getResources().getString(R.string.card) + num : getContext().getResources().getString(R.string.card) + "0" + num);
         }
         helper.setText(R.id.tv_nick, bean.getNickName());
         helper.setText(R.id.tv_time, DateUtils.getDayTimeFromMillisecond(bean.getCreateTime() * 1000));

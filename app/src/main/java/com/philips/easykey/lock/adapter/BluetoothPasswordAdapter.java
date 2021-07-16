@@ -54,7 +54,7 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
         helper.setText(R.id.tv_nick, bean.getNickName());
         //1永久 2时间段 3周期 4 24小时 5 周期
         if (bean.getType() == 1) {
-            helper.setText(R.id.tv_time, MyApplication.getInstance().getString(R.string.foever_able));
+            helper.setText(R.id.tv_time, getContext().getResources().getString(R.string.foever_able));
         } else if (bean.getType() == 2) {
             helper.setText(R.id.tv_time, DateUtils.getDateTimeFromMillisecond(bean.getStartTime()) + "-" + DateUtils.getDateTimeFromMillisecond(bean.getEndTime()));
         } else if (bean.getType() == 3) {  //周期密码
@@ -78,10 +78,10 @@ public class BluetoothPasswordAdapter extends BaseQuickAdapter<ForeverPassword, 
         } else if (bean.getType() == 4) {
             helper.setText(R.id.tv_time, DateUtils.getDateTimeFromMillisecond(bean.getStartTime()) + "-" + DateUtils.getDateTimeFromMillisecond(bean.getEndTime()));
         }else if (bean.getType()==5){
-            helper.setText(R.id.tv_time, MyApplication.getInstance().getString(R.string.temporary_password_used_once));
+            helper.setText(R.id.tv_time,getContext().getResources().getString(R.string.temporary_password_used_once));
         }
         if ("09".equals(bean.getNum())){
-            helper.setText(R.id.tv_time, MyApplication.getInstance().getString(R.string.stress_password));
+            helper.setText(R.id.tv_time, getContext().getResources().getString(R.string.stress_password));
         }
 
     }

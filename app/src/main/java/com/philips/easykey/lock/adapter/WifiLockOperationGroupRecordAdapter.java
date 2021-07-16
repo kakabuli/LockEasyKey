@@ -44,7 +44,7 @@ public class WifiLockOperationGroupRecordAdapter extends BaseQuickAdapter<WifiLo
         String time = bean.getTime();
         if (!TextUtils.isEmpty(time)) {
             if (time.equals(DateUtils.getCurrentYMD())){
-                time = getContext().getString(R.string.today);
+                time = getContext().getResources().getString(R.string.today);
             }
             tvTitle.setText(time);
             tvTitle.setVisibility(View.VISIBLE);

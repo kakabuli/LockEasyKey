@@ -58,9 +58,11 @@ public class PhilipsDuressAlarmAdapter extends BaseQuickAdapter<PhilipsDuressBea
         }
         String sNum = bean.getNum() > 9 ? "" + bean.getNum() : "0" + bean.getNum();;
         if(bean.getNickName() != null && !bean.getNickName().isEmpty()){
-            holder.setText(R.id.tv_password_num,bean.getNickName().isEmpty() ? getContext().getString(R.string.philips_duress_number,sNum) : bean.getNickName());
+            holder.setText(R.id.tv_password_num,bean.getNickName().isEmpty() ?
+                    getContext().getResources().getString(R.string.philips_duress_number,sNum) : bean.getNickName());
         }else{
-            holder.setText(R.id.tv_password_num,bean.getNum());
+            holder.setText(R.id.tv_password_num,
+                    getContext().getResources().getString(R.string.philips_duress_number,sNum));
         }
 
         holder.findView(R.id.rl_duress_alarm_toggle).setOnClickListener(v -> {
