@@ -361,6 +361,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             }
 
         });
+        tvTemporaryPassword.setTextIsSelectable(true);
     }
 
     @Deprecated
@@ -410,11 +411,12 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                             mPresenter.talkback(false);
                             mPresenter.stopTalkback();
                             tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
+                            showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
                         }else{
                             ivCalling.setSelected(true);
                             mPresenter.talkback(true);
                             mPresenter.startTalkback();
-                            showShort(getString(R.string.wifi_video_lock_open_talk_back));
+                            showShort(getString(R.string.philips_wifi_video_lock_open_talk_back));
                             tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
                         }
                     }

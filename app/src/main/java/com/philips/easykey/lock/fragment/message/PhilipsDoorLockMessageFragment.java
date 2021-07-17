@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.philips.easykey.core.tool.FileTool;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity;
 import com.philips.easykey.lock.activity.message.PhilipsDeviceSelectDialogActivity;
 import com.philips.easykey.lock.adapter.PhilipsSevenDayDataStatisticsAdapter;
 import com.philips.easykey.lock.adapter.PhilipsTodayLockStatisticsAdapter;
@@ -36,10 +40,13 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.widget.SpacesItemDecoration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +64,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     ImageView ivTodayLockStatisticsRight;
     TextView tvOpenLockNumber;
     TextView tvNoMessage;
+    TextView tvNoAlarm;
     RelativeLayout llDeviceType;
     ScrollView scrollView;
     TextView createTime;
@@ -68,7 +76,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     private int RESULT_OK = 100;
     private View mView;
     private List<WifiVideoLockAlarmRecord> wifiVideoLockAlarmRecordData = new ArrayList<>();
-    private List<TodayLockStatisticsBean> TodayLockStatisticsData = new ArrayList<>();
+    private List<TodayLockStatisticsBean> todayLockStatisticsData = new ArrayList<>();
     private List<SevendayDataStatisticsBean> sevendayDataStatisticsData = new ArrayList<>();
     private int earlyWarningMsgMoveLeftDistance = 0;
     private int earlyWarningMsgMoveRightDistance = 0;
@@ -76,6 +84,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     private int todayLockStatisticsMoveRightDistance = 0;
     private int itemDecorationLeft = SizeUtils.dp2px(4);
     private final List<HomeShowBean> mDevices = new ArrayList<>();
+    private String wifiSn;
     private WifiLockInfo wifiLockInfo;
 
     @Nullable
@@ -95,6 +104,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         tvOpenLockNumber = mView.findViewById(R.id.tv_open_lock_number);
         ivTodayLockStatisticsLeft = mView.findViewById(R.id.iv_today_lock_statistics_left);
         ivTodayLockStatisticsRight = mView.findViewById(R.id.iv_today_lock_statistics_right);
+        tvNoAlarm = mView.findViewById(R.id.tv_no_alarm);
         tvNoMessage = mView.findViewById(R.id.tv_no_message);
         llDeviceType = mView.findViewById(R.id.ll_device_type);
         scrollView = mView.findViewById(R.id.scrollView);
@@ -118,8 +128,14 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     public void onResume() {
         super.onResume();
         if (!mDevices.isEmpty() && wifiLockInfo != null ) {
-            mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiLockInfo.getWifiSN());
-            mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiLockInfo.getWifiSN());
+            mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
+            mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
+            refreshAlarmRecordLayoutData();
+        }else {
+            rcvVideoLockMsg.setVisibility(View.GONE);
+            tvNoAlarm.setVisibility(View.VISIBLE);
+            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -129,25 +145,51 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     }
 
     private void initView() {
-        for (int i = 0; i < 7; i++) {
-            WifiVideoLockAlarmRecord wifiVideoLockAlarmRecord = new WifiVideoLockAlarmRecord();
-            wifiVideoLockAlarmRecordData.add(wifiVideoLockAlarmRecord);
+        if(videoLockWarningInformAdapter == null){
+            videoLockWarningInformAdapter = new PhilipsVideoLockWarningInformAdapter( new PhilipsVideoLockWarningInformAdapter.VideoLockWarningCallBackLinstener() {
+                @Override
+                public void onVideoLockWarningCallBackLinstener(WifiVideoLockAlarmRecord record) {
+                    if(wifiLockInfo.getPowerSave() == 1){
+                        powerStatusDialog();
+                        return;
+                    }
+                    getActivity().runOnUiThread(() -> {
+                        String path = FileTool.getVideoCacheFolder(getActivity(),record.getWifiSN()).getPath();
+                        String fileName = path +  File.separator + record.get_id() + ".mp4";
+                        if (new File(fileName).exists()){
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
+                            intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
+                            intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
+                            try{
+                                fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
+                            }catch (Exception e){
+                            }
+                            intent.putExtra("NAME",fileName);
+                            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+                            intent.putExtra("record",record);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockAlbumDetailActivity.class);
+                            intent.putExtra(KeyConstants.VIDEO_PIC_PATH,fileName);
+                            intent.putExtra(KeyConstants.VIDO_SHOW_DELETE,1);
+                            try {
+                                fileName = DateUtils.getStrFromMillisecond2(record.getStartTime() - 28800000);
+                            }catch (Exception e){
+                            }
+                            intent.putExtra("NAME",fileName);
+                            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+                            intent.putExtra("record",record);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            });
         }
-        videoLockWarningInformAdapter = new PhilipsVideoLockWarningInformAdapter(wifiVideoLockAlarmRecordData, new PhilipsVideoLockWarningInformAdapter.VideoLockWarningCallBackLinstener() {
-            @Override
-            public void onVideoLockWarningCallBackLinstener(WifiVideoLockAlarmRecord record) {
-
-            }
-        });
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcvVideoLockMsg.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
-        if (wifiVideoLockAlarmRecordData.size() < 5) {
-            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
-            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
-        }
         rcvVideoLockMsg.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -187,46 +229,20 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             }
         });
 
-        TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
-        todayLockStatisticsBean.setStatisticsType(1);
-        todayLockStatisticsBean.setStatisticsCount(0);
-        TodayLockStatisticsData.add(todayLockStatisticsBean);
-
-        TodayLockStatisticsBean todayLockStatisticsBean1 = new TodayLockStatisticsBean();
-        todayLockStatisticsBean1.setStatisticsType(2);
-        todayLockStatisticsBean1.setStatisticsCount(0);
-        TodayLockStatisticsData.add(todayLockStatisticsBean1);
-
-        TodayLockStatisticsBean todayLockStatisticsBean2 = new TodayLockStatisticsBean();
-        todayLockStatisticsBean2.setStatisticsType(3);
-        todayLockStatisticsBean2.setStatisticsCount(0);
-        TodayLockStatisticsData.add(todayLockStatisticsBean2);
-
-        TodayLockStatisticsBean todayLockStatisticsBean3 = new TodayLockStatisticsBean();
-        todayLockStatisticsBean3.setStatisticsType(4);
-        todayLockStatisticsBean3.setStatisticsCount(0);
-        TodayLockStatisticsData.add(todayLockStatisticsBean3);
-
-        TodayLockStatisticsBean todayLockStatisticsBean4 = new TodayLockStatisticsBean();
-        todayLockStatisticsBean4.setStatisticsType(3);
-        todayLockStatisticsBean4.setStatisticsCount(0);
-        TodayLockStatisticsData.add(todayLockStatisticsBean4);
-
-        lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter(TodayLockStatisticsData);
+        if(lockStatisticsAdapter == null){
+            lockStatisticsAdapter = new PhilipsTodayLockStatisticsAdapter();
+        }
         LinearLayoutManager horizontalLayoutManager1 = new LinearLayoutManager(getContext());
         horizontalLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvTodayLockStatistics.setLayoutManager(horizontalLayoutManager1);
         rcvTodayLockStatistics.setAdapter(lockStatisticsAdapter);
-        if (TodayLockStatisticsData.size() < 5) {
-            ivTodayLockStatisticsLeft.setVisibility(View.INVISIBLE);
-            ivTodayLockStatisticsRight.setVisibility(View.INVISIBLE);
-        }
+        refreshDtatisticsDayLayoutData(null);
         rcvTodayLockStatistics.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (TodayLockStatisticsData.size() < 5) return;
+                if (todayLockStatisticsData.size() < 5) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 //找到即将移出屏幕Item的position
                 int position = layoutManager.findFirstVisibleItemPosition();
@@ -263,15 +279,9 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
             }
         });
-
-        for (int i = 0; i < 3; i++) {
-            SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
-            sevendayDataStatisticsBean.setOrdinateValue(new float[]{20, 20, 27, 26, 24, 21});
-            sevendayDataStatisticsBean.setTransverseValue(new String[]{"02.13", "02.14", "02.15", "02.16", "02.17", "02.18"});
-            sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
-            sevendayDataStatisticsData.add(sevendayDataStatisticsBean);
+        if(sevendayDataStatisticsAdapter == null){
+            sevendayDataStatisticsAdapter = new PhilipsSevenDayDataStatisticsAdapter();
         }
-        sevendayDataStatisticsAdapter = new PhilipsSevenDayDataStatisticsAdapter(sevendayDataStatisticsData);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
@@ -300,6 +310,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
     private void refreshLayoutData(WifiLockInfo mWifiLockInfo) {
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockInfo.getWifiSN());
+        wifiSn = wifiLockInfo.getWifiSN();
         long createTime2 = wifiLockInfo.getCreateTime();
 
         if (createTime2 == 0) {
@@ -313,9 +324,121 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             createTime.setText(day + "");
         }
         //WiFi信息并展示
-        int count = (int) SPUtils.get(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiLockInfo.getWifiSN(), 0);
+        int count = (int) SPUtils.get(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiSn, 0);
         tvOpenLockTimes.setText("" + count);
         tvLockName.setText(mWifiLockInfo.getLockNickname());
+        mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
+        mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
+        refreshAlarmRecordLayoutData();
+    }
+
+    private void refreshAlarmRecordLayoutData(){
+        String alarmCache = (String) SPUtils.get(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD + wifiLockInfo.getWifiSN(), "");
+        wifiVideoLockAlarmRecordData = new Gson().fromJson(alarmCache, new TypeToken<List<WifiVideoLockAlarmRecord>>() {}.getType());
+        if(wifiVideoLockAlarmRecordData == null){
+            rcvVideoLockMsg.setVisibility(View.GONE);
+            tvNoAlarm.setVisibility(View.VISIBLE);
+            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(wifiVideoLockAlarmRecordData.size() == 0){
+            rcvVideoLockMsg.setVisibility(View.GONE);
+            tvNoAlarm.setVisibility(View.VISIBLE);
+            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
+        }else if (wifiVideoLockAlarmRecordData.size() > 0 && wifiVideoLockAlarmRecordData.size() < 5) {
+            tvNoAlarm.setVisibility(View.GONE);
+            ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
+            rcvVideoLockMsg.setVisibility(View.VISIBLE);
+            videoLockWarningInformAdapter.setList(wifiVideoLockAlarmRecordData);
+            videoLockWarningInformAdapter.notifyDataSetChanged();
+        }else if(wifiVideoLockAlarmRecordData.size() > 5){
+            tvNoAlarm.setVisibility(View.GONE);
+            ivVideoLockMsgLeft.setVisibility(View.VISIBLE);
+            ivVideoLockMsgRight.setVisibility(View.VISIBLE);
+            rcvVideoLockMsg.setVisibility(View.VISIBLE);
+            videoLockWarningInformAdapter.setList(wifiVideoLockAlarmRecordData);
+            videoLockWarningInformAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void refreshDtatisticsDayLayoutData(GetStatisticsDayResult statisticsDayResult){
+        todayLockStatisticsData.clear();
+        tvOpenLockNumber.setText(statisticsDayResult == null ? "0" : statisticsDayResult.getData().getAllCount() + "");
+        for(int i = 0 ; i < 4 ; i ++){
+            TodayLockStatisticsBean todayLockStatisticsBean = new TodayLockStatisticsBean();
+            if(i == 0){
+                todayLockStatisticsBean.setStatisticsType(1);
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getDoorbellCount());
+            }else if(i == 1){
+                todayLockStatisticsBean.setStatisticsType(2);
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getPwdOpenLockCount());
+            }else if(i == 2){
+                todayLockStatisticsBean.setStatisticsType(3);
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getFingerprintOpenLockCount());
+            }else if(i == 3){
+                todayLockStatisticsBean.setStatisticsType(4);
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getCardOpenLockCount());
+            }
+            todayLockStatisticsData.add(todayLockStatisticsBean);
+        }
+        lockStatisticsAdapter.setList(todayLockStatisticsData);
+        lockStatisticsAdapter.notifyDataSetChanged();
+        if (todayLockStatisticsData.size() < 5) {
+            ivTodayLockStatisticsLeft.setVisibility(View.INVISIBLE);
+            ivTodayLockStatisticsRight.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void refreshDtatisticsSevenDayLayoutData(GetStatisticsSevenDayResult statisticsSevenDayResult){
+        sevendayDataStatisticsData.clear();
+        for (int i = 0; i < 3; i++) {
+            SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
+            if(i == 0) {
+                sevendayDataStatisticsBean.setOrdinateValue(new int[]{
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(5).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getOpenLockCount()});
+                sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.philips_open_the_door_record));
+            }else if(i == 1){
+                sevendayDataStatisticsBean.setOrdinateValue(new int[]{
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(5).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getDoorbellCount()});
+                sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.philips_visitor_record));
+            }else if(i == 2){
+                sevendayDataStatisticsBean.setOrdinateValue(new int[]{
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(5).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getAlarmCount()});
+                sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
+            }
+            sevendayDataStatisticsBean.setTransverseValue(new String[]{ // TODO: 2021/7/17 这里数据处理有点坑，服务器返回的数据格式跟ui要求有出入，只有二次封装
+                    statisticsSevenDayResult.getData().getStatisticsList().get(6).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(5).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(4).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(3).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(2).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(1).getDate().replace("-",".").substring(5),
+                    statisticsSevenDayResult.getData().getStatisticsList().get(0).getDate().replace("-",".").substring(5)});
+            sevendayDataStatisticsData.add(sevendayDataStatisticsBean);
+        }
+        sevendayDataStatisticsAdapter.setList(sevendayDataStatisticsData);
+        sevendayDataStatisticsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -340,13 +463,39 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
     @Override
     public void getDtatisticsDay(GetStatisticsDayResult getStatisticsDayResult) {
-        tvOpenLockNumber.setText(getStatisticsDayResult.getData().getAllCount());
+        refreshDtatisticsDayLayoutData(getStatisticsDayResult);
         LogUtils.d("获取门锁当天记录  数据是  " + getStatisticsDayResult.toString());
     }
 
     @Override
     public void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult) {
         LogUtils.d("获取门锁七天记录  数据是  " + getStatisticsSevenDayResult.toString());
+        refreshDtatisticsSevenDayLayoutData(getStatisticsSevenDayResult);
+    }
+
+    public void powerStatusDialog(){
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(getActivity(), getString(R.string.philips_deviceinfo__power_save_mode),"",
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 
 }

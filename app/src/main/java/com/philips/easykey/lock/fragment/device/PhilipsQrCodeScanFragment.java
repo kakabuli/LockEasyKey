@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,12 +82,25 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         if(mCameraScan != null) {
             mCameraScan.enableTorch(false);
             mCameraScan.release();
         }
-        super.onDestroy();
     }
+
+    public void startCamera(){
+        if(mCameraScan != null) {
+            mCameraScan.startCamera();
+        }
+    }
+
+    public void stopCamera(){
+        if(mCameraScan != null) {
+            mCameraScan.stopCamera();
+        }
+    }
+
 
     @Override
     public boolean onScanResultCallback(Result result) {

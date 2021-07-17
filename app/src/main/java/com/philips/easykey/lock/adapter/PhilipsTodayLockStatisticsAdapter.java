@@ -18,8 +18,8 @@ import java.util.List;
 
 public class PhilipsTodayLockStatisticsAdapter extends BaseQuickAdapter<TodayLockStatisticsBean, BaseViewHolder> {
 
-    public PhilipsTodayLockStatisticsAdapter(@Nullable List<TodayLockStatisticsBean> data) {
-        super(R.layout.philips_item_lock_statistics, data);
+    public PhilipsTodayLockStatisticsAdapter() {
+        super(R.layout.philips_item_lock_statistics);
     }
 
     @Override
@@ -29,19 +29,19 @@ public class PhilipsTodayLockStatisticsAdapter extends BaseQuickAdapter<TodayLoc
         TextView tvBar = baseViewHolder.getView(R.id.tv_bar);
         switch (todayLockStatisticsBean.getStatisticsType()){
             case 1:
-                tvType.setText("访客记录");
+                tvType.setText(getContext().getResources().getString(R.string.philips_visitor_record));
                 ivType.setImageDrawable(getContext().getDrawable(R.drawable.philips_message_icon_visitors));
                 break;
             case 2:
-                tvType.setText("指纹开门");
+                tvType.setText(getContext().getResources().getString(R.string.philips_fingerprint_open_the_door));
                 ivType.setImageDrawable(getContext().getDrawable(R.drawable.philips_message_icon_fingerprint));
                 break;
             case 3:
-                tvType.setText("密码开门");
+                tvType.setText(getContext().getResources().getString(R.string.philips_password_open_the_door));
                 ivType.setImageDrawable(getContext().getDrawable(R.drawable.philips_message_icon_password));
                 break;
             case 4:
-                tvType.setText("开片");
+                tvType.setText(getContext().getResources().getString(R.string.philips_card_open_the_door));
                 ivType.setImageDrawable(getContext().getDrawable(R.drawable.philips_message_icon_card));
                 break;
         }

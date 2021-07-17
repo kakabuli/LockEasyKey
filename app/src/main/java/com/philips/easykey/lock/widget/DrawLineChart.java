@@ -48,7 +48,7 @@ public class DrawLineChart extends View {
     private float mNeedDrawHeight;
     private String[] mTransverseValue = new String[]{};
     /**数据值*/
-    private float[] mOrdinateValue = new float[]{0,0,23,10,24,42,18};
+    private int[] mOrdinateValue = new int[]{0,0,23,10,24,42,18};
     /**图表的最大值*/
     private float maxVlaue = 27.55f;
     /**图表的最小值*/
@@ -133,11 +133,11 @@ public class DrawLineChart extends View {
         this.mTransverseValue = mTransverseValue;
     }
 
-    public float[] getOrdinateValue() {
+    public int[] getOrdinateValue() {
         return mOrdinateValue;
     }
 
-    public void setOrdinateValue(float[] mOrdinateValue) {
+    public void setOrdinateValue(int[] mOrdinateValue) {
         this.mOrdinateValue = mOrdinateValue;
     }
 
@@ -367,7 +367,7 @@ public class DrawLineChart extends View {
 
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         for (int i = 0; i < mPoints.length; i++) {
-            canvas.drawText(mTransverseValue[i],mBrokenLineLeft + SizeUtils.dp2px(13) + (mViewWidth / mPoints.length  - mBrokenLinerRight / (mPoints.length - 1)) * i, mViewHeight,mTextPaint);
+            canvas.drawText(mTransverseValue[i],mBrokenLineLeft + SizeUtils.dp2px(5) + (mViewWidth / mPoints.length  - mBrokenLinerRight / (mPoints.length - 1)) * i, mViewHeight,mTextPaint);
         }
     }
     /**保留几位小数*/
@@ -379,7 +379,7 @@ public class DrawLineChart extends View {
 
 
     /**根据值计算在该值的 x，y坐标*/
-    public Point[] getPoints(float[] values, float height, float width, float max ,float min, float left,float top) {
+    public Point[] getPoints(int[] values, float height, float width, float max ,float min, float left,float top) {
         float leftPading = width / (values.length-1);//绘制边距
         Point[] points = new Point[values.length];
         for (int i = 0; i < values.length; i++) {

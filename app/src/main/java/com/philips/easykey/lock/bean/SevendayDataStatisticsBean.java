@@ -6,7 +6,7 @@ public class SevendayDataStatisticsBean {
 
     private String statisticsTypeName;
 
-    private float[] ordinateValue ;
+    private int[] ordinateValue ;
 
     private String[] transverseValue;
 
@@ -18,11 +18,11 @@ public class SevendayDataStatisticsBean {
         this.statisticsTypeName = statisticsTypeName;
     }
 
-    public float[] getOrdinateValue() {
+    public int[] getOrdinateValue() {
         return ordinateValue;
     }
 
-    public void setOrdinateValue(float[] ordinateValue) {
+    public void setOrdinateValue(int[] ordinateValue) {
         this.ordinateValue = ordinateValue;
     }
 

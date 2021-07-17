@@ -2,14 +2,17 @@ package com.philips.easykey.lock.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
+import com.philips.easykey.lock.utils.RotateTransformation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,21 +26,45 @@ public class PhilipsVideoLockWarningInformAdapter extends BaseQuickAdapter<WifiV
         void onVideoLockWarningCallBackLinstener(WifiVideoLockAlarmRecord record);
     }
 
-    public PhilipsVideoLockWarningInformAdapter(@Nullable List<WifiVideoLockAlarmRecord> data, VideoLockWarningCallBackLinstener listener) {
-        super(R.layout.philips_item_video_lock_warn_inform, data);
+    public PhilipsVideoLockWarningInformAdapter( VideoLockWarningCallBackLinstener listener) {
+        super(R.layout.philips_item_video_lock_warn_inform);
         this.mListener = listener;
     }
 
     @Override
-    protected void convert(@NotNull BaseViewHolder baseViewHolder, WifiVideoLockAlarmRecord wifiVideoLockAlarmRecord) {
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, WifiVideoLockAlarmRecord record) {
         ImageView ivContent = baseViewHolder.getView(R.id.iv_content);
-        //Glide.with(getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
-        ivContent.setOnClickListener(new View.OnClickListener() {
+        ImageView ivPlay = baseViewHolder.getView(R.id.iv_paly);
+        RelativeLayout rlPic = baseViewHolder.getView(R.id.rl_pic);
+        if(record.getThumbUrl() == null && !record.isThumbState()){
+            if(record.getFileName() == null || record.getFileName().isEmpty()){
+                rlPic.setVisibility(View.GONE);
+            }else{
+                rlPic.setVisibility(View.VISIBLE);
+            }
+        }else{
+            rlPic.setVisibility(View.VISIBLE);
+        }
+
+        if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
+            Glide.with(ivContent.getContext()).load(record.getThumbUrl())
+                    .apply(new RequestOptions().error(R.mipmap.img_video_lock_default).placeholder(R.mipmap.img_video_lock_default).dontAnimate()
+                            .transform(new RotateTransformation(90f))).into(ivContent);
+        }else{
+            Glide.with(ivContent.getContext()).load(R.mipmap.img_video_lock_default).into(ivContent);
+        }
+
+        if(record.isThumbState() && record.getFileName() != null){
+            ivPlay.setVisibility(View.VISIBLE);
+        }else{
+            ivPlay.setVisibility(View.GONE);
+        }
+        rlPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(wifiVideoLockAlarmRecord.getFileDate() != null && !wifiVideoLockAlarmRecord.getFileDate().isEmpty()){
+                if(record.getFileDate() != null && !record.getFileDate().isEmpty()){
                     if(mListener != null){
-                        mListener.onVideoLockWarningCallBackLinstener(wifiVideoLockAlarmRecord);
+                        mListener.onVideoLockWarningCallBackLinstener(record);
                     }
                 }
             }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_pic"
     android:layout_width="76pt"
     android:layout_height="110pt">
 
         <ImageView
             android:id="@+id/iv_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_f2f2f2_3dp"/>
+            android:layout_height="match_parent"/>
 
         <ImageView
             android:id="@+id/iv_paly"

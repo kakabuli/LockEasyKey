@@ -171,6 +171,17 @@
                 android:textColor="#333333"
                 android:text="@string/philips_frament_warning_message_inform"/>
 
+            <TextView
+                android:id="@+id/tv_no_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="36pt"
+                android:visibility="gone"
+                android:textColor="#333333"
+                android:textSize="12pt"
+                android:text="@string/no_message"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

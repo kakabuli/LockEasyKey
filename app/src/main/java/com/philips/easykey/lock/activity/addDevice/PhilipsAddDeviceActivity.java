@@ -29,6 +29,8 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
     private View mVScanAddSelected, mVAddManuallySelected;
 
     private final ArrayList<Fragment> mFragments = new ArrayList<>();
+    private PhilipsQrCodeScanFragment mPhilipsQrCodeScanFragment;
+    private PhilipsAddManuallyFragment mPhilipsAddManuallyFragment;
 
     @Override
     public void initData(@Nullable Bundle bundle) {
@@ -49,9 +51,14 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
         mVAddManuallySelected = findViewById(R.id.vAddManuallySelected);
         applyDebouncingClickListener(findViewById(R.id.ivBack), findViewById(R.id.ivHelp), mTvAddManually, mTvScanAdd);
 
-
-        mFragments.add(PhilipsQrCodeScanFragment.newInstance());
-        mFragments.add(PhilipsAddManuallyFragment.newInstance());
+        if(mPhilipsQrCodeScanFragment == null){
+            mPhilipsQrCodeScanFragment = new PhilipsQrCodeScanFragment();
+        }
+        if(mPhilipsAddManuallyFragment == null){
+            mPhilipsAddManuallyFragment = new PhilipsAddManuallyFragment();
+        }
+        mFragments.add(mPhilipsQrCodeScanFragment);
+        mFragments.add(mPhilipsAddManuallyFragment);
         FragmentUtils.add(getSupportFragmentManager(), mFragments, R.id.fcvAddDevice, 0);
 
     }
@@ -82,6 +89,7 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
         mVScanAddSelected.setVisibility(View.VISIBLE);
         mVAddManuallySelected.setVisibility(View.GONE);
         FragmentUtils.showHide(0, mFragments);
+        mPhilipsQrCodeScanFragment.startCamera();
     }
 
     private void showAddDeviceFromManual() {
@@ -91,6 +99,7 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
         mVAddManuallySelected.setVisibility(View.VISIBLE);
         mVScanAddSelected.setVisibility(View.GONE);
         FragmentUtils.showHide(1, mFragments);
+        mPhilipsQrCodeScanFragment.stopCamera();
     }
 
 }

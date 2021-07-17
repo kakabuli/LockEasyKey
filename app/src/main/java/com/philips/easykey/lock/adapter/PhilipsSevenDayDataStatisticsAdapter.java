@@ -16,8 +16,8 @@ import java.util.List;
 
 public class PhilipsSevenDayDataStatisticsAdapter extends BaseQuickAdapter<SevendayDataStatisticsBean, BaseViewHolder> {
 
-    public PhilipsSevenDayDataStatisticsAdapter(@Nullable List<SevendayDataStatisticsBean> data) {
-        super(R.layout.philips_item_seven_day_data_statistics, data);
+    public PhilipsSevenDayDataStatisticsAdapter() {
+        super(R.layout.philips_item_seven_day_data_statistics);
     }
 
     @Override
@@ -25,12 +25,23 @@ public class PhilipsSevenDayDataStatisticsAdapter extends BaseQuickAdapter<Seven
         TextView tvType = baseViewHolder.getView(R.id.tv_type);
         CurveChart curveChart = baseViewHolder.getView(R.id.curve_chart);
         tvType.setText(sevendayDataStatisticsBean.getStatisticsTypeName());
-        curveChart.setMaxVlaue(80);
-        curveChart.setMinValue(20);
+        curveChart.setMaxVlaue(max(sevendayDataStatisticsBean.getOrdinateValue()) + 40);
+        curveChart.setMinValue(0);
         curveChart.setNumberLine(4);
         curveChart.setOrdinateValue(sevendayDataStatisticsBean.getOrdinateValue());
         curveChart.setTransverseValue(sevendayDataStatisticsBean.getTransverseValue());
         curveChart.setBorderTransverseLineWidth(0.3f);
-        curveChart.setBrokenLineLTRB(43,20,15,22);
+        curveChart.setBrokenLineLTRB(42,20,15,22);
+    }
+
+    public static int max(int[] array) {
+        int maximum = Integer.MIN_VALUE;
+
+        for (int i = 0; i < array.length; i++) {
+            if (maximum < array[i]) {
+                maximum = array[i];
+            }
+        }
+        return maximum;
     }
 }
