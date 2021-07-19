@@ -187,7 +187,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         }
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rcvVideoLockMsg.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
         rcvVideoLockMsg.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -354,7 +353,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             rcvVideoLockMsg.setVisibility(View.VISIBLE);
             videoLockWarningInformAdapter.setList(wifiVideoLockAlarmRecordData);
             videoLockWarningInformAdapter.notifyDataSetChanged();
-        }else if(wifiVideoLockAlarmRecordData.size() > 5){
+        }else if(wifiVideoLockAlarmRecordData.size() >= 5){
             tvNoAlarm.setVisibility(View.GONE);
             ivVideoLockMsgLeft.setVisibility(View.VISIBLE);
             ivVideoLockMsgRight.setVisibility(View.VISIBLE);
@@ -398,33 +397,33 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
             if(i == 0) {
                 sevendayDataStatisticsBean.setOrdinateValue(new int[]{
-                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getOpenLockCount(),
                         statisticsSevenDayResult.getData().getStatisticsList().get(5).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getOpenLockCount()});
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getOpenLockCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getOpenLockCount()});
                 sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.philips_open_the_door_record));
             }else if(i == 1){
                 sevendayDataStatisticsBean.setOrdinateValue(new int[]{
-                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getDoorbellCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getDoorbellCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getDoorbellCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getDoorbellCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getDoorbellCount(),
                         statisticsSevenDayResult.getData().getStatisticsList().get(5).getDoorbellCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getDoorbellCount()});
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getDoorbellCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getDoorbellCount()});
                 sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.philips_visitor_record));
             }else if(i == 2){
                 sevendayDataStatisticsBean.setOrdinateValue(new int[]{
-                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getAlarmCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getAlarmCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getAlarmCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getAlarmCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getAlarmCount(),
                         statisticsSevenDayResult.getData().getStatisticsList().get(5).getAlarmCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getAlarmCount()});
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getAlarmCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getAlarmCount()});
                 sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.warn_information));
             }
             sevendayDataStatisticsBean.setTransverseValue(new String[]{ // TODO: 2021/7/17 这里数据处理有点坑，服务器返回的数据格式跟ui要求有出入，只有二次封装

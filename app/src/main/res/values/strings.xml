@@ -2028,6 +2028,7 @@
     <string name="activity_wifi_video_fourth_third">第三步：配置连接WI-FI</string>
     <string name="activity_wifi_video_fourth_fifth">第四步：配置连接WI-FI</string>
     <string name="philips_password_len_not_less_8">wifi密码必须不小于8位</string>
+    <string name="philips_please_24g_network_for_door_lock_distribution">请使用2.4G网络进行门锁配网</string>
     <string name="activity_wifi_video_fifth_network">确定重新开始配网吗？</string>
     <string name="activity_wifi_video_fifth_camera">提示：因手机屏幕尺寸不同，请移动手机在\n距离门锁摄像头10-50CM范围内扫描</string>
     <string name="activity_wifi_video_fifth_next">Wi-Fi已连接，下一步</string>

@@ -321,7 +321,8 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
     public void resetPasswordSuccess() {
         hiddenLoading();
         ToastUtils.showShort(getString(R.string.philips_pwd_resetting_success));
-        MyApplication.getInstance().tokenInvalid(false);
+        finish();
+        //MyApplication.getInstance().tokenInvalid(false);
     }
 
     public void sendRandomFailed(Throwable e) {

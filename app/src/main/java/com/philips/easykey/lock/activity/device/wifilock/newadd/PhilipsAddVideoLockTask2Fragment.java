@@ -30,6 +30,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.popup.PhilipsWifiListPopup;
+import com.philips.easykey.lock.utils.NetUtil;
 
 import java.util.ArrayList;
 
@@ -123,6 +124,11 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
             }
             if (TextUtils.isEmpty(wifiPwd)) {
                 ToastUtils.showShort(R.string.philips_password_len_not_less_8);
+                return;
+            }
+
+            if(NetUtil.isWifi5G(getContext())){
+                ToastUtils.showShort(R.string.philips_please_24g_network_for_door_lock_distribution);
                 return;
             }
             if (mAddVideoLockActivity != null) {

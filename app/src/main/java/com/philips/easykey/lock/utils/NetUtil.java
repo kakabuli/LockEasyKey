@@ -2,11 +2,14 @@ package com.philips.easykey.lock.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
 import com.philips.easykey.lock.MyApplication;
+
+import java.util.List;
 
 
 public class NetUtil {
@@ -81,5 +84,48 @@ public class NetUtil {
 		return wifiId;
 	}
 
+	public static boolean isWifi24G(Context context) {
+		int freq = 0;
+		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+		if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP) {
+			freq = wifiInfo.getFrequency();
+		} else {
+			String ssid = wifiInfo.getSSID();
+			if (ssid != null && ssid.length() > 2) {
+				String ssidTemp = ssid.substring(1, ssid.length() - 1);
+				List<ScanResult> scanResults = wifiManager.getScanResults();
+				for (ScanResult scanResult : scanResults) {
+					if (scanResult.SSID.equals(ssidTemp)) {
+						freq = scanResult.frequency;
+						break;
+					}
+				}
+			}
+		}
+		return freq > 2400 && freq < 2500;
+	}
+
+	public static boolean isWifi5G(Context context) {
+		int freq = 0;
+		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+		if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP) {
+			freq = wifiInfo.getFrequency();
+		} else {
+			String ssid = wifiInfo.getSSID();
+			if (ssid != null && ssid.length() > 2) {
+				String ssidTemp = ssid.substring(1, ssid.length() - 1);
+				List<ScanResult> scanResults = wifiManager.getScanResults();
+				for (ScanResult scanResult : scanResults) {
+					if (scanResult.SSID.equals(ssidTemp)) {
+						freq = scanResult.frequency;
+						break;
+					}
+				}
+			}
+		}
+		return freq > 4900 && freq < 5900;
+	}
 
 }

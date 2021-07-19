@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -186,6 +187,14 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
         rlVideoLayout.setVisibility(View.GONE);
         rlMarkLayout.setVisibility(View.VISIBLE);
+        mPresenter.handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(rlMarkLayout.getVisibility() == View.VISIBLE && rlVideoLayout.getVisibility() == View.GONE){
+                    finish();
+                }
+            }
+        },30 * 1000);
         llyRecord.setVisibility(View.GONE);
         avi.show();
 
@@ -462,7 +471,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             if(isCalling == 1){
                 switchBackConnectP2P();
             }else{
-                new Handler().postDelayed(new Runnable() {
+                mPresenter.handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if(avi != null){
