@@ -25,7 +25,7 @@ ext {
             compileSdkVersion       :30,
             minSdkVersion           :26,
             targetSdkVersion        :26,
-            versionCode             :202107161,
+            versionCode             :202107201,
             versionName             :"1.0.0.bate2",
             buildToolsVersion       :"30.0.2",
 
