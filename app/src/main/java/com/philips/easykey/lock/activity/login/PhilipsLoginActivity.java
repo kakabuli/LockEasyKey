@@ -658,7 +658,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     .subscribe(new BaseObserver<RegisterWeChatAndBindPhoneResult>() {
                         @Override
                         public void onSuccess(RegisterWeChatAndBindPhoneResult registerWeChatAndBindPhoneResult) {
-                            loginSuccess(registerWeChatAndBindPhoneResult.getData().getToken(),registerWeChatAndBindPhoneResult.getData().getUid());
+                            loginSuccess(registerWeChatAndBindPhoneResult.getData().getToken(),registerWeChatAndBindPhoneResult.getData().getUid(),account);
                         }
 
                         @Override
@@ -742,7 +742,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 .subscribe(new BaseObserver<WeChatLoginResult>() {
                     @Override
                     public void onSuccess(WeChatLoginResult weChatLoginResult) {
-                        loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid());
+                        loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid(), tel);
                     }
 
                     @Override
@@ -819,7 +819,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         if (NetUtil.isNetworkAvailable()) {
              String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             mCountryCode = mCountryCode.replace("+", "");
-            account = mCountryCode + account;
             if (TextUtils.isEmpty(account)) {
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                 return;
@@ -829,10 +828,10 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
                 return;
             }
-            XiaokaiNewServiceImp.codeLogin(code,account).subscribe(new BaseObserver<WeChatLoginResult>() {
+            XiaokaiNewServiceImp.codeLogin(code,mCountryCode + account).subscribe(new BaseObserver<WeChatLoginResult>() {
                 @Override
                 public void onSuccess(WeChatLoginResult weChatLoginResult) {
-                    loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid());
+                    loginSuccess(weChatLoginResult.getData().getToken(),weChatLoginResult.getData().getUid(),account);
                 }
 
                 @Override
@@ -886,7 +885,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         SPUtils.put(SPUtils.USERNAME, userName);
     }
 
-    private void loginSuccess(String token , String uid) {
+    private void loginSuccess(String token , String uid ,String phone) {
         //请求用户名称，由于服务器返回过来的用户名称为空，因此需要重新获取
         onLoginSuccess();
         LogUtils.d("登陆成功  数据是  token" + token);
@@ -895,7 +894,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 //        SPUtils.put(SPUtils.UID, loginResult.getData().getUid());
         MMKVUtils.setMMKV(SPUtils.TOKEN,token);
         MMKVUtils.setMMKV(SPUtils.UID,uid);
-
+        SPUtils.put(SPUtils.PHONEN, phone);
 
         MyApplication.getInstance().setToken(token);
         MyApplication.getInstance().setUid(uid);

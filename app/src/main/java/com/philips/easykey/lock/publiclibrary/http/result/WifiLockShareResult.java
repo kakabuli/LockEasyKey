@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.http.result;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class WifiLockShareResult extends BaseResult {
         this.data = data;
     }
 
-    public static class WifiLockShareUser implements Serializable {
+    public class WifiLockShareUser implements Serializable {
 
         /**
          * _id : 5def586f4d3ee1156842868c
@@ -55,12 +57,14 @@ public class WifiLockShareResult extends BaseResult {
          * uname : 8618954359823
          * userNickname : 萝卜头
          */
-
-        private String _id;
+        public String _id;
         private String uid;
         private String uname;
         private String userNickname;
         private long createTime;
+
+        public WifiLockShareUser() {
+        }
 
         public String get_id() {
             return _id;
@@ -101,5 +105,24 @@ public class WifiLockShareResult extends BaseResult {
         public void setCreateTime(long createTime) {
             this.createTime = createTime;
         }
+
+        @Override
+        public String toString() {
+            return "WifiLockShareUser{" +
+                    "_id='" + _id + '\'' +
+                    ", uid='" + uid + '\'' +
+                    ", uname='" + uname + '\'' +
+                    ", userNickname='" + userNickname + '\'' +
+                    ", createTime=" + createTime +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "WifiLockShareResult{" +
+                "nowTime=" + nowTime +
+                ", data=" + data +
+                '}';
     }
 }

@@ -91,20 +91,30 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
             Bundle bundle = new Bundle();
             bundle.putString(KeyConstants.WIFI_SN,wifiSn);
             if(isVideoLock){
-                openRecordFragment = new PhilipsWifiLockOpenRecordFragment();
+                if(openRecordFragment == null){
+                    openRecordFragment = new PhilipsWifiLockOpenRecordFragment();
+                }
                 openRecordFragment.setArguments(bundle);
                 fragments.add(openRecordFragment);
-                vistorRecordFragment = new PhilipsWifiLockVistorRecordFragment();
+                if(vistorRecordFragment == null){
+                    vistorRecordFragment = new PhilipsWifiLockVistorRecordFragment();
+                }
                 vistorRecordFragment.setArguments(bundle);
                 fragments.add(vistorRecordFragment);
-                videoLockAlarmRecordFragment = new PhilipsWifiVideoLockAlarmRecordFragment();
+                if(videoLockAlarmRecordFragment == null){
+                    videoLockAlarmRecordFragment = new PhilipsWifiVideoLockAlarmRecordFragment();
+                }
                 videoLockAlarmRecordFragment.setArguments(bundle);
                 fragments.add(videoLockAlarmRecordFragment);
             }else {
-                openRecordFragment = new PhilipsWifiLockOpenRecordFragment();
+                if(openRecordFragment == null){
+                    openRecordFragment = new PhilipsWifiLockOpenRecordFragment();
+                }
                 openRecordFragment.setArguments(bundle);
                 fragments.add(openRecordFragment);
-                alarmRecordFragment = new WifiLockAlarmRecordFragment();
+                if(alarmRecordFragment == null){
+                    alarmRecordFragment = new WifiLockAlarmRecordFragment();
+                }
                 alarmRecordFragment.setArguments(bundle);
                 fragments.add(alarmRecordFragment);
             }
