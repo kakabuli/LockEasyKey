@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Philips Smart Lock</string>
+    <string name="app_name">Philips EasyKey+</string>
     <string name="philips_message">message</string>
     <string name="philips_last_record">%1$s %2$s</string>
     <string name="philips_pwd">password</string>

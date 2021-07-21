@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="select_coutroy">选择国家/地区</string>
-    <string name="app_name">飞利浦智能锁</string>
+    <string name="app_name">Philips EasyKey+</string>
     <string name="app_name_notificatoin_title">飞利浦智能锁正在运行</string>
     <!--<string name="app_name_notificatoin_content">可能导致系统卡顿，降低待机时间，点按关闭</string>-->
     <string name="app_name_notificatoin_content">有消息会立即通知你的哦~</string>
