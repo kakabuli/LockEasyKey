@@ -550,7 +550,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
 
     public void setNickName(String lockNickname){
         // TODO: 2021/5/10 设置名字
-        XiaokaiNewServiceImp.wifiLockUpdateNickname(mWifiLockVideoBindBean.getEventparams().getDevice_sn(),
+        XiaokaiNewServiceImp.wifiLockUpdateNickname(mWifiLockVideoBindBean.getWfId(),
                 MyApplication.getInstance().getUid(), lockNickname)
                 .safeSubscribe(new Observer<BaseResult>() {
                     @Override
@@ -560,6 +560,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
 
                     @Override
                     public void onNext(@NotNull BaseResult baseResult) {
+                        MyApplication.getInstance().getAllDevicesByMqtt(true);
                         // TODO: 2021/5/10 设置名称成功
                         String code = baseResult.getCode();
                         if(TextUtils.isEmpty(code)) {

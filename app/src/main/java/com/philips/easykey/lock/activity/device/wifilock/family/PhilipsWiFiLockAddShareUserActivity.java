@@ -2,7 +2,10 @@ package com.philips.easykey.lock.activity.device.wifilock.family;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +72,32 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
             nickName = (String) SPUtils.get(SPUtils.PHONEN, "");
         }
 
+        etTelephone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String phone = etTelephone.getText().toString().trim();
+                if(TextUtils.isEmpty(phone)) {
+                    changeConfirmBtnStyle(false);
+                } else {
+                    changeConfirmBtnStyle(!TextUtils.isEmpty(s.toString()));
+                }
+            }
+        });
+    }
+
+    private void changeConfirmBtnStyle(boolean isSelect) {
+        btnConfirm.setEnabled(isSelect);
+        btnConfirm.setBackgroundResource(isSelect ? R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
     @Override
@@ -102,6 +131,7 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
                     AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
                     return;
                 }
+
 
                 String userNickName = "86" + phone;
                 if(!mEtNickName.getText().toString().trim().isEmpty()){

@@ -1,6 +1,8 @@
 package com.philips.easykey.lock.adapter;
 
 import androidx.annotation.Nullable;
+
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -36,7 +38,14 @@ public class PhilipsWifiLockCardAndFingerAdapter extends BaseQuickAdapter<WiFiLo
         }else if(bean.getTpye() == BleLockUtils.TYPE_CARD){
             helper.setText(R.id.tv_num, num > 9 ? getContext().getResources().getString(R.string.card) + num : getContext().getResources().getString(R.string.card) + "0" + num);
         }
-        helper.setText(R.id.tv_nick, bean.getNickName());
+        if(!TextUtils.isEmpty(bean.getNickName())){
+            if(bean.getNickName().length() > 5){
+                helper.setText(R.id.tv_nick, bean.getNickName().substring(0,5) + "...");
+            }else {
+                helper.setText(R.id.tv_nick, bean.getNickName());
+            }
+        }
+
         helper.setText(R.id.tv_time, DateUtils.getDayTimeFromMillisecond(bean.getCreateTime() * 1000));
     }
 

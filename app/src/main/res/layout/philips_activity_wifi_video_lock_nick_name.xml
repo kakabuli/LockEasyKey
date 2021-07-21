@@ -42,7 +42,7 @@
         android:paddingStart="16pt"
         android:paddingEnd="16pt"
         android:textSize="16pt"
-        android:maxEms="20"
+        android:maxLength="20"
         android:textCursorDrawable="@drawable/edittext_cursor"
         />
 

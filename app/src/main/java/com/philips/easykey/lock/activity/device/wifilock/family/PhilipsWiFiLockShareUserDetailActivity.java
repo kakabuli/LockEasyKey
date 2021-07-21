@@ -3,7 +3,10 @@ package com.philips.easykey.lock.activity.device.wifilock.family;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +67,10 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
         Intent intent = getIntent();
         shareUser = (WifiLockShareResult.WifiLockShareUser) intent.getSerializableExtra(KeyConstants.SHARE_USER_INFO);
         tvNumber.setText(shareUser.getUserNickname());
+        String nickname = tvNumber.getText().toString().trim();
+        if(!TextUtils.isEmpty(nickname)) {
+            changeConfirmBtnStyle(true);
+        }
         tvName.setText(shareUser.getUname());
         long createTime = shareUser.getCreateTime();
         if (createTime == 0) {
@@ -77,7 +84,35 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
         if (TextUtils.isEmpty(adminNickname)) {
             adminNickname = (String) SPUtils.get(SPUtils.PHONEN, "");
         }
+
+        tvNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String phone = tvNumber.getText().toString().trim();
+                if(TextUtils.isEmpty(phone)) {
+                    changeConfirmBtnStyle(false);
+                } else {
+                    changeConfirmBtnStyle(!TextUtils.isEmpty(s.toString()));
+                }
+            }
+        });
     }
+
+    private void changeConfirmBtnStyle(boolean isSelect) {
+        confirm.setEnabled(isSelect);
+        confirm.setBackgroundResource(isSelect ? R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
+    }
+
 
     private void getAuthorizationTime() {
     }

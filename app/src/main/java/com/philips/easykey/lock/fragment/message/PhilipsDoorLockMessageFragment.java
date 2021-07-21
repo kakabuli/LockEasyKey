@@ -2,6 +2,7 @@ package com.philips.easykey.lock.fragment.message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -325,7 +326,14 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         //WiFi信息并展示
         int count = (int) SPUtils.get(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiSn, 0);
         tvOpenLockTimes.setText("" + count);
-        tvLockName.setText(mWifiLockInfo.getLockNickname());
+        if(!TextUtils.isEmpty(mWifiLockInfo.getLockNickname())){
+            if(mWifiLockInfo.getLockNickname().length() > 10){
+                tvLockName.setText(mWifiLockInfo.getLockNickname().substring(0,10) + "...");
+            }else {
+                tvLockName.setText(mWifiLockInfo.getLockNickname());
+            }
+        }
+
         mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
         mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
         refreshAlarmRecordLayoutData();

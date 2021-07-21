@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,7 +77,13 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
             }
         });
 
-        tvDeviceName.setText(StringUtil.processEmptyString(data.getDeviceName()));
+        if(!TextUtils.isEmpty(data.getDeviceName())){
+            if(data.getDeviceName().length() > 10){
+                tvDeviceName.setText(data.getDeviceName().substring(0,10) + "...");
+            }else {
+                tvDeviceName.setText(data.getDeviceName());
+            }
+        }
         if (data.getLastRecordDetail() != null) {
             BleUtil.setTextViewOperationRecordByType(tvLastRecord, data.getLastRecordDetail());
             String lastRecord = DateUtils.secondToDate2(data.getLastRecordDetail().getCreateTime())

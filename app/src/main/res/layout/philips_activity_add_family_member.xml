@@ -67,6 +67,7 @@
         android:background="@color/white"
         android:hint="@string/philips_share_user_account_nickname"
         android:maxLines="1"
+        android:maxLength="10"
         android:singleLine="true"
         android:paddingStart="16pt"
         android:textColor="@color/color_333333"

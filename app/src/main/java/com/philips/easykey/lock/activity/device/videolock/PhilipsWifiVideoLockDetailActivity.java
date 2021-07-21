@@ -225,7 +225,15 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             mPresenter.getPasswordList(wifiSn);
             mPresenter.queryUserList(wifiSn);
 
-            mTvDeviceName.setText(wifiLockInfo.getLockNickname().isEmpty() ? wifiSn : wifiLockInfo.getLockNickname());
+            if(!wifiLockInfo.getLockNickname().isEmpty()){
+                if(wifiLockInfo.getLockNickname().length() > 8){
+                    mTvDeviceName.setText(wifiLockInfo.getLockNickname().substring(0,8) + "...");
+                }else {
+                    mTvDeviceName.setText(wifiLockInfo.getLockNickname());
+                }
+            }else {
+                mTvDeviceName.setText(wifiSn);
+            }
 
             if(wifiLockInfo.getIsAdmin() == 1){
                 mRlDetailPassword.setVisibility(View.VISIBLE);

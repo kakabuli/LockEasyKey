@@ -3,6 +3,7 @@ package com.philips.easykey.lock.adapter;
 import androidx.annotation.Nullable;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -44,7 +45,13 @@ public class WifiLockFacePasswordAdapter extends BaseQuickAdapter<FacePassword, 
 //        }
 
         helper.setText(R.id.tv_num, bean.getNum());
-        helper.setText(R.id.tv_nick, bean.getNickName());
+        if(!TextUtils.isEmpty(bean.getNickName())){
+            if(bean.getNickName().length() > 5){
+                helper.setText(R.id.tv_nick, bean.getNickName().substring(0,5) + "...");
+            }else {
+                helper.setText(R.id.tv_nick, bean.getNickName());
+            }
+        }
 //        //0永久秘钥 1策略秘钥 2胁迫秘钥 3管理员秘钥 4无权限秘钥 254 一次性秘钥 255 无效值
 //        switch (bean.getType()) {
 //            case 0:

@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.adapter;
 
+import android.text.TextUtils;
+
 import androidx.annotation.Nullable;
 
 
@@ -30,7 +32,13 @@ public class PhilipsWifiLockPasswordAdapter extends BaseQuickAdapter<ForeverPass
 
         int num = Integer.parseInt(bean.getNum());
         helper.setText(R.id.tv_num, num > 9 ? getContext().getResources().getString(R.string.password) + num : getContext().getResources().getString(R.string.password) + "0" + num);
-        helper.setText(R.id.tv_nick, bean.getNickName());
+        if(!TextUtils.isEmpty(bean.getNickName())){
+            if(bean.getNickName().length() > 5){
+                helper.setText(R.id.tv_nick, bean.getNickName().substring(0,5) + "...");
+            }else {
+                helper.setText(R.id.tv_nick, bean.getNickName());
+            }
+        }
         helper.setText(R.id.tv_time, DateUtils.getDayTimeFromMillisecond(bean.getCreateTime() * 1000));
     }
 

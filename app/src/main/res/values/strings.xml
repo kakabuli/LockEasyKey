@@ -172,8 +172,8 @@
     <string name="real_time_video_time_setting">时间设置</string>
     <string name="real_time_video_setting_period_detail">可设置定时开启视频WI-FI长连接</string>
     <string name="real_time_video_setting_detail">开启后，可用App远程查看门外情况，若使用不频繁，建议定时开启或关闭，可节省锁的电池电量</string>
-    <string name="real_time_video_setting_detail_normal">全天24小时随时随地查看摄像头</string>
-    <string name="real_time_video_setting_detail_power">需要唤醒门锁或有人按门铃时，才能查看摄像头，其他时间不能查看摄像头</string>
+    <string name="real_time_video_setting_detail_normal">手机APP可随时同门锁视频通话，该模式功耗较高</string>
+    <string name="real_time_video_setting_detail_power">当用户使用秘钥开门或门锁发生报警时，APP才能与门锁视频通话。该模式较为省电</string>
     <string name="new_version">已是最新版本</string>
     <string name="confirm_log_out">确定退出登录?</string>
     <string name="delete_cache_data_success">清除成功</string>

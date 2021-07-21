@@ -52,6 +52,7 @@
         android:layout_marginTop="12pt"
         android:paddingStart="16pt"
         android:paddingEnd="16pt"
+        android:maxLength="10"
         android:textColor="@color/color_333333"
         android:textSize="16pt"
         android:textCursorDrawable="@drawable/edittext_cursor"

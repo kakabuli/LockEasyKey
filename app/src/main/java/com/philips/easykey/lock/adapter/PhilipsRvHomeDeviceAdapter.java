@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +32,14 @@ public class PhilipsRvHomeDeviceAdapter extends BaseQuickAdapter<PhilipsDeviceBe
         if(bean == null) return;
 
         TextView tvLastRecord = holder.findView(R.id.tvLastRecord);
-        holder.setText(R.id.tvDeviceName, StringUtil.processEmptyString(bean.getDeviceName()));
+        if(!TextUtils.isEmpty(bean.getDeviceName())){
+            if(bean.getDeviceName().length() > 10){
+                holder.setText(R.id.tvDeviceName, bean.getDeviceName().substring(0,10) + "...");
+            }else {
+                holder.setText(R.id.tvDeviceName, bean.getDeviceName());
+            }
+        }
+
 
         if(bean.getLastRecordDetail() != null){
             BleUtil.setTextViewOperationRecordByType(tvLastRecord,bean.getLastRecordDetail());
