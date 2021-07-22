@@ -190,6 +190,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcvVideoLockMsg.setLayoutManager(horizontalLayoutManager);
         rcvVideoLockMsg.setAdapter(videoLockWarningInformAdapter);
+        rcvVideoLockMsg.setFocusable(false);
         rcvVideoLockMsg.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -237,6 +238,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         rcvTodayLockStatistics.addItemDecoration(new SpacesItemDecoration(itemDecorationLeft, 0, 0, 0));
         rcvTodayLockStatistics.setLayoutManager(horizontalLayoutManager1);
         rcvTodayLockStatistics.setAdapter(lockStatisticsAdapter);
+        rcvTodayLockStatistics.setFocusable(false);
         refreshDtatisticsDayLayoutData(null);
         rcvTodayLockStatistics.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -291,6 +293,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         verticalLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvSevenDayDataStatistics.setLayoutManager(verticalLayoutManager);
         rcvSevenDayDataStatistics.setAdapter(sevendayDataStatisticsAdapter);
+        rcvSevenDayDataStatistics.setFocusable(false);
     }
 
     private void initDevices() {
