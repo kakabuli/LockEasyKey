@@ -124,7 +124,7 @@ public class FileTool {
     }
 
     public static File getVideoLockRootDir(Context context){
-        File folder = new File(getRootPath(), VIDEO_LOCK_PATH);
+        File folder = new File(context.getExternalFilesDir(""), VIDEO_LOCK_PATH);
         if (!folder.exists()) {
             folder.mkdir();
         }
