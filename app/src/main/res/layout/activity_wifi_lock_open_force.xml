@@ -10,19 +10,17 @@
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:background="#F8F8F8">
+        android:layout_height="44pt"
+        android:background="#FFFFFF">
 
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:paddingLeft="@dimen/dp_16"
-            android:paddingTop="@dimen/dp_5"
-            android:paddingRight="@dimen/dp_16"
-            android:paddingBottom="@dimen/dp_5"
-            android:src="@mipmap/back_gray" />
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back" />
 
         <TextView
             android:id="@+id/head_title"
@@ -30,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/open_power"
-            android:textColor="#000000"
-            android:textSize="@dimen/sp_17"
-            android:textStyle="bold" />
+            android:textColor="@color/color_333333"
+            android:textSize="17pt"
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -40,23 +38,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
+        android:layout_marginTop="12pt"
         android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/low_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60">
+            android:layout_height="56pt">
 
             <TextView
                 android:id="@+id/tv_low"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_24"
+                android:layout_marginLeft="16pt"
                 android:drawablePadding="@dimen/dp_27"
                 android:text="@string/wifi_lock_x9_door_force_low"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="16pt" />
 
             <CheckBox
                 android:id="@+id/ck_low"
@@ -67,33 +66,24 @@
                 android:layout_marginRight="@dimen/dp_17"
                 android:button="@drawable/language_selector"
                 android:clickable="false" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_1"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:background="#F2F2F2"></View>
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/high_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60"
-
-            >
+            android:layout_height="56pt">
 
             <TextView
                 android:id="@+id/tv_high"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_24"
+                android:layout_marginLeft="16pt"
                 android:drawablePadding="@dimen/dp_27"
                 android:text="@string/wifi_lock_x9_door_force_high"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="16pt" />
 
             <CheckBox
                 android:id="@+id/ck_high"
@@ -104,18 +94,28 @@
                 android:layout_marginRight="@dimen/dp_17"
                 android:button="@drawable/language_selector"
                 android:clickable="false" />
-
-
         </RelativeLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_marginLeft="@dimen/dp_13"
-            android:layout_marginRight="@dimen/dp_13"
-            android:background="@color/more_line" />
-
     </LinearLayout>
+
+    <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:layout_centerInParent="true"
+        app:indicatorColor="#333333"
+        android:layout_marginTop="@dimen/dp_150" />
+
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/wifi_video_lock_waiting"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:layout_below="@id/avi"/>
+
 
 </RelativeLayout>

@@ -162,10 +162,17 @@ public class WifiLockInfo implements Serializable {
     private String frontPanelVersion;
     private String backPanelVersion;
 
+    private String voiceVersion;
+    private int touchHandleStatus;
+    private int screenLightLevel;
+    private int screenLightSwitch;
+    private int screenLightTime;
+    private int bodySensor;
+    private int volLevel;
     private int duressAlarmSwitch;
 
 
-    @Generated(hash = 494257709)
+    @Generated(hash = 2019128850)
     public WifiLockInfo(Long id, String deviceID, String wifiSN, int isAdmin, String adminUid,
             String adminName, String productSN, String productModel, int appId,
             String lockNickname, String lockSoftwareVersion, String functionSet, String uid,
@@ -180,6 +187,8 @@ public class WifiLockInfo implements Serializable {
             String mcu_version, String device_model, int keep_alive_status, String mac,
             String lockMac, String RSSI, int wifiStrength, int openDirection, int openForce,
             int lockingMethod, String frontPanelVersion, String backPanelVersion,
+            String voiceVersion, int touchHandleStatus, int screenLightLevel,
+            int screenLightSwitch, int screenLightTime, int bodySensor, int volLevel,
             int duressAlarmSwitch) {
         this.id = id;
         this.deviceID = deviceID;
@@ -237,6 +246,13 @@ public class WifiLockInfo implements Serializable {
         this.lockingMethod = lockingMethod;
         this.frontPanelVersion = frontPanelVersion;
         this.backPanelVersion = backPanelVersion;
+        this.voiceVersion = voiceVersion;
+        this.touchHandleStatus = touchHandleStatus;
+        this.screenLightLevel = screenLightLevel;
+        this.screenLightSwitch = screenLightSwitch;
+        this.screenLightTime = screenLightTime;
+        this.bodySensor = bodySensor;
+        this.volLevel = volLevel;
         this.duressAlarmSwitch = duressAlarmSwitch;
     }
 
@@ -579,6 +595,66 @@ public class WifiLockInfo implements Serializable {
         this.distributionNetwork = distributionNetwork;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getVoiceVersion() {
+        return voiceVersion;
+    }
+
+    public void setVoiceVersion(String voiceVersion) {
+        this.voiceVersion = voiceVersion;
+    }
+
+    public int getTouchHandleStatus() {
+        return touchHandleStatus;
+    }
+
+    public void setTouchHandleStatus(int touchHandleStatus) {
+        this.touchHandleStatus = touchHandleStatus;
+    }
+
+    public int getScreenLightLevel() {
+        return screenLightLevel;
+    }
+
+    public void setScreenLightLevel(int screenLightLevel) {
+        this.screenLightLevel = screenLightLevel;
+    }
+
+    public int getScreenLightSwitch() {
+        return screenLightSwitch;
+    }
+
+    public void setScreenLightSwitch(int screenLightSwitch) {
+        this.screenLightSwitch = screenLightSwitch;
+    }
+
+    public int getScreenLightTime() {
+        return screenLightTime;
+    }
+
+    public void setScreenLightTime(int screenLightTime) {
+        this.screenLightTime = screenLightTime;
+    }
+
+    public int getBodySensor() {
+        return bodySensor;
+    }
+
+    public void setBodySensor(int bodySensor) {
+        this.bodySensor = bodySensor;
+    }
+
+    public int getVolLevel() {
+        return volLevel;
+    }
+
+    public void setVolLevel(int volLevel) {
+        this.volLevel = volLevel;
+    }
+
     @Override
     public String toString() {
         return "WifiLockInfo{" +
@@ -621,8 +697,31 @@ public class WifiLockInfo implements Serializable {
                 ", device_did='" + device_did + '\'' +
                 ", device_sn='" + device_sn + '\'' +
                 ", p2p_password='" + p2p_password + '\'' +
-                ", mac='" + mac + '\'' +
                 ", singleFireSwitchInfo=" + singleFireSwitchInfo +
+                ", setPir=" + setPir +
+                ", alive_time=" + alive_time +
+                ", stay_status=" + stay_status +
+                ", camera_version='" + camera_version + '\'' +
+                ", mcu_version='" + mcu_version + '\'' +
+                ", device_model='" + device_model + '\'' +
+                ", keep_alive_status=" + keep_alive_status +
+                ", mac='" + mac + '\'' +
+                ", lockMac='" + lockMac + '\'' +
+                ", RSSI='" + RSSI + '\'' +
+                ", wifiStrength=" + wifiStrength +
+                ", openDirection=" + openDirection +
+                ", openForce=" + openForce +
+                ", lockingMethod=" + lockingMethod +
+                ", frontPanelVersion='" + frontPanelVersion + '\'' +
+                ", backPanelVersion='" + backPanelVersion + '\'' +
+                ", voiceVersion='" + voiceVersion + '\'' +
+                ", touchHandleStatus=" + touchHandleStatus +
+                ", screenLightLevel=" + screenLightLevel +
+                ", screenLightSwitch=" + screenLightSwitch +
+                ", screenLightTime=" + screenLightTime +
+                ", bodySensor=" + bodySensor +
+                ", volLevel=" + volLevel +
+                ", duressAlarmSwitch=" + duressAlarmSwitch +
                 '}';
     }
 

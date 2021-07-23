@@ -47,8 +47,11 @@ import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SetZBChannel;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingLockingMethod;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingOpenDirection;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingOpenForce;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingScreenBrightness;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingScreenTime;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingVideoLockAliveTime;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingVideoLockPir;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.SettingVoiceQuality;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UnBindGatewayBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UpdateDevNickNameBean;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishbean.UpdateDevPushSwitchBean;
@@ -737,28 +740,40 @@ public class MqttCommandFactory {
 
     }
 
+    /**
+     *  设置语音质量
+     */
+    public static MqttMessage settingVoiceQuality(String wifiID,int voiceQuality) {
+        int messageId = getMessageId();
+
+        SettingVoiceQuality.ParamsBean paramsBean = new SettingVoiceQuality.ParamsBean(voiceQuality);
+        SettingVoiceQuality mSettingFaceWanderingAlarm = new SettingVoiceQuality(MqttConstant.MSG_TYPE_REQUEST, messageId,MyApplication.getInstance().getUid(),
+                wifiID,MqttConstant.SET_LOCK,paramsBean,System.currentTimeMillis()+"");
+        return getMessage(mSettingFaceWanderingAlarm, messageId);
+    }
+
     /////////////////////X9////////////////////////////
     /**
      * 设置开门方向
      */
-    public static MqttMessage settingOpenDirection(String wifiID,int openDirection) {
+    public static MqttMessage settingOpenDirection(String wifiID,int openDirection , String func) {
         int messageId = getMessageId();
         SettingOpenDirection.ParamsBean paramsBean = new SettingOpenDirection.ParamsBean();
         paramsBean.setOpenDirection(openDirection);
         SettingOpenDirection mSettingOpenDirection = new SettingOpenDirection(MqttConstant.MSG_TYPE_REQUEST,MyApplication.getInstance().getUid(),messageId,
-                wifiID,MqttConstant.SET_OPEN_DIRECTION,paramsBean,System.currentTimeMillis()+"");
+                wifiID,func,paramsBean,System.currentTimeMillis()+"");
         return getMessage(mSettingOpenDirection, messageId,2);
     }
 
     /**
      * 设置开门力量
      */
-    public static MqttMessage settingOpenForce(String wifiID,int openForce) {
+    public static MqttMessage settingOpenForce(String wifiID,int openForce,String func) {
         int messageId = getMessageId();
         SettingOpenForce.ParamsBean paramsBean = new SettingOpenForce.ParamsBean();
         paramsBean.setOpenForce(openForce);
         SettingOpenForce mSettingOpenDirection = new SettingOpenForce(MqttConstant.MSG_TYPE_REQUEST,messageId,MyApplication.getInstance().getUid(),
-                wifiID,MqttConstant.SET_OPEN_FORCE,paramsBean,System.currentTimeMillis()+"");
+                wifiID,func,paramsBean,System.currentTimeMillis()+"");
         return getMessage(mSettingOpenDirection, messageId,2);
     }
 
@@ -798,6 +813,30 @@ public class MqttCommandFactory {
         SettingVideoLockPir mSettingVideoLockAliveTime = new SettingVideoLockPir(MqttConstant.MSG_TYPE_REQUEST, messageId,MyApplication.getInstance().getUid(),
                 wifiID,MqttConstant.SET_CAMERA,paramsBean,System.currentTimeMillis()+"",0);
         return getMessage(mSettingVideoLockAliveTime, messageId);
+    }
+
+    /**
+     * 设置视频模组 屏幕亮度
+     *
+     */
+    public static MqttMessage settingScreenBrightness(String wifiID,int screenBrightness ) {
+        int messageId = getMessageId();
+        SettingScreenBrightness.ParamsBean paramsBean = new SettingScreenBrightness.ParamsBean(screenBrightness);
+        SettingScreenBrightness mSettingScreenBrightness = new SettingScreenBrightness(MqttConstant.MSG_TYPE_REQUEST, messageId,MyApplication.getInstance().getUid(),
+                wifiID,MqttConstant.SET_CAMERA,paramsBean,System.currentTimeMillis()+"",0);
+        return getMessage(mSettingScreenBrightness, messageId,2);
+    }
+
+    /**
+     * 设置视频模组 屏幕时长
+     *
+     */
+    public static MqttMessage settingScreenTime(String wifiID,int screenLightSwitch,int screenLightTime ) {
+        int messageId = getMessageId();
+        SettingScreenTime.ParamsBean paramsBean = new SettingScreenTime.ParamsBean(screenLightSwitch,screenLightTime);
+        SettingScreenTime mSettingScreenTime = new SettingScreenTime(MqttConstant.MSG_TYPE_REQUEST, messageId,MyApplication.getInstance().getUid(),
+                wifiID,MqttConstant.SET_CAMERA,paramsBean,System.currentTimeMillis()+"",0);
+        return getMessage(mSettingScreenTime, messageId,2);
     }
 
     /**

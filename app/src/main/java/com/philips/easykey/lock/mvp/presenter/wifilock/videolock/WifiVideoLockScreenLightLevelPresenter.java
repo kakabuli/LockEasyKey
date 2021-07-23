@@ -1,14 +1,16 @@
-package com.philips.easykey.lock.mvp.presenter.wifilock.x9;
+package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
+
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
-import com.philips.easykey.lock.mvp.view.wifilock.x9.IWifiLockOpenDirectionView;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockScreenLightLevelView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.SettingOpenDirectionResult;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.SettingScreenBrightnessResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
@@ -24,8 +26,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 
-public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOpenDirectionView> {
-    private Disposable setOpenDirectionDisposable;
+public class WifiVideoLockScreenLightLevelPresenter<T> extends BasePresenter<IWifiVideoLockScreenLightLevelView> {
+    private Disposable setScreenLightLevelDisposable;
     private static  String did ="";//AYIOTCN-000337-FDFTF
     private static  String sn ="";//010000000020500020
 
@@ -33,15 +35,15 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
 
     private static  String serviceString= XMP2PManager.serviceString;;
 
-    public void setOpenDirection(String wifiSN,int openDirection , String func) {
+    public void setScreenLightLevel(String wifiSN,int screenLightLevel) {
         if (mqttService != null && mqttService.getMqttClient() != null && mqttService.getMqttClient().isConnected()) {
-            MqttMessage mqttMessage = MqttCommandFactory.settingOpenDirection(wifiSN,openDirection,func);
-            toDisposable(setOpenDirectionDisposable);
-            setOpenDirectionDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(MyApplication.getInstance().getUid()),mqttMessage)
+            MqttMessage mqttMessage = MqttCommandFactory.settingScreenBrightness(wifiSN,screenLightLevel);
+            toDisposable(setScreenLightLevelDisposable);
+            setScreenLightLevelDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(MyApplication.getInstance().getUid()),mqttMessage)
                     .filter(new Predicate<MqttData>() {
                         @Override
                         public boolean test(MqttData mqttData) throws Exception {
-                            if(MqttConstant.SET_OPEN_DIRECTION.equals(mqttData.getFunc()) || MqttConstant.SET_LOCK.equals(mqttData.getFunc())){
+                            if(MqttConstant.SET_CAMERA.equals(mqttData.getFunc())){
                                 return true;
                             }
                             return false;
@@ -53,13 +55,13 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             MyApplication.getInstance().getAllDevicesByMqtt(true);
-                            SettingOpenDirectionResult settingOpenDirectionResult = new Gson().fromJson(mqttData.getPayload(), SettingOpenDirectionResult.class);
-                            LogUtils.e("shulan settingOpenDirectionResult-->" + settingOpenDirectionResult.toString());
-                            if(settingOpenDirectionResult != null && isSafe()){
-                                if("200".equals(settingOpenDirectionResult.getCode() + "")){
+                            SettingScreenBrightnessResult mSettingScreenBrightnessResult = new Gson().fromJson(mqttData.getPayload(), SettingScreenBrightnessResult.class);
+                            LogUtils.e("shulan mSettingScreenBrightnessResult-->" + mSettingScreenBrightnessResult.toString());
+                            if(mSettingScreenBrightnessResult != null && isSafe()){
+                                if("200".equals(mSettingScreenBrightnessResult.getCode() + "")){
                                     MyApplication.getInstance().getAllDevicesByMqtt(true);
                                     mViewRef.get().onSettingCallBack(true);
-                                }else if("201".equals(settingOpenDirectionResult.getCode() + "")){
+                                }else if("201".equals(mSettingScreenBrightnessResult.getCode() + "")){
                                     mViewRef.get().onSettingCallBack(false);
                                 }
                             }
@@ -72,11 +74,11 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                             }
                         }
                     });
-            compositeDisposable.add(setOpenDirectionDisposable);
+            compositeDisposable.add(setScreenLightLevelDisposable);
         }
     }
 
-    public void setConnectOpenDirection(String wifiSN,int openDirection) {
+    public void setConnectScreenLightLevel(String wifiSN,int screenLightLevel) {
         DeviceInfo deviceInfo=new DeviceInfo();
         deviceInfo.setDeviceDid(did);
         deviceInfo.setP2pPassword(p2pPassword);
@@ -100,7 +102,7 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                         if(isSafe()){
                             try {
                                 if (jsonObject.getString("result").equals("ok")){
-                                    setOpenDirection(wifiSN,openDirection,MqttConstant.SET_LOCK);
+                                    setScreenLightLevel(wifiSN,screenLightLevel);
                                 }else{
                                     mViewRef.get().onSettingCallBack(false);
                                 }

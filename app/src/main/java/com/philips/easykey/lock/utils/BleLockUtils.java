@@ -247,6 +247,39 @@ public class BleLockUtils {
     }
 
     /**
+     * 显示屏亮度
+     */
+    public static boolean isSupportScreenBrightness(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(73) || integers.contains(72) || integers.contains(71);
+    }
+
+    /**
+     * 显示屏时长
+     */
+    public static boolean isSupportScreenDuration(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(74) || integers.contains(75) || integers.contains(76);
+    }
+
+
+    /**
      * 根据功能集判断是否支持节能模式显示
      *
      * @param functionSet
@@ -304,6 +337,22 @@ public class BleLockUtils {
         }
         List<Integer> integers = Arrays.asList(funcs);
         return integers.contains(53);
+    }
+
+    /**
+     * 视频模式开关显示
+     */
+    public static boolean isSupportVideoModeSwitch(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(93);
     }
 
     /**
@@ -560,6 +609,22 @@ public class BleLockUtils {
         return integers.contains(26);
     }
 
+    /**
+     * 使用讯美P2P连接方式
+     */
+    public static boolean isSupportXMConnect(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(59);
+    }
+
     public static boolean isSupportPanelMultiOTA(String functionSet){
         if(TextUtils.isEmpty(functionSet)){
             return false;
@@ -610,6 +675,38 @@ public class BleLockUtils {
         }
         List<Integer> integers = Arrays.asList(funcs);
         return integers.contains(86);
+    }
+
+    /**
+     * 静音设置
+     */
+    public static boolean isSupportSilentMode(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(17);
+    }
+
+    /**
+     * 语音设置
+     */
+    public static boolean isSupportVoiceQuality(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(88);
     }
 
     /**

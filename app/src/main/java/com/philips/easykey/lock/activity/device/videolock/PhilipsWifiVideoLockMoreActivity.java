@@ -29,6 +29,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
+import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -46,6 +47,16 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     RelativeLayout rlAm;
     TextView ivAm;
     RelativeLayout rlDoorLockLanguageSwitch;
+    RelativeLayout rlVoiceQualitySetting;
+    TextView tvVoiceQualitySetting;
+    RelativeLayout rlDoorDirection;
+    TextView tvDoorDirection;
+    RelativeLayout rlOpenForce;
+    TextView tvOpenForce;
+    RelativeLayout rlScreenBrightness;
+    TextView tvScreenBrightness;
+    RelativeLayout rlScreenDuration;
+    TextView tvScreenDuration;
     ImageView ivSilentMode;
     RelativeLayout rlSilentMode;
     RelativeLayout rlDeviceInformation;
@@ -89,6 +100,16 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
         rlAm = findViewById(R.id.rl_am);
         ivAm = findViewById(R.id.iv_am);
         rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
+        rlVoiceQualitySetting = findViewById(R.id.rl_voice_quality_setting);
+        tvVoiceQualitySetting = findViewById(R.id.tv_voice_quality_setting);
+        rlDoorDirection = findViewById(R.id.rl_door_direction);
+        tvDoorDirection = findViewById(R.id.tv_door_direction);
+        rlOpenForce = findViewById(R.id.rl_open_force);
+        tvOpenForce = findViewById(R.id.tv_open_force);
+        rlScreenBrightness = findViewById(R.id.rl_screen_brightness);
+        tvScreenBrightness = findViewById(R.id.tv_screen_brightness);
+        rlScreenDuration = findViewById(R.id.rl_screen_duration);
+        tvScreenDuration = findViewById(R.id.tv_screen_duration);
         ivSilentMode = findViewById(R.id.iv_silent_mode);
         rlSilentMode = findViewById(R.id.rl_silent_mode);
         rlDeviceInformation = findViewById(R.id.rl_device_information);
@@ -169,17 +190,81 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                 rlAm.setVisibility(View.GONE);
             }
 
+            //17静音模式设置
+            if(BleLockUtils.isSupportSilentMode(wifiLockInfo.getFunctionSet())){
+                rlSilentMode.setVisibility(View.VISIBLE);
+            }else{
+                rlSilentMode.setVisibility(View.GONE);
+            }
+
+            //88语音设置
+            if(BleLockUtils.isSupportVoiceQuality(wifiLockInfo.getFunctionSet())){
+                rlVoiceQualitySetting.setVisibility(View.VISIBLE);
+                setVoiceQuality(wifiLockInfo.getVolLevel());
+            }else{
+                rlVoiceQualitySetting.setVisibility(View.GONE);
+            }
+
+            //开门力量
+            if(BleLockUtils.isSupportOpenDoorPower(func)){
+                rlOpenForce.setVisibility(View.VISIBLE);
+                try{
+                    setOpenForce(wifiLockInfo.getOpenForce());
+                }catch (Exception e){}
+            }else{
+                rlOpenForce.setVisibility(View.GONE);
+            }
+
+            //开门方向
+            if(BleLockUtils.isSupportDoorDirection(func)){
+                rlDoorDirection.setVisibility(View.VISIBLE);
+                try{
+                    setOpenDirection(wifiLockInfo.getOpenDirection());
+                }catch (Exception e){}
+            }else{
+                rlDoorDirection.setVisibility(View.GONE);
+            }
+
             if(wifiLockInfo.getStay_status() == 0){
                 tvWanderingAlarmRight.setText(getString(R.string.wandering_alarm_close));
             }else if(wifiLockInfo.getStay_status() ==1){
                 tvWanderingAlarmRight.setText(getString(R.string.activity_wifi_video_more_open));
             }
 
+            //54实时视频设置
+            if(BleLockUtils.isSupportRealTimeVideo(Integer.parseInt(wifiLockInfo.getFunctionSet()))){
+                ((TextView)findViewById(R.id.tv_real_time_title)).setText(R.string.real_time_video);
+                ((TextView)findViewById(R.id.tv_real_time)).setText("");
+            }
 
-            if(BleLockUtils.isSupportRealTimeVideo(func)){
+            //93视频模式显示
+            if(BleLockUtils.isSupportVideoModeSwitch(wifiLockInfo.getFunctionSet())){
+                ((TextView)findViewById(R.id.tv_real_time_title)).setText(R.string.philips_video_activity_lock_real_time_video);
+                ((TextView)findViewById(R.id.tv_real_time)).setCompoundDrawables(null,null,null,null);
+                int KeepAliveStatus = wifiLockInfo.getKeep_alive_status();
+                ((TextView)findViewById(R.id.tv_real_time)).setText(KeepAliveStatus == 1 ? getString(R.string.open) : getString(R.string.close));
+            }
+
+            /*if(BleLockUtils.isSupportRealTimeVideo(func)){
                 rlRealTimeVideo.setVisibility(View.VISIBLE);
             }else{
                 rlRealTimeVideo.setVisibility(View.GONE);
+            }*/
+
+            //显示屏亮度
+            if(BleLockUtils.isSupportScreenBrightness(wifiLockInfo.getFunctionSet())){
+                rlScreenBrightness.setVisibility(View.VISIBLE);
+                setScreenLightLevel(wifiLockInfo.getScreenLightLevel());
+            }else{
+                rlScreenBrightness.setVisibility(View.GONE);
+            }
+
+            //显示屏时长
+            if(BleLockUtils.isSupportScreenDuration(wifiLockInfo.getFunctionSet())){
+                rlScreenDuration.setVisibility(View.VISIBLE);
+                setScreenLightTime(wifiLockInfo.getScreenLightTime());
+            }else{
+                rlScreenDuration.setVisibility(View.GONE);
             }
 
             if(BleLockUtils.isSupportPirSetting(func)){
@@ -204,6 +289,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
         rlDeviceName.setOnClickListener(this);
         rlSafeMode.setOnClickListener(this);
         rlAm.setOnClickListener(this);
+        rlVoiceQualitySetting.setOnClickListener(this);
         rlDoorLockLanguageSwitch.setOnClickListener(this);
         rlSilentMode.setOnClickListener(this);
         rlDeviceInformation.setOnClickListener(this);
@@ -215,6 +301,56 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
         rlRealTimeVideo.setOnClickListener(this);
         ivSilentMode.setOnClickListener(this);
         rlDuressAlarm.setOnClickListener(this);
+        rlDoorDirection.setOnClickListener(this);
+        rlOpenForce.setOnClickListener(this);
+        rlScreenBrightness.setOnClickListener(this);
+        rlScreenDuration.setOnClickListener(this);
+    }
+
+    private void setVoiceQuality(int voiceQuality) {
+        if(voiceQuality == 0){
+            tvVoiceQualitySetting.setText(R.string.mute_name);
+        }else if(voiceQuality == 1){
+            tvVoiceQualitySetting.setText(R.string.philips_voice_quality_low);
+        }else if(voiceQuality == 2){
+            tvVoiceQualitySetting.setText(R.string.philips_voice_quality_high);
+        }
+    }
+
+    private void setOpenDirection(int openDirection) {
+        if(openDirection == 1){
+            tvDoorDirection.setText(getString(R.string.wifi_lock_x9_door_direction_left));
+        }else if(openDirection == 2){
+            tvDoorDirection.setText(getString(R.string.wifi_lock_x9_door_direction_right));
+        }
+    }
+
+    private void setOpenForce(int openForce) {
+        if(openForce == 1){
+            tvOpenForce.setText(getString(R.string.wifi_lock_x9_door_force_low));
+        }else if(openForce == 2){
+            tvOpenForce.setText(getString(R.string.wifi_lock_x9_door_force_high));
+        }
+    }
+
+    private void setScreenLightTime(int screenLightTime) {
+        if(/*screenLightTime <= 5*/ screenLightTime == 5){
+            tvScreenDuration.setText(R.string.more_screen_light_duration_5s);
+        }else if(/*screenLightTime > 5 && screenLightTime <= 10*/ screenLightTime == 10){
+            tvScreenDuration.setText(R.string.more_screen_light_duration_10s);
+        }else if(/*screenLightTime > 10 && screenLightTime <= 15*/ screenLightTime == 15){
+            tvScreenDuration.setText(R.string.more_screen_light_duration_15s);
+        }
+    }
+
+    private void setScreenLightLevel(int screenLightLevel) {
+        if(/*screenLightLevel <= 30*/screenLightLevel == 30){
+            tvScreenBrightness.setText(R.string.low);
+        }else if(/*screenLightLevel > 30 && screenLightLevel <= 50*/ screenLightLevel == 50){
+            tvScreenBrightness.setText(R.string.centre);
+        }else if(/*screenLightLevel > 50 && screenLightLevel <= 80*/ screenLightLevel == 80){
+            tvScreenBrightness.setText(R.string.high);
+        }
     }
 
     @Override
@@ -272,6 +408,14 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                             mPresenter.release();
                         }
                         break;
+                    case R.id.rl_voice_quality_setting:
+                        if (avi.isShow()) {
+                            intent = new Intent(this, PhilipsWifiVideoLockVoiceQualitySettingActivity.class);
+                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                            startActivityForResult(intent,KeyConstants.WIFI_VICEO_LOCK_VOICE_QUALITY);
+                            mPresenter.release();
+                        }
+                        break;
                     case R.id.iv_silent_mode:  //静音模式
                         if(avi.isShow()) {
                             if(wifiLockInfo.getPowerSave() == 1){
@@ -304,8 +448,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
 
                             }
                         }
-
-
                         break;
                     case R.id.rl_device_information:
                         if(avi.isShow()){
@@ -361,7 +503,38 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                             mPresenter.release();
                         }
                         break;
-
+                    case R.id.rl_screen_brightness:
+                        if (avi.isShow()) {
+                            intent = new Intent(this, PhilipsWifiVideoScreenBrightnessActivity.class);
+                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                            startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_SCREEN_BRIGHTNESS);
+                            mPresenter.release();
+                        }
+                        break;
+                    case R.id.rl_screen_duration:
+                        if (avi.isShow()) {
+                            intent = new Intent(this, PhilipsWifiVideoScreenDurationActivity.class);
+                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                            startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_SCREEN_DURATION);
+                            mPresenter.release();
+                        }
+                        break;
+                    case R.id.rl_door_direction:
+                        if (avi.isShow()) {
+                            intent = new Intent(this, PhilipsWifiLockOpenDirectionActivity.class);
+                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                            startActivityForResult(intent,KeyConstants.WIFI_LOCK_SET_OPEN_DIRECTION);
+                            mPresenter.release();
+                        }
+                        break;
+                    case R.id.rl_open_force:
+                        if (avi.isShow()) {
+                            intent = new Intent(this, PhilipsWifiLockOpenForceActivity.class);
+                            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
+                            startActivityForResult(intent,KeyConstants.WIFI_LOCK_SET_OPEN_FORCE);
+                            mPresenter.release();
+                        }
+                        break;
                     case R.id.rl_real_time_video:
                         if(avi.isShow()){
 
@@ -670,6 +843,28 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                     Intent intent = new Intent();
                     intent.putExtra(KeyConstants.WIFI_LOCK_NEW_NAME, name);
                     setResult(RESULT_OK, intent);
+                    break;
+                case KeyConstants.WIFI_VICEO_LOCK_VOICE_QUALITY:
+                    int voiceQuality = data.getIntExtra(MqttConstant.SET_VOICE_QUALITY,0);
+                    setVoiceQuality(voiceQuality);
+                    break;
+                case KeyConstants.WIFI_VIDEO_LOCK_SCREEN_BRIGHTNESS:
+                    int screenLightLevel = data.getIntExtra(MqttConstant.SET_SCREEN_LIGHT_LEVEL,50);
+                    setScreenLightLevel(screenLightLevel);
+                    break;
+                case KeyConstants.WIFI_VIDEO_LOCK_SCREEN_DURATION:
+                    int screenLightTime = data.getIntExtra(MqttConstant.SET_SREEN_LIGHT_TIME,10);
+                    setScreenLightTime(screenLightTime);
+                    break;
+                case KeyConstants.WIFI_LOCK_SET_OPEN_DIRECTION:
+                    if(data != null){
+                        int openDirection = data.getIntExtra(MqttConstant.SET_OPEN_DIRECTION, 0);
+                        setOpenDirection(openDirection);
+                    }
+                    break;
+                case KeyConstants.WIFI_LOCK_SET_OPEN_FORCE:
+                    int openForce = data.getIntExtra(MqttConstant.SET_OPEN_FORCE,0);
+                    setOpenForce(openForce);
                     break;
             }
 

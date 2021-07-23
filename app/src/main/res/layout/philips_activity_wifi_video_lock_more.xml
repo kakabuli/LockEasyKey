@@ -215,9 +215,38 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_voice_quality_setting"
+                android:layout_width="match_parent"
+                android:layout_height="56pt"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16pt"
+                    android:text="@string/philips_voice_quality_setting"
+                    android:textColor="#333333"
+                    android:textSize="16pt" />
+
+                <TextView
+                    android:id="@+id/tv_voice_quality_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16pt"
+                    android:textSize="15pt"
+                    android:textColor="@color/color_666666"
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/rl_silent_mode"
                 android:layout_width="match_parent"
                 android:layout_height="56pt"
+                android:visibility="gone"
                 android:background="#FFFFFF">
 
                 <TextView
@@ -238,6 +267,72 @@
                     android:layout_marginRight="10pt"
                     android:src="@drawable/philips_setting_switch_selector" />
 
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="43pt"
+                android:textSize="14pt"
+                android:text="@string/philips_video_setting_lock_seting"
+                android:textColor="@color/color_666666"
+                android:gravity="center_vertical"
+                android:paddingLeft="16pt"
+                android:background="@color/cF7F7F7"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_door_direction"
+                android:layout_width="match_parent"
+                android:layout_height="56pt"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16pt"
+                    android:text="@string/door_direction"
+                    android:textColor="#333333"
+                    android:textSize="16pt" />
+
+                <TextView
+                    android:id="@+id/tv_door_direction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16pt"
+                    android:textSize="15pt"
+                    android:textColor="@color/color_666666"
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_open_force"
+                android:layout_width="match_parent"
+                android:layout_height="56pt"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16pt"
+                    android:text="@string/open_power"
+                    android:textColor="#333333"
+                    android:textSize="16pt" />
+
+                <TextView
+                    android:id="@+id/tv_open_force"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16pt"
+                    android:textSize="15pt"
+                    android:textColor="@color/color_666666"
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt" />
             </RelativeLayout>
 
 
@@ -302,6 +397,7 @@
                 android:background="#FFFFFF">
 
                 <TextView
+                    android:id="@+id/tv_real_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -309,15 +405,72 @@
                     android:text="@string/philips_video_activity_lock_real_time_video"
                     android:textColor="#333333"
                     android:textSize="16pt" />
-
-                <ImageView
+                <TextView
+                    android:id="@+id/tv_real_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
-                    app:srcCompat="@drawable/philips_detail_setting_more" />
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15pt" />
 
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_screen_brightness"
+                android:layout_width="match_parent"
+                android:layout_height="56pt"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16pt"
+                    android:text="@string/philips_screen_brightness"
+                    android:textColor="#333333"
+                    android:textSize="16pt" />
+                <TextView
+                    android:id="@+id/tv_screen_brightness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16pt"
+                    android:textSize="15pt"
+                    android:textColor="@color/color_666666"
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_screen_duration"
+                android:layout_width="match_parent"
+                android:layout_height="56pt"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16pt"
+                    android:text="@string/philips_screen_duration"
+                    android:textColor="#333333"
+                    android:textSize="16pt" />
+                <TextView
+                    android:id="@+id/tv_screen_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16pt"
+                    android:textSize="15pt"
+                    android:textColor="@color/color_666666"
+                    android:drawableRight="@drawable/philips_detail_setting_more"
+                    android:drawablePadding="10pt" />
             </RelativeLayout>
 
             <TextView

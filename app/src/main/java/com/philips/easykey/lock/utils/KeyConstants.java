@@ -385,6 +385,15 @@ public class KeyConstants {
     //X9上锁方式
     public static final int WIFI_LOCK_LOCKING_METHOD = 3003;
 
+    //显示屏时间
+    public static final int WIFI_VIDEO_LOCK_SCREEN_DURATION = 3010;
+
+    //显示屏亮度
+    public static final int WIFI_VIDEO_LOCK_SCREEN_BRIGHTNESS = 3011;
+
+    //设置语音质量
+    public static final int WIFI_VICEO_LOCK_VOICE_QUALITY = 3012;
+
     //设置胁迫密钥账号
     public static final int WIFI_LOCK_SETTING_DURESS_ACCOUNT = 3014;
 
