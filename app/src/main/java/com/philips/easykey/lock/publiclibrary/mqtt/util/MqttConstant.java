@@ -230,6 +230,15 @@ public class MqttConstant {
     //设置开门力量
     public static final String SET_OPEN_FORCE = "setOpenForce";
 
+    //设置屏幕亮度
+    public static final String SET_SCREEN_LIGHT_LEVEL = "setScreenLightLevel";
+
+    //设置屏幕时长
+    public static final String SET_SREEN_LIGHT_TIME = "setScreenLightTime";
+
+    //设置语音质量
+    public static final String SET_VOICE_QUALITY = "setVoiceQuality";
+
     //设置上锁方式
     public static final String SET_LOCKING_METHOD = "setLockingMethod";
 

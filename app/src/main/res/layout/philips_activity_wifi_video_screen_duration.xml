@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F2F2F2"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back" />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/screen_duration"
+            android:textColor="@color/color_333333"
+            android:textSize="17pt"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/title"
+        android:id="@+id/rl_screen_light_duration"
+        android:layout_width="match_parent"
+        android:layout_marginTop="12pt"
+        android:layout_height="88pt"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16pt"
+                android:text="@string/screen_duration_text"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16pt"
+                android:text="@string/screen_duration_des"
+                android:textColor="#999999"
+                android:textSize="12pt" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_screen_light_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="23pt"
+            android:src="@drawable/wandering_alarm_selector" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_screen_light_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="12pt"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_screen_light_duration">
+
+        <RelativeLayout
+            android:id="@+id/rl_screen_light_duration_5s"
+            android:layout_width="match_parent"
+            android:layout_height="56pt"
+            android:background="#FFFFFF">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16pt"
+                android:text="@string/screen_light_duration_5s"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+
+            <CheckBox
+                android:id="@+id/ck_screen_light_duration_5s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_16"
+                android:button="@drawable/wandering_judge_time_selector"
+                android:clickable="false"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_screen_light_duration_10s"
+            android:layout_width="match_parent"
+            android:layout_height="56pt"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16pt"
+                android:text="@string/screen_light_duration_10s"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+
+            <CheckBox
+                android:id="@+id/ck_screen_light_duration_10s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_16"
+                android:button="@drawable/wandering_judge_time_selector"
+                android:clickable="false"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_screen_light_duration_15s"
+            android:layout_width="match_parent"
+            android:layout_height="56pt"
+            android:background="#FFFFFF"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16pt"
+                android:text="@string/screen_light_duration_15s"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+
+            <CheckBox
+                android:id="@+id/ck_screen_light_duration_15s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_16"
+                android:button="@drawable/wandering_judge_time_selector"
+                android:clickable="false"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+    <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dp_150"
+        app:indicatorColor="#333333"/>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/wifi_video_lock_waiting"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:layout_below="@id/avi"/>
+</RelativeLayout>

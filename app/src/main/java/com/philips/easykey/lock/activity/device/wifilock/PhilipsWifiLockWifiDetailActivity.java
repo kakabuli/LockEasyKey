@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.wifilock.newadd.PhilipsAddVideoLockActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewThirdActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockOldUserFirstActivity;
@@ -115,10 +116,9 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
 
                     @Override
                     public void right() {
-                        Intent wifiIntent = new Intent(PhilipsWifiLockWifiDetailActivity.this, WifiLockAddNewThirdActivity.class);
+                        Intent wifiIntent = new Intent(PhilipsWifiLockWifiDetailActivity.this, PhilipsAddVideoLockActivity.class);
                         String wifiModelType = "WiFi&VIDEO";
                         wifiIntent.putExtra("wifiModelType", wifiModelType);
-                        wifiIntent.putExtra("distribution_again", true);
                         startActivity(wifiIntent);
                     }
 

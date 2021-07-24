@@ -1,14 +1,14 @@
-package com.philips.easykey.lock.mvp.presenter.wifilock.x9;
+package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
-import com.philips.easykey.lock.mvp.view.wifilock.x9.IWifiLockOpenDirectionView;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockVoiceQualitySettingView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
-import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.SettingOpenDirectionResult;
+import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.SettingVoiceQualityResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 
-public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOpenDirectionView> {
+public class WifiVideoLockVoiceQualitySettingPresenter<T> extends BasePresenter<IWifiVideoLockVoiceQualitySettingView> {
     private Disposable setOpenDirectionDisposable;
     private static  String did ="";//AYIOTCN-000337-FDFTF
     private static  String sn ="";//010000000020500020
@@ -33,15 +33,15 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
 
     private static  String serviceString= XMP2PManager.serviceString;;
 
-    public void setOpenDirection(String wifiSN,int openDirection , String func) {
+    public void setVoiceQuality(String wifiSN,int voiceQuality) {
         if (mqttService != null && mqttService.getMqttClient() != null && mqttService.getMqttClient().isConnected()) {
-            MqttMessage mqttMessage = MqttCommandFactory.settingOpenDirection(wifiSN,openDirection,func);
+            MqttMessage mqttMessage = MqttCommandFactory.settingVoiceQuality(wifiSN,voiceQuality);
             toDisposable(setOpenDirectionDisposable);
             setOpenDirectionDisposable = mqttService.mqttPublish(MqttConstant.getCallTopic(MyApplication.getInstance().getUid()),mqttMessage)
                     .filter(new Predicate<MqttData>() {
                         @Override
                         public boolean test(MqttData mqttData) throws Exception {
-                            if(MqttConstant.SET_OPEN_DIRECTION.equals(mqttData.getFunc()) || MqttConstant.SET_LOCK.equals(mqttData.getFunc())){
+                            if(MqttConstant.SET_LOCK.equals(mqttData.getFunc())){
                                 return true;
                             }
                             return false;
@@ -53,13 +53,13 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                         @Override
                         public void accept(MqttData mqttData) throws Exception {
                             MyApplication.getInstance().getAllDevicesByMqtt(true);
-                            SettingOpenDirectionResult settingOpenDirectionResult = new Gson().fromJson(mqttData.getPayload(), SettingOpenDirectionResult.class);
-                            LogUtils.e("shulan settingOpenDirectionResult-->" + settingOpenDirectionResult.toString());
-                            if(settingOpenDirectionResult != null && isSafe()){
-                                if("200".equals(settingOpenDirectionResult.getCode() + "")){
+                            SettingVoiceQualityResult mSettingVoiceQualityResult = new Gson().fromJson(mqttData.getPayload(), SettingVoiceQualityResult.class);
+                            LogUtils.e("shulan mSettingVoiceQualityResult-->" + mSettingVoiceQualityResult.toString());
+                            if(mSettingVoiceQualityResult != null && isSafe()){
+                                if("200".equals(mSettingVoiceQualityResult.getCode() + "")){
                                     MyApplication.getInstance().getAllDevicesByMqtt(true);
                                     mViewRef.get().onSettingCallBack(true);
-                                }else if("201".equals(settingOpenDirectionResult.getCode() + "")){
+                                }else if("201".equals(mSettingVoiceQualityResult.getCode() + "")){
                                     mViewRef.get().onSettingCallBack(false);
                                 }
                             }
@@ -76,7 +76,7 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
         }
     }
 
-    public void setConnectOpenDirection(String wifiSN,int openDirection) {
+    public void setConnectVoiceQuality(String wifiSN,int voiceQuality) {
         DeviceInfo deviceInfo=new DeviceInfo();
         deviceInfo.setDeviceDid(did);
         deviceInfo.setP2pPassword(p2pPassword);
@@ -100,7 +100,7 @@ public class WifiLockOpenDirectionPresenter<T> extends BasePresenter<IWifiLockOp
                         if(isSafe()){
                             try {
                                 if (jsonObject.getString("result").equals("ok")){
-                                    setOpenDirection(wifiSN,openDirection,MqttConstant.SET_LOCK);
+                                    setVoiceQuality(wifiSN,voiceQuality);
                                 }else{
                                     mViewRef.get().onSettingCallBack(false);
                                 }

@@ -750,6 +750,8 @@
 
     <string name="screenshot_name">截屏</string>
     <string name="mute_name">静音</string>
+    <string name="philips_voice_quality_high">高音量</string>
+    <string name="philips_voice_quality_low">低音量</string>
     <string name="novoice">免提</string>
     <string name="recording_name">录屏</string>
     <string name="select_no_lock">暂无联动门锁</string>
@@ -762,6 +764,14 @@
     <string name="add_device_before_pair_gateway">添加设备前，请先配置kaadas网关</string>
     <string name="gateway">网关</string>
     <string name="cateye">猫眼</string>
+    <string name="voice_quality_setting">语音设置</string>
+    <string name="screen_brightness">显示屏亮度</string>
+    <string name="screen_duration">显示屏时间</string>
+    <string name="screen_duration_text">自动亮屏</string>
+    <string name="screen_duration_des">开启后，按门铃时显示屏将自动点亮</string>
+    <string name="screen_light_duration_5s">持续亮屏5S</string>
+    <string name="screen_light_duration_10s">持续亮屏10S</string>
+    <string name="screen_light_duration_15s">持续亮屏15S</string>
     <string name="philips_please_input_the_correct_lock_model">请输入正确的锁型号</string>
     <string name="philips_the_model_is_not_matched">未匹配到该型号</string>
     <string name="philips_smart_lock">智能锁</string>
@@ -899,6 +909,9 @@
     <string name="cateye_low_power">低电量事件</string>
     <string name="fuselage_is_drawn">机身被拔事件</string>
     <string name="volume">铃声音量</string>
+    <string name="more_screen_light_duration_5s">5s</string>
+    <string name="more_screen_light_duration_10s">10s</string>
+    <string name="more_screen_light_duration_15s">15s</string>
     <string name="low">低</string>
     <string name="centre">中</string>
     <string name="high">高</string>
@@ -2384,10 +2397,14 @@
 
     <!-- setting -->
     <string name="philips_video_setting_lock_mode">门锁模式</string>
+    <string name="philips_video_setting_lock_seting">开门设置</string>
     <string name="philips_video_activity_open_lock_mode">验证方式</string>
     <string name="philips_video_activity_lock_auto_mode">上锁模式</string>
     <string name="philips_video_activity_lock_language">语言设置</string>
+    <string name="philips_voice_quality_setting">语音设置</string>
     <string name="philips_video_activity_lock_video">视频设置</string>
+    <string name="philips_screen_brightness">显示屏亮度</string>
+    <string name="philips_screen_duration">显示屏时间</string>
     <string name="philips_video_activity_lock_real_time_video">视频模式</string>
     <string name="philips_video_activity_delete_device">删除用户</string>
     <string name="philips_video_activity_duress_alarm">胁迫报警</string>

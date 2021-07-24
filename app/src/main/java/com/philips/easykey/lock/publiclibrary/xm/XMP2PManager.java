@@ -74,8 +74,8 @@ public class XMP2PManager extends StreamListener  {
     private volatile static XMStreamComCtrl xmStreamComCtrl = null;
 
 //    public static  String serviceString="EBGDEIBIKEJPGDJMEBHLFFEJHPNFHGNMGBFHBPCIAOJJLGLIDEABCKOOGILMJFLJAOMLLMDIOLMGBMCGIO";
-//    public static String serviceString="EBGDEJBJKEJLGHJKEIHCFMEDHENOHINHHHFOBCCGAAJOLJKNDIAFDDPGGELGIGLNAJNDKJCNPJNDAL";//凯迪仕P2P地址
-    public static String serviceString="EBGDEJBJKGJFGJJGEFGAFCENHIMKHENIGBFHBDCHABJFLIKMDHADDFPAGILIIILIAINCKBDPOMNMBACFIN";//飞利浦P2P地址
+    public static String serviceString="EBGDEJBJKEJLGHJKEIHCFMEDHENOHINHHHFOBCCGAAJOLJKNDIAFDDPGGELGIGLNAJNDKJCNPJNDAL";//凯迪仕P2P地址
+//    public static String serviceString="EBGDEJBJKGJFGJJGEFGAFCENHIMKHENIGBFHBDCHABJFLIKMDHADDFPAGILIIILIAINCKBDPOMNMBACFIN";//飞利浦P2P地址
 
     /**
      * 获取 单例 对象操作
@@ -232,8 +232,8 @@ public class XMP2PManager extends StreamListener  {
         if(handleSession<0){
             currentDid=null;
             LogUtils.d("shulan--------------111");
-            if(mConnectListener != null)
-                mConnectListener.onConnectFailed(handleSession);
+            /*if(mConnectListener != null)
+                mConnectListener.onConnectFailed(handleSession);*/
         }else {
             //获取P2P当前信息
             sessionStatus();
