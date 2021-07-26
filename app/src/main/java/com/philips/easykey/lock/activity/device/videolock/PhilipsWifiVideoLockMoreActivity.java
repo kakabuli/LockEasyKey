@@ -536,8 +536,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_real_time_video:
+                        if(BleLockUtils.isSupportVideoModeSwitch(wifiLockInfo.getFunctionSet())) return;
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiVideoLockRealTimeActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
