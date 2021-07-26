@@ -47,7 +47,6 @@ public class ClothesHangerMachineQrCodeScanActivity extends BaseAddToApplication
         setContentView(R.layout.device_scan_qrcode);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        MyApplication.getInstance().addActivity(this);
 
         back = findViewById(R.id.back);
         touchLightLayout = findViewById(R.id.touch_light_layout);
