@@ -651,6 +651,22 @@ public class BleLockUtils {
         return integers.contains(87);
     }
 
+    /**
+     * 语音模组
+     */
+    public static boolean isSupportVoiceModel(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(89);
+    }
+
     public static boolean isSupportLockOTA(String functionSet){
         if(TextUtils.isEmpty(functionSet)){
             return false;
@@ -675,6 +691,19 @@ public class BleLockUtils {
         }
         List<Integer> integers = Arrays.asList(funcs);
         return integers.contains(86);
+    }
+
+    public static boolean isSupportFrontPanelOnlyShow(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(95);
     }
 
     /**

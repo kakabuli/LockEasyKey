@@ -893,6 +893,8 @@
     <string name="lock_firware_version_number">门锁固件版本</string>
     <string name="lock_firware_hardware_number">门锁硬件版本</string>
     <string name="lock_firware__number">门锁版本</string>
+    <string name="front_hard_version">前面板版本</string>
+    <string name="back_hard_version">后面板版本</string>
     <string name="face_model_firware_version_number">人脸模组版本</string>
     <string name="lock_software_version">门锁软件版本</string>
     <string name="no_lock_alarm">暂无预警信息</string>
@@ -2032,7 +2034,8 @@
     <string name="dialog_wifi_video_ota_update">是否升级</string>
     <string name="dialog_wifi_wifi_firmware_version">WIFI固件版本</string>
     <string name="dialog_wifi_video_moudle_version">视频模组版本</string>
-    <string name="dialog_wifi_video_mcu_moudle_version">视频模组微控制器版本</string>
+    <string name="dialog_wifi_video_mcu_moudle_version">视频控制器版本</string>
+    <string name="voice_model_firware_version_number">语音模组版本</string>
 
     <string name="activity_wifi_video_fifth_third">第三步：门锁扫描二维码</string>
     <string name="activity_wifi_video_fifth_thour">第四步：门锁扫描二维码</string>
