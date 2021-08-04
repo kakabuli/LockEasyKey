@@ -45,7 +45,7 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
         tvContent.setText(R.string.philips_terms_of_use);
         tvRight.setVisibility(View.VISIBLE);
         tvRight.setText(R.string.philips_agree);
-        webView.loadUrl("http://app.kaadas.cc/pageFile/philips/Terms_of_use.html");
+        webView.loadUrl("http://app.kaadas.cc/pageFile/Philips_Terms_of_Use/index.html");
     }
 
 

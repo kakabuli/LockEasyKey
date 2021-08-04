@@ -162,7 +162,7 @@ public class PhilipsAddManuallyFragment extends Fragment {
     public ArrayList<PhilipsAddManuallyDeviceBean> searchItems(String name) {
         ArrayList<PhilipsAddManuallyDeviceBean> mSearchList = new ArrayList<>();
         for (int i = 0; i < doorlockModelList.size(); i++) {
-            int index = doorlockModelList.get(i).getName().indexOf(name);
+            int index = doorlockModelList.get(i).getName().toUpperCase().indexOf(name.toUpperCase());
             // 存在匹配的数据
             if (index != -1) {
                 mSearchList.add(doorlockModelList.get(i));

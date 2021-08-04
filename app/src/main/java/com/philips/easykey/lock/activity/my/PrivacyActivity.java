@@ -43,7 +43,7 @@ public class PrivacyActivity extends BaseAddToApplicationActivity implements Vie
         initView();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.primary_user_agreement);
-        webView.loadUrl("http://app.kaadas.cc/pageFile/philips/Privacy_policy.html");
+        webView.loadUrl("http://app.kaadas.cc/pageFile/Philips_Privacy_Policy/index.html");
     }
 
 
