@@ -49,8 +49,9 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         back();
+        return super.onKeyDown(keyCode, event);
     }
 
     public class MyWebViewClient extends WebViewClient {

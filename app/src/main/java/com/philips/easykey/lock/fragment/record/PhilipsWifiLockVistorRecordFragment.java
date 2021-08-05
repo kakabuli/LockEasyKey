@@ -212,10 +212,10 @@ public class PhilipsWifiLockVistorRecordFragment extends BaseFragment<IWifiLockV
         }
         int size = records.size();
         currentPage = page + 1;
-        groupData(lockRecords);
+        int sum = groupData(lockRecords);
 
         if (size>0){
-            operationGroupRecordAdapter.notifyItemRangeInserted(size,lockRecords.size());
+            operationGroupRecordAdapter.notifyItemRangeInserted(size,sum);
         }else {
             operationGroupRecordAdapter.notifyDataSetChanged();
         }
@@ -228,8 +228,9 @@ public class PhilipsWifiLockVistorRecordFragment extends BaseFragment<IWifiLockV
         }
     }
 
-    private void groupData(List<WifiVideoLockAlarmRecord> lockRecords) {
+    private int groupData(List<WifiVideoLockAlarmRecord> lockRecords) {
         String lastTimeHead = "";
+        int sum = 0;
         WifiVideoLockAlarmRecord lastRecord = null;
         if (lockRecords != null && lockRecords.size() > 0) {
             for (int i = 0; i < lockRecords.size(); i++) {
@@ -240,8 +241,7 @@ public class PhilipsWifiLockVistorRecordFragment extends BaseFragment<IWifiLockV
                 WifiVideoLockAlarmRecord record = lockRecords.get(i);
                 boolean falg = false;
                 for(WifiVideoLockAlarmRecord list : records){
-                    if(list.get_id() != null && record.get_id() != null
-                            && list.get_id().equals(record.get_id()) ){
+                    if(list.getCreateTime() == record.getCreateTime()){
                         falg = true;
                         break;
                     }
@@ -265,10 +265,12 @@ public class PhilipsWifiLockVistorRecordFragment extends BaseFragment<IWifiLockV
                         lastRecord.setLast(true);
                     }
                 }
+                sum += 1;
                 records.add(record);
 
             }
         }
+        return sum;
     }
 
 
