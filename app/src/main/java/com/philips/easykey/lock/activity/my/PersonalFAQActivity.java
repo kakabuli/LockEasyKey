@@ -30,7 +30,7 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     ImageView ivBack;
     WebView webView;
     TextView tvContent;
-    private String url = "http://app.kaadas.cc/pageFile/Philips_FQA/index.html";
+    private String url = "http://h5.kaadas.cc/Philips_FQA/";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +50,10 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        back();
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            back();
+            return false;
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -69,7 +72,6 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
             finish();
         }else {
             webView.loadUrl(url);
-            return;
         }
     }
 }

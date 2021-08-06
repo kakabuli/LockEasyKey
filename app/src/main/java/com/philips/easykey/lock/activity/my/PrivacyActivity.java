@@ -4,8 +4,12 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,12 +47,23 @@ public class PrivacyActivity extends BaseAddToApplicationActivity implements Vie
         initView();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.primary_user_agreement);
-        webView.loadUrl("http://app.kaadas.cc/pageFile/Philips_Privacy_Policy/index.html");
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl("http://h5.kaadas.cc/Philips_Privacy_Policy");
     }
 
 
     private void initView() {
         //getData();
+    }
+    public class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            webView.loadUrl(url);
+            return true;
+        }
     }
 
 

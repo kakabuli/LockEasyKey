@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,12 +47,24 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
         tvContent.setText(R.string.philips_terms_of_use);
         tvRight.setVisibility(View.VISIBLE);
         tvRight.setText(R.string.philips_agree);
-        webView.loadUrl("http://app.kaadas.cc/pageFile/Philips_Terms_of_Use/index.html");
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl("http://h5.kaadas.cc/Philips_Terms_of_Use");
     }
 
 
     private void initView() {
 //        getData();
+    }
+
+    public class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            webView.loadUrl(url);
+            return true;
+        }
     }
 
 
