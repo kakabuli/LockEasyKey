@@ -604,7 +604,9 @@ public class WifiVideoLockRealTimePresenter<T> extends BasePresenter<IWifiVideoL
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-
+                            if(isSafe()){
+                                mViewRef.get().onSettingCallBack(false);
+                            }
                         }
                     });
             compositeDisposable.add(setRealTimeLinstenerDisposable);

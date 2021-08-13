@@ -547,7 +547,10 @@ public class WifiVideoLockMorePresenter<T> extends BasePresenter<IWifiVideoLockM
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
+                            if(isSafe()){
+                                mViewRef.get().onSettingCallBack(false,volume == 1 ? 0:1);
 
+                            }
                         }
                     });
             compositeDisposable.add(setVolumeListenDisposable);

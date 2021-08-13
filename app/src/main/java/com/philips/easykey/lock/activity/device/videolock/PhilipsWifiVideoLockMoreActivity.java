@@ -241,8 +241,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             if(BleLockUtils.isSupportVideoModeSwitch(wifiLockInfo.getFunctionSet())){
                 ((TextView)findViewById(R.id.tv_real_time_title)).setText(R.string.philips_video_activity_lock_real_time_video);
                 ((TextView)findViewById(R.id.tv_real_time)).setCompoundDrawables(null,null,null,null);
-                int KeepAliveStatus = wifiLockInfo.getKeep_alive_status();
-                ((TextView)findViewById(R.id.tv_real_time)).setText(KeepAliveStatus == 1 ? getString(R.string.open) : getString(R.string.close));
+                int KeepAliveStatus = wifiLockInfo.getPowerSave();
+                ((TextView)findViewById(R.id.tv_real_time)).setText(KeepAliveStatus == 0 ? getString(R.string.open) : getString(R.string.close));
             }
 
             /*if(BleLockUtils.isSupportRealTimeVideo(func)){
