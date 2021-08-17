@@ -456,7 +456,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
         mSufaceView.setVisibility(View.GONE);
         mSufaceView.setVisibility(View.VISIBLE);
         int keepAliveStatus = 0;
@@ -532,7 +531,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     @Override
@@ -972,7 +970,8 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         });
 
         if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
-            dialog.show();
+            if(dialog != null)
+            	dialog.show();
         }
 
     }
