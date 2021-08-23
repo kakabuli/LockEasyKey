@@ -73,6 +73,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     TextView tvWanderingAlarmRight;
     RelativeLayout rlRealTimeVideo;
     RelativeLayout rlDuressAlarm;
+    RelativeLayout rlSensingDoorHandle;
+    TextView tvSensingDoorHandle;
     AVLoadingIndicatorView avi;
     TextView tvTips;
 
@@ -125,6 +127,9 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
         tvWanderingAlarmRight = findViewById(R.id.tv_wandering_alarm_right);
         rlRealTimeVideo = findViewById(R.id.rl_real_time_video);
         rlDuressAlarm = findViewById(R.id.rl_duress_alarm);
+        rlSensingDoorHandle = findViewById(R.id.rl_sensing_door_handle);
+        tvSensingDoorHandle = findViewById(R.id.tv_sensing_door_handle);;
+
         avi = findViewById(R.id.avi);
         tvTips = findViewById(R.id.tv_tips);
 
@@ -136,7 +141,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                 isWifiVideoLockType = true;
             }
         }
-//        rlAm.setVisibility(View.GONE);
         mPresenter.init(wifiSn);
         initClick();
         initData();
@@ -203,6 +207,15 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                 setVoiceQuality(wifiLockInfo.getVolLevel());
             }else{
                 rlVoiceQualitySetting.setVisibility(View.GONE);
+            }
+
+            //感应把手开关显示
+            if(BleLockUtils.isSupportSensingHandleSwitch(wifiLockInfo.getFunctionSet())){
+                rlSensingDoorHandle.setVisibility(View.VISIBLE);
+                int touchHandleStatus = wifiLockInfo.getTouchHandleStatus();
+                tvSensingDoorHandle.setText(touchHandleStatus == 1 ? getString(R.string.open) : getString(R.string.close));
+            }else{
+                rlSensingDoorHandle.setVisibility(View.GONE);
             }
 
             //开门力量

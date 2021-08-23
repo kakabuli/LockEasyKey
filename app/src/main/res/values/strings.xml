@@ -2025,7 +2025,7 @@
     <string name="dialog_wifi_video_power_status">已开启省电模式，需唤醒门锁后再试</string>
     <string name="dialog_wifi_video_delete_video">确定删除视频吗？</string>
     <string name="dialog_wifi_video_keep_alive_close">视频长连接已关闭</string>
-    <string name="dialog_wifi_video_doorbell_outside_door">按门铃时可查看门外情况</string>
+    <string name="dialog_wifi_video_doorbell_outside_door">1.请检查设备电量，电量过低时请更换电池\n2.电量正常时，请在锁端节能设置中，开启视频功能</string>
     <string name="dialog_wifi_video_waking_up_door_lock_setting">唤醒门锁后，可在视频设置中开启</string>
     <string name="dialog_wifi_video_tip">温馨提示</string>
     <string name="dialog_wifi_video_open_the_door_continue_watching">门锁已打开，是否继续观看?</string>
@@ -2405,6 +2405,7 @@
     <string name="philips_video_activity_lock_auto_mode">上锁模式</string>
     <string name="philips_video_activity_lock_language">语言设置</string>
     <string name="philips_voice_quality_setting">语音设置</string>
+    <string name="philips_sensing_door_handle">感应门把手</string>
     <string name="philips_video_activity_lock_video">视频设置</string>
     <string name="philips_screen_brightness">显示屏亮度</string>
     <string name="philips_screen_duration">显示屏时间</string>

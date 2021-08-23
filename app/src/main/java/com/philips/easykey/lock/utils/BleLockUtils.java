@@ -175,14 +175,14 @@ public class BleLockUtils {
         FUNCTION_SET.put(0xC8, new Integer[]{1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 16, 17, 19, 20, 21, 22, 23, 36});
         FUNCTION_SET.put(0xC9, new Integer[]{1, 2, 3, 4, 5, 6, 7, 10, 12, 13, 16, 17, 19, 20, 21, 22, 23, 36});
 
-        FUNCTION_SET.put(0xA0, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 33, 34, 36, 38, 40, 44, 49, 50, 60, 61, 62, 63});  //2021年1月27 X9功能集
-        FUNCTION_SET.put(0xA1, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 17, 19, 20, 21, 22, 23, 32,33, 34, 38, 44, 51, 52, 53, 55, 57, 58, 59, 60, 61, 86, 88, 89, 90, 93});
+        FUNCTION_SET.put(0xA0, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 16, 18, 19, 20, 21, 22, 23, 33, 34, 36, 38, 40, 44, 49, 50, 60, 61, 62, 63});  //2021年1月27 X9功能集
+        FUNCTION_SET.put(0xA1, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 19, 20, 21, 22, 23, 32, 33, 34, 38, 44, 51, 52, 53, 55, 57, 58, 59, 60, 61, 86, 88, 89, 90, 93});
         FUNCTION_SET.put(0xA2, new Integer[]{1, 2});
         FUNCTION_SET.put(0xA3, new Integer[]{1, 2});
-        FUNCTION_SET.put(0xA4, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 17, 19, 20, 21, 22, 23, 33, 34, 38, 44, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74, 75, 76, 86, 88, 89, 90, 93, 94});
-        FUNCTION_SET.put(0xA5, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 17, 19, 20, 21, 22, 23, 26, 28, 29, 30, 33, 34, 38, 47, 51, 52, 53, 54, 55, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 88, 89, 90, 91, 92, 93,94});
-        FUNCTION_SET.put(0xA6, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 33, 34, 38, 44, 51, 52, 53, 55, 57, 58, 59, 86, 88, 89, 90, 91, 93});
-
+        FUNCTION_SET.put(0xA4, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 19, 20, 21, 22, 23, 32, 33, 34, 38, 44, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74, 75, 76, 86, 88, 89, 90, 93, 94});
+        FUNCTION_SET.put(0xA5, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 19, 20, 21, 22, 23, 26, 28, 29, 30, 33, 34, 38, 47, 51, 52, 53, 54, 55, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 88, 89, 90, 91, 92, 93,94});
+        FUNCTION_SET.put(0xA6, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 33, 34, 38, 44, 47, 51, 52, 53, 55, 57, 58, 59, 86, 88, 89, 90, 91, 93});
+        FUNCTION_SET.put(0xA7, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 19 ,20, 21, 22, 23, 33, 34, 38, 44, 47, 51, 52, 53, 55, 57, 58, 59, 68, 69, 70, 71, 72, 73, 74, 75, 76, 86, 88, 89, 90, 93, 91, 93});
 
         FUNCTION_SET.put(0xFF, new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 16, 17, 19, 20, 21, 22}); //默认为FF
     }
@@ -721,6 +721,22 @@ public class BleLockUtils {
         }
         List<Integer> integers = Arrays.asList(funcs);
         return integers.contains(17);
+    }
+
+    /**
+     * 感应把手功能开关显示
+     */
+    public static boolean isSupportSensingHandleSwitch(String functionSet){
+        if(TextUtils.isEmpty(functionSet)){
+            return false;
+        }
+        int funcSet = Integer.parseInt(functionSet);
+        Integer[] funcs = FUNCTION_SET.get(funcSet);
+        if (funcs == null) {
+            return false;
+        }
+        List<Integer> integers = Arrays.asList(funcs);
+        return integers.contains(91);
     }
 
     /**

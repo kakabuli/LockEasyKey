@@ -460,11 +460,11 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         mSufaceView.setVisibility(View.VISIBLE);
         int keepAliveStatus = 0;
         try{
-            keepAliveStatus = wifiLockInfo.getKeep_alive_status();
+            keepAliveStatus = wifiLockInfo.getPowerSave();
         }catch (Exception e){
 
         }
-        if(keepAliveStatus == 1){
+        if(keepAliveStatus == 0){
             switchBackConnectP2P();
         }else{
             if(isCalling == 1){
@@ -500,7 +500,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
     private void showKeepAliveDialog() {
         AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), getString(R.string.dialog_wifi_video_doorbell_outside_door),
-                getString(R.string.dialog_wifi_video_waking_up_door_lock_setting), "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+                null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
