@@ -240,7 +240,7 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
             llyBootomBar.setVisibility(View.GONE);
             mPresenter.settingDevice(wifiLockInfo);
 
-            if(wifiLockInfo.getKeep_alive_status() ==1){
+            if(wifiLockInfo.getPowerSave() == 0){
 
                 new Thread(new Runnable() {
                     @Override
@@ -795,7 +795,7 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
 
     private void showKeepAliveDialog() {
         AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), getString(R.string.dialog_wifi_video_doorbell_outside_door),
-                getString(R.string.dialog_wifi_video_waking_up_door_lock_setting), "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+                null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
