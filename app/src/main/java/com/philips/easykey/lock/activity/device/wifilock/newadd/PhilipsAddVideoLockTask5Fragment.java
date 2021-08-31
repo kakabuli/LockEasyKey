@@ -77,6 +77,7 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
                 return;
             }
             if(mAddVideoLockActivity != null) {
+                btnNext.setEnabled(false);
                 mAddVideoLockActivity.setAdminPwd(adminPwd);
             }
             // TODO: 2021/5/8 需要回调监听成功与失败

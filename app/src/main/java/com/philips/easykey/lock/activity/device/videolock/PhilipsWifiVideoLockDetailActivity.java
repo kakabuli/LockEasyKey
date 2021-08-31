@@ -392,8 +392,8 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
-                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), getString(R.string.dialog_wifi_video_doorbell_outside_door),
+                null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -401,7 +401,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
                     @Override
                     public void right() {
-
+                        finish();
                     }
 
                     @Override

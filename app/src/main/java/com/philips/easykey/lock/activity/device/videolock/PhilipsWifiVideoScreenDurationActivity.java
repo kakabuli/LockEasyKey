@@ -162,6 +162,10 @@ public class PhilipsWifiVideoScreenDurationActivity extends BaseActivity<IWifiVi
     }
 
     private void setScreenLightTime() {
+        if(wifiLockInfo.getPowerSave() == 1){
+            finish();
+            return;
+        }
         screenLightSwitch = ivScreenLightDuration.isSelected() ? 1 : 0;
         screenLightTime = getScreenLightTime();
         if(wifiLockInfo.getScreenLightSwitch() == screenLightSwitch && wifiLockInfo.getScreenLightTime() == screenLightTime){
@@ -334,8 +338,11 @@ public class PhilipsWifiVideoScreenDurationActivity extends BaseActivity<IWifiVi
                         }else {
                             intent = new Intent(PhilipsWifiVideoScreenDurationActivity.this, WifiLockMoreActivity.class);
                         }
-
-                        intent.putExtra(MqttConstant.SET_SREEN_LIGHT_TIME,screenLightTime);
+                        if(screenLightSwitch == 0){
+                            intent.putExtra(MqttConstant.SET_SREEN_LIGHT_TIME,0);
+                        }else {
+                            intent.putExtra(MqttConstant.SET_SREEN_LIGHT_TIME,screenLightTime);
+                        }
                         setResult(RESULT_OK,intent);
                     }else{
                         ToastUtils.showLong(getString(R.string.modify_failed));

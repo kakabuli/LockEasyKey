@@ -654,7 +654,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
                 return;
             }
-            XiaokaiNewServiceImp.registerWeChatAndBindPhone(mWXopenId,account, code)
+            String countryCode = mCountryCode.trim().replace("+", "");
+            XiaokaiNewServiceImp.registerWeChatAndBindPhone(mWXopenId,countryCode + account, code)
                     .subscribe(new BaseObserver<RegisterWeChatAndBindPhoneResult>() {
                         @Override
                         public void onSuccess(RegisterWeChatAndBindPhoneResult registerWeChatAndBindPhoneResult) {

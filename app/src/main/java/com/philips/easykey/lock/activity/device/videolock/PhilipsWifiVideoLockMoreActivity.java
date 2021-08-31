@@ -353,6 +353,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             tvScreenDuration.setText(R.string.more_screen_light_duration_10s);
         }else if(/*screenLightTime > 10 && screenLightTime <= 15*/ screenLightTime == 15){
             tvScreenDuration.setText(R.string.more_screen_light_duration_15s);
+        }else  if(/*screenLightTime > 10 && screenLightTime <= 15*/ screenLightTime == 0){
+            tvScreenDuration.setText(R.string.close);
         }
     }
 

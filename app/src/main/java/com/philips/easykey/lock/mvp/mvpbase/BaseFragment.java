@@ -112,14 +112,23 @@ public abstract class BaseFragment<T extends IBaseView, V
     public int getStatusBarHeight() {
         int result = 20;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-            final View decorView = getActivity().getWindow().getDecorView();
-            WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
-            if (rootWindowInsets == null) {
+            try {
+                final View decorView = getActivity().getWindow().getDecorView();
+                WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
+                if (rootWindowInsets == null) {
+                    return result;
+                }
+                DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
+                result = displayCutout.getSafeInsetTop();
+                return result;
+            }catch (Exception e){
+                // TODO: 2021/8/24 部分Android10 以上的手机 displayCutout.getSafeInsetTop()会报空指针
+                int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+                if (resourceId > 0) {
+                    result = getResources().getDimensionPixelSize(resourceId);
+                }
                 return result;
             }
-            DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
-            result = displayCutout.getSafeInsetTop();
-            return result;
         }else {
             int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
             if (resourceId > 0) {

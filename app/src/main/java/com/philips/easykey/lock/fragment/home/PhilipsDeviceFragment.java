@@ -116,6 +116,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     @Override
     public void onResume() {
         super.onResume();
+        MyApplication.getInstance().getAllDevicesByMqtt(true);
         initTabData();
         initOperationRecord();
         initDevices();

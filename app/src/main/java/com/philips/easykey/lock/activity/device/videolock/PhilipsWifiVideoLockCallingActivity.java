@@ -407,31 +407,22 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     }
 
     private void initLinstener() {
-        ivCalling.setOnTouchListener((v, event) -> {
-            if(event.getAction() == MotionEvent.ACTION_DOWN){
-                if (ContextCompat.checkSelfPermission(PhilipsWifiVideoLockCallingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions( PhilipsWifiVideoLockCallingActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
-                    ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission) + "");
+        ivCalling.setOnClickListener(v -> {
+            if(isFirstAudio){
+                if(ivCalling.isSelected()){
+                    ivCalling.setSelected(false);
+                    mPresenter.talkback(false);
+                    mPresenter.stopTalkback();
+                    tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
+                    showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
                 }else{
-                    if(isFirstAudio){
-
-                        if(mPresenter.isTalkback()){
-                            ivCalling.setSelected(false);
-                            mPresenter.talkback(false);
-                            mPresenter.stopTalkback();
-                            tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-                            showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
-                        }else{
-                            ivCalling.setSelected(true);
-                            mPresenter.talkback(true);
-                            mPresenter.startTalkback();
-                            showShort(getString(R.string.philips_wifi_video_lock_open_talk_back));
-                            tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
-                        }
-                    }
+                    ivCalling.setSelected(true);
+                    mPresenter.talkback(true);
+                    mPresenter.startTalkback();
+                    showShort(getString(R.string.philips_wifi_video_lock_open_talk_back));
+                    tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
                 }
             }
-            return false;
         });
     }
 

@@ -167,6 +167,7 @@ public class PhilipsWifiVideoLockDuressPresenter<T> extends BasePresenter<IPhili
         XiaokaiNewServiceImp.wifiPwdDuressAlarmSwitch(mSettingPwdDuressAlarmSwitchBean).subscribe(new BaseObserver<BaseResult>() {
             @Override
             public void onSuccess(BaseResult baseResult) {
+                MyApplication.getInstance().getAllDevicesByMqtt(true);
                 if(isSafe()){
                     LogUtils.e("shulan setDuressSwitch--> " + baseResult.toString());
                     mViewRef.get().onSettingDuress(baseResult);

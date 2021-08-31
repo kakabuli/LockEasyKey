@@ -168,6 +168,11 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
             @Override
             public void sure() {
                 // TODO: 2021/5/11 确认
+                if(mInputPwdFailDialog != null) {
+                    mInputPwdFailDialog.dismiss();
+                }
+                showFirstTask1();
+                FragmentUtils.showHide(0, mFragments);
             }
         });
     }

@@ -62,6 +62,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
     private List<Fragment> fragments = new ArrayList<>();
     private FragmentPagerAdapter adapter;
     private Dialog mBottomCalendarDialog;
+    private DateBean screenDateBean ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
         tvVistorRecord.setOnClickListener(this);
         mIvRecordScreen.setOnClickListener(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
+        screenDateBean = null;
     }
 
     private void initData() {
@@ -332,10 +334,17 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
        TextView title = contentView.findViewById(R.id.title);
        ImageView ivLast = contentView.findViewById(R.id.ivLast);
        ImageView ivNext = contentView.findViewById(R.id.ivNext);
-       calendarView.setInitDate(cDate[0] + "." + cDate[1])
-               .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
-               .init();
-       title.setText(cDate[0] + "年" + cDate[1] + "月");
+       if(screenDateBean !=  null){
+           calendarView.setInitDate(screenDateBean.getSolar()[0] + "." + screenDateBean.getSolar()[1])
+                   .setSingleDate(screenDateBean.getSolar()[0] + "." + screenDateBean.getSolar()[1] + "." + screenDateBean.getSolar()[2])
+                   .init();
+           title.setText(screenDateBean.getSolar()[0] + "年" + screenDateBean.getSolar()[1] + "月");
+       }else {
+           calendarView.setInitDate(cDate[0] + "." + cDate[1])
+                   .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
+                   .init();
+           title.setText(cDate[0] + "年" + cDate[1] + "月");
+       }
        ivLast.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -359,7 +368,8 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
            public void onSingleChoose(View view, DateBean dateBean) {
                mBottomCalendarDialog.dismiss();
                mBottomCalendarDialog = null;
-               String date = dateBean.getSolar()[0] + "-" + dateBean.getSolar()[1] + "-" + dateBean.getSolar()[2];
+               screenDateBean = dateBean;
+               String date  = dateBean.getSolar()[0] + "-" + dateBean.getSolar()[1] + "-" + dateBean.getSolar()[2];
                getScreenedRecord(date);
            }
        });

@@ -15,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.AddBluetoothPairSuccessAdapter;
 import com.philips.easykey.lock.bean.deviceAdd.AddBluetoothPairSuccessBean;
+import com.philips.easykey.lock.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +65,14 @@ public class PhilipsAddVideoLockTask6Fragment extends Fragment {
             // TODO: 2021/5/10 立即体验
             String name = etName.getText().toString();
             if(TextUtils.isEmpty(name)) {
-                // TODO: 2021/5/10 提示错误
+                ToastUtils.showShort(R.string.nickName_not_empty);
                 return;
             }
+            if (name.length() > 10 ) {
+                ToastUtils.showShort(R.string.philips_nickname_verify_error);
+                return;
+            }
+
             if(mAddVideoLockActivity != null) {
                 mAddVideoLockActivity.setNickName(name);
             }

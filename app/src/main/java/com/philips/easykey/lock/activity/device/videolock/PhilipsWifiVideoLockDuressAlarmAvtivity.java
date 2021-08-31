@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -123,7 +124,8 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
             intent.putExtra(KeyConstants.WIFI_SN,data.getWifiSN());
             intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,position);
             intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO,data);
-            startActivityForResult(intent,1012);
+            //startActivityForResult(intent,1012);
+            startActivity(intent);
         });
     }
 
