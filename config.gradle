@@ -14,7 +14,7 @@ ext {
             MQTT                    :'"tcp://app.cone-x.com"',
             LINPHONE_SIP            :'"sip-kaadas.juziwulian.com:5061"',
 
-            HTTPS_DEV               :'"https://app.kaadas.cc:8090/"',
+            HTTPS_DEV               :'"http://app.kaadas.cc:8090/"',
             MQTT_DEV                :'"tcp://app.kaadas.cc"',
             LINPHONE_SIP_DEV        :'"test.juziwulian.com:5061"',
 
