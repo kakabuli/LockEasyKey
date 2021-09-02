@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;

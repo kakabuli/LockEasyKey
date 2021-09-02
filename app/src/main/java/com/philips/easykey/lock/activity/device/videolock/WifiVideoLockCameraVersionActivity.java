@@ -336,7 +336,7 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     }
 
     @Override
-    public void noNeedUpdate() {
+    public void noNeedUpdate(CheckOTAResult result, int type) {
 
 
     }
@@ -354,14 +354,14 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
     private long time = 0;
 
     @Override
-    public void needUpdate(CheckOTAResult.UpdateFileInfo appInfo, String SN, String version,int type) {
+    public void needUpdate(CheckOTAResult result, int type) {
         if(System.currentTimeMillis() - time > 5000){
             if(type == 1){
-                updateDialog(appInfo,getString(R.string.dialog_wifi_wifi_firmware_version) + version,SN);
+                updateDialog(result.getData(),getString(R.string.dialog_wifi_wifi_firmware_version) + result.getData().getFileVersion(),wifiSN);
             }else if(type ==4){
-                updateDialog(appInfo,getString(R.string.dialog_wifi_video_moudle_version) + version,SN);
+                updateDialog(result.getData(),getString(R.string.dialog_wifi_video_moudle_version) + result.getData().getFileVersion(),wifiSN);
             }else if(type == 5){
-                updateDialog(appInfo,getString(R.string.dialog_wifi_video_mcu_moudle_version) + version,SN);
+                updateDialog(result.getData(),getString(R.string.dialog_wifi_video_mcu_moudle_version) + result.getData().getFileVersion(),wifiSN);
             }
             time = System.currentTimeMillis();
         }

@@ -52,18 +52,13 @@ public interface IWifiVideoLockOTAView extends IBaseView {
     void onWifiLockActionUpdate();
 
 
-    void noNeedUpdate(); //  不需要更新
+    void noNeedUpdate(CheckOTAResult result,  int type); //  不需要更新
 
     void snError();  //Sn错误
 
     void dataError(); //数据参数错误
 
-    /**
-     *
-     * @param appInfo
-     * @param SN
-     */
-    void needUpdate(CheckOTAResult.UpdateFileInfo appInfo, String SN,String version, int type);
+    void needUpdate(CheckOTAResult result,  int type);
 
 
     /**

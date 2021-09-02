@@ -62,9 +62,11 @@ public class PhilipsWifiVideoLockSettingDuressAlarmAvtivity extends BaseActivity
             if(mPhilipsDuressBean.getPwdDuressSwitch() == 0){
                 rlDuressAlarmShow.setVisibility(View.GONE);
                 mIvDuressSelect.setSelected(false);
+                duressSwitch = 0;
             }else{
                 rlDuressAlarmShow.setVisibility(View.VISIBLE);
                 mIvDuressSelect.setSelected(true);
+                duressSwitch = 1;
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
