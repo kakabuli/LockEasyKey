@@ -62,7 +62,6 @@ import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
@@ -396,7 +395,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //            } else {
 //                Log.e(GeTui.VideoLog, "getui upload to success");
 //            }
-            String JpushId = MMKVUtils.getStringMultiMMKV(SPUtils2.FILE_NAME,GeTui.JPUSH_ID,"");
+            String JpushId = MMKVUtils.getStringMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,"");
             LogUtils.d("shulan---JpushId-->---" + JpushId );
             uploadToken(2,JpushId);
         }

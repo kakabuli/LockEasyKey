@@ -4,11 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
@@ -34,7 +32,6 @@ import com.philips.easykey.lock.activity.device.gatewaylock.GatewayLockAuthorize
 import com.philips.easykey.lock.activity.device.gatewaylock.GatewayLockFunctionActivity;
 import com.philips.easykey.lock.activity.device.oldbluetooth.OldBleDetailActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockDetailActivity;
-import com.philips.easykey.lock.activity.device.wifilock.WiFiLockDetailActivity;
 import com.philips.easykey.lock.activity.device.wifilock.WifiLockAuthActivity;
 import com.philips.easykey.lock.adapter.DeviceDetailAdapter;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -51,12 +48,10 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.ServerBleDevice;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
-import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.BleLockServiceInfo;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
@@ -300,7 +295,7 @@ public class DeviceFragment extends BaseFragment<IDeviceView, DevicePresenter<ID
                         GatewayInfo gatewayInfo = (GatewayInfo) obj;
                         String meUsername = gatewayInfo.getServerInfo().getMeUsername();
                         String mePwd = gatewayInfo.getServerInfo().getMePwd();
-                        SPUtils2.put(getActivity(), gwid, meUsername + "&" + mePwd);
+                        SPUtils.put(gwid, meUsername + "&" + mePwd);
                     }
                 }
             }

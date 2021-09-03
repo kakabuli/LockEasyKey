@@ -19,13 +19,11 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 
