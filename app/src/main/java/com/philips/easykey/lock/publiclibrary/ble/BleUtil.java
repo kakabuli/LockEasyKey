@@ -1082,21 +1082,38 @@ public class BleUtil {
                         if(record.getPwdNum() == 254){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_254));
                         }else{
-                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_000,sNum));
+                            if(TextUtils.isEmpty(record.getPwdNickname())){
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_000,sNum));
+                            }else {
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_000,record.getPwdNickname()));
+                            }
                         }
                         break;
                     case 3:
-                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,sNum));
+                        if(TextUtils.isEmpty(record.getPwdNickname())){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,sNum));
+                        }else {
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,record.getPwdNickname()));
+                        }
+
                         break;
                     case 4:
                         if(record.getPwdNum() == 254){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_254));
                         }else{
-                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_000,sNum));
+                            if(TextUtils.isEmpty(record.getPwdNickname())){
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_000,sNum));
+                            }else {
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_000,record.getPwdNickname()));
+                            }
                         }
                         break;
                     case 7:
-                        mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,sNum));
+                        if(TextUtils.isEmpty(record.getPwdNickname())){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,sNum));
+                        }else {
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,record.getPwdNickname()));
+                        }
                         break;
                     default:
                         break;

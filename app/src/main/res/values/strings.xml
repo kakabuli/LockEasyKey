@@ -2460,7 +2460,7 @@
     <string name="philips_cdt_record_icon">记录图标</string>
 
     <!-- my -->
-    <string name="philips_nickname_verify_error">请输入20位以内的字符</string>
+    <string name="philips_nickname_verify_error">请输入10位以内的字符</string>
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>
     <string name="philips_system_setting">系统设置</string>

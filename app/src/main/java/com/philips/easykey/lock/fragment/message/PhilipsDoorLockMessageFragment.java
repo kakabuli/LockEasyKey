@@ -343,8 +343,16 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     }
 
     private void refreshAlarmRecordLayoutData(){
+        wifiVideoLockAlarmRecordData.clear();
         String alarmCache = (String) SPUtils.get(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD + wifiLockInfo.getWifiSN(), "");
-        wifiVideoLockAlarmRecordData = new Gson().fromJson(alarmCache, new TypeToken<List<WifiVideoLockAlarmRecord>>() {}.getType());
+        List<WifiVideoLockAlarmRecord> data = new Gson().fromJson(alarmCache, new TypeToken<List<WifiVideoLockAlarmRecord>>() {}.getType());
+        if(data != null && data.size() > 0){
+            for(int i = 0 ; i < data.size() ; i ++ ){
+                if(!TextUtils.isEmpty(data.get(i).getThumbUrl())){
+                    wifiVideoLockAlarmRecordData.add(data.get(i));
+                }
+            }
+        }
         if(wifiVideoLockAlarmRecordData == null){
             rcvVideoLockMsg.setVisibility(View.GONE);
             tvNoAlarm.setVisibility(View.VISIBLE);

@@ -3,6 +3,7 @@ package com.philips.easykey.lock.activity.device.videolock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -60,8 +61,12 @@ public class PhilipsWifiVideoLockSettingDuressAlarmAvtivity extends BaseActivity
 
             if(mPhilipsDuressBean.getPwdDuressSwitch() == 0){
                 rlDuressAlarmShow.setVisibility(View.GONE);
+                mIvDuressSelect.setSelected(false);
+                duressSwitch = 0;
             }else{
                 rlDuressAlarmShow.setVisibility(View.VISIBLE);
+                mIvDuressSelect.setSelected(true);
+                duressSwitch = 1;
             }
         }
     }

@@ -367,7 +367,7 @@ public class DrawLineChart extends View {
 
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         for (int i = 0; i < mPoints.length; i++) {
-            canvas.drawText(mTransverseValue[i],mBrokenLineLeft + SizeUtils.dp2px(5) + (mViewWidth / mPoints.length  - mBrokenLinerRight / (mPoints.length - 1)) * i, mViewHeight,mTextPaint);
+            canvas.drawText(mTransverseValue[i],mBrokenLineLeft + SizeUtils.dp2px(5) + (mViewWidth / mPoints.length  - mBrokenLinerRight / (mPoints.length - 1)) * i, mViewHeight - 2,mTextPaint);
         }
     }
     /**保留几位小数*/

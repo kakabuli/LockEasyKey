@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
@@ -167,6 +168,7 @@ public class PhilipsWifiVideoLockDuressPresenter<T> extends BasePresenter<IPhili
         XiaokaiNewServiceImp.wifiPwdDuressAlarmSwitch(mSettingPwdDuressAlarmSwitchBean).subscribe(new BaseObserver<BaseResult>() {
             @Override
             public void onSuccess(BaseResult baseResult) {
+                MyApplication.getInstance().getAllDevicesByMqtt(true);
                 if(isSafe()){
                     LogUtils.e("shulan setDuressSwitch--> " + baseResult.toString());
                     mViewRef.get().onSettingDuress(baseResult);

@@ -2,7 +2,10 @@ package com.philips.easykey.lock.activity.device.videolock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,15 +55,18 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
     private void initData() {
         mDuressBean = (PhilipsDuressBean) getIntent().getSerializableExtra(KeyConstants.DURESS_PASSWORD_INfO);
         position = getIntent().getIntExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,-1);
-        if(mDuressBean != null && !TextUtils.isEmpty(mDuressBean.getDuressAlarmAccount())){
-            mEtReceiver.setText(mDuressBean.getDuressAlarmAccount());
+        if(mDuressBean != null && !TextUtils.isEmpty(mDuressBean.getDuressAlarmAccount()) && mDuressBean.getDuressAlarmAccount().length() > 2){
+            mEtReceiver.setText(mDuressBean.getDuressAlarmAccount().substring(2));
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            settingDuressAccount();
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
+            startActivity(intent);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -78,7 +84,6 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
             return;
         }
-
         if(StringUtil.isNumeric(duressAccount)){
             if(!PhoneUtil.isMobileNO(duressAccount)){
                 AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
@@ -124,10 +129,37 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
         confirm.setOnClickListener(v -> {
             settingDuressAccount();
         });
+        mEtReceiver.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String et = mEtReceiver.getText().toString().trim();
+                if(TextUtils.isEmpty(et)) {
+                    changeConfirmBtnStyle(false);
+                } else {
+                    changeConfirmBtnStyle(!TextUtils.isEmpty(s.toString()));
+                }
+
+            }
+        });
     }
 
     private void showDuressAlarmDialog() {
 
+    }
+
+    private void changeConfirmBtnStyle(boolean isConfirm){
+        confirm.setEnabled(isConfirm);
+        confirm.setBackgroundResource(isConfirm?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
     private void initView() {
@@ -140,6 +172,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
     public void onSettingDuressAccount(BaseResult baseResult) {
         if("200".equals(baseResult.getCode() + "")){
             mDuressBean.setDuressAlarmAccount(duressAccount);
+            mDuressBean.setPwdDuressSwitch(1);
             ToastUtils.showShort(R.string.set_success);
             Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
             intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO, mDuressBean);

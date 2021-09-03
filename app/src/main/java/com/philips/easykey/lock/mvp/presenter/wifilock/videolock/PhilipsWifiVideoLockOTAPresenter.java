@@ -306,10 +306,9 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
                         //200  成功  401  数据参数不对  102 SN格式不对  210 查无结果
                         if ("200".equals(otaResult.getCode() + "")) {
                             if (isSafe()) {
-                                CheckOTAResult.UpdateFileInfo data = otaResult.getData();
-                                mViewRef.get().needUpdate(data, SN,data.getFileVersion(), type);
+                                mViewRef.get().needUpdate(otaResult, type);
                             }
-                        } else if ("401".equals(otaResult.getCode() + "")) { // 数据参数不对
+                        } /*else if ("401".equals(otaResult.getCode() + "")) { // 数据参数不对
                             if (isSafe()) {
                                 mViewRef.get().dataError();
                             }
@@ -321,9 +320,9 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
                             if (isSafe()) {
                                 mViewRef.get().noNeedUpdate();
                             }
-                        } else {
+                        }*/ else {
                             if (isSafe()) {
-                                mViewRef.get().unknowError(otaResult.getCode());
+                                mViewRef.get().noNeedUpdate(otaResult, type);
                             }
                         }
                     }

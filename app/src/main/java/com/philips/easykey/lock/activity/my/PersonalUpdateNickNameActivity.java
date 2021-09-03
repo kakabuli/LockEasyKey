@@ -54,7 +54,7 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
                     ToastUtils.showShort(R.string.nickName_not_empty);
                     return;
                 }
-                if (!StringUtil.nicknameJudge(editText, 20)) {
+                if (!StringUtil.nicknameJudge(editText, 10)) {
 
                     ToastUtils.showShort(R.string.philips_nickname_verify_error);
                     return;
