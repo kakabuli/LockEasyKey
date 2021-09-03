@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -92,6 +93,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mFragments.add(PhilipsAddVideoLockTask5Fragment.getInstance());
         mFragments.add(PhilipsAddVideoLockTask6Fragment.getInstance());
         mFragments.add(PhilipsAddVideoLockTask4FailFragment.getInstance());
+        mFragments.add(PhilipsAddVideoLockTask5ModifyPwdFragment.getInstance());
         FragmentUtils.add(getSupportFragmentManager(), mFragments, R.id.fcvAddVideoLock, 0);
         initDialogs();
 
@@ -150,6 +152,15 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
             }
         });
         mInputPwdFailDialog = new PhilipsInputPwdFailDialog(this);
+        mInputPwdFailDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if(mFragments.get(4) instanceof PhilipsAddVideoLockTask5Fragment) {
+                    ((PhilipsAddVideoLockTask5Fragment) mFragments.get(4)).initUIAndData();
+                }
+            }
+        });
         mInputPwdFailDialog.setOnPwdFailListener(new PhilipsInputPwdFailDialog.OnPwdFailListener() {
             @Override
             public void reEnter() {
@@ -162,7 +173,12 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
             @Override
             public void forgotPwd() {
                 // TODO: 2021/5/11 忘记密码
+                if(mInputPwdFailDialog != null) {
+                    mInputPwdFailDialog.dismiss();
+                }
                 clearInputAdminPwd();
+                showFirstTask5ModifyPwd();
+                FragmentUtils.showHide(7, mFragments);
             }
 
             @Override
@@ -171,8 +187,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                 if(mInputPwdFailDialog != null) {
                     mInputPwdFailDialog.dismiss();
                 }
-                showFirstTask1();
-                FragmentUtils.showHide(0, mFragments);
+                showFirstTask5ModifyPwd();
+                FragmentUtils.showHide(7, mFragments);
             }
         });
     }
@@ -332,6 +348,20 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mTvTitle.setText(R.string.philips_network_pairing);
         mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(6, mFragments);
+    }
+
+    public void showFirstTask5ModifyPwd() {
+        mVTask1.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask1N2Line.setBackgroundColor(getColor(R.color.c0066A1));
+        mVTask2.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask2N3Line.setBackgroundColor(getColor(R.color.c0066A1));
+        mVTask3.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask3N4Line.setBackgroundColor(getColor(R.color.c0066A1));
+        mVTask4.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
+        mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
+        mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
+        mTvTitle.setText(R.string.philips_up_management_pwd);
+        FragmentUtils.showHide(7, mFragments);
     }
 
     public void setWifiInfo(@NonNull String wifiName, @NonNull String wifiPwd) {

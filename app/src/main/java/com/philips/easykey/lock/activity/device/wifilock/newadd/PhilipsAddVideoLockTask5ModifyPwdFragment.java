@@ -3,9 +3,12 @@ package com.philips.easykey.lock.activity.device.wifilock.newadd;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +25,10 @@ import com.philips.easykey.lock.R;
 public class PhilipsAddVideoLockTask5ModifyPwdFragment extends Fragment {
 
     private PhilipsAddVideoLockActivity mAddVideoLockActivity;
+
+    private ImageView mIvSelect;
+    private Button mBtnNext;
+    private boolean isChoose = false;
 
     public static PhilipsAddVideoLockTask5ModifyPwdFragment getInstance() {
         return new PhilipsAddVideoLockTask5ModifyPwdFragment();
@@ -41,7 +48,23 @@ public class PhilipsAddVideoLockTask5ModifyPwdFragment extends Fragment {
     }
 
     private void initTaskUI(View root) {
+        mIvSelect = root.findViewById(R.id.ivSelect);
+        mBtnNext = root.findViewById(R.id.btnContinueToVerify);
 
+        mIvSelect.setOnClickListener(v -> {
+            isChoose = !isChoose;
+            refreshNext();
+        });
+        mBtnNext.setOnClickListener(v -> {
+            if(mAddVideoLockActivity != null && isChoose) {
+                mAddVideoLockActivity.showFirstTask1();
+            }
+        });
     }
 
+    private void refreshNext() {
+        mBtnNext.setBackgroundResource(isChoose?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_invalid_bg);
+        mIvSelect.setImageResource(isChoose?R.drawable.philips_dms_icon_selected:R.drawable.philips_dms_icon_default);
+        mBtnNext.setEnabled(isChoose);
+    }
 }

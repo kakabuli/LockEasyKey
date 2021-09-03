@@ -2480,6 +2480,7 @@
     <string name="philips_pls_face_the_qr_code_directly_to_the_door_camera">请将二维码正对门锁摄像头8-20CM范围内</string>
     <string name="philips_connect_wifi">连接WiFi</string>
     <string name="philips_network_pairing">配网中</string>
+    <string name="philips_up_management_pwd">修改管理密码</string>
     <string name="philips_confirm_management_pwd">确认管理密码</string>
     <string name="philips_connect_the_lock_to_the_router_within_about_10_meters">将门锁与路由器约10米内进行连接</string>
     <string name="philips_connecting_data">正在连接数据</string>

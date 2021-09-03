@@ -3,6 +3,7 @@ package com.philips.easykey.lock.mvp.view;
 import com.philips.easykey.lock.mvp.mvpbase.IBaseView;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 
 public interface IDoorLockMessageView extends IBaseView {
@@ -26,4 +27,6 @@ public interface IDoorLockMessageView extends IBaseView {
      * @param getStatisticsSevenDayResult
      */
     void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult);
+
+    void getWifiVideoLockAlarm(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult);
 }

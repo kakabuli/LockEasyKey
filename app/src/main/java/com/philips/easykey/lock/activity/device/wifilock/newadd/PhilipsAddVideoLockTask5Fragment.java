@@ -45,10 +45,16 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         }
         return root;
     }
+    Button btnNext;
+    public void initUIAndData() {
+        if(btnNext != null){
+            btnNext.setEnabled(true);
+        }
+    }
 
     private void initTaskUI(View root) {
         mEtAdminPwd = root.findViewById(R.id.etAdminPwd);
-        Button btnNext = root.findViewById(R.id.btnNext);
+        btnNext = root.findViewById(R.id.btnNext);
         TextView tvPwdFailed = root.findViewById(R.id.tvPwdFailed);
         btnNext.setEnabled(false);
 

@@ -40,6 +40,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
@@ -131,7 +132,9 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         if (!mDevices.isEmpty() && wifiLockInfo != null ) {
             mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
             mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
-            refreshAlarmRecordLayoutData();
+            long timeMillis = System.currentTimeMillis();
+            String date = DateUtils.getDayTimeFromMillisecond(timeMillis);
+            mPresenter.getWifiVideoLockGetAlarmFilterList(1,wifiSn,DateUtils.dateChangeTimestamp(date + " 00:00:00"),DateUtils.dateChangeTimestamp(date + " 23:59:59"));
         }else {
             rcvVideoLockMsg.setVisibility(View.GONE);
             tvNoAlarm.setVisibility(View.VISIBLE);
@@ -307,12 +310,16 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             tvNoMessage.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
             llDeviceType.setVisibility(View.VISIBLE);
-            refreshLayoutData((WifiLockInfo)mDevices.get(0).getObject());
+            if(TextUtils.isEmpty(wifiSn)){
+                refreshLayoutData((WifiLockInfo)mDevices.get(0).getObject());
+            }else {
+                refreshLayoutData(MyApplication.getInstance().getWifiLockInfoBySn(wifiSn));
+            }
         }
     }
 
     private void refreshLayoutData(WifiLockInfo mWifiLockInfo) {
-        wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockInfo.getWifiSN());
+        wifiLockInfo = mWifiLockInfo;
         wifiSn = wifiLockInfo.getWifiSN();
         long createTime2 = wifiLockInfo.getCreateTime();
 
@@ -339,13 +346,13 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
 
         mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
         mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
-        refreshAlarmRecordLayoutData();
+        long timeMillis = System.currentTimeMillis();
+        String date = DateUtils.getDayTimeFromMillisecond(timeMillis);
+        mPresenter.getWifiVideoLockGetAlarmFilterList(1,wifiSn,DateUtils.dateChangeTimestamp(date + " 00:00:00"),DateUtils.dateChangeTimestamp(date + " 23:59:59"));
     }
 
-    private void refreshAlarmRecordLayoutData(){
+    private void refreshAlarmRecordLayoutData(List<WifiVideoLockAlarmRecord> data){
         wifiVideoLockAlarmRecordData.clear();
-        String alarmCache = (String) SPUtils.get(KeyConstants.WIFI_VIDEO_LOCK_ALARM_RECORD + wifiLockInfo.getWifiSN(), "");
-        List<WifiVideoLockAlarmRecord> data = new Gson().fromJson(alarmCache, new TypeToken<List<WifiVideoLockAlarmRecord>>() {}.getType());
         if(data != null && data.size() > 0){
             for(int i = 0 ; i < data.size() ; i ++ ){
                 if(!TextUtils.isEmpty(data.get(i).getThumbUrl())){
@@ -489,6 +496,13 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     public void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult) {
         LogUtils.d("获取门锁七天记录  数据是  " + getStatisticsSevenDayResult.toString());
         refreshDtatisticsSevenDayLayoutData(getStatisticsSevenDayResult);
+    }
+
+    @Override
+    public void getWifiVideoLockAlarm(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult) {
+        LogUtils.d("获取当天预计视频 数据是  " + getWifiVideoLockAlarmScreenedRecordResult.toString());
+        List<WifiVideoLockAlarmRecord> alarmRecords = getWifiVideoLockAlarmScreenedRecordResult.getData().getAlarmList();
+        refreshAlarmRecordLayoutData(alarmRecords);
     }
 
     public void powerStatusDialog(){

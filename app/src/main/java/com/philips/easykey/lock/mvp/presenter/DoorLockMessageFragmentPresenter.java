@@ -9,12 +9,17 @@ import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.IDoorLockMessageView;
 import com.philips.easykey.lock.mvp.view.IMessageView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -123,6 +128,32 @@ public class DoorLockMessageFragmentPresenter<T> extends BasePresenter<IDoorLock
                     @Override
                     public void onSubscribe1(Disposable d) {
 
+                    }
+                });
+    }
+
+    public void getWifiVideoLockGetAlarmFilterList(int page, String wifiSn,long startTime,long endTime) {
+        XiaokaiNewServiceImp.wifiVideoLockGetAlarmFilterList(wifiSn,page,startTime,endTime)
+                .timeout(10 *1000, TimeUnit.MILLISECONDS)
+                .subscribe(new BaseObserver<GetWifiVideoLockAlarmScreenedRecordResult>() {
+                    @Override
+                    public void onSuccess(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult) {
+                        mViewRef.get().getWifiVideoLockAlarm(getWifiVideoLockAlarmScreenedRecordResult);
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        LogUtils.d("getWifiVideoLockGetAlarmFilterList onAckErrorCode = "  + baseResult.toString());
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        LogUtils.d("getWifiVideoLockGetAlarmFilterList onFailed = "  + throwable.toString());
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+                        compositeDisposable.add(d);
                     }
                 });
     }

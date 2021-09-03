@@ -275,7 +275,11 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             //显示屏时长
             if(BleLockUtils.isSupportScreenDuration(wifiLockInfo.getFunctionSet())){
                 rlScreenDuration.setVisibility(View.VISIBLE);
-                setScreenLightTime(wifiLockInfo.getScreenLightTime());
+                if(wifiLockInfo.getScreenLightSwitch() == 0){
+                    setScreenLightTime(0);
+                }else {
+                    setScreenLightTime(wifiLockInfo.getScreenLightTime());
+                }
             }else{
                 rlScreenDuration.setVisibility(View.GONE);
             }
