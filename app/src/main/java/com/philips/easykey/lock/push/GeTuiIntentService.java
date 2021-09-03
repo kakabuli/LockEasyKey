@@ -18,8 +18,9 @@ import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 
 import org.json.JSONException;
@@ -152,7 +153,7 @@ public class GeTuiIntentService extends GTIntentService {
         Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
         LogUtils.d("shulan -- onReceiveClientId-->clientid=" + clientid);
 	//	SPUtils.put(context,"clientId_GetTui",clientid);
-		SPUtils2.put(context, GeTui.JPUSH_ID,clientid);
+        MMKVUtils.setMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,clientid);
         sendMessage(clientid, 1);
     }
     // App初始化以后会回调这个方法

@@ -55,6 +55,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.NotificationUtil;
 import com.philips.easykey.lock.utils.PermissionUtil;
@@ -65,7 +66,7 @@ import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
 import com.philips.easykey.lock.widget.NoScrollViewPager;
-import com.philips.easykey.push.xiaomi.SPUtils2;
+import com.philips.easykey.push.xiaomi.MISPUtils;
 import com.philips.easykey.push.xiaomi.XiaoMiConstant;
 
 import java.util.ArrayList;
@@ -383,7 +384,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 uploadToken(3,huawei);
             }
         } else if(Rom.isMiui()){
-            String xiaoMiToken = (String) SPUtils2.get(MainActivity.this, XiaoMiConstant.XIAOMIKEY,"");
+            String xiaoMiToken = (String) MISPUtils.get(MainActivity.this, XiaoMiConstant.XIAOMIKEY,"");
             uploadToken(4,xiaoMiToken);
             LogUtils.d("shulan xiaoMiToken--->" + xiaoMiToken);
         } else{
@@ -394,9 +395,9 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //            } else {
 //                Log.e(GeTui.VideoLog, "getui upload to success");
 //            }
-                String JpushId = (String) SPUtils2.get(MyApplication.getInstance(), GeTui.JPUSH_ID, "");
+            String JpushId = MMKVUtils.getStringMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,"");
             LogUtils.d("shulan---JpushId-->---" + JpushId );
-                uploadToken(2,JpushId);
+            uploadToken(2,JpushId);
         }
 
         boolean isUploadPhoneMsg = (boolean) SPUtils.get(Constants.PHONE_MSG_UPLOAD_STATUS, false);

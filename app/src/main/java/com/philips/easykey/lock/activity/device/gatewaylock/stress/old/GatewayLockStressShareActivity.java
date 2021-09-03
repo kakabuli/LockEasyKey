@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import com.philips.easykey.lock.mvp.presenter.gatewaylockpresenter.GatewayLockSh
 import com.philips.easykey.lock.mvp.view.gatewaylockview.GatewayLockShareView;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.philips.easykey.lock.utils.SPUtils2;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.SharedUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.blankj.utilcode.util.ToastUtils;
@@ -56,7 +55,7 @@ public class GatewayLockStressShareActivity extends BaseActivity<GatewayLockShar
         back.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(pwdId)){
                 Intent managerIntent=new Intent(GatewayLockStressShareActivity.this, GatewayLockStressDetailActivity.class);
-                SPUtils2.put(this,KeyConstants.ADD_STRESS_PWD_ID,pwdId);
+                SPUtils.put(KeyConstants.ADD_STRESS_PWD_ID,pwdId);
                 startActivity(managerIntent);
             }
         });
@@ -140,7 +139,7 @@ public class GatewayLockStressShareActivity extends BaseActivity<GatewayLockShar
     private boolean isCosumenBackKey() {
         if (!TextUtils.isEmpty(pwdId)){
             Intent managerIntent=new Intent(GatewayLockStressShareActivity.this, GatewayLockStressDetailActivity.class);
-            SPUtils2.put(this,KeyConstants.ADD_STRESS_PWD_ID,pwdId);
+            SPUtils.put(KeyConstants.ADD_STRESS_PWD_ID,pwdId);
             startActivity(managerIntent);
         }
         return true;

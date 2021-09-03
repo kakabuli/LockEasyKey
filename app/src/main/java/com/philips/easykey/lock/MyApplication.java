@@ -45,7 +45,6 @@ import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.MyLog;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import com.philips.easykey.lock.utils.greenDao.db.ClothesHangerMachineAllBeanDao;
 import com.philips.easykey.lock.utils.greenDao.db.DaoManager;
@@ -401,7 +400,6 @@ public class MyApplication extends Application {
         productLists.clear();
 
         MyApplication.getInstance().initTokenAndUid();
-        SPUtils2.remove(this, Constants.PUSHID);
         //清除数据库数据
         for (Activity activity : activities) {
             if (activity != null) {

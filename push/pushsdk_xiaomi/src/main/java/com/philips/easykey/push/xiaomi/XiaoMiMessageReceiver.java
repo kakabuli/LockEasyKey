@@ -126,7 +126,7 @@ public class XiaoMiMessageReceiver extends PushMessageReceiver {
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mRegId = cmdArg1;
-                SPUtils2.put(context,XiaoMiConstant.XIAOMIKEY,mRegId);
+                MISPUtils.put(context,XiaoMiConstant.XIAOMIKEY,mRegId);
                 Log.e("denganzhi1","XiaoMI_onCommandResult==>"+mRegId);
              //   log = context.getString(R.string.register_success);
             } else {

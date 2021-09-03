@@ -29,8 +29,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.blankj.utilcode.util.LogUtils;
-import com.philips.easykey.lock.utils.SPUtils2;
-import com.blankj.utilcode.util.ToastUtils;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.greenDao.bean.GatewayLockPwd;
 import com.philips.easykey.lock.utils.greenDao.db.GatewayLockPwdDao;
@@ -161,14 +160,14 @@ public class GatewayLockStressDetailActivity extends BaseActivity<IGatewayLockSt
     protected void onStart() {
         super.onStart();
         if (pwdList != null) {
-            String pwdId = (String) SPUtils2.get(this, KeyConstants.ADD_STRESS_PWD_ID, "");
+            String pwdId = (String) SPUtils.get(KeyConstants.ADD_STRESS_PWD_ID, "");
             if (!TextUtils.isEmpty(pwdId)) {
                 if (!pwdList.contains(pwdId)){
                     pwdList.clear();
                     pwdList.add(pwdId);
                     gatewayLockStressPasswordAdapter.notifyDataSetChanged();
                     passwordPageChange(true);
-                    SPUtils2.remove(this, KeyConstants.ADD_STRESS_PWD_ID);
+                    SPUtils.remove(KeyConstants.ADD_STRESS_PWD_ID);
                 }
             }
         }
