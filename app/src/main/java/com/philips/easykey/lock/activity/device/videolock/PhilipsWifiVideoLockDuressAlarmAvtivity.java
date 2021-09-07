@@ -65,10 +65,8 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
             int position = getIntent().getIntExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,-1);
             if(position < 0) return;
             PhilipsDuressBean bean = (PhilipsDuressBean) getIntent().getSerializableExtra(KeyConstants.DURESS_PASSWORD_INfO);
-            duressList.get(position).setPwdDuressSwitch(bean.getPwdDuressSwitch());
-            duressList.get(position).setDuressAlarmAccount(bean.getDuressAlarmAccount());
-            mPhilipsDuressAlarmAdapter.setList(duressList);
-            mPhilipsDuressAlarmAdapter.notifyDataSetChanged();
+            mPhilipsDuressAlarmAdapter.setData(position,bean);
+            getIntent().removeExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO);
         }
     }
 
@@ -124,7 +122,6 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
             intent.putExtra(KeyConstants.WIFI_SN,data.getWifiSN());
             intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,position);
             intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO,data);
-            //startActivityForResult(intent,1012);
             startActivity(intent);
         });
     }
@@ -167,13 +164,7 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == 1012){
-                int position = data.getIntExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,-1);
-                if(position < 0) return;
-                duressList.get(position).setPwdDuressSwitch(data.getIntExtra("duress_alarm_toggle",0));
-                duressList.get(position).setDuressAlarmAccount(data.getStringExtra("duress_alarm_phone"));
-//                mPhilipsDuressAlarmAdapter.setList();
-                mPhilipsDuressAlarmAdapter.setNewData(duressList);
-                mPhilipsDuressAlarmAdapter.notifyDataSetChanged();
+
             }
         }
     }
@@ -196,6 +187,7 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
 
     @Override
     public void onGetPasswordSuccess(WiFiLockPassword wiFiLockPassword) {
+        duressList.clear();
         duressList = mPresenter.setWifiLockPassword(wifiSn,wiFiLockPassword);
         mPhilipsDuressAlarmAdapter.setList(duressList);
     }

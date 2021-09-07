@@ -1079,7 +1079,9 @@ public class BleUtil {
                 switch (record.getPwdType()) {
                     //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
                     case 0:
-                        if(record.getPwdNum() == 254){
+                        if(record.getPwdNum() == 255){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_255));
+                        }else if(record.getPwdNum() == 254){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_0_254));
                         }else{
                             if(TextUtils.isEmpty(record.getPwdNickname())){
@@ -1090,7 +1092,9 @@ public class BleUtil {
                         }
                         break;
                     case 3:
-                        if(TextUtils.isEmpty(record.getPwdNickname())){
+                        if(record.getPwdNum() == 255){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_255));
+                        }else if(TextUtils.isEmpty(record.getPwdNickname())){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,sNum));
                         }else {
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_3_000,record.getPwdNickname()));
@@ -1098,7 +1102,9 @@ public class BleUtil {
 
                         break;
                     case 4:
-                        if(record.getPwdNum() == 254){
+                        if(record.getPwdNum() == 255){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_255));
+                        } else if(record.getPwdNum() == 254){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_4_254));
                         }else{
                             if(TextUtils.isEmpty(record.getPwdNickname())){
@@ -1109,7 +1115,9 @@ public class BleUtil {
                         }
                         break;
                     case 7:
-                        if(TextUtils.isEmpty(record.getPwdNickname())){
+                        if(record.getPwdNum() == 255){
+                            mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_255));
+                        }else if(TextUtils.isEmpty(record.getPwdNickname())){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,sNum));
                         }else {
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_4_7_000,record.getPwdNickname()));

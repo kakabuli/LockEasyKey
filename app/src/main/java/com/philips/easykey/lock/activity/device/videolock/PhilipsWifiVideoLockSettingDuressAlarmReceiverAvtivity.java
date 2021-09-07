@@ -179,8 +179,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
             intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
             intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO, position);
             startActivity(intent);
-//            setResult(RESULT_OK, intent);
-            finish();
+            mPresenter.getPasswordList(mDuressBean.getWifiSN());            finish();
         }else if("453".equals(baseResult.getCode() + "")){
             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.phliips_user_not_registered));
         }else{

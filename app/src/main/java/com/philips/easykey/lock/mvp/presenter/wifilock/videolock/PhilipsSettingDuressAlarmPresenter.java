@@ -1,13 +1,19 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsSettingDuressAlarm;
+import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAccountBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAlarmBean;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.WifiLockGetPasswordListResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 
 import io.reactivex.disposables.Disposable;
 
@@ -79,5 +85,32 @@ public class PhilipsSettingDuressAlarmPresenter<T> extends BasePresenter<IPhilip
         });
     }
 
+    public void getPasswordList(String wifiSn) {
+        XiaokaiNewServiceImp.wifiLockGetPwdList(wifiSn, MyApplication.getInstance().getUid())
+                .subscribe(new BaseObserver<WifiLockGetPasswordListResult>() {
+                    @Override
+                    public void onSuccess(WifiLockGetPasswordListResult wifiLockGetPasswordListResult) {
 
+                        WiFiLockPassword wiFiLockPassword = wifiLockGetPasswordListResult.getData();
+                        String object = new Gson().toJson(wiFiLockPassword);
+                        LogUtils.d("服务器数据是   " + object);
+
+                        SPUtils.put(KeyConstants.WIFI_LOCK_PASSWORD_LIST + wifiSn, object);
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+                });
+    }
 }

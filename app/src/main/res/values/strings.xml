@@ -313,8 +313,8 @@
     <string name="message_push">消息推送</string>
     <string name="real_time_video">实时视频设置</string>
     <string name="wandering_alarm">徘徊报警</string>
-    <string name="wandering_pir_sensitivity">PIR灵敏度</string>
-    <string name="wandering_judge_time">徘徊判定时间</string>
+    <string name="wandering_pir_sensitivity">探测距离</string>
+    <string name="wandering_judge_time">徘徊时长</string>
     <string name="wandering_alarm_close">已关闭</string>
     <string name="wandering_alarm_text">当门外有人经过时，门锁会抓拍室外异常视频， 此功能较为耗电</string>
     <string name="wandering_pir_sensitivity_text">高度灵敏会增加频繁检测距离，导致耗电</string>
@@ -2632,14 +2632,18 @@
     <string name="philips_operation_record_3_7_000">添加\""人脸%1$s\""</string>
 
     <!--删除密码-->
+    <string name="philips_operation_record_4_0_255">删除全部密码</string>
     <string name="philips_operation_record_4_0_254">删除\""管理员密码\""</string>
     <string name="philips_operation_record_4_0_000">删除\""密码%1$s\""</string>
     <!--删除卡片-->
+    <string name="philips_operation_record_4_3_255">删除全部卡片</string>
     <string name="philips_operation_record_4_3_000">删除\""卡片%1$s\""</string>
     <!--删除指纹-->
+    <string name="philips_operation_record_4_4_255">删除全部指纹</string>
     <string name="philips_operation_record_4_4_254">删除\""管理员指纹\""</string>
     <string name="philips_operation_record_4_4_000">删除\""指纹%1$s\""</string>
     <!--删除面容识别-->
+    <string name="philips_operation_record_4_7_255">删除全部人脸</string>
     <string name="philips_operation_record_4_7_000">删除\""人脸%1$s\""</string>
     <!--修改管理员密码-->
     <string name="philips_operation_record_5_0_254">修改\""管理员密码\""</string>

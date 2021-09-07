@@ -227,7 +227,7 @@ public class WifiVideoLockSafeModePresenter<T> extends BasePresenter<IWifiVideoL
      */
     public void checkOtaInfo(String SN, String version, int type) {
         //请求成功
-        otaDisposable = XiaokaiNewServiceImp.getOtaInfo(1, SN, version, type)
+        otaDisposable = XiaokaiNewServiceImp.getOtaInfo(18, SN, version, type)
                 .subscribe(new Consumer<CheckOTAResult>() {
                     @Override
                     public void accept(CheckOTAResult otaResult) throws Exception {

@@ -76,7 +76,7 @@ public class ClothesHangerMachineDetailPresenter<T> extends BasePresenter<ICloth
         params.add(new HangerMultiOTABean.OTAParams(6,hangerVersion));
         params.add(new HangerMultiOTABean.OTAParams(7,moduleVersion));
 
-        XiaokaiNewServiceImp.getOtaMultiInfo(1,wifiSN,params,MqttConstant.CLOTHES_HANGER_MACHINE_MX_CHIP)
+        XiaokaiNewServiceImp.getOtaMultiInfo(18,wifiSN,params,MqttConstant.CLOTHES_HANGER_MACHINE_MX_CHIP)
                 .compose(RxjavaHelper.observeOnMainThread())
                 .subscribe(new BaseObserver<MultiCheckOTAResult>() {
             @Override

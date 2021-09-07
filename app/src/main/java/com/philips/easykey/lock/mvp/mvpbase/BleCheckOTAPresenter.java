@@ -35,7 +35,7 @@ public class BleCheckOTAPresenter<T extends ICheckOtaView> extends BlePresenter<
         //请求成功
         //测试版本号写死
         //200  成功  401  数据参数不对  102 SN格式不对  210 查无结果
-        otaDisposable = XiaokaiNewServiceImp.getOtaInfo(1, SN, version, type)
+        otaDisposable = XiaokaiNewServiceImp.getOtaInfo(18, SN, version, type)
                 .subscribe(new Consumer<CheckOTAResult>() {
                     @Override
                     public void accept(CheckOTAResult otaResult) throws Exception {

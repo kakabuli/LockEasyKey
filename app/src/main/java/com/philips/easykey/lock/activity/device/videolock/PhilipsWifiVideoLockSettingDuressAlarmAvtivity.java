@@ -17,6 +17,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.PhilipsSettingDuressAlarmPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsSettingDuressAlarm;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 
@@ -125,7 +126,10 @@ public class PhilipsWifiVideoLockSettingDuressAlarmAvtivity extends BaseActivity
             ToastUtils.showShort(R.string.philips_set_duress_account);
             return;
         }
-
+        if(duressSwitch == 0 && duressSwitch != mPhilipsDuressBean.getPwdDuressSwitch()){
+            mPresenter.setDuressPwdAlarm(mPhilipsDuressBean.getWifiSN(),mPhilipsDuressBean.getPwdType(),mPhilipsDuressBean.getNum(),duressSwitch);
+            return;
+        }
         finish();
         /*if(mDuressBean.getPwdDuressSwitch() == duressSwitch && mDuressBean.getDuressAlarmAccount() == duressAccount){
             ToastUtils.showShort(R.string.set_failed);
@@ -168,12 +172,24 @@ public class PhilipsWifiVideoLockSettingDuressAlarmAvtivity extends BaseActivity
 
     @Override
     public void onSettingDuress(BaseResult baseResult) {
-        Intent intent = new Intent(this,PhilipsWifiVideoLockDuressAlarmAvtivity.class);
-        intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
-        intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,position);
-        intent.putExtra("duress_alarm_toggle", mIvDuressSelect.isSelected() ? 1 : 0);
-        intent.putExtra("duress_alarm_phone", duressAccount);
-        setResult(RESULT_OK,intent);
-        finish();
+        if("200".equals(baseResult.getCode() + "")){
+            mPhilipsDuressBean.setPwdDuressSwitch(duressSwitch);
+            ToastUtils.showShort(R.string.set_success);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO, mPhilipsDuressBean);
+            intent.putExtra(KeyConstants.WIFI_SN, mPhilipsDuressBean.getWifiSN());
+            intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO, position);
+            startActivity(intent);
+            mPresenter.getPasswordList(wifiSn);
+            finish();
+        }else if("453".equals(baseResult.getCode() + "")){
+            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.phliips_user_not_registered));
+        }else{
+            ToastUtils.showShort(R.string.set_failed);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            intent.putExtra(KeyConstants.WIFI_SN, mPhilipsDuressBean.getWifiSN());
+            startActivity(intent);
+            finish();
+        }
     }
 }
