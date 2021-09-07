@@ -12,11 +12,14 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiVideoLockAlarmRecord;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetOpenCountResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetStatisticsSevenDayResult;
 import com.philips.easykey.lock.publiclibrary.http.result.GetWifiVideoLockAlarmScreenedRecordResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -156,5 +159,35 @@ public class DoorLockMessageFragmentPresenter<T> extends BasePresenter<IDoorLock
                         compositeDisposable.add(d);
                     }
                 });
+    }
+
+    public void getOpenCount(String wifiSn) {
+        XiaokaiNewServiceImp.wifiLockGetOpenCount(wifiSn)
+                .subscribe(new BaseObserver<GetOpenCountResult>() {
+                    @Override
+                    public void onSuccess(GetOpenCountResult getOpenCountResult) {
+                        int count = getOpenCountResult.getData().getCount();
+                        SPUtils.put(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiSn, count);
+                        if (isSafe()) {
+                            mViewRef.get().getOpenCountSuccess(count);
+                        }
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        LogUtils.d("getOpenCount onAckErrorCode = "  + baseResult.toString());
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        LogUtils.d("getOpenCount onFailed = "  + throwable.toString());
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+                });
+
     }
 }

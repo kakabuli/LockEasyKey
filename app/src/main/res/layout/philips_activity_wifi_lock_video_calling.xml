@@ -50,6 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:paddingEnd="12pt"
+                android:visibility="gone"
                 app:srcCompat="@drawable/philips_video_icon_setting" />
 
             <TextView

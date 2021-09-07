@@ -129,7 +129,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     @Override
     public void onResume() {
         super.onResume();
-        if (!mDevices.isEmpty() && wifiLockInfo != null ) {
+        /*if (!mDevices.isEmpty() && wifiLockInfo != null ) {
             mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
             mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
             long timeMillis = System.currentTimeMillis();
@@ -140,7 +140,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             tvNoAlarm.setVisibility(View.VISIBLE);
             ivVideoLockMsgLeft.setVisibility(View.INVISIBLE);
             ivVideoLockMsgRight.setVisibility(View.INVISIBLE);
-        }
+        }*/
     }
 
     @Override
@@ -333,9 +333,6 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             }
             createTime.setText(day + "");
         }
-        //WiFi信息并展示
-        int count = (int) SPUtils.get(KeyConstants.WIFI_LOCK_OPEN_COUNT + wifiSn, 0);
-        tvOpenLockTimes.setText("" + count);
         if(!TextUtils.isEmpty(mWifiLockInfo.getLockNickname())){
             if(mWifiLockInfo.getLockNickname().length() > 10){
                 tvLockName.setText(mWifiLockInfo.getLockNickname().substring(0,10) + "...");
@@ -343,7 +340,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
                 tvLockName.setText(mWifiLockInfo.getLockNickname());
             }
         }
-
+        mPresenter.getOpenCount(wifiSn);
         mPresenter.getDoorLockDtatisticsDay(wifiLockInfo.getUid(),wifiSn);
         mPresenter.getDoorLockDtatisticsSevenDay(wifiLockInfo.getUid(),wifiSn);
         long timeMillis = System.currentTimeMillis();
@@ -484,6 +481,11 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     public void onWifiLockActionUpdate() {
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiLockInfo.getWifiSN());
         refreshLayoutData(wifiLockInfo);
+    }
+
+    @Override
+    public void getOpenCountSuccess(int count) {
+        tvOpenLockTimes.setText("" + count);
     }
 
     @Override

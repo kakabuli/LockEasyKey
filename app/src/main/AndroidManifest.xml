@@ -1214,6 +1214,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.message.PhilipsDeviceSelectDialogActivity"
+            android:launchMode="singleTask"
             android:theme="@style/DialogTransparent" />
 
         <service android:name=".publiclibrary.xm.DoorbellingService" />

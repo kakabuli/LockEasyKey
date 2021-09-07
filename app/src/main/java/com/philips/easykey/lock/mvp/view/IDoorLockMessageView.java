@@ -29,4 +29,9 @@ public interface IDoorLockMessageView extends IBaseView {
     void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult);
 
     void getWifiVideoLockAlarm(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult);
+
+    /**
+     * 获取开锁次数成功
+     */
+    void getOpenCountSuccess(int count);
 }
