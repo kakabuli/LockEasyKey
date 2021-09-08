@@ -2122,9 +2122,9 @@
 
     <string name="activity_wifi_lock_power_status">门锁如何开启节能模式</string>
     <string name="activity_wifi_lock_close_power_status">门锁如何关闭节能模式</string>
-    <string name="activity_wifi_lock_wifi_detail_title">更换Wi-Fi</string>
-    <string name="activity_wifi_lock_wifi_detail_name">Wi-Fi名称</string>
-    <string name="activity_wifi_lock_wifi_detail_strength">Wi-Fi强度</string>
+    <string name="activity_wifi_lock_wifi_detail_title">更换WiFi</string>
+    <string name="activity_wifi_lock_wifi_detail_name">WiFi名称</string>
+    <string name="activity_wifi_lock_wifi_detail_strength">WiFi强度</string>
 
     <string name="philips_frament_door_lock_message">门锁消息</string>
     <string name="philips_frament_system_message">系统消息</string>
