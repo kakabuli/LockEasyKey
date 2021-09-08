@@ -2719,4 +2719,5 @@
     <string name="philips_errcode_unknown">发送返回</string>
     <string name="you_have_not_installed_wechat">你还没有安装微信</string>
 
+    <string name="philips_get_wifi_rssi_error">获取数据失败</string>
 </resources>

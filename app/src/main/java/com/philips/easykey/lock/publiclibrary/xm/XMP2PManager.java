@@ -140,6 +140,16 @@ public class XMP2PManager extends StreamListener  {
         void onRebootDevice(String paramString);
     }
 
+    private DeviceInformationListener mDeviceInformationListener = null;
+
+    public interface DeviceInformationListener{
+        void onSignal(JSONObject jsonObject);
+    }
+
+    public void setDeviceInformationListener(DeviceInformationListener listener){
+        this.mDeviceInformationListener = listener;
+    }
+
     private AudioVideoStatusListener mAudioVideoStatusListener;
 
     public interface AudioVideoStatusListener{
@@ -812,13 +822,21 @@ public class XMP2PManager extends StreamListener  {
     }
 
     public void getDeviceInformation(){
-        MyLog.getInstance().save("shulan xm--DeviceInformation-->" + getInstanceP2P().getDeviceInformation());
+        LogUtils.d("shulan xm--DeviceInformation-->" + getInstanceP2P().getDeviceInformation());
+    }
+
+    public void getDeviceInformation(DeviceInformationListener listener){
+       this.mDeviceInformationListener = listener;
+        LogUtils.d("shulan xm--DeviceInformation-->" + getInstanceP2P().getDeviceInformation());
     }
 
     @Override
     public void onGetDeviceInformationProcResult(JSONObject jsonObject) {
         super.onGetDeviceInformationProcResult(jsonObject);
-        MyLog.getInstance().save("shulan onGetDeviceInformationProcResult-->" + jsonObject.toString());
+        LogUtils.d("shulan onGetDeviceInformationProcResult-->" + jsonObject.toString());
+        if(mDeviceInformationListener != null){
+            this.mDeviceInformationListener.onSignal(jsonObject);
+        }
     }
 
 }
