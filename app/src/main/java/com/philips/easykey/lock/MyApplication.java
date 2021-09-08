@@ -37,6 +37,7 @@ import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -62,6 +63,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mmkv.MMKV;
@@ -130,7 +132,7 @@ public class MyApplication extends Application {
         MyLog.getInstance().init(this);
         LogUtils.d("attachView  App启动 ");
         instance = this;
-//        CrashReport.initCrashReport(getApplicationContext(), "37003f935b", true);
+        //CrashReport.initCrashReport(getApplicationContext(), "37003f935b", true);
         initBleService();
         initMqttService();//启动MqttService
         initMMKV(this);
@@ -533,6 +535,7 @@ public class MyApplication extends Application {
         if (allBindDeviceDisposable != null && !allBindDeviceDisposable.isDisposed()) {
             allBindDeviceDisposable.dispose();
         }
+        if(mqttService == null)return;
         allBindDeviceDisposable = mqttService.mqttPublish(MqttConstant.MQTT_REQUEST_APP, allBindDevice)
                 .filter(mqttData -> mqttData.getFunc().equalsIgnoreCase(MqttConstant.GET_ALL_BIND_DEVICE))
                 .timeout(10 * 1000, TimeUnit.MILLISECONDS)
@@ -731,6 +734,16 @@ public class MyApplication extends Application {
                         wifiLockInfo.setVolume(actionBean.getEventparams().getVolume());
                         wifiLockInfo.setPowerSave(actionBean.getEventparams().getPowerSave());
                         wifiLockInfo.setFaceStatus(actionBean.getEventparams().getFaceStatus());
+                        wifiLockInfo.setOpenForce(actionBean.getEventparams().getOpenForce());
+                        wifiLockInfo.setLockingMethod(actionBean.getEventparams().getLockingMethod());
+                        wifiLockInfo.setOpenDirection(actionBean.getEventparams().getOpenDirection());
+                        wifiLockInfo.setBodySensor(actionBean.getEventparams().getBodySensor());
+                        wifiLockInfo.setTouchHandleStatus(actionBean.getEventparams().getTouchHandleStatus());
+
+                        if(BleLockUtils.isSupportFacePir(wifiLockInfo.getFunctionSet())){
+                            wifiLockInfo.setHoverAlarm(actionBean.getEventparams().getHoverAlarm());
+                            wifiLockInfo.setHoverAlarmLevel(actionBean.getEventparams().getHoverAlarmLevel());
+                        }
                         long updateTime = Long.parseLong(actionBean.getTimestamp());
                         LogUtils.d("更新的时间为   " + DateUtils.getDateTimeFromMillisecond(updateTime * 1000));
                         wifiLockInfo.setUpdateTime(updateTime);

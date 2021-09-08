@@ -2,6 +2,7 @@ package com.philips.easykey.lock.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,9 +87,11 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         }
         if (data.getLastRecordDetail() != null) {
             BleUtil.setTextViewOperationRecordByType(tvLastRecord, data.getLastRecordDetail());
-            String lastRecord = DateUtils.secondToDate2(data.getLastRecordDetail().getCreateTime())
-                    + " " + tvLastRecord.getText().toString().trim();
-            tvLastRecord.setText(lastRecord);
+            if(!TextUtils.isEmpty(tvLastRecord.getText())){
+                String lastRecord = DateUtils.secondToDate2(data.getLastRecordDetail().getCreateTime())
+                        + " " + tvLastRecord.getText().toString().trim();
+                tvLastRecord.setText(lastRecord);
+            }
         }
 
     }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -264,6 +265,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get(0));
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get(0).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());
+            Log.d("zdx", "initOperationRecord: "  + records.get(0).getCreateTime());
             return;
         }
 
@@ -278,9 +280,13 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             }
         }
 
+
+
         BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get((int) createTime[1]));
-        mTvLastRecord.setText(DateUtils.secondToDate2(records.get((int) createTime[1]).getCreateTime())
-                + " " + mTvLastRecord.getText().toString().trim());
+        if(!TextUtils.isEmpty(mTvLastRecord.getText())){
+            mTvLastRecord.setText(DateUtils.secondToDate2(records.get((int) createTime[1]).getCreateTime())
+                    + " " + mTvLastRecord.getText().toString().trim());
+        }
     }
 
     /**

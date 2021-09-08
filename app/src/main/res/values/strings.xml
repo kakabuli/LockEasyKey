@@ -2681,6 +2681,8 @@
     <string name="philips_operation_record_17_0">开启节能模式</string>
     <!--关闭节能模式-->
     <string name="philips_operation_record_18_0">关闭节能模式</string>
+    <!--已恢复出厂设置-->
+    <string name="philips_operation_record_19_0">已恢复出厂设置</string>
 
     <!--报警事件-->
     <!--1 锁定报警-->
