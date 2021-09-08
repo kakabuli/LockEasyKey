@@ -207,7 +207,6 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.attachView(this);
         int userManageNumber = (int) SPUtils.getProtect(KeyConstants.USER_MANAGE_NUMBER + "" + bleLockInfo.getServerLockInfo().getLockName(), 0);
         tvNumberFour.setText(userManageNumber + getString(R.string.people));
         runOnUiThread(lockRunnable);
@@ -216,7 +215,6 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     private void showLockType() {

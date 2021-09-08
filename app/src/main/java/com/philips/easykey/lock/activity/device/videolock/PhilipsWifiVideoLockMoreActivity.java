@@ -619,7 +619,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
         if(avi!=null){
             avi.hide();
             tvTips.setVisibility(View.GONE);
@@ -630,7 +629,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     @Override

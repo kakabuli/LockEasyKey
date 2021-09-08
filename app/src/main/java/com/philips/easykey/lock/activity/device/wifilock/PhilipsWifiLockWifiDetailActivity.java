@@ -15,14 +15,21 @@ import com.philips.easykey.lock.activity.device.wifilock.newadd.PhilipsAddVideoL
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewFirstActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewThirdActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockOldUserFirstActivity;
+import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.PhilipsWifiVideoLockWifiDetailPresenter;
+import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockSetLanguagePresenter;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsWifiDetailView;
+import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockSetLanguageView;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
 
-public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActivity {
+public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifiDetailView, PhilipsWifiVideoLockWifiDetailPresenter<IPhilipsWifiDetailView>>
+        implements IPhilipsWifiDetailView {
 
     ImageView back;
     RelativeLayout rlReplaceWifi;
@@ -88,7 +95,19 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
                 tvRssid.setText(wifiLockInfo.getRSSI() + "");
             if(wifiLockInfo.getLockMac() != null)
                 tvMAC.setText(wifiLockInfo.getLockMac() + "");
+
+
+            if(wifiLockInfo.getDistributionNetwork() == 3 ||
+                    BleLockUtils.isSupportXMConnect(wifiLockInfo.getFunctionSet())){
+                mPresenter.settingDevice(wifiLockInfo);
+
+            }
         }
+    }
+
+    @Override
+    protected PhilipsWifiVideoLockWifiDetailPresenter<IPhilipsWifiDetailView> createPresent() {
+        return new PhilipsWifiVideoLockWifiDetailPresenter<>();
     }
 
     @Override
@@ -105,6 +124,7 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseAddToApplicationActiv
     protected void onDestroy() {
         super.onDestroy();
     }
+
 
     private void showWifiDialog() {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.activity_wifi_video_replace_wifi_again),
