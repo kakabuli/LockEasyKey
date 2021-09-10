@@ -2,6 +2,7 @@ package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.wifi.ScanResult;
@@ -29,9 +30,14 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockAlbumDetailActivity;
 import com.philips.easykey.lock.popup.PhilipsWifiListPopup;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
+import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.NetUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import razerdp.basepopup.BasePopupWindow;
@@ -117,6 +123,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
         btnNext.setOnClickListener(v -> {
             String wifiName = mEtWifiName.getText().toString().trim();
             String wifiPwd = mEtWifiPwd.getText().toString().trim();
+            String ssid = NetUtil.getWifiName().replaceAll("\"", "");
 
             if (TextUtils.isEmpty(wifiName)) {
                 ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
@@ -126,15 +133,26 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
                 ToastUtils.showShort(R.string.philips_password_len_not_less_8);
                 return;
             }
+            if (!ssid.equals(wifiName)){
+                ///手机系统连接的wifi名和在wifi列表选择的wifiname不相等
+                if(wifiName.contains("5G")){
+                    ToastUtils.showShort(R.string.philips_please_24g_network_for_door_lock_distribution);
+                    return;
+                }
+                else {
+                    if (mAddVideoLockActivity != null) {
+                        mAddVideoLockActivity.setWifiInfo(wifiName, wifiPwd);
+                        mAddVideoLockActivity.showFirstTask3();
+                    }
+                }
+            }else {
+                if(NetUtil.isWifi5G(getContext())){
+                    ///当前手机系统连接的wifi为5G频段
+                    showDual_Frequency_In_OneDialog(wifiName, wifiPwd);
 
-            if(NetUtil.isWifi5G(getContext())){
-                ToastUtils.showShort(R.string.philips_please_24g_network_for_door_lock_distribution);
-                return;
+                }
             }
-            if (mAddVideoLockActivity != null) {
-                mAddVideoLockActivity.setWifiInfo(wifiName, wifiPwd);
-                mAddVideoLockActivity.showFirstTask3();
-            }
+
         });
     }
 
@@ -226,4 +244,30 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
         }
     }
 
+    private void showDual_Frequency_In_OneDialog(String wifiName,String wifiPwd) {
+
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this.getActivity()
+                , getString(R.string.dual_frequency_in_one) + "","#000000",
+                getString(R.string.connection), getString(R.string.philips_cancel), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener()  {
+
+            @Override
+            public void left() {
+                if (mAddVideoLockActivity != null) {
+                    mAddVideoLockActivity.setWifiInfo(wifiName, wifiPwd);
+                    mAddVideoLockActivity.showFirstTask3();
+                }
+            }
+
+            @Override
+            public void right() {
+                return;
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(String toString) {
+            }
+        });
+    }
 }

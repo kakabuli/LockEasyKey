@@ -278,6 +278,8 @@
     <string name="connection_cateye_success">恭喜，猫眼连接成功</string>
     <string name="connet_cateye_fail">未能连接成功</string>
     <string name="reconnection">是否继续连接</string>
+    <string name="connection">继续连接</string>
+    <string name="dual_frequency_in_one">当前手机连接5G频段，\n请确认路由器是否双频合一</string>
     <string name="quit">退出</string>
     <string name="open_gateway_qrcode">打开包装盒扫描网关二维码</string>
     <string name="go_to_unbind">取消绑定</string>
