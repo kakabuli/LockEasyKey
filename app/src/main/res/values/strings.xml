@@ -2692,7 +2692,7 @@
     <!--3 试错3次锁定报警-->
     <string name="philips_wifi_video_lock_alarm_type_3">门锁已被锁定</string>
     <!--4 防撬报警-->
-    <string name="philips_wifi_video_lock_alarm_type_4">监测到您的门锁被撬</string>
+    <string name="philips_wifi_video_lock_alarm_type_4">检测到您的门锁被撬</string>
     <!--8 机械钥匙报警-->
     <string name="philips_wifi_video_lock_alarm_type_8">门锁正在被机械方式开启，请回家或联系保安查看</string>
     <!--16 低电量-->
