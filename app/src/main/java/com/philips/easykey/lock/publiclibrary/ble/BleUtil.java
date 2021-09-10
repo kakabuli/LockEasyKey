@@ -987,6 +987,7 @@ public class BleUtil {
          * 16添加管理员指纹
          * 17开启节能模式
          * 18关闭节能模式
+         * 19恢复出厂设置
          */
         switch (record.getType()){
             case 1://开锁
@@ -1192,6 +1193,9 @@ public class BleUtil {
                 break;
             case 18: //18关闭节能模式
                 mTvContent.setText(R.string.philips_operation_record_18_0);
+                break;
+            case 19: //   19恢复出厂设置
+                mTvContent.setText(R.string.recover_factory);
                 break;
         }
 
