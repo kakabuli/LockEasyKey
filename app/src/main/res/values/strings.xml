@@ -2579,7 +2579,7 @@
     <string name="philips_code_production_fail">生产失败</string>
     <string name="philips_code_no_permission">无权限</string>
     <string name="philips_code_resource_not_find">资源未找到</string>
-    <string name="philips_deviceinfo_update_ota_battery_low">门锁电量低于30%，不能升级的哦~</string>
+    <string name="philips_deviceinfo_update_ota_battery_low">门锁电量低于20%，不能进行升级的哦~</string>
     <string name="philips_deviceinfo__power_save_mode">省电模式已开启，请开锁后再试</string>
     <string name="philips_videolock_deviceinfo_update_ota">系统升级时，门锁请勿断电</string>
     <string name="philips_videolock_change_power_save_mode_title">确定切换至省电模式吗？</string>
