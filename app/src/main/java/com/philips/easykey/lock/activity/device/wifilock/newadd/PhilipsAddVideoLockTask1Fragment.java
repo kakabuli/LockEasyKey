@@ -107,7 +107,9 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
             return;
         }
         if(mAddVideoLockActivity != null) {
-            mAddVideoLockActivity.showFirstTask2();
+            if (isChoose){
+                mAddVideoLockActivity.showFirstTask2();
+            }
         }
     }
 
