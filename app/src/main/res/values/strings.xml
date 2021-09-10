@@ -589,7 +589,7 @@
     <string name="philips_visitor_record">访客记录</string>
     <string name="philips_fingerprint_open_the_door">指纹开门</string>
     <string name="philips_password_open_the_door">密码开门</string>
-    <string name="philips_card_open_the_door">开片开门</string>
+    <string name="philips_card_open_the_door">卡片开门</string>
     <string name="philips_open_the_door_record">开门记录</string>
     <string name="equipment_dynamic">设备动态</string>
     <string name="bluetooth_synchronized_door_lock_status">蓝牙同步操作记录</string>
