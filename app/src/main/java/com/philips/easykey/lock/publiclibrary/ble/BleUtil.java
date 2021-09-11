@@ -1005,7 +1005,8 @@ public class BleUtil {
                          */
                         switch (record.getPwdNum()){
                             case 254:
-                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254_no_num));
+//                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
                                 break;
                             case 253:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_253,record.getUserNickname()));

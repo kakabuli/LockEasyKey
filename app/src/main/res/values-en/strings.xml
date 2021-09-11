@@ -70,6 +70,7 @@
     <string name="philips_operation_record_1_0_252">Unlock with one-time PIN</string>
     <string name="philips_operation_record_1_0_253">Unlock by \""%1$s\"" with visitor PIN</string>
     <string name="philips_operation_record_1_0_254">Unlock by \""%1$s\"" with master PIN</string>
+    <string name="philips_operation_record_1_0_254_no_num">Unlock with master PIN</string>
     <string name="philips_operation_record_1_0_000">Unlock by \""%1$s\"" with PIN</string>
 
     <!--卡片开门-->

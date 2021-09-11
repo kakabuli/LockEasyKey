@@ -2600,6 +2600,7 @@
     <string name="philips_operation_record_1_0_252">使用一次性密码开门</string>
     <string name="philips_operation_record_1_0_253">\""%1$s\""使用访客密码开门</string>
     <string name="philips_operation_record_1_0_254">\""%1$s\""使用管理员密码开门</string>
+    <string name="philips_operation_record_1_0_254_no_num">使用管理员密码开门</string>
     <string name="philips_operation_record_1_0_000">\""%1$s\""使用密码开门</string>
 
     <!--卡片开门-->
