@@ -117,6 +117,9 @@ public class HttpUtils<T> {
             case 302:
                 errorMsg = activity.getString(R.string.philips_code_liu_yan_fail);
                 break;
+            case 303:
+                errorMsg = activity.getString(R.string.philips_code_security_key_full);
+                break;
             case 400:
                 errorMsg = activity.getString(R.string.philips_code_request_data_format_incorrect);
                 break;

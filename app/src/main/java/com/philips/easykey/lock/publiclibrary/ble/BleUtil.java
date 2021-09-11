@@ -723,9 +723,7 @@ public class BleUtil {
             case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
                 if (PwdType == 4){
                     tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_4, ""));
-
                 }else {
-
                     tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_0, ""));
                 }
                 break;

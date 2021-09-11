@@ -184,7 +184,30 @@ public class PhilipsWifiVideoLockSettingDuressAlarmAvtivity extends BaseActivity
             finish();
         }else if("453".equals(baseResult.getCode() + "")){
             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.phliips_user_not_registered));
-        }else{
+        }else if("303".equals(baseResult.getCode())){
+            AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, "", getString(R.string.philips_code_security_key_full),getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener(){
+                @Override
+                public void left() {
+
+                }
+
+                @Override
+                public void right() {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(String toString) {
+
+                }
+            });
+        }
+        else{
             ToastUtils.showShort(R.string.set_failed);
             Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, mPhilipsDuressBean.getWifiSN());

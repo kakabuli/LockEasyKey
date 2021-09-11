@@ -2525,6 +2525,7 @@
     <string name="philips_code_no_result">查无结果</string>
     <string name="philips_code_character_length_exceeds_limit">字符长度超出限制</string>
     <string name="philips_code_liu_yan_fail">留言失败</string>
+    <string name="philips_code_security_key_full">当前胁迫密钥已满5组，请关闭其他胁迫密钥后，再添加</string>
     <string name="philips_code_request_data_format_incorrect">请求数据或格式不对</string>
     <string name="philips_code_data_parameter_incorrect">数据参数不对</string>
     <string name="philips_code_to_empower_the_user_not_found">要赋权用户没找到！</string>
