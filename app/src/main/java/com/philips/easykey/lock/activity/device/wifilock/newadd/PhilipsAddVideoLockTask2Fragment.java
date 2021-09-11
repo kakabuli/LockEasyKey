@@ -151,6 +151,12 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
                     showDual_Frequency_In_OneDialog(wifiName, wifiPwd);
 
                 }
+                else {
+                    if (mAddVideoLockActivity != null) {
+                        mAddVideoLockActivity.setWifiInfo(wifiName, wifiPwd);
+                        mAddVideoLockActivity.showFirstTask3();
+                    }
+                }
             }
 
         });
