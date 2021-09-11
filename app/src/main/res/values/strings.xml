@@ -2690,8 +2690,10 @@
     <!--报警事件-->
     <!--1 锁定报警-->
     <string name="philips_wifi_video_lock_alarm_type_1">门锁已被锁定</string>
-    <!--2 胁迫密码抱紧-->
-    <string name="philips_wifi_video_lock_alarm_type_2">\""%1$s\""使用胁迫密码开门</string>
+    <!--2-0 胁迫密码报警-->
+    <string name="philips_wifi_video_lock_alarm_type_2_0">\""%1$s\""使用胁迫密码开门</string>
+    <!--2-4 胁迫指纹报警-->
+    <string name="philips_wifi_video_lock_alarm_type_2_4">\""%1$s\""使用胁迫指纹开门</string>
     <!--3 试错3次锁定报警-->
     <string name="philips_wifi_video_lock_alarm_type_3">门锁已被锁定</string>
     <!--4 防撬报警-->

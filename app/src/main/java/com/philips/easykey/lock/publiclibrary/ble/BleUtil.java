@@ -715,13 +715,19 @@ public class BleUtil {
      * @param type  	报警类型：1锁定 2劫持 3三次错误 4防撬 8机械方式报警 16低电压 32锁体异常 64布防 128低电量关人脸 96门铃 112pir报警
      * @return
      */
-    public static void setTextViewAlarmByType(TextView tvRight,int type) {
+    public static void setTextViewAlarmByType(TextView tvRight,int type,int PwdType) {
         switch (type) {
             case 0x01:// 锁定报警
                 tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_1);
                 break;
             case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
-                tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2, ""));
+                if (PwdType == 4){
+                    tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_4, ""));
+
+                }else {
+
+                    tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_0, ""));
+                }
                 break;
             case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
                 tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_3);

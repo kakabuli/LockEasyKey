@@ -3,6 +3,7 @@ package com.philips.easykey.lock.publiclibrary.bean;
 import java.io.Serializable;
 
 public class WifiVideoLockAlarmRecord implements Serializable {
+
     /**
      {
      "_id": "5df0abf54d27d6da12fb4c71",
@@ -27,6 +28,7 @@ public class WifiVideoLockAlarmRecord implements Serializable {
     private String _id;
     private String time;
     private int type;
+    private int pwdType;
     private String wifiSN;
     private String createTime;
     private String productSN;
@@ -175,6 +177,14 @@ public class WifiVideoLockAlarmRecord implements Serializable {
         this.type = type;
     }
 
+    public int getPwdType() {
+        return pwdType;
+    }
+
+    public void setPwdType(int pwdType) {
+        this.pwdType = pwdType;
+    }
+
     public String getWifiSN() {
         return wifiSN;
     }
@@ -213,6 +223,7 @@ public class WifiVideoLockAlarmRecord implements Serializable {
                 "_id='" + _id + '\'' +
                 ", time=" + time +
                 ", type=" + type +
+                ", pwdType=" + pwdType +
                 ", wifiSN='" + wifiSN + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", productSN='" + productSN + '\'' +
