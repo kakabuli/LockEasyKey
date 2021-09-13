@@ -2288,7 +2288,7 @@
     <string name="gateway_">网关：</string>
     <string name="activity_wifi_lock_add_new_third">去修改管理密码</string>
     <string name="activity_wifi_lock_add_new_third_1">如何修改初始管理密码?</string>
-    <string name="activiy_wifi_lock_message_push">开启后，新消息将不在通知栏内显示</string>
+    <string name="activiy_wifi_lock_message_push">开启后，APP 将不再接收设备操作记录。门铃呼叫、报警信息仍可正常推送。</string>
     <string name="activity_wifi_lock_old_user_first_1">第一步：已进入管理模式</string>
     <string name="activity_wifi_lock_old_user_first_2">已进入管理模式</string>
     <string name="sceond_40">40秒</string>
