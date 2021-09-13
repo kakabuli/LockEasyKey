@@ -3,6 +3,7 @@ package com.philips.easykey.lock.push;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
@@ -16,15 +17,21 @@ import com.igexin.sdk.message.GTTransmitMessage;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.device.videolock.PhilipsWifiVideoLockCallingActivity;
+import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
+import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * 继承 GTIntentService 接收来自个推的消息, 所有消息在线程中回调, 如果注册了该服务, 则务必要在 AndroidManifest中声明, 否则无法接受消息<br>
@@ -155,6 +162,9 @@ public class GeTuiIntentService extends GTIntentService {
 	//	SPUtils.put(context,"clientId_GetTui",clientid);
         MMKVUtils.setMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,clientid);
         sendMessage(clientid, 1);
+        if(!Rom.isEmui() && !Rom.isMiui() && !clientid.equals(MMKVUtils.getStringMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,""))){
+            refreshedTokenToServer(clientid);
+        }
     }
     // App初始化以后会回调这个方法
     @Override
@@ -358,5 +368,40 @@ public class GeTuiIntentService extends GTIntentService {
         msg.what = what;
         msg.obj = data;
       //  DemoApplication.sendMessage(msg);
+    }
+
+    private void refreshedTokenToServer(String jpush) {
+        LogUtils.d(TAG, "sending token to server. token:" + jpush);
+        uploadpushmethod(2,jpush);
+//        SPUtils.put(GeTui.JPUSH_ID,jpush);
+//        MMKVUtils.setMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,jpush);
+    }
+
+    public void uploadpushmethod(int type , String JpushId) {
+        String uid = MMKVUtils.getStringMMKV(SPUtils.UID);
+        if (!TextUtils.isEmpty(uid) && !TextUtils.isEmpty(JpushId)) {
+            XiaokaiNewServiceImp.uploadPushId(uid, JpushId, type).subscribe(new BaseObserver<BaseResult>() {
+                @Override
+                public void onSuccess(BaseResult baseResult) {
+                }
+
+                @Override
+                public void onAckErrorCode(BaseResult baseResult) {
+                    LogUtils.e(GeTui.VideoLog, "pushid上传失败,服务返回:" + baseResult);
+                }
+
+                @Override
+                public void onFailed(Throwable throwable) {
+                    LogUtils.e(GeTui.VideoLog, "pushid上传失败");
+                }
+
+                @Override
+                public void onSubscribe1(Disposable d) {
+                }
+            });
+        }else {
+            LogUtils.e("jpushid上传失败");
+        }
+
     }
 }
