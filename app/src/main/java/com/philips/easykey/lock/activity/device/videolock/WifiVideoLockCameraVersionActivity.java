@@ -428,4 +428,9 @@ public class WifiVideoLockCameraVersionActivity extends BaseActivity<IWifiVideoL
             });
         }
     }
+
+    @Override
+    public void onConnectFailed(int paramInt) {
+
+    }
 }

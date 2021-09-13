@@ -9,11 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
@@ -25,14 +22,16 @@ import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.CheckOTAResult;
+import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectError;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVideoLockOTAView, PhilipsWifiVideoLockOTAPresenter<IWifiVideoLockOTAView>>
         implements IWifiVideoLockOTAView {
@@ -714,6 +713,26 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
         }
     }
 
+    @Override
+    public void onConnectFailed(int paramInt) {
+        if(!PhilipsWifiVideoLockDeviceInfoActivity.this.isFinishing()){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(avi != null){
+                        avi.hide();
+                    }
+                    mTvTips.setVisibility(View.GONE);
+                    if(paramInt == -3){
+                        createDialog(getString(R.string.xm_connection_timed_out));
+                    }else{
+                        createDialog(XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiVideoLockDeviceInfoActivity.this,paramInt));
+                    }
+                }
+            });
+        }
+    }
+
     public void updateDialog(CheckOTAResult.UpdateFileInfo appInfo, String content, String wifiSN) {
         AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this, content,
                 "#333333", getString(R.string.philips_cancel), getString(R.string.philips_confirm),
@@ -769,6 +788,31 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             public void afterTextChanged (String toString){
         }
         });
+    }
+
+    public void createDialog(String content){
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, content,"",
+                getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 
     public void powerStatusDialog(){

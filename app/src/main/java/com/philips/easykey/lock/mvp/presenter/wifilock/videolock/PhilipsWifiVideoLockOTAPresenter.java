@@ -230,7 +230,7 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
             @Override
             public void onConnectFailed(int paramInt) {
                 if(isSafe()){
-                    mViewRef.get().onSettingCallBack(false);
+                    mViewRef.get().onConnectFailed(paramInt);
                 }
             }
 
