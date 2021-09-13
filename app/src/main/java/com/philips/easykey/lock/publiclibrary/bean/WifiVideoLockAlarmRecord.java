@@ -9,6 +9,8 @@ public class WifiVideoLockAlarmRecord implements Serializable {
      "_id": "5df0abf54d27d6da12fb4c71",
      "time": "1541468973342",
      "type": 4,
+     "pwdType":int
+     "userNickname":string
      "wifiSN": "WF132231004",
      "createTime": "1576054908866",
      "productSN" : "KV51203710173",
@@ -30,6 +32,7 @@ public class WifiVideoLockAlarmRecord implements Serializable {
     private int type;
     private int pwdType;
     private String wifiSN;
+    private String userNickname;
     private String createTime;
     private String productSN;
     private String eventId;//锁定报警，劫持报警，防撬报警，机械方式报警，门锁布防报警，门铃报警，pir徘徊报警有图片，视频信息,存在下列属性
@@ -193,6 +196,14 @@ public class WifiVideoLockAlarmRecord implements Serializable {
         this.wifiSN = wifiSN;
     }
 
+    public String getUserNickname() {
+        return userNickname;
+    }
+
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
+    }
+
     public boolean isFirst() {
         return first;
     }
@@ -225,6 +236,7 @@ public class WifiVideoLockAlarmRecord implements Serializable {
                 ", type=" + type +
                 ", pwdType=" + pwdType +
                 ", wifiSN='" + wifiSN + '\'' +
+                ", userNickname='" + userNickname + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", productSN='" + productSN + '\'' +
                 ", eventId='" + eventId + '\'' +
