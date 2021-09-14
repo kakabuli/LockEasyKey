@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.huawei.agconnect.config.AGConnectServicesConfig;
 import com.huawei.hms.aaid.HmsInstanceId;
 import com.huawei.hms.common.ApiException;
+import com.igexin.sdk.PushManager;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.UpgradeBean;
@@ -397,6 +398,10 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 //            }
             String JpushId = MMKVUtils.getStringMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,"");
             LogUtils.d("shulan---JpushId-->---" + JpushId );
+            if(TextUtils.isEmpty(JpushId)){
+                String clientid = PushManager.getInstance().getClientid(this);
+                JpushId = clientid;
+            }
             uploadToken(2,JpushId);
         }
 

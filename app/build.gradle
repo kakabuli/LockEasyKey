@@ -33,9 +33,9 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
         manifestPlaceholders = [
-                GETUI_APP_ID    : "0Xktb3BmI77e832N4GKu5",
-                GETUI_APP_KEY   : "HdgiZGfQLr5qNcTa51B0B2",
-                GETUI_APP_SECRET: "cWHc94l8sa7HE3KrnuNjS9",
+                GETUI_APPID    : "0Xktb3BmI77e832N4GKu5",
+                //GETUI_APP_KEY   : "HdgiZGfQLr5qNcTa51B0B2",
+                //GETUI_APP_SECRET: "cWHc94l8sa7HE3KrnuNjS9",
 
 //                HUAWEI_APP_ID   : "100038281",
 
@@ -173,7 +173,9 @@ dependencies {
     implementation files('libs/GetuiSDK-support-VIVO-1.0.5.jar')
     implementation files('libs/GetuiSDK-support-OPPO-1.0.7.jar')
 
-    implementation 'com.getui:sdk:2.14.1.0'
+//    implementation 'com.getui:sdk:2.14.1.0'
+    implementation 'com.getui:gtsdk:3.2.3.0'
+    implementation 'com.getui:gtc:3.1.4.0'
     implementation 'com.huawei.hms:push:5.1.1.301'
     implementation project(':push:pushsdk_xiaomi')
 

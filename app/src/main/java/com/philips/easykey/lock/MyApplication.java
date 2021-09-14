@@ -16,6 +16,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.huawei.hms.push.HmsMessaging;
+import com.igexin.sdk.IUserLoggerInterface;
 import com.igexin.sdk.PushManager;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
@@ -149,6 +150,12 @@ public class MyApplication extends Application {
             MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
         }
         PushManager.getInstance().initialize(this);
+        PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
+            @Override
+            public void log(String s) {
+                LogUtils.d("Getui PushManager -->" + s);
+            }
+        });
         LogUtils.d("attachView  App启动完成 ");
         //去掉在Android 9以上调用反射警告提醒弹窗 （Detected problems with API compatibility(visit g.co/dev/appcompat for more info)
         closeAndroidPDialog();
