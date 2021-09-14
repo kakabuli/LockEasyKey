@@ -446,7 +446,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17pt"
             android:text="@string/wifi_video_lock_p2p_connect"
-            android:textColor="@color/ce1e1e1"
+            android:textColor="#fff"
             android:textSize="15pt" />
 
 
