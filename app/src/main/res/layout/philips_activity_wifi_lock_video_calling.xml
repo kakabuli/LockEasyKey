@@ -438,7 +438,7 @@
             android:layout_marginTop="18pt"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/iv_big_head_pic"
-            android:textColor="@color/ce1e1e1"/>
+            android:textColor="@color/white"/>
 
         <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
             android:id="@+id/avi"

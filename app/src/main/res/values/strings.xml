@@ -2730,4 +2730,6 @@
     <string name="you_have_not_installed_wechat">你还没有安装微信</string>
 
     <string name="philips_get_wifi_rssi_error">获取数据失败</string>
+    <string name="philips_network_not_turned_on">手机未开启网络，请打开网络再试</string>
+    
 </resources>

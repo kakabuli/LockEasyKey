@@ -19,7 +19,10 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -54,6 +57,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
+import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 import com.philips.easykey.lock.widget.avindicator.AVSpeakerView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -195,7 +199,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         mPresenter.handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(rlMarkLayout.getVisibility() == View.VISIBLE && rlVideoLayout.getVisibility() == View.GONE){
+                if(isCalling == 1 && rlMarkLayout.getVisibility() == View.VISIBLE && rlVideoLayout.getVisibility() == View.GONE){
                     finish();
                 }
             }
@@ -474,6 +478,10 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         }catch (Exception e){
 
         }
+        if(!WifiUtils.getInstance(this).isWifiEnable()){
+            openWifiDialog();
+            return;
+        }
         if(keepAliveStatus == 0){
             switchBackConnectP2P();
         }else{
@@ -506,6 +514,33 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             if(ivCache != null)
                 ivCache.setVisibility(View.GONE);
         }
+    }
+
+    private void openWifiDialog() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this, getString(R.string.philips_network_not_turned_on),
+                "#333333", getString(R.string.philips_cancel), getString(R.string.setting),
+                "#0066A1", "#ffffff", new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+                        finish();
+                    }
+
+                    @Override
+                    public void right() {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        finish();
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 
     private void showKeepAliveDialog() {
@@ -937,14 +972,15 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             dialog = new Dialog(this, R.style.MyDialog);
         }
         // 获取Dialog布局
-        View mView = LayoutInflater.from(this).inflate(R.layout.no_et_title_two_button_dialog, null);
+        View mView = LayoutInflater.from(this).inflate(R.layout.philips_no_et_title_two_button_dialog, null);
         TextView tvContent = mView.findViewById(R.id.tv_content);
+        tvContent.setTextColor(Color.parseColor("#333333"));
         tvContent.setText(content + "");
         TextView tv_cancel = mView.findViewById(R.id.tv_left);
         tv_cancel.setText(getString(R.string.close));
-        tv_cancel.setTextColor(Color.parseColor("#9A9A9A"));
+        tv_cancel.setTextColor(Color.parseColor("#0066A1"));
         TextView tv_query = mView.findViewById(R.id.tv_right);
-        tv_query.setTextColor(Color.parseColor("#2096F8"));
+        tv_query.setTextColor(Color.parseColor("#FFFFFF"));
         tv_query.setText(getString(R.string.philips_clothes_hanger_add_next));
         dialog.setContentView(mView);
 
