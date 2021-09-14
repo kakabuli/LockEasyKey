@@ -2506,7 +2506,7 @@
     <string name="philips_already_5_times_wrong_plz_repair_network_after_modify_admin_pwd">已输错5次，请在门锁端修改管理员密码后，重新配网</string>
     <string name="philips_lock_restore_tip">1.门锁通电情况下，使用尖锐物体双击后面板\n【RES】键\n2.语音提示“正在恢复设置”\n3.恢复出厂后，门锁管理员密码为“12345678”</string>
     <string name="philips_hint_plz_input_phone_or_mail">请输入手机号/邮箱</string>
-    <string name="philips_logo_easykey">Philips EasyKey</string>
+    <string name="philips_logo_easykey">Philips EasyKey+</string>
     <string name="philips_tip_plz_input_8_15_pwd">请输入8-15位密码，英文、数字组合</string>
     <string name="philips_give_the_device_a_name">给设备起个名吧~</string>
     <string name="philips_all_device">所有设备</string>
@@ -2593,7 +2593,7 @@
     <string name="philips_videolock_power_save_mode_content">已开启节能模式，请更换电池后再试</string>
     <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
     <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
-    <string name="philips_splash_app_name">Philips EasyKey</string>
+    <string name="philips_splash_app_name">Philips\nEasyKey+</string>
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">使用临时密码开门</string>

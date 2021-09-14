@@ -24,6 +24,7 @@
         android:layout_marginTop="96pt"
         android:text="@string/philips_splash_app_name"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:fontFamily="@font/centrale_sans_book"
         android:textSize="24pt"
         android:textColor="@color/white"
