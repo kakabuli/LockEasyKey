@@ -198,6 +198,16 @@
                     android:layout_marginTop="11pt"
                     android:src="@drawable/philips_real_time_video_calling_selector" />
 
+
+                <com.philips.easykey.lock.widget.avindicator.AVSpeakerView
+                    android:id="@+id/av_speaker_view"
+                    style="@style/AVLoadingIndicatorView.Large"
+                    android:layout_marginTop="22pt"
+                    app:indicatorColor="@color/c0066A1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="45pt"
+                    android:layout_height="45pt"/>
+
                 <TextView
                     android:id="@+id/tv_calling_tip"
                     android:layout_width="wrap_content"

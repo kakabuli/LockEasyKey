@@ -55,6 +55,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
+import com.philips.easykey.lock.widget.avindicator.AVSpeakerView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.MP4Info;
@@ -79,6 +80,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivRefuseIcon;
     ImageView ivRefuseIcon1;
     AVLoadingIndicatorView avi;
+    AVSpeakerView avSpeakerView;
     TextView tvTips;
     ImageView ivSetting;
     ImageView back;
@@ -187,6 +189,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
         rlVideoLayout.setVisibility(View.GONE);
         rlMarkLayout.setVisibility(View.VISIBLE);
+        if(avSpeakerView != null){
+            avSpeakerView.hide();
+        }
         mPresenter.handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -212,6 +217,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     }
 
     private void initUI() {
+        avSpeakerView = findViewById(R.id.av_speaker_view);
         ivAnswerIcon = findViewById(R.id.iv_answer_icon);
         ivRefuseIcon = findViewById(R.id.iv_refuse_icon);
         ivRefuseIcon1 = findViewById(R.id.iv_refuse_icon_1);
@@ -421,7 +427,20 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                     mPresenter.startTalkback();
                     showShort(getString(R.string.philips_wifi_video_lock_open_talk_back));
                     tvCallingTips.setText(getString(R.string.wifi_video_lock_talking_back));
+                    ivCalling.setVisibility(View.INVISIBLE);
+                    avSpeakerView.show();
                 }
+            }
+        });
+        avSpeakerView.setOnClickListener(v -> {
+            if(isFirstAudio){
+                ivCalling.setSelected(false);
+                mPresenter.talkback(false);
+                mPresenter.stopTalkback();
+                tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
+                showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
+                ivCalling.setVisibility(View.VISIBLE);
+                avSpeakerView.hide();
             }
         });
     }
