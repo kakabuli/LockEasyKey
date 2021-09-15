@@ -3,11 +3,14 @@ package com.philips.easykey.lock.activity.device.wifilock.newadd;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,8 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
 
     private PhilipsAddVideoLockActivity mAddVideoLockActivity;
     private EditText mEtAdminPwd;
+    private ImageView mIvShow;
+    private boolean passwordHide = true;
 
     public static PhilipsAddVideoLockTask5Fragment getInstance() {
         return new PhilipsAddVideoLockTask5Fragment();
@@ -55,8 +60,20 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
     private void initTaskUI(View root) {
         mEtAdminPwd = root.findViewById(R.id.etAdminPwd);
         btnNext = root.findViewById(R.id.btnNext);
+        mIvShow = root.findViewById(R.id.ivShow);
         TextView tvPwdFailed = root.findViewById(R.id.tvPwdFailed);
         btnNext.setEnabled(false);
+        mIvShow.setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                mEtAdminPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                mIvShow.setImageResource(R.drawable.philips_dms_icon_hidden);
+            } else {
+                mEtAdminPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                mIvShow.setImageResource(R.drawable.philips_dms_icon_display);
+            }
+            mEtAdminPwd.setSelection(mEtAdminPwd.getText().toString().length());//将光标移至文字末尾
+        });
 
         mEtAdminPwd.addTextChangedListener(new TextWatcher() {
             @Override
