@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,8 +54,9 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
 
     private PhilipsAddVideoLockActivity mAddVideoLockActivity;
     private PhilipsWifiListPopup mWifiListPopup;
-    private ImageView mIvDrop;
+    private ImageView mIvDrop,mIvPwd;
     private EditText mEtWifiName, mEtWifiPwd;
+    private boolean passwordHide = true;
 
     public static PhilipsAddVideoLockTask2Fragment getInstance() {
         return new PhilipsAddVideoLockTask2Fragment();
@@ -77,6 +80,7 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
         mEtWifiPwd = root.findViewById(R.id.etWifiPwd);
         Button btnNext = root.findViewById(R.id.btnNext);
         mIvDrop = root.findViewById(R.id.ivDrop);
+        mIvPwd = root.findViewById(R.id.ivPwd);
         initWifiListPopup();
         // todo 初始化当前扫描的wifi列表数据
         initCurWifiName(mEtWifiName);
@@ -89,6 +93,18 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
                     showPopup();
                 }
             }
+        });
+
+        mIvPwd.setOnClickListener(v -> {
+            passwordHide = !passwordHide;
+            if (passwordHide) {
+                mEtWifiPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                mIvPwd.setImageResource(R.drawable.philips_dms_icon_hidden);
+            } else {
+                mEtWifiPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                mIvPwd.setImageResource(R.drawable.philips_dms_icon_display);
+            }
+            mEtWifiPwd.setSelection(mEtWifiPwd.getText().toString().length());//将光标移至文字末尾
         });
         btnNext.setEnabled(false);
         mEtWifiPwd.addTextChangedListener(new TextWatcher() {
