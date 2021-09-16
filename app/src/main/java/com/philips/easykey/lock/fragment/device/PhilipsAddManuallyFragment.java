@@ -83,6 +83,7 @@ public class PhilipsAddManuallyFragment extends Fragment {
         mTvSmartLockStr3 = root.findViewById(R.id.tvSmartLockStr3);
         mView = root.findViewById(R.id.view);
         mView1 = root.findViewById(R.id.view1);
+        LogUtils.d("onCreateView");
         mBtnSearch = root.findViewById(R.id.btnSearch);
         mBtnSearch.setOnClickListener(v -> searchDevice());
 
@@ -95,6 +96,7 @@ public class PhilipsAddManuallyFragment extends Fragment {
             String wifiModelType = "WiFi&VIDEO";
             wifiIntent.putExtra("wifiModelType", wifiModelType);
             startActivity(wifiIntent);
+
         });
 
         mPhilipsAddDeviceDoorLockFuzzMatchAdapter = new PhilipsAddDeviceDoorLockFuzzMatchAdapter(R.layout.philips_item_add_door_lock_fuzzmatch_list_rv);
@@ -242,5 +244,62 @@ public class PhilipsAddManuallyFragment extends Fragment {
 
                     }
                 });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().finish();
+        LogUtils.d("onDestroyView");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.d("onPause");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtils.d("onStop");
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.d("onStart");
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtils.d("onActivityCreated");
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.d("onResume");
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtils.d("onDestroy");
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LogUtils.d("onDetach");
+
     }
 }
