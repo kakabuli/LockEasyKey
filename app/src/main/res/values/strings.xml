@@ -508,6 +508,7 @@
     <string name="bluetooth_no_connect_bluetooth_one_three">语音提示：“已进入管理模式”。</string>
     <string name="bluetooth_no_connect_bluetooth_two_hint">按照语音提示,点击对应数字选项,进入指纹添加</string>
     <string name="bluetooth_no_connect_bluetooth_three_hint">请找到门锁指纹采集位置,按照语音提示将要手指触摸进行采集</string>
+    <string name="philips_only_2400MHz_network_is_supported_and_public_network_is_not_supported">仅支持2.4G网络，不支持使用公共网络</string>
     <string name="philips_next_step">下一步</string>
 
     <string name="warring_lock">您的门锁错误验证多次,门锁系统锁定</string>

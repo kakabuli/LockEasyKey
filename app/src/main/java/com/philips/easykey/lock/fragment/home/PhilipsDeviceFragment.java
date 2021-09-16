@@ -281,8 +281,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                 deviceBean.setWifiSn(((WifiLockInfo) bean.getObject()).getWifiSN());
                 deviceBean.setPowerSave(((WifiLockInfo) bean.getObject()).getPowerSave());
                 deviceBean.setPower(((WifiLockInfo) bean.getObject()).getPower());
+                deviceBean.setPurview(((WifiLockInfo) bean.getObject()).getIsAdmin());
             } else if(bean.getObject() instanceof ClothesHangerMachineAllBean) {
                 deviceBean.setWifiSn(((ClothesHangerMachineAllBean) bean.getObject()).getWifiSN());
+                deviceBean.setPurview(((ClothesHangerMachineAllBean) bean.getObject()).getIsAdmin());
             }
             mAllDeviceBeans.add(deviceBean);
         }

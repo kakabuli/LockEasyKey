@@ -18,6 +18,7 @@ public class PhilipsDeviceBean {
     private int deviceType;              // 模拟 6：视频锁  7：晾衣机
     private String wifiSn;
     private int powerSave;
+    private int purview; ///权限范围
 
     public int getPowerSave() {
         return powerSave;
@@ -67,6 +68,14 @@ public class PhilipsDeviceBean {
         this.wifiSn = wifiSn;
     }
 
+    public int getPurview() {
+        return purview;
+    }
+
+    public void setPurview(int purview) {
+        this.purview = purview;
+    }
+
     @NotNull
     @Override
     public String toString() {
@@ -77,6 +86,7 @@ public class PhilipsDeviceBean {
                 ", deviceType=" + deviceType +
                 ", wifiSn='" + wifiSn + '\'' +
                 ", powerSave=" + powerSave +
+                ", purview=" + purview +
                 '}';
     }
 }
