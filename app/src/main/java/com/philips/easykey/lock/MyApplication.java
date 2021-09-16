@@ -150,6 +150,7 @@ public class MyApplication extends Application {
             MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
         }
         PushManager.getInstance().initialize(this);
+        if(BuildConfig.DEBUG)
         PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
             @Override
             public void log(String s) {
