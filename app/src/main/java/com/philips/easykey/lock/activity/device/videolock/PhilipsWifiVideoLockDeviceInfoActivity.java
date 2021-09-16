@@ -494,7 +494,6 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             } else {
                 rlVoiceModelFirmwareVersion.setVisibility(View.GONE);
             }
-            mPresenter.settingDevice(wifiLockInfo);
         }
     }
 
