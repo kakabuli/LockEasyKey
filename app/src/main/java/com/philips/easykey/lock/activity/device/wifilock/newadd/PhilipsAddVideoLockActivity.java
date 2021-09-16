@@ -111,6 +111,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
             // TODO: 2021/5/6 进入帮助页面
         } else if(view.getId() == R.id.ivBack) {
             finish();
+
         }
     }
 

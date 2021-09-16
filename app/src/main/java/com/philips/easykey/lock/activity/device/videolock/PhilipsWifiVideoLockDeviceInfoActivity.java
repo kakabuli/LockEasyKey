@@ -409,6 +409,9 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
     private void initData() {
         if (wifiLockInfo != null) {
+
+            mPresenter.settingDevice(wifiLockInfo);
+
             String productModel = wifiLockInfo.getProductModel() + "";
             Log.d("zdx", "initData: " + productModel);
             if(TextUtils.equals(productModel,"TDA4A")){
@@ -727,6 +730,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
                         createDialog(getString(R.string.xm_connection_timed_out));
                     }else{
                         createDialog(XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiVideoLockDeviceInfoActivity.this,paramInt));
+
                     }
                 }
             });

@@ -226,6 +226,7 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
         deviceInfo.setP2pPassword(p2pPassword);
         deviceInfo.setDeviceSn(sn);
         deviceInfo.setServiceString(serviceString);
+
         XMP2PManager.getInstance().setOnConnectStatusListener(new XMP2PManager.ConnectStatusListener() {
             @Override
             public void onConnectFailed(int paramInt) {
