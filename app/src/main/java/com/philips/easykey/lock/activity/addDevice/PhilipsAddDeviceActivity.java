@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.activity.addDevice;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.fragment.device.PhilipsAddManuallyFragment;
 import com.philips.easykey.lock.fragment.device.PhilipsQrCodeScanFragment;
