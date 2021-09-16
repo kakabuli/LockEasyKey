@@ -3,6 +3,7 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,7 +119,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         super.onResume();
         MyApplication.getInstance().getAllDevicesByMqtt(true);
         initTabData();
-        initOperationRecord();
+//        initOperationRecord();
         initDevices();
     }
 
