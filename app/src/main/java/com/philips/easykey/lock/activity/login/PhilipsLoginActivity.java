@@ -220,6 +220,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
         regToWx();
         initTerms();
+        initStatement();
     }
 
     @Override
@@ -227,6 +228,35 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         initLoginData();
         checkVersion();
         initAccountFromLocal();
+    }
+
+    private void initStatement() {
+        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+        if(!showStatementAndTerms)return;
+        AlertDialogUtil.getInstance().statementAndTermsDialog(
+                this
+                , getString(R.string.philips_statements_and_terms),
+                getString(R.string.philips_statements_and_terms_content),
+                getString(R.string.philips_no_agree),getString(R.string.philips_agree),new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
+                        finish();
+                    }
+
+                    @Override
+                    public void right() {
+                        SPUtils.putProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, false);
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(String toString) {
+
+                    }
+                });
     }
 
     private void initTerms() {
