@@ -46,6 +46,8 @@ public class PhilipsDuressAlarmAdapter extends BaseQuickAdapter<PhilipsDuressBea
             return;
         }else{
             holder.findView(R.id.tv_password).setVisibility(View.GONE);
+            holder.findView(R.id.tv_password_num).setVisibility(View.VISIBLE);
+            holder.findView(R.id.rl_duress_alarm_toggle).setVisibility(View.VISIBLE);
         }
 
         if(bean.getPwdDuressSwitch() == 0){
@@ -57,6 +59,7 @@ public class PhilipsDuressAlarmAdapter extends BaseQuickAdapter<PhilipsDuressBea
             holder.findView(R.id.rl_duress_alarm_password_notification).setVisibility(View.VISIBLE);
         }
         String sNum = bean.getNum() > 9 ? "" + bean.getNum() : "0" + bean.getNum();;
+
         if(bean.getNickName() != null && !bean.getNickName().isEmpty()){
             holder.setText(R.id.tv_password_num,bean.getNickName().isEmpty() ?
                     getContext().getResources().getString(R.string.philips_duress_number,sNum) : bean.getNickName());
