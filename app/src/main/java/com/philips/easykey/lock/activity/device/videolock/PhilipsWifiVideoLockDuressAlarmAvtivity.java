@@ -61,6 +61,7 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
     @Override
     protected void onResume() {
         super.onResume();
+
         if(getIntent().hasExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO)){
             int position = getIntent().getIntExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,-1);
             if(position < 0) return;
