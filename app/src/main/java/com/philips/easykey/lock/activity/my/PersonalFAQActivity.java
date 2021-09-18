@@ -23,6 +23,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.fragment.help.PersonalFAQHangerHelpFragment;
 import com.philips.easykey.lock.fragment.help.PersonalFAQLockHelpFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.ConstantConfig;
 
 
 public class PersonalFAQActivity extends BaseAddToApplicationActivity {
@@ -30,7 +31,6 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     ImageView ivBack;
     WebView webView;
     TextView tvContent;
-    private String url = "http://h5.kaadas.cc/Philips_FQA/";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
         ivBack = findViewById(R.id.iv_back);
         tvContent = findViewById(R.id.tv_content);
         webView = findViewById(R.id.webView);
-        webView.loadUrl(url);
+        webView.loadUrl(ConstantConfig.PHILIPS_FQA);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
@@ -68,10 +68,12 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
 
     private void back() {
         if (webView == null) finish();
-        if(TextUtils.equals(url,webView.getUrl())){
+        Log.d("lhf","111---------" + ConstantConfig.PHILIPS_FQA);
+        Log.d("lhf","222---------" + webView.getUrl());
+        if(TextUtils.equals(ConstantConfig.PHILIPS_FQA,webView.getUrl())){
             finish();
         }else {
-            webView.loadUrl(url);
+            webView.loadUrl(ConstantConfig.PHILIPS_FQA);
         }
     }
 }

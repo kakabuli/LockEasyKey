@@ -15,5 +15,5 @@ public class ConstantConfig {
     public static final String PHILPS_DURRESS_HELP = "https://app.cone-x.com/mobile_h5/Philps_Durress_Help";
     public static final String PHILIPS_UPDATE_ADMIN_PASSWORD = "https://app.cone-x.com/mobile_h5/Philips_Update_Admin_Password";
     public static final String PHILIPS_ADD_SCAN_DEVICE = "https://app.cone-x.com/mobile_h5/Philips_Add_Scan_Device";
-    public static final String PHILIPS_FQA = "https://app.cone-x.com/mobile_h5/Philips_FQA";
+    public static final String PHILIPS_FQA = "https://app.cone-x.com/mobile_h5/Philips_FQA/";
 }
