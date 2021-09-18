@@ -48,6 +48,8 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
 
     private static  String serviceString=XMP2PManager.serviceString;;
 
+    private boolean mqttCtrl = false;
+
     public void init(String wifiSn) {
         wifiSN = wifiSn;
         listenActionUpdate();
@@ -226,11 +228,11 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
         deviceInfo.setP2pPassword(p2pPassword);
         deviceInfo.setDeviceSn(sn);
         deviceInfo.setServiceString(serviceString);
-
+        mqttCtrl = false;
         XMP2PManager.getInstance().setOnConnectStatusListener(new XMP2PManager.ConnectStatusListener() {
             @Override
             public void onConnectFailed(int paramInt) {
-                if(isSafe()){
+                if(isSafe() && !mqttCtrl){
                     mViewRef.get().onConnectFailed(paramInt);
                 }
             }
@@ -243,7 +245,7 @@ public class PhilipsWifiVideoLockOTAPresenter<T> extends BasePresenter<IWifiVide
                         if(isSafe()){
                             try {
                                 if (jsonObject.getString("result").equals("ok")){
-
+                                    mqttCtrl = true;
                                     notifyGateWayNewVersion();
                                 }else{
                                     if(isSafe()){
