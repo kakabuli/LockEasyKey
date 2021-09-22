@@ -95,6 +95,8 @@ public class PhilipsAddManuallyFragment extends Fragment {
             String wifiModelType = "WiFi&VIDEO";
             wifiIntent.putExtra("wifiModelType", wifiModelType);
             startActivity(wifiIntent);
+            getActivity().finish();
+
         });
 
         mPhilipsAddDeviceDoorLockFuzzMatchAdapter = new PhilipsAddDeviceDoorLockFuzzMatchAdapter(R.layout.philips_item_add_door_lock_fuzzmatch_list_rv);
@@ -111,6 +113,7 @@ public class PhilipsAddManuallyFragment extends Fragment {
                 String wifiModelType = "WiFi&VIDEO";
                 wifiIntent.putExtra("wifiModelType", wifiModelType);
                 startActivity(wifiIntent);
+                getActivity().finish();
             }
         });
         mEtSearch.addTextChangedListener(new TextWatcher() {
@@ -243,4 +246,5 @@ public class PhilipsAddManuallyFragment extends Fragment {
                     }
                 });
     }
+
 }

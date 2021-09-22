@@ -17,6 +17,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.PersonalUserAgreementAdapter;
 import com.philips.easykey.lock.bean.PersonalUserAgreementBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.ConstantConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class PrivacyActivity extends BaseAddToApplicationActivity implements Vie
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl("http://h5.kaadas.cc/Philips_Privacy_Policy");
+        webView.loadUrl(ConstantConfig.PHILIPS_PRIVACY_POLICY);
     }
 
 

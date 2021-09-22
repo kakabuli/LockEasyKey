@@ -127,7 +127,6 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
         /*if(wifiLockInfo.getPowerSave() == 0){
             new Thread(new Runnable() {
                 @Override
@@ -148,7 +147,6 @@ public class PhilipsWifiVideoLockLanguageSettingActivity extends BaseActivity<IW
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     @Override

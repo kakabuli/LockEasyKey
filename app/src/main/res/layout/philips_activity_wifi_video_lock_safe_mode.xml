@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/activity_wifi_video_open_lock_mode"
+            android:text="@string/philips_video_activity_open_lock_mode"
             android:textColor="@color/color_333333"
             android:textSize="17pt" />
     </RelativeLayout>
@@ -44,7 +44,7 @@
             android:id="@+id/zh_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activity_wifi_video_lock_safe_mode_1"
+            android:text="@string/activity_wifi_video_lock_safe_mode_single"
             android:layout_centerVertical="true"
             android:textColor="#333333"
             android:layout_marginStart="16pt"
@@ -66,7 +66,7 @@
     <RelativeLayout
         android:id="@+id/safe_layout"
         android:layout_width="match_parent"
-        android:layout_height="56pt"
+        android:layout_height="72pt"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/normal_layout"
         >
@@ -80,6 +80,17 @@
             android:textColor="#333333"
             android:layout_marginStart="16pt"
             android:textSize="16pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16pt"
+            android:layout_marginEnd="75pt"
+            android:text="@string/activity_wifi_video_safe_mode_double_content"
+            android:layout_below="@id/en_text"
+            android:textColor="#999999"
+            android:layout_marginTop="8pt"
+            android:textSize="12pt" />
 
         <CheckBox
             android:id="@+id/ck_safe"

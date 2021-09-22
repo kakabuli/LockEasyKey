@@ -3,6 +3,7 @@ package com.philips.easykey.lock.fragment.home;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,7 +119,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         super.onResume();
         MyApplication.getInstance().getAllDevicesByMqtt(true);
         initTabData();
-        initOperationRecord();
+//        initOperationRecord();
         initDevices();
     }
 
@@ -281,8 +282,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                 deviceBean.setWifiSn(((WifiLockInfo) bean.getObject()).getWifiSN());
                 deviceBean.setPowerSave(((WifiLockInfo) bean.getObject()).getPowerSave());
                 deviceBean.setPower(((WifiLockInfo) bean.getObject()).getPower());
+                deviceBean.setPurview(((WifiLockInfo) bean.getObject()).getIsAdmin());
             } else if(bean.getObject() instanceof ClothesHangerMachineAllBean) {
                 deviceBean.setWifiSn(((ClothesHangerMachineAllBean) bean.getObject()).getWifiSN());
+                deviceBean.setPurview(((ClothesHangerMachineAllBean) bean.getObject()).getIsAdmin());
             }
             mAllDeviceBeans.add(deviceBean);
         }

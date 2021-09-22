@@ -108,7 +108,7 @@ public class WiFiLockPassword {
          * items : ["1","3","6"]
          * num : 12
          * startTime : 1551774543
-         * type : 1
+         * type : 1  密钥周期类型：0永久密钥 1策略密码 2胁迫密钥 3管理员密钥 4无权限密钥 254一次性密钥 255 无效值
          */
 
         private long createTime;

@@ -97,8 +97,8 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
             }
             accountType = 1;
             duressAccount = "86" + duressAccount;
-            mPresenter.setDuressPwdAlarm(mDuressBean.getWifiSN(),mDuressBean.getPwdType(),mDuressBean.getNum(),mDuressBean.getPwdDuressSwitch());
-//            mPresenter.setDuressPwdAccount(mDuressBean.getWifiSN(), mDuressBean.getPwdType(), mDuressBean.getNum(),1,duressAccount);
+//            mPresenter.setDuressPwdAlarm(mDuressBean.getWifiSN(),mDuressBean.getPwdType(),mDuressBean.getNum(),mDuressBean.getPwdDuressSwitch());
+            mPresenter.setDuressPwdAccount(mDuressBean.getWifiSN(), mDuressBean.getPwdType(), mDuressBean.getNum(),1,duressAccount);
             return;
         }else{
             if(!DetectionEmailPhone.isEmail(duressAccount)){
@@ -112,8 +112,8 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
                 return;
             }
             accountType = 2;
-            mPresenter.setDuressPwdAlarm(mDuressBean.getWifiSN(),mDuressBean.getPwdType(),mDuressBean.getNum(),mDuressBean.getPwdDuressSwitch());
-//            mPresenter.setDuressPwdAccount(mDuressBean.getWifiSN(), mDuressBean.getPwdType(), mDuressBean.getNum(),2,duressAccount);
+//            mPresenter.setDuressPwdAlarm(mDuressBean.getWifiSN(),mDuressBean.getPwdType(),mDuressBean.getNum(),mDuressBean.getPwdDuressSwitch());
+            mPresenter.setDuressPwdAccount(mDuressBean.getWifiSN(), mDuressBean.getPwdType(), mDuressBean.getNum(),2,duressAccount);
             return;
         }
 
@@ -195,7 +195,8 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
     public void onSettingDuress(BaseResult baseResult) {
         if("200".equals(baseResult.getCode() + "")) {
             mPresenter.setDuressPwdAccount(mDuressBean.getWifiSN(), mDuressBean.getPwdType(), mDuressBean.getNum(),accountType,duressAccount);
-        }else{
+        }
+        else{
             ToastUtils.showShort(R.string.set_failed);
             /*Intent intent = new Intent(this, WifiVideoLockDuressAlarmAvtivity.class);
             startActivity(intent);

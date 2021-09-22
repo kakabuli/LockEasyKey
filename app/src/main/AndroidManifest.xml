@@ -1236,6 +1236,7 @@
                 <action android:name="com.cysmart.bluetooth.le.ACTION_OTA_DATA_AVAILABLE_V1" />
             </intent-filter>
         </receiver> <!-- &lt;!&ndash; process必须指定为":pushservice"，切勿随意更改 &ndash;&gt; -->
+        <meta-data android:name="GETUI_APPID" android:value="${GETUI_APPID}"/>
         <service
             android:name=".push.GeTuiPushService"
             android:exported="true"

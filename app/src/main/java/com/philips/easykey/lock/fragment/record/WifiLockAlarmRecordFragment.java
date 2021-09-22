@@ -164,7 +164,7 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
         //服务器没有开锁记录
         refreshLayout.finishRefresh();
         refreshLayout.setEnableLoadMore(false);  //服务器没有数据时，不让上拉加载更多
-        ToastUtils.showShort(R.string.server_no_data_2);
+       // ToastUtils.showShort(R.string.server_no_data_2);
     }
 
     @Override

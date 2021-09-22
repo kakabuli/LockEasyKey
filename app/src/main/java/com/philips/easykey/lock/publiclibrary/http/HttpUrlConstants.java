@@ -426,7 +426,6 @@ public class HttpUrlConstants {
      */
     public static final String WIFI_DURESS_ALARM_SWITCH = BASE_URL + "user/edit/duressAlarmSwitch";
 
-
     ////////////////////////////////////////////           WiFi视频锁api功能            ///////////////////////////////////////////////
 
     /**

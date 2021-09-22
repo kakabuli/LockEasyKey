@@ -116,18 +116,28 @@
         android:layout_marginEnd="16pt"
         android:background="@drawable/philips_shape_search_et_bg"
         android:drawableStart="@drawable/philips_dms_icon_password"
-        android:drawableEnd="@drawable/philips_dms_icon_display"
         android:drawablePadding="15pt"
         android:paddingStart="12pt"
         android:paddingEnd="9pt"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etWifiName" />
 
+    <ImageView
+        android:id="@+id/ivPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9pt"
+        app:layout_constraintBottom_toBottomOf="@+id/etWifiPwd"
+        app:layout_constraintEnd_toEndOf="@+id/etWifiPwd"
+        app:layout_constraintTop_toTopOf="@+id/etWifiPwd"
+        app:srcCompat="@drawable/philips_dms_icon_hidden" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="仅支持2.4G网络，不支持使用公共网络"
+        android:text="@string/philips_only_2400MHz_network_is_supported_and_public_network_is_not_supported"
         android:layout_marginTop="8pt"
         android:textSize="14pt"
         android:textColor="@color/color_333333"

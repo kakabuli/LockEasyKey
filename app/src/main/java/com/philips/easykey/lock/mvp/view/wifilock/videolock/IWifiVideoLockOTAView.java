@@ -86,4 +86,7 @@ public interface IWifiVideoLockOTAView extends IBaseView {
     //设置的值回调
     void onSettingCallBack(boolean flag);
 
+    //讯美连接
+    void onConnectFailed(int paramInt);
+
 }

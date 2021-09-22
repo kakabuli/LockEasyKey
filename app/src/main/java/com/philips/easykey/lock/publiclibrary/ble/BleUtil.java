@@ -715,13 +715,17 @@ public class BleUtil {
      * @param type  	报警类型：1锁定 2劫持 3三次错误 4防撬 8机械方式报警 16低电压 32锁体异常 64布防 128低电量关人脸 96门铃 112pir报警
      * @return
      */
-    public static void setTextViewAlarmByType(TextView tvRight,int type) {
+    public static void setTextViewAlarmByType(TextView tvRight,int type,int PwdType,String userNickname) {
         switch (type) {
             case 0x01:// 锁定报警
                 tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_1);
                 break;
             case 0x02:// 有人使用劫持密码开启门锁，赶紧联系或报警
-                tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2, ""));
+                if (PwdType == 4){
+                    tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_4, userNickname));
+                }else {
+                    tvRight.setText(tvRight.getContext().getString(R.string.philips_wifi_video_lock_alarm_type_2_0, userNickname));
+                }
                 break;
             case 0x03:// 门锁错误验证多次，门锁系统锁定90秒
                 tvRight.setText(R.string.philips_wifi_video_lock_alarm_type_3);
@@ -987,6 +991,7 @@ public class BleUtil {
          * 16添加管理员指纹
          * 17开启节能模式
          * 18关闭节能模式
+         * 19恢复出厂设置
          */
         switch (record.getType()){
             case 1://开锁
@@ -1000,7 +1005,8 @@ public class BleUtil {
                          */
                         switch (record.getPwdNum()){
                             case 254:
-                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
+                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254_no_num));
+//                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
                                 break;
                             case 253:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_253,record.getUserNickname()));
@@ -1192,6 +1198,9 @@ public class BleUtil {
                 break;
             case 18: //18关闭节能模式
                 mTvContent.setText(R.string.philips_operation_record_18_0);
+                break;
+            case 19: //   19恢复出厂设置
+                mTvContent.setText(R.string.recover_factory);
                 break;
         }
 

@@ -15,6 +15,7 @@ import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.adapter.PersonalUserAgreementAdapter;
 import com.philips.easykey.lock.bean.PersonalUserAgreementBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
+import com.philips.easykey.lock.utils.ConstantConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl("http://h5.kaadas.cc/Philips_Terms_of_Use");
+        webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE);
     }
 
 

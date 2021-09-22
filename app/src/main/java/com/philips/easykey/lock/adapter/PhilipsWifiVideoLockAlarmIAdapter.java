@@ -76,7 +76,7 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
             rlPic.setVisibility(View.VISIBLE);
         }
 
-        BleUtil.setTextViewAlarmByType(helper.getView(R.id.tv_right),record.getType());
+        BleUtil.setTextViewAlarmByType(helper.getView(R.id.tv_right),record.getType(),record.getPwdType(),record.getUserNickname());
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
             Glide.with(ivContent.getContext()).load(record.getThumbUrl())

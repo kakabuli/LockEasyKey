@@ -70,6 +70,7 @@
     <string name="philips_operation_record_1_0_252">Unlock with one-time PIN</string>
     <string name="philips_operation_record_1_0_253">Unlock by \""%1$s\"" with visitor PIN</string>
     <string name="philips_operation_record_1_0_254">Unlock by \""%1$s\"" with master PIN</string>
+    <string name="philips_operation_record_1_0_254_no_num">Unlock with master PIN</string>
     <string name="philips_operation_record_1_0_000">Unlock by \""%1$s\"" with PIN</string>
 
     <!--卡片开门-->
@@ -158,8 +159,10 @@
     <!--报警事件-->
     <!--1 锁定报警-->
     <string name="philips_wifi_video_lock_alarm_type_1">System freeze</string>
-    <!--2 胁迫密码报警-->
-    <string name="philips_wifi_video_lock_alarm_type_2">Duress PIN unlock by \""%1$s\""</string>
+    <!--2-0 胁迫密码报警-->
+    <string name="philips_wifi_video_lock_alarm_type_2_0">Duress PIN unlock by \""%1$s\""</string>
+    <!--2-4 胁迫指纹报警-->
+    <string name="philips_wifi_video_lock_alarm_type_2_4">Duress fingerprint unlock by \""%1$s\""</string>
     <!--3 试错3次锁定报警-->
     <string name="philips_wifi_video_lock_alarm_type_3">System freeze</string>
     <!--4 防撬报警-->

@@ -170,13 +170,11 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.attachView(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     private void showLockType() {
@@ -255,7 +253,6 @@ public class WiFiLockDetailActivity extends BaseActivity<IWifiLockDetailView, Wi
     protected void onResume() {
         super.onResume();
         //每次显示界面都重新设置状态和电量
-        mPresenter.attachView(this);
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         LogUtils.d("获取到的设备Sn是   " + wifiSn);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);

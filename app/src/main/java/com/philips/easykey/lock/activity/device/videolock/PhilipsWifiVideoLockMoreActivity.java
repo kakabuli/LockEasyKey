@@ -164,9 +164,9 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             }
 
             if(wifiLockInfo.getSafeMode() == 1){
-                ivSafeMode.setText(getString(R.string.safe_mode));
+                ivSafeMode.setText(getString(R.string.activity_wifi_video_safe_mode_double));
             }else{
-                ivSafeMode.setText(getString(R.string.normal_mode));
+                ivSafeMode.setText(getString(R.string.activity_wifi_video_lock_safe_mode_single));
             }
             String language = wifiLockInfo.getLanguage();
             if ("zh".equals(language)) {
@@ -619,7 +619,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
         if(avi!=null){
             avi.hide();
             tvTips.setVisibility(View.GONE);
@@ -630,7 +629,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.detachView();
     }
 
     @Override
@@ -827,9 +825,9 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             switch (requestCode){
                 case KeyConstants.WIFI_VIDEO_LOCK_SAFE_MODE_CODE:
                     if(data.getIntExtra(KeyConstants.WIFI_VIDEO_LOCK_SAFE_MODE,0) == 1){
-                        ivSafeMode.setText(getString(R.string.safe_mode));
+                        ivSafeMode.setText(getString(R.string.activity_wifi_video_safe_mode_double));
                     }else{
-                        ivSafeMode.setText(getString(R.string.normal_mode));
+                        ivSafeMode.setText(getString(R.string.activity_wifi_video_lock_safe_mode_single));
                     }
                     break;
                 case KeyConstants.WIFI_VIDEO_LOCK_AM_MODE_CODE:

@@ -149,16 +149,15 @@ public class WifiLockAddNewScanBLEActivity extends BaseActivity<ISearchDeviceVie
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (!goToHelpActivity){
-            LogUtils.d("--kaadas--onStop--detachView");
-            mPresenter.detachView();
-        }
+//        if (!goToHelpActivity){
+//            LogUtils.d("--kaadas--onStop--detachView");
+//            mPresenter.detachView();
+//        }
     }
 
     //当没有搜索到蓝牙设备时，显示对话框。

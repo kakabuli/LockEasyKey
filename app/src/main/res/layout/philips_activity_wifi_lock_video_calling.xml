@@ -198,6 +198,16 @@
                     android:layout_marginTop="11pt"
                     android:src="@drawable/philips_real_time_video_calling_selector" />
 
+
+                <com.philips.easykey.lock.widget.avindicator.AVSpeakerView
+                    android:id="@+id/av_speaker_view"
+                    style="@style/AVLoadingIndicatorView.Large"
+                    android:layout_marginTop="22pt"
+                    app:indicatorColor="@color/c0066A1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="45pt"
+                    android:layout_height="45pt"/>
+
                 <TextView
                     android:id="@+id/tv_calling_tip"
                     android:layout_width="wrap_content"
@@ -428,7 +438,7 @@
             android:layout_marginTop="18pt"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/iv_big_head_pic"
-            android:textColor="@color/ce1e1e1"/>
+            android:textColor="@color/white"/>
 
         <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
             android:id="@+id/avi"
@@ -446,7 +456,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17pt"
             android:text="@string/wifi_video_lock_p2p_connect"
-            android:textColor="@color/ce1e1e1"
+            android:textColor="#fff"
             android:textSize="15pt" />
 
 

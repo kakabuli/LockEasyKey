@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -26,17 +23,15 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.PersonalDataPresenter;
+import com.philips.easykey.lock.mvp.view.IPersonalDataView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
 import com.philips.easykey.lock.utils.StringUtil;
-import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.mvp.view.IPersonalDataView;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
 import com.philips.easykey.lock.widget.CircleImageView;
 import com.philips.easykey.lock.widget.image.GlideEngine;
@@ -44,6 +39,10 @@ import com.philips.easykey.lock.widget.image.GlideEngine;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -353,7 +352,18 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
 
     @Override
     public void photoUploadSuccess() {
-        mPresenter.downloadPicture(MyApplication.getInstance().getUid());
+//        mPresenter.downloadPicture(MyApplication.getInstance().getUid());
+        Bitmap temp;
+        int degree = BitmapUtil.readPictureDegree(photoPath);
+        temp = BitmapUtil.ratio(photoPath, 720, 720);
+        /**
+         * 把图片旋转为正的方向
+         */
+        if (temp!=null){
+            Bitmap newbitmap = BitmapUtil.rotaingImageView(degree, temp);
+            downloadPhoto(newbitmap);
+            temp = null;
+        }
     }
 
     @Override

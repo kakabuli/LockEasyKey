@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
@@ -52,6 +53,16 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
             ivPower.setImageResource(R.drawable.philips_home_icon_battery_full);
         }
 
+        if (data.getPurview()==1){
+            ///管理员
+            view.findViewById(R.id.ivPwd).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.tvPwd).setVisibility(View.VISIBLE);
+        }else {
+            ///分享用户
+            view.findViewById(R.id.ivPwd).setVisibility(View.GONE);
+            view.findViewById(R.id.tvPwd).setVisibility(View.GONE);
+
+        }
         view.findViewById(R.id.ivMore).setOnClickListener(v -> {
             if (mOnClickMoreListener != null) {
                 mOnClickMoreListener.onClick(v, data);

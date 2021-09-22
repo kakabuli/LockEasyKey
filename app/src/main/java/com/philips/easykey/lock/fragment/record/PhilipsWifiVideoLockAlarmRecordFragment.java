@@ -283,7 +283,7 @@ public class PhilipsWifiVideoLockAlarmRecordFragment extends BaseFragment<IWifiV
         refreshLayout.finishRefresh();
         refreshLayout.setEnableLoadMore(false);  //服务器没有数据时，不让上拉加载更多
         tvNoMore.setVisibility(View.VISIBLE);
-        ToastUtils.showShort(R.string.server_no_data_2);
+        //ToastUtils.showShort(R.string.server_no_data_2);
         recycleview.setVisibility(View.GONE);
     }
 

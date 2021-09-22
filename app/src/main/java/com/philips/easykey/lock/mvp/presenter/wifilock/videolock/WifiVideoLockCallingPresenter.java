@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.mvp.presenter.wifilock.videolock;
 
+import android.util.Log;
 import android.view.SurfaceView;
 
 import com.google.gson.Gson;
@@ -48,8 +49,8 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
     static int	m_handleSession	= -1;
     int			mChannel		= 0;
 
-    private static final long OVER_TIME_SECONDS = 30000;
-    private static final int OVER_TIME_TIMES = 10;
+    private static final long OVER_TIME_SECONDS = 25000;
+    private static final int OVER_TIME_TIMES = 5;
     private long startTime = 0;
     private int connectTimes = 0;
     private boolean isFinish = false;
@@ -125,7 +126,6 @@ public class WifiVideoLockCallingPresenter<T> extends BasePresenter<IWifiLockVid
                 return;
             }
             if((startTime > 0 && System.currentTimeMillis() - startTime > OVER_TIME_SECONDS) || connectTimes > OVER_TIME_TIMES){
-                LogUtils.d("shulan 111---------->onConnectFailed=" + paramInt);
                 if(isSafe()){
                     mViewRef.get().onConnectFailed(paramInt);
                 }
