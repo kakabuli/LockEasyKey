@@ -22,12 +22,9 @@ import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.blankj.utilcode.util.ClickUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
-import com.philips.easykey.lock.shulan.KeepAliveManager;
-import com.philips.easykey.lock.shulan.config.ForegroundNotification;
-import com.philips.easykey.lock.shulan.config.ForegroundNotificationClickListener;
-import com.philips.easykey.lock.shulan.config.RunMode;
 import com.philips.easykey.lock.utils.LoadingDialog;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
@@ -43,7 +40,7 @@ import io.reactivex.disposables.Disposable;
  *     desc  : base about activity
  * </pre>
  */
-public abstract class NormalBaseActivity extends AppCompatActivity
+public abstract class NormalBaseActivity extends BaseAddToApplicationActivity
         implements IBaseView {
 
     private final View.OnClickListener mClickListener = this::onDebouncingClick;
@@ -110,35 +107,6 @@ public abstract class NormalBaseActivity extends AppCompatActivity
 //            MyApplication.getInstance().reStartApp();
             LogUtils.d("bleService 为 " + bleService);
         }
-    }
-
-    /**
-     * 启动保活
-     */
-    private void startKeepAlive() {
-        //启动保活服务
-        KeepAliveManager.toKeepAlive(
-                getApplication()
-                , RunMode.HIGH_POWER_CONSUMPTION, getString(R.string.app_name_notificatoin_title),
-                getString(R.string.app_name_notificatoin_content),
-                R.mipmap.ic_launcher,
-                new ForegroundNotification(
-                        //定义前台服务的通知点击事件
-                        new ForegroundNotificationClickListener() {
-                            @Override
-                            public void foregroundNotificationClick(Context context, Intent intent) {
-                                LogUtils.d("JOB-->", " foregroundNotificationClick");
-//                                stopKeepAlive();
-                            }
-                        })
-        );
-    }
-
-    /**
-     * 停止保活
-     */
-    public void stopKeepAlive() {
-        KeepAliveManager.stopWork(getApplication());
     }
 
     public void applyDebouncingClickListener(View... views) {

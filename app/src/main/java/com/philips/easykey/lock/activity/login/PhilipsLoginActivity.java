@@ -218,7 +218,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode);
         setStatusBarColor(R.color.white);
 
-        regToWx();
         initTerms();
         initStatement();
     }
@@ -246,6 +245,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     @Override
                     public void right() {
                         SPUtils.putProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, false);
+                        MyApplication.getInstance().initSDK();
                     }
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -359,33 +359,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mTvRegister.setVisibility(View.GONE);
     }
 
-    // APP_ID 替换为你的应用从官方网站申请到的合法appID
-    private static final String APP_ID = "wx2424a66f6c8a94df";
-
-    // IWXAPI 是第三方app和微信通信的openApi接口
-    private IWXAPI api;
-
-    private void regToWx() {
-        // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(this.getApplicationContext(), APP_ID, true);
-
-        // 将应用的appId注册到微信
-        api.registerApp(APP_ID);
-//
-//        //建议动态监听微信启动广播进行注册到微信
-//        registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//
-//                // 将该app注册到微信
-//                api.registerApp(APP_ID);
-//            }
-//        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
-
-    }
-
     private void wechatLogin() {
-        if (!api.isWXAppInstalled()) {
+        if (!MyApplication.getInstance().getApi().isWXAppInstalled()) {
             ToastUtils.showShort(R.string.you_have_not_installed_wechat);
             return;
         }
@@ -395,7 +370,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         // 用于保持请求和回调的状态，授权请求后原样带回给第三方。
         // 该参数可用于防止 csrf 攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加 session 进行校验
         req.state = "wechat_sdk_demo_test";
-        api.sendReq(req);
+        MyApplication.getInstance().getApi().sendReq(req);
         WXEntryActivity.setWXdata(new WXEntryActivity.onWXDataListener() {
             @Override
             public void data(String code) {

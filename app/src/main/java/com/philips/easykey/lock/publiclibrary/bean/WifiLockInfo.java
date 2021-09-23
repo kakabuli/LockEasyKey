@@ -90,6 +90,8 @@ public class WifiLockInfo implements Serializable {
     private String language;
     private int operatingMode;
     private int volume;
+    private int hoverAlarm;
+    private int hoverAlarmLevel;
     private String bleVersion;
     private String wifiVersion;
     private String mqttVersion;
@@ -172,16 +174,17 @@ public class WifiLockInfo implements Serializable {
     private int duressAlarmSwitch;
 
 
-    @Generated(hash = 2019128850)
+    @Generated(hash = 1524929990)
     public WifiLockInfo(Long id, String deviceID, String wifiSN, int isAdmin, String adminUid,
             String adminName, String productSN, String productModel, int appId,
             String lockNickname, String lockSoftwareVersion, String functionSet, String uid,
             String uname, int pushSwitch, int amMode, int safeMode, int powerSave,
             int faceStatus, int defences, String language, int operatingMode, int volume,
-            String bleVersion, String wifiVersion, String mqttVersion, String faceVersion,
-            String lockFirmwareVersion, String randomCode, int distributionNetwork,
-            long createTime, String wifiName, int power, long updateTime, int openStatus,
-            long openStatusTime, String device_did, String device_sn, String p2p_password,
+            int hoverAlarm, int hoverAlarmLevel, String bleVersion, String wifiVersion,
+            String mqttVersion, String faceVersion, String lockFirmwareVersion,
+            String randomCode, int distributionNetwork, long createTime, String wifiName,
+            int power, long updateTime, int openStatus, long openStatusTime,
+            String device_did, String device_sn, String p2p_password,
             SingleFireSwitchInfo singleFireSwitchInfo, WifiVideoLockSetPirBean setPir,
             WifiVideoLockAliveTimeBean alive_time, int stay_status, String camera_version,
             String mcu_version, String device_model, int keep_alive_status, String mac,
@@ -213,6 +216,8 @@ public class WifiLockInfo implements Serializable {
         this.language = language;
         this.operatingMode = operatingMode;
         this.volume = volume;
+        this.hoverAlarm = hoverAlarm;
+        this.hoverAlarmLevel = hoverAlarmLevel;
         this.bleVersion = bleVersion;
         this.wifiVersion = wifiVersion;
         this.mqttVersion = mqttVersion;
@@ -539,6 +544,22 @@ public class WifiLockInfo implements Serializable {
         this.volume = volume;
     }
 
+    public int getHoverAlarm() {
+        return hoverAlarm;
+    }
+
+    public void setHoverAlarm(int hoverAlarm) {
+        this.hoverAlarm = hoverAlarm;
+    }
+
+    public int getHoverAlarmLevel() {
+        return hoverAlarmLevel;
+    }
+
+    public void setHoverAlarmLevel(int hoverAlarmLevel) {
+        this.hoverAlarmLevel = hoverAlarmLevel;
+    }
+
     public String getBleVersion() {
         return bleVersion;
     }
@@ -681,6 +702,8 @@ public class WifiLockInfo implements Serializable {
                 ", language='" + language + '\'' +
                 ", operatingMode=" + operatingMode +
                 ", volume=" + volume +
+                ", hoverAlarm=" + hoverAlarm +
+                ", hoverAlarmLevel=" + hoverAlarmLevel +
                 ", bleVersion='" + bleVersion + '\'' +
                 ", wifiVersion='" + wifiVersion + '\'' +
                 ", mqttVersion='" + mqttVersion + '\'' +

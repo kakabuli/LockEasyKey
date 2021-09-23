@@ -13,7 +13,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 
-import com.philips.easykey.lock.shulan.R;
+import com.philips.easykey.lock.R;
+
 
 public class NotificationUtils extends ContextWrapper {
     private NotificationManager manager;

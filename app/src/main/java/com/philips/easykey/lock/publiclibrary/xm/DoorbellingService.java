@@ -25,6 +25,7 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NotificationUtils;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.ServiceAliveUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -263,25 +264,26 @@ public class DoorbellingService extends Service {
      *  开启蓝牙和Mqtt服务
      */
     private void initBleOrMqttService() {
+        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+        if(showStatementAndTerms)return;
         LogUtils.d("shulan initBleOrMqttService");
         if(!ServiceAliveUtils.isServiceRunning(this,BleService.class.getName())){
             //        //启动bleService
             Intent bleServiceIntent = new Intent(this, BleService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(bleServiceIntent);
-            } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                startForegroundService(bleServiceIntent);
+//            } else {
                 startService(bleServiceIntent);
-            }
+//            }
         }
-
         if(!ServiceAliveUtils.isServiceRunning(this,MqttService.class.getName())){
             //启动mqttservice
             Intent intent = new Intent(this, MqttService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent);
-            } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                startForegroundService(intent);
+//            } else {
                 startService(intent);
-            }
+//            }
 
 //            reconnectMqtt();
         }else{

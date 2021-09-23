@@ -1200,7 +1200,7 @@ public class BleUtil {
                 mTvContent.setText(R.string.philips_operation_record_18_0);
                 break;
             case 19: //   19恢复出厂设置
-                mTvContent.setText(R.string.recover_factory);
+                mTvContent.setText(R.string.philips_operation_record_19_0);
                 break;
         }
 

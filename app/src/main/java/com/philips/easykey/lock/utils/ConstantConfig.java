@@ -10,7 +10,7 @@ public class ConstantConfig {
     public static final String MQTT_BASE_URL = BuildConfig.MQTT_HOST;//正式服务器
     public static final String LINPHONE_URL = BuildConfig.SIP_HOST;//正式sip
 
-    public static final String PHILIPS_PRIVACY_POLICY = "https://app.cone-x.com/mobile_h5/Philips_Privacy_Policy";
+    public static final String PHILIPS_PRIVACY_POLICY = "https://app.cone-x.com/mobile_h5/Philips_Android_Privacy_Policy_EasyKey+";
     public static final String PHILIPS_TERMS_OF_USE = "https://app.cone-x.com/mobile_h5/Philips_Terms_of_Use";
     public static final String PHILPS_DURRESS_HELP = "https://app.cone-x.com/mobile_h5/Philps_Durress_Help";
     public static final String PHILIPS_UPDATE_ADMIN_PASSWORD = "https://app.cone-x.com/mobile_h5/Philips_Update_Admin_Password";

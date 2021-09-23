@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.huawei.hms.push.HmsMessaging;
@@ -105,7 +106,7 @@ public class MyApplication extends Application {
     private String uid;
     private List<Activity> activities = new ArrayList<>();
     // APP_ID 替换为你的应用从官方网站申请到的合法appID
-    private static final String APP_ID = "wxaa2df1f344ba0755";
+    private static final String APP_ID = "wx2424a66f6c8a94df";
 
     // IWXAPI 是第三方app和微信通信的openApi接口
     protected MqttService mqttService;
@@ -133,16 +134,16 @@ public class MyApplication extends Application {
         MyLog.getInstance().init(this);
         LogUtils.d("attachView  App启动 ");
         instance = this;
-        //CrashReport.initCrashReport(getApplicationContext(), "37003f935b", true);
-        initBleService();
-        initMqttService();//启动MqttService
         initMMKV(this);
+        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+        if(!showStatementAndTerms){
+            initSDK();
+        }
         initTokenAndUid();  //获取本地UUID
         listenerAppBackOrForge();
         //扫描二维码初始化
         /* ZXingLibrary.initDisplayOpinion(this);*/
         initXMP2PManager();
-        regToWx();
         //配置数据库
         setUpWriteDataBase(DB_KEY);
         // HuaWei phone
@@ -164,6 +165,14 @@ public class MyApplication extends Application {
         closeAndroidPDialog();
         setRxJavaErrorHandler();
         initFont();
+    }
+
+    public void initSDK(){
+        // TODO: 2021/9/23 为解决商城隐私问题，一些sdk的初始化要特殊判断
+        CrashReport.initCrashReport(getApplicationContext(), "37003f935b", true);
+        initBleService();
+        initMqttService();
+        regToWx();
     }
 
     private void initFont() {
@@ -246,7 +255,7 @@ public class MyApplication extends Application {
     }
 
     public BleService getBleService() {
-
+        if(bleService == null)return null;
         return bleService;
     }
 
@@ -740,6 +749,7 @@ public class MyApplication extends Application {
                         wifiLockInfo.setOperatingMode(actionBean.getEventparams().getOperatingMode());
                         wifiLockInfo.setSafeMode(actionBean.getEventparams().getSafeMode());
                         wifiLockInfo.setVolume(actionBean.getEventparams().getVolume());
+                        wifiLockInfo.setVolLevel(actionBean.getEventparams().getVolLevel());
                         wifiLockInfo.setPowerSave(actionBean.getEventparams().getPowerSave());
                         wifiLockInfo.setFaceStatus(actionBean.getEventparams().getFaceStatus());
                         wifiLockInfo.setOpenForce(actionBean.getEventparams().getOpenForce());
