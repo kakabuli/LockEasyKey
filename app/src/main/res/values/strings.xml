@@ -3,8 +3,10 @@
     <string name="select_coutroy">选择国家/地区</string>
     <string name="app_name">Philips EasyKey+</string>
     <string name="app_name_notificatoin_title">PhilipsEasyKey+正在运行</string>
-    <!--<string name="app_name_notificatoin_content">可能导致系统卡顿，降低待机时间，点按关闭</string>-->
     <string name="app_name_notificatoin_content">PhilipsEasyKey+服务已开启，有消息会及时通知您</string>
+   <!-- <string name="app_name">Philips EasyKey Plus</string>
+    <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
+    <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>-->
     <string name="china">中国大陆</string>
     <string name="input_telephone_or_rmail">请输入手机号或邮箱</string>
     <string name="philips_hint_plz_input_password">请输入密码</string>
@@ -821,7 +823,7 @@
     <string name="no_find_network">没有检测到设备网络\n无法生成有效密码</string>
     <string name="take_effect_be_being">生效中。。。</string>
     <string name="copy_success">复制成功</string>
-    <string name="telephone_not_install_wechat">您的手机未请输入正确的锁型号安装微信</string>
+    <string name="telephone_not_install_wechat">您的手机未安装微信</string>
     <string name="share_content">【凯迪仕智能】密码: %1$s。此密码只能用于凯迪仕智能锁验证开门，%2$s。</string>
     <string name="ftp_weak_up_fail">FTP唤醒失败</string>
     <string name="data_get_loading">数据获取中...</string>
