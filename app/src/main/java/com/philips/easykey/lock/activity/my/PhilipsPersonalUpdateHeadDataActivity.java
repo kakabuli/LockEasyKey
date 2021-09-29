@@ -30,6 +30,7 @@ import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.widget.BottomMenuDialog;
@@ -93,7 +94,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
 
         initView();
         getMessage();
-        tvContent.setText(getString(R.string.personal_center));
+        tvContent.setText(getString(R.string.philips_personal_profile));
         ivBack.setOnClickListener(this);
     }
 
@@ -142,7 +143,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     //展示头像对话框
     private void showHeadDialog() {
         dialogBuilder = new BottomMenuDialog.Builder(this);
-        dialogBuilder.addMenu(R.string.select_photo_album, new View.OnClickListener() {
+        dialogBuilder.addMenu(R.string.philips_select_photo_album, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createAlbum();

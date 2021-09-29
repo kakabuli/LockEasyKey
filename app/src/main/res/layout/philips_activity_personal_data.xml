@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/cF7F7F7"
     android:orientation="vertical">
     <include layout="@layout/head"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F7F7F7"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -34,13 +33,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
+                android:layout_marginRight="14pt"
                 android:src="@drawable/philips_icon_more" />
 
             <com.philips.easykey.lock.widget.CircleImageView
                 android:id="@+id/iv_head"
-                android:layout_width="34pt"
-                android:layout_height="34pt"
+                android:layout_width="36pt"
+                android:layout_height="36pt"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="41pt"
                 android:layout_alignParentRight="true"
@@ -58,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginLeft="16pt"
                 android:text="@string/nickname"
                 android:textColor="#333333"
                 android:textSize="16pt" />
@@ -69,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16pt"
+                android:layout_marginRight="14pt"
                 android:src="@drawable/philips_icon_more" />
 
             <TextView
@@ -84,7 +83,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:gravity="end"
-                android:text="@string/head_portrait_name" />
+                android:text="" />
 
         </RelativeLayout>
 

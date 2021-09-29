@@ -10,6 +10,8 @@
     <string name="philips_cdt_wifi">Wifi</string>
     <string name="philips_cdt_record_icon">record icon</string>
     <string name="philips_device_count">/%1$d</string>
+    <string name="philips_personal_profile">profile</string>
+    <string name="philips_select_photo_album">select album</string>
 
 
 

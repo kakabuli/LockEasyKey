@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:paddingStart="16pt"
             android:paddingEnd="16pt"
-            app:srcCompat="@drawable/philips_icon_back"  />
+            app:srcCompat="@drawable/philips_icon_back_white"  />
 
         <TextView
             android:id="@+id/head_title"

@@ -108,7 +108,6 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.c0066A1);
 
         LogUtils.d("MainActivity启动 ");
         initView();

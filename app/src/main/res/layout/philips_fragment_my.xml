@@ -54,7 +54,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="14pt"
                 android:layout_marginTop="78pt"
-                android:src="@drawable/philips_icon_person_more" />
+                android:src="@drawable/philips_icon_more_white" />
         </RelativeLayout>
     </RelativeLayout>
 
