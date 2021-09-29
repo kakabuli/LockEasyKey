@@ -63,6 +63,7 @@ import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
@@ -107,6 +108,8 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.c0066A1);
+
         LogUtils.d("MainActivity启动 ");
         initView();
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);

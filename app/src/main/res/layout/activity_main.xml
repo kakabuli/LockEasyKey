@@ -22,6 +22,7 @@
             android:id="@+id/rg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_52"
+            android:background="#5FA9D0"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 

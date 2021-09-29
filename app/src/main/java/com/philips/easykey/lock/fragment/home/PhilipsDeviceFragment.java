@@ -46,6 +46,7 @@ import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 
 
