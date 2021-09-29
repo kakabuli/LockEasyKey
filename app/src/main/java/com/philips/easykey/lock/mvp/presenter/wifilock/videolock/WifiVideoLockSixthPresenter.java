@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoSixthView;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoBindBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoUpdateBindBean;
@@ -116,6 +117,15 @@ public class WifiVideoLockSixthPresenter<T> extends BasePresenter<IWifiLockVideo
             @Override
             public void onSuccess(WifiLockVideoBindResult wifiLockVideoBindResult) {
                 if(isSafe()){
+                    WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
+                    if(wifiLockInfo != null){
+                        wifiLockInfo.setRandomCode(randomCode);
+                        wifiLockInfo.setWifiName(wifiName);
+                        wifiLockInfo.setDevice_did(device_did);
+                        wifiLockInfo.setP2p_password(p2p_password);
+                    }else{
+                        MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
+                    }
                     mViewRef.get().onUpdateSuccess(wifiSN);
                 }
             }
