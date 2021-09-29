@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.R;
 
 /**
  * 状态栏相关工具类
@@ -128,6 +129,7 @@ public class StatusBarUtils {
 			//设置了状态栏 drawble，例如渐变色
 			addStatusViewWithDrawble(mActivity, mDrawable);
 		}
+
 		if (isDrawerLayout()) {
 			//未设置 fitsSystemWindows 且是侧滑菜单，需要设置 fitsSystemWindows 以解决 4.4 上侧滑菜单上方白条问题
 			fitsSystemWindows(mActivity);
@@ -307,6 +309,7 @@ public class StatusBarUtils {
 	 * @param activity
 	 */
 	private void fullScreen(Activity activity) {
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				//5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
@@ -323,6 +326,9 @@ public class StatusBarUtils {
 				window.setStatusBarColor(Color.TRANSPARENT);
 				//导航栏颜色也可以正常设置
 //                window.setNavigationBarColor(Color.TRANSPARENT);
+
+				StatusBarUtils.setWindowStatusBarColor(mActivity, R.color.c0066A1);
+
 			} else {
 				Window window = activity.getWindow();
 				WindowManager.LayoutParams attributes = window.getAttributes();

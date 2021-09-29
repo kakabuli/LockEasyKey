@@ -2471,6 +2471,8 @@
     <string name="philips_cdt_record_icon">记录图标</string>
 
     <!-- my -->
+    <string name="philips_personal_profile">个人资料</string>
+    <string name="philips_select_photo_album">从相册里选择</string>
     <string name="philips_nickname_verify_error">请输入10位以内的字符</string>
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>

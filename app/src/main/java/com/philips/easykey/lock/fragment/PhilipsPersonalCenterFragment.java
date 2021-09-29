@@ -35,6 +35,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StorageUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.utils.ftp.GeTui;

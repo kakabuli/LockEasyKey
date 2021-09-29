@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/philips_icon_back" />
+        app:srcCompat="@drawable/philips_icon_back_white" />
 
     <ImageView
         android:id="@+id/ivHelp"

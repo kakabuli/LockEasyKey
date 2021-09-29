@@ -24,6 +24,7 @@ import com.philips.easykey.lock.dialog.PhilipsInputPwdFailDialog;
 import com.philips.easykey.lock.dialog.PhilipsOpenLocationDialog;
 import com.philips.easykey.lock.dialog.PhilipsWiFiNotConnectDialog;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
+import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoBindBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.WiFiLockVideoUpdateBindBean;
@@ -567,6 +568,15 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
                             if(!TextUtils.isEmpty(msg)) ToastUtils.showShort(msg);
                             // TODO: 2021/5/10 错误跳转
                             return;
+                        }
+                        WifiLockInfo wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
+                        if(wifiLockInfo != null){
+                            wifiLockInfo.setRandomCode(randomCode);
+                            wifiLockInfo.setWifiName(wifiName);
+                            wifiLockInfo.setDevice_did(device_did);
+                            wifiLockInfo.setP2p_password(p2p_password);
+                        }else{
+                            MyApplication.getInstance().getWifiLockInfoBySn(wifiSN);
                         }
                         bindSuccess();
                     }

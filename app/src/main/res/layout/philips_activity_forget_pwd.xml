@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintStart_toStartOf="@+id/vTitleBg"
         app:layout_constraintTop_toTopOf="@+id/vTitleBg"
-        app:srcCompat="@drawable/philips_icon_back" />
+        app:srcCompat="@drawable/philips_icon_back_white" />
 
     <TextView
         android:id="@+id/tvTitle"
