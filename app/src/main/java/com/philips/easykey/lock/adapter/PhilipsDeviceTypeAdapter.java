@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -28,9 +29,10 @@ public class PhilipsDeviceTypeAdapter extends BaseQuickAdapter<PhilipsDeviceType
         if(s == null) return;
         holder.setText(R.id.tvDeviceTypeName, s.getTypeName());
         holder.setTextColor(R.id.tvDeviceTypeName, s.isSelected()
-                ?getContext().getColor(R.color.color_333333)
-                :getContext().getColor(R.color.c666666));
+                ?getContext().getColor(R.color.white)
+                :getContext().getColor(R.color.afffffff));
         ((TextView) holder.getView(R.id.tvDeviceTypeName)).setTextSize(TypedValue.COMPLEX_UNIT_PT, s.isSelected()? 16:14);
+        ((TextView) holder.getView(R.id.tvDeviceTypeName)).setTypeface(s.isSelected()? Typeface.defaultFromStyle(Typeface.BOLD) :Typeface.defaultFromStyle(Typeface.NORMAL));
         holder.setVisible(R.id.vSelected, s.isSelected());
     }
 }

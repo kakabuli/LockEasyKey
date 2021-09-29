@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.bean.PhilipsDeviceBean;
 import com.philips.easykey.lock.publiclibrary.ble.BleUtil;
@@ -37,11 +38,16 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
     }
 
     @Override
-    public void bindView(View view, PhilipsDeviceBean data) {
+    public void bindView(View view, PhilipsDeviceBean data,int position) {
         if (data == null) return;
         TextView tvDeviceName = view.findViewById(R.id.tvDeviceName);
         TextView tvLastRecord = view.findViewById(R.id.tvLastRecord);
 
+        TextView tvCount = view.findViewById(R.id.tvCount);
+        TextView tvCurrentPage = view.findViewById(R.id.tvCurrentPage);
+
+        tvCurrentPage.setText(StringUtils.format("%1d", position + 1));
+        tvCount.setText(tvCount.getContext().getString(R.string.philips_device_count, getCount()));
         ImageView ivPower = view.findViewById(R.id.ivPower);
         if (data.getPower() <= 30) {
             ivPower.setImageResource(R.drawable.philips_home_icon_battery_low);

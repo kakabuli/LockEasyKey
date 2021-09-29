@@ -2,18 +2,23 @@ package com.philips.easykey.lock.fragment.home;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,12 +72,11 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     private PhilipsDeviceTypeAdapter mDeviceTypeAdapter;
     private LinearLayout mllNoDevice;
+    private ConstraintLayout mClVpAndRc;
+    private RelativeLayout mTitle;
     private ViewPager mVPDevices;
     private RecyclerView mRvDevices;
-    private TextView mTvCount, mTvCurrentPage;
     private ImageView mIvGrid, mIvList;
-    private ImageView mIvNoDevice;
-    private TextView mTvNoDevice;
 
     private PhilipsVpHomeDevicesAdapter mVpHomeDevicesAdapter;
     private PhilipsRvHomeDeviceAdapter mRvHomeDeviceAdapter;
@@ -92,11 +96,9 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.philips_fragment_device, container, false);
 
+        mTitle = root.findViewById(R.id.title);
         mllNoDevice = root.findViewById(R.id.llNoDevice);
-        mTvCount = root.findViewById(R.id.tvCount);
-        mTvCurrentPage = root.findViewById(R.id.tvCurrentPage);
-        mTvNoDevice = root.findViewById(R.id.tvNoDevice);
-        mIvNoDevice = root.findViewById(R.id.ivNoDevice);
+        mClVpAndRc = root.findViewById(R.id.clVpAndRc);
 
         initDataViewFromCardType(root);
         initTab(root);
@@ -110,7 +112,9 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
         initTabData();
         MyApplication.getInstance().setOnHomeShowDeviceChangeListener(this::initDevices);
-
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(mTitle.getLayoutParams());
+        lp.setMargins(0, getStatusBarHeight(), 0, 0);
+        mTitle.setLayoutParams(lp);
         return root;
     }
 
@@ -168,7 +172,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
             @Override
             public void onPageSelected(int position) {
-                mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
+                //mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
             }
 
             @Override
@@ -248,10 +252,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         bean2.setTypeName(getString(R.string.philips_smart_lock));
         bean2.setSelected(false);
         list.add(bean2);
-        PhilipsDeviceTypeBean bean3 = new PhilipsDeviceTypeBean();
-        bean3.setTypeName(getString(R.string.philips_clothes_machine));
-        bean3.setSelected(false);
-        list.add(bean3);
         mDeviceTypeAdapter.setList(list);
     }
 
@@ -261,16 +261,10 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mDevices.addAll(MyApplication.getInstance().getHomeShowDevices());
         if(mDevices.isEmpty()) {
             mllNoDevice.setVisibility(View.VISIBLE);
-            showNoDevice(true);
-            mTvCurrentPage.setVisibility(View.GONE);
-            mTvCount.setVisibility(View.GONE);
+            mClVpAndRc.setVisibility(View.GONE);
         } else {
-            showNoDevice(false);
             mllNoDevice.setVisibility(View.GONE);
-            if(isCardShow) {
-                mTvCurrentPage.setVisibility(View.VISIBLE);
-                mTvCount.setVisibility(View.VISIBLE);
-            }
+            mClVpAndRc.setVisibility(View.VISIBLE);
         }
         for (HomeShowBean bean : mDevices) {
             // TODO: 2021/5/17 等待正确json来替换
@@ -292,8 +286,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mWillShowDeviceBeans.clear();
         mWillShowDeviceBeans.addAll(mAllDeviceBeans);
         mVpHomeDevicesAdapter.notifyDataSetChanged();
-        mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
-        mTvCount.setText(getString(R.string.philips_device_count, mWillShowDeviceBeans.size()));
     }
 
     private WifiLockOperationRecord getLastOperationRecord(String wifiSn) {
@@ -333,8 +325,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             if(!mWillShowDeviceBeans.isEmpty()) {
                 mVPDevices.setCurrentItem(0);
             }
-            mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
-            mTvCount.setText(getString(R.string.philips_device_count, mWillShowDeviceBeans.size()));
         } else {
             mRvHomeDeviceAdapter.setList(mWillShowDeviceBeans);
         }
@@ -344,33 +334,21 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
     private void showCardView() {
         if(getContext() == null) return;
-        mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_default));
-        mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_selected));
-        mTvCurrentPage.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
-        mTvCount.setVisibility(mWillShowDeviceBeans.isEmpty()?View.GONE:View.VISIBLE);
         mVPDevices.setVisibility(View.VISIBLE);
         mRvDevices.setVisibility(View.GONE);
-
+        mIvGrid.setVisibility(View.GONE);
+        mIvList.setVisibility(View.VISIBLE);
         initCardData(mCurrentTab);
     }
 
     private void showListView() {
         if(getContext() == null) return;
-        mIvList.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_list_selected));
-        mIvGrid.setImageDrawable(ContextCompat.getDrawable(getContext(),  R.drawable.philips_icon_card_default));
-        mTvCurrentPage.setVisibility(View.GONE);
-        mTvCount.setVisibility(View.GONE);
         mVPDevices.setVisibility(View.GONE);
         mRvDevices.setVisibility(View.VISIBLE);
-
+        mIvGrid.setVisibility(View.VISIBLE);
+        mIvList.setVisibility(View.GONE);
         mRvHomeDeviceAdapter.setList(mWillShowDeviceBeans);
     }
-
-    private void showNoDevice(boolean isShow) {
-        mIvNoDevice.setVisibility(isShow?View.VISIBLE:View.GONE);
-        mTvNoDevice.setVisibility(isShow?View.VISIBLE:View.GONE);
-    }
-
 
     /*------------------------------ 权限处理 ------------------------------*/
 
@@ -543,5 +521,35 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
                     public void onSubscribe1(Disposable d) {
                     }
                 });
+    }
+
+    //获取状态栏高度
+    public int getStatusBarHeight() {
+        int result = 20;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            try {
+                final View decorView = getActivity().getWindow().getDecorView();
+                WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
+                if (rootWindowInsets == null) {
+                    return result;
+                }
+                DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
+                result = displayCutout.getSafeInsetTop();
+                return result;
+            }catch (Exception e){
+                // TODO: 2021/8/24 部分Android10 以上的手机 displayCutout.getSafeInsetTop()会报空指针
+                int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+                if (resourceId > 0) {
+                    result = getResources().getDimensionPixelSize(resourceId);
+                }
+                return result;
+            }
+        }else {
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = getResources().getDimensionPixelSize(resourceId);
+            }
+            return result;
+        }
     }
 }

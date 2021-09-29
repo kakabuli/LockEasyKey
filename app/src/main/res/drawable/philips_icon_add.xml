@@ -1,15 +1,12 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="22pt"
-    android:height="22pt"
-    android:viewportWidth="22"
-    android:viewportHeight="22">
+    android:width="17.815dp"
+    android:height="17.817dp"
+    android:viewportWidth="17.815"
+    android:viewportHeight="17.817">
   <path
-      android:pathData="M11,11m0,11a11,11 0,1 1,0 -22a11,11 0,1 1,0 22"
+      android:pathData="M1,7.31L16.815,7.31A1,1 0,0 1,17.815 8.31L17.815,9.235A1,1 0,0 1,16.815 10.235L1,10.235A1,1 0,0 1,0 9.235L0,8.31A1,1 0,0 1,1 7.31z"
       android:fillColor="#fff"/>
   <path
-      android:pathData="M6.03,10.028L16.211,10.028A1,1 0,0 1,17.211 11.028L17.211,11.028A1,1 0,0 1,16.211 12.028L6.03,12.028A1,1 0,0 1,5.03 11.028L5.03,11.028A1,1 0,0 1,6.03 10.028z"
-      android:fillColor="#0066a1"/>
-  <path
-      android:pathData="M10.028,16.213L10.028,6.03A1,1 0,0 1,11.028 5.03L11.028,5.03A1,1 0,0 1,12.028 6.03L12.028,16.213A1,1 0,0 1,11.028 17.213L11.028,17.213A1,1 0,0 1,10.028 16.213z"
-      android:fillColor="#0066a1"/>
+      android:pathData="M7.31,16.817L7.31,1A1,1 0,0 1,8.31 0L9.235,0A1,1 0,0 1,10.235 1L10.235,16.817A1,1 0,0 1,9.235 17.817L8.31,17.817A1,1 0,0 1,7.31 16.817z"
+      android:fillColor="#fff"/>
 </vector>

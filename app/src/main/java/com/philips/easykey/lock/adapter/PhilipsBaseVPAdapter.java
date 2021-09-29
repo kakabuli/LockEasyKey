@@ -50,7 +50,7 @@ public abstract class PhilipsBaseVPAdapter<T> extends PagerAdapter {
     public Object instantiateItem(@NotNull ViewGroup container, int position) {
         View view = getView(container, position);
         container.addView(view);
-        bindView(view, mDataList.get(position));
+        bindView(view, mDataList.get(position),position);
         return view;
     }
 
@@ -74,6 +74,6 @@ public abstract class PhilipsBaseVPAdapter<T> extends PagerAdapter {
         return view;
     }
 
-    public abstract void bindView(View view, T data);
+    public abstract void bindView(View view, T data,int position);
 
 }

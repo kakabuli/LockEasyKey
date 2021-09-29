@@ -13,6 +13,7 @@
     <color name="transparent">#00000000</color>
 
     <color name="white">#ffffff</color>
+    <color name="afffffff">#afffffff</color>
     <color name="textcolor_content">#666666</color>
     <color name="date_picker_bg">#FFFFFF</color>
     <color name="date_picker_divider">#11112233</color>

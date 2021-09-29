@@ -7,6 +7,7 @@
    <!-- <string name="app_name">Philips EasyKey Plus</string>
     <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
     <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>-->
+    <string name="philips">飞利浦</string>
     <string name="china">中国大陆</string>
     <string name="input_telephone_or_rmail">请输入手机号或邮箱</string>
     <string name="philips_hint_plz_input_password">请输入密码</string>
@@ -57,7 +58,7 @@
     <string name="message">消息</string>
     <string name="mine">我的</string>
     <string name="guard_your_home">守护您的家</string>
-    <string name="click_add_device">点击添加设备</string>
+    <string name="click_add_device">添加设备</string>
     <string name="my_message">我的消息</string>
     <string name="production_activation">产品激活</string>
     <string name="security_setting">安全设置</string>
