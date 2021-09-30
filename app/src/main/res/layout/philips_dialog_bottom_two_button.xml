@@ -16,7 +16,7 @@
         android:text="@string/delete"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@drawable/philips_retangle_0066a1_3"
+        android:background="@drawable/philips_retangle_e04a71_3"
         />
 
     <Button

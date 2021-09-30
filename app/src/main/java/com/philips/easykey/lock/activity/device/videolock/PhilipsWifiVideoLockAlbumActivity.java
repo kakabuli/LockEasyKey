@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.philips.easykey.lock.R;
@@ -46,6 +47,7 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
     ImageView back;
     RecyclerView recycleview;
     ImageView ivMyAlbumDelete;
+    LinearLayout rlPictureData;
 
     private MyAlbumAdapter adapter;
 
@@ -67,6 +69,7 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
         back = findViewById(R.id.back);
         recycleview = findViewById(R.id.recycleview);
         ivMyAlbumDelete = findViewById(R.id.iv_myalbum_delete);
+        rlPictureData = findViewById(R.id.rl_no_data);
 
         back.setOnClickListener(v -> {
             if(showDeleteItem){
@@ -324,6 +327,15 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
 
         }
         adapter.notifyDataSetChanged();
+        if(items != null && items.size() == 0){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    recycleview.setVisibility(View.GONE);
+                    rlPictureData.setVisibility(View.VISIBLE);
+                }
+            });
+        }
     }
 
     private void showDeleteItem(boolean b) {
@@ -404,6 +416,16 @@ public class PhilipsWifiVideoLockAlbumActivity extends BaseAddToApplicationActiv
                 temp = j + 1;
                 times++;
             }
+        }
+
+        if(items != null && items.size() > 0){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    rlPictureData.setVisibility(View.GONE);
+                    recycleview.setVisibility(View.VISIBLE);
+                }
+            });
         }
 
         for(FileBean i : items){
