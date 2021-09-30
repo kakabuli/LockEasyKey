@@ -6,13 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="48pt"
+        android:background="#0066A1 "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="343pt"
-        android:layout_height="44pt"
-        android:layout_marginTop="10pt"
+        android:layout_height="34pt"
+        android:layout_marginTop="7pt"
         android:textCursorDrawable="@drawable/edittext_cursor"
-        android:background="@drawable/philips_shape_search_et_bg"
+        android:background="@drawable/philips_shape_et_login_bg"
         android:drawableStart="@drawable/philips_icon_search"
         android:drawablePadding="16pt"
         android:gravity="center_vertical"
@@ -20,6 +28,7 @@
         android:maxLines="1"
         android:paddingStart="8pt"
         android:singleLine="true"
+        android:textSize="15sp"
         android:textColorHint="@color/c999999"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,8 +44,11 @@
         android:text="@string/philips_search"
         android:layout_marginTop="10pt"
         android:layout_marginEnd="16pt"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvSmartLockStr"
@@ -48,7 +60,7 @@
         android:textColor="@color/c0066A1"
         android:textSize="16pt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/cl" />
 
     <View
         android:id="@+id/view"
@@ -107,6 +119,6 @@
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch"/>
+        app:layout_constraintTop_toBottomOf="@+id/cl"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

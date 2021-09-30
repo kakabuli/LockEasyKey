@@ -784,10 +784,10 @@
     <string name="philips_smart_lock">智能锁</string>
     <string name="philips_ddl708v_5hw">DDL708 V-5HW</string>
     <string name="philips_ddl708vp_5hw">DDL708 VP-5HW</string>
-    <string name="philips_ddl708_5hw">DDL708 5HW</string>
-    <string name="philips_ddl708v_8hw">DDL708 V-8HW</string>
-    <string name="philips_ddl708vp_8hw">DDL708 VP-8HW</string>
-    <string name="philips_ddl708_8hw">DDL708 8HW</string>
+    <string name="philips_ddl709_5hw">DDL709 5HW</string>
+    <string name="philips_ddl709v_8hw">DDL709 VP-5HW</string>
+    <string name="philips_alpha_5hw">Alpha V-5HW</string>
+    <string name="philips_alpha_vp_5hw">Alpha VP-5HW</string>
     <string name="cateye_gateway">猫眼网关</string>
     <string name="three_gateway">6030 网关</string>
     <string name="kaadas_cateye">Kaadas 猫眼</string>
@@ -2446,6 +2446,7 @@
     <string name="philips_flash_light">手电筒</string>
     <string name="philips_qr_code_scan_add_tips">请将门锁后面板电池盖拆卸后，\n扫描电池盖上二维码进入配网流程</string>
     <string name="philips_how_to_add_devices">如何添加设备</string>
+    <string name="philips_how_to_modify_administrators_password">如何修改管理员密码</string>
     <string name="philips_add_device_method_one">方式一： \n扫码门锁电池盖上的二维码，进行添加</string>
     <string name="philips_add_device_method_two">方式二： \n查看包装盒上的门锁型号，手动输入进行添加</string>
     <string name="philips_add_device_service_telephone">服务热线：400-8828-236</string>
@@ -2488,7 +2489,7 @@
     <string name="philips_tip_add_video_lock_task1">1.触摸门锁数字键区域，唤醒门锁面板 \n2.连续2次点击“*”号键，输入管理员密码\n&#160;&#160;&#160;&#160;后按“#”号键确认 \n3.根据语音提示，在门锁菜单中选择“4”</string>
     <string name="philips_the_door_lock_has_a_voice_prompt_distributing_network_please_wait">门锁已语音提示“配网中，请稍后”</string>
     <string name="philips_voice_prompt_setting_failed">语音提示设置失败？</string>
-    <string name="philips_enter_management_mode">进入管理模式</string>
+    <string name="philips_enter_management_mode">设备连接</string>
     <string name="philips_lock_tip_scan_suc_pair_network">门锁已语音提示“扫描成功，配网中”</string>
     <string name="philips_pls_face_the_qr_code_directly_to_the_door_camera">请将二维码正对门锁摄像头8-20CM范围内</string>
     <string name="philips_connect_wifi">连接WiFi</string>

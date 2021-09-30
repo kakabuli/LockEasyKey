@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,7 @@ public class PhilipsAddVideoLockTask1Fragment extends Fragment {
         });
         tvVoicePromptFailed.setOnClickListener(v -> {
             // TODO: 2021/5/6 跳转到语音提示失败的操作显示
+            startActivity(new Intent(mAddVideoLockActivity,PhilipsModifyPassWordHelpActivity.class));
         });
     }
 

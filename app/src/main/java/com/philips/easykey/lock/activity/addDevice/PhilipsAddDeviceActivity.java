@@ -86,8 +86,8 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
 
     private void showAddDeviceFromQRCode() {
         // TODO: 2021/4/26 通过扫描二维码进入添加模式
-        mTvScanAdd.setTextColor(getColor(R.color.color_333333));
-        mTvAddManually.setTextColor(getColor(R.color.c999999));
+        mTvScanAdd.setTextColor(getColor(R.color.white));
+        mTvAddManually.setTextColor(getColor(R.color.afffffff));
         mVScanAddSelected.setVisibility(View.VISIBLE);
         mVAddManuallySelected.setVisibility(View.GONE);
         FragmentUtils.showHide(0, mFragments);
@@ -96,8 +96,8 @@ public class PhilipsAddDeviceActivity extends NormalBaseActivity {
 
     private void showAddDeviceFromManual() {
         // TODO: 2021/4/26 选择对应型号并进入对应的添加方式
-        mTvAddManually.setTextColor(getColor(R.color.color_333333));
-        mTvScanAdd.setTextColor(getColor(R.color.c999999));
+        mTvAddManually.setTextColor(getColor(R.color.white));
+        mTvScanAdd.setTextColor(getColor(R.color.afffffff));
         mVAddManuallySelected.setVisibility(View.VISIBLE);
         mVScanAddSelected.setVisibility(View.GONE);
         FragmentUtils.showHide(1, mFragments);

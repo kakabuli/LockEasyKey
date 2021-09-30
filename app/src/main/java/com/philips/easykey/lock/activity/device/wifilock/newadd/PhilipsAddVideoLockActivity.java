@@ -241,8 +241,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_enter_management_mode);
-        mIvHelp.setVisibility(View.VISIBLE);
+        //mTvTitle.setText(R.string.philips_enter_management_mode);
+        //mIvHelp.setVisibility(View.VISIBLE);
         FragmentUtils.showHide(0, mFragments);
         if(mFragments.get(0) instanceof PhilipsAddVideoLockTask1Fragment) {
             ((PhilipsAddVideoLockTask1Fragment) mFragments.get(0)).initUIAndData();
@@ -259,8 +259,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_connect_wifi);
-        mIvHelp.setVisibility(View.VISIBLE);
+        //mTvTitle.setText(R.string.philips_connect_wifi);
+        //mIvHelp.setVisibility(View.VISIBLE);
         FragmentUtils.showHide(1, mFragments);
         if(mFragments.get(1) instanceof PhilipsAddVideoLockTask2Fragment) {
             ((PhilipsAddVideoLockTask2Fragment) mFragments.get(1)).initUIAndData();
@@ -277,8 +277,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_qr_code_msg);
-        mIvHelp.setVisibility(View.GONE);
+        //mTvTitle.setText(R.string.philips_qr_code_msg);
+        //mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(2, mFragments);
         getDeviceBindingStatus();
         if(mFragments.get(2) instanceof PhilipsAddVideoLockTask3Fragment) {
@@ -297,8 +297,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_network_pairing);
-        mIvHelp.setVisibility(View.GONE);
+        //mTvTitle.setText(R.string.philips_network_pairing);
+        //mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(3, mFragments);
         if(mFragments.get(3) instanceof PhilipsAddVideoLockTask4Fragment) {
             startTask4((PhilipsAddVideoLockTask4Fragment) mFragments.get(3));
@@ -315,8 +315,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_confirm_management_pwd);
-        mIvHelp.setVisibility(View.GONE);
+        //mTvTitle.setText(R.string.philips_confirm_management_pwd);
+        //mIvHelp.setVisibility(View.GONE);
         mTimes = 0;
         FragmentUtils.showHide(4, mFragments);
     }
@@ -331,8 +331,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.c0066A1));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
-        mTvTitle.setText(R.string.philips_add_success);
-        mIvHelp.setVisibility(View.GONE);
+        //mTvTitle.setText(R.string.philips_add_success);
+        //mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(5, mFragments);
     }
 
@@ -346,8 +346,8 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_network_pairing);
-        mIvHelp.setVisibility(View.GONE);
+        //mTvTitle.setText(R.string.philips_network_pairing);
+        //mIvHelp.setVisibility(View.GONE);
         FragmentUtils.showHide(6, mFragments);
     }
 
@@ -361,7 +361,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
         mVTask4.setBackgroundResource(R.drawable.philips_shape_task_done_circle_view);
         mVTask4N5Line.setBackgroundColor(getColor(R.color.cB3C8E6));
         mVTask5.setBackgroundResource(R.drawable.philips_shape_task_prepare_circle_view);
-        mTvTitle.setText(R.string.philips_up_management_pwd);
+        //mTvTitle.setText(R.string.philips_up_management_pwd);
         FragmentUtils.showHide(7, mFragments);
     }
 

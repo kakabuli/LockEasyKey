@@ -9,8 +9,8 @@
     <View
         android:id="@+id/vTitleBg"
         android:layout_width="match_parent"
-        android:layout_height="44pt"
-        android:background="@color/white"
+        android:layout_height="50pt"
+        android:background="#0066A1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/philips_enter_management_mode"
-        android:textColor="@color/color_333333"
+        android:textColor="@color/white"
         android:textSize="17pt"
         android:layout_marginTop="11pt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +45,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:srcCompat="@drawable/philips_icon_help" />
 
 

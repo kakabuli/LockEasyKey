@@ -1,4 +1,4 @@
-package com.philips.easykey.lock.activity.addDevice;
+package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.philips.easykey.lock.R;
-import com.philips.easykey.lock.activity.my.PersonalUserAgreementActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.ConstantConfig;
 
-public class PhilipsAddDeviceHelpActivity extends BaseAddToApplicationActivity {
+public class PhilipsModifyPassWordHelpActivity extends BaseAddToApplicationActivity {
 
     ImageView ivBack;
     TextView tvContent;
@@ -37,11 +36,11 @@ public class PhilipsAddDeviceHelpActivity extends BaseAddToApplicationActivity {
                 finish();
             }
         });
-        tvContent.setText(R.string.philips_how_to_add_devices);
+        tvContent.setText(R.string.philips_how_to_modify_administrators_password);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl(ConstantConfig.PHILIPS_ADD_SCAN_DEVICE);
+        webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD);
     }
 
     public class MyWebViewClient extends WebViewClient {
