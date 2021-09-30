@@ -171,7 +171,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                     });
         });
 
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.colorPrimary);
         initData();
     }
 

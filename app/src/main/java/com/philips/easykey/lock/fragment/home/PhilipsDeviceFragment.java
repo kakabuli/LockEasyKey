@@ -173,7 +173,6 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
 
             @Override
             public void onPageSelected(int position) {
-                //mTvCurrentPage.setText(StringUtils.format("%1d", mWillShowDeviceBeans.size()==0?0:mVPDevices.getCurrentItem()+1));
             }
 
             @Override

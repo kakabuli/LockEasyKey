@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -30,39 +31,50 @@
             android:maxEms="10"
             android:lines="1"
             android:ellipsize="end"
-            android:textColor="@color/color_333333"
+            android:textColor="#ffffff"
             android:textSize="17pt"/>
 
 
         <ImageView
             android:id="@+id/iv_detail_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingEnd="16pt"
+            android:layout_width="26pt"
+            android:layout_height="26pt"
+            android:layout_marginRight="13pt"
+            android:layout_centerVertical="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/philips_equipment_icon_setting"
-            android:layout_alignParentEnd="true"
-
-            />
+            android:layout_alignParentEnd="true" />
 
         <ImageView
             android:id="@+id/iv_detail_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingEnd="16pt"
+            android:layout_width="26pt"
+            android:layout_height="26pt"
+            android:layout_marginRight="13pt"
+            android:layout_centerVertical="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/philips_equipment_icon_delete"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/ivWifi"
-        android:layout_width="20pt"
-        android:layout_height="20pt"
+    <TextView
+        android:id="@+id/tv_right_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="19pt"
         android:layout_marginStart="16pt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@string/safe_mode"
+        android:textSize="14pt"
+        android:textColor="#179584" />
+
+    <ImageView
+        android:id="@+id/ivWifi"
+        android:layout_width="20pt"
+        android:layout_height="20pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="48pt"
+        app:layout_constraintTop_toTopOf="@id/tv_right_mode"
         app:srcCompat="@drawable/philips_home_icon_wifi"
         android:contentDescription="@string/philips_cdt_wifi" />
 
@@ -70,32 +82,18 @@
         android:id="@+id/ivPower"
         android:layout_width="22pt"
         android:layout_height="20pt"
-        android:layout_marginStart="10pt"
-        app:layout_constraintStart_toEndOf="@+id/ivWifi"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivWifi"
         app:srcCompat="@drawable/philips_home_icon_battery_low1"
         android:contentDescription="@string/philips_cdt_power" />
-
-    <TextView
-        android:id="@+id/tv_right_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/safe_mode"
-        android:textSize="14pt"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:drawableRight="@drawable/philips_detail_equipment_icon_help"
-        android:drawablePadding="10pt"
-        android:layout_marginEnd="16pt"
-        app:layout_constraintTop_toTopOf="@id/ivWifi"
-        android:textColor="@color/c000028" />
 
 
     <ImageView
         android:id="@+id/ivVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56pt"
+        android:layout_marginTop="110pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivWifi"
@@ -107,215 +105,105 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="42pt"
-        android:gravity="start|center_vertical"
+        android:gravity="center"
         tools:text="2021.03.29  10:00   小明指纹00开锁"
-        android:textColor="@color/color_333333"
+        android:textColor="#E98300 "
         android:layout_marginStart="60pt"
         android:layout_marginEnd="60pt"
         android:textSize="14pt"
         app:layout_constraintTop_toBottomOf="@+id/ivVideo" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24pt"
+        android:layout_height="56pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20pt"
-        android:layout_marginEnd="20pt">
+        android:background="#5FA9D0 ">
+
 
         <RelativeLayout
-            android:id="@+id/rl_detail_password"
-            android:layout_width="163pt"
-            android:layout_height="56pt"
-            android:layout_marginBottom="12pt"
-            android:background="@drawable/philips_detail_bg_3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_detail_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/philips_equipment_icon_password"
-                android:layout_marginStart="24pt"
-                android:layout_centerVertical="true"/>
+            android:id="@+id/rl_detail_record"
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_detail_password"
-                android:textSize="14pt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6pt"
-                android:textColor="@color/color_333333"
-                android:text="@string/philips_pwd"/>
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/philips_equipment_icon_message"
+                android:textSize="10pt"
+                android:textColor="#ffffff"
+                android:text="@string/philips_message"/>
+        </RelativeLayout>
 
-            <ImageView
+        <RelativeLayout
+            android:id="@+id/rl_detail_album"
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="match_parent">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                app:srcCompat="@drawable/philips_detail_setting_more2"/>
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/philips_equipment_icon_album"
+                android:textSize="10pt"
+                android:textColor="#ffffff"
+                android:text="@string/philips_album"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_detail_password"
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/philips_equipment_icon_password"
+                android:textSize="10pt"
+                android:textColor="#ffffff"
+                android:text="@string/philips_pwd"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_detail_share"
-            android:layout_width="163pt"
-            android:layout_height="56pt"
-            android:layout_marginBottom="12pt"
-            android:background="@drawable/philips_detail_bg_3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_detail_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/philips_equipment_icon_share"
-                android:layout_marginStart="24pt"
-                android:layout_centerVertical="true"/>
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_detail_share"
-                android:textSize="14pt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6pt"
-                android:textColor="@color/color_333333"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/philips_equipment_icon_share"
+                android:textSize="10pt"
+                android:textColor="#ffffff"
                 android:text="@string/philips_activity_detail_share"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                app:srcCompat="@drawable/philips_detail_setting_more2"/>
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/rl_detail_share_setting"
-            android:layout_width="163pt"
-            android:layout_height="56pt"
-            android:background="@drawable/philips_detail_bg_3"
-            app:layout_constraintBottom_toTopOf="@+id/rl_detail_share"
-            android:layout_marginBottom="12pt"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent">
-
-
-            <ImageView
-                android:id="@+id/iv_detail_share_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/philips_equipment_icon_setting"
-                android:layout_marginStart="24pt"
-                android:layout_centerVertical="true"/>
-
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="match_parent"
+            android:visibility="gone">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_detail_share_setting"
-                android:textSize="14pt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6pt"
-                android:textColor="@color/color_333333"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/philips_equipment_icon_setting"
+                android:textSize="10pt"
+                android:textColor="#ffffff"
                 android:text="@string/philips_setting"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                app:srcCompat="@drawable/philips_detail_setting_more2"/>
-
         </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rl_detail_record"
-            android:layout_width="163pt"
-            android:layout_height="56pt"
-            android:layout_marginBottom="12pt"
-            android:background="@drawable/philips_detail_bg_3"
-            app:layout_constraintBottom_toTopOf="@+id/rl_detail_password"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_detail_record"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/philips_equipment_icon_message"
-                android:layout_marginStart="24pt"
-                android:layout_centerVertical="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_detail_record"
-                android:textSize="14pt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6pt"
-                android:textColor="@color/color_333333"
-                android:text="@string/philips_message"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                app:srcCompat="@drawable/philips_detail_setting_more2"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_detail_album"
-            android:layout_width="163pt"
-            android:layout_height="56pt"
-            android:layout_marginBottom="12pt"
-            android:background="@drawable/philips_detail_bg_3"
-            app:layout_constraintBottom_toTopOf="@+id/rl_detail_share"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_detail_album"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/philips_equipment_icon_album"
-                android:layout_marginStart="24pt"
-                android:layout_centerVertical="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_detail_album"
-                android:textSize="14pt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6pt"
-                android:textColor="@color/color_333333"
-                android:text="@string/philips_album"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16pt"
-                app:srcCompat="@drawable/philips_detail_setting_more2"/>
-
-
-        </RelativeLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 
