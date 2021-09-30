@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="select_coutroy">选择国家/地区</string>
-    <string name="app_name">Philips EasyKey+</string>
+    <string name="app_name">Philips EasyKey Plus</string>
     <string name="app_name_notificatoin_title">PhilipsEasyKey+正在运行</string>
     <string name="app_name_notificatoin_content">PhilipsEasyKey+服务已开启，有消息会及时通知您</string>
-   <!-- <string name="app_name">Philips EasyKey Plus</string>
-    <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
-    <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>-->
+    <!-- <string name="app_name">Philips EasyKey Plus</string>
+     <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
+     <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>-->
     <string name="philips">飞利浦</string>
     <string name="china">中国大陆</string>
     <string name="input_telephone_or_rmail">请输入手机号或邮箱</string>
@@ -2320,10 +2320,10 @@
     <string name="philips_password_restrict_3600">1小时</string>
     <string name="philips_password_restrict_86400">1个自然日</string>
     <string name="philips_login_password_restrict">输错%1$s次，限制%2$s</string>
-    <string name="philips_message">消息</string>
+    <string name="philips_message">message</string>
     <string name="philips_last_record">%1$s %2$s</string>
-    <string name="philips_pwd">密钥</string>
-    <string name="philips_setting">设置</string>
+    <string name="philips_pwd">password</string>
+    <string name="philips_setting">setting</string>
 
     <string name="philips_rf">遥控</string>
     <string name="philips_manual">手动</string>
@@ -2466,13 +2466,13 @@
     <string name="philips_face_ota_failed">OTA出错%1$s</string>
 
     <!-- contentDescription -->
-    <string name="philips_cdt_power">电量</string>
+    <string name="philips_cdt_power">power</string>
     <string name="philips_cdt_wifi">Wifi</string>
-    <string name="philips_cdt_record_icon">记录图标</string>
+    <string name="philips_cdt_record_icon">record icon</string>
 
     <!-- my -->
-    <string name="philips_personal_profile">个人资料</string>
-    <string name="philips_select_photo_album">从相册里选择</string>
+    <string name="philips_personal_profile">profile</string>
+    <string name="philips_select_photo_album">select album</string>
     <string name="philips_nickname_verify_error">请输入10位以内的字符</string>
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>
@@ -2603,125 +2603,125 @@
     <string name="philips_splash_app_name">Philips\nEasyKey+</string>
 
     <!-- 密码开门 -->
-    <string name="philips_operation_record_1_0_250">使用临时密码开门</string>
-    <string name="philips_operation_record_1_0_252">使用一次性密码开门</string>
-    <string name="philips_operation_record_1_0_253">\""%1$s\""使用访客密码开门</string>
-    <string name="philips_operation_record_1_0_254">\""%1$s\""使用管理员密码开门</string>
-    <string name="philips_operation_record_1_0_254_no_num">使用管理员密码开门</string>
-    <string name="philips_operation_record_1_0_000">\""%1$s\""使用密码开门</string>
+    <string name="philips_operation_record_1_0_250">Unlock with temporary PIN</string>
+    <string name="philips_operation_record_1_0_252">Unlock with one-time PIN</string>
+    <string name="philips_operation_record_1_0_253">Unlock by \""%1$s\"" with visitor PIN</string>
+    <string name="philips_operation_record_1_0_254">Unlock by \""%1$s\"" with master PIN</string>
+    <string name="philips_operation_record_1_0_254_no_num">Unlock with master PIN</string>
+    <string name="philips_operation_record_1_0_000">Unlock by \""%1$s\"" with PIN</string>
 
     <!--卡片开门-->
-    <string name="philips_operation_record_1_3">\""%1$s\""使用卡片开门</string>
+    <string name="philips_operation_record_1_3">Unlock by \""%1$s\"" with Key tag</string>
 
     <!-- 指纹开门-->
-    <string name="philips_operation_record_1_4_254">\""%1$s\""使用管理员指纹开门</string>
-    <string name="philips_operation_record_1_4_000">\""%1$s\""使用指纹开门</string>
+    <string name="philips_operation_record_1_4_254">Master fingerprint unlock by \""%1$s\""</string>
+    <string name="philips_operation_record_1_4_000">Finger unlock by \""%1$s\""</string>
 
     <!-- 人脸开门-->
-    <string name="philips_operation_record_1_7_000">\""%1$s\""使用面容识别</string>
+    <string name="philips_operation_record_1_7_000">Face ID unlock by \""%1$s\""</string>
 
     <!-- 手机开门-->
-    <string name="philips_operation_record_1_8_000">\""%1$s\""使用手机开门</string>
+    <string name="philips_operation_record_1_8_000">App unlock by \""%1$s\""</string>
 
     <!-- 机械方式开门-->
-    <string name="philips_operation_record_1_9_000">\""%1$s\""使用机械方式开门</string>
+    <string name="philips_operation_record_1_9_000">Key unlock by \""%1$s\""</string>
 
     <!--室内OPEN键开门-->
-    <string name="philips_operation_record_1_10_000">室内OPEN键开门</string>
+    <string name="philips_operation_record_1_10_000">Unlock with OPEN button</string>
 
     <!--室内感应把手开门-->
-    <string name="philips_operation_record_1_11_000">室内感应把手开门</string>
+    <string name="philips_operation_record_1_11_000">Unlock with infrared sensor </string>
 
     <!--关闭门锁-->
-    <string name="philips_operation_record_2_00_000">门已上锁</string>
+    <string name="philips_operation_record_2_00_000">Door is locked</string>
 
     <!--添加密码-->
-    <string name="philips_operation_record_3_0_254">添加\""管理员密码\""</string>
-    <string name="philips_operation_record_3_0_000">添加\""密码%1$s\""</string>
+    <string name="philips_operation_record_3_0_254">Add \""Master PIN\""</string>
+    <string name="philips_operation_record_3_0_000">Add \""PIN %1$s\""</string>
     <!--添加卡片-->
-    <string name="philips_operation_record_3_3_000">添加\""卡片%1$s\""</string>
+    <string name="philips_operation_record_3_3_000">Add \""Key tag %1$s\""</string>
     <!--添加指纹-->
-    <string name="philips_operation_record_3_4_254">添加\""管理员指纹\""</string>
-    <string name="philips_operation_record_3_4_000">添加\""指纹%1$s\""</string>
+    <string name="philips_operation_record_3_4_254">Add \""Master fingerprint\""</string>
+    <string name="philips_operation_record_3_4_000">Add \""Fingerprint %1$s\""</string>
     <!--添加面容识别-->
-    <string name="philips_operation_record_3_7_000">添加\""人脸%1$s\""</string>
+    <string name="philips_operation_record_3_7_000">Add \""Face ID %1$s\""</string>
 
     <!--删除密码-->
-    <string name="philips_operation_record_4_0_255">删除全部密码</string>
-    <string name="philips_operation_record_4_0_254">删除\""管理员密码\""</string>
-    <string name="philips_operation_record_4_0_000">删除\""密码%1$s\""</string>
+    <string name="philips_operation_record_4_0_255">Delete All Password</string>
+    <string name="philips_operation_record_4_0_254">Delete \""Master PIN\""</string>
+    <string name="philips_operation_record_4_0_000">Delete \""PIN %1$s\""</string>
     <!--删除卡片-->
-    <string name="philips_operation_record_4_3_255">删除全部卡片</string>
-    <string name="philips_operation_record_4_3_000">删除\""卡片%1$s\""</string>
+    <string name="philips_operation_record_4_3_255">Delete All Key tag</string>
+    <string name="philips_operation_record_4_3_000">Delete \""Key tag %1$s\""</string>
     <!--删除指纹-->
-    <string name="philips_operation_record_4_4_255">删除全部指纹</string>
-    <string name="philips_operation_record_4_4_254">删除\""管理员指纹\""</string>
-    <string name="philips_operation_record_4_4_000">删除\""指纹%1$s\""</string>
+    <string name="philips_operation_record_4_4_255">Delete All Fingerprint</string>
+    <string name="philips_operation_record_4_4_254">Delete \""Master fingerprint\""</string>
+    <string name="philips_operation_record_4_4_000">Delete \""Fingerprint %1$s\""</string>
     <!--删除面容识别-->
-    <string name="philips_operation_record_4_7_255">删除全部人脸</string>
-    <string name="philips_operation_record_4_7_000">删除\""人脸%1$s\""</string>
+    <string name="philips_operation_record_4_7_255">Delete All Face ID</string>
+    <string name="philips_operation_record_4_7_000">Delete \""Face ID %1$s\""</string>
     <!--修改管理员密码-->
-    <string name="philips_operation_record_5_0_254">修改\""管理员密码\""</string>
+    <string name="philips_operation_record_5_0_254">Modify \""Master PIN\""</string>
     <!--自动模式-->
-    <string name="philips_operation_record_6_0">设置为自动模式</string>
+    <string name="philips_operation_record_6_0">Set to auto mode</string>
     <!--手动模式-->
-    <string name="philips_operation_record_7_0">设置为手动模式</string>
+    <string name="philips_operation_record_7_0">Set to manual mode</string>
     <!--常用模式-->
-    <string name="philips_operation_record_8_0">关闭双重验证功能</string>
+    <string name="philips_operation_record_8_0">Disable dual-verification</string>
     <!--安全模式-->
-    <string name="philips_operation_record_9_0">开启双重验证功能</string>
+    <string name="philips_operation_record_9_0">Enable dual-verification</string>
     <!--反锁模式-->
-    <string name="philips_operation_record_10_0">室内反锁已开启</string>
+    <string name="philips_operation_record_10_0">Inside deadlock enabled</string>
     <!--布防模式-->
-    <string name="philips_operation_record_11_0">布防功能已开启</string>
+    <string name="philips_operation_record_11_0">The deployment function enabled</string>
 
     <!--修改密码昵称-->
-    <string name="philips_operation_record_12_0">\""密码%1$s\""名称更换为\""%2$s\""</string>
+    <string name="philips_operation_record_12_0">\""PIN %1$s\"" changed to \""%2$s\""</string>
     <!--修改卡片昵称-->
-    <string name="philips_operation_record_12_3">\""卡片%1$s\""名称更换为\""%2$s\""</string>
+    <string name="philips_operation_record_12_3">\""Key tag %1$s\"" changed to \""%2$s\""</string>
     <!--修改指纹昵称-->
-    <string name="philips_operation_record_12_4">\""指纹%1$s\""名称更换为\""%2$s\""</string>
+    <string name="philips_operation_record_12_4">\""Finger %1$s\"" changed to \""%2$s\""</string>
     <!--修改面容昵称-->
-    <string name="philips_operation_record_12_7">\""人脸%1$s\""名称更换为\""%2$s\""</string>
+    <string name="philips_operation_record_12_7">\""Face ID %1$s\"" changed to \""%2$s\""</string>
     <!--添加分享用户-->
-    <string name="philips_operation_record_13_0">设备已分享给\""%1$s\""</string>
+    <string name="philips_operation_record_13_0">Successfully shared device whith \""%1$s\""</string>
     <!--删除分享用户-->
-    <string name="philips_operation_record_14_254">已删除\""%1$s\""门锁使用权限</string>
-    <string name="philips_operation_record_14_000">\""%1$s\""已删除\""%2$s\""门锁使用权限</string>
+    <string name="philips_operation_record_14_254">Successfully removed \""%1$s\"" access to smart lock</string>
+    <string name="philips_operation_record_14_000">\""%2$s\"" Access has been removed by \""%1$s\""</string>
     <!--修改管理员指纹-->
-    <string name="philips_operation_record_15_0">修改\""管理员指纹\""</string>
+    <string name="philips_operation_record_15_0">Modify \""Master fingerprint\""</string>
     <!--添加管理员指纹-->
-    <string name="philips_operation_record_16_0">添加\""管理员指纹\""</string>
+    <string name="philips_operation_record_16_0">Add \""Master fingerprint\""</string>
     <!--开启节能模式-->
-    <string name="philips_operation_record_17_0">开启节能模式</string>
+    <string name="philips_operation_record_17_0">Enable power save mode</string>
     <!--关闭节能模式-->
-    <string name="philips_operation_record_18_0">关闭节能模式</string>
+    <string name="philips_operation_record_18_0">Disable power save mode</string>
     <!--已恢复出厂设置-->
-    <string name="philips_operation_record_19_0">已恢复出厂设置</string>
+    <string name="philips_operation_record_19_0">Restore factory settings</string>
 
     <!--报警事件-->
     <!--1 锁定报警-->
-    <string name="philips_wifi_video_lock_alarm_type_1">门锁已被锁定</string>
+    <string name="philips_wifi_video_lock_alarm_type_1">System freeze</string>
     <!--2-0 胁迫密码报警-->
-    <string name="philips_wifi_video_lock_alarm_type_2_0">\""%1$s\""使用胁迫密码开门</string>
+    <string name="philips_wifi_video_lock_alarm_type_2_0">Duress PIN unlock by \""%1$s\""</string>
     <!--2-4 胁迫指纹报警-->
-    <string name="philips_wifi_video_lock_alarm_type_2_4">\""%1$s\""使用胁迫指纹开门</string>
+    <string name="philips_wifi_video_lock_alarm_type_2_4">Duress fingerprint unlock by \""%1$s\""</string>
     <!--3 试错3次锁定报警-->
-    <string name="philips_wifi_video_lock_alarm_type_3">门锁已被锁定</string>
+    <string name="philips_wifi_video_lock_alarm_type_3">System freeze</string>
     <!--4 防撬报警-->
-    <string name="philips_wifi_video_lock_alarm_type_4">检测到您的门锁被撬</string>
+    <string name="philips_wifi_video_lock_alarm_type_4">Detected door being prying </string>
     <!--8 机械钥匙报警-->
-    <string name="philips_wifi_video_lock_alarm_type_8">门锁正在被机械方式开启，请回家或联系保安查看</string>
+    <string name="philips_wifi_video_lock_alarm_type_8">The door lock is being mechanically opened</string>
     <!--16 低电量-->
-    <string name="philips_wifi_video_lock_alarm_type_16">电量过低，请及时更换电池\n门锁已自动开启节能模式</string>
+    <string name="philips_wifi_video_lock_alarm_type_16">Low power level, please replace battery\nEco mode enabled automatically</string>
     <!--32 锁体异常-->
-    <string name="philips_wifi_video_lock_alarm_type_32">您的门锁处于异常状态，请检查锁体</string>
+    <string name="philips_wifi_video_lock_alarm_type_32">The door lock is in abnormal state, please check the lock body</string>
     <!--64 布防报警-->
-    <string name="philips_wifi_video_lock_alarm_type_64">您的门锁有从门内开锁情况</string>
+    <string name="philips_wifi_video_lock_alarm_type_64">The door lock has been unlocked from inside</string>
     <!-- 96 门铃-->
-    <string name="philips_wifi_video_lock_alarm_type_96">有人按门铃</string>
+    <string name="philips_wifi_video_lock_alarm_type_96">Someone presses doorbell</string>
     <!--112 pir动作-->
-    <string name="philips_wifi_video_lock_alarm_type_112">发生移动告警</string>
+    <string name="philips_wifi_video_lock_alarm_type_112">Abnormal motion alert</string>
     <string name="philips_china">中国</string>
     <string name="philips_terms_of_use2">《使用条款》</string>
     <string name="philips_privacy_policy">《隐私政策》</string>
