@@ -10,7 +10,7 @@
         android:id="@+id/vTitleBg"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="@color/white"
+        android:background="#0066A1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scan_add"
-        android:textColor="@color/color_333333"
+        android:textColor="#FFFFFF"
         android:textSize="17pt"
         android:layout_marginStart="67pt"
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
@@ -49,9 +49,10 @@
 
     <View
         android:id="@+id/vScanAddSelected"
-        android:layout_width="89pt"
+        android:layout_width="51pt"
         android:layout_height="3pt"
-        android:background="@color/c0066A1"
+        android:layout_marginTop="8pt"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/tvScanAdd"
         app:layout_constraintStart_toStartOf="@+id/tvScanAdd"
         app:layout_constraintTop_toBottomOf="@+id/tvScanAdd" />
@@ -62,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="56pt"
         android:textSize="17pt"
-        android:textColor="@color/c999999"
+        android:textColor="#afFFFFFF "
         android:text="@string/philips_add_manually"
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintEnd_toStartOf="@+id/ivHelp"
@@ -70,9 +71,10 @@
 
     <View
         android:id="@+id/vAddManuallySelected"
-        android:layout_width="89pt"
+        android:layout_width="51pt"
         android:layout_height="3pt"
-        android:background="@color/c0066A1"
+        android:layout_marginTop="8pt"
+        android:background="#FFFFFF"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/tvAddManually"
         app:layout_constraintStart_toStartOf="@+id/tvAddManually"
