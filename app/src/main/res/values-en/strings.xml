@@ -2478,6 +2478,8 @@
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>
     <string name="philips_system_setting">系统设置</string>
+    <string name="philips_common_problem">common problem</string>
+    <string name="philips_common_problem_of_lock">common problem of lock</string>
     <string name="philips_contact_us">联系我们</string>
     <string name="philips_set_nickname">设置名字</string>
     <string name="Philips_easykey">Philips EasyKey+</string>
@@ -2602,6 +2604,63 @@
     <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
     <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
     <string name="philips_splash_app_name">Philips\nEasyKey+</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">Unlock with temporary PIN</string>

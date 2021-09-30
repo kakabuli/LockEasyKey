@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.my;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -43,16 +44,31 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
         webView.loadUrl(ConstantConfig.PHILIPS_FQA);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new MyWebViewClient());
+        webView.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void  onPageStarted(WebView view, String url, Bitmap favicon) {
+                //设定加载开始的操作
+                if(TextUtils.equals(ConstantConfig.PHILIPS_FQA,webView.getUrl())){
+                    tvContent.setText(R.string.philips_common_problem);
+                }else {
+                    tvContent.setText(R.string.philips_common_problem_of_lock);
+                }
+
+            }
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //设定加载结束的操作
+
+            }
+        });
         ivBack.setOnClickListener(v -> back());
-        tvContent.setText(R.string.faq);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            back();
-            return false;
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -67,6 +83,7 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     }
 
     private void back() {
+
         if (webView == null) finish();
         Log.d("lhf","111---------" + ConstantConfig.PHILIPS_FQA);
         Log.d("lhf","222---------" + webView.getUrl());
@@ -76,4 +93,5 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
             webView.loadUrl(ConstantConfig.PHILIPS_FQA);
         }
     }
+
 }
