@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32pt"
-            android:gravity="start|center_vertical"
+            android:gravity="center"
             tools:text="2021.03.29  10:00   小明指纹00开锁"
             android:layout_marginEnd="60pt"
             android:layout_marginStart="60pt"
