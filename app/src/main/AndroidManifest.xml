@@ -107,10 +107,6 @@
             android:name=".activity.device.videolock.PhilipsWifiVideoLockDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.WifiVideoLockCallingTestActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockAMModeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -147,7 +143,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockAlbumActivity" />
-        <activity android:name=".activity.device.videolock.WifiVideoLockRealTimeVideoActivity" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockCallingActivity"
             android:launchMode="singleTop"

@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -22,23 +21,20 @@ import androidx.core.content.ContextCompat;
 
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
@@ -52,14 +48,12 @@ import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectError;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectJsonError;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.BitmapUtil;
-import com.philips.easykey.lock.utils.BleLockUtils;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
-import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 import com.philips.easykey.lock.widget.avindicator.AVSpeakerView;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.MP4Info;
@@ -91,11 +85,13 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     TextView tvTemporaryPassword;
     RelativeLayout rlVideoLayout;
     RelativeLayout rlMarkLayout;
-    ImageView ivScreenshot;
+    LinearLayout ivScreenshot;
+    LinearLayout llyMute;
     ImageView ivMute;
+    RelativeLayout rlCalling;
     ImageView ivCalling;
-    ImageView ivRecoring;
-    ImageView ivAlbum;
+    LinearLayout ivRecoring;
+    LinearLayout ivAlbum;
     RelativeLayout llyRecord;
     ImageView ivScreenshotBitmap;
     RelativeLayout mRlScreenShot;
@@ -108,7 +104,8 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivCache;
     RelativeLayout titleBar;
     TextView mTvHeadTitle;
-    ImageView mIvTemporaryPwd;
+    LinearLayout mIvTemporaryPwd;
+    TextView mTvToast;
 
     private Bitmap myBitmap;
 
@@ -212,7 +209,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         rlVideoLayout = findViewById(R.id.rl_video_layout);
         rlMarkLayout = findViewById(R.id.rl_mark_layout);
         ivScreenshot = findViewById(R.id.iv_screenshot);
+        llyMute = findViewById(R.id.lly_mute);
         ivMute = findViewById(R.id.iv_mute);
+        rlCalling = findViewById(R.id.rl_calling);
         ivCalling = findViewById(R.id.iv_calling);
         ivRecoring = findViewById(R.id.iv_recoring);
         ivAlbum = findViewById(R.id.iv_album);
@@ -229,6 +228,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         titleBar = findViewById(R.id.title_bar);
         mTvHeadTitle = findViewById(R.id.head_title);
         mIvTemporaryPwd = findViewById(R.id.iv_temporary_pwd);
+        mTvToast = findViewById(R.id.tv_toast);
     }
 
     private void initOnClickListener() {
@@ -273,12 +273,13 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 isDoorbelling = false;
             }
         });
-        ivMute.setOnClickListener(v -> {
+        llyMute.setOnClickListener(v -> {
             if(!isMute){
                 if(mPresenter.stopAudioStream() >= 0){
                     if(mPresenter.isEnableAudio()){
                         mPresenter.enableAudio(false);
                         isMute = true;
+                        llyMute.setSelected(true);
                         ivMute.setImageResource(R.drawable.philips_video_icon_mute_selected);
                         showShort(getString(R.string.wifi_video_lock_mute_on));
                     }
@@ -289,6 +290,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                     if(!mPresenter.isEnableAudio()){
                         mPresenter.enableAudio(true);
                         isMute = false;
+                        llyMute.setSelected(false);
                         ivMute.setImageResource(R.drawable.philips_video_icon_mute);
                         showShort(getString(R.string.philips_wifi_video_lock_mute_off));
                     }
@@ -313,7 +315,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         ivRecoring.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                ToastUtils.showShort(getString(R.string.wifi_video_lock_read_and_write_permission));
+                showShort(getString(R.string.wifi_video_lock_read_and_write_permission));
             }else{
                 if(!ivRecoring.isSelected()){
                     ivRecoring.setSelected(true);
@@ -353,16 +355,18 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     }
 
     private void initLinstener() {
-        ivCalling.setOnClickListener(v -> {
+        rlCalling.setOnClickListener(v -> {
             if(isFirstAudio){
-                if(ivCalling.isSelected()){
-                    ivCalling.setSelected(false);
+                if(rlCalling.isSelected()){
+                    rlCalling.setSelected(false);
                     mPresenter.talkback(false);
                     mPresenter.stopTalkback();
                     tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
                     showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
+                    ivCalling.setVisibility(View.VISIBLE);
+                    avSpeakerView.hide();
                 }else{
-                    ivCalling.setSelected(true);
+                    rlCalling.setSelected(true);
                     mPresenter.talkback(true);
                     mPresenter.startTalkback();
                     showShort(getString(R.string.philips_wifi_video_lock_open_talk_back));
@@ -370,17 +374,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                     ivCalling.setVisibility(View.INVISIBLE);
                     avSpeakerView.show();
                 }
-            }
-        });
-        avSpeakerView.setOnClickListener(v -> {
-            if(isFirstAudio){
-                ivCalling.setSelected(false);
-                mPresenter.talkback(false);
-                mPresenter.stopTalkback();
-                tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
-                showShort(getString(R.string.philips_wifi_video_lock_close_talk_back));
-                ivCalling.setVisibility(View.VISIBLE);
-                avSpeakerView.hide();
             }
         });
     }
@@ -399,8 +392,18 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         return super.onKeyDown(keyCode, event);
     }
 
+    private Runnable showShortRunnale = new Runnable() {
+        @Override
+        public void run() {
+            if(mTvToast != null) mTvToast.setVisibility(View.GONE);
+        }
+    };
+
     private void showShort(String ss) {
-        ToastUtils.getDefaultMaker().setGravity(Gravity.CENTER,0,0).showShort(ss);
+        mPresenter.handler.removeCallbacks(showShortRunnale);
+        mTvToast.setVisibility(View.VISIBLE);
+        mTvToast.setText(ss);
+        mPresenter.handler.postDelayed(showShortRunnale,1000);
     }
 
     @Override
@@ -567,7 +570,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         isFirstAudio = false;
         llyRecord.setVisibility(View.GONE);
         ivRecoring.setSelected(false);
-        ivCalling.setSelected(false);
+        rlCalling.setSelected(false);
         tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
         tvTemporaryPassword.setVisibility(View.GONE);
         tvTemporaryPassword.setText("");
@@ -576,17 +579,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
     @Override
     public void onConnectSuccess() {
-        /*runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(isCalling == 1){
-                    avi.hide();
-                    tvTips.setVisibility(View.GONE);
-                }else{
-
-                }
-            }
-        });*/
         mPresenter.startRealTimeVideo(mSufaceView);
 
     }
@@ -604,7 +596,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 if(errno == XMP2PConnectJsonError.XM_JSON_ERROR_TALK_OCCUPIED){
                     mPresenter.talkback(false);
                     mPresenter.stopTalkback();
-                    ivCalling.setSelected(false);
+                    rlCalling.setSelected(false);
                     tvCallingTips.setText(getString(R.string.wifi_video_lock_talk_back));
                     showShort(getString(R.string.xm_json_error_talk_occupied) + "");
                 }
@@ -730,7 +722,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission));
+                showShort(getString(R.string.wifi_video_lock_microphone_permission));
             }
         });
     }
