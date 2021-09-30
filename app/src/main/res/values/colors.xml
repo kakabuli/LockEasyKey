@@ -7,6 +7,9 @@
     <color name="app_main_status_bar">#1175E7</color>
     <color name="app_main_status_bar1">#1289EE</color>
     <color name="app_main_status_bar2">#14A2F6</color>
+    <color name="app_main_status_bar3">#165294</color>
+    <color name="app_main_status_bar4">#0066A1</color>
+    <color name="app_main_status_bar5">#7F000000</color>
     <color name="app_white_status_bar">#ffffff</color>
 
     <color name="black">#000000</color>

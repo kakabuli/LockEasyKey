@@ -95,7 +95,6 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
     ImageView ivRecordSpot;
     TextView tvTime;
     RelativeLayout rlCallingTime;
-    ImageView ivBigHeadPic;
     TextView tvVideoTimeStamp;
 
     private Dialog dialog;
@@ -154,11 +153,9 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         ivRecordSpot = findViewById(R.id.iv_record_spot);
         tvTime = findViewById(R.id.tv_time);
         rlCallingTime = findViewById(R.id.rl_calling_time);
-        ivBigHeadPic = findViewById(R.id.iv_big_head_pic);
         tvVideoTimeStamp = findViewById(R.id.tv_video_timestamp);
 
         back.setOnClickListener(v -> finish());
-        findViewById(R.id.mark_back).setOnClickListener(v -> finish());
         ivRefuseIcon.setOnClickListener(v -> {
             mPresenter.stopConnect();
             avi.hide();
@@ -263,11 +260,9 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         isCalling = getIntent().getIntExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
         if(isCalling == 0){
             rlCallingTime.setVisibility(View.GONE);
-            ivBigHeadPic.setVisibility(View.VISIBLE);
             isDoorbelling = false;
         }else if(isCalling == 1){
             rlCallingTime.setVisibility(View.VISIBLE);
-            ivBigHeadPic.setVisibility(View.GONE);
             isDoorbelling = true;
         }
 
@@ -278,7 +273,6 @@ public class WifiVideoLockCallingTestActivity extends BaseActivity<IWifiLockVide
         }
         if (wifiLockInfo != null){
             mPresenter.settingDevice(wifiLockInfo);
-            ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
             String lockNickname = wifiLockInfo.getLockNickname();
         }
 

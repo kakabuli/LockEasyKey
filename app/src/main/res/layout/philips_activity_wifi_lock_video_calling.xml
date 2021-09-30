@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/transparent"
-
         >
 
         <SurfaceView
@@ -358,29 +357,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@mipmap/philips_calling_img_bg" />
-
-        <RelativeLayout
-            android:id="@+id/rl_title_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="44pt">
-            <ImageView
-                android:id="@+id/mark_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_centerVertical="true"
-                />
-
-        </RelativeLayout>
-
+            android:background="@drawable/calling_layout_gradual_bg" />
 
         <ImageView
             android:id="@+id/iv_real_time_refuse_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80pt"
+            android:layout_marginBottom="60pt"
             android:layout_centerHorizontal="true"
             android:src="@drawable/philips_calling_icon_refuse" />
 
@@ -390,7 +374,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80pt"
+            android:layout_marginBottom="60pt"
             >
 
             <ImageView
@@ -398,7 +382,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="60pt"
+                android:layout_marginRight="47pt"
                 app:srcCompat="@drawable/philips_calling_icon_video" />
 
             <ImageView
@@ -406,7 +390,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="60pt"
+                android:layout_marginLeft="47pt"
                 app:srcCompat="@drawable/philips_calling_icon_refuse" />
 
             <ImageView
@@ -418,43 +402,11 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_big_head_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl_title_bar"
-            android:layout_marginTop="37pt"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/philips_calling_img_use" />
-
-
-        <TextView
-            android:id="@+id/tv_doorbell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_video_lock_rang_the_doorbell"
-            android:textSize="15pt"
-            android:layout_marginTop="18pt"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/iv_big_head_pic"
-            android:textColor="@color/white"/>
-
-        <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
-            android:id="@+id/avi"
-            style="@style/AVLoadingIndicatorView.Large"
-            android:layout_width="35pt"
-            android:layout_height="35pt"
-            android:layout_centerInParent="true"
-            />
-
         <TextView
             android:id="@+id/tv_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/avi"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="17pt"
+            android:layout_centerInParent="true"
             android:text="@string/wifi_video_lock_p2p_connect"
             android:textColor="#fff"
             android:textSize="15pt" />

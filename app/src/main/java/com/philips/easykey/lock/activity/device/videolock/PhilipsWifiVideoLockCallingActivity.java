@@ -57,10 +57,10 @@ import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.Rsa;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
 import com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView;
 import com.philips.easykey.lock.widget.avindicator.AVSpeakerView;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.MP4Info;
 import com.yuv.display.MyBitmapFactory;
@@ -83,7 +83,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivAnswerIcon;
     ImageView ivRefuseIcon;
     ImageView ivRefuseIcon1;
-    AVLoadingIndicatorView avi;
     AVSpeakerView avSpeakerView;
     TextView tvTips;
     ImageView ivSetting;
@@ -104,12 +103,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     TextView tvTime;
     ImageView ivRealTimeRefuseIcon;
     RelativeLayout rlCallingTime;
-    ImageView ivBigHeadPic;
     TextView tvVideoTimeStamp;
     TextView tvCallingTips;
-    TextView tvDoorbell;
     ImageView ivCache;
-    RelativeLayout rlTitleBar;
     RelativeLayout titleBar;
     TextView mTvHeadTitle;
     ImageView mIvTemporaryPwd;
@@ -141,10 +137,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     //门铃调用1次
     private boolean isDoorbelling = false;
 
-    private RequestOptions options;
-
-    final RxPermissions rxPermissions = new RxPermissions(this);
-
     private List<ProductInfo> productList = new ArrayList<>();
 
     private boolean isLastPirture = false;
@@ -166,15 +158,10 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         productList = MyApplication.getInstance().getProductInfos();
         if(isCalling == 0){
             rlCallingTime.setVisibility(View.GONE);
-            tvDoorbell.setVisibility(View.GONE);
             isDoorbelling = false;
         }else if(isCalling == 1){
             ivRealTimeRefuseIcon.setVisibility(View.GONE);
-            tvDoorbell.setVisibility(View.VISIBLE);
             ivRefuseIcon1.setVisibility(View.GONE);
-            if(avi != null){
-                avi.hide();
-            }
             if(tvTips != null)
                 tvTips.setVisibility(View.GONE);
             isDoorbelling = true;
@@ -190,7 +177,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             String lockNickname = wifiLockInfo.getLockNickname();
             mTvHeadTitle.setText(TextUtils.isEmpty(lockNickname) ? wifiLockInfo.getWifiSN() : lockNickname);
         }
-
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.app_main_status_bar3);
         rlVideoLayout.setVisibility(View.GONE);
         rlMarkLayout.setVisibility(View.VISIBLE);
         if(avSpeakerView != null){
@@ -205,19 +192,11 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             }
         },30 * 1000);
         llyRecord.setVisibility(View.GONE);
-        avi.show();
 
         tvTemporaryPassword.setVisibility(View.GONE);
         tvTemporaryPassword.setText("");
 
         initLinstener();
-/*        //动态设置状态栏高度
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(titleBar.getLayoutParams());
-        lp.setMargins(0, getStatusBarHeight(), 0, 0);
-        titleBar.setLayoutParams(lp);*/
-        RelativeLayout.LayoutParams rllp = new RelativeLayout.LayoutParams(rlTitleBar.getLayoutParams());
-        rllp.setMargins(0, getStatusBarHeight(), 0, 0);
-        rlTitleBar.setLayoutParams(rllp);
     }
 
     private void initUI() {
@@ -225,7 +204,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         ivAnswerIcon = findViewById(R.id.iv_answer_icon);
         ivRefuseIcon = findViewById(R.id.iv_refuse_icon);
         ivRefuseIcon1 = findViewById(R.id.iv_refuse_icon_1);
-        avi = findViewById(R.id.avi);
         tvTips = findViewById(R.id.tv_tips);
         ivSetting = findViewById(R.id.iv_setting);
         back = findViewById(R.id.back);
@@ -245,12 +223,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         tvTime = findViewById(R.id.tv_time);
         ivRealTimeRefuseIcon = findViewById(R.id.iv_real_time_refuse_icon);
         rlCallingTime = findViewById(R.id.rl_calling_time);
-        ivBigHeadPic = findViewById(R.id.iv_big_head_pic);
         tvVideoTimeStamp = findViewById(R.id.tv_video_timestamp);
         tvCallingTips = findViewById(R.id.tv_calling_tip);
-        tvDoorbell = findViewById(R.id.tv_doorbell);
         ivCache = findViewById(R.id.iv_cache);
-        rlTitleBar = findViewById(R.id.rl_title_bar);
         titleBar = findViewById(R.id.title_bar);
         mTvHeadTitle = findViewById(R.id.head_title);
         mIvTemporaryPwd = findViewById(R.id.iv_temporary_pwd);
@@ -258,27 +233,24 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
     private void initOnClickListener() {
         back.setOnClickListener(v -> finish());
-        findViewById(R.id.mark_back).setOnClickListener(v -> finish());
         ivRealTimeRefuseIcon.setOnClickListener(v -> {
             mPresenter.stopConnect();
-            avi.hide();
             tvTips.setVisibility(View.GONE);
             finish();
         });
         ivRefuseIcon1.setOnClickListener(v -> {
             mPresenter.stopConnect();
-            avi.hide();
             tvTips.setVisibility(View.GONE);
             finish();
         });
         ivRefuseIcon.setOnClickListener(v -> {
             mPresenter.stopConnect();
-            avi.hide();
             tvTips.setVisibility(View.GONE);
             finish();
         });
         ivAnswerIcon.setOnClickListener(v -> {
             if(this.isConnect){
+                StatusBarUtils.setWindowStatusBarColor(PhilipsWifiVideoLockCallingActivity.this,R.color.transparent);
                 rlVideoLayout.setVisibility(View.VISIBLE);
                 rlMarkLayout.setVisibility(View.GONE);
                 new Thread(new Runnable() {
@@ -297,9 +269,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             }else{
                 ivAnswerIcon.setVisibility(View.GONE);
                 ivRefuseIcon.setVisibility(View.GONE);
-                tvDoorbell.setVisibility(View.GONE);
-                avi.setVisibility(View.VISIBLE);
-                avi.show();
                 tvTips.setVisibility(View.VISIBLE);
                 isDoorbelling = false;
             }
@@ -383,39 +352,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         tvTemporaryPassword.setTextIsSelectable(true);
     }
 
-    @Deprecated
-    private void changeIcon() {
-        ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
-        if (!TextUtils.isEmpty(wifiLockInfo.getProductModel())){
-            ivBigHeadPic.setImageResource(BleLockUtils.getDetailImageByModel(wifiLockInfo.getProductModel()));
-            String model = wifiLockInfo.getProductModel();
-            String WifiSN = wifiLockInfo.getWifiSN();
-
-            if (model != null && WifiSN != null) {
-                //本地图片有对应的产品则不获取缓存的产品型号图片，缓存没有则选择尝试下载
-                if (BleLockUtils.getDetailImageByModel(model) == R.mipmap.bluetooth_lock_default) {
-                    options = new RequestOptions()
-                            .placeholder(R.mipmap.bluetooth_lock_default)      //加载成功之前占位图
-                            .error(R.mipmap.bluetooth_lock_default)      //加载错误之后的错误图
-                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)    //只缓存最终的图片
-                            .dontAnimate()                                    //直接显示图片
-                            .fitCenter();
-
-                    for (ProductInfo productInfo : productList) {
-                        try {
-                            if (productInfo.getSnHead().equals(WifiSN.substring(0,3))) {
-
-                                Glide.with(this).load(productInfo.getAdminUrl()).apply(options).into(ivBigHeadPic);
-                            }
-                        } catch (Exception e) {
-                            LogUtils.d("--kaadas--:" + e.getMessage());
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private void initLinstener() {
         ivCalling.setOnClickListener(v -> {
             if(isFirstAudio){
@@ -491,9 +427,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 mPresenter.handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(avi != null){
-                            avi.hide();
-                        }
                         if(tvTips != null)
                             tvTips.setVisibility(View.GONE);
                         showKeepAliveDialog();
@@ -600,9 +533,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             @Override
             public void run() {
                 if(!PhilipsWifiVideoLockCallingActivity.this.isFinishing()){
-                    if(avi != null){
-                        avi.hide();
-                    }
                     if(tvTips != null)
                         tvTips.setVisibility(View.GONE);
                     LogUtils.d("shulan"+this + " paramInt=" + paramInt);
@@ -778,13 +708,11 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 if(ivCache!= null)
                     ivCache.setVisibility(View.GONE);
                 if(isCalling == 0 || !isDoorbelling){
-                    if(avi!=null){
-                        avi.hide();
-                    }
                     if(tvTips != null){
                         tvTips.setVisibility(View.GONE);
                     }
                     if(rlVideoLayout != null){
+                        StatusBarUtils.setWindowStatusBarColor(PhilipsWifiVideoLockCallingActivity.this,R.color.transparent);
                         rlVideoLayout.setVisibility(View.VISIBLE);
                     }
                     if(rlMarkLayout != null){
@@ -1007,8 +935,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             @Override
             public void onClick(View v) {
                 resetStatus();
-                avi.setVisibility(View.VISIBLE);
-                avi.show();
                 tvTips.setVisibility(View.VISIBLE);
                 dialog.dismiss();
                 connectP2P();
