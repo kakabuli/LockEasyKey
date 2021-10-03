@@ -85,8 +85,6 @@ public class PersonalFAQActivity extends BaseAddToApplicationActivity {
     private void back() {
 
         if (webView == null) finish();
-        Log.d("lhf","111---------" + ConstantConfig.PHILIPS_FQA);
-        Log.d("lhf","222---------" + webView.getUrl());
         if(TextUtils.equals(ConstantConfig.PHILIPS_FQA,webView.getUrl())){
             finish();
         }else {

@@ -98,6 +98,7 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     private void changeConfirmBtnStyle(boolean isSelect) {
         btnConfirm.setEnabled(isSelect);
         btnConfirm.setBackgroundResource(isSelect ? R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
+        btnConfirm.setTextColor(isSelect ? getResources().getColor(R.color.white) : getResources().getColor(R.color.colorPrimary));
     }
 
     @Override

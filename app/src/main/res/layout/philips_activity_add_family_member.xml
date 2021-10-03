@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white">
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/philips_add_user"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"/>
 
     </RelativeLayout>
