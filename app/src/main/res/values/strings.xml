@@ -771,7 +771,7 @@
     <string name="add_device_before_pair_gateway">添加设备前，请先配置kaadas网关</string>
     <string name="gateway">网关</string>
     <string name="cateye">猫眼</string>
-    <string name="voice_quality_setting">语音设置</string>
+    <string name="voice_quality_setting">Voice Settings</string>
     <string name="screen_brightness">显示屏亮度</string>
     <string name="screen_duration">显示屏时间</string>
     <string name="screen_duration_text">自动亮屏</string>
@@ -2030,7 +2030,7 @@
     <string name="wifi_video_lock_delete_show_toast">There is nothing to delete~</string>
     <string name="wifi_video_lock_find_file_show_toast">找不到文件</string>
     <string name="wifi_video_lock_p2p_connect">Someone is at the door...</string>
-    <string name="dialog_wifi_video_power_status">已开启省电模式，需唤醒门锁后再试</string>
+    <string name="dialog_wifi_video_power_status">Power saving mode is turned on, you need to wake up the door lock and try again</string>
     <string name="dialog_wifi_video_delete_video">确定删除视频吗？</string>
     <string name="dialog_wifi_video_keep_alive_close">Video connection closed</string>
     <string name="dialog_wifi_video_doorbell_outside_door">1. Please check the power of the device, please replace the battery when the power is too low\n2. When the power is normal, please turn on the video function in the lock end energy saving setting</string>
