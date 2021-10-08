@@ -188,8 +188,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             if (BleLockUtils.isSupportAMModeSet(func)) {
                 rlAm.setVisibility(View.VISIBLE);
                 int amMode = wifiLockInfo.getAmMode();
-                ivAm.setText(amMode == 1 ? getString(R.string.hand) + getString(R.string.activity_wifi_video_more_lock)
-                        : getString(R.string.auto) + getString(R.string.activity_wifi_video_more_lock));
+                ivAm.setText(amMode == 1 ? getString(R.string.wifi_video_lock_normal_mode)
+                        : getString(R.string.wifi_video_lock_auto_mode));
             } else {
                 rlAm.setVisibility(View.GONE);
             }
@@ -832,8 +832,8 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                     break;
                 case KeyConstants.WIFI_VIDEO_LOCK_AM_MODE_CODE:
                     int amMode = data.getIntExtra(KeyConstants.WIFI_VIDEO_LOCK_AM_MODE,0);
-                    ivAm.setText(amMode == 1 ? getString(R.string.hand) + getString(R.string.activity_wifi_video_more_lock)
-                            : getString(R.string.auto) + getString(R.string.activity_wifi_video_more_lock));
+                    ivAm.setText(amMode == 1 ? getString(R.string.wifi_video_lock_normal_mode)
+                            : getString(R.string.wifi_video_lock_auto_mode));
                     break;
                 case KeyConstants.WIFI_VIDEO_LOCK_LANGUAGE_CODE:
                     String language = data.getStringExtra(KeyConstants.WIFI_VIDEO_LOCK_LANGUAGE);

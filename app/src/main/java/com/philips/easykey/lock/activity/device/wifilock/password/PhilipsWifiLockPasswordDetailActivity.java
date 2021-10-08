@@ -99,10 +99,8 @@ public class PhilipsWifiLockPasswordDetailActivity extends BaseActivity<IWifiLoc
                 String phone = mEtNickName.getText().toString().trim();
                 if(TextUtils.isEmpty(phone)) {
                     confirm.setPressed(false);
-                    confirm.setTextColor(getResources().getColor(R.color.colorPrimary));
                 } else {
                     confirm.setPressed(!TextUtils.isEmpty(s.toString()));
-                    confirm.setTextColor(getResources().getColor(R.color.white));
                 }
             }
         });

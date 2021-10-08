@@ -1,17 +1,21 @@
 package com.philips.easykey.lock.activity.device.wifilock.family;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ViewUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
@@ -98,7 +102,6 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     private void changeConfirmBtnStyle(boolean isSelect) {
         btnConfirm.setEnabled(isSelect);
         btnConfirm.setBackgroundResource(isSelect ? R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
-        btnConfirm.setTextColor(isSelect ? getResources().getColor(R.color.white) : getResources().getColor(R.color.colorPrimary));
     }
 
     @Override
@@ -173,7 +176,11 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     @Override
     public void onAddUserFailed(BaseResult result) {
         hiddenLoading();
-        ToastUtils.showLong( HttpUtils.httpErrorCode(this, result.getCode()));
+        ToastUtils.make()
+                .setTextColor(Color.WHITE)
+                .setBgResource(R.drawable.background_7f000000_3pt)
+                .setGravity(Gravity.CENTER, 0, 0)
+                .show(HttpUtils.httpErrorCode(this, result.getCode()));
     }
 
     @Override

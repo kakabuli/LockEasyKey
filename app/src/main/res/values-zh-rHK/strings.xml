@@ -825,7 +825,7 @@
     <string name="take_effect_be_being">生效中。。。</string>
     <string name="copy_success">复制成功</string>
     <string name="telephone_not_install_wechat">您的手机未安装微信</string>
-    <string name="share_content">【凯迪仕智能】密码: %1$s。此密码只能用于凯迪仕智能锁验证开门，%2$s。</string>
+    <string name="share_content">【Philips EasyKey+】密码: %1$s。此密码只能用于飞利浦Plus智能锁验证开门，%2$s。</string>
     <string name="ftp_weak_up_fail">FTP唤醒失败</string>
     <string name="data_get_loading">数据获取中...</string>
     <string name="pull_refefresh_new_data">下拉刷新查看最新数据</string>
@@ -2373,7 +2373,7 @@
     <string name="philips_activity_gateway_more_failed">获取失败</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_1">手机未连接Wi-Fi，无法添加设备</string>
     <string name="philips_dialog_go_to_connect">去连接</string>
-    <string name="philips_activity_clothes_hanger_machine_add_dialog_3">请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁</string>
+    <string name="philips_activity_clothes_hanger_machine_add_dialog_3">请到设置>隐私>定位服务中开启【Philips EasyKey+】\n定位服务，否则无法添加Wi-Fi锁</string>
     <string name="philips_activity_timer_manager_1">不重复</string>
     <string name="philips_activity_timer_manager_2">打开开关1</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_4">蓝牙未开启，是否开启蓝牙？</string>
@@ -2399,7 +2399,7 @@
     <string name="philips_activity_wifi_lock_device_info_back_panel">后面板固件版本：</string>
     <string name="philips_activity_wifi_lock_ble_wifi_checkadmin_password">门锁初始密码不能验证,\n请修改门锁管理密码或重新输入\n</string>
     <string name="philips_activity_wifi_lock_checkadmin_password">连接已断开，请重新开始\n</string>
-    <string name="philips_activity_wifi_lock_new_add_first">请到设置>隐私>定位服务中开启【凯迪仕智能】\n定位服务，否则无法添加Wi-Fi锁</string>
+    <string name="philips_activity_wifi_lock_new_add_first">请到设置>隐私>定位服务中开启【Philips EasyKey+】\n定位服务，否则无法添加Wi-Fi锁</string>
     <string name="philips_activity_wifi_lock_check_password_dialog_1">门锁管理密码验证失败3次，\n超过5次，配网失败</string>
     <string name="philips_activity_wifi_lock_add_modify_password">连接断开，请重新开始</string>
     <string name="philips_activity_register_agreenment">请先同意用户协议</string>
@@ -2478,6 +2478,8 @@
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>
     <string name="philips_system_setting">系统设置</string>
+    <string name="philips_common_problem">常见问题</string>
+    <string name="philips_common_problem_of_lock">门锁问题</string>
     <string name="philips_contact_us">联系我们</string>
     <string name="philips_set_nickname">设置名字</string>
     <string name="Philips_easykey">Philips EasyKey+</string>

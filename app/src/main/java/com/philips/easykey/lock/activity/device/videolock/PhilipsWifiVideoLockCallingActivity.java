@@ -43,6 +43,7 @@ import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockCa
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoCallingView;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
+import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.publiclibrary.mqtt.eventbean.WifiLockOperationBean;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectError;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PConnectJsonError;
@@ -105,7 +106,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     RelativeLayout titleBar;
     TextView mTvHeadTitle;
     LinearLayout mIvTemporaryPwd;
-    TextView mTvToast;
 
     private Bitmap myBitmap;
 
@@ -228,7 +228,6 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         titleBar = findViewById(R.id.title_bar);
         mTvHeadTitle = findViewById(R.id.head_title);
         mIvTemporaryPwd = findViewById(R.id.iv_temporary_pwd);
-        mTvToast = findViewById(R.id.tv_toast);
     }
 
     private void initOnClickListener() {
@@ -392,18 +391,12 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         return super.onKeyDown(keyCode, event);
     }
 
-    private Runnable showShortRunnale = new Runnable() {
-        @Override
-        public void run() {
-            if(mTvToast != null) mTvToast.setVisibility(View.GONE);
-        }
-    };
-
     private void showShort(String ss) {
-        mPresenter.handler.removeCallbacks(showShortRunnale);
-        mTvToast.setVisibility(View.VISIBLE);
-        mTvToast.setText(ss);
-        mPresenter.handler.postDelayed(showShortRunnale,1000);
+        ToastUtils.make()
+                .setTextColor(Color.WHITE)
+                .setBgResource(R.drawable.background_7f000000_3pt)
+                .setGravity(Gravity.CENTER, 0, 0)
+                .show(ss);
     }
 
     @Override

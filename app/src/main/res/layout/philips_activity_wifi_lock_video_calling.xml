@@ -331,19 +331,6 @@
                 android:text="@string/wifi_video_lock_talk_back"/>
         </RelativeLayout>
 
-
-        <TextView
-            android:id="@+id/tv_toast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16pt"
-            android:textColor="@color/white"
-            android:padding="12pt"
-            android:visibility="gone"
-            android:background="@drawable/background_7f000000_3pt"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="222pt"/>
-
     </RelativeLayout>
 
 
