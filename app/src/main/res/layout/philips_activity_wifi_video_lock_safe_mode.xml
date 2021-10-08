@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/philips_video_activity_open_lock_mode"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt" />
     </RelativeLayout>
 
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_wifi_video_safe_mode_double"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="17pt"
             android:textColor="#333333"
             android:layout_marginStart="16pt"
             android:textSize="16pt" />
@@ -89,7 +89,7 @@
             android:text="@string/activity_wifi_video_safe_mode_double_content"
             android:layout_below="@id/en_text"
             android:textColor="#999999"
-            android:layout_marginTop="8pt"
+            android:layout_marginTop="7pt"
             android:textSize="12pt" />
 
         <CheckBox
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_17"
+            android:layout_marginRight="17pt"
             android:button="@drawable/language_selector"
             android:clickable="false" />
 

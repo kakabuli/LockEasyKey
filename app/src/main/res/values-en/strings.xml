@@ -398,7 +398,7 @@
     <string name="password_or_card">密码+卡片（选项功能）</string>
     <string name="finger_or_card">指纹+卡片（选项功能）</string>
     <string name="chinese">Chinese</string>
-    <string name="lock_language">门锁语言</string>
+    <string name="lock_language">Door Lock Language</string>
     <string name="please_use_gateway_qr_code">请使用Kaadas网关二维码</string>
     <string name="unbind_not_have_devicesn">无法绑定</string>
     <string name="gateway_already_bind">网关已经被绑定</string>
@@ -2069,7 +2069,7 @@
     <string name="activity_wifi_video_real_time_belling_video">有人按门铃（或锁被唤醒）时，可视对讲不受影响</string>
     <string name="activity_wifi_video_safe_mode_2">双重验证（指纹+密码）</string>
     <string name="activity_wifi_video_safe_mode_double">Multiple Verification</string>
-    <string name="activity_wifi_video_safe_mode_double_content">需两种秘钥验证成功后方可开门</string>
+    <string name="activity_wifi_video_safe_mode_double_content">Two kinds of secret keys are required to verify successfully before opening the door</string>
     <string name="activity_wifi_video_scan_network">正在配网中，请稍后...</string>
     <string name="activity_wifi_video_scan_wifi_fail">Wi-Fi账号或密码输错已超过3次</string>
     <string name="activity_wifi_video_sixth_fail">门锁管理密码验证失败，\n请重新输入</string>
