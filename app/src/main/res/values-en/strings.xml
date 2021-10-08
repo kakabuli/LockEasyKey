@@ -2525,142 +2525,85 @@
     <string name="philips_no_device">暂无设备</string>
 
     <!-- code回调的数据 -->
-    <string name="philips_code_account_or_password_empty">账号或密码为空</string>
-    <string name="philips_code_account_or_password_error">账户或密码错误</string>
-    <string name="philips_code_sn_wrong">SN格式不对</string>
-    <string name="philips_code_update_mission_do_not_exist">升级任务不存在</string>
-    <string name="philips_code_not_bind">验证码无效</string>
-    <string name="philips_code_has_bind">设备已绑定</string>
-    <string name="philips_code_register_account_fail">注册账户失败</string>
-    <string name="philips_code_modify_password_fail">修改密码失败</string>
-    <string name="philips_code_no_result">查无结果</string>
-    <string name="philips_code_character_length_exceeds_limit">字符长度超出限制</string>
-    <string name="philips_code_liu_yan_fail">留言失败</string>
-    <string name="philips_code_security_key_full">当前胁迫密钥已满5组，请关闭其他胁迫密钥后，再添加</string>
-    <string name="philips_code_request_data_format_incorrect">请求数据或格式不对</string>
-    <string name="philips_code_data_parameter_incorrect">数据参数不对</string>
-    <string name="philips_code_to_empower_the_user_not_found">要赋权用户没找到！</string>
+    <string name="philips_code_account_or_password_empty">Account or password is empty</string>
+    <string name="philips_code_account_or_password_error">Incorrect account or password</string>
+    <string name="philips_code_sn_wrong">SN format is wrong</string>
+    <string name="philips_code_update_mission_do_not_exist">The upgrade task does not exist</string>
+    <string name="philips_code_not_bind">Invalid verification code</string>
+    <string name="philips_code_has_bind">Device is bound</string>
+    <string name="philips_code_register_account_fail">Account registration failed</string>
+    <string name="philips_code_modify_password_fail">Failed to modify password</string>
+    <string name="philips_code_no_result">No results</string>
+    <string name="philips_code_character_length_exceeds_limit">Character length exceeds limit</string>
+    <string name="philips_code_liu_yan_fail">Message failed</string>
+    <string name="philips_code_security_key_full">The current duress key is full of 5 groups, please close other duress keys before adding</string>
+    <string name="philips_code_request_data_format_incorrect">The requested data or format is incorrect</string>
+    <string name="philips_code_data_parameter_incorrect">Incorrect data parameters</string>
+    <string name="philips_code_to_empower_the_user_not_found">To empower the user not found！</string>
     <string name="philips_code_device_not_found">device not found</string>
-    <string name="philips_code_res_not_found">资源未找到</string>
-    <string name="philips_code_user_repeat_register">用户重复注册</string>
-    <string name="philips_code_not_show_verification">不需要显示验证码</string>
+    <string name="philips_code_res_not_found">Resource not found</string>
+    <string name="philips_code_user_repeat_register">Repeat user registration</string>
+    <string name="philips_code_not_show_verification">No need to display verification code</string>
     <string name="philips_code_mqtt_server_connect_fail">mqtt server connect fail</string>
-    <string name="philips_code_virification_error">查无该用户</string>
-    <string name="philips_code_device_repeat_register">设备重复注册</string>
-    <string name="philips_code_user_not_exist">用户不存在</string>
-    <string name="philips_code_device_register_fail_repeat_record">设备已被绑定，请解绑后再添加</string>
-    <string name="philips_code_image_size_too_large">图片质量过大，无法上传</string>
+    <string name="philips_code_virification_error">No such user found</string>
+    <string name="philips_code_device_repeat_register">Duplicate device registration</string>
+    <string name="philips_code_user_not_exist">User does not exist</string>
+    <string name="philips_code_device_register_fail_repeat_record">The device has been bound, please unbind it before adding</string>
+    <string name="philips_code_image_size_too_large">The image quality is too large to upload</string>
     <string name="philips_code_do_not_register_user_memenet">don\'t register user ,memenet</string>
-    <string name="philips_code_device_register_fail_duplicate_record">设备注册失败 重复的记录！</string>
-    <string name="philips_code_user_exsit">用户已经存在</string>
-    <string name="philips_code_not_peremeter_peremeter_not_match">无法查找设备</string>
-    <string name="philips_code_upload_pushid_fail">上传pushid失败</string>
-    <string name="philips_code_not_manager">您不是设备管理员，无权限分享</string>
-    <string name="philips_code_password_only_number_and_letter_6_15">密码只能数字和字母组合，6-15位</string>
-    <string name="philips_code_data_not_map">数据不是映射关系</string>
-    <string name="philips_code_invalid_random_code">验证码无效</string>
-    <string name="philips_code_too_many_request">操作频繁，稍后再试</string>
-    <string name="philips_code_server_error">服务器出小差</string>
-    <string name="philips_code_business_process_fail">业务处理失败</string>
-    <string name="philips_code_server_process_timeout">服务请求处理超时</string>
-    <string name="philips_code_api_interface_update_fail">api接口更新失败</string>
-    <string name="philips_code_failed_to_register_users_in_batch">批量注册用户失败</string>
-    <string name="philips_code_sn_password_mac_map_incorrect">SN和password1与mac映射不对</string>
-    <string name="philips_code_information_verification_fail">信息校验失败</string>
-    <string name="philips_code_get_nickname_fail">获取昵称失败</string>
-    <string name="philips_code_modify_push_switch_fail">修改推送开关失败</string>
-    <string name="philips_code_modify_nickname_fail">修改昵称失败</string>
-    <string name="philips_code_upload_file_fail">上传文件失败</string>
-    <string name="philips_code_verification_send_too_many">验证码发送次数过多，稍后再试</string>
+    <string name="philips_code_device_register_fail_duplicate_record">Device registration failed. Duplicate records!</string>
+    <string name="philips_code_user_exsit">User already exists</string>
+    <string name="philips_code_not_peremeter_peremeter_not_match">Can\'t find device</string>
+    <string name="philips_code_upload_pushid_fail">Failed to upload pushid</string>
+    <string name="philips_code_not_manager">You are not a device administrator and have no permission to share</string>
+    <string name="philips_code_password_only_number_and_letter_6_15">The password can only be a combination of numbers and letters, 6-15 digits</string>
+    <string name="philips_code_data_not_map">Data is not a mapping relationship</string>
+    <string name="philips_code_invalid_random_code">Invalid verification code</string>
+    <string name="philips_code_too_many_request">Frequent operation, try again later</string>
+    <string name="philips_code_server_error">Server trip</string>
+    <string name="philips_code_business_process_fail">Business processing failure</string>
+    <string name="philips_code_server_process_timeout">Service request processing timeout</string>
+    <string name="philips_code_api_interface_update_fail">api interface update failed</string>
+    <string name="philips_code_failed_to_register_users_in_batch">Failed to register users in batch</string>
+    <string name="philips_code_sn_password_mac_map_incorrect">SN and password1 are incorrectly mapped to mac</string>
+    <string name="philips_code_information_verification_fail">Information verification failed</string>
+    <string name="philips_code_get_nickname_fail">Failed to get nickname</string>
+    <string name="philips_code_modify_push_switch_fail">Failed to modify push switch</string>
+    <string name="philips_code_modify_nickname_fail">Failed to modify nickname</string>
+    <string name="philips_code_upload_file_fail">Failed to upload file</string>
+    <string name="philips_code_verification_send_too_many">The verification code has been sent too many times, try again later</string>
     <string name="philips_code_register_memenet_fail">register memenet fail</string>
-    <string name="philips_code_logout_fail">退出失败 </string>
-    <string name="philips_code_add_device_fail">添加设备失败</string>
-    <string name="philips_code_operation_fail">操作失败</string>
-    <string name="philips_code_open_lock_fail">开锁失败！</string>
-    <string name="philips_code_malicious_login">恶意登录</string>
-    <string name="philips_code_open_lock_fail_not_permission">开锁失败,当前时间没有权限</string>
-    <string name="philips_code_illegal_data">非法数据</string>
-    <string name="philips_code_has_nodification_manager_confirm">已经通知管理员确认</string>
-    <string name="philips_code_has_bind_gateway">已经绑定了网关</string>
-    <string name="philips_code_approval_fail">审批失败</string>
-    <string name="philips_code_get_list_fail">获取列表失败</string>
-    <string name="philips_code_get_gateway_device_list_fail">获取网关设备列表失败</string>
-    <string name="philips_code_get_open_lock_record_fail">获取操作记录失败</string>
-    <string name="philips_code_unbind_fail">解绑失败</string>
-    <string name="philips_code_not_gateway_manager">不是网关管理员</string>
-    <string name="philips_code_bind_gateway_fail">绑定网关失败</string>
-    <string name="philips_code_mimi_bind_gateway_fail">mimi绑定网关失败</string>
-    <string name="philips_code_approval_mimi_bind_gateway_fail">审批mimi绑定网关失败</string>
-    <string name="philips_code_production_fail">生产失败</string>
-    <string name="philips_code_no_permission">无权限</string>
-    <string name="philips_code_resource_not_find">资源未找到</string>
-    <string name="philips_deviceinfo_update_ota_battery_low">门锁电量低于20%，不能进行升级的哦~</string>
-    <string name="philips_deviceinfo__power_save_mode">省电模式已开启，请开锁后再试</string>
-    <string name="philips_videolock_deviceinfo_update_ota">系统升级时，门锁请勿断电</string>
-    <string name="philips_videolock_change_power_save_mode_title">确定切换至省电模式吗？</string>
-    <string name="philips_videolock_change_power_save_mode_content">省电模式状态下，无法使用APP远程查看门外情况</string>
-    <string name="philips_videolock_power_save_mode_title">当前处于节能模式状态</string>
-    <string name="philips_videolock_power_save_mode_content">已开启节能模式，请更换电池后再试</string>
-    <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
-    <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
+    <string name="philips_code_logout_fail">Exit failed </string>
+    <string name="philips_code_add_device_fail">Failed to add device</string>
+    <string name="philips_code_operation_fail">operation failed</string>
+    <string name="philips_code_open_lock_fail">Failed to unlock！</string>
+    <string name="philips_code_malicious_login">Malicious login</string>
+    <string name="philips_code_open_lock_fail_not_permission">Failed to unlock, no permission at current time</string>
+    <string name="philips_code_illegal_data">Illegal data</string>
+    <string name="philips_code_has_nodification_manager_confirm">The administrator has been notified to confirm</string>
+    <string name="philips_code_has_bind_gateway">Gateway has been bound</string>
+    <string name="philips_code_approval_fail">Approval failed</string>
+    <string name="philips_code_get_list_fail">Failed to get list</string>
+    <string name="philips_code_get_gateway_device_list_fail">Failed to get the list of gateway devices</string>
+    <string name="philips_code_get_open_lock_record_fail">Failed to get operation record</string>
+    <string name="philips_code_unbind_fail">Unbinding failed</string>
+    <string name="philips_code_not_gateway_manager">Not a gateway administrator</string>
+    <string name="philips_code_bind_gateway_fail">Failed to bind gateway</string>
+    <string name="philips_code_mimi_bind_gateway_fail">Mimi failed to bind to the gateway</string>
+    <string name="philips_code_approval_mimi_bind_gateway_fail">Failed to approve mimi binding gateway</string>
+    <string name="philips_code_production_fail">Production failure</string>
+    <string name="philips_code_no_permission">No permission</string>
+    <string name="philips_code_resource_not_find">Resource not found</string>
+    <string name="philips_deviceinfo_update_ota_battery_low">The power of the door lock is less than 20%, so it can’t be upgraded~</string>
+    <string name="philips_deviceinfo__power_save_mode">Power saving mode is turned on, please try again after unlocking</string>
+    <string name="philips_videolock_deviceinfo_update_ota">When the system is upgraded, please do not power off the door lock</string>
+    <string name="philips_videolock_change_power_save_mode_title">Are you sure to switch to power saving mode?</string>
+    <string name="philips_videolock_change_power_save_mode_content">In the power-saving mode, you cannot use the APP to remotely view the situation outside the door</string>
+    <string name="philips_videolock_power_save_mode_title">Currently in energy-saving mode</string>
+    <string name="philips_videolock_power_save_mode_content">Energy-saving mode is turned on, please replace the battery and try again</string>
+    <string name="philips_videolock_device_fragment_power_save_mode_title">Energy-saving mode is turned on</string>
+    <string name="philips_videolock_device_fragment_power_save_mode_content">Energy-saving mode cannot view the situation outside the door, please replace the battery or enter the shortcut key 408# in the door lock to close</string>
     <string name="philips_splash_app_name">Philips\nEasyKey+</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">Unlock with temporary PIN</string>
