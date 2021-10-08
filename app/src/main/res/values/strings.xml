@@ -72,12 +72,12 @@
     <string name="delete">Delete</string>
     <string name="message_detail">消息详情</string>
     <string name="nickname_modify_success">昵称修改成功</string>
-    <string name="server_back_exception">服务器返回异常</string>
-    <string name="tiem_out">超时</string>
-    <string name="connect_exception">连接异常</string>
-    <string name="unable_identify_host">无法识别主机</string>
-    <string name="http_exception">http异常</string>
-    <string name="exception">异常消息</string>
+    <string name="server_back_exception">The server returned an exception</string>
+    <string name="tiem_out">Time Out</string>
+    <string name="connect_exception">Abnormal connection</string>
+    <string name="unable_identify_host">Unrecognized host</string>
+    <string name="http_exception">http exception</string>
+    <string name="exception">Exception</string>
     <string name="phone_number_con_not_empty">手机号不能为空</string>
     <string name="find_newAPP">发现新版本，是否更新？</string>
     <string name="token_out_date">登录过期</string>
@@ -566,7 +566,7 @@
     <string name="this_device_already_bind_reset">设备已被%1$s绑定，请按照提示退网后再重新绑定</string>
     <string name="device_not_bind_to_bind">用户未绑定，是否进入绑定流程？</string>
     <string name="unbind_success_innet">解绑成功,请操作入网！</string>
-    <string name="connect_out_of_date">连接超时</string>
+    <string name="connect_out_of_date">Connection timed out</string>
     <string name="connecting_ble">正在连接蓝牙</string>
     <string name="bind_failed">绑定失败</string>
     <string name="bind_failed2">绑定失败!</string>
