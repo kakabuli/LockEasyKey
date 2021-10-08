@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -30,8 +31,9 @@ public class PhilipsWifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOper
 
         TextView tvTime = helper.getView(R.id.tv_time);
         TextView tvDayTime = helper.getView(R.id.tv_day_time);
+        ImageView ivIcon = helper.getView(R.id.iv);
         long time = record.getTime();
-        String s = DateUtils.currentLong2HourMin(time * 1000);
+        String s = DateUtils.currentLong2HourMinSecond(time * 1000);
         tvTime.setText(TextUtils.isEmpty(s) ? "" : s);
         tvDayTime.setVisibility( first? View.VISIBLE : View.GONE);
         //设置天时间
@@ -43,7 +45,7 @@ public class PhilipsWifiLockRecordIAdapter extends BaseQuickAdapter<WifiLockOper
             tvDayTime.setText(dayTime+"");
         }
 
-        BleUtil.setTextViewOperationRecordByType(helper.getView(R.id.tv_content),record);
+        BleUtil.setTextViewOperationRecordByType(ivIcon,helper.getView(R.id.tv_content),record);
 
     }
 }

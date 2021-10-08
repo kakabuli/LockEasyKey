@@ -10,7 +10,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +32,9 @@ import com.philips.easykey.lock.fragment.record.WifiLockAlarmRecordFragment;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockRecordPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockVideoRecordView;
-import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -170,44 +166,44 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
             public void onPageSelected(int position) {
                 if(isVideoLock){
                     if(position == 0){
-                        tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
-                        tvOpenLockRecord.setTextColor(getColor(R.color.c0066A1));
+                        tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
+                        tvOpenLockRecord.setTextColor(getColor(R.color.white));
                         tvVistorRecord.setBackgroundResource(0);
-                        tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                        tvWarnInformation.setTextColor(getColor(R.color.c999999));
+                        tvVistorRecord.setTextColor(getColor(R.color.afffffff));
+                        tvWarnInformation.setTextColor(getColor(R.color.afffffff));
                         tvWarnInformation.setBackgroundResource(0);
-                        tvWarnInformation.setTextColor(getColor(R.color.c999999));
+                        tvWarnInformation.setTextColor(getColor(R.color.afffffff));
                     }else if(position == 1){
                         tvOpenLockRecord.setBackgroundResource(0);
-                        tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
+                        tvOpenLockRecord.setTextColor(getColor(R.color.afffffff));
                         tvWarnInformation.setBackgroundResource(0);
-                        tvWarnInformation.setTextColor(getColor(R.color.c999999));
-                        tvVistorRecord.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
-                        tvVistorRecord.setTextColor(getColor(R.color.c0066A1));
+                        tvWarnInformation.setTextColor(getColor(R.color.afffffff));
+                        tvVistorRecord.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
+                        tvVistorRecord.setTextColor(getColor(R.color.white));
                     }else{
                         tvOpenLockRecord.setBackgroundResource(0);
-                        tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
+                        tvOpenLockRecord.setTextColor(getColor(R.color.afffffff));
                         tvVistorRecord.setBackgroundResource(0);
-                        tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                        tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
-                        tvWarnInformation.setTextColor(getColor(R.color.c0066A1));
+                        tvVistorRecord.setTextColor(getColor(R.color.afffffff));
+                        tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
+                        tvWarnInformation.setTextColor(getColor(R.color.white));
                     }
                 }else{
                     if(position == 0){
-                        tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
-                        tvOpenLockRecord.setTextColor(getColor(R.color.c0066A1));
+                        tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
+                        tvOpenLockRecord.setTextColor(getColor(R.color.white));
                         tvVistorRecord.setBackgroundResource(0);
-                        tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                        tvWarnInformation.setTextColor(getColor(R.color.c999999));
+                        tvVistorRecord.setTextColor(getColor(R.color.afffffff));
+                        tvWarnInformation.setTextColor(getColor(R.color.afffffff));
                         tvWarnInformation.setBackgroundResource(0);;
-                        tvWarnInformation.setTextColor(getColor(R.color.c999999));
+                        tvWarnInformation.setTextColor(getColor(R.color.afffffff));
                     }else{
                         tvOpenLockRecord.setBackgroundResource(0);
-                        tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
+                        tvOpenLockRecord.setTextColor(getColor(R.color.afffffff));
                         tvVistorRecord.setBackgroundResource(0);
-                        tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                        tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
-                        tvWarnInformation.setTextColor(getColor(R.color.c0066A1));
+                        tvVistorRecord.setTextColor(getColor(R.color.afffffff));
+                        tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
+                        tvWarnInformation.setTextColor(getColor(R.color.white));
                     }
                 }
             }
@@ -252,7 +248,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
                 tvVistorRecord.setBackgroundResource(0);
                 tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
+                tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
                 tvWarnInformation.setTextColor(getColor(R.color.c0066A1));
             }
         }
@@ -283,7 +279,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 break;
             case R.id.tv_open_lock_record:
                 //开锁记录
-                tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
+                tvOpenLockRecord.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
                 tvOpenLockRecord.setTextColor(getColor(R.color.c0066A1));
                 tvVistorRecord.setBackgroundResource(0);
                 tvVistorRecord.setTextColor(getColor(R.color.c999999));
@@ -298,7 +294,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
                 tvVistorRecord.setBackgroundResource(0);
                 tvVistorRecord.setTextColor(getColor(R.color.c999999));
-                tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
+                tvWarnInformation.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
                 tvWarnInformation.setTextColor(getColor(R.color.c0066A1));
                 if(isVideoLock){
                     viewPager.setCurrentItem(2);
@@ -312,7 +308,7 @@ public class PhilipsWifiLockRecordActivity extends BaseActivity<IWifiLockVideoRe
                 tvOpenLockRecord.setTextColor(getColor(R.color.c999999));
                 tvWarnInformation.setBackgroundResource(0);
                 tvWarnInformation.setTextColor(getColor(R.color.c999999));
-                tvVistorRecord.setBackgroundResource(R.drawable.philips_bg_line_0066a1_3);
+                tvVistorRecord.setBackgroundResource(R.drawable.philips_bg_line_fff_3);
                 tvVistorRecord.setTextColor(getColor(R.color.c0066A1));
                 viewPager.setCurrentItem(1);
                 break;

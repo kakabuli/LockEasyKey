@@ -10,13 +10,10 @@ ext {
     isRelease = checkRelease()
 
     HOST = [
-//            HTTPS                   :'"https://app.cone-x.com:8090/"',
-//            MQTT                    :'"tcp://app.cone-x.com"',
-//            LINPHONE_SIP            :'"sip-kaadas.juziwulian.com:5061"',
-
-            HTTPS                   :'"https://app.kaadas.com:34000/"',
-            MQTT                    :'"tcp://mqtt-kaadas.juziwulian.com:1883"',
+            HTTPS                   :'"https://app.cone-x.com:8090/"',
+            MQTT                    :'"tcp://app.cone-x.com"',
             LINPHONE_SIP            :'"sip-kaadas.juziwulian.com:5061"',
+
 
             HTTPS_DEV               :'"http://app.kaadas.cc:8090/"',
             MQTT_DEV                :'"tcp://app.kaadas.cc"',

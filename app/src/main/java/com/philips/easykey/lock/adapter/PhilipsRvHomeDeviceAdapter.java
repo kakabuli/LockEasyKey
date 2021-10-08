@@ -42,7 +42,7 @@ public class PhilipsRvHomeDeviceAdapter extends BaseQuickAdapter<PhilipsDeviceBe
 
 
         if(bean.getLastRecordDetail() != null){
-            BleUtil.setTextViewOperationRecordByType(tvLastRecord,bean.getLastRecordDetail());
+            BleUtil.setTextViewOperationRecordByType(null,tvLastRecord,bean.getLastRecordDetail());
             tvLastRecord.setText(DateUtils.secondToDate2(bean.getLastRecordDetail().getCreateTime())
                     + " " + tvLastRecord.getText().toString().trim());
         }
