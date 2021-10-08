@@ -35,11 +35,11 @@
         android:id="@+id/iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/philips_circle_0066a1_9"
-        android:layout_marginStart="16pt"
+        android:layout_below="@+id/tv_day_time"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="19pt"
-        android:layout_below="@+id/tv_day_time" />
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="14pt"
+        android:src="@drawable/philips_circle_0066a1_9" />
 
 
     <TextView

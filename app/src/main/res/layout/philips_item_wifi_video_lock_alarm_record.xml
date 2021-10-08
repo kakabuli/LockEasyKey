@@ -35,12 +35,12 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="21pt"
+        android:layout_height="21pt"
         android:src="@drawable/philips_circle_0066a1_9"
         android:layout_marginStart="16pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="19pt"
+        android:layout_marginTop="14pt"
         app:layout_constraintTop_toBottomOf="@+id/tv_day_time" />
 
     <TextView

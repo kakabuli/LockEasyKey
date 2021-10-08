@@ -46,9 +46,10 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
         TextView tvTime = helper.getView(R.id.tv_time);
         TextView tvDayTime = helper.getView(R.id.tv_day_time);
         TextView tvRight = helper.getView(R.id.tv_right);
+        ImageView ivIcon = helper.getView(R.id.iv);
 
         long time = Long.parseLong(record.getTime());
-        String s = DateUtils.currentLong2HourMin(time * 1000);
+        String s = DateUtils.currentLong2HourMinSecond(time * 1000);
         tvTime.setText(TextUtils.isEmpty(s) ? "" : s);
         tvDayTime.setVisibility( first? View.VISIBLE : View.GONE);
         //设置天时间
@@ -77,6 +78,11 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
         }
 
         BleUtil.setTextViewAlarmByType(helper.getView(R.id.tv_right),record.getType(),record.getPwdType(),record.getUserNickname());
+        if(record.getType() == 0x10 || record.getType() == 0x20){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_remind).into(ivIcon);
+        }else {
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_alarm).into(ivIcon);
+        }
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){
             Glide.with(ivContent.getContext()).load(record.getThumbUrl())

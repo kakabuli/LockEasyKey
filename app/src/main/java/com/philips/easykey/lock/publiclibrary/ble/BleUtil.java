@@ -2,6 +2,7 @@ package com.philips.easykey.lock.publiclibrary.ble;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -969,7 +970,7 @@ public class BleUtil {
     /** 根据wifi锁操作记录类型，设置记录内容
      *
      */
-    public static void setTextViewOperationRecordByType(TextView mTvContent, WifiLockOperationRecord record) {
+    public static void setTextViewOperationRecordByType(ImageView iv,TextView mTvContent, WifiLockOperationRecord record) {
         Context mContext = mTvContent.getContext();
         String sNum = (record.getPwdNum() > 9 ? ""+ record.getPwdNum() : "0"+ record.getPwdNum());
         /**
@@ -1006,24 +1007,42 @@ public class BleUtil {
                         switch (record.getPwdNum()){
                             case 254:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254_no_num));
+                                if(iv != null){
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_administrator_password));
+                                }
 //                                mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_254,record.getUserNickname()));
                                 break;
                             case 253:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_253,record.getUserNickname()));
+                                if(iv != null){
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_one_time_password));
+                                }
                                 break;
                             case 252:
                                 mTvContent.setText(R.string.philips_operation_record_1_0_252);
+                                if(iv != null){
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_temporary_password));
+                                }
                                 break;
                             case 250:
                                 mTvContent.setText(R.string.philips_operation_record_1_0_250);
+                                if(iv != null){
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_temporary_password));
+                                }
                                 break;
                             default:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_000,record.getUserNickname()));
+                                if(iv != null){
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_administrator_password));
+                                }
                                 break;
                         }
                         break;
                     case 3:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_3,record.getUserNickname()));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_card));
+                        }
                         break;
                     case 4:
                         if(record.getPwdNum() == 254){
@@ -1031,21 +1050,39 @@ public class BleUtil {
                         }else {
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_4_000,record.getUserNickname()));
                         }
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_fingerprint));
+                        }
                         break;
                     case 7:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_7_000,record.getUserNickname()));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_face));
+                        }
                         break;
                     case 8:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_8_000,record.getUserNickname()));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_phone));
+                        }
                         break;
                     case 9:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_9_000,record.getUserNickname()));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_mechanics));
+                        }
                         break;
                     case 10:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_10_000));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_indoor_door_opening));
+                        }
                         break;
                     case 11:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_11_000));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_door_handle));
+                        }
                         break;
                     default:
                         break;
@@ -1053,8 +1090,14 @@ public class BleUtil {
                 break;
             case 2://关锁
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_2_00_000));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_lock_the_door));
+                }
                 break;
             case 3://添加密钥
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_add_password));
+                }
                 switch (record.getPwdType()) {
                     //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
                     case 0:
@@ -1082,6 +1125,9 @@ public class BleUtil {
                 }
                 break;
             case 4://删除密钥
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_del));
+                }
                 switch (record.getPwdType()) {
                     //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
                     case 0:
@@ -1135,26 +1181,50 @@ public class BleUtil {
                 break;
             case 5://修改管理员密码
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_5_0_254));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_administrator_password));
+                }
                 break;
             case 6://自动模式
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_6_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_automatic_mode));
+                }
                 break;
             case 7://手动模式
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_7_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_manual_mode));
+                }
                 break;
             case 8://常用模式切换
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_8_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_dual_authentication_mode));
+                }
                 break;
             case 9://安全模式切换
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_9_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_dual_authentication_mode));
+                }
                 break;
             case 10://反锁模式
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_10_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_anti_lock));
+                }
                 break;
             case 11://布防模式
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_11_0));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_deploy_troops_for_defence));
+                }
                 break;
             case 12://修改密码昵称
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_change));
+                }
                 switch (record.getPwdType()) {
                     //	密码类型：0密码 3卡片 4指纹 7面容 8APP用户 9机械方式
                     case 0:
@@ -1176,6 +1246,9 @@ public class BleUtil {
             case 13://添加分享用户
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_13_0,
                         (!TextUtils.isEmpty(record.getShareUserNickname()) ? record.getShareUserNickname() : record.getShareAccount())));
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_equipment_sharing));
+                }
                 break;
             case 14://删除分享用户
                 if(MyApplication.getInstance().getWifiLockInfoBySn(record.getWifiSN()).getIsAdmin() == 1){
@@ -1186,21 +1259,39 @@ public class BleUtil {
                             (!TextUtils.isEmpty(record.getUserNickname()) ? record.getUserNickname() : record.getWifiSN()),
                             (!TextUtils.isEmpty(record.getShareUserNickname()) ? record.getShareUserNickname() : record.getShareAccount())));
                 }
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_remove_permission));
+                }
                 break;
             case 15: //15修改管理指纹
                 mTvContent.setText(R.string.philips_operation_record_15_0);
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_change));
+                }
                 break;
             case 16: //16添加管理员指纹
                 mTvContent.setText(R.string.philips_operation_record_16_0);
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_add_password));
+                }
                 break;
             case 17: //17开启节能模式
                 mTvContent.setText(R.string.philips_operation_record_17_0);
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_open_energy_conservation));
+                }
                 break;
             case 18: //18关闭节能模式
                 mTvContent.setText(R.string.philips_operation_record_18_0);
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_close_energy_conservation));
+                }
                 break;
             case 19: //   19恢复出厂设置
                 mTvContent.setText(R.string.philips_operation_record_19_0);
+                if(iv != null){
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_restore_factory));
+                }
                 break;
         }
 

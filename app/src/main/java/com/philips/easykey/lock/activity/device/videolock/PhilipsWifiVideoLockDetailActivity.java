@@ -262,7 +262,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         if(records == null) return;
         if(records.size() <= 0) return;
         if(records.size() == 1){
-            BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get(0));
+            BleUtil.setTextViewOperationRecordByType(null,mTvLastRecord,records.get(0));
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get(0).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());
             Log.d("zdx", "initOperationRecord: "  + records.get(0).getCreateTime());
@@ -282,7 +282,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
 
 
-        BleUtil.setTextViewOperationRecordByType(mTvLastRecord,records.get((int) createTime[1]));
+        BleUtil.setTextViewOperationRecordByType(null,mTvLastRecord,records.get((int) createTime[1]));
         if(!TextUtils.isEmpty(mTvLastRecord.getText())){
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get((int) createTime[1]).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());

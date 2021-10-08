@@ -35,16 +35,14 @@
         app:layout_constraintEnd_toEndOf="parent"  />
 
 
-
-
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/philips_circle_0066a1_9"
+        android:layout_width="21pt"
+        android:layout_height="21pt"
         android:layout_marginStart="16pt"
+        android:layout_marginTop="14pt"
+        android:src="@drawable/philips_circle_0066a1_9"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="19pt"
         app:layout_constraintTop_toBottomOf="@+id/tv_day_time" />
 
 

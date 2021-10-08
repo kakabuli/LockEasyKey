@@ -42,9 +42,11 @@ public class PhilipsWifiLockVistorIAdapter extends BaseQuickAdapter<WifiVideoLoc
         boolean first = record.isFirst();
         TextView tvTime = helper.getView(R.id.tv_time);
         TextView tvDayTime = helper.getView(R.id.tv_day_time);
+        ImageView ivIcon = helper.getView(R.id.iv);
+        Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_doorbell).into(ivIcon);
 
         long time = Long.parseLong(record.getTime());
-        String s = DateUtils.currentLong2HourMin(time * 1000);
+        String s = DateUtils.currentLong2HourMinSecond(time * 1000);
         tvTime.setText(TextUtils.isEmpty(s) ? "" : s);
         tvDayTime.setVisibility( first? View.VISIBLE : View.GONE);
         //设置天时间

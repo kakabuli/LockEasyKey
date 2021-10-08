@@ -103,7 +103,7 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
             }
         }
         if (data.getLastRecordDetail() != null) {
-            BleUtil.setTextViewOperationRecordByType(tvLastRecord, data.getLastRecordDetail());
+            BleUtil.setTextViewOperationRecordByType(null,tvLastRecord, data.getLastRecordDetail());
             if(!TextUtils.isEmpty(tvLastRecord.getText())){
                 String lastRecord = DateUtils.secondToDate2(data.getLastRecordDetail().getCreateTime())
                         + " " + tvLastRecord.getText().toString().trim();
