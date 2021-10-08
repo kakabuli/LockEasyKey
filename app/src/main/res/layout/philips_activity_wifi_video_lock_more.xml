@@ -9,7 +9,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/setting"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"
             />
     </RelativeLayout>
@@ -69,11 +69,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt"
+                    android:drawablePadding="14pt"
                     android:ellipsize="end"
                     android:maxEms="10"
                     android:singleLine="true"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:textSize="15pt"></TextView>
 
             </RelativeLayout>
@@ -102,12 +102,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt"
+                    android:drawablePadding="14pt"
                     android:ellipsize="end"
                     android:maxEms="10"
                     android:singleLine="true"
                     android:text="@string/wifi"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:textSize="15pt" />
 
             </RelativeLayout>
@@ -148,8 +148,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt"
-                    android:textColor="@color/color_666666"
+                    android:drawablePadding="14pt"
+                    android:textColor="@color/c189383"
                     android:textSize="15pt"/>
 
             </RelativeLayout>
@@ -177,9 +177,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
 
 
             </RelativeLayout>
@@ -208,9 +208,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
 
             </RelativeLayout>
 
@@ -237,9 +237,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -265,7 +265,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666" />
+                    android:textColor="@color/c189383" />
             </RelativeLayout>
 
 
@@ -329,9 +329,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -357,9 +357,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
             </RelativeLayout>
 
 
@@ -388,8 +388,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt"
-                    android:textColor="@color/color_666666"
+                    android:drawablePadding="14pt"
+                    android:textColor="@color/c189383"
                     android:textSize="15pt"
                     android:text="@string/wandering_alarm_close" />
 
@@ -440,8 +440,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt"
-                    android:textColor="@color/color_666666"
+                    android:drawablePadding="14pt"
+                    android:textColor="@color/c189383"
                     android:textSize="15pt" />
 
             </RelativeLayout>
@@ -468,9 +468,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -495,9 +495,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16pt"
                     android:textSize="15pt"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/c189383"
                     android:drawableRight="@drawable/philips_detail_setting_more"
-                    android:drawablePadding="10pt" />
+                    android:drawablePadding="14pt" />
             </RelativeLayout>
 
             <TextView
@@ -603,7 +603,7 @@
                 android:layout_marginTop="70pt"
                 android:layout_marginRight="16pt"
                 android:layout_marginBottom="37pt"
-                android:background="@drawable/philips_retangle_cd202c_3"
+                android:background="@drawable/philips_retangle_e04a71_3"
                 android:text="@string/philips_video_activity_delete_device"
                 android:textColor="@color/white"
                 android:textSize="16pt" />
