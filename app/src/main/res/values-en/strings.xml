@@ -381,7 +381,7 @@
     <string name="philips_guide_page_three_hint">触发报警功能，自动抓拍视频报警</string>
     <string name="philips_immediate_experience">立即体验</string>
     <string name="device_name">Device Name</string>
-    <string name="message_free">消息免打扰</string>
+    <string name="message_free">Message Free</string>
     <string name="message_push_wnadering_alarm">徘徊报警</string>
     <string name="message_push_doorbell_info">门铃信息</string>
     <string name="message_push_lock_info">开关锁信息</string>
@@ -2293,7 +2293,7 @@
     <string name="gateway_">网关：</string>
     <string name="activity_wifi_lock_add_new_third">去修改管理密码</string>
     <string name="activity_wifi_lock_add_new_third_1">如何修改初始管理密码?</string>
-    <string name="activiy_wifi_lock_message_push">开启后，APP 将不再接收设备操作记录。门铃呼叫、报警信息仍可正常推送。</string>
+    <string name="activiy_wifi_lock_message_push">After opening, the APP will no longer receive device operation records. Doorbell calls and alarm messages can still be pushed normally.</string>
     <string name="activity_wifi_lock_old_user_first_1">第一步：已进入管理模式</string>
     <string name="activity_wifi_lock_old_user_first_2">已进入管理模式</string>
     <string name="sceond_40">40秒</string>
