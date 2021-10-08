@@ -11,7 +11,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/screen_duration"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"
             />
     </RelativeLayout>
@@ -38,33 +38,31 @@
         android:id="@+id/rl_screen_light_duration"
         android:layout_width="match_parent"
         android:layout_marginTop="12pt"
-        android:layout_height="88pt"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13pt"
         android:background="#FFFFFF">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/tv_screen_light_duration_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:layout_marginLeft="16pt"
+            android:layout_marginTop="14pt"
+            android:text="@string/screen_duration_text"
+            android:textColor="#333333"
+            android:textSize="16pt" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16pt"
-                android:text="@string/screen_duration_text"
-                android:textColor="#333333"
-                android:textSize="16pt" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16pt"
-                android:text="@string/screen_duration_des"
-                android:textColor="#999999"
-                android:textSize="12pt" />
-
-        </LinearLayout>
-
+        <TextView
+            android:layout_below="@id/tv_screen_light_duration_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16pt"
+            android:text="@string/screen_duration_des"
+            android:textColor="#999999"
+            android:layout_marginTop="8pt"
+            android:layout_toLeftOf="@id/iv_screen_light_duration"
+            android:textSize="12pt" />
 
         <ImageView
             android:id="@+id/iv_screen_light_duration"
@@ -73,7 +71,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="23pt"
-            android:src="@drawable/wandering_alarm_selector" />
+            android:src="@drawable/philips_setting_switch_selector" />
     </RelativeLayout>
 
     <LinearLayout
@@ -107,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginRight="17pt"
                 android:button="@drawable/wandering_judge_time_selector"
                 android:clickable="false"
                 />
@@ -135,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginRight="17pt"
                 android:button="@drawable/wandering_judge_time_selector"
                 android:clickable="false"
                 />
@@ -164,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginRight="17pt"
                 android:button="@drawable/wandering_judge_time_selector"
                 android:clickable="false"
                 />
@@ -178,10 +176,10 @@
     <com.philips.easykey.lock.widget.avindicator.AVLoadingIndicatorView
         android:id="@+id/avi"
         style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="@dimen/dp_35"
-        android:layout_height="@dimen/dp_35"
+        android:layout_width="35pt"
+        android:layout_height="35pt"
         android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/dp_150"
+        android:layout_marginTop="150pt"
         app:indicatorColor="#333333"/>
 
     <TextView
@@ -190,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/wifi_video_lock_waiting"
-        android:layout_marginTop="@dimen/dp_10"
-        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="10pt"
+        android:textSize="14pt"
         android:layout_below="@id/avi"/>
 </RelativeLayout>
