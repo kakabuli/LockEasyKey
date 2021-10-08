@@ -2478,6 +2478,8 @@
     <string name="philips_feedback_record">反馈记录</string>
     <string name="philips_terms_of_use">使用条款</string>
     <string name="philips_system_setting">系统设置</string>
+    <string name="philips_common_problem">常见问题</string>
+    <string name="philips_common_problem_of_lock">门锁问题</string>
     <string name="philips_contact_us">联系我们</string>
     <string name="philips_set_nickname">设置名字</string>
     <string name="Philips_easykey">Philips EasyKey+</string>
