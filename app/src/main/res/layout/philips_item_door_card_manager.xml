@@ -17,11 +17,22 @@
         android:background="@color/white"
         android:textStyle="bold"/>
 
+    <ImageView
+        android:id="@+id/img_delete"
+        android:layout_marginTop="29pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17pt"
+        app:srcCompat="@drawable/lockmode_manage_delete_selector"
+        android:visibility="gone"
+        />
+
     <RelativeLayout
         android:id="@+id/rl_nick_name"
         android:layout_width="match_parent"
         android:layout_below="@id/tv_num"
-        android:layout_marginTop="1px"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:layout_height="56pt">
 
@@ -49,8 +60,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_below="@id/rl_nick_name"
-        android:layout_marginTop="1px"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
+        android:visibility="gone"
         android:layout_height="56pt">
 
         <TextView

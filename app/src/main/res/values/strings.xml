@@ -44,7 +44,7 @@
     <string name="dialog_confirm">确认</string>
     <string name="safe_mode_dialog">请去新增开锁方式，启动安全模式</string>
     <string name="philips_cancel">Cancel</string>
-    <string name="query">确认</string>
+    <string name="query">Confirm</string>
     <string name="get_verification_content">重新获取(%1$s)</string>
     <string name="verification_verify_error">请输入六位验证码</string>
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
@@ -298,7 +298,7 @@
     <string name="bluetooth_type">型号：</string>
     <string name="nothing">（无）</string>
     <string name="password">Password</string>
-    <string name="face_password">面容识别</string>
+    <string name="face_password">Face ID</string>
     <string name="add_face_password">添加面容识别</string>
     <string name="group">组</string>
     <string name="fingerprint">Fingerprint</string>
@@ -432,9 +432,9 @@
     <string name="syc_pwd_fail">同步密码失败</string>
     <string name="get_password_failed">获取秘钥列表失败</string>
     <string name="add_password">添加密码</string>
-    <string name="no_password">暂无密码</string>
-    <string name="no_face_password">门锁还没有面容识别，请到门锁添加同步</string>
-    <string name="how_to_add_face_password">如何添加面容识别？</string>
+    <string name="no_password">No password</string>
+    <string name="no_face_password">There is no Face ID on the door lock. Please add synchronization to the door lock</string>
+    <string name="how_to_add_face_password">How to add Face ID?</string>
 
     <string name="pwd_header_add_tv">添加密码</string>
     <string-array name="home_top">
@@ -579,7 +579,7 @@
 
     <string name="input_door_face_name">请输入面容名称</string>
 
-    <string name="nickname_not_modify">昵称未修改</string>
+    <string name="nickname_not_modify">Nickname not modified</string>
     <string name="is_savving">正在保存</string>
     <string name="please_have_net_add_card">请在有网络情况下添加卡片！</string>
     <string name="confirm_delete_door_card">确定删除门卡吗？</string>
@@ -659,7 +659,7 @@
     <string name="connect_device">连接设备</string>
     <string name="delete_fialed">删除失败</string>
     <string name="lock_delete_success_please_sync">锁上删除成功，服务器删除失败，请同步！</string>
-    <string name="modify_success">修改成功</string>
+    <string name="modify_success">Modified successfully</string>
     <string name="lock_no_this_password">锁上没有该密码，请同步！</string>
     <string name="get_lock_password_failed">获取锁上密码失败</string>
     <string name="is_deleting">正在删除...</string>
@@ -1380,8 +1380,8 @@
     <string name="set_up_wifi_failed1">确保Wi-Fi是2.4G频率</string>
     <string name="no_card">暂无门卡</string>
     <string name="no_finger">暂无指纹</string>
-    <string name="refresh_failed_please_retry_later">刷新失败，请稍后再试！</string>
-    <string name="modify_failed">修改失败</string>
+    <string name="refresh_failed_please_retry_later">Refresh failed, please try again later!</string>
+    <string name="modify_failed">Modification failed</string>
     <string name="is_modifing">正在修改......</string>
     <string name="is_adding">正在添加....</string>
     <string name="share_success">分享成功</string>
@@ -1638,9 +1638,9 @@
     <string name="lock_hand_mode">门锁手动模式状态</string>
     <string name="hand">手动</string>
     <string name="auto">自动</string>
-    <string name="no_pwd_sync">门锁还没有密码，请到门锁添加同步</string>
-    <string name="no_finger_sync">门锁还没有指纹，请到门锁添加同步</string>
-    <string name="no_card_sync">门锁还没有门卡，请到门锁添加同步</string>
+    <string name="no_pwd_sync">There is no password for the door lock. Please add synchronization to the door lock</string>
+    <string name="no_finger_sync">There is no fingerprint on the door lock. Please add synchronization to the door lock</string>
+    <string name="no_card_sync">There is no Key Tag on the door lock. Please add synchronization to the door lock</string>
     <string name="scan_add">扫码添加</string>
     <string name="touch_light">轻触照亮</string>
     <string name="qr_notice">请将二维码放入框内</string>
@@ -2327,7 +2327,7 @@
 
     <string name="philips_rf">遥控</string>
     <string name="philips_manual">手动</string>
-    <string name="philips_rfid">卡片</string>
+    <string name="philips_rfid">Key Tag</string>
     <string name="philips_fingerprint">指纹</string>
     <string name="philips_voice">语音</string>
     <string name="philips_finger_vein">静脉</string>
@@ -2423,14 +2423,14 @@
     <string name="philips_video_activity_lock_real_time_video">视频模式</string>
     <string name="philips_video_activity_delete_device">删除用户</string>
     <string name="philips_video_activity_duress_alarm">胁迫报警</string>
-    <string name="philips_video_activity_nickname">修改名称</string>
+    <string name="philips_video_activity_nickname">Modify Name</string>
     <string name="philips_device_nick_name_update_failed">设备名称修改失败</string>
     <string name="philips_device_wandering_alarm_restore_default">恢复默认</string>
     <string name="philips_device_duress_alarm_des_check_tips">开启后，输入指纹APP实时接收报警信息</string>
     <string name="philips_device_duress_alarm_notification">警报通知</string>
     <string name="philips_setting_stress_alarm">设置胁迫密码</string>
     <string name="philips_setting_app_stress_alarm">APP实时推送胁迫报警消息</string>
-    <string name="philips_setting_duress_alarm_app_add_time">添加时间</string>
+    <string name="philips_setting_duress_alarm_app_add_time">Add time</string>
     <string name="philips_setting_duress_alarm_receiver">接收账号</string>
     <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
     <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
