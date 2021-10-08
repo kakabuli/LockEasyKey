@@ -2424,7 +2424,7 @@
     <string name="philips_video_activity_delete_device">Delete User</string>
     <string name="philips_video_activity_duress_alarm">Duress Alarm</string>
     <string name="philips_video_activity_nickname">Modify Name</string>
-    <string name="philips_device_nick_name_update_failed">设备名称修改失败</string>
+    <string name="philips_device_nick_name_update_failed">Device name modification failed</string>
     <string name="philips_device_wandering_alarm_restore_default">恢复默认</string>
     <string name="philips_device_duress_alarm_des_check_tips">开启后，输入指纹APP实时接收报警信息</string>
     <string name="philips_device_duress_alarm_notification">警报通知</string>
@@ -2749,4 +2749,5 @@
     <string name="philips_user_protocol2">《用户协议》</string>
     <string name="and">和</string>
     <string name="philips_album_no_data">No picture</string>
+    <string name="query_1">Confirm</string>
 </resources>
