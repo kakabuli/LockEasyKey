@@ -87,7 +87,7 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
 
         ivBack.setOnClickListener(this);
         llAddUser.setOnClickListener(this);
-        tvContent.setText(getString(R.string.user_manage));
+        tvContent.setText(getString(R.string.philips_activity_detail_share));
         initRefresh();
     }
 

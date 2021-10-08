@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white">
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/philips_user_detail"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"/>
 
         <TextView
@@ -39,7 +39,7 @@
             android:textSize="16pt"
             android:paddingEnd="16pt"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/cCD2020"/>
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textColor="@color/c666666"
+            android:textColor="#189383 "
             android:singleLine="true"
             android:ellipsize="end"
             android:textSize="15pt" />
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textColor="@color/c666666"
+            android:textColor="#189383"
             android:singleLine="true"
             android:ellipsize="end"
             android:textSize="15pt" />
