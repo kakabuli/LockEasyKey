@@ -45,21 +45,22 @@
             android:id="@+id/message_push"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16pt"
+            android:layout_marginStart="16pt"
             android:layout_marginTop="14pt"
             android:text="@string/message_free"
             android:textColor="#333333"
             android:textSize="16pt" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/message_push"
-            android:layout_marginLeft="16pt"
-            android:layout_marginRight="66pt"
+            android:layout_marginStart="16pt"
+            android:layout_toLeftOf="@id/iv_message_free"
             android:textSize="12pt"
             android:layout_marginTop="8pt"
             android:textColor="#999999"
+            android:layout_marginEnd="5pt"
             android:text="@string/activiy_wifi_lock_message_push"/>
 
         <ImageView

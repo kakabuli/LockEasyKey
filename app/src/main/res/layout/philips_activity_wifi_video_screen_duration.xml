@@ -57,10 +57,11 @@
             android:layout_below="@id/tv_screen_light_duration_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16pt"
+            android:layout_marginStart="16pt"
             android:text="@string/screen_duration_des"
             android:textColor="#999999"
             android:layout_marginTop="8pt"
+            android:layout_marginEnd="5pt"
             android:layout_toLeftOf="@id/iv_screen_light_duration"
             android:textSize="12pt" />
 

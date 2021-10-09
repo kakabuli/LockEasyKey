@@ -66,9 +66,10 @@
     <RelativeLayout
         android:id="@+id/safe_layout"
         android:layout_width="match_parent"
-        android:layout_height="72pt"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/normal_layout"
+        android:paddingBottom="13pt"
         >
 
         <TextView
@@ -82,10 +83,11 @@
             android:textSize="16pt" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16pt"
-            android:layout_marginEnd="75pt"
+            android:layout_marginEnd="5pt"
+            android:layout_toLeftOf="@id/ck_safe"
             android:text="@string/activity_wifi_video_safe_mode_double_content"
             android:layout_below="@id/en_text"
             android:textColor="#999999"
