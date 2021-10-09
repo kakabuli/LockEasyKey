@@ -11,7 +11,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/device_information"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt" />
     </RelativeLayout>
 
@@ -173,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_lock_firmware_version"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_lock_firmware_version"
@@ -231,7 +231,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_fornt_hard_version"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_fornt_hard_version"
@@ -288,7 +288,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_back_hard_version"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_back_hard_version"
@@ -376,7 +376,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_lock_firware_number"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_lock_firware_number"
@@ -431,7 +431,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_lock_wifi_firware_number"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_lock_wifi_firware_number"
@@ -489,7 +489,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10pt"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_child_system_firware_number"
@@ -549,7 +549,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10pt"
             android:layout_toLeftOf="@id/tv_voice_model_firmware_version"
-            android:src="@drawable/philips_circle_ed4a4a"
+            android:src="@drawable/philips_circle_e04a71"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_voice_model_firmware_version"

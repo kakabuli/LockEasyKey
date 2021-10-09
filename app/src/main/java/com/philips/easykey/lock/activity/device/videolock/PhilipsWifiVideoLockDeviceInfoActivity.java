@@ -768,29 +768,27 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     private void shownNewVersion() {
         String content = getString(R.string.already_newest_version) + "";
         //当前已是最新版本
-            AlertDialogUtil.getInstance().
-
-        noEditSingleButtonDialog(this,getString(R.string.hint)
-                    ,content,
-
-        getString(R.string.affirm), new AlertDialogUtil.ClickListener()
-
-        {
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.hint),
+                content, getString(R.string.affirm), new AlertDialogUtil.ClickListener() {
             @Override
-            public void left () {
+            public void left() {
 
-        }
+            }
 
             @Override
-            public void right () {
+            public void right() {
 
-        }
+            }
+
             @Override
-            public void onTextChanged (CharSequence s,int start, int before, int count){
-        }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
             @Override
-            public void afterTextChanged (String toString){
-        }
+            public void afterTextChanged(String toString) {
+
+            }
         });
     }
 
@@ -820,7 +818,8 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_deviceinfo__power_save_mode),"",
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, getString(R.string.philips_closed_video_mode_title),
+                getString(R.string.philips_closed_video_mode_content),
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
