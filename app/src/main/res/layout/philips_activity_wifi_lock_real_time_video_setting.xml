@@ -9,7 +9,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/real_time_video"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"  />
     </RelativeLayout>
 
@@ -34,7 +34,8 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         android:id="@+id/rl_video_connect_open"
         android:layout_width="match_parent"
-        android:layout_height="72pt"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13pt"
         android:background="#FFFFFF"
         >
 
@@ -51,8 +52,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16pt"
-            android:layout_marginRight="75pt"
+            android:layout_marginStart="16pt"
+            android:layout_toLeftOf="@id/iv_video_connect_open"
+            android:layout_marginEnd="5pt"
             android:textSize="12pt"
             android:layout_below="@+id/tv_real_time_title"
             android:layout_marginTop="8pt"
@@ -73,7 +75,8 @@
         app:layout_constraintTop_toBottomOf="@+id/rl_video_connect_open"
         android:id="@+id/rl_video_connect_power"
         android:layout_width="match_parent"
-        android:layout_height="88pt"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13pt"
         android:background="#FFFFFF">
 
         <TextView
@@ -89,8 +92,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16pt"
-            android:layout_marginRight="75pt"
+            android:layout_marginStart="16pt"
+            android:layout_marginEnd="5pt"
+            android:layout_toLeftOf="@id/iv_video_connect_power"
             android:textSize="12pt"
             android:layout_below="@+id/tv_real_time_title_1"
             android:layout_marginTop="8pt"
