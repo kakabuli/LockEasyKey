@@ -910,7 +910,7 @@
     <string name="lock_blocked">门锁堵转报警</string>
     <string name="validation_failed_three_times">系统被锁定报警</string>
     <string name="pick_proof">防撬报警</string>
-    <string name="stress_alarm">胁迫报警</string>
+    <string name="stress_alarm">Duress Alarm</string>
     <string name="lock_alarm">锁定报警</string>
     <string name="pir_trigger">pir触发事件</string>
     <string name="low_power_alarm">低电量报警</string>
@@ -2426,13 +2426,13 @@
     <string name="philips_video_activity_nickname">Modify Name</string>
     <string name="philips_device_nick_name_update_failed">Device name modification failed</string>
     <string name="philips_device_wandering_alarm_restore_default">Reset</string>
-    <string name="philips_device_duress_alarm_des_check_tips">开启后，输入指纹APP实时接收报警信息</string>
-    <string name="philips_device_duress_alarm_notification">警报通知</string>
-    <string name="philips_setting_stress_alarm">设置胁迫密码</string>
-    <string name="philips_setting_app_stress_alarm">APP实时推送胁迫报警消息</string>
+    <string name="philips_device_duress_alarm_des_check_tips">After opening, enter the fingerprint APP to receive real-time alarm information</string>
+    <string name="philips_device_duress_alarm_notification">Alert Notification</string>
+    <string name="philips_setting_stress_alarm">Set Duress Password</string>
+    <string name="philips_setting_app_stress_alarm">APP pushes real-time duress alarm messages</string>
     <string name="philips_setting_duress_alarm_app_add_time">Add time</string>
     <string name="philips_setting_duress_alarm_receiver">接收账号</string>
-    <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
+    <string name="philips_setting_duress_alarm_app_receiver">APP Receiving</string>
     <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
     <string name="philips_activity_detail_share">Share</string>
     <string name="philips_activity_detail_password_lock_type">开门方式</string>
@@ -2730,7 +2730,7 @@
     <string name="philips_privacy_policy">《隐私政策》</string>
     <string name="philips_register_agreement_tip">已阅读并同意</string>
     <string name="philips_and">和</string>
-    <string name="philips_duress_number">编号%1$s</string>
+    <string name="philips_duress_number">Number %1$s</string>
     <string name="philips_set_duress_account">请设置胁迫报警账号</string>
     <string name="phliips_user_not_registered">该用户未注册</string>
 
@@ -2750,4 +2750,7 @@
     <string name="and">和</string>
     <string name="philips_album_no_data">No picture</string>
     <string name="query_1">Confirm</string>
+    <string name="philips_setting_duress_alarm_receiver_1">Receive duress alarm messages</string>
+    <string name="philips_duress_alarm_setting_exit">Exit duress alarm setting?</string>
+    <string name="philips_duress_alarm_full_size">当前胁迫密码已满5组，请关闭其他胁迫密钥后再添加</string>
 </resources>

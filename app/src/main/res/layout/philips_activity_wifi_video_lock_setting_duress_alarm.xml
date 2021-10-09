@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cF7F7F7"
-    tools:context=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity">
+    tools:context=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmActivity">
 
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/philips_setting_stress_alarm"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt" />
 
         <ImageView
@@ -37,6 +37,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:paddingEnd="16pt"
+            android:paddingStart="16pt"
             app:srcCompat="@drawable/philips_duress_alarm_help" />
     </RelativeLayout>
 
@@ -44,8 +45,9 @@
     <RelativeLayout
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="72pt"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12pt"
+        android:paddingBottom="13pt"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
@@ -60,11 +62,13 @@
             android:textSize="16pt" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_rl_duress_1"
-            android:layout_marginLeft="16pt"
+            android:layout_marginStart="16pt"
             android:layout_marginTop="8pt"
+            android:layout_toLeftOf="@id/iv_duress_select"
+            android:layout_marginEnd="5pt"
             android:text="@string/philips_device_duress_alarm_des_check_tips"
             android:textColor="@color/c999999"
             android:textSize="12pt" />
@@ -93,7 +97,7 @@
             android:layout_marginStart="16pt"
             android:paddingTop="12pt"
             android:paddingBottom="12pt"
-            android:text="@string/philips_setting_app_stress_alarm"
+            android:text="@string/philips_setting_duress_alarm_receiver_1"
             android:textColor="@color/color_666666"
             android:textSize="14pt"
             />
@@ -117,12 +121,14 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_duress_alarm_app"
                 android:layout_marginStart="16pt"
                 android:layout_marginTop="8pt"
                 android:text="@string/philips_setting_app_stress_alarm"
+                android:layout_toLeftOf="@id/tv_duress_alarm_toggle"
+                android:layout_marginEnd="5pt"
                 android:textColor="@color/color_666666"
                 android:textSize="12pt" />
 

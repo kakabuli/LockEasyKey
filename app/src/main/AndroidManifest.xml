@@ -75,14 +75,14 @@
         tool:ignore="LockedOrientationActivity">
         <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity"/>
         <activity
-            android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmAvtivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity"
+            android:name=".activity.device.videolock.PhilipsWifiVideoLockSettingDuressAlarmReceiverActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockVoiceQualitySettingActivity"

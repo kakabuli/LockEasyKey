@@ -2750,4 +2750,7 @@
     <string name="and">和</string>
     <string name="philips_album_no_data">暂无图片</string>
     <string name="query_1">确定</string>
+    <string name="philips_setting_duress_alarm_receiver_1">接收胁迫报警消息</string>
+    <string name="philips_duress_alarm_setting_exit">是否退出胁迫报警设置？</string>
+    <string name="philips_duress_alarm_full_size">当前胁迫密码已满5组，请关闭其他\n胁迫密钥后再添加</string>
 </resources>

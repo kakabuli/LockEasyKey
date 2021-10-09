@@ -52,8 +52,7 @@ public class PhilipsWifiVideoLockNickNameActivity extends BaseActivity<IWifiVide
     }
 
     private void changeConfirmBtnStyle(boolean isCanLogin) {
-        confirm.setEnabled(isCanLogin);
-        confirm.setBackgroundResource(isCanLogin?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
+        confirm.setSelected(isCanLogin);
     }
 
     private void initListener() {

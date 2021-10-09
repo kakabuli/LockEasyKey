@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,7 +23,7 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 
-public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends BaseActivity<IPhilipsSettingDuressAlarm,
+public class PhilipsWifiVideoLockSettingDuressAlarmReceiverActivity extends BaseActivity<IPhilipsSettingDuressAlarm,
         PhilipsSettingDuressAlarmPresenter<IPhilipsSettingDuressAlarm>> implements IPhilipsSettingDuressAlarm {
 
 
@@ -63,7 +62,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
             startActivity(intent);
             finish();
@@ -121,7 +120,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
 
     private void initListener() {
         mBack.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
             startActivity(intent);
             finish();
@@ -158,8 +157,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
     }
 
     private void changeConfirmBtnStyle(boolean isConfirm){
-        confirm.setEnabled(isConfirm);
-        confirm.setBackgroundResource(isConfirm?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
+        confirm.setSelected(isConfirm);
     }
 
     private void initView() {
@@ -174,7 +172,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
             mDuressBean.setDuressAlarmAccount(duressAccount);
             mDuressBean.setPwdDuressSwitch(1);
             ToastUtils.showShort(R.string.set_success);
-            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO, mDuressBean);
             intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
             intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO, position);
@@ -184,7 +182,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverAvtivity extends Base
             AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.phliips_user_not_registered));
         }else{
             ToastUtils.showShort(R.string.set_failed);
-            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+            Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, mDuressBean.getWifiSN());
             startActivity(intent);
             finish();

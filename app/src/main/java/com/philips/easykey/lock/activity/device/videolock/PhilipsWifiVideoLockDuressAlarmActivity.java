@@ -1,19 +1,15 @@
 package com.philips.easykey.lock.activity.device.videolock;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
@@ -23,20 +19,18 @@ import com.philips.easykey.lock.adapter.PhilipsDuressAlarmAdapter;
 import com.philips.easykey.lock.bean.PhilipsDuressBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.PhilipsWifiVideoLockDuressPresenter;
-import com.philips.easykey.lock.mvp.presenter.wifilock.videolock.WifiVideoLockMorePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.videolock.IPhilipsWifiVideoLockDuressView;
-import com.philips.easykey.lock.mvp.view.wifilock.videolock.IWifiVideoLockMoreView;
 import com.philips.easykey.lock.publiclibrary.bean.WiFiLockPassword;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.KeyConstants;
-import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 
 import java.util.List;
 
-public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhilipsWifiVideoLockDuressView, PhilipsWifiVideoLockDuressPresenter<IPhilipsWifiVideoLockDuressView>>
+public class PhilipsWifiVideoLockDuressAlarmActivity extends BaseActivity<IPhilipsWifiVideoLockDuressView, PhilipsWifiVideoLockDuressPresenter<IPhilipsWifiVideoLockDuressView>>
         implements IPhilipsWifiVideoLockDuressView {
 
     private RecyclerView recycler;
@@ -47,12 +41,12 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
     private int duressAlarmSwitch;
     private List<PhilipsDuressBean> duressList;
     private WifiLockInfo wifiLockInfo;
+    private int duressAlarmSize = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.philips_activity_wifi_video_lock_duress_alarm);
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
         initView();
         initListener();
         initData();
@@ -92,6 +86,11 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
             wiFiLockPassword = new Gson().fromJson(localPasswordCache, WiFiLockPassword.class);
             duressList = mPresenter.setWifiLockPassword(wifiSn,wiFiLockPassword);
             mPhilipsDuressAlarmAdapter.setList(duressList);
+            duressAlarmSize = 0;
+            for (PhilipsDuressBean duressBean : duressList) {
+                if(duressBean.getPwdDuressSwitch() == 1)
+                    duressAlarmSize++;
+            }
         }else{
             mPresenter.getPasswordList(wifiSn);
         }
@@ -119,11 +118,40 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(mPhilipsDuressAlarmAdapter);
         mPhilipsDuressAlarmAdapter.setOnClickDuressNotificationListener((v, position, data) -> {
-            Intent intent = new Intent(this,PhilipsWifiVideoLockSettingDuressAlarmAvtivity.class);
+            if(data.getPwdDuressSwitch() == 0 && duressAlarmSize > 5){
+                createDuressAlarmSizeFullDialog();
+                return;
+            }
+            Intent intent = new Intent(this, PhilipsWifiVideoLockSettingDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN,data.getWifiSN());
             intent.putExtra(KeyConstants.DURESS_PASSWORD_POSITION_INfO,position);
             intent.putExtra(KeyConstants.DURESS_PASSWORD_INfO,data);
             startActivity(intent);
+        });
+    }
+
+    private void createDuressAlarmSizeFullDialog() {
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, "", getString(R.string.philips_duress_alarm_full_size),
+                getString(R.string.query_1), new AlertDialogUtil.ClickListener() {
+            @Override
+            public void left() {
+
+            }
+
+            @Override
+            public void right() {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(String toString) {
+
+            }
         });
     }
 
@@ -190,6 +218,11 @@ public class PhilipsWifiVideoLockDuressAlarmAvtivity extends BaseActivity<IPhili
     public void onGetPasswordSuccess(WiFiLockPassword wiFiLockPassword) {
         duressList.clear();
         duressList = mPresenter.setWifiLockPassword(wifiSn,wiFiLockPassword);
+        duressAlarmSize = 0;
+        for (PhilipsDuressBean duressBean : duressList) {
+            if(duressBean.getPwdDuressSwitch() == 1)
+                duressAlarmSize++;
+        }
         mPhilipsDuressAlarmAdapter.setList(duressList);
     }
 

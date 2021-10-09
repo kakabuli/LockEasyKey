@@ -51,9 +51,11 @@ public class PhilipsDuressAlarmAdapter extends BaseQuickAdapter<PhilipsDuressBea
         }
 
         if(bean.getPwdDuressSwitch() == 0){
+            holder.setTextColorRes(R.id.tv_duress_alarm_toggle,R.color.cE98300);
             holder.setText(R.id.tv_duress_alarm_toggle,R.string.close);
             holder.findView(R.id.rl_duress_alarm_password_notification).setVisibility(View.GONE);
         }else if(bean.getPwdDuressSwitch() == 1){
+            holder.setTextColorRes(R.id.tv_duress_alarm_toggle,R.color.c666666);
             holder.setText(R.id.tv_duress_alarm_toggle,R.string.open);
             holder.setText(R.id.tv_duress_alarm_phone,bean.getDuressAlarmAccount());
             holder.findView(R.id.rl_duress_alarm_password_notification).setVisibility(View.VISIBLE);

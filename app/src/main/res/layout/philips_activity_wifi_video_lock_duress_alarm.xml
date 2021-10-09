@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cF7F7F7"
-    tools:context=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmAvtivity"
+    tools:context=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmActivity"
     android:orientation="vertical">
 
 
@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="#FFFFFF">
+        android:background="@color/c0066A1">
 
         <ImageView
             android:id="@+id/back"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/stress_alarm"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="17pt"
             />
     </RelativeLayout>
@@ -38,8 +38,9 @@
     <RelativeLayout
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="72pt"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12pt"
+        android:paddingBottom="13pt"
         android:background="@color/white">
 
         <TextView
@@ -53,10 +54,12 @@
             android:textSize="16pt" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_rl_duress_1"
-            android:layout_marginLeft="16pt"
+            android:layout_toLeftOf="@id/iv_duress_select"
+            android:layout_marginEnd="5pt"
+            android:layout_marginStart="16pt"
             android:layout_marginTop="8pt"
             android:text="@string/philips_device_duress_alarm_des_check_tips"
             android:textColor="@color/c999999"

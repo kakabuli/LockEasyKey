@@ -98,9 +98,9 @@ public class PhilipsWifiLockPasswordDetailActivity extends BaseActivity<IWifiLoc
             public void afterTextChanged(Editable s) {
                 String phone = mEtNickName.getText().toString().trim();
                 if(TextUtils.isEmpty(phone)) {
-                    confirm.setPressed(false);
+                    confirm.setSelected(false);
                 } else {
-                    confirm.setPressed(!TextUtils.isEmpty(s.toString()));
+                    confirm.setSelected(!TextUtils.isEmpty(s.toString()));
                 }
             }
         });

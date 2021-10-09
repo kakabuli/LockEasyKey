@@ -573,7 +573,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         break;
                     case R.id.rl_duress_alarm:
                         if(avi.isShow()){
-                            intent = new Intent(this,PhilipsWifiVideoLockDuressAlarmAvtivity.class);
+                            intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
                             mPresenter.release();
