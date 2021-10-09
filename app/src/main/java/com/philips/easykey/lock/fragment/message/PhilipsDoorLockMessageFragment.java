@@ -60,6 +60,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     RecyclerView rcvSevenDayDataStatistics;
     TextView tvLockName;
     LinearLayout llVideoLockMsg;
+    LinearLayout llSevenDayStatistics;
     ImageView ivVideoLockMsgLeft;
     ImageView ivVideoLockMsgRight;
     ImageView ivTodayLockStatisticsLeft;
@@ -101,6 +102,7 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
         rcvSevenDayDataStatistics = mView.findViewById(R.id.rcv_seven_day_data_statistics);
         tvLockName = mView.findViewById(R.id.tv_lock_name);
         llVideoLockMsg = mView.findViewById(R.id.ll_video_lock_msg);
+        llSevenDayStatistics = mView.findViewById(R.id.llSevenDayStatistics);
         ivVideoLockMsgLeft = mView.findViewById(R.id.iv_video_lock_msg_left);
         ivVideoLockMsgRight = mView.findViewById(R.id.iv_video_lock_msg_right);
         tvOpenLockNumber = mView.findViewById(R.id.tv_open_lock_number);
@@ -497,14 +499,26 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     @Override
     public void getDtatisticsSevenDay(GetStatisticsSevenDayResult getStatisticsSevenDayResult) {
         LogUtils.d("获取门锁七天记录  数据是  " + getStatisticsSevenDayResult.toString());
+        llSevenDayStatistics.setVisibility(View.VISIBLE);
         refreshDtatisticsSevenDayLayoutData(getStatisticsSevenDayResult);
+    }
+
+    @Override
+    public void getDtatisticsSevenDayFailed() {
+        llSevenDayStatistics.setVisibility(View.GONE);
     }
 
     @Override
     public void getWifiVideoLockAlarm(GetWifiVideoLockAlarmScreenedRecordResult getWifiVideoLockAlarmScreenedRecordResult) {
         LogUtils.d("获取当天预计视频 数据是  " + getWifiVideoLockAlarmScreenedRecordResult.toString());
+        llVideoLockMsg.setVisibility(View.VISIBLE);
         List<WifiVideoLockAlarmRecord> alarmRecords = getWifiVideoLockAlarmScreenedRecordResult.getData().getAlarmList();
         refreshAlarmRecordLayoutData(alarmRecords);
+    }
+
+    @Override
+    public void getWifiVideoLockAlarmFailed() {
+        llVideoLockMsg.setVisibility(View.GONE);
     }
 
     public void powerStatusDialog(){

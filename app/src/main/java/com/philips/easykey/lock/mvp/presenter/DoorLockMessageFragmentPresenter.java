@@ -120,11 +120,13 @@ public class DoorLockMessageFragmentPresenter<T> extends BasePresenter<IDoorLock
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
+                        mViewRef.get().getDtatisticsSevenDayFailed();
                         LogUtils.d("getDoorLockDtatisticsSevenDay onAckErrorCode = "  + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
+                        mViewRef.get().getDtatisticsSevenDayFailed();
                         LogUtils.d("getDoorLockDtatisticsSevenDay onFailed = "  + throwable.toString());
                     }
 
@@ -146,11 +148,13 @@ public class DoorLockMessageFragmentPresenter<T> extends BasePresenter<IDoorLock
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
+                        mViewRef.get().getWifiVideoLockAlarmFailed();
                         LogUtils.d("getWifiVideoLockGetAlarmFilterList onAckErrorCode = "  + baseResult.toString());
                     }
 
                     @Override
                     public void onFailed(Throwable throwable) {
+                        mViewRef.get().getWifiVideoLockAlarmFailed();
                         LogUtils.d("getWifiVideoLockGetAlarmFilterList onFailed = "  + throwable.toString());
                     }
 
