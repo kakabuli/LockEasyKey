@@ -319,12 +319,12 @@
     <string name="message_push">Message Push</string>
     <string name="real_time_video">Real time video settings</string>
     <string name="wandering_alarm">Wandering Alarm</string>
-    <string name="wandering_pir_sensitivity">探测距离</string>
-    <string name="wandering_judge_time">徘徊时长</string>
+    <string name="wandering_pir_sensitivity">Detection Distance</string>
+    <string name="wandering_judge_time">Wandering Time</string>
     <string name="wandering_alarm_close">DisEnabled</string>
     <string name="wandering_alarm_text">When someone passes outside the door, the door lock will capture outdoor abnormal video. This function consumes more power</string>
-    <string name="wandering_pir_sensitivity_text">高度灵敏会增加频繁检测距离，导致耗电</string>
-    <string name="wandering_judge_time_text">判定时间不宜太短，防止误报</string>
+    <string name="wandering_pir_sensitivity_text">High sensitivity will increase the frequent detection distance, resulting in power consumption</string>
+    <string name="wandering_judge_time_text">The judgment time should not be too short to prevent false alarms</string>
     <string name="serial_number">序列号</string>
     <string name="device_signal">设备信号</string>
     <string name="link_signal">链路信号</string>
@@ -2077,18 +2077,18 @@
     <string name="activity_wifi_video_sixth_fail_2">次，\n超过5次，配网失败</string>
     <string name="activity_wifi_video_sixth_fail_3">\n门锁管理密码验证已失败5次\n</string>
     <string name="activity_wifi_video_sixth_fail_4">请修改管理密码，重新配网\n</string>
-    <string name="activity_wifi_video_wamdering_open">开启后，可视摄像头会侦测门外徘徊人员，比较耗电</string>
-    <string name="activity_wifi_video_wamdering_low">近</string>
-    <string name="activity_wifi_video_wamdering_midd">中</string>
-    <string name="activity_wifi_video_wamdering_high">远</string>
-    <string name="activity_wifi_video_wamdering_sceond">秒</string>
-    <string name="activity_wifi_video_wamdering_10sceond">来回走动10秒报警</string>
-    <string name="activity_wifi_video_wamdering_20sceond">来回走动20秒报警</string>
-    <string name="activity_wifi_video_wamdering_30sceond">来回走动30秒报警</string>
-    <string name="activity_wifi_video_wamdering_60sceond">来回走动60秒报警</string>
-    <string name="activity_wifi_video_wamdering_3meters">远（3米内）</string>
-    <string name="activity_wifi_video_wamdering_2meters">中（2米内）</string>
-    <string name="activity_wifi_video_wamdering_1meters">近（1米内）</string>
+    <string name="activity_wifi_video_wamdering_open">After being turned on, the visual camera will detect people wandering outside the door, which consumes more power</string>
+    <string name="activity_wifi_video_wamdering_low">1 Meter</string>
+    <string name="activity_wifi_video_wamdering_midd">2 Meter</string>
+    <string name="activity_wifi_video_wamdering_high">3 Meter</string>
+    <string name="activity_wifi_video_wamdering_sceond">S</string>
+    <string name="activity_wifi_video_wamdering_10sceond">10 Second</string>
+    <string name="activity_wifi_video_wamdering_20sceond">20 Second</string>
+    <string name="activity_wifi_video_wamdering_30sceond">30 Second</string>
+    <string name="activity_wifi_video_wamdering_60sceond">60 Second</string>
+    <string name="activity_wifi_video_wamdering_3meters">3 Meter</string>
+    <string name="activity_wifi_video_wamdering_2meters">2 Meter</string>
+    <string name="activity_wifi_video_wamdering_1meters">1 Meter</string>
 
 
     <string name="activity_wifi_am_auto_mode">模式</string>

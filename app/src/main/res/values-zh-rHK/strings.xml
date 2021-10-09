@@ -2078,17 +2078,17 @@
     <string name="activity_wifi_video_sixth_fail_3">\n门锁管理密码验证已失败5次\n</string>
     <string name="activity_wifi_video_sixth_fail_4">请修改管理密码，重新配网\n</string>
     <string name="activity_wifi_video_wamdering_open">开启后，可视摄像头会侦测门外徘徊人员，比较耗电</string>
-    <string name="activity_wifi_video_wamdering_low">近</string>
-    <string name="activity_wifi_video_wamdering_midd">中</string>
-    <string name="activity_wifi_video_wamdering_high">远</string>
+    <string name="activity_wifi_video_wamdering_low">1米</string>
+    <string name="activity_wifi_video_wamdering_midd">2米</string>
+    <string name="activity_wifi_video_wamdering_high">3米</string>
     <string name="activity_wifi_video_wamdering_sceond">秒</string>
-    <string name="activity_wifi_video_wamdering_10sceond">来回走动10秒报警</string>
-    <string name="activity_wifi_video_wamdering_20sceond">来回走动20秒报警</string>
-    <string name="activity_wifi_video_wamdering_30sceond">来回走动30秒报警</string>
-    <string name="activity_wifi_video_wamdering_60sceond">来回走动60秒报警</string>
-    <string name="activity_wifi_video_wamdering_3meters">远（3米内）</string>
-    <string name="activity_wifi_video_wamdering_2meters">中（2米内）</string>
-    <string name="activity_wifi_video_wamdering_1meters">近（1米内）</string>
+    <string name="activity_wifi_video_wamdering_10sceond">10秒</string>
+    <string name="activity_wifi_video_wamdering_20sceond">20秒</string>
+    <string name="activity_wifi_video_wamdering_30sceond">30秒</string>
+    <string name="activity_wifi_video_wamdering_60sceond">60秒</string>
+    <string name="activity_wifi_video_wamdering_3meters">3米</string>
+    <string name="activity_wifi_video_wamdering_2meters">2米</string>
+    <string name="activity_wifi_video_wamdering_1meters">1米</string>
 
 
     <string name="activity_wifi_am_auto_mode">模式</string>
