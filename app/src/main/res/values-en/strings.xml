@@ -49,10 +49,10 @@
     <string name="verification_verify_error">请输入六位验证码</string>
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
     <string name="agree_user_protocol">请同意用户协议</string>
-    <string name="philips_input_valid_telephone_or_email">请输入有效手机号或邮箱</string>
+    <string name="philips_input_valid_telephone_or_email">Please enter a valid mobile phone number or email address</string>
     <string name="philips_input_valid_telephone">请输入有效手机号</string>
 
-    <string name="philips_account_message_not_empty">账户信息不能为空</string>
+    <string name="philips_account_message_not_empty">Account information cannot be empty</string>
     <string name="home_page">首页</string>
     <string name="device">设备</string>
     <string name="message">消息</string>
@@ -2431,7 +2431,7 @@
     <string name="philips_setting_stress_alarm">Set Duress Password</string>
     <string name="philips_setting_app_stress_alarm">APP pushes real-time duress alarm messages</string>
     <string name="philips_setting_duress_alarm_app_add_time">Add time</string>
-    <string name="philips_setting_duress_alarm_receiver">接收账号</string>
+    <string name="philips_setting_duress_alarm_receiver">Receiving Account</string>
     <string name="philips_setting_duress_alarm_app_receiver">APP Receiving</string>
     <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
     <string name="philips_activity_detail_share">Share</string>
@@ -2732,7 +2732,7 @@
     <string name="philips_and">和</string>
     <string name="philips_duress_number">Number %1$s</string>
     <string name="philips_set_duress_account">请设置胁迫报警账号</string>
-    <string name="phliips_user_not_registered">该用户未注册</string>
+    <string name="phliips_user_not_registered">User not registered</string>
 
     <string name="philips_errcode_success">发送成功</string>
     <string name="philips_errcode_cancel">发送取消</string>
@@ -2752,5 +2752,7 @@
     <string name="query_1">Confirm</string>
     <string name="philips_setting_duress_alarm_receiver_1">Receive duress alarm messages</string>
     <string name="philips_duress_alarm_setting_exit">Exit duress alarm setting?</string>
-    <string name="philips_duress_alarm_full_size">当前胁迫密码已满5组，请关闭其他胁迫密钥后再添加</string>
+    <string name="philips_duress_alarm_full_size">The current duress password is full of 5 groups, \nplease close other duress keys before adding</string>
+    <string name="duress_alarm_help_title">What is Duress Alarm?</string>
+    <string name="duress_alarm_help_content">When the password or fingerprint is set as the coercion key, use the coercion password or fingerprint to open the door, and the associated notification account will receive the coercion alarm information.</string>
 </resources>

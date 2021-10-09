@@ -2753,4 +2753,6 @@
     <string name="philips_setting_duress_alarm_receiver_1">接收胁迫报警消息</string>
     <string name="philips_duress_alarm_setting_exit">是否退出胁迫报警设置？</string>
     <string name="philips_duress_alarm_full_size">当前胁迫密码已满5组，请关闭其他\n胁迫密钥后再添加</string>
+    <string name="duress_alarm_help_title">什么是胁迫报警？</string>
+    <string name="duress_alarm_help_content">将密码或指纹设置为胁迫密钥时，使用该胁迫密码或指纹开门，已关联的通知账号将会收到胁迫报警信息。</string>
 </resources>

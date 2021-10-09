@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16pt"
         android:layout_marginStart="16pt"
-        android:paddingBottom="86pt"
         android:background="@drawable/background_white_3dp">
 
         <TextView
@@ -22,7 +21,7 @@
             android:textSize="17pt"
             android:layout_marginTop="24pt"
             android:layout_centerHorizontal="true"
-            android:text="什么是胁迫报警？"/>
+            android:text="@string/duress_alarm_help_title"/>
 
 
         <ImageView
@@ -37,13 +36,13 @@
         <TextView
             android:layout_below="@id/duress_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="157pt"
             android:textSize="14pt"
             android:layout_marginTop="67pt"
             android:layout_marginStart="26pt"
             android:layout_marginEnd="26pt"
             android:textColor="@color/color_666666"
-            android:text="将密码或指纹设置为胁迫密钥时，使用该胁迫密码或指纹开门，已关联的通知账号将会收到胁迫报警信息。"/>
+            android:text="@string/duress_alarm_help_content"/>
     </RelativeLayout>
 
     <ImageView

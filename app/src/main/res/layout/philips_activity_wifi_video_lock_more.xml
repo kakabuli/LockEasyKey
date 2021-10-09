@@ -376,7 +376,8 @@
             <RelativeLayout
                 android:id="@+id/rl_wandering_alarm"
                 android:layout_width="match_parent"
-                android:layout_height="88pt"
+                android:layout_height="wrap_content"
+                android:paddingBottom="13pt"
                 android:background="#FFFFFF">
 
 
@@ -408,9 +409,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_wandering_alarm"
+                    android:layout_toLeftOf="@id/tv_wandering_alarm_right"
+                    android:layout_marginEnd="5pt"
                     android:layout_marginTop="8pt"
-                    android:layout_marginLeft="16pt"
-                    android:layout_marginRight="95pt"
+                    android:layout_marginStart="16pt"
                     android:text="@string/wandering_alarm_text"
                     android:textColor="#999999"
                     android:textSize="12pt" />
