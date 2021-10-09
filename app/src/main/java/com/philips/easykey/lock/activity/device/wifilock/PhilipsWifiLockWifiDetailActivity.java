@@ -139,7 +139,7 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
                     powerSaveModeStatus();
                     return;
                 }
-                createDialog(getString(R.string.philips_deviceinfo__power_save_mode));
+                createDialog(getString(R.string.philips_closed_video_mode_title),getString(R.string.philips_closed_video_mode_content));
                 ToastUtils.showShort(R.string.philips_get_wifi_rssi_error);
                 return;
             }
@@ -247,9 +247,9 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
                 }*/
 
                 if(errorCode == -3){
-                    createDialog(getString(R.string.video_lock_xm_connect_time_out_1) + "");
+                    createDialog(getString(R.string.video_lock_xm_connect_time_out_1) + "","");
                 }else{
-                    createDialog(getString(R.string.video_lock_xm_connect_failed_1) + "");
+                    createDialog(getString(R.string.video_lock_xm_connect_failed_1) + "","");
                 }
 
                 tvTips.setVisibility(View.GONE);
@@ -291,8 +291,8 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
         }
     }
 
-    public void createDialog(String content){
-        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, content,"",
+    public void createDialog(String title,String content){
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(this, title,content,
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

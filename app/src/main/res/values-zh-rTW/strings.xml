@@ -2755,4 +2755,6 @@
     <string name="philips_duress_alarm_full_size">当前胁迫密码已满5组，请关闭其他\n胁迫密钥后再添加</string>
     <string name="duress_alarm_help_title">什么是胁迫报警？</string>
     <string name="duress_alarm_help_content">将密码或指纹设置为胁迫密钥时，使用该胁迫密码或指纹开门，已关联的通知账号将会收到胁迫报警信息。</string>
+    <string name="philips_closed_video_mode_title">已关闭视频功能</string>
+    <string name="philips_closed_video_mode_content">1.请检查设备电量，电量过低时请\n更换电池\n2.电量正常时，请在锁端节能设置\n中，开启视频功能</string>
 </resources>

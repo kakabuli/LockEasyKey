@@ -522,7 +522,8 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(getActivity(), getString(R.string.philips_deviceinfo__power_save_mode),"",
+        AlertDialogUtil.getInstance().PhilipsSingleButtonDialog(getActivity(), getString(R.string.philips_closed_video_mode_title),
+                getString(R.string.philips_closed_video_mode_content),
                 getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

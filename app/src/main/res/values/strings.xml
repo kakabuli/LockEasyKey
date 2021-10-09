@@ -36,9 +36,9 @@
     <string name="look_for_QRCode">在门锁后面板找到配网二维码</string>
     <string name="not_input_special_symbol">不能输入特殊符号</string>
     <string name="phone_not_right">手机号错误</string>
-    <string name="hint">提示</string>
+    <string name="hint">Tips</string>
     <string name="philips_password_error">密码错误</string>
-    <string name="affirm">确认</string>
+    <string name="affirm">Confirm</string>
     <string name="philips_noNet">No network, please connect to the network first!</string>
     <string name="more_then_ten_member">You have added more than 10 members, \nPlease delete the existing member permissions and add again</string>
     <string name="dialog_confirm">确认</string>
@@ -325,7 +325,7 @@
     <string name="wandering_alarm_text">When someone passes outside the door, the door lock will capture outdoor abnormal video. This function consumes more power</string>
     <string name="wandering_pir_sensitivity_text">High sensitivity will increase the frequent detection distance, resulting in power consumption</string>
     <string name="wandering_judge_time_text">The judgment time should not be too short to prevent false alarms</string>
-    <string name="serial_number">序列号</string>
+    <string name="serial_number">Serial Number</string>
     <string name="device_signal">设备信号</string>
     <string name="link_signal">链路信号</string>
     <string name="firmware_version_number">固件版本号</string>
@@ -339,7 +339,7 @@
     <string name="open_lock_success">开锁成功</string>
     <string name="open_lock_failed">开锁失败</string>
     <string name="device_info">设备信息</string>
-    <string name="unit_type">设备型号</string>
+    <string name="unit_type">Device Model</string>
     <string name="lock_firmware_version">门锁固件版本</string>
     <string name="bluetooth_module_version">门锁蓝牙模块版本</string>
     <string name="hao_de">Well</string>
@@ -707,7 +707,7 @@
     <string name="card_full_and_delete_exist_code">卡片库已满，请删除已有码库再添加</string>
     <string name="set_card_failed_number">设置卡片失败，获取锁上编号失败！</string>
     <string name="read_device_info_fail">读取设备信息失败</string>
-    <string name="already_newest_version">当前已是最新版本</string>
+    <string name="already_newest_version">Currently the latest version</string>
     <string name="sync_failed_card">同步门卡失败</string>
     <string name="lock_no_this_card">锁上没有此卡片，请同步</string>
     <string name="philips_confirm">Query</string>
@@ -898,11 +898,11 @@
     <string name="mainactivity_permission_alert_title">应用权限开关开启通知</string>
     <string name="no_unlock_record">暂无操作记录</string>
     <string name="connection_server">连接服务器失败,请检查网络退出该页面重新进去</string>
-    <string name="lock_firware_version_number">门锁固件版本</string>
+    <string name="lock_firware_version_number">Lock Firmware Version</string>
     <string name="lock_firware_hardware_number">门锁硬件版本</string>
     <string name="lock_firware__number">门锁版本</string>
-    <string name="front_hard_version">前面板版本</string>
-    <string name="back_hard_version">后面板版本</string>
+    <string name="front_hard_version">Front Panel Version</string>
+    <string name="back_hard_version">Rear Panel Version</string>
     <string name="face_model_firware_version_number">人脸模组版本</string>
     <string name="lock_software_version">门锁软件版本</string>
     <string name="no_lock_alarm">暂无预警信息</string>
@@ -1033,16 +1033,16 @@
     <string name="start_upgarde">开始升级</string>
     <string name="good_for_you">恭喜你！</string>
     <string name="ota_good_for_you">锁OTA升级成功</string>
-    <string name="ota_fail">升级失败</string>
+    <string name="ota_fail">Upgrade failed</string>
     <string name="ota_fail_reply">锁OTA升级失败，是否需要重试？</string>
     <string name="philips_input_correct_verification_code">请输入正确验证码</string>
     <string name="ota_update_loading">正在升级，请勿操作！</string>
     <string name="device_name_cannot_be_empty">设备名称不能为空</string>
     <string name="wifi_password_length">Wi-Fi密码长度8~63位</string>
-    <string name="check_update_failed">检查版本信息失败，请稍后再试！</string>
+    <string name="check_update_failed">Failed to check version information, please try again later!</string>
     <string name="check_update_failed2">检查版本信息失败，请稍后再试！！！</string>
     <string name="data_params_error">数据参数不对</string>
-    <string name="sn_error">Sn格式不正确</string>
+    <string name="sn_error">SN format is incorrect</string>
     <string name="hava_ble_new_version">检测到新蓝牙版本，是否升级？</string>
     <string name="hava_camera_new_version">检测到新摄像头固件，是否升级？</string>
     <string name="hava_algorithm_new_version">检测到新算法版固件，是否升级？</string>
@@ -1463,7 +1463,7 @@
     <string name="wifi_delete2">门锁授权使用</string>
     <string name="wifi_add">授权</string>
     <string name="wifi_add2">使用门锁</string>
-    <string name="lan_bo_ji_ni">兰博基尼传奇</string>
+    <string name="lan_bo_ji_ni">Lamborghini legend</string>
     <string name="connect_lock_failed">连接锁设备失败</string>
     <string name="read_data_failed">读取数据失败</string>
     <string name="please_open_wifi">请打开Wi-Fi</string>
@@ -1517,7 +1517,7 @@
     <string name="face_lock_power_Save_open">开启节能模式</string>
     <string name="face_lock_power_Save_close">关闭节能模式</string>
     <string name="please_input_612">请输入6-12位有效密码</string>
-    <string name="info_error">信息不全，请刷新设备列表</string>
+    <string name="info_error">Incomplete information, please refresh the device list</string>
     <string name="upload_success">上传成功</string>
     <string name="upload_failed">上传失败</string>
     <string name="iploading">正在上传服务器</string>
@@ -1526,7 +1526,7 @@
     <string name="clothes_hanger_machine_notice">暂不支持5G频段的WiFi以及酒店、机场 \n需认证的WiFi</string>
     <string name="notice_wifi_update">注意观察Wi-Fi模块升级</string>
     <string name="notice_lock_update">注意观察Wi-Fi锁升级</string>
-    <string name="notice_lock_update_uploadFailed">上传失败，请重试</string>
+    <string name="notice_lock_update_uploadFailed">Upload failed, please try again</string>
     <string name="hava_wifi_new_version">检测有新Wi-Fi模块版本</string>
     <string name="hava_lock_new_version">检测有新Wi-Fi锁版本</string>
     <string name="hava_face_model_new_version">检测到人脸模组版本</string>
@@ -1621,7 +1621,7 @@
     <string name="ble_break_authenticate">门锁断开连接，无法验证</string>
 
     <string name="wifi_view1">Wi-Fi模块固件版本</string>
-    <string name="camera_serial_numer">摄像头序列号</string>
+    <string name="camera_serial_numer">Camera Serial Number</string>
     <string name="camera_hardware_version">摄像头硬件版本</string>
     <string name="camera__version">摄像头版本</string>
     <string name="camera_firmware_version">摄像头固件版本</string>
@@ -2040,10 +2040,10 @@
     <string name="dialog_wifi_video_continue_playing">Keep playing</string>
     <string name="dialog_wifi_video_check_ota">检测有新</string>
     <string name="dialog_wifi_video_ota_update">是否升级</string>
-    <string name="dialog_wifi_wifi_firmware_version">WIFI固件版本</string>
-    <string name="dialog_wifi_video_moudle_version">视频模组版本</string>
-    <string name="dialog_wifi_video_mcu_moudle_version">视频控制器版本</string>
-    <string name="voice_model_firware_version_number">语音模组版本</string>
+    <string name="dialog_wifi_wifi_firmware_version">WiFi Firmware Version</string>
+    <string name="dialog_wifi_video_moudle_version">Video Module Version</string>
+    <string name="dialog_wifi_video_mcu_moudle_version">Video Controller Version</string>
+    <string name="voice_model_firware_version_number">Voice Module Version</string>
 
     <string name="activity_wifi_video_fifth_third">第三步：门锁扫描二维码</string>
     <string name="activity_wifi_video_fifth_thour">第四步：门锁扫描二维码</string>
@@ -2755,4 +2755,6 @@
     <string name="philips_duress_alarm_full_size">The current duress password is full of 5 groups, \nplease close other duress keys before adding</string>
     <string name="duress_alarm_help_title">What is Duress Alarm?</string>
     <string name="duress_alarm_help_content">When the password or fingerprint is set as the coercion key, use the coercion password or fingerprint to open the door, and the associated notification account will receive the coercion alarm information.</string>
+    <string name="philips_closed_video_mode_title">Video feature turned off</string>
+    <string name="philips_closed_video_mode_content">1. Please check the power of the device and replace the battery when the power is too low. \n2. When the power is normal, please turn on the video function in the lock end energy saving setting</string>
 </resources>
