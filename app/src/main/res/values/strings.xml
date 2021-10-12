@@ -589,6 +589,7 @@
     <string name="guard_time">守护时间</string>
     <string name="day">天</string>
     <string name="guard_number">守护次数</string>
+    <string name="message_number">消息总数</string>
     <string name="ci">次</string>
     <string name="bar">条</string>
     <string name="philips_visitor_record">访客记录</string>

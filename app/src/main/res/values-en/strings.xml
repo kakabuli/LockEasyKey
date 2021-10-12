@@ -2758,4 +2758,5 @@
     <string name="duress_alarm_help_content">When the password or fingerprint is set as the coercion key, use the coercion password or fingerprint to open the door, and the associated notification account will receive the coercion alarm information.</string>
     <string name="philips_closed_video_mode_title">Video feature turned off</string>
     <string name="philips_closed_video_mode_content">1. Please check the power of the device and replace the battery when the power is too low. \n2. When the power is normal, please turn on the video function in the lock end energy saving setting</string>
+    <string name="message_number">消息总数</string>
 </resources>

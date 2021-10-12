@@ -118,7 +118,7 @@
                    android:layout_height="wrap_content"
                    android:layout_centerHorizontal="true"
                    android:layout_marginTop="14pt"
-                   android:text="@string/guard_number"
+                   android:text="@string/message_number"
                    android:textColor="#333333"
                    android:textSize="12pt" />
 
