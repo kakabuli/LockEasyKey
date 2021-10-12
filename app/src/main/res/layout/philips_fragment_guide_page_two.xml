@@ -64,7 +64,7 @@
         <ImageView
             android:layout_width="6pt"
             android:layout_height="6pt"
-            android:background="@drawable/guide_indicator_select" />
+            android:background="@drawable/guide_indicator_unselect" />
 
         <ImageView
             android:layout_width="6pt"
