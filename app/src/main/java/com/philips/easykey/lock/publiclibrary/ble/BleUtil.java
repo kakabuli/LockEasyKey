@@ -1021,7 +1021,7 @@ public class BleUtil {
                             case 252:
                                 mTvContent.setText(R.string.philips_operation_record_1_0_252);
                                 if(iv != null){
-                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_temporary_password));
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_admin_temporary_password));
                                 }
                                 break;
                             case 250:
@@ -1033,7 +1033,7 @@ public class BleUtil {
                             default:
                                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_0_000,record.getUserNickname()));
                                 if(iv != null){
-                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_administrator_password));
+                                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_password));
                                 }
                                 break;
                         }
@@ -1047,11 +1047,14 @@ public class BleUtil {
                     case 4:
                         if(record.getPwdNum() == 254){
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_4_254,record.getUserNickname()));
+                            if(iv != null){
+                                iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_admin_fingerprint));
+                            }
                         }else {
                             mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_4_000,record.getUserNickname()));
-                        }
-                        if(iv != null){
-                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_fingerprint));
+                            if(iv != null){
+                                iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_fingerprint));
+                            }
                         }
                         break;
                     case 7:
@@ -1266,7 +1269,7 @@ public class BleUtil {
             case 15: //15修改管理指纹
                 mTvContent.setText(R.string.philips_operation_record_15_0);
                 if(iv != null){
-                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_change));
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_admin_fingerprint));
                 }
                 break;
             case 16: //16添加管理员指纹
