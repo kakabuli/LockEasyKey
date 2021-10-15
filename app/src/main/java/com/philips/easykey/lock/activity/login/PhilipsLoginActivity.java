@@ -147,8 +147,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mIvShowOrHide = findViewById(R.id.ivShowOrHide);
         mTvGetCode = findViewById(R.id.tvGetCode);
         mEtVerificationCode = findViewById(R.id.etVerificationCode);
-        mIvPhone = findViewById(R.id.ivPhone);
-        mTvPhone = findViewById(R.id.tvPhone);
         mIvVerification = findViewById(R.id.ivVerification);
         mTvCode = findViewById(R.id.tvCode);
         mTvForgotPwd = findViewById(R.id.tvForgotPwd);
@@ -224,7 +222,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         });
 
         applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
-                mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
+                mBtnLogin, mIvVerification, findViewById(R.id.ivWechat),
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode,mlanguage);
 
         initTerms();
@@ -323,13 +321,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             }
         } else if(view.getId() == R.id.ivWechat) {
             wechatLogin();
-        } else if(view.getId() == R.id.ivVerification) {
-            // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
-            loginType = codeType;
-            changeToVCodeLogin();
-        } else if(view.getId() == R.id.ivPhone){
-            loginType = phoneLogin;
-            changeToAccountLogin();
+        } else if(view.getId() == R.id.ivVerification){
+            Intent intent = new Intent(this, PhilipsSMSLoginActivity.class);
+            startActivity(intent);
         } else if(view.getId() == R.id.tvSelectCountry) {
             Intent intent = new Intent(this, CountryActivity.class);
             startActivityForResult(intent, mCountryReqCode);
@@ -358,19 +352,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void changeToVCodeLogin() {
-        mEtVerificationCode.setVisibility(View.VISIBLE);
-        mTvGetCode.setVisibility(View.VISIBLE);
-        mEtPwd.setVisibility(View.INVISIBLE);
-        mIvShowOrHide.setVisibility(View.INVISIBLE);
-        mIvPhone.setVisibility(View.VISIBLE);
-        mTvPhone.setVisibility(View.VISIBLE);
-        mIvVerification.setVisibility(View.GONE);
-        mTvCode.setVisibility(View.GONE);
-        mTvForgotPwd.setVisibility(View.GONE);
-        mTvRegister.setVisibility(View.GONE);
-    }
-
     private void wechatLogin() {
         if (!MyApplication.getInstance().getApi().isWXAppInstalled()) {
             ToastUtils.showShort(R.string.you_have_not_installed_wechat);
@@ -390,19 +371,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 getWeChatOpenId(code);
             }
         });
-    }
-
-    private void changeToAccountLogin() {
-        mEtVerificationCode.setVisibility(View.GONE);
-        mTvGetCode.setVisibility(View.GONE);
-        mEtPwd.setVisibility(View.VISIBLE);
-        mIvShowOrHide.setVisibility(View.VISIBLE);
-        mIvPhone.setVisibility(View.GONE);
-        mTvPhone.setVisibility(View.GONE);
-        mIvVerification.setVisibility(View.VISIBLE);
-        mTvCode.setVisibility(View.VISIBLE);
-        mTvForgotPwd.setVisibility(View.VISIBLE);
-        mTvRegister.setVisibility(View.VISIBLE);
     }
 
     private void changeLoginBtnStyle(boolean isCanLogin) {
@@ -738,7 +706,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
                         if(baseResult.getCode().equals("448")){
-                            changeToVCodeLogin();
+
                         }
                     }
 

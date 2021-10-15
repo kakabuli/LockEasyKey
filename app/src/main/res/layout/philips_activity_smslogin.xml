@@ -1,51 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/philips_login_bg"
-    android:orientation="vertical">
+    tools:context=".activity.login.PhilipsSMSLoginActivity">
 
-    <TextView
-        android:id="@+id/tvLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16pt"
-        android:text="@string/setting_language_cn"
-        android:textColor="@color/c1E9D8B"
-        android:textSize="16pt"
-        android:layout_marginTop="30pt"
+    <View
+        android:id="@+id/vTitleBg"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/c0066A1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivLogo"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tvBrandName"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="81pt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/philips_login_logo" />
+        android:layout_marginStart="15pt"
+        app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
+        app:layout_constraintStart_toStartOf="@+id/vTitleBg"
+        app:layout_constraintTop_toTopOf="@+id/vTitleBg"
+        app:srcCompat="@drawable/philips_icon_back_white" />
 
     <TextView
-        android:id="@+id/tvBrandName"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:fontFamily="@font/centrale_sans_book"
-        android:text="@string/philips_splash_app_name"
-        android:textColor="@color/c0066A1"
-        android:textSize="20pt"
-        android:layout_marginBottom="56pt"
-        app:layout_constraintBottom_toTopOf="@+id/etPhoneOrMail"
+        android:text="@string/philips_sms_login"
+        android:textSize="17pt"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/vTitleBg"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+<EditText
         android:id="@+id/etPhoneOrMail"
         android:layout_width="match_parent"
         android:layout_height="44pt"
@@ -60,10 +53,10 @@
         android:background="@drawable/philips_shape_et_login_bg"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        android:layout_marginBottom="14pt"
-        app:layout_constraintBottom_toTopOf="@+id/etPwd"
+        android:layout_marginTop="24pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vTitleBg" />
 
     <TextView
         android:id="@+id/tvSelectCountry"
@@ -96,10 +89,10 @@
         android:background="@drawable/philips_shape_et_login_bg"
         android:layout_marginEnd="16pt"
         android:layout_marginStart="16pt"
-        android:layout_marginBottom="51pt"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        android:layout_marginTop="14pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneOrMail" />
 
     <ImageView
         android:id="@+id/ivShowOrHide"
@@ -113,7 +106,6 @@
 
     <EditText
         android:id="@+id/etVerificationCode"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="44pt"
         android:layout_marginStart="16pt"
@@ -134,7 +126,6 @@
 
     <TextView
         android:id="@+id/tvGetCode"
-        android:visibility="gone"
         android:layout_width="109pt"
         android:layout_height="44pt"
         android:text="@string/philips_get_verification"
@@ -146,28 +137,6 @@
         app:layout_constraintEnd_toEndOf="@+id/etVerificationCode"
         app:layout_constraintTop_toTopOf="@+id/etVerificationCode" />
 
-    <TextView
-        android:id="@+id/tvForgotPwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/philips_forget_password"
-        android:layout_marginTop="8pt"
-        android:textSize="14pt"
-        android:textColor="@color/color_333333"
-        app:layout_constraintStart_toStartOf="@+id/etPwd"
-        app:layout_constraintTop_toBottomOf="@+id/etPwd" />
-
-    <TextView
-        android:id="@+id/tvRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/philips_register_now"
-        android:layout_marginTop="8pt"
-        android:textSize="14pt"
-        android:textColor="@color/color_333333"
-        app:layout_constraintEnd_toEndOf="@+id/etPwd"
-        app:layout_constraintTop_toBottomOf="@+id/etPwd" />
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
@@ -176,12 +145,12 @@
         android:textColor="@color/white"
         android:textSize="16pt"
         android:background="@drawable/philips_shape_btn_login_bg"
-        android:layout_marginBottom="133pt"
+        android:layout_marginTop="106pt"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etVerificationCode" />
 
 
     <TextView
@@ -190,41 +159,17 @@
         android:layout_height="wrap_content"
         android:textColor="@color/c666666"
         android:textSize="12pt"
-        android:layout_marginBottom="105pt"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivVerification"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="106pt"
-        android:layout_marginBottom="8pt"
-        app:layout_constraintBottom_toTopOf="@+id/tvCode"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/philips_login_icon_verification_code" />
-
-    <TextView
-        android:id="@+id/tvCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17pt"
-        android:text=""
-        android:textColor="@color/color_333333"
-        android:textSize="12pt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivVerification"
-        app:layout_constraintStart_toStartOf="@+id/ivVerification" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <ImageView
         android:id="@+id/ivPhone"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="106pt"
-        android:layout_marginBottom="8pt"
+        android:layout_marginBottom="26pt"
         app:layout_constraintBottom_toTopOf="@+id/tvPhone"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/philips_login_icon_iphone" />
@@ -246,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="106pt"
-        android:layout_marginBottom="8pt"
+        android:layout_marginBottom="26pt"
         app:layout_constraintBottom_toTopOf="@+id/tvWechat"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/philips_login_icon_wechat" />
@@ -262,5 +207,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ivWechat"
         app:layout_constraintStart_toStartOf="@+id/ivWechat"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
