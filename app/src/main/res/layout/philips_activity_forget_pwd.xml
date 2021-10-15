@@ -11,8 +11,9 @@
         android:id="@+id/vTitleBg"
         android:layout_width="match_parent"
         android:layout_height="44pt"
-        android:background="@color/white"
+        android:background="@color/c0066A1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/philips_forget_password"
         android:textSize="17pt"
-        android:textColor="@color/color_333333"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/vTitleBg"
@@ -158,7 +159,7 @@
         android:layout_marginTop="24pt"
         android:background="@drawable/philips_shape_btn_login_bg"
         android:text="@string/philips_complete"
-        android:textColor="@color/white"
+        android:textColor="@color/c0066A1"
         android:textSize="16pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

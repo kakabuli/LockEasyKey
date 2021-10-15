@@ -225,7 +225,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
         applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
                 mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
-                mTvSelectCountry, mIvShowOrHide, mTvGetCode);
+                mTvSelectCountry, mIvShowOrHide, mTvGetCode,mlanguage);
 
         initTerms();
         initStatement();
