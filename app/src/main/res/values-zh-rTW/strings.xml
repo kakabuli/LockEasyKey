@@ -2759,4 +2759,5 @@
     <string name="philips_closed_video_mode_title">已关闭视频功能</string>
     <string name="philips_closed_video_mode_content">1.请检查设备电量，电量过低时请\n更换电池\n2.电量正常时，请在锁端节能设置\n中，开启视频功能</string>
     <string name="message_number">消息总数</string>
+    <string name="setting_language_cn">中文</string>
 </resources>

@@ -52,6 +52,7 @@ import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.wxapi.NetworkUtil;
 import com.philips.easykey.lock.wxapi.WXEntryActivity;
@@ -87,7 +88,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     private ImageView mIvVerification;
     private TextView mTvCode;
     private TextView mTvForgotPwd;
-    private TextView mTvRegister;
+    private TextView mTvRegister,mlanguage;
 
     private final int mCountryReqCode = 1233;
     private String mCountryCode = "86";
@@ -130,6 +131,14 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
+
+    }
+
+    @Override
     public void initView(@Nullable Bundle savedInstanceState, @Nullable View contentView) {
         mEtPhoneOrMail = findViewById(R.id.etPhoneOrMail);
         mEtPwd = findViewById(R.id.etPwd);
@@ -145,6 +154,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mTvForgotPwd = findViewById(R.id.tvForgotPwd);
         mTvRegister = findViewById(R.id.tvRegister);
         mTvAgreement = findViewById(R.id.tvAgreement);
+        mlanguage = findViewById(R.id.tvLanguage);
 
         changeLoginBtnStyle(false);
         mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
@@ -216,7 +226,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
                 mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode);
-        setStatusBarColor(R.color.white);
 
         initTerms();
         initStatement();
@@ -329,6 +338,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         } else if(view.getId() == R.id.tvGetCode) {
             if(isCountdown) return;
             getVerification();
+        } else if (view.getId() == R.id.tvLanguage){
+            //TODO 语言切换
         }
     }
 

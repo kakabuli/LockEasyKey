@@ -8,6 +8,18 @@
     android:background="@drawable/philips_login_bg"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tvLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16pt"
+        android:text="@string/setting_language_cn"
+        android:textColor="@color/c1E9D8B"
+        android:textSize="16pt"
+        android:layout_marginTop="30pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
