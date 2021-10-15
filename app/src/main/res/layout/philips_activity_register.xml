@@ -5,31 +5,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/philips_login_bg"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/vTitleBg"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/c0066A1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:id="@+id/ivLogo"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tvBrandName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="81pt"
-        app:srcCompat="@drawable/philips_login_logo" />
+        android:layout_marginStart="15pt"
+        app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
+        app:layout_constraintStart_toStartOf="@+id/vTitleBg"
+        app:layout_constraintTop_toTopOf="@+id/vTitleBg"
+        app:srcCompat="@drawable/philips_icon_back_white" />
 
     <TextView
-        android:id="@+id/tvBrandName"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/centrale_sans_book"
-        android:text="@string/philips_logo_easykey"
-        android:textColor="@color/c0066A1"
-        android:textSize="20pt"
-        android:layout_marginBottom="56pt"
-        app:layout_constraintBottom_toTopOf="@+id/etPhoneOrMail"
+        android:text="@string/philips_registered_account"
+        android:textSize="17pt"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/vTitleBg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/vTitleBg"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etPhoneOrMail"
@@ -37,18 +45,19 @@
         android:layout_height="44pt"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        android:layout_marginBottom="12pt"
+        android:textSize="16pt"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColorHint="@color/cCCCCCC"
+        android:layout_marginTop="24pt"
         android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_et_login_bg"
         android:hint="@string/philips_hint_plz_input_phone_or_mail"
-        android:maxLines="1"
         android:paddingStart="90pt"
         android:paddingEnd="14pt"
-        android:singleLine="true"
-        android:textSize="16pt"
-        app:layout_constraintBottom_toTopOf="@+id/etVerificationCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vTitleBg" />
 
     <TextView
         android:id="@+id/tvSelectCountry"
@@ -71,7 +80,7 @@
         android:layout_height="44pt"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        android:layout_marginBottom="12pt"
+        android:layout_marginTop="14pt"
         android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_et_login_bg"
         android:hint="@string/philips_hint_input_verification"
@@ -80,9 +89,9 @@
         android:paddingEnd="14pt"
         android:singleLine="true"
         android:textSize="16pt"
-        app:layout_constraintBottom_toTopOf="@+id/etPwd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneOrMail" />
 
     <TextView
         android:id="@+id/tvGetCode"
@@ -103,7 +112,7 @@
         android:layout_height="44pt"
         android:layout_marginStart="16pt"
         android:layout_marginEnd="16pt"
-        android:layout_marginBottom="8pt"
+        android:layout_marginTop="14pt"
         android:textCursorDrawable="@drawable/edittext_cursor"
         android:background="@drawable/philips_shape_et_login_bg"
         android:hint="@string/philips_hint_plz_input_password"
@@ -113,10 +122,10 @@
         android:paddingEnd="14pt"
         android:singleLine="true"
         android:textSize="16pt"
-        app:layout_constraintBottom_toTopOf="@+id/tvPwdTip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etVerificationCode" />
 
     <ImageView
         android:id="@+id/ivShowOrHide"
@@ -132,20 +141,35 @@
         android:id="@+id/tvPwdTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44pt"
+        android:layout_marginTop="8pt"
         android:textSize="12pt"
         android:textColor="@color/c666666"
         android:text="@string/philips_tip_plz_input_8_15_pwd"
-        app:layout_constraintBottom_toTopOf="@+id/tvAgreement"
-        app:layout_constraintStart_toStartOf="@+id/etPwd" />
+        app:layout_constraintStart_toStartOf="@+id/etPwd"
+        app:layout_constraintTop_toBottomOf="@+id/etPwd" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginEnd="16pt"
+        android:layout_marginTop="24pt"
+        android:background="@drawable/philips_shape_btn_login_bg"
+        android:text="@string/philips_register"
+        android:textColor="@color/c0066A1"
+        android:textSize="16pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPwdTip" />
 
     <ImageView
         android:id="@+id/ivAgreement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51pt"
-        android:layout_marginBottom="14pt"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        android:layout_marginStart="50pt"
+        android:layout_marginTop="16pt"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/philips_register_icon_default" />
 
@@ -159,20 +183,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivAgreement"
         app:layout_constraintStart_toEndOf="@+id/ivAgreement"
         app:layout_constraintTop_toTopOf="@+id/ivAgreement" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="44pt"
-        android:layout_marginStart="16pt"
-        android:layout_marginEnd="16pt"
-        android:layout_marginBottom="30pt"
-        android:background="@drawable/philips_shape_btn_login_bg"
-        android:text="@string/philips_register"
-        android:textColor="@color/white"
-        android:textSize="16pt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
