@@ -145,6 +145,10 @@ public class KeyConstants {
      */
     public static final String AUTHORIZATION_TELEPHONE = "authorization_telephone";
     /**
+     * 微信OpenId
+     */
+    public static final String WECHAT_OPENID = "wechat_openId";
+    /**
      * 普通家庭成员数据
      */
     public static final String COMMON_FAMILY_MEMBER_DATA = "common_family_member_data";

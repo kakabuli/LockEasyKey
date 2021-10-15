@@ -320,9 +320,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 //                registerWeChatAndBindPhone();
 //            }
         } else if(view.getId() == R.id.ivWechat) {
-//            wechatLogin();
-            Intent intent = new Intent(this, PhilipsWeChatLoginActivity.class);
-            startActivity(intent);
+            wechatLogin();
         } else if(view.getId() == R.id.ivVerification){
             Intent intent = new Intent(this, PhilipsSMSLoginActivity.class);
             startActivity(intent);
@@ -708,11 +706,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
                         if(baseResult.getCode().equals("448")){
-                            changeToVCodeLogin();
+                            changeRegisterWeChat(mWXopenId);
                         }
                     }
-
-
 
                     @Override
                     public void onFailed(Throwable throwable) {
@@ -724,17 +720,10 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     }
                 });
     }
-    private void changeToVCodeLogin() {
-        mEtVerificationCode.setVisibility(View.VISIBLE);
-        mTvGetCode.setVisibility(View.VISIBLE);
-        mEtPwd.setVisibility(View.INVISIBLE);
-        mIvShowOrHide.setVisibility(View.INVISIBLE);
-        mIvPhone.setVisibility(View.VISIBLE);
-        mTvPhone.setVisibility(View.VISIBLE);
-        mIvVerification.setVisibility(View.GONE);
-        mTvCode.setVisibility(View.GONE);
-        mTvForgotPwd.setVisibility(View.GONE);
-        mTvRegister.setVisibility(View.GONE);
+    private void changeRegisterWeChat(String wechatOpenId) {
+        Intent intent = new Intent(this, PhilipsWeChatLoginActivity.class);
+        intent.putExtra(KeyConstants.WECHAT_OPENID, wechatOpenId);
+        startActivity(intent);
     }
 
     private void weChatLogin(String openId,String tel){
