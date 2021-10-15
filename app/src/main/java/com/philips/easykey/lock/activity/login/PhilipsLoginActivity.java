@@ -284,6 +284,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mTvAgreement.append(termsOfUseSpannable);
         mTvAgreement.append(getString(R.string.philips_and));
         mTvAgreement.append(privacyPolicySpannable);
+        mTvAgreement.setHighlightColor(getResources().getColor(R.color.device_item_background));
         mTvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
