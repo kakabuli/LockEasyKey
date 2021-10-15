@@ -72,7 +72,8 @@
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity"
         tools:replace="android:name,android:allowBackup">
-        <activity android:name=".activity.login.PhilipsSMSLoginActivity"></activity>
+        <activity android:name=".activity.login.PhilipsWeChatLoginActivity"></activity>
+        <activity android:name=".activity.login.PhilipsSMSLoginActivity" />
         <activity android:name=".activity.device.videolock.PhilipsWifiVideoLockPasswordTypeActivity" />
         <activity
             android:name=".activity.device.videolock.PhilipsWifiVideoLockDuressAlarmActivity"

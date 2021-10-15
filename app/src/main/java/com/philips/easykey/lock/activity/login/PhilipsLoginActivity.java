@@ -312,15 +312,17 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             Intent intent = new Intent(this, PhilipsRegisterActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.btnLogin) {
-            if(TextUtils.equals(loginType,phoneLogin)){
+//            if(TextUtils.equals(loginType,phoneLogin)){
                 login();
-            }else if(TextUtils.equals(loginType,codeType)){
-                codeLogin();
-            }else if(TextUtils.equals(loginType,wxLogin)){
-                registerWeChatAndBindPhone();
-            }
+//            }else if(TextUtils.equals(loginType,codeType)){
+//                codeLogin();
+//            }else if(TextUtils.equals(loginType,wxLogin)){
+//                registerWeChatAndBindPhone();
+//            }
         } else if(view.getId() == R.id.ivWechat) {
-            wechatLogin();
+//            wechatLogin();
+            Intent intent = new Intent(this, PhilipsWeChatLoginActivity.class);
+            startActivity(intent);
         } else if(view.getId() == R.id.ivVerification){
             Intent intent = new Intent(this, PhilipsSMSLoginActivity.class);
             startActivity(intent);
@@ -706,7 +708,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
                         if(baseResult.getCode().equals("448")){
-
+                            changeToVCodeLogin();
                         }
                     }
 
@@ -721,6 +723,18 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
                     }
                 });
+    }
+    private void changeToVCodeLogin() {
+        mEtVerificationCode.setVisibility(View.VISIBLE);
+        mTvGetCode.setVisibility(View.VISIBLE);
+        mEtPwd.setVisibility(View.INVISIBLE);
+        mIvShowOrHide.setVisibility(View.INVISIBLE);
+        mIvPhone.setVisibility(View.VISIBLE);
+        mTvPhone.setVisibility(View.VISIBLE);
+        mIvVerification.setVisibility(View.GONE);
+        mTvCode.setVisibility(View.GONE);
+        mTvForgotPwd.setVisibility(View.GONE);
+        mTvRegister.setVisibility(View.GONE);
     }
 
     private void weChatLogin(String openId,String tel){
