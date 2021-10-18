@@ -16,7 +16,7 @@ public class WifiLockOperationRecord {
      * userNickname : ahaha
      */
 
-    private String _id;
+    public String _id;
     private long time;
     private int type;
     private String wifiSN;
@@ -36,6 +36,8 @@ public class WifiLockOperationRecord {
     private boolean first = false; // 是否是第一个
     private boolean last = false; //是否是最后一个
     private String dayTime;
+
+    public WifiLockOperationRecord(){}
 
 
 
