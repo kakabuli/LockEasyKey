@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.huawei.hms.push.HmsMessaging;
 import com.igexin.sdk.IUserLoggerInterface;
 import com.igexin.sdk.PushManager;
+import com.mob.MobSDK;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockActionBean;
@@ -173,6 +174,7 @@ public class MyApplication extends Application {
                     LogUtils.d("Getui PushManager -->" + s);
                 }
             });
+        MobSDK.submitPolicyGrantResult(true,null);
     }
 
     private void initFont() {
