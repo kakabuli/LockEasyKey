@@ -1215,7 +1215,7 @@ public class BleUtil {
             case 10://反锁模式
                 mTvContent.setText(mContext.getString(R.string.philips_operation_record_10_0));
                 if(iv != null){
-                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_anti_lock));
+                    iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_lock_the_door));
                 }
                 break;
             case 11://布防模式

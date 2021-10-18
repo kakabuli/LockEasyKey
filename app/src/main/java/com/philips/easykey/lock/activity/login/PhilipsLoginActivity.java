@@ -226,7 +226,10 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode,mlanguage);
 
         initTerms();
-        initStatement();
+        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+        if(showStatementAndTerms){
+            initStatement();
+        }
     }
 
     @Override
@@ -237,8 +240,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     private void initStatement() {
-        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
-        if(!showStatementAndTerms)return;
         AlertDialogUtil.getInstance().statementAndTermsDialog(
                 this
                 , getString(R.string.philips_statements_and_terms),
@@ -312,6 +313,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             Intent intent = new Intent(this, PhilipsRegisterActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.btnLogin) {
+            boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+            if(showStatementAndTerms){
+                initStatement();
+                return;
+            }
 //            if(TextUtils.equals(loginType,phoneLogin)){
                 login();
 //            }else if(TextUtils.equals(loginType,codeType)){
@@ -320,8 +326,18 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 //                registerWeChatAndBindPhone();
 //            }
         } else if(view.getId() == R.id.ivWechat) {
+            boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+            if(showStatementAndTerms){
+                initStatement();
+                return;
+            }
             wechatLogin();
         } else if(view.getId() == R.id.ivVerification){
+            boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+            if(showStatementAndTerms){
+                initStatement();
+                return;
+            }
             Intent intent = new Intent(this, PhilipsSMSLoginActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.tvSelectCountry) {
