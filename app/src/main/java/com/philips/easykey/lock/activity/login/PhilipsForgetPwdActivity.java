@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -31,6 +32,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 
 import io.reactivex.disposables.Disposable;
@@ -230,6 +232,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
     private void enableComplete(boolean enable) {
         mBtnComplete.setEnabled(enable);
+        mBtnComplete.setTextColor(enable?Color.parseColor("#FFFFFF"):Color.parseColor("#0066A1"));
         mBtnComplete.setBackgroundResource(enable?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 

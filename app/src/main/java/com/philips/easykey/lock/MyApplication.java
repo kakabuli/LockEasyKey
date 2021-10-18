@@ -422,16 +422,18 @@ public class MyApplication extends Application {
         //清除数据库数据
         for (Activity activity : activities) {
             if (activity != null) {
-                if (!alreadyStart) { //如果还没有启动Activity
-                    alreadyStart = true;
-                    Intent intent = new Intent(activity, PhilipsLoginActivity.class);
-                    intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
-                    activity.startActivity(intent);
+                if (!activity.getClass().equals(PhilipsLoginActivity.class)){
+                    if (!alreadyStart) { //如果还没有启动Activity
+                        alreadyStart = true;
+                        Intent intent = new Intent(activity, PhilipsLoginActivity.class);
+                        intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
+                        activity.startActivity(intent);
                     /*if (isShowDialog) {  //
                         ToastUtils.showShort(R.string.token_invalid_relogin_please);
                     }*/
+                    }
+                    activity.finish();
                 }
-                activity.finish();
             }
         }
     }

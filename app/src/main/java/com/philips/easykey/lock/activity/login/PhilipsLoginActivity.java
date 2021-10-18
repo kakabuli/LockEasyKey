@@ -52,6 +52,7 @@ import com.philips.easykey.lock.utils.MMKVUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.PhoneUtil;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.StringUtil;
 import com.philips.easykey.lock.wxapi.NetworkUtil;
 import com.philips.easykey.lock.wxapi.WXEntryActivity;
@@ -87,7 +88,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     private ImageView mIvVerification;
     private TextView mTvCode;
     private TextView mTvForgotPwd;
-    private TextView mTvRegister;
+    private TextView mTvRegister,mlanguage;
 
     private final int mCountryReqCode = 1233;
     private String mCountryCode = "86";
@@ -130,6 +131,14 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        StatusBarUtils.setWindowStatusBarColor(this,R.color.white);
+
+    }
+
+    @Override
     public void initView(@Nullable Bundle savedInstanceState, @Nullable View contentView) {
         mEtPhoneOrMail = findViewById(R.id.etPhoneOrMail);
         mEtPwd = findViewById(R.id.etPwd);
@@ -138,13 +147,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mIvShowOrHide = findViewById(R.id.ivShowOrHide);
         mTvGetCode = findViewById(R.id.tvGetCode);
         mEtVerificationCode = findViewById(R.id.etVerificationCode);
-        mIvPhone = findViewById(R.id.ivPhone);
-        mTvPhone = findViewById(R.id.tvPhone);
         mIvVerification = findViewById(R.id.ivVerification);
         mTvCode = findViewById(R.id.tvCode);
         mTvForgotPwd = findViewById(R.id.tvForgotPwd);
         mTvRegister = findViewById(R.id.tvRegister);
         mTvAgreement = findViewById(R.id.tvAgreement);
+        mlanguage = findViewById(R.id.tvLanguage);
 
         changeLoginBtnStyle(false);
         mEtPhoneOrMail.addTextChangedListener(new TextWatcher() {
@@ -214,9 +222,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         });
 
         applyDebouncingClickListener(mTvForgotPwd, mTvRegister,
-                mBtnLogin, mIvPhone,mIvVerification, findViewById(R.id.ivWechat),
-                mTvSelectCountry, mIvShowOrHide, mTvGetCode);
-        setStatusBarColor(R.color.white);
+                mBtnLogin, mIvVerification, findViewById(R.id.ivWechat),
+                mTvSelectCountry, mIvShowOrHide, mTvGetCode,mlanguage);
 
         initTerms();
         initStatement();
@@ -284,6 +291,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         mTvAgreement.append(termsOfUseSpannable);
         mTvAgreement.append(getString(R.string.philips_and));
         mTvAgreement.append(privacyPolicySpannable);
+        mTvAgreement.setHighlightColor(getResources().getColor(R.color.device_item_background));
         mTvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
@@ -304,22 +312,18 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             Intent intent = new Intent(this, PhilipsRegisterActivity.class);
             startActivity(intent);
         } else if(view.getId() == R.id.btnLogin) {
-            if(TextUtils.equals(loginType,phoneLogin)){
+//            if(TextUtils.equals(loginType,phoneLogin)){
                 login();
-            }else if(TextUtils.equals(loginType,codeType)){
-                codeLogin();
-            }else if(TextUtils.equals(loginType,wxLogin)){
-                registerWeChatAndBindPhone();
-            }
+//            }else if(TextUtils.equals(loginType,codeType)){
+//                codeLogin();
+//            }else if(TextUtils.equals(loginType,wxLogin)){
+//                registerWeChatAndBindPhone();
+//            }
         } else if(view.getId() == R.id.ivWechat) {
             wechatLogin();
-        } else if(view.getId() == R.id.ivVerification) {
-            // TODO: 2021/5/20 临时屏蔽，等提供接口后再恢复
-            loginType = codeType;
-            changeToVCodeLogin();
-        } else if(view.getId() == R.id.ivPhone){
-            loginType = phoneLogin;
-            changeToAccountLogin();
+        } else if(view.getId() == R.id.ivVerification){
+            Intent intent = new Intent(this, PhilipsSMSLoginActivity.class);
+            startActivity(intent);
         } else if(view.getId() == R.id.tvSelectCountry) {
             Intent intent = new Intent(this, CountryActivity.class);
             startActivityForResult(intent, mCountryReqCode);
@@ -328,6 +332,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         } else if(view.getId() == R.id.tvGetCode) {
             if(isCountdown) return;
             getVerification();
+        } else if (view.getId() == R.id.tvLanguage){
+            //TODO 语言切换
         }
     }
 
@@ -344,19 +350,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void changeToVCodeLogin() {
-        mEtVerificationCode.setVisibility(View.VISIBLE);
-        mTvGetCode.setVisibility(View.VISIBLE);
-        mEtPwd.setVisibility(View.INVISIBLE);
-        mIvShowOrHide.setVisibility(View.INVISIBLE);
-        mIvPhone.setVisibility(View.VISIBLE);
-        mTvPhone.setVisibility(View.VISIBLE);
-        mIvVerification.setVisibility(View.GONE);
-        mTvCode.setVisibility(View.GONE);
-        mTvForgotPwd.setVisibility(View.GONE);
-        mTvRegister.setVisibility(View.GONE);
     }
 
     private void wechatLogin() {
@@ -378,19 +371,6 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 getWeChatOpenId(code);
             }
         });
-    }
-
-    private void changeToAccountLogin() {
-        mEtVerificationCode.setVisibility(View.GONE);
-        mTvGetCode.setVisibility(View.GONE);
-        mEtPwd.setVisibility(View.VISIBLE);
-        mIvShowOrHide.setVisibility(View.VISIBLE);
-        mIvPhone.setVisibility(View.GONE);
-        mTvPhone.setVisibility(View.GONE);
-        mIvVerification.setVisibility(View.VISIBLE);
-        mTvCode.setVisibility(View.VISIBLE);
-        mTvForgotPwd.setVisibility(View.VISIBLE);
-        mTvRegister.setVisibility(View.VISIBLE);
     }
 
     private void changeLoginBtnStyle(boolean isCanLogin) {
@@ -726,11 +706,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
                         if(baseResult.getCode().equals("448")){
-                            changeToVCodeLogin();
+                            changeRegisterWeChat(mWXopenId);
                         }
                     }
-
-
 
                     @Override
                     public void onFailed(Throwable throwable) {
@@ -741,6 +719,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
                     }
                 });
+    }
+    private void changeRegisterWeChat(String wechatOpenId) {
+        Intent intent = new Intent(this, PhilipsWeChatLoginActivity.class);
+        intent.putExtra(KeyConstants.WECHAT_OPENID, wechatOpenId);
+        startActivity(intent);
     }
 
     private void weChatLogin(String openId,String tel){

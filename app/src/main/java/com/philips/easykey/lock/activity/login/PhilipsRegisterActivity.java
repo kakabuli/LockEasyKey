@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -114,7 +115,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
         initTerms();
 
         enableRegister(false);
-        applyDebouncingClickListener(mTvSelectCountry, mTvGetCode, mIvAgreement, mBtnRegister, mIvShowOrHide);
+        applyDebouncingClickListener(findViewById(R.id.ivBack),mTvSelectCountry, mTvGetCode, mIvAgreement, mBtnRegister, mIvShowOrHide);
 
     }
 
@@ -141,6 +142,8 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
             register();
         } else if(view.getId() == R.id.ivShowOrHide) {
             changePasswordStatus();
+        } else if (view.getId() == R.id.ivBack){
+            finish();
         }
     }
 
@@ -193,6 +196,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
         mTvAgreement.append(termsOfUseSpannable);
         mTvAgreement.append(getString(R.string.philips_and));
         mTvAgreement.append(privacyPolicySpannable);
+        mTvAgreement.setHighlightColor(getResources().getColor(R.color.device_item_background));
         mTvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
@@ -267,6 +271,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
 
     private void enableRegister(boolean enable) {
         mBtnRegister.setEnabled(enable);
+        mBtnRegister.setTextColor(enable? Color.parseColor("#FFFFFF"):Color.parseColor("#0066A1"));
         mBtnRegister.setBackgroundResource(enable?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
