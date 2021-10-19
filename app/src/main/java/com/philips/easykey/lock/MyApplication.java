@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.huawei.hms.push.HmsMessaging;
 import com.igexin.sdk.IUserLoggerInterface;
 import com.igexin.sdk.PushManager;
+import com.mob.MobSDK;
 import com.philips.easykey.lock.activity.login.PhilipsLoginActivity;
 import com.philips.easykey.lock.bean.HomeShowBean;
 import com.philips.easykey.lock.bean.WifiLockActionBean;
@@ -173,6 +174,7 @@ public class MyApplication extends Application {
         initBleService();
         initMqttService();
         regToWx();
+        MobSDK.submitPolicyGrantResult(true,null);
     }
 
     private void initFont() {
@@ -661,7 +663,7 @@ public class MyApplication extends Application {
     }
 
     public ClothesHangerMachineAllBean getClothesHangerMachineBySn(String sn) {
-        if (sn.isEmpty()) {
+        if (TextUtils.isEmpty(sn)) {
             return null;
         }
         if (homeShowDevices != null) {
@@ -694,7 +696,7 @@ public class MyApplication extends Application {
     }
 
     public WifiLockInfo getWifiLockInfoBySn(String sn) {
-        if (sn.isEmpty()) {
+        if (TextUtils.isEmpty(sn)) {
             return null;
         }
         if (homeShowDevices != null) {
