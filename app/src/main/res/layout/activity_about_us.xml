@@ -68,7 +68,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/dp_16"
                         android:text="@string/Philips_after_sales_number"
-                        android:textColor="#333333"
+                        android:textColor="#0066A1"
                         android:textSize="16pt" />
                 </RelativeLayout>
         </LinearLayout>

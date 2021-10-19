@@ -31,14 +31,16 @@ import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingView, SystemSettingPresenter<ISystemSettingView>> implements ISystemSettingView{
 
     ImageView ivBack;
     TextView tvContent;
-    TextView versionNum;
+    TextView versionNum,Copyright;
     RelativeLayout userAgreementLayout;
     TextView cacheData;
     RelativeLayout clearCacheLayout;
@@ -52,6 +54,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
         ivBack = findViewById(R.id.iv_back);
         tvContent = findViewById(R.id.tv_content);
         versionNum = findViewById(R.id.version_num);
+        Copyright = findViewById(R.id.Copyright_By_Philips);
         userAgreementLayout = findViewById(R.id.user_agreement_layout);
         cacheData = findViewById(R.id.cache_data);
         clearCacheLayout = findViewById(R.id.clear_cache_layout);
@@ -81,11 +84,12 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
 
     private void initView() {
         try {
+            int year = Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR);
             PackageManager manager = this.getPackageManager();
             PackageInfo packageInfo = manager.getPackageInfo(this.getPackageName(), 0);
             String version = packageInfo.versionName;
             versionNum.setText(String.format(getString(R.string.Philips_version_number) ,version ));
-
+            Copyright.setText(String.format(getString(R.string.Philips_Copyright_By_Year) ,year));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

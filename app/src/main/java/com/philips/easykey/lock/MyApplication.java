@@ -144,23 +144,8 @@ public class MyApplication extends Application {
         listenerAppBackOrForge();
         //扫描二维码初始化
         /* ZXingLibrary.initDisplayOpinion(this);*/
-        initXMP2PManager();
         //配置数据库
         setUpWriteDataBase(DB_KEY);
-        // HuaWei phone
-        if (Rom.isEmui()) {
-            HmsMessaging.getInstance(this).setAutoInitEnabled(true);
-        } else if (Rom.isMiui()) {
-            MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
-        }
-        PushManager.getInstance().initialize(this);
-        if(BuildConfig.DEBUG)
-        PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
-            @Override
-            public void log(String s) {
-                LogUtils.d("Getui PushManager -->" + s);
-            }
-        });
         LogUtils.d("attachView  App启动完成 ");
         //去掉在Android 9以上调用反射警告提醒弹窗 （Detected problems with API compatibility(visit g.co/dev/appcompat for more info)
         closeAndroidPDialog();
@@ -174,6 +159,21 @@ public class MyApplication extends Application {
         initBleService();
         initMqttService();
         regToWx();
+        initXMP2PManager();
+        // HuaWei phone
+        if (Rom.isEmui()) {
+            HmsMessaging.getInstance(this).setAutoInitEnabled(true);
+        } else if (Rom.isMiui()) {
+            MiPushClient.registerPush(this, M_APP_ID, M_APP_KEY);
+        }
+        PushManager.getInstance().initialize(this);
+        if(BuildConfig.DEBUG)
+            PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
+                @Override
+                public void log(String s) {
+                    LogUtils.d("Getui PushManager -->" + s);
+                }
+            });
         MobSDK.submitPolicyGrantResult(true,null);
     }
 
@@ -424,16 +424,18 @@ public class MyApplication extends Application {
         //清除数据库数据
         for (Activity activity : activities) {
             if (activity != null) {
-                if (!alreadyStart) { //如果还没有启动Activity
-                    alreadyStart = true;
-                    Intent intent = new Intent(activity, PhilipsLoginActivity.class);
-                    intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
-                    activity.startActivity(intent);
+                if (!activity.getClass().equals(PhilipsLoginActivity.class)){
+                    if (!alreadyStart) { //如果还没有启动Activity
+                        alreadyStart = true;
+                        Intent intent = new Intent(activity, PhilipsLoginActivity.class);
+                        intent.putExtra(KeyConstants.IS_SHOW_DIALOG, isShowDialog);
+                        activity.startActivity(intent);
                     /*if (isShowDialog) {  //
                         ToastUtils.showShort(R.string.token_invalid_relogin_please);
                     }*/
+                    }
+                    activity.finish();
                 }
-                activity.finish();
             }
         }
     }

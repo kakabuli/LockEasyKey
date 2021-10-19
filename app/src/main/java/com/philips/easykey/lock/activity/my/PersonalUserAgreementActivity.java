@@ -40,14 +40,14 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
 
         ivBack = findViewById(R.id.iv_back);
         tvContent = findViewById(R.id.tv_content);
-        tvRight = findViewById(R.id.tv_right);
+//        tvRight = findViewById(R.id.tv_right);
         webView = findViewById(R.id.webView);
 
         initView();
         ivBack.setOnClickListener(this);
         tvContent.setText(R.string.philips_terms_of_use);
-        tvRight.setVisibility(View.VISIBLE);
-        tvRight.setText(R.string.philips_agree);
+//        tvRight.setVisibility(View.VISIBLE);
+//        tvRight.setText(R.string.philips_agree);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());

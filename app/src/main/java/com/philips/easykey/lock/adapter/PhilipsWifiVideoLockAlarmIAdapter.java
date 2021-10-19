@@ -78,10 +78,18 @@ public class PhilipsWifiVideoLockAlarmIAdapter extends BaseQuickAdapter<WifiVide
         }
 
         BleUtil.setTextViewAlarmByType(helper.getView(R.id.tv_right),record.getType(),record.getPwdType(),record.getUserNickname());
-        if(record.getType() == 0x10 || record.getType() == 0x20){
-            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_remind).into(ivIcon);
+        if(record.getType() == 0x10){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_low_electricity).into(ivIcon);
+        }else if(record.getType() == 0x04){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_anti_prying).into(ivIcon);
+        }else if(record.getType() == 0x70){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_linger).into(ivIcon);
+        }else if(record.getType() == 0x01){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_locking).into(ivIcon);
+        }else if(record.getType() == 0x02){
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_coercion).into(ivIcon);
         }else {
-            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_alarm).into(ivIcon);
+            Glide.with(ivIcon.getContext()).load(R.drawable.philips_icon_remind).into(ivIcon);
         }
 
         if(record.getThumbUrl()!=null && !record.getThumbUrl().isEmpty()){

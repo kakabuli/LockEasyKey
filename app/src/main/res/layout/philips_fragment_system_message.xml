@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="#f7f7f7">
 
       <TextView
@@ -12,11 +13,9 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
-          android:layout_marginTop="100pt"
           android:textSize="14pt"
           android:textColor="#333333"
-          android:drawableTop="@drawable/philips_message_img_default"
-          android:gravity="center_horizontal"
+          android:drawableTop="@drawable/philips_message_icon_no_news"
           android:drawablePadding="18pt"
           android:text="@string/philips_frament_no_message"/>
 
