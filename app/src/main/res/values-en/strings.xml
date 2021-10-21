@@ -50,8 +50,9 @@
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
     <string name="agree_user_protocol">请同意用户协议</string>
     <string name="philips_input_valid_telephone_or_email">Please enter a valid mobile phone number or email address</string>
-    <string name="philips_input_valid_telephone">请输入有效手机号</string>
+    <string name="philips_input_valid_telephone">请输入有效的手机号</string>
     <string name="philips_this_account_is_not_registered">This account is not registered</string>
+
 
     <string name="philips_account_message_not_empty">Account information cannot be empty</string>
     <string name="home_page">首页</string>

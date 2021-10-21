@@ -293,7 +293,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
                     return;
                 } else {
                     String countryCode = mCountryCode.trim().replace("+", "");
