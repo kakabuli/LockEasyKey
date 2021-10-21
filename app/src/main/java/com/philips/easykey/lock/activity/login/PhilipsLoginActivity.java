@@ -509,7 +509,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             if (StringUtil.isNumeric(phoneOrMail)) {
                 if (!PhoneUtil.isMobileNO(phoneOrMail)) {
                     // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
                 } else {
                     //密码错误
                     if (!StringUtil.passwordJudge(pwd)) {
