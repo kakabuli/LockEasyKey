@@ -115,7 +115,8 @@ public class PhilipsWifiVideoLockSettingDuressAlarmActivity extends BaseActivity
         });
 
         mIvDuressAlarmHelp.setOnClickListener(v -> {
-            showDuressAlarmHelpDialog();
+            //showDuressAlarmHelpDialog();
+            startActivity(new Intent(this,PhilipsDuressAlarmHelpActivity.class));
         });
     }
 

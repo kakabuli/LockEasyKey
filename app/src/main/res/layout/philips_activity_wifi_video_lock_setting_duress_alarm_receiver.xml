@@ -45,7 +45,7 @@
         android:paddingEnd="16pt"
         android:textSize="16pt"
         android:textCursorDrawable="@drawable/edittext_cursor"
-        />
+        android:hint="@string/philips_setting_duress_alarm_receiver_number"/>
 
 
     <Button

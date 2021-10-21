@@ -51,6 +51,7 @@
     <string name="agree_user_protocol">请同意用户协议</string>
     <string name="philips_input_valid_telephone_or_email">请输入有效手机号或邮箱</string>
     <string name="philips_input_valid_telephone">请输入有效手机号</string>
+    <string name="philips_this_account_is_not_registered">该账号未注册</string>
 
     <string name="philips_account_message_not_empty">账户信息不能为空</string>
     <string name="home_page">首页</string>
@@ -911,6 +912,7 @@
     <string name="validation_failed_three_times">系统被锁定报警</string>
     <string name="pick_proof">防撬报警</string>
     <string name="stress_alarm">胁迫报警</string>
+    <string name="what_is_coercion_alarm">什么是胁迫报警?</string>
     <string name="lock_alarm">锁定报警</string>
     <string name="pir_trigger">pir触发事件</string>
     <string name="low_power_alarm">低电量报警</string>
@@ -2003,8 +2005,8 @@
 
     <string name="wifi_lock_x9_door_direction_left">左开门</string>
     <string name="wifi_lock_x9_door_direction_right">右开门</string>
-    <string name="wifi_lock_x9_door_force_low">低扭力</string>
-    <string name="wifi_lock_x9_door_force_high">高扭力</string>
+    <string name="wifi_lock_x9_door_force_low">低扭力(无天地钩)</string>
+    <string name="wifi_lock_x9_door_force_high">高扭力(带天地钩)</string>
     <string name="wifi_lock_x9_locking_method_1">自动上锁</string>
     <string name="wifi_lock_x9_locking_method_2">定时5秒</string>
     <string name="wifi_lock_x9_locking_method_3">定时10秒</string>
@@ -2432,6 +2434,7 @@
     <string name="philips_setting_app_stress_alarm">APP实时推送胁迫报警消息</string>
     <string name="philips_setting_duress_alarm_app_add_time">添加时间</string>
     <string name="philips_setting_duress_alarm_receiver">接收账号</string>
+    <string name="philips_setting_duress_alarm_receiver_number">输入手机号/邮箱号</string>
     <string name="philips_setting_duress_alarm_app_receiver">APP接收</string>
     <string name="philips_activity_calling_screenshot_bitmap_save">图片已保存至相册</string>
     <string name="philips_activity_detail_share">分享</string>
@@ -2458,7 +2461,7 @@
     <string name="philips_share_permanent_password">永久密码</string>
     <string name="philips_share_user_account">用户账号</string>
     <string name="philips_share_user_account_nickname">备注名称</string>
-    <string name="philips_share_user_nickname">将设备分享给“%1$s”分享给</string>
+    <string name="philips_share_user_nickname">将设备“%1$s”分享给</string>
     <string name="philips_dynamic_record_message">消息记录</string>
     <string name="philips_album_not_find_video">Could not play this video.</string>
     <string name="philips_face_ota_conncet_wifi">请连接到指定WiFi</string>
@@ -2725,7 +2728,7 @@
     <!-- 96 门铃-->
     <string name="philips_wifi_video_lock_alarm_type_96">有人按门铃</string>
     <!--112 pir动作-->
-    <string name="philips_wifi_video_lock_alarm_type_112">发生移动告警</string>
+    <string name="philips_wifi_video_lock_alarm_type_112">徘徊报警</string>
     <string name="philips_china">中国</string>
     <string name="philips_terms_of_use2">《使用条款》</string>
     <string name="philips_privacy_policy">《隐私政策》</string>

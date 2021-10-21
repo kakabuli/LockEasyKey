@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <rotate
+            android:drawable="@drawable/philips_icon_loading"
+            android:pivotX="50%"
+            android:pivotY="50%"
+           >
+        </rotate>
+
+</rotate>

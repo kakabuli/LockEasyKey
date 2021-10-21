@@ -85,7 +85,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmReceiverActivity extends Base
         }
         if(StringUtil.isNumeric(duressAccount)){
             if(!PhoneUtil.isMobileNO(duressAccount)){
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                ToastUtils.showShort(R.string.philips_this_account_is_not_registered);
                 return;
             }
 

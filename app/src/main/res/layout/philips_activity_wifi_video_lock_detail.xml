@@ -37,18 +37,18 @@
 
         <ImageView
             android:id="@+id/iv_detail_setting"
-            android:layout_width="26pt"
-            android:layout_height="26pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="13pt"
             android:layout_centerVertical="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/philips_equipment_icon_setting"
+            app:srcCompat="@drawable/philips_equipment_icon_setting_big"
             android:layout_alignParentEnd="true" />
 
         <ImageView
             android:id="@+id/iv_detail_delete"
-            android:layout_width="26pt"
-            android:layout_height="26pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="13pt"
             android:layout_centerVertical="true"
             app:layout_constraintEnd_toEndOf="parent"

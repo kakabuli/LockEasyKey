@@ -1304,6 +1304,9 @@
             android:name=".activity.addDevice.PhilipsAddDeviceHelpActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.device.videolock.PhilipsDuressAlarmHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.device.wifilock.newadd.PhilipsModifyPassWordHelpActivity"
             android:screenOrientation="portrait" />
         <activity
