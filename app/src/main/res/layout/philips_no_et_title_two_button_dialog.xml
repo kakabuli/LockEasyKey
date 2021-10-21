@@ -35,7 +35,7 @@
         android:background="@drawable/philips_retangle_0066a1_3"
         />
 
-    <Button
+    <TextView
         android:id="@+id/tv_left"
         android:layout_width="100pt"
         android:layout_height="40pt"
@@ -48,6 +48,6 @@
         android:text="@string/philips_cancel"
         android:gravity="center"
         android:textColor="@color/c0066A1"
-        android:background="@drawable/philips_retangle_ffffff_3"
+        android:background="@color/white"
         />
 </RelativeLayout>

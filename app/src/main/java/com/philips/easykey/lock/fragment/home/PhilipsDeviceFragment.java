@@ -158,8 +158,27 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
             showCardView();
         });
         mIvList.setOnClickListener(v -> {
-            isCardShow = false;
-            showListView();
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(getContext(),getString(R.string.whether_to_switch_to_list_status_display),
+                    "#333333",getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                        @Override
+                        public void left() {
+
+                        }
+
+                        @Override
+                        public void right() {
+                            isCardShow = false;
+                            showListView();
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+
+                        @Override
+                        public void afterTextChanged(String toString) {
+                        }
+                    });
         });
     }
 

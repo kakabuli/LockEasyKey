@@ -410,6 +410,7 @@
     <string name="input_device_name">请输入设备名称</string>
     <string name="device_nick_name_no_update">设备名称未修改</string>
     <string name="device_delete_dialog_head">Confirm to delete the device？</string>
+    <string name="whether_to_switch_to_list_status_display">是否切换至列表状态显示</string>
     <string name="device_delete_dialog_content">删除设备后,\n设备将与用户解除绑定</string>
     <string name="device_delete_lock_dialog_content">删除设备后,\n设备将与用户解除绑定</string>
     <string name="device_delete_gateway_dialog_content">删除设备后,\n设备将与用户解除绑定</string>

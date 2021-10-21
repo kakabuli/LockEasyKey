@@ -44,7 +44,7 @@
     <string name="dialog_confirm">确认</string>
     <string name="safe_mode_dialog">请去新增开锁方式，启动安全模式</string>
     <string name="philips_cancel">取消</string>
-    <string name="query">确认</string>
+    <string name="query">确定</string>
     <string name="get_verification_content">重新获取(%1$s)</string>
     <string name="verification_verify_error">请输入六位验证码</string>
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
@@ -407,6 +407,7 @@
     <string name="device_nick_name_no_update">设备名称未修改</string>
     <string name="device_delete_dialog_head">确认删除设备？</string>
     <string name="device_delete_dialog_content">删除设备后,\n设备将与用户解除绑定</string>
+    <string name="whether_to_switch_to_list_status_display">是否切换至列表状态显示</string>
     <string name="device_delete_lock_dialog_content">删除设备后,\n设备将与用户解除绑定</string>
     <string name="device_delete_gateway_dialog_content">删除设备后,\n设备将与用户解除绑定</string>
     <string name="pwd_manager_syn">密码同步</string>
@@ -2034,7 +2035,7 @@
     <string name="wifi_video_lock_p2p_connect">連接中，請稍後...</string>
     <string name="dialog_wifi_video_power_status">已开启省电模式，需唤醒门锁后再试</string>
     <string name="dialog_wifi_video_delete_video">确定删除视频吗？</string>
-    <string name="dialog_wifi_video_keep_alive_close">视频长连接已关闭</string>
+    <string name="dialog_wifi_video_keep_alive_close">已关闭视频功能</string>
     <string name="dialog_wifi_video_doorbell_outside_door">1.请检查设备电量，电量过低时请更换电池\n2.电量正常时，请在锁端节能设置中，开启视频功能</string>
     <string name="dialog_wifi_video_waking_up_door_lock_setting">唤醒门锁后，可在视频设置中开启</string>
     <string name="dialog_wifi_video_tip">温馨提示</string>

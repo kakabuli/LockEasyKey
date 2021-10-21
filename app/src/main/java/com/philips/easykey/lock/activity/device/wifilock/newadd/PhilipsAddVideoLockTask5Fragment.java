@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.utils.AlertDialogUtil;
 import com.philips.easykey.lock.utils.StringUtil;
 
 /**
@@ -107,6 +108,23 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         });
         tvPwdFailed.setOnClickListener(v -> {
             // TODO: 2021/5/8 跳转到错误指引页面
+            AlertDialogUtil.getInstance().singleButtonNoTitleDialog(getContext(), getString(R.string.philips_lock_restore_tip), getString(R.string.philips_confirm), "#ffffff", new AlertDialogUtil.ClickListener() {
+                @Override
+                public void left() {
+
+                }
+
+                @Override
+                public void right() {
+
+                }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+                @Override
+                public void afterTextChanged(String toString) {
+                }
+            });
         });
     }
 

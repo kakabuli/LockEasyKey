@@ -9,9 +9,8 @@
 
     <TextView
         android:id="@+id/tv_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text="@string/more_then_ten_member"
         android:textColor="#101010"
         android:textSize="@dimen/sp_15"
@@ -24,21 +23,22 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/dialog_line"
         android:layout_marginTop="@dimen/dp_23"
-        />
+        android:visibility="gone"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        android:padding="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_24" >
         <TextView
             android:id="@+id/tv_button"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_36"
+            android:layout_height="@dimen/dp_40"
             android:text="@string/dialog_confirm"
-            android:textColor="#007AFF"
-            android:textSize="@dimen/sp_13"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
             android:gravity="center"
-            />
+            android:background="@color/colorPrimary"/>
     </LinearLayout>
 
 

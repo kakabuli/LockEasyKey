@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
@@ -585,15 +586,14 @@ public class AlertDialogUtil {
         });
     }
 
-    //没有标题的对话框
-    public void noEditTitleTwoButtonPhilipsDialog(Context context, String content, String contentColor,String left, String right, String leftColor, String rightColor, ClickListener clickListener) {
+    //没有标题的对话框String contentColor
+    public void noEditTitleTwoButtonPhilipsDialog(Context context, String content,String left, String right, String leftColor, String rightColor, ClickListener clickListener) {
         View mView = LayoutInflater.from(context).inflate(R.layout.philips_no_et_title_two_button_dialog, null);
         TextView tvContent = mView.findViewById(R.id.tv_content);
         TextView tv_cancel = mView.findViewById(R.id.tv_left);
         TextView tv_query = mView.findViewById(R.id.tv_right);
         AlertDialog alertDialog = AlertDialogUtil.getInstance().common(context, mView);
         tvContent.setText(content);
-        tvContent.setTextColor(Color.parseColor(contentColor));
         tv_cancel.setText(left);
         tv_cancel.setTextColor(Color.parseColor(leftColor));
         tv_query.setText(right);
@@ -621,13 +621,14 @@ public class AlertDialogUtil {
     }
 
     //没有标题的对话框
-    public void noEditTitleTwoButtonPhilipsDialog(Context context, String content, String left, String right, String leftColor, String rightColor, ClickListener clickListener) {
+    public void noEditTitleTwoButtonPhilipsDialog(Context context, String content, String contentColor,String left, String right, String leftColor, String rightColor, ClickListener clickListener) {
         View mView = LayoutInflater.from(context).inflate(R.layout.philips_no_et_title_two_button_dialog, null);
         TextView tvContent = mView.findViewById(R.id.tv_content);
         TextView tv_cancel = mView.findViewById(R.id.tv_left);
         TextView tv_query = mView.findViewById(R.id.tv_right);
         AlertDialog alertDialog = AlertDialogUtil.getInstance().common(context, mView);
         tvContent.setText(content);
+        tvContent.setTextColor(Color.parseColor(contentColor));
         tv_cancel.setText(left);
         tv_cancel.setTextColor(Color.parseColor(leftColor));
         tv_query.setText(right);
