@@ -2769,4 +2769,6 @@
     <string name="philips_sms_login">短信登录</string>
     <string name="philips_wechat_bind">微信绑定</string>
     <string name="philips_hint_plz_input_phone">请输入手机号</string>
+    <string name="philips_please_enter_the_correct_password">请输入正确的密码</string>
+    <string name="philips_input_correct_account_or_password">请输入正确的账号或密码</string>
 </resources>

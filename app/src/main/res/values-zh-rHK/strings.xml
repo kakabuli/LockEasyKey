@@ -48,6 +48,7 @@
     <string name="get_verification_content">重新获取(%1$s)</string>
     <string name="verification_verify_error">请输入六位验证码</string>
     <string name="philips_password_judgment">必须同时存在字母和数字,并且在8-15位</string>
+    <string name="philips_please_enter_the_correct_password">请输入正确的密码</string>
     <string name="agree_user_protocol">请同意用户协议</string>
     <string name="philips_input_valid_telephone_or_email">请输入有效手机号或邮箱</string>
     <string name="philips_input_valid_telephone">请输入有效的手机号</string>
@@ -2769,4 +2770,5 @@
     <string name="philips_sms_login">短信登录</string>
     <string name="philips_wechat_bind">微信绑定</string>
     <string name="philips_hint_plz_input_phone">请输入手机号</string>
+    <string name="philips_input_correct_account_or_password">请输入正确的账号或密码</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -499,7 +500,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             String phoneOrMail = getEdittextContent(mEtPhoneOrMail);
             String pwd = getEdittextContent(mEtPwd);
             if (TextUtils.isEmpty(phoneOrMail)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             if (StringUtil.judgeSpecialCharacter(pwd)) {
@@ -509,11 +510,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             if (StringUtil.isNumeric(phoneOrMail)) {
                 if (!PhoneUtil.isMobileNO(phoneOrMail)) {
                     // 账户密码错误 请输入正确验证码 调用这个方法传入对应的内容就可以
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 } else {
                     //密码错误
                     if (!StringUtil.passwordJudge(pwd)) {
-                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
+                        AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_account_or_password),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                         return;
                     }
                     if(TextUtils.isEmpty(mCountryCode)) {
@@ -525,11 +526,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 }
             } else {
                 if (!DetectionEmailPhone.isEmail(phoneOrMail)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone_or_email),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 } else {
                     //密码错误
-                    if (!StringUtil.passwordJudge(pwd)) {
-                        AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
+                    if (!StringUtil.passwordJudge(pwd)) { AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_account_or_password), Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
+
                         return;
                     }
                     showLoading(getString(R.string.login_in));
@@ -569,13 +570,13 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         if ("101".equals(result.getCode() + "")){
             if(result.getData() != null){
                 if(result.getData().getRestrictCount() >= 5){
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_login_password_restrict,
-                            result.getData().getRestrictCount() + "" , getString(StringUtil.getTimeToString(result.getData().getRestrictTime()))));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_login_password_restrict,
+                            result.getData().getRestrictCount() + "" , getString(StringUtil.getTimeToString(result.getData().getRestrictTime()))),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 }else{
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_account_or_password),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 }
             }else{
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.account_password_error));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_account_or_password),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
             }
         }else {
             ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
@@ -622,12 +623,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         if (NetUtil.isNetworkAvailable()) {
             String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                     return;
                 } else {
                     String countryCode = mCountryCode.trim().replace("+", "");
@@ -647,12 +648,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
         if (NetUtil.isNetworkAvailable()) {
             final String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             String code = StringUtil.getEdittextContent(mEtVerificationCode);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_verification_code),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             String countryCode = mCountryCode.trim().replace("+", "");
@@ -825,12 +826,12 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
              String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             mCountryCode = mCountryCode.replace("+", "");
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             String code = StringUtil.getEdittextContent(mEtVerificationCode);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_verification_code),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             XiaokaiNewServiceImp.codeLogin(code,mCountryCode + account).subscribe(new BaseObserver<WeChatLoginResult>() {
