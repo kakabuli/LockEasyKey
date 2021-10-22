@@ -245,7 +245,8 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
                 }else{
                     content = XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiLockWifiDetailActivity.this,errorCode);
                 }*/
-
+                // TODO: 2021/10/22 这里在获取到wifi的rssi后偶尔会回调这个接口，所以在wifi强度，rssi有值时返回
+                if(!TextUtils.isEmpty(tvRssid.getText()) && !TextUtils.isEmpty(tvWifiStrength.getText()))return;
                 if(errorCode == -3){
                     createDialog(getString(R.string.video_lock_xm_connect_time_out_1) + "","");
                 }else{

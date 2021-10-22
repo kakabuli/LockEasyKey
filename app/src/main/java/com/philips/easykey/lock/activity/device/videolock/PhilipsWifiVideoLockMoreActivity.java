@@ -398,19 +398,23 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         mPresenter.release();
                         break;
                     case R.id.rl_safe_mode:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiVideoLockSafeModeActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                             startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_SAFE_MODE_CODE);
                             mPresenter.release();
                         }
                         break;
-
-
                     case R.id.iv_am:   //手动自动模式
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiVideoLockAMModeActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
                             startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_AM_MODE_CODE);
@@ -419,8 +423,11 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
 
                         break;
                     case R.id.rl_door_lock_language_switch:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiVideoLockLanguageSettingActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivityForResult(intent,KeyConstants.WIFI_VIDEO_LOCK_LANGUAGE_CODE);
@@ -428,6 +435,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_voice_quality_setting:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if (avi.isShow()) {
                             intent = new Intent(this, PhilipsWifiVideoLockVoiceQualitySettingActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -470,7 +481,6 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         break;
                     case R.id.rl_device_information:
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiVideoLockDeviceInfoActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
@@ -506,6 +516,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                                 });
                         break;
                     case R.id.rl_wifi_name: //WiFi名称
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
                             Intent setWifiIntent = new Intent(this, PhilipsWifiLockWifiDetailActivity.class);
                             setWifiIntent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -514,8 +528,11 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_message_push:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
-
                             intent = new Intent(this, PhilipsWifiLockMessagePushActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                             startActivity(intent);
@@ -523,6 +540,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_screen_brightness:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if (avi.isShow()) {
                             intent = new Intent(this, PhilipsWifiVideoScreenBrightnessActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -531,6 +552,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_screen_duration:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if (avi.isShow()) {
                             intent = new Intent(this, PhilipsWifiVideoScreenDurationActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -539,6 +564,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_door_direction:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if (avi.isShow()) {
                             intent = new Intent(this, PhilipsWifiLockOpenDirectionActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -547,6 +576,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_open_force:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if (avi.isShow()) {
                             intent = new Intent(this, PhilipsWifiLockOpenForceActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -556,6 +589,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         break;
                     case R.id.rl_real_time_video:
                         if(BleLockUtils.isSupportVideoModeSwitch(wifiLockInfo.getFunctionSet())) return;
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
                             intent = new Intent(this, PhilipsWifiVideoLockRealTimeActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -564,6 +601,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_wandering_alarm:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
                             intent = new Intent(this, PhilipsWifiVideoLockWanderingAlarmActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
@@ -572,6 +613,10 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
                         }
                         break;
                     case R.id.rl_duress_alarm:
+                        if (wifiLockInfo.getPowerSave() == 1) {
+                            powerStatusDialog();
+                            return;
+                        }
                         if(avi.isShow()){
                             intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
                             intent.putExtra(KeyConstants.WIFI_SN, wifiSn);

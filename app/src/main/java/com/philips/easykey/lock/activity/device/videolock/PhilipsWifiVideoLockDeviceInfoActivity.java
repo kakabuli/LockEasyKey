@@ -726,12 +726,13 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
                         avi.hide();
                     }
                     mTvTips.setVisibility(View.GONE);
-                    if(paramInt == -3){
+                    // TODO: 2021/10/22 测试反馈提示该窗口的时候板子能正常升级，暂时注释该弹窗 
+                    /*if(paramInt == -3){
                         createDialog(getString(R.string.xm_connection_timed_out));
                     }else{
                         createDialog(XMP2PConnectError.checkP2PErrorStringWithCode(PhilipsWifiVideoLockDeviceInfoActivity.this,paramInt));
 
-                    }
+                    }*/
                 }
             });
         }
