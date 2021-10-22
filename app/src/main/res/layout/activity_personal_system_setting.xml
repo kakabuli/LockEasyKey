@@ -33,7 +33,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="#333333"
                 android:textSize="17pt"
-                android:text="@string/Philips_easykey"/>
+                android:text="@string/app_name"/>
 
             <RelativeLayout
                 android:id="@+id/rl_language_setting"
