@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="select_coutroy">选择国家/地区</string>
-    <string name="app_name">Philips EasyKey+</string>
+    <string name="app_name">Philips EasyKey Plus</string>
     <string name="app_name_notificatoin_title">PhilipsEasyKey+正在运行</string>
     <string name="app_name_notificatoin_content">PhilipsEasyKey+服务已开启，有消息会及时通知您</string>
    <!-- <string name="app_name">Philips EasyKey Plus</string>
