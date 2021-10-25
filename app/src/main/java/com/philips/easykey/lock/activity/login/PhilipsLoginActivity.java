@@ -568,7 +568,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     public void onLoginFailedServer(LoginResult result) {
-        mBtnLogin.setBackgroundResource(R.drawable.login_button_shape);
+//        mBtnLogin.setBackgroundResource(R.drawable.login_button_shape);
         hiddenLoading();
         if ("101".equals(result.getCode() + "")){
             if(result.getData() != null){
