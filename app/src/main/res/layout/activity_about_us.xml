@@ -26,7 +26,9 @@
                     android:gravity="center_horizontal"
                     android:background="@drawable/background_white_3dp"
                     android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/iv_philips_wechat_qr_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50pt"

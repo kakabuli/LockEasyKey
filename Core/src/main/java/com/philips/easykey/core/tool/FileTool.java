@@ -72,7 +72,7 @@ public class FileTool {
     private static final String TAG = "RxFileTool";
 
     private static final String VIDEO_LOCK = "videolock";
-    private static final String VIDEO_LOCK_PATH = "PhilipsEasykey";
+    private static final String VIDEO_LOCK_PATH = "Philips EasyKey Plus";
 
     /**
      * 得到SD卡根目录.

@@ -574,7 +574,7 @@
 
     <string name="device_add_third_content_in_net">根据语音提示，操作进入配网</string>
     <string name="device_add_third_content_exit_net">根据语音提示，操作进入退网</string>
-    <string name="save_success">保存成功！</string>
+    <string name="save_success">保存成功</string>
 
     <string name="input_door_card_name">请输入门卡名称</string>
 
