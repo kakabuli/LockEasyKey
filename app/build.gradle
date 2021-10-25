@@ -100,10 +100,10 @@ android {
         variant.outputs.all {
             def date = new Date().format("yyyyMMdd" , TimeZone.getDefault())
             if(variant.buildType.name == 'debug'){
-                outputFileName = "Philips_EasyKey_plus_debug${date}_${versionCode}_${versionName}.apk"
+                outputFileName = "Philips_EasyKey_Plus_debug${date}_${versionCode}_${versionName}.apk"
             }
             if(variant.buildType.name == 'release'){
-                outputFileName = "Philips_EasyKey_plus_${versionCode}_${versionName}.apk"
+                outputFileName = "Philips_EasyKey_Plus_${versionCode}_${versionName}.apk"
             }
         }
     }
