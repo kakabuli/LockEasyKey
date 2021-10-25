@@ -241,12 +241,12 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
         if (NetUtil.isNetworkAvailable()) {
             String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                     return;
                 } else {
                     String countryCode = mCountryCode.trim().replace("+", "");
@@ -257,7 +257,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                 if (RegexUtils.isEmail(account)) {
                     sendRandomByEmail(account);
                 } else {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone_or_email),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                     return;
                 }
             }
@@ -274,28 +274,29 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
         if (NetUtil.isNetworkAvailable()) {
             final String account = StringUtil.getEdittextContent(mEtPhoneOrMail);
             if (TextUtils.isEmpty(account)) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_account_message_not_empty));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_account_message_not_empty),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             String code = StringUtil.getEdittextContent(mEtVerificationCode);
             if (TextUtils.isEmpty(code) || code.length() != 6) {
-                AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_verification_code),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
 
             String pwd = StringUtil.getEdittextContent(mEtPwd);
             if (StringUtil.judgeSpecialCharacter(pwd)) {
-                ToastUtils.showShort(R.string.philips_password_judgment);
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.not_input_special_symbol),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
             if (!StringUtil.passwordJudge(pwd)) {
-                ToastUtils.showShort(R.string.philips_password_judgment);
+//                ToastUtils.showShort(R.string.philips_password_judgment);
+                AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_please_enter_the_correct_password),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 return;
             }
 
             if (StringUtil.isNumeric(account)) {
                 if (!PhoneUtil.isMobileNO(account)) {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone_or_email),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                     return;
                 }
                 showLoading("");
@@ -307,7 +308,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                     showLoading("");
                     resetPassword(account, pwd,2, code);
                 } else {
-                    AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_valid_telephone_or_email));
+                    AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_valid_telephone_or_email),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
                 }
             }
 
@@ -346,7 +347,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
     public void resetPasswordFailedServer(BaseResult result) {
         hiddenLoading();
         if ("445".equals(result.getCode())){
-            AlertDialogUtil.getInstance().noButtonSingleLineDialog(this, getString(R.string.philips_input_correct_verification_code));
+            AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_verification_code),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
         }else {
             ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
         }

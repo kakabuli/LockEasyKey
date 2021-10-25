@@ -47,9 +47,11 @@ public class AlertDialogUtil {
 
     //通用dialog，具体使用参考PersonalSystemSettingActivity中的loginOut,xml中有四种布局，
     //xml中有四种布局，
-    // 1 have_edit_dialog（存在输入框，两个按钮）2 no_button_dialog(只有内容的对话框)
-    //3 no_edit_singleButton(没有输入框，只有一个按钮)4 no_et_dialog(没有输入框，有两个按钮)
-    //5 hava_title_content_no_button
+    // 1 have_edit_dialog（存在输入框，两个按钮）
+    // 2 no_button_dialog(只有内容的对话框)
+    // 3 no_edit_singleButton(没有输入框，只有一个按钮)
+    // 4 no_et_dialog(没有输入框，有两个按钮)
+    // 5 have_title_content_no_button
     //由于有输入框这种需要不同的约束，所以不进行封装。
     public AlertDialog common(Context context, View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialog);
@@ -80,6 +82,18 @@ public class AlertDialogUtil {
     public AlertDialog noButtonSingleLineDialog(Context context, String content) {
         View mView = LayoutInflater.from(context).inflate(R.layout.no_button_dialog, null);
         TextView tvContent = mView.findViewById(R.id.tv_content);
+        AlertDialog alertDialog = AlertDialogUtil.getInstance().common(context, mView);
+        tvContent.setText(content);
+        return alertDialog;
+    }
+
+    //只有内容的对话框，背景，透明度
+    public AlertDialog noButtonDialogWithBackground(Context context, String content,int content_color,int background_color,float Alpha) {
+        View mView = LayoutInflater.from(context).inflate(R.layout.no_button_dialog, null);
+        mView.setAlpha(Alpha);
+        mView.setBackgroundColor(background_color);
+        TextView tvContent = mView.findViewById(R.id.tv_content);
+        tvContent.setTextColor(content_color);
         AlertDialog alertDialog = AlertDialogUtil.getInstance().common(context, mView);
         tvContent.setText(content);
         return alertDialog;

@@ -2,8 +2,8 @@
 <resources>
     <string name="select_coutroy">选择国家/地区</string>
     <string name="app_name">Philips EasyKey Plus</string>
-    <string name="app_name_notificatoin_title">PhilipsEasyKey+正在运行</string>
-    <string name="app_name_notificatoin_content">PhilipsEasyKey+服务已开启，有消息会及时通知您</string>
+    <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
+    <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>
     <!-- <string name="app_name">Philips EasyKey Plus</string>
      <string name="app_name_notificatoin_title">PhilipsEasyKeyPlus正在运行</string>
      <string name="app_name_notificatoin_content">PhilipsEasyKeyPlus服务已开启，有消息会及时通知您</string>-->
@@ -2769,4 +2769,6 @@
     <string name="philips_sms_login">短信登录</string>
     <string name="philips_wechat_bind">微信绑定</string>
     <string name="philips_hint_plz_input_phone">请输入手机号</string>
+    <string name="philips_please_enter_the_correct_password">请输入正确的密码</string>
+    <string name="philips_input_correct_account_or_password">请输入正确的账号或密码</string>
 </resources>
