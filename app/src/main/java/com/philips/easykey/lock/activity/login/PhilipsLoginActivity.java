@@ -241,10 +241,13 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     private void initStatement() {
+
+        String message = String.format(getString(R.string.philips_statements_and_terms_content), getString(R.string.app_name));
+
         AlertDialogUtil.getInstance().statementAndTermsDialog(
                 this
                 , getString(R.string.philips_statements_and_terms),
-                getString(R.string.philips_statements_and_terms_content),
+                message,
                 getString(R.string.philips_no_agree),getString(R.string.philips_agree),new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

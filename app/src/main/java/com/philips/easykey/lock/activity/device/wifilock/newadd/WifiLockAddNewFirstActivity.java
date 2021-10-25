@@ -157,10 +157,13 @@ public class WifiLockAddNewFirstActivity extends BaseAddToApplicationActivity {
     }
 
     private void showLocationPermission() {
+
+        String message = String.format(getString(R.string.philips_activity_wifi_lock_new_add_first), getString(R.string.app_name));
+
         AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(
                 WifiLockAddNewFirstActivity.this
                 , getString(R.string.dialog_wifi_video_tip),
-                getString(R.string.philips_activity_wifi_lock_new_add_first),
+                message,
                 getString(R.string.philips_confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {

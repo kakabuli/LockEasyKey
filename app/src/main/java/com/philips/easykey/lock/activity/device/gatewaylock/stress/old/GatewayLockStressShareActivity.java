@@ -66,11 +66,11 @@ public class GatewayLockStressShareActivity extends BaseActivity<GatewayLockShar
             }
         });
         tvShortMessage.setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().sendShortMessage(message, this);
         });
         tvWeiXin.setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim(),getString(R.string.app_name));
             if (SharedUtil.isWeixinAvilible(this)) {
                 SharedUtil.getInstance().sendWeiXin(message);
             } else {
@@ -78,7 +78,7 @@ public class GatewayLockStressShareActivity extends BaseActivity<GatewayLockShar
             }
         });
         tvCopy.setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), pwdValue,tvPwdType.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().copyTextToSystem(this, message);
         });
 

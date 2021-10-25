@@ -121,10 +121,13 @@ public class ClothesHangerMachineAddFirstActivity extends BaseAddToApplicationAc
     }
 
     private void showLocationPermission() {
+
+        String message = String.format(getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_3), getString(R.string.app_name));
+
         AlertDialogUtil.getInstance().havaNoEditTwoButtonDialog(
                 ClothesHangerMachineAddFirstActivity.this
                 , getString(R.string.dialog_wifi_video_tip),
-                getString(R.string.philips_activity_clothes_hanger_machine_add_dialog_3),
+                message,
                 getString(R.string.philips_confirm), getString(R.string.philips_cancel),"#1F96F7", "#1F96F7", new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
