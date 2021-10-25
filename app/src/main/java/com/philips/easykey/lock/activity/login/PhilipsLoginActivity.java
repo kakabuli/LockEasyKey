@@ -899,7 +899,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 //        SPUtils.put(SPUtils.UID, loginResult.getData().getUid());
         MMKVUtils.setMMKV(SPUtils.TOKEN,token);
         MMKVUtils.setMMKV(SPUtils.UID,uid);
-        SPUtils.put(SPUtils.PHONEN, phone);
+        if(!TextUtils.isEmpty(phone)){
+            SPUtils.put(SPUtils.PHONEN, phone.substring(2));
+        }
 
         MyApplication.getInstance().setToken(token);
         MyApplication.getInstance().setUid(uid);
