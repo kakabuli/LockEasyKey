@@ -140,7 +140,7 @@ public class BluetoothPasswordShareActivity extends BaseBleActivity<IPasswordDet
 
     @Override
     public void onClick(View v) {
-        String message = String.format(getString(R.string.share_content), password,shiXiao);
+        String message = String.format(getString(R.string.share_content), password,shiXiao,getString(R.string.app_name));
         switch (v.getId()) {
             case R.id.iv_back:
                 finish();

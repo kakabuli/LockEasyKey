@@ -58,11 +58,11 @@ public class PhilipsWifiLockPasswordShareActivity extends BaseAddToApplicationAc
 
         findViewById(R.id.back).setOnClickListener(v -> finish());
         findViewById(R.id.tv_short_message).setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content),password,tvNotice.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().sendShortMessage(message, this);
         });
         findViewById(R.id.tv_wei_xin).setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim(),getString(R.string.app_name));
             if (SharedUtil.isWeixinAvilible(this)) {
                 SharedUtil.getInstance().sendWeiXin(message);
             } else {
@@ -70,7 +70,7 @@ public class PhilipsWifiLockPasswordShareActivity extends BaseAddToApplicationAc
             }
         });
         findViewById(R.id.tv_copy).setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), password, tvNotice.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().copyTextToSystem(this, message);
         });
 

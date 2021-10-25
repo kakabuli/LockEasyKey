@@ -43,11 +43,14 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
      * 启动保活
      */
     private void startKeepAlive() {
+        String title = String.format(MyApplication.getInstance().getString(R.string.app_name_notificatoin_title), MyApplication.getInstance().getString(R.string.app_name));
+        String content = String.format(MyApplication.getInstance().getString(R.string.app_name_notificatoin_content), MyApplication.getInstance().getString(R.string.app_name));
+
         //启动保活服务
         KeepAliveManager.toKeepAlive(
                 getApplication()
-                , RunMode.HIGH_POWER_CONSUMPTION, getString(R.string.app_name_notificatoin_title),
-                getString(R.string.app_name_notificatoin_content),
+                , RunMode.HIGH_POWER_CONSUMPTION, title,
+                content,
                 R.mipmap.ic_launcher,
                 new ForegroundNotification(
                         //定义前台服务的通知点击事件

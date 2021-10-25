@@ -73,19 +73,19 @@ public class GatewayLockPasswordShareActivity extends BaseActivity<IGatewayLockP
             alertDialog.setCancelable(false);
         });
         tvShortMessage.setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().sendShortMessage(message, this);
         });
         tvWeiXin.setOnClickListener(v -> {
             if (SharedUtil.isWeixinAvilible(this)) {
-                String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+                String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim(),getString(R.string.app_name));
                 SharedUtil.getInstance().sendWeiXin(message);
             } else {
                 ToastUtils.showShort(R.string.telephone_not_install_wechat);
             }
         });
         tvCopy.setOnClickListener(v -> {
-            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim());
+            String message = String.format(getString(R.string.share_content), pwdValue, tvPwdType.getText().toString().trim(),getString(R.string.app_name));
             SharedUtil.getInstance().copyTextToSystem(this, message);
         });
 
