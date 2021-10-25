@@ -49,6 +49,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     RelativeLayout rlDoorLockLanguageSwitch;
     RelativeLayout rlVoiceQualitySetting;
     TextView tvVoiceQualitySetting;
+    TextView tvLockSet;
     RelativeLayout rlDoorDirection;
     TextView tvDoorDirection;
     RelativeLayout rlOpenForce;
@@ -104,6 +105,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
         rlDoorLockLanguageSwitch = findViewById(R.id.rl_door_lock_language_switch);
         rlVoiceQualitySetting = findViewById(R.id.rl_voice_quality_setting);
         tvVoiceQualitySetting = findViewById(R.id.tv_voice_quality_setting);
+        tvLockSet = findViewById(R.id.tv_lock_set);
         rlDoorDirection = findViewById(R.id.rl_door_direction);
         tvDoorDirection = findViewById(R.id.tv_door_direction);
         rlOpenForce = findViewById(R.id.rl_open_force);
@@ -231,11 +233,13 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
             //开门方向
             if(BleLockUtils.isSupportDoorDirection(func)){
                 rlDoorDirection.setVisibility(View.VISIBLE);
+                tvLockSet.setVisibility(View.VISIBLE);
                 try{
                     setOpenDirection(wifiLockInfo.getOpenDirection());
                 }catch (Exception e){}
             }else{
                 rlDoorDirection.setVisibility(View.GONE);
+                tvLockSet.setVisibility(View.GONE);
             }
 
             if(wifiLockInfo.getStay_status() == 0){

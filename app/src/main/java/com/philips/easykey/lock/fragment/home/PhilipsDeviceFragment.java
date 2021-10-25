@@ -456,10 +456,8 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
     }
 
     public void powerStatusDialog(){
-        AlertDialogUtil.getInstance().titleTwoButtonPhilipsDialog(getActivity(), getString(R.string.philips_videolock_device_fragment_power_save_mode_title),
-                getString(R.string.philips_videolock_device_fragment_power_save_mode_title),
-                getString(R.string.philips_cancel), getString(R.string.philips_confirm),
-                "#0066A1","#FFFFFF", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(getContext(), getString(R.string.dialog_wifi_video_keep_alive_close), getString(R.string.dialog_wifi_video_doorbell_outside_door),
+                null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
