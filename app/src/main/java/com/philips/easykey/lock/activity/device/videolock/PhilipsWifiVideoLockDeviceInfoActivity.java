@@ -663,6 +663,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
     @Override
     public void uploadSuccess(int type) {
+        hiddenLoading();
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -317,14 +317,15 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         int openStatus = wifiLockInfo.getOpenStatus();
         int faceStatus = wifiLockInfo.getFaceStatus();  //面容识别已关闭
         int powerSave = wifiLockInfo.getPowerSave();   //已启动节能模式
-
-        if (defences == 1) {//布防模式
-            mTvRightMode.setText(R.string.safe_protection);
-            return;
-        }
+        //安全>布防>节能>正常模式>反锁
 
         if (safeMode == 1) {//安全模式
             mTvRightMode.setText(R.string.safe_mode);
+            return;
+        }
+
+        if (defences == 1) {//布防模式
+            mTvRightMode.setText(R.string.safe_protection);
             return;
         }
 
@@ -334,6 +335,10 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         }
 
         mTvRightMode.setText(R.string.real_time_video_setting_normal);
+
+        if(operatingMode == 1){
+            mTvRightMode.setText(R.string.philips_fragment_wifi_video_anti_lock_mode);
+        }
     }
 
     @Override
