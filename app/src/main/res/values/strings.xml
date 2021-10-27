@@ -2465,7 +2465,7 @@
     <string name="philips_hint_please_input_lock_type">请输入门锁型号</string>
     <string name="philips_temp_password">Temp PIN</string>
     <string name="philips_share_copy_password">Copy password</string>
-    <string name="philips_share_permanent_password">永久密码</string>
+    <string name="philips_share_permanent_password">密码</string>
     <string name="philips_share_user_account">User account</string>
     <string name="philips_share_user_account_nickname">Remark name</string>
     <string name="philips_share_user_nickname">将设备“%1$s”分享给</string>

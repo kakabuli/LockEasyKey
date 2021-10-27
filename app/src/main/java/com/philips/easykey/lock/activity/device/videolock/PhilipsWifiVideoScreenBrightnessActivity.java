@@ -86,11 +86,11 @@ public class PhilipsWifiVideoScreenBrightnessActivity extends BaseActivity<IWifi
             ckScreenBrightnessLow.setChecked(true);
             ckScreenBrightnessMid.setChecked(false);
             ckScreenBrightnessHigh.setChecked(false);
-        }else if(screenLightLevel > 30 && screenLightLevel <= 50){
+        }else if(screenLightLevel > 30 && screenLightLevel <= 60){
             ckScreenBrightnessLow.setChecked(false);
             ckScreenBrightnessMid.setChecked(true);
             ckScreenBrightnessHigh.setChecked(false);
-        }else if(screenLightLevel > 50){
+        }else if(screenLightLevel > 60){
             ckScreenBrightnessLow.setChecked(false);
             ckScreenBrightnessMid.setChecked(false);
             ckScreenBrightnessHigh.setChecked(true);
@@ -142,7 +142,7 @@ public class PhilipsWifiVideoScreenBrightnessActivity extends BaseActivity<IWifi
                 setScreenLightLevelView(80);
                 break;
             case R.id.rl_screen_brightness_mid:
-                setScreenLightLevelView(50);
+                setScreenLightLevelView(60);
                 break;
             case R.id.rl_screen_brightness_low:
                 setScreenLightLevelView(30);;
@@ -188,14 +188,14 @@ public class PhilipsWifiVideoScreenBrightnessActivity extends BaseActivity<IWifi
         }
 
         if(ckScreenBrightnessMid.isChecked()){
-            return 50;
+            return 60;
         }
 
         if(ckScreenBrightnessLow.isChecked()){
             return 30;
         }
 
-        return 50;
+        return 60;
     }
 
     public void powerStatusDialog(){
