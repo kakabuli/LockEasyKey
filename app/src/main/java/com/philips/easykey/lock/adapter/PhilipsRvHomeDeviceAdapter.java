@@ -47,9 +47,9 @@ public class PhilipsRvHomeDeviceAdapter extends BaseQuickAdapter<PhilipsDeviceBe
                     + " " + tvLastRecord.getText().toString().trim());
         }
 
-        if(bean.getPower() <= 30){
+        if(bean.getPower() <= 20){
             holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low);
-        }else if(bean.getPower() > 30 && bean.getPower() <= 60){
+        }else if(bean.getPower() > 20 && bean.getPower() <= 60){
             holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low2);
         }else if(bean.getPower() > 60 && bean.getPower() <= 90){
             holder.setImageResource(R.id.ivPower,R.drawable.philips_home_icon_battery_low1);

@@ -111,7 +111,7 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
 
     private boolean processScanResult(String code) {
         if(TextUtils.isEmpty(code))return false;
-        if(code.contains("WiFi&VIDEO") || code.contains("kaadas_WiFi_camera")){
+        if(code.contains("WiFi&VIDEO") || code.contains("PHILIPS_WiFi_camera")){
             //视频WIFI锁
             Intent wifiIntent = new Intent(getContext(), PhilipsAddVideoLockActivity.class);
             String wifiModelType = "WiFi&VIDEO";

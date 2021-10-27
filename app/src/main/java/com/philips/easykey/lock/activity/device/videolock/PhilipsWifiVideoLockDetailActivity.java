@@ -294,9 +294,9 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
      * @param power
      */
     private void remainingCapacity(int power) {
-        if(power <= 30){
+        if(power <= 20){
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low);
-        }else if(power > 30 && power <= 60){
+        }else if(power > 20 && power <= 60){
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low2);
         }else if(power > 60 && power <= 90){
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low1);

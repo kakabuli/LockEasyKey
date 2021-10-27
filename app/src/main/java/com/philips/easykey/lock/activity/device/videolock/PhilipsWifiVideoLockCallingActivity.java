@@ -52,6 +52,7 @@ import com.philips.easykey.lock.utils.BitmapUtil;
 import com.philips.easykey.lock.utils.DateUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rsa;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
@@ -410,7 +411,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         }catch (Exception e){
 
         }
-        if(!WifiUtils.getInstance(this).isWifiEnable()){
+        if(!NetUtil.isNetworkAvailable()){
             openWifiDialog();
             return;
         }

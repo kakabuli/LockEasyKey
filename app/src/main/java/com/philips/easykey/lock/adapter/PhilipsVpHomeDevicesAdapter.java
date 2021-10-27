@@ -49,9 +49,9 @@ public class PhilipsVpHomeDevicesAdapter extends PhilipsBaseVPAdapter<PhilipsDev
         tvCurrentPage.setText(StringUtils.format("%1d", position + 1));
         tvCount.setText(tvCount.getContext().getString(R.string.philips_device_count, getCount()));
         ImageView ivPower = view.findViewById(R.id.ivPower);
-        if (data.getPower() <= 30) {
+        if (data.getPower() <= 20) {
             ivPower.setImageResource(R.drawable.philips_home_icon_battery_low);
-        } else if (data.getPower() > 30 && data.getPower() <= 60) {
+        } else if (data.getPower() > 20 && data.getPower() <= 60) {
             ivPower.setImageResource(R.drawable.philips_home_icon_battery_low2);
         } else if (data.getPower() > 60 && data.getPower() <= 90) {
             ivPower.setImageResource(R.drawable.philips_home_icon_battery_low1);

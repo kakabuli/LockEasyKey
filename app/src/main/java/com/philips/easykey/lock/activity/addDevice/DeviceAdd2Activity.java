@@ -262,7 +262,7 @@ public class DeviceAdd2Activity extends BaseActivity<DeviceZigBeeDetailView, Dev
 //                    } else if ( (result.contains("_WiFi_2")||result.contains("_WiFi_fast"))){  //新的快速配网
 //                        startActivity(new Intent(this,WifiLockAddNewFirstActivity.class));
                     } else if ( (result.contains("_WiFi_"))){  //4-30新的配网流程
-                        if(result.equals("kaadas_WiFi_camera")){
+                        if(result.equals("PHILIPS_WiFi_camera")){
                             //视频WIFI锁
                             Intent wifiIntent = new Intent(this, WifiLockAddNewFirstActivity.class);
                             String wifiModelType = "WiFi&VIDEO";

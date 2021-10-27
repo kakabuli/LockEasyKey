@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,7 +58,9 @@ public class PhilipsDuressAlarmAdapter extends BaseQuickAdapter<PhilipsDuressBea
         }else if(bean.getPwdDuressSwitch() == 1){
             holder.setTextColorRes(R.id.tv_duress_alarm_toggle,R.color.c666666);
             holder.setText(R.id.tv_duress_alarm_toggle,R.string.open);
-            holder.setText(R.id.tv_duress_alarm_phone,StringUtil.phoneToHide(bean.getDuressAlarmAccount()));
+            if(!TextUtils.isEmpty(bean.getDuressAlarmAccount())){
+                holder.setText(R.id.tv_duress_alarm_phone,StringUtil.phoneToHide(bean.getDuressAlarmAccount()));
+            }
             holder.findView(R.id.rl_duress_alarm_password_notification).setVisibility(View.VISIBLE);
         }
         String sNum = bean.getNum() > 9 ? "" + bean.getNum() : "0" + bean.getNum();;
