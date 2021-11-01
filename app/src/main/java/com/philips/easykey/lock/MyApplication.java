@@ -13,9 +13,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
+import com.hjq.permissions.XXPermissions;
 import com.huawei.hms.push.HmsMessaging;
 import com.igexin.sdk.IUserLoggerInterface;
 import com.igexin.sdk.PushManager;
@@ -32,12 +32,12 @@ import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
+import com.philips.easykey.lock.utils.PermissionInterceptor;
 import com.philips.easykey.lock.publiclibrary.http.util.RetrofitServiceManager;
 import com.philips.easykey.lock.publiclibrary.http.util.RxjavaHelper;
 import com.philips.easykey.lock.publiclibrary.mqtt.MqttCommandFactory;
 import com.philips.easykey.lock.publiclibrary.mqtt.publishresultbean.AllBindDevices;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttConstant;
-import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttData;
 import com.philips.easykey.lock.publiclibrary.mqtt.util.MqttService;
 import com.philips.easykey.lock.publiclibrary.xm.XMP2PManager;
 import com.philips.easykey.lock.utils.BleLockUtils;
@@ -89,7 +89,6 @@ import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.subjects.PublishSubject;
 
@@ -151,6 +150,9 @@ public class MyApplication extends Application {
         closeAndroidPDialog();
         setRxJavaErrorHandler();
         initFont();
+
+        // 设置权限申请拦截器
+        XXPermissions.setInterceptor(new PermissionInterceptor());
     }
 
     public void initSDK(){

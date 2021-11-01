@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.hjq.permissions.OnPermissionCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.WifiLockAddNewNotActivateActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
@@ -26,6 +29,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -35,7 +39,7 @@ public class AboutUsActivity extends BaseAddToApplicationActivity {
 
     TextView tvContent;
     ImageView ivPhilipsWeiXinQRCode;
-
+    boolean permission = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +56,16 @@ public class AboutUsActivity extends BaseAddToApplicationActivity {
         ivPhilipsWeiXinQRCode.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                boolean b = saveImageToGallery(AboutUsActivity.this, ivPhilipsWeiXinQRCode);
-                if (b) {
-                    ToastUtils.showShort(getString(R.string.save_success));
-                } else {
+
+                checkPermissions();
+                if (permission){
+                    boolean b = saveImageToGallery(AboutUsActivity.this, ivPhilipsWeiXinQRCode);
+                    if (b) {
+                        ToastUtils.showShort(getString(R.string.save_success));
+                    } else {
+                        ToastUtils.showShort(getString(R.string.save_failed));
+                    }
+                }else {
                     ToastUtils.showShort(getString(R.string.save_failed));
                 }
                 return false;
@@ -100,6 +110,92 @@ public class AboutUsActivity extends BaseAddToApplicationActivity {
             e.printStackTrace();
         }
         return false;
+    }
+
+    void checkPermissions() {
+
+        try {
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {  //适配 Android 11 分区存储
+                //适配 Android 11 分区存储
+                XXPermissions.with(this)
+                        // 申请存储权限
+                        .permission(Permission.Group.STORAGE)
+                        .request(new OnPermissionCallback() {
+
+                            @Override
+                            public void onGranted(List<String> permissions, boolean all) {
+                                if (all) {
+                                    LogUtils.d("获取权限成功");
+                                    permission = true;
+                                } else {
+                                    LogUtils.d("获取部分权限成功，但部分权限未正常授予");
+                                }
+                            }
+
+                            @Override
+                            public void onDenied(List<String> permissions, boolean never) {
+                                if (never) {
+                                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+//                                    XXPermissions.startPermissionActivity(AboutUsActivity.this, permissions);
+                                    LogUtils.d("被永久拒绝授权，请手动授予权限");
+
+                                } else {
+                                    LogUtils.d("获取权限失败");
+                                }
+                            }
+                        });
+            }
+            else {
+                //不适配 Android 11 分区存储
+                XXPermissions.with(this)
+                        .permission(Permission.MANAGE_EXTERNAL_STORAGE)
+                        .request(new OnPermissionCallback() {
+
+                            @Override
+                            public void onGranted(List<String> permissions, boolean all) {
+                                if (all) {
+                                    LogUtils.d("获取权限成功");
+                                    permission = true;
+
+                                } else {
+                                    LogUtils.d("获取部分权限成功，但部分权限未正常授予");
+                                }
+                            }
+
+                            @Override
+                            public void onDenied(List<String> permissions, boolean never) {
+                                if (never) {
+                                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+//                                    XXPermissions.startPermissionActivity(AboutUsActivity.this, permissions);
+                                    LogUtils.d("被永久拒绝授权，请手动授予权限");
+
+                                } else {
+                                    LogUtils.d("获取权限失败");
+                                }
+                            }
+                        });
+            }
+
+        }catch (Exception e){
+            LogUtils.d(e.getMessage());
+        }
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == XXPermissions.REQUEST_CODE) {
+            if (XXPermissions.isGranted(this, Permission.RECORD_AUDIO) &&
+                    XXPermissions.isGranted(this, Permission.Group.CALENDAR)) {
+                LogUtils.d("用户已经在权限设置页授予了录音和日历权限");
+            } else {
+                LogUtils.d("用户没有在权限设置页授予权限");
+
+            }
+        }
     }
 
 }

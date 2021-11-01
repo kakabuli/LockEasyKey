@@ -63,7 +63,6 @@ import com.philips.easykey.lock.utils.PermissionUtil;
 import com.philips.easykey.lock.utils.Rom;
 import com.philips.easykey.lock.utils.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.ftp.GeTui;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 import com.philips.easykey.lock.widget.BottomMenuSelectMarketDialog;
@@ -111,7 +110,9 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
 
         LogUtils.d("MainActivity启动 ");
         initView();
+        //TODO 2021.10.29 后期把XXPermissions全部替换PermissionUtil
         PermissionUtil.getInstance().requestPermission(PermissionUtil.getInstance().permission, this);
+
         isRunning = true;
         mRg.setOnCheckedChangeListener(this);
         MqttService mqttService = MyApplication.getInstance().getMqttService();

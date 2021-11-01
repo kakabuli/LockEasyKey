@@ -2767,4 +2767,35 @@
     <string name="philips_wechat_bind">微信绑定</string>
     <string name="philips_hint_plz_input_phone">请输入手机号</string>
     <string name="philips_input_correct_account_or_password">请输入正确的账号或密码</string>
+
+    <!-- 权限提示语 -->
+    <string name="philips_common_permission_hint">授权提示</string>
+    <string name="philips_common_permission_message">使用此功能需要先授予权限</string>
+    <string name="philips_common_permission_granted">授予</string>
+
+    <string name="philips_common_permission_alert">授权提醒</string>
+    <string name="philips_common_permission_fail_1">授权失败，请正确授予权限</string>
+    <string name="philips_common_permission_fail_2">获取权限失败，请手动授予权限</string>
+    <string name="philips_common_permission_fail_3">获取权限失败，请手动授予%s</string>
+    <string name="philips_common_permission_fail_4">没有授予后台定位权限，请您选择"始终允许"</string>
+    <string name="philips_common_permission_goto">前往授权</string>
+
+    <string name="philips_common_permission_calendar">日历权限</string>
+    <string name="philips_common_permission_camera">相机权限</string>
+    <string name="philips_common_permission_contacts">通讯录权限</string>
+    <string name="philips_common_permission_location">定位权限</string>
+    <string name="philips_common_permission_location_background">后台定位权限</string>
+    <string name="philips_common_permission_bluetooth">附近的设备权限</string>
+    <string name="philips_common_permission_microphone">麦克风权限</string>
+    <string name="philips_common_permission_phone">电话权限</string>
+    <string name="philips_common_permission_call_log">通话记录权限</string>
+    <string name="philips_common_permission_sensors">身体传感器权限</string>
+    <string name="philips_common_permission_activity_recognition">健身运动权限</string>
+    <string name="philips_common_permission_sms">短信权限</string>
+    <string name="philips_common_permission_storage">存储权限</string>
+
+    <string name="philips_common_permission_install">安装应用权限</string>
+    <string name="philips_common_permission_notification">通知栏权限</string>
+    <string name="philips_common_permission_window">悬浮窗权限</string>
+    <string name="philips_common_permission_setting">系统设置权限</string>
 </resources>
