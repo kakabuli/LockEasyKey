@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -31,6 +32,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -81,6 +83,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivRefuseIcon1;
     AVSpeakerView avSpeakerView;
     TextView tvTips;
+    ProgressBar progress;
     ImageView ivSetting;
     ImageView back;
     SurfaceView mSufaceView;
@@ -161,7 +164,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
             ivRealTimeRefuseIcon.setVisibility(View.GONE);
             ivRefuseIcon1.setVisibility(View.GONE);
             if(tvTips != null)
-                tvTips.setVisibility(View.GONE);
+                tvTips.setVisibility(View.VISIBLE);
+                tvTips.setText(getString(R.string.wifi_video_lock_rang_the_doorbell));
+            progress.setVisibility(View.GONE);
             isDoorbelling = true;
         }
 
@@ -203,6 +208,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         ivRefuseIcon = findViewById(R.id.iv_refuse_icon);
         ivRefuseIcon1 = findViewById(R.id.iv_refuse_icon_1);
         tvTips = findViewById(R.id.tv_tips);
+        progress = findViewById(R.id.progress);
         ivSetting = findViewById(R.id.iv_setting);
         back = findViewById(R.id.back);
         mSufaceView = findViewById(R.id.surface_view);

@@ -1072,7 +1072,7 @@ public class BleUtil {
                     case 9:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_9_000,record.getUserNickname()));
                         if(iv != null){
-                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_mechanics));
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_indoor_door_opening));
                         }
                         break;
                     case 10:
@@ -1084,7 +1084,7 @@ public class BleUtil {
                     case 11:
                         mTvContent.setText(mContext.getString(R.string.philips_operation_record_1_11_000));
                         if(iv != null){
-                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_icon_door_handle));
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_indoor_door_opening));
                         }
                         break;
                     default:

@@ -2499,7 +2499,7 @@
     <string name="Philips_after_sales_call">售后电话</string>
     <string name="Philips_after_sales_number">400-8828-236</string>
     <string name="philips_tip_add_video_lock_task1">1.触摸门锁数字键区域，唤醒门锁面板 \n2.连续2次点击“*”号键，输入管理员密码\n&#160;&#160;&#160;&#160;后按“#”号键确认 \n3.根据语音提示，在门锁菜单中选择“4”</string>
-    <string name="philips_the_door_lock_has_a_voice_prompt_distributing_network_please_wait">门锁已语音提示“配网中，请稍后”</string>
+    <string name="philips_the_door_lock_has_a_voice_prompt_distributing_network_please_wait">门锁已语音提示“已进入配网状态”</string>
     <string name="philips_voice_prompt_setting_failed">语音提示设置失败？</string>
     <string name="philips_enter_management_mode">设备连接</string>
     <string name="philips_lock_tip_scan_suc_pair_network">门锁已语音提示“扫描成功，配网中”</string>

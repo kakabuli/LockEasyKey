@@ -369,7 +369,7 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     private void setScreenLightLevel(int screenLightLevel) {
         if(/*screenLightLevel <= 30*/screenLightLevel == 30){
             tvScreenBrightness.setText(R.string.low);
-        }else if(/*screenLightLevel > 30 && screenLightLevel <= 50*/ screenLightLevel == 50){
+        }else if(/*screenLightLevel > 30 && screenLightLevel <= 50*/ screenLightLevel == 60){
             tvScreenBrightness.setText(R.string.centre);
         }else if(/*screenLightLevel > 50 && screenLightLevel <= 80*/ screenLightLevel == 80){
             tvScreenBrightness.setText(R.string.high);

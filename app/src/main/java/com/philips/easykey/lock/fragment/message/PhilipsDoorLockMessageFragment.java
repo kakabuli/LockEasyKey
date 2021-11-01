@@ -422,13 +422,13 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
             SevendayDataStatisticsBean sevendayDataStatisticsBean = new SevendayDataStatisticsBean();
             if(i == 0) {
                 sevendayDataStatisticsBean.setOrdinateValue(new int[]{
-                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(5).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getOpenLockCount(),
-                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getOpenLockCount()});
+                        statisticsSevenDayResult.getData().getStatisticsList().get(6).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(5).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(4).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(3).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(2).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(1).getOperationCount(),
+                        statisticsSevenDayResult.getData().getStatisticsList().get(0).getOperationCount()});
                 sevendayDataStatisticsBean.setStatisticsTypeName(getString(R.string.philips_open_the_door_record));
             }else if(i == 1){
                 sevendayDataStatisticsBean.setOrdinateValue(new int[]{

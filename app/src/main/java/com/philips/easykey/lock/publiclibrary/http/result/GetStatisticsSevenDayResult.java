@@ -71,7 +71,7 @@ public class GetStatisticsSevenDayResult extends BaseResult{
     {
         private String date;
 
-        private int openLockCount;
+        private int operationCount;
 
         private int doorbellCount;
 
@@ -83,12 +83,15 @@ public class GetStatisticsSevenDayResult extends BaseResult{
         public String getDate(){
             return this.date;
         }
-        public void setOpenLockCount(int openLockCount){
-            this.openLockCount = openLockCount;
+
+        public int getOperationCount() {
+            return operationCount;
         }
-        public int getOpenLockCount(){
-            return this.openLockCount;
+
+        public void setOperationCount(int operationCount) {
+            this.operationCount = operationCount;
         }
+
         public void setDoorbellCount(int doorbellCount){
             this.doorbellCount = doorbellCount;
         }
@@ -106,7 +109,7 @@ public class GetStatisticsSevenDayResult extends BaseResult{
         public String toString() {
             return "StatisticsList{" +
                     "date='" + date + '\'' +
-                    ", openLockCount=" + openLockCount +
+                    ", operationCount=" + operationCount +
                     ", doorbellCount=" + doorbellCount +
                     ", alarmCount=" + alarmCount +
                     '}';

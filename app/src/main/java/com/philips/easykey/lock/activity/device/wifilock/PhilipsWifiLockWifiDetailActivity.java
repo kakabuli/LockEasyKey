@@ -69,6 +69,7 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
         avi = findViewById(R.id.avi);
         tvTips = findViewById(R.id.tv_tips);
 
+
         back.setOnClickListener(v -> finish());
         rlReplaceWifi.setOnClickListener(v -> {
             //老的wifi锁不存在这个字段，为wifi配网1，wifi&ble为2
@@ -131,6 +132,13 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
     @Override
     protected void onResume() {
         super.onResume();
+        if(avi != null){
+            avi.hide();
+            tvTips.setVisibility(View.GONE);
+        }
+        avi.setVisibility(View.VISIBLE);
+        tvTips.setVisibility(View.VISIBLE);
+        avi.show();
         if(wifiLockInfo.getDistributionNetwork() == 3 ||
                 BleLockUtils.isSupportXMConnect(wifiLockInfo.getFunctionSet())){
             registerBroadcast();
