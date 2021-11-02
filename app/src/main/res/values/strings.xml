@@ -163,7 +163,7 @@
     <string name="close_touch_id">关闭Touch ID</string>
     <string name="open_face_id">开启Face ID</string>
     <string name="close_face_id">关闭Face ID</string>
-    <string name="kaadas_touch_id">“飞利浦”的触控ID</string>
+    <string name="kaadas_touch_id">“Philips EasyKey Plus”的触控ID</string>
     <string name="verify_telephone_fingerprint">通过Home键验证已有手机指纹</string>
     <string name="hand_pwd_drraw_the_ailure">绘制错误，请重新绘制</string>
     <string name="hand_pwd_drraw_the_old_ailure">请绘制旧手势密码</string>
