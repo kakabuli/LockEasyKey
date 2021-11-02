@@ -252,7 +252,11 @@ dependencies {
     implementation('com.google.guava:guava:30.1.1-jre')
     // 权限请求帮助库
     // For developers using AndroidX in their applications
+    //TODO 2021.10.29,easypermissions框架19年停更，先引入XXPermissions（已经兼容到android12的权限），有空XXPermissions完全替换掉EasyPermissions。
     implementation 'pub.devrel:easypermissions:3.0.0'
+    // 权限请求框架：https://github.com/getActivity/XXPermissions
+    implementation 'com.github.getActivity:XXPermissions:12.6'
+
     // basePopup
     implementation 'io.github.razerdp:BasePopup:2.3.0'
     // Gson
