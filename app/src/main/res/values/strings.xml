@@ -2500,7 +2500,7 @@
     <string name="philips_videolock_power_save_mode_content">Energy-saving mode is turned on, please replace the battery and try again</string>
     <string name="philips_videolock_device_fragment_power_save_mode_title">Energy-saving mode is turned on</string>
     <string name="philips_videolock_device_fragment_power_save_mode_content">Energy-saving mode cannot view the situation outside the door, please replace the battery or enter the shortcut key 408# in the door lock to close</string>
-    <string name="philips_splash_app_name">Philips\nEasyKey+</string>
+    <string name="philips_splash_app_name">Philips\nEasyKey Plus</string>
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">Unlock with temporary PIN</string>

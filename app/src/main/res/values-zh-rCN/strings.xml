@@ -2492,7 +2492,7 @@
     <string name="philips_videolock_power_save_mode_content">已开启节能模式，请更换电池后再试</string>
     <string name="philips_videolock_device_fragment_power_save_mode_title">已开启节能模式</string>
     <string name="philips_videolock_device_fragment_power_save_mode_content">节能模式无法查看门外情况，请更换电池或在门锁输入快捷键408# 进行关闭</string>
-    <string name="philips_splash_app_name">Philips\nEasyKey+</string>
+    <string name="philips_splash_app_name">Philips\nEasyKey Plus</string>
 
     <!-- 密码开门 -->
     <string name="philips_operation_record_1_0_250">使用临时密码开门</string>
