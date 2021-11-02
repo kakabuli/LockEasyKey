@@ -64,7 +64,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
         adminPassword = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_ADMIN_PASSWORD);
         wifiName = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_WIFI_SSID);
-        Log.e("凯迪仕", "onCreate: adminPassword " + adminPassword + "   wifiName " + wifiName);
+        Log.e("philips", "onCreate: adminPassword " + adminPassword + "   wifiName " + wifiName);
         thread.start();
     }
 

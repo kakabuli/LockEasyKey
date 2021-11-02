@@ -114,7 +114,6 @@ public class MyApplication extends Application {
     private BleService bleService;
     private Disposable allBindDeviceDisposable;
     private AllBindDevices allBindDevices;
-    private String TAG = "凯迪仕";
     private IWXAPI api;
     private List<HomeShowBean> homeShowDevices = new ArrayList<>();
     private List<HomeShowBean> loclHomeShowDevices = new ArrayList<>();

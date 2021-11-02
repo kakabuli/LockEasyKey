@@ -37,7 +37,7 @@ public class WifiLockAddNewModifyPasswordActivity extends BaseAddToApplicationAc
         findViewById(R.id.continue_check).setOnClickListener(v -> {
             String wifiName = NetUtil.getWifiName();
             LogUtils.d("连接状态  wifiName   " +wifiName+"  isConnected " +SocketManager.getInstance().isConnected());
-            if (!(!TextUtils.isEmpty(wifiName ) && wifiName.contains("kaadas_AP")) || !SocketManager.getInstance().isConnected()){
+            if (!(!TextUtils.isEmpty(wifiName ) && wifiName.contains("philips_AP")) || !SocketManager.getInstance().isConnected()){
                 ToastUtils.showShort(R.string.philips_activity_wifi_lock_add_modify_password);
                 startActivity(new Intent(this,WifiLockAddNewModifyPasswordDisconnectActivity.class));
                 socketManager.destroy();

@@ -89,7 +89,7 @@
     <string name="philips_pwd_resetting_success">密码重置成功</string>
     <string name="my_device">我的设备</string>
     <string name="you_no_device">您还没有设备哦</string>
-    <string name="lockNickName">Kaadas 智能锁</string>
+    <string name="lockNickName">Philips EasyKey Plus 智能锁</string>
     <string name="device_power">电量</string>
     <string name="add_device">添加设备</string>
     <string name="device_zigbee">ZigBee</string>
@@ -104,7 +104,7 @@
     <string name="reset_key_two">（如指示灯处于其他状态，按复位键）</string>
     <string name="confirm_indicator_light">确认指示灯变亮</string>
     <string name="go_bind">去绑定</string>
-    <string name="wifi_is_connecting">正在连接kaadas网关Wi-Fi中...</string>
+    <string name="wifi_is_connecting">正在连接Philips EasyKey Plus网关Wi-Fi中...</string>
     <string name="add_lock">添加门锁</string>
     <string name="choose_to_add_wifi">选择配网</string>
     <string name="searching_bluetooth">正在搜索附近设备...</string>
@@ -197,29 +197,7 @@
     <string name="setting_language_en">English</string>
     <string name="setting_language_tai">泰语</string>
     <string name="tranitional_chinese">繁体中文</string>
-    <string name="user_agreement_title">
-                            本协议系深圳市凯迪仕智能科技有限公司（以下简称“kaadas”）与所有使用凯迪仕智能科技客户端（以下简称“凯迪仕”）的主体（包含但不限于个人、团队等）（以下简称用户）所订立的有效合约。使用凯迪仕的任何服务即表示接受本协议的全部条款。
-                        </string>
-    <string name="user_agreement_one_title">一、总则</string>
-    <string name="user_agreement_one_content">1.1 凯迪仕智能的所有权和运营权归深圳市凯迪仕智能科技有限公司所有。\n   1.2 用户在注册之前，应当仔细阅读本协议，并同意遵守本协议后方可成为注册用户。一旦注册成功，则用户与凯迪仕之间自动形成协议关系，用户应当受本协议的约束。用户在使用特殊的服务或产品时，应当同意接受相关协议后方能使用。\n   1.3 本协议可由凯迪仕智能随时更新，更新后的协议条款一旦公布即代替原来的协议条款，恕不再另行通知，用户可在本平台查阅最新版协议条款。在凯迪仕智能修改协议条款后，如果用户不接受修改后的条款，请立即停止使用凯迪仕提供的服务，用户继续使用凯迪仕提供的服务将被视为接受修改后的协议。</string>
-    <string name="user_agreement_two_title">二、服务内容及使用须知</string>
-    <string name="user_agreement_two_content">2.1 凯迪仕智能APP需配合凯迪仕品牌相关产品使用。\n   2.2 凯迪仕智能仅提供相关的网络服务，除此之外与相关网络服务有关的设备(如个人电脑、手机、及其他与接入互联网或移动网有关的装置)及所需的费用(如为接入互联网而支付的电话费及上网费、为使用移动网而支付的手机费)均应由用户自行负担。</string>
-    <string name="user_agreement_three_title">三、用户账号</string>
-    <string name="user_agreement_three_content">3.1 经凯迪仕智能注册系统完成注册程序并通过身份认证的用户即成为正式用户，可以获得凯迪仕规定用户所应享有的一切权限。\n   3.2 用户通过该账号所进行的一切活动引起的任何损失或损害，由用户自行承担全部责任，凯迪仕智能不承担任何责任。因黑客行为或用户的保管疏忽导致账号非法使用，凯迪仕不承担任何责任。</string>
-    <string name="user_agreement_four_title">四、使用规则</string>
-    <string name="user_agreement_four_content">4.1 用户需遵守中华人民共和国相关法律法规，包括但不限于《中华人民共和国计算机信息系统安全保护条例》、《计算机软件保护条例》、《最高人民法院关于审理涉及计算机网络著作权纠纷案件适用法律若干问题的解释(法释[2004]1号)》、《全国人大常委会关于维护互联网安全的决定》、《互联网电子公告服务管理规定》、《互联网新闻信息服务管理规定》、《互联网著作权行政保护办法》和《信息网络传播权保护条例》等有关计算机互联网规定和知识产权的法律和法规、实施办法。\n   4.2 用户对其自行发表、上传或传送的内容负全部责任，所有用户不得在凯迪仕智能任何页面发布、转载、传送含有下列内容之一的信息，否则凯迪仕有权自行处理并不通知用户，且由此引起的任何损失或损害，由用户自行承担全部责任，凯迪仕不承担任何责任：\n   (1)违反宪法确定的基本原则的；\n  (2)危害国家安全，泄漏国家机密，颠覆国家政权，破坏国家统一的；\n   (3)损害国家荣誉和利益的；\n  (4)煽动民族仇恨、民族歧视，破坏民族团结的；\n  (5)破坏国家宗教政策，宣扬邪教和封建迷信的；\n  (6)散布谣言，扰乱社会秩序，破坏社会稳定的；\n  (7)散布淫秽、色情、赌博、暴力、恐怖或者教唆犯罪的；\n   (8)侮辱或者诽谤他人，侵害他人合法权益的；\n  (9)煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的；\n   (10)以非法民间组织名义活动的；\n  (11)含有法律、行政法规禁止的其他内容的。\n   4.3 用户承诺对其发表或者上传于凯迪仕智能的所有信息(即属于《中华人民共和国著作权法》规定的作品，包括但不限于文字、图片、音乐、电影、表演和录音录像制品和电脑程序等)均享有完整的知识产权，或者已经得到相关权利人的合法授权；如用户违反本条规定造成优点智能被第三人索赔的，用户应全额补偿凯迪仕一切费用(包括但不限于各种赔偿费、诉讼代理费及为此支出的其它合理费用)，由此引起的任何损失或损害，由用户自行承担全部责任，凯迪仕不承担任何责任；\n   4.4 当第三方认为用户发表或者上传于凯迪仕的信息侵犯其权利，并根据《信息网络传播权保护条例》或者相关法律规定向凯迪仕发送权利通知书时，用户同意凯迪仕可以自行判断决定删除涉嫌侵权信息，除非用户提交书面证据材料排除侵权的可能性，凯迪仕智能将不会自动恢复上述删除的信息；\n   4.5 用户保证，其向凯迪仕智能上传的内容不得直接或间接的：\n  (1)为任何非法目的而使用网络服务系统；\n   (2)以任何方式干扰或企图干扰凯迪仕智能客户端或深圳市凯迪仕智能科技有限公司网站的任何部分及功能的正常运行；\n  (3)避开、尝试避开或声称能够避开任何内容保护机制或者凯迪仕智能数据度量工具；\n  (4)未获得凯迪仕事先书面同意以书面格式或图形方式使用源自凯迪仕智能科技的任何注册或未注册的作品、服务标志、公司徽标（LOGO）、URL或其他标志；\n  (5)请求、收集、索取或以其他方式从任何用户那里获取对凯迪仕智能科技账号、密码或其他身份验证凭据的访问权；\n   (6)为任何用户自动登录到凯迪仕智能账号代理身份验证凭据；\n  (7)提供跟踪功能，包括但不限于识别其他用户在个人主页上查看或操作；\n  (8)未经授权冒充他人获取对凯迪仕智能科技的访问权。\n   4.6 用户违反上述任何一款的保证，凯迪仕均有权就其情节对其做出警告、屏蔽直至取消登录资格的处罚；如因用户违反上述保证而给凯迪仕、凯迪仕智能用户或凯迪仕智能科技的任何合作伙伴造成损失，用户自行负责承担一切法律责任并赔偿损失。</string>
-    <string name="user_agreement_five_title">五、隐私保护</string>
-    <string name="user_agreement_five_content">5.1 凯迪仕智能不对外公开或向第三方提供单个用户的注册资料及用户在使用网络服务时存储在凯迪仕智能的非公开内容，但下列情况除外：\n   (1)事先获得用户的明确授权；\n   (2)根据有关的法律法规要求；\n  (3)按照相关政府主管部门的要求；\n  (4)为维护社会公众的利益。\n   5.2 凯迪仕智能可能会与第三方合作向用户提供相关的网络服务，在此情况下，如该第三方同意承担与优点智能同等的保护用户隐私的责任，则凯迪仕智能有权将用户的注册资料等提供给该第三方。\n  5.3 在不透露单个用户隐私资料的前提下，凯迪仕智能有权对整个用户数据库进行分析并对用户数据库进行商业上的利用。</string>
-    <string name="user_agreement_six_title">六、版权声明</string>
-    <string name="user_agreement_six_content">6.1 凯迪仕智能的文字、图片、音频、视频等版权均归深圳凯迪仕智能科技有限公司享有或与作者共同享有，未经优点智能许可，不得任意转载，否则将承担相关法律责任。\n   6.2 凯迪仕智能特有的标识、版面设计、编排方式等版权均属深圳凯迪仕智能科技有限公司享有，未经凯迪仕智能许可，不得任意复制或转载。 \n  6.3 使用凯迪仕智能的任何内容均应注明“来源于凯迪仕智能”及署上作者姓名，按法律规定需要支付稿酬的，应当通知凯迪仕及作者并支付稿酬，并独立承担一切法律责任。\n   6.4 凯迪仕智能享有所有作品用于其它用途的优先权，包括但不限于网站、电子杂志、平面出版等，但在使用前会通知作者，并按同行业的标准支付稿酬。\n   6.5 凯迪仕智能所有内容仅代表作者自己的立场和观点，与凯迪仕无关，由作者本人承担一切法律责任。\n   6.6 恶意转载凯迪仕智能内容的，凯迪仕保留将其诉诸法律的权利。</string>
-    <string name="user_agreement_seven_title">七、责任声明</string>
-    <string name="user_agreement_seven_content">7.1 用户明确同意其使用凯迪仕智能网络服务所存在的风险及一切后果将完全由用户本人承担，凯迪仕对此不承担任何责任。\n   7.2 凯迪仕智能无法保证网络服务一定能满足用户的要求，也不保证网络服务的及时性、安全性、准确性。\n  7.3 凯迪仕智能不保证为方便用户而设置的外部链接的准确性和完整性，同时，对于该等外部链接指向的不由凯迪仕智能实际控制的任何网页上的内容，凯迪仕智能不承担任何责任。\n   7.4对于凯迪仕智能向用户提供的下列产品或者服务的质量缺陷本身及其引发的任何损失，凯迪仕智能无需承担任何责任：\n   (1)凯迪仕智能向用户免费提供的各项网络服务；\n  (2)凯迪仕智能向用户赠送的任何产品或者服务。\n   7.5 凯迪仕智能有权于任何时间暂时或永久修改或终止本服务(或其任何部分)，而无论其通知与否，凯迪仕智能对用户和任何第三人均无需承担任何责任。</string>
-    <string name="user_agreement_eight_title">八、附则</string>
-    <string name="user_agreement_eight_content">8.1 本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。如用户和优点科技就本协议内容或其执行发生任何争议，双方应尽量友好协商解决；协商不成时，任何一方均可向凯迪仕所在地的人民法院提起诉讼。\n
-8.2本协议一经公布即生效，凯迪仕有权随时对协议内容进行修改，修改后的结果公布于凯迪仕智能科技网站上。如果不同意凯迪仕对本协议相关条款所做的修改，用户有权停止使用网络服务。如果用户继续使用网络服务，则视为用户接受凯迪仕智能科技对本协议相关条款所做的修改。\n
-8.3 如本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，本协议的其余条款仍应有效并且有约束力。\n
-8.4不可抗力条款：如果不能履行本协议是由于一方所不能预见和控制的原因造成的，如战争、罢工、自然灾害、恶劣天气、航空运输中断等，则不能履行本协议的一方可相应免责。\n
-8.5 本协议解释权及修订权归深圳市凯迪仕智能科技有限公司所有。</string>
+
     <string name="faq">常见问题</string>
     <string name="fingerprint_unidentifiable">无法识别</string>
     <string name="fingerprint_fail_check"> 指纹验证失败,手指过脏，或者移动过快等原因。</string>
@@ -258,11 +236,10 @@
     <string name="no_signal">没有信号</string>
     <string name="user_feedback_hint">请输入反馈信息（8到300个字符),我们会尽快处理你的问题。</string>
     <string name="submit">提 交</string>
-    <string name="about_us_content">Kaadas凯迪仕专注于智能锁领域，是一家集产品研发、制造、销售、安装、售后于一体的全产业链公司，是国家级高新技术企业，总部位于中国深圳高新科技园——清华信息港。凯迪仕一直秉承“创新、智造、品质、诚信、工匠精神”做产品，为全球每一位消费者提供舒适，便捷，安全的高品质生活。目前凯迪仕有1000多名员工，上万家全球终端网点，销售规模位居全球前列。</string>
     <string name="wechat_official_account">微信公众号</string>
-    <string name="kaadas_smart_door_lock">凯迪仕智能门锁</string>
+    <string name="kaadas_smart_door_lock">Philips EasyKey Plus智能门锁</string>
     <string name="wei_bo">微博</string>
-    <string name="kaadas_smart_lock">凯迪仕智能锁</string>
+    <string name="kaadas_smart_lock">Philips EasyKey Plus智能锁</string>
     <string name="customer_service_phone">客服电话</string>
     <string name="zhao_shang_phone">招商电话</string>
     <string name="enterprise_official_website">企业官网</string>
@@ -274,7 +251,7 @@
     <string name="please_qrcode_in">将设备二维码放入框内</string>
     <string name="add_cateye">添加猫眼</string>
     <string name="select_feedback_type">请选择反馈类别</string>
-    <string name="select_kaadas">我选凯迪仕</string>
+    <string name="select_kaadas">我选Philips EasyKey Plus</string>
     <string name="resume_load">密码错误，还可以再输入</string>
     <string name="second">次</string>
     <string name="draw_gesture_password">绘制手势密码</string>
@@ -296,7 +273,7 @@
     <string name="go_to_add_zigbee_device">前去添加ZigBee设备</string>
     <string name="no_add_zigbee_device">暂不添加了</string>
     <string name="gateway_bind_fail">连接失败！</string>
-    <string name="device_gateway_first_text">该网络非kaadas网关</string>
+    <string name="device_gateway_first_text">该网络非Philips EasyKey Plus网关</string>
     <string name="device_try">再试一下</string>
     <string name="connecting_zigbeelock">正在连接网关锁···</string>
     <string name="connection_zigbeelock_success">恭喜，网关锁连接成功</string>
@@ -404,7 +381,7 @@
     <string name="finger_or_card">指纹+卡片（选项功能）</string>
     <string name="chinese">Chinese</string>
     <string name="lock_language">Door Lock Language</string>
-    <string name="please_use_gateway_qr_code">请使用Kaadas网关二维码</string>
+    <string name="please_use_gateway_qr_code">请使用Philips EasyKey Plus网关二维码</string>
     <string name="unbind_not_have_devicesn">无法绑定</string>
     <string name="gateway_already_bind">网关已经被绑定</string>
     <string name="input_device_name">请输入设备名称</string>
@@ -642,7 +619,7 @@
     <string name="sure_delete_password">确定删除密码吗？</string>
     <string name="connect_cateye_check_wifi">目前手机连接Wi-Fi与所选网关不一致，请切换手机网络为所选网关</string>
     <string name="switch_wifi">前去切换WIFI</string>
-    <string name="please_scan_cateye_qrcode">请扫描kaadas猫眼二维码</string>
+    <string name="please_scan_cateye_qrcode">请扫描Philips EasyKey Plus猫眼二维码</string>
     <string name="add">Add</string>
     <string name="device_add_zigbee">添加ZigBee设备</string>
     <string name="device_bluetooth">蓝牙设备</string>
@@ -775,7 +752,7 @@
     <string name="be_beging_syc_lockinfo">正在同步锁信息，请稍后。。。</string>
     <string name="lock_has_bean_close">门锁已经打开</string>
     <string name="scan">扫一扫</string>
-    <string name="add_device_before_pair_gateway">添加设备前，请先配置kaadas网关</string>
+    <string name="add_device_before_pair_gateway">添加设备前，请先配置Philips EasyKey Plus网关</string>
     <string name="gateway">网关</string>
     <string name="cateye">猫眼</string>
     <string name="voice_quality_setting">Voice Settings</string>
@@ -797,8 +774,8 @@
     <string name="philips_alpha_vp_5hw">Alpha VP-5HW</string>
     <string name="cateye_gateway">猫眼网关</string>
     <string name="three_gateway">6030 网关</string>
-    <string name="kaadas_cateye">Kaadas 猫眼</string>
-    <string name="kaadas_smart_lock_zigbeee">Kaadas 智能锁\n（ZigBee）</string>
+    <string name="kaadas_cateye">Philips EasyKey Plus 猫眼</string>
+    <string name="kaadas_smart_lock_zigbeee">Philips EasyKey Plus 智能锁\n（ZigBee）</string>
     <string name="select_take_effect_time">请选择生效时间</string>
     <string name="end_time_must_bigger_end_time">结束时间必须大于开始时间</string>
     <string name="please_allow_open_ble">请允许打开蓝牙</string>
@@ -878,7 +855,7 @@
     <string name="low_power_notify">设备:%1$s,低电量，请及时查看</string>
     <string name="host_lost_notify">设备:%1$s,机身被拔，请及时查看</string>
     <string name="head_lost_notify">设备:%1$s,猫头被拔,请及时查看</string>
-    <string name="please_scan_kaadas_qrcode">请扫描凯迪仕产品二维码</string>
+    <string name="please_scan_kaadas_qrcode">请扫描Philips EasyKey Plus产品二维码</string>
     <string name="no_scan">无法扫描</string>
     <string name="cancel_scan">取消扫描</string>
     <string name="once">1次</string>
@@ -1104,7 +1081,7 @@
     <string name="cat_eye_pair_fail">猫眼连接失败！</string>
     <string name="pair_device_out_time">设备连接超时</string>
     <string name="network_connection_fail">网络原因连接失败</string>
-    <string name="scan_cateye_fail_no_qcode">扫描失败，非Kaadas猫眼二维码！</string>
+    <string name="scan_cateye_fail_no_qcode">扫描失败，非Philips EasyKey Plus猫眼二维码！</string>
     <string name="rescancateye">是否继续扫描</string>
     <string name="not_empty">设备名不能为空</string>
     <string name="is_saving_name">正在保存设备名称</string>
@@ -1511,7 +1488,7 @@
     <string name="send_wifi_account_password">发送Wi-Fi账号、密码</string>
     <string name="look_wifi_support">查看门锁Wi-Fi支持家庭路由器</string>
     <string name="user_help">使用帮助</string>
-    <string name="wifi_lock_help_notice1">我是新手，怎么配置凯迪仕Wi-Fi 门锁?</string>
+    <string name="wifi_lock_help_notice1">我是新手，怎么配置Philips EasyKey PlusWi-Fi 门锁?</string>
     <string name="read_failed">读取失败</string>
     <string name="connect_failed2">连接失败</string>
     <string name="admin_password_error">管理员密码输入错误，请重新输入</string>
@@ -1664,7 +1641,7 @@
     <string name="lock_activated">门锁已激活</string>
     <string name="lock_not_activa">门锁未激活</string>
     <string name="wifi_lock_add_new_second_notice1">第二步：门锁激活</string>
-    <string name="wifi_lock_add_new_lock_activate_notice">①微信搜索【凯迪仕智能锁】公众号并关注 \n②进入公众号－【售后服务】，点击【产品激活】 \n③扫描电池盖产品序列号，获取激活码 \n④唤醒门锁，输入激活码，按“＃”确认</string>
+    <string name="wifi_lock_add_new_lock_activate_notice">①微信搜索【Philips EasyKey Plus智能锁】公众号并关注 \n②进入公众号－【售后服务】，点击【产品激活】 \n③扫描电池盖产品序列号，获取激活码 \n④唤醒门锁，输入激活码，按“＃”确认</string>
     <string name="long_save_qr_code">长按保存二维码</string>
     <string name="wifi_lock_add_new_third_notice1">第三步：修改初始管理密码</string>
     <string name="wifi_lock_add_new_third_notice1_1">第三步：已进入管理配置模式</string>
@@ -1764,97 +1741,7 @@
     <string name="video_lock_xm_connect_time_out">Video connection timed out. Please try again later</string>
     <string name="video_lock_xm_connect_failed_1">Network exception, unable to connect</string>
     <string name="video_lock_xm_connect_failed">Network exception, video cannot be connected</string>
-    <string name="privacy_title">
-                            我们的隐私政策已于2019年12月27日更新，将会于2020年1月1日生效。我们对隐私政策进行了详细修订，从该日期开始，这一隐私政策能够提供有关我们如何管理您在使用所有凯迪仕产品和服务时透露的个人信息的隐私详情，特定的凯迪仕产品或服务提供独立的隐私政策除外。
-请花一些时间熟悉我们的隐私权惯例，如果您有任何问题，请告诉我们。
-                        </string>
-    <string name="privacy_one_title">一、 我们向您承诺</string>
-    <string name="privacy_one_content">本隐私政策规定了深圳市凯迪仕智能科技有限公司（下文简称“凯迪仕"或“我们"）如何收集、使用、披露、处理和保护您在使用我们的产品和服务时通过凯迪仕APP提供给我们的信息。若我们要求您提供某些信息，以便在使用凯迪仕产品和服务时验证您的身份，我们将严格遵守本隐私政策和/或我们的用户条款与条件来使用这些信息。 本隐私政策在制定时充分考虑到您的需求；您全面了解我们的个人资料收集和使用惯例，而且确信自己最终能控制提供给我们的所有个人信息，这一点至关重要。 在这项隐私政策中，“个人信息"指所有通过有关特定个人的信息，或者与我们能够访问的其他关于该人的信息相结合后，能够直接或间接识别该人的所有数据。此类个人信息包括但不限于您提供或上传的信息和设备信息 通过使用凯迪仕产品和服务或其他符合使用法律的操作，即表示您已阅读并接受本隐私政策中所述之所有条款，包括我们定期作出的任何变更。为遵守使用法律，包括本地数据保护法律（如欧盟的《全面数据保护法规》），我们将会对于特定类别的个人数据的处理（如自动个体决策）征求您的明确同意。另外，我们承诺遵照适用法律（包括您所在地的数据保护法律）来保护您的个人信息的隐私、机密和安全。同时我们承诺确保我们的全体员工和代理商履行这些义务。 最后，我们所希望的就是为我们的用户带来最好的体验。如果您对这一隐私政策中概括的数据处理惯例有任何疑问，联系我们，以便我们处理您的需求，我们很高兴直接为您答疑解惑。</string>
-    <string name="privacy_two_title">二、 哪些信息会被收集以及我们如何使用这些信息？</string>
-    <string name="privacy_two_content">
-        1.收集的信息类别 为了向您提供我们的服务，我们会要求您提供向您提供服务所必需的个人信息。如果您不提供个人信息，我们可能无法向您提供我们的产品或服务。 我们只会为了详细说明过的、明确的、合法的目的收集必要的信息，并保证不会以和上述目的不符的方式处理这些信息。我们可能会收集以下各类信息（无论其是否为个人信息）： \n
- （1）您提供给我们或上传的信息（包括您的联系信息）：我们可能收集您提供给我们的个人信息，例如您的姓名、手机号、电子邮箱地址、（例如您的安全相关信息、姓名、生日、性别）、您可能接入到我们的设备同步的资料或数据，在凯迪仕平台创建的账户和相关设置信息、您添加的设备或发送的消息、反馈等。 手持终端或SIM卡相关信息：我们可能收集运行米家的手持终端相关的信息，例如IMEI编号、IMSI编号、系统版本、设备制造商信息、型号名称和网络运营商。我们还可能会收集与您账号绑定的相关设备信息，例如MAC地址、DID、设备网络状态（IP/网络信号）、固件版本。 我们指定与您相关的信息：我们可能收集并使用诸如您的凯迪仕账号等信息。  \n
-（2）位置信息（仅适用于特定服务/功能）：与您的位置相关的各类信息，例如区域和国家代码、城市代码、移动网络代码、移动设备国家代码、小区识别码、地区名称、经纬度信息、时区设置和语言设置。 登录信息：与您使用某些功能、移动应用程序和网站相关的信息，例如cookie和其他匿名标识符技术、IP地址、网络请求信息、临时消息历史、标准系统日志和系统崩溃信息等。  \n
-（3）其他信息：环境特征值 (ECV)（由凯迪仕账号、手机ID、连接的Wi-Fi账号及位置信息产生的数值）  \n
-（4）账户凭证：有关您账户凭证的信息，例如密码、密码安全问题和回答等。 我们还可能收集其他与个人没有直接或间接关联的各类汇总的、匿名化的或者无标识的匿名信息。例如，在使用特定服务时，可能收集用户移动电话设备的设备型号和系统版本号。收集这类信息是为了提升我们提供给您的服务质量。 \n\n
-        2.这些个人信息可能会被如何使用 收集个人信息的目的在于向您提供产品和/或服务，并且保证我们遵守适用法律。您特此同意我们可以出于本隐私政策规定的目的处理个人信息，并向我们的关联公司（涉及通信、社交媒体、技术和云业务）和第三方服务供应商（定义如下）披露个人信息。 我们可能会将个人信息用于下列目的： \n
- （1） 提供、处理、维护、改善、开发我们的商品和/或给您的服务，以及通过设备或我们提供的服务。 \n
- （2） 与您就您的设备、服务或任何普通查询（例如更新、设备固件/软件升级、客户咨询支持、相关信息、通知）等进行交流。 \n
- （3）开展市场营销相关活动，例如提供营销和推广相关的资料和更新。获取更多市场营销和推广相关的活动信息，请查看后示的题为“直接市场推广"的内容。
- （4）分析和开发与我们产品及服务的使用相关的统计信息，以更好地改进我们的产品和服务。
- （5） 储存并维护与您相关的信息，用于我们运营业务或履行法律义务。
- （6）无需与我们的服务器通信，提供本地服务。 关于我们如何使用您的信息（其中可能包含个人信息），下面提供了更多详细信息：
- （7） 创建您的凯迪仕账号。在通过网页或我们的移动设备创建账号时收集的个人信息用于建立用户的个人账户和资料页。
- （8） 提供基于位置的服务。在使用凯迪仕及接入我们的设备时，我们可能会使用位置信息判断设备时区，以保证在设备中准确显示时间、登录服务地区。以及根据您的选择为您提前开启相应设备等体验。您可以随时进入设备设置或停止使用这一应用程序来关闭这一功能。
- （9） 设备接入。设备通过App进行操作，需要验证其设备的真实性，因此我们会需要通过核验出厂MAC、DID信息来确认设备的合法身份。此外，设备需要连接网络使用的情况下，需要通过APP对设备进行相应的网络设置，此过程需要您录入相应的Wi-Fi名称及密码，该信息仅用于设备配网使用。您填写的Wi-Fi及密码数据，我们会加密存储在设备本地，不会上传服务器，您可以随时进入设备删除该信息。 同时，我们需要通过判断IP、网络信号为设备选择最优联网方式，来保障设备的联网稳定性。
- （10）设备状态显示。可以允许您远程查看设备状态，以便您时刻查看设备运行情况。
- （11）设置自动化任务。您设备上报的事件信息（信息来自于您添加的设备，具体的可设置信息取决于您对该设备的隐私授权范围，每个添加设备会提供设备提供方的隐私政策相关条款由您选择是否同意），可以用于创建属于您个人的自动化任务。
- （12）提供推送服务。账号和 IMEI 号码也将用于提供凯迪仕推送服务，为用户发送设备通知。您可以随时通过更改"消息设置"项下的偏好选项来关闭这一功能。
- （13）收集用户反馈。您选择提供的反馈对帮助我们改进我们的服务而言极为珍贵。为了跟踪您选择提供的反馈，我们可能会使用您所提供的个人信息与您联系，并保留记录。
- （14）发送通知。我们可能会不时使用您的个人信息来发送重要通知，例如有关设备异常运行状态的通知、您定制的设备推送通知（具体需要根据您购买添加设备的情况而定）、我们的条款、条件和政策变更。
 
-    </string>
-    <string name="privacy_three_title">三 直接市场推广</string>
-    <string name="privacy_three_content">我们可能会使用您的姓名、电话号码、电子邮箱地址、凯迪仕账号、IMEI 号码向您提供凯迪仕公司及其合作伙伴（提供网络、移动应用程序和云产品和服务）的产品和服务相关的推广资料。我们严格遵守您所在地的数据保护法（一些法律可能会要求独立的明确许可），所以我们只会在征得您事先明确的同意，并且会通过一项清晰的肯定操作，确认我们已征得您的同意或您表示不反对之后，才会使用您的个人信息。如果您不希望再收到某些类别的电子邮件，您可以点击位于页面下方的链接退订邮件。我们不会将您的个人信息传送给我们的商业伙伴用于直接市场推广。 四 我们与谁共享您的信息？ 我们不会将任何个人信息出售给第三方。 我们可能会向第三方（定义见下文）披露您的个人信息，以便提供您要求的产品或服务。 我们可能会向本部分下文列出的第三方服务供应商和关联公司作出披露。在本部分所述的各种情况下，您可以放心，凯迪仕仅会根据您的授权共享您的个人信息。您对凯迪仕的授权将包括各类处理您的个人信息的子处理器。您应当了解，在下文描述的任何情况下，当凯迪仕与第三方服务供应商共享您的个人信息时，凯迪仕会通过合同规定第三方的实践和义务，遵守适用的地方数据保护法。凯迪仕会通过合同保证第三方服务供应商遵守您所属司法管辖区中适用于他们的隐私权标准。 五 与我们集团和第三方服务供应商共享 为了顺利地从事商业经营，以向您提供产品和服务的全部功能，我们可能会向其他的凯迪仕关联公司（其涉及通讯、社交媒体、技术或云业务）或我们的第三方服务供应商（我们的邮寄商店、送货服务供应商、电信公司、数据中心、数据存储设施、客户服务供应商、广告和推广服务供应商、代表凯迪仕的代理）[关联公司和/或其他第三方]（统称为"第三方服务供应商"）披露您的个人信息。此类第三方服务供应商可能代表凯迪仕或出于上述的一项或多项目的处理您的个人信息。在我们的设备上使用某些移动应用程序时，我们可能会和第三方共享您的 IP 地址，以便为您提供您要求的一些服务。如果您不再希望允许我们共享这些信息，请发送电子邮件到 kds@kaadas.com联系我们。</string>
-    <string name="privacy_four_title">四、与其他人共享信息</string>
-    <string name="privacy_four_content">在适用法律要求时，凯迪仕可能会不经过您的进一步同意而披露您的个人信息。</string>
-    <string name="privacy_five_title">五、不需要同意的信息</string>
-    <string name="privacy_five_content">
-        （1）我们可能以汇总的形式与第三方（例如我们网站上的广告商）共享匿名信息，用于商业目的；我们可能与其共享我们服务的一般使用趋势，例如在购买某些产品或从事某些交易的特定人群中的客户数量。 \n
-        （2）为免存疑，凯迪仕可能在地方数据保护法明确允许的情况下和范围内（例如为了遵循传票）不经您的同意而收集、使用或披露您的个人信息，并且当我们可能会出于诚意相信为了保护我们的权利、保护您的安全或他人安全、为调查欺诈行为或对政府要求作出回应而必需披露时，不经您的同意而披露您的信息。 \n
-    </string>
-    <string name="privacy_six_title">六、凯迪仕的安全措施</string>
-    <string name="privacy_six_content"> 我们承诺保证您的个人信息安全。为了防止未经授权的访问、披露或其他类似风险，我们落实了合理的物理、电子和管理措施流程，保护我们从您对凯迪仕APP的使用收集的信息。 \n
- 我们将采取所有合理的措施保护您的个人信息。 例如，当您访问凯迪仕账户时，您可以选择我们的两步验证程序来保证更好的安全性。当您从凯迪仕设备向我们的服务器发送或收取信息时，我们确保使用安全套接层 (SSL) 和其他算法对其进行加密。 您的个人信息全都被储存在安全的服务器上，并在受控设施中受到保护。我们依据重要性和敏感性对您的数据进行分类，并且保证您的个人信息具有最高的安全等级。我们保证通过访问这些信息来帮助向您提供产品和服务的员工和第三方服务供应商具有严格的合同保密义务，如果未能履行这些义务，其将会受到纪律处分或被终止合作。同样，我们对以云为基础的数据存储设有专门的访问控制措施。总而言之，我们定期审查信息收集、储存和处理实践，包括物理安全措施，以防止任何未经授权的访问和使用。\n
- 我们将采取所有可行的步骤保护您的个人信息。但是，您应当意识到互联网的使用并不总是安全的，因此，我们不能保证在通过互联网双向传输时任何个人信息的安全性或完整性。 \n
- 我们将对个人数据泄露行为采取相应措施，如将泄露现象通报相关监管机构，或在某些情况下依照使用法律（包括您当地的数据保护法律）向数据主体通报个人数据泄露行为。 \n
-    </string>
-    <string name="privacy_seven_title">七、您能做什么</string>
-    <string name="privacy_seven_content">
-         （1）您可以在保护您的个人信息方面发挥自己的作用，不要向任何人透露您的登录密码或帐户信息，除非此人获得您的正式授权。无论您何时作为凯迪仕账号用户登录凯迪仕，尤其是在他人的计算机或公共互联网终端上登录时，在会话结束时您总应注销登出。 \n
- （2）凯迪仕不对因您未能保持个人信息的私密性而导致第三方访问您的个人信息进而造成的安全疏漏承担责任。尽管有上述规定，如果发生互联网其他任何用户未经授权使用您账户的情况或其他任何安全漏洞，您必须立即通知我们。 您的协助将有助于我们保护您个人信息的私密性。 \n
-    </string>
-    <string name="privacy_eight_title">八、保留政策</string>
-    <string name="privacy_eight_content">如有必要实现收集信息的目的，或者遵守适用法律要求或允许，我们将一直保留个人信息。如果有合理的理由认为保留个人信息不能实现收集个人信息的目的，我们将不再保留个人信息，或删除个人信息与特定个人相关联的方式。如果是为了公众利益对信息进行进一步处理归档，为了科学或历史研究目的或根据使用法律进行统计的目的，即使进一步处理信息的目的与原始目的不相符，凯迪仕也可以进一步保留数据。</string>
-
-    <string name="privacy_nine_title">九、 访问您的设备上的其他功能</string>
-    <string name="privacy_nine_content">我们的应用程序可能会访问您设备上的某些功能，例如Wi-Fi 网络状态。这些信息用于允许这些应用程序在您的设备上运行，并且允许您与其互动。在任何时候，您可以通过在设备水平上关闭应用程序或者通过 kds@kaadas.com联系我们来撤销许可。</string>
-
-
-    <string name="privacy_ten_title">十、您可以控制您的个人信息</string>
-    <string name="privacy_ten_content">
-        控制设置 我们承认每个人对隐私权的关注各不相同。因此，我们提供了一些示例，说明凯迪仕提供的各种方式，供您选择，以限制收集、使用、披露或处理您的个人信息，并控制您的隐私权设置：
-        （1）打开或者关闭用户体验计划和位置访问功能；   \n
-        （2）登入或退出凯迪仕账户：  \n
-        （3）如果您之前因为上述目的同意我们使用您的个人信息，您可以随时通过书面或者向kds@kaadas.com发送邮件的方式联系我们来改变您的决定。
-    </string>
-
-    <string name="privacy_elevent_title">十一、  访问、更新、更正、消除或限制处理您的个人信息</string>
-    <string name="privacy_elevent_content">
-        （1）您有权要求访问和/或更正我们持有的与您有关的任何个人信息。当您更新个人信息时，在我们处理您的请求前，会要求验证您的身份。一旦我们获得充分信息，可处理您的请求以访问或更正您的个人信息时，我们将在适用数据保护法规定的时间内对您的请求做出回应。  \n
-        （2）根据您的要求，我们可以将收集和处理的您的个人数据副本免费提供给您。 对于同一信息的任何额外请求，我们可能会根据使用法律根据实际管理支出收取合理的费用。 \n
-        （3）如果您希望请求访问我们持有的个人数据或者如果您认为我们持有的关于您的任何信息是不正确或不完整的，请尽快致信或者向下方提供的电子邮箱地址发送电子邮件联系我们。电子邮箱：kds@kaadas.com。\n
-        （4）如果您是《通用数据保护条例（GDPR）》管理下的欧盟用户，您有权要求我们消除您的个人信息。如果GDPR之中有相关规定，我们将考虑该消除要求的合理性并采取包括技术措施的合理步骤。 \n
-        （5）如果您是《通用数据保护条例（GDPR）》管理下的欧盟用户，您有权限制我们处理您的个人信息，我们将考虑该限制要求的合理性。如果GDPR之中有相关规定，我们将只会根据符合GDPR中适用规定的方式处理您的个人信息，并在解除限制的之前通知您。 \n
-        （6）如果您是《通用数据保护条例（GDPR）》管理下的欧盟用户，您有权不受可能会对您产生法律效果、或者对您造成类似的重大影响的、完全基于自动化处理（包括剖析）决定的影响。\n
-        （7）如果您是《通用数据保护条例（GDPR）》管理下的欧盟用户，您有权以常用的结构化格式接收您的个人信息，并将该信息传输给另一个数据控制器。\n
-        （8）与您凯迪仕账户中的个人信息相关的更多详细信息，您可以通过您的设备登入账户来访问和更改。</string>
-
-    <string name="privacy_twenteny_title">十二、撤销同意</string>
-    <string name="privacy_twenteny_content">
-        （1）您可以通过向kds@kaadas.com发送邮件的方式联系我们提交请求，撤销同意收集、使用和/或披露我们掌握或控制的您的个人信息。我们将会在您做出请求后的合理时间内处理您的请求，并且会根据您的请求，在此后不再收集、使用和/或披露您的个人信息。 \n
- （2）请注意，您撤销同意会导致某些法律后果。根据您撤销同意让我们处理您的个人信息的范围，这可能表示您不能享受凯迪仕的产品和服务。
-    </string>
-
-    <string name="privacy_thirteen_title">十三、 联系我们</string>
-    <string name="privacy_thirteen_content">
-        如果您对本隐私政策有任何意见或问题，或者您对我们收集、使用或披露您的个人信息有任何问题，请通过下列地址联系我们的数据保护官，并提及“隐私政策 "： \n
-深圳市凯迪仕智能科技有限公司 \n
-地址：广东省深圳市南山区北环大道辅路清华信息港研发楼B座9楼  \n
-联系电话：0755-86668868  \n
-电子邮箱： kds@kaadas.com  \n
-感谢您花时间了解我们的隐私政策！  \n
-    </string>
     <string name="lock_firware_number">固件版本</string>
     <string name="lock_wifi_firware_number">Wi-Fi固件版本</string>
     <string name="child_system_firware_number">子系统固件版本</string>
@@ -2101,7 +1988,7 @@
 
 
     <string name="activity_wifi_am_auto_mode">模式</string>
-    <string name="activity_wifi_lock_face_model_1">Kaadas 2代操作菜单</string>
+    <string name="activity_wifi_lock_face_model_1">Philips EasyKey Plus 2代操作菜单</string>
     <string name="activity_wifi_lock_face_model_2">如何开启A-M自动模式（手动模式下）</string>
     <string name="activity_wifi_lock_face_model_3">① 按键区输入“*”两次 </string>
     <string name="activity_wifi_lock_face_model_4">② 输入已修改的管理密码“********” </string>
@@ -2116,7 +2003,7 @@
     <string name="activity_wifi_lock_face_model_13">④ 语音播报：“已进入管理模式” </string>
     <string name="activity_wifi_lock_face_model_14">⑤ 根据语音提示,按“1”，在按“8” </string>
     <string name="activity_wifi_lock_face_model_15">⑥ 语音播报“设置成功，手动模式”</string>
-    <string name="activity_wifi_lock_face_model_16">Kaadas 1代操作菜单</string>
+    <string name="activity_wifi_lock_face_model_16">Philips EasyKey Plus 1代操作菜单</string>
     <string name="activity_wifi_lock_face_model_17">如何开启A-M自动模式</string>
     <string name="activity_wifi_lock_face_model_18">① 按键区输入“*”两次 </string>
     <string name="activity_wifi_lock_face_model_19">② 输入已修改的管理密码“********” </string>
@@ -2202,7 +2089,7 @@
     <string name="fragment_wifi_video_lock_common_help_wifi_list">WiFi列表无法显示？</string>
     <string name="fragment_wifi_video_lock_common_help_resolve">解决方法：</string>
     <string name="fragment_wifi_video_lock_common_help_check">请检查手机是否禁止APP的获取定位权限.</string>
-    <string name="fragment_wifi_video_lock_common_help_1">打开手机设置-应用权限管理，找到凯迪仕智能锁APP，开启定位权限..</string>
+    <string name="fragment_wifi_video_lock_common_help_1">打开手机设置-应用权限管理，找到Philips EasyKey PlusAPP，开启定位权限..</string>
     <string name="fragment_wifi_video_lock_common_help_2">注： Android手机的APP要获取WiFi列表，需要获取定位权限.</string>
     <string name="fragment_wifi_video_lock_common_help_3">将原配锂电池按标签指示方向插入门锁后面板电池仓，若门锁提示电量低，代表锂电池要更换.</string>
     <string name="fragment_wifi_video_lock_common_help_4">将锂电池取下然后找一个手机充电器，即可给锂电池充电.</string>
@@ -2212,17 +2099,17 @@
     <string name="fragment_wifi_video_lock_common_help_8">① 目前不支持WiFi的5G频段和公共场所的WiFi（需要密码的那种），请连接2.4G频段的可正常上网的WiFi；\n② 请将路由器离门锁可视距离不超过20米；\n③ 请检查WiFi密码是否正确，区分空格和特殊字符；\n④ 请在门锁上重新进入管理员模式，按4进入配网状态，然后APP上重新按引导步骤添加即可；\n⑤ 请保证WiFi路由器离门锁可视距离不超过20米；\n⑥ 请将WiFi天线连接线接好；\n⑦ 为保障安全，暂时不支持未设置过密码的WiFi路由器给门锁配网.</string>
     <string name="fragment_wifi_video_lock_common_help_9">注： 注意充电器的接口与锂电池的接口要一致，都是使用micro USB接口，充电7个小时左右即可满电.</string>
     <string name="fragment_wifi_video_lock_common_help_10">① 请检查手机APP是否开启推送免打扰； \n② 请检查APP推送权限是否开启.</string>
-    <string name="fragment_wifi_video_lock_common_help_11">① 点击APP里对应门锁的更多按钮，进入设置页面，选择消息推送，进入后关闭消息免打扰； \n② 打开android手机设置-应用权限管理，找到凯迪仕智能锁APP，开启所有推送和相关权限.</string>
+    <string name="fragment_wifi_video_lock_common_help_11">① 点击APP里对应门锁的更多按钮，进入设置页面，选择消息推送，进入后关闭消息免打扰； \n② 打开android手机设置-应用权限管理，找到Philips EasyKey PlusAPP，开启所有推送和相关权限.</string>
     <string name="fragment_wifi_video_lock_common_help_12">注：Android手机由于系统厂商默认会禁止APP的消息推送权限和其他权限，需要用户手动设置开启，请允许APP开机自启动，在后台时别杀</string>
     <string name="fragment_wifi_video_lock_common_help_13">图像看不了、不清晰、卡顿？</string>
     <string name="fragment_wifi_video_lock_common_help_14">① 先检查镜头玻璃是否干净 \n② 镜头有无水汽 \n③ WiFi信号不稳定 \n④ 是否关闭视频长连接</string>
     <string name="fragment_wifi_video_lock_common_help_15">① 用无尘布将镜头擦拭干净 \n② 若镜头玻璃内部有水汽，需拆机维修 \n③ WiFi信号不稳定会导致图像卡顿或无法出图，请将路由器靠近智能锁，可视距离不超过20米\n④请在APP实时视频页面右上角设置按钮进入，打开视频长连接开关，设置周期为每（00:00-23:59）</string>
     <string name="fragment_wifi_video_lock_common_help_16">注：联网产品对WiFi信号有要求，请确保手机和家中的WiFi路由器能正常上网.</string>
     <string name="fragment_wifi_video_lock_common_help_17">① 请检查APP是否提示获取相机权限受限\n② 门锁后面板二维码损坏</string>
-    <string name="fragment_wifi_video_lock_common_help_18">① 打开手机设置-应用权限管理，找到凯迪仕智能锁APP，开启相机权限\n② 请选择添加视频锁，手动输入型号：K20V</string>
+    <string name="fragment_wifi_video_lock_common_help_18">① 打开手机设置-应用权限管理，找到Philips EasyKey PlusAPP，开启相机权限\n② 请选择添加视频锁，手动输入型号：K20V</string>
     <string name="fragment_wifi_video_lock_common_help_19">注：部分Android手机由于系统厂商默认会禁止APP获取相关权限，需要用户手动设置开启.</string>
     <string name="fragment_wifi_video_lock_common_help_20">注：为了省电，徘徊报警默认是关闭的，需打开才能有此功能，徘徊报警的PIR的灵敏度分：低中高，分别对应1米、2米、3米的侦测距离，判定时间10-60秒，默认在门外徘徊30秒触发报警.</string>
-    <string name="fragment_wifi_video_lock_common_help_21">打开凯迪仕APP，找到对应门锁，点击“更多”按钮，进入设置页面，找到徘徊报警选型，进入后，开启徘徊报警开关.</string>
+    <string name="fragment_wifi_video_lock_common_help_21">打开Philips EasyKey PlusAPP，找到对应门锁，点击“更多”按钮，进入设置页面，找到徘徊报警选型，进入后，开启徘徊报警开关.</string>
     <string name="fragment_wifi_video_lock_common_help_22">锂电池没电？</string>
     <string name="fragment_wifi_video_lock_common_help_24">收不到门铃和报警推送？</string>
     <string name="fragment_wifi_video_lock_common_help_25">徘徊报警不报警？</string>
@@ -2258,7 +2145,7 @@
     <string name="activity_wifi_lock_help_1">配置前确认:</string>
     <string name="activity_wifi_lock_help_2">① 确认门锁已安装 \n② 建议在门锁后面板装入用本产品配置的碱性电池或其他符合规格的干电 池4节或8节，确保门锁正常使用Wi-Fi联网功能 \n③ 当门锁出现低电量报警时，请及时更换掉电池，确保电池正负极安装正确 \n④ 确认门锁后面板Wi-Fi 模块已插紧，不松动 \n⑤ 确保手机蓝牙已打开，家里Wi-Fi网络(2.4G网络) 可正常使用，并且手机已经连接该网络</string>
     <string name="activity_wifi_lock_help_3">进行门锁的激活操作:</string>
-    <string name="activity_wifi_lock_help_4">① 微信搜索【凯迪仕智能锁】公众号并关注\n② 进入公众号－【售后服务】，点击【产品激活】\n③ 扫描电池盖产品序列号，获取激活码\n④ 唤醒门锁，输入激活码，按“＃”确认</string>
+    <string name="activity_wifi_lock_help_4">① 微信搜索【Philips EasyKey Plus智能锁】公众号并关注\n② 进入公众号－【售后服务】，点击【产品激活】\n③ 扫描电池盖产品序列号，获取激活码\n④ 唤醒门锁，输入激活码，按“＃”确认</string>
     <string name="activity_wifi_lock_help_5">门锁首次配网:</string>
     <string name="activity_wifi_lock_help_6">① 在[添加设备页面]， 点击右上角图标，扫描对应电池盒上的配网二维码，进行配网\n② 请确保手机已打开蓝牙,并优先连接上2.4G Wi-Fi \n③ 用手触碰按键区，唤醒门锁 ，确保门锁数字键盘灯亮，手机App连上门锁热点，如手机连接不上门锁热点，请选择其他配网方式进行配网\n④ 门锁验证-输入配置门锁当前管理密码进行验证，验证通过，跳转下一步\n⑤ 输入Wi-Fi 密码， (确保此处选择的Wi-Fi与手机已连接的Wi-Fi是同一个2.4G Wi-Fi网络)，点击[下一步]\n⑥ 在 [连接设备]，等待设备连接成功</string>
     <string name="activity_wifi_lock_help_7">无法发现待配网门锁?</string>
@@ -2288,7 +2175,7 @@
     <string name="fragment_wifi_video_lock_configure_help_1">配置前确认</string>
     <string name="fragment_wifi_video_lock_configure_help_2">① 确认门锁已安装； \n② 推开门锁后面板电池盖（后面板上方位置，用力向上推开），安装上随包配送的锂电池； \n③ 请确保锂电池电量充足，请按电池指向确保电池正负安装正确； \n④ 当门锁出现低电量报警时，请及时更换电池； \n⑤ 请确保家里的WiFi网络（仅支持2.4G网络，后缀是_5G的不支持）能正常使用，请将手机连接到该WiFi网络.</string>
     <string name="fragment_wifi_video_lock_configure_help_3">第一步：进行门锁的激活操作</string>
-    <string name="fragment_wifi_video_lock_configure_help_4">① 微信搜索【凯迪仕智能锁】公众号并关注； \n② 进入公众号-【售后服务】，点击【产品激活】； \n③ 扫描电池盖产品序列号，获得激活码； \n④ 唤醒门锁，输入激活码，按“#”确认.</string>
+    <string name="fragment_wifi_video_lock_configure_help_4">① 微信搜索【Philips EasyKey Plus智能锁】公众号并关注； \n② 进入公众号-【售后服务】，点击【产品激活】； \n③ 扫描电池盖产品序列号，获得激活码； \n④ 唤醒门锁，输入激活码，按“#”确认.</string>
     <string name="fragment_wifi_video_lock_configure_help_5">第二步：修改初始管理员密码</string>
     <string name="fragment_wifi_video_lock_configure_help_6">① 用手触碰按键区，唤醒门锁，确保门锁数字键盘灯亮； \n② 按键区，输入“*”两次，即“**”； \n③ 输入初始管理员密码“12345678” \n④ 按“#”确认； \n⑤ 语音播报“已进入管理模式，请修改管理密码”； \n⑥ 输入新设定的管理密码，按“#”确认； \n⑦ 再次输入刚才的管理员密码，按“#”完成修改.</string>
     <string name="fragment_wifi_video_lock_configure_help_7">第三步：门锁首次配网</string>
@@ -2387,11 +2274,11 @@
     <string name="philips_activity_timer_manager_2">打开开关1</string>
     <string name="philips_activity_clothes_hanger_machine_add_dialog_4">蓝牙未开启，是否开启蓝牙？</string>
     <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_1">Wi-Fi账号或密码输错已超过5次</string>
-    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_2">读取失败,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_3">连接失败,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_2">读取失败,请尝试手机系统忘记philips_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_3">连接失败,请尝试手机系统忘记philips_AP热点</string>
     <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_4">管理员密码输入错误，请重新输入</string>
-    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_5">写数据错误,请尝试手机系统忘记kaadas_AP热点</string>
-    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_6">返回错误,请尝试手机系统忘记kaadas_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_5">写数据错误,请尝试手机系统忘记philips_AP热点</string>
+    <string name="philips_activity_wifi_lock_add_new_checkwifi_dialog_6">返回错误,请尝试手机系统忘记philips_AP热点</string>
     <string name="philips_activity_wifi_lock_add_new_fifth_1">未知模组类型</string>
     <string name="philips_activity_wifi_lock_add_new_third_1">第四步：修改初始管理密码</string>
     <string name="philips_activity_clothes_hanger_machine_qrcode_scan">%1$s 晾衣机，是否进入配网？</string>

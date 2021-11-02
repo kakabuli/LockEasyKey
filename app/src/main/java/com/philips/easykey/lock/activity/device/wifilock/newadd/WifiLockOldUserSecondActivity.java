@@ -84,13 +84,13 @@ public class WifiLockOldUserSecondActivity extends BaseAddToApplicationActivity 
         if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
             ssid = ssid.substring(1, ssid.length() - 1);
         }
-        if (!ssid.equals("kaadas_AP") && !"<unknown ssid>".equals(ssid)) {
+        if (!ssid.equals("philips_AP") && !"<unknown ssid>".equals(ssid)) {
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_NAME, ssid);
             byte[] ssidOriginalData = TouchNetUtil.getOriginalSsidBytes(info);
             LogUtils.d("获取到的   byte数据是    " + Rsa.bytesToHexString(ssidOriginalData));
             SPUtils.put(KeyConstants.WIFI_LOCK_CONNECT_ORIGINAL_DATA, Rsa.bytesToHexString(ssidOriginalData));
         }
-        else if(ssid.equals("kaadas_AP")){
+        else if(ssid.equals("philips_AP")){
 
         }
         else {

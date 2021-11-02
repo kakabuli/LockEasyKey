@@ -65,7 +65,6 @@ public class WifiLockApConnectDeviceActivity extends BaseActivity<IWifiLockAPWif
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         randomCode = getIntent().getStringExtra(KeyConstants.WIFI_LOCK_RANDOM_CODE);
         func = getIntent().getIntExtra(KeyConstants.WIFI_LOCK_FUNC, 0);
-        Log.e("凯迪仕", "onCreate: sSsid " + sSsid + "   sPassword " + sPassword);
         thread.start();
         LogUtils.d("数据是 2 randomCode " + randomCode);
     }
