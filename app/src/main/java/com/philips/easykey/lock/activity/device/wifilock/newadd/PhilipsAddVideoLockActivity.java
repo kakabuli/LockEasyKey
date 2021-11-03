@@ -414,12 +414,11 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     }
 
     public void onScanSuccess(WifiLockVideoBindBean wifiLockVideoBindBean) {
-        if(mWifiLockVideoBindBean == null) {
-            mWifiLockVideoBindBean = wifiLockVideoBindBean;
-            mRandomCode = wifiLockVideoBindBean.getEventparams().getRandomCode();
-        } else {
+        mWifiLockVideoBindBean = wifiLockVideoBindBean;
+        mRandomCode = wifiLockVideoBindBean.getEventparams().getRandomCode();
+       /* else {
             // TODO: 2021/5/8 后来重复，可能需要通过判断时间戳来进行选择
-        }
+        }*/
         if(mFragments.get(3) instanceof PhilipsAddVideoLockTask4Fragment) {
             ((PhilipsAddVideoLockTask4Fragment) mFragments.get(3)).cancelCountDown();
         }
@@ -433,31 +432,32 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     /*-------------------------------- 输入管理密码 -----------------------------*/
 
     public void setAdminPwd(String adminPwd) {
-        if(!TextUtils.isEmpty(mRandomCode)){
+        if(!TextUtils.isEmpty(mRandomCode) && mRandomCode.length() != 79){
             WifiVideoPasswordFactorManager.FactorResult result = WifiVideoPasswordFactorManager.parsePasswordData(adminPwd,mRandomCode);
             LogUtils.d("输入管理密码错误次数：" + mTimes);
-            if(result.result == 0){
-                mRandomCode = Rsa.bytesToHexString(result.password);
-                if(MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockVideoBindBean.getWfId()) == null){
-                    bindDevice(mWifiLockVideoBindBean.getWfId(),mWifiLockVideoBindBean.getWfId(),mWifiLockVideoBindBean.getUserId(),
-                            Rsa.bytesToHexString(result.password),mWifiName,result.func,3,
-                            mWifiLockVideoBindBean.getEventparams().getDevice_sn(),mWifiLockVideoBindBean.getEventparams().getMac(),
-                            mWifiLockVideoBindBean.getEventparams().getDevice_did(),mWifiLockVideoBindBean.getEventparams().getP2p_password());
+            if(result.result == 0) {
+                //mRandomCode = Rsa.bytesToHexString(result.password);
+                if (MyApplication.getInstance().getWifiLockInfoBySn(mWifiLockVideoBindBean.getWfId()) == null) {
+                    bindDevice(mWifiLockVideoBindBean.getWfId(), mWifiLockVideoBindBean.getWfId(), mWifiLockVideoBindBean.getUserId(),
+                            Rsa.bytesToHexString(result.password), mWifiName, result.func, 3,
+                            mWifiLockVideoBindBean.getEventparams().getDevice_sn(), mWifiLockVideoBindBean.getEventparams().getMac(),
+                            mWifiLockVideoBindBean.getEventparams().getDevice_did(), mWifiLockVideoBindBean.getEventparams().getP2p_password());
 
-                } else if(result.result == -3){
-                    unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
-                }else {
+                } else {
                     updateBindDevice(mWifiLockVideoBindBean.getWfId(),
                             mWifiLockVideoBindBean.getUserId(),
-                            Rsa.bytesToHexString(result.password),mWifiName,
-                            result.func,mWifiLockVideoBindBean.getEventparams().getDevice_did(),
+                            Rsa.bytesToHexString(result.password), mWifiName,
+                            result.func, mWifiLockVideoBindBean.getEventparams().getDevice_did(),
                             mWifiLockVideoBindBean.getEventparams().getP2p_password());
                 }
-
+            }else if(result.result == -3){
+                    unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
             } else {
                 adminPasswordError();
                 mTimes++;
             }
+        }else{
+            unBindDeviceFail(mWifiLockVideoBindBean.getWfId());
         }
 
     }

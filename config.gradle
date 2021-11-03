@@ -28,7 +28,7 @@ ext {
             targetSdkVersion        :31,
             versionCode             :202111022,
             versionName             :"2.0.3",
-            buildToolsVersion       :"30.0.2",
+            buildToolsVersion       :"31.0.0",
 
             coreVersionCode         :201909250,
             coreVersionName         :"3.4.8",
