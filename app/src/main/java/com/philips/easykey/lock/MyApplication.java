@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.hjq.permissions.XXPermissions;
@@ -29,6 +30,7 @@ import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.GetProductionModelListResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.publiclibrary.ble.BleService;
 import com.philips.easykey.lock.publiclibrary.http.result.GetPasswordResult;
@@ -546,7 +548,100 @@ public class MyApplication extends Application {
      * @param isForce 是否强制刷新
      */
 
-    public void getAllDevicesByMqtt(boolean isForce) {
+    public void getAllDevicesByMqtt(boolean isForce){
+        if (!isForce) {
+            if (allBindDevices != null) {
+                getDevicesFromServer.onNext(allBindDevices);
+                return;
+            }
+        }
+        XiaokaiNewServiceImp.getAllBindDevice(getUid(),2)
+                .subscribe(new BaseObserver<AllBindDevices>() {
+                    @Override
+                    public void onSuccess(AllBindDevices allBindDevices) {
+                        LogUtils.d("getAllBindDevice onSuccess " + allBindDevices.toString());
+                        if (!"200".equals(allBindDevices.getCode())) {  ///服务器获取设备列表失败
+                            LogUtils.d("   获取列表失败  " + allBindDevices.getCode());
+                            useHomeShowDeviceFromLocal();
+                        }else {
+                            //使用服务器的数据
+                            if (!loclHomeShowDevices.isEmpty()) {
+                                loclHomeShowDevices.clear();
+                            }
+
+                            List<AllBindDevices.ReturnDataBean.GwListBean> gwList = allBindDevices.getData().getGwList();
+                            if (gwList != null) {
+                                int allgwSize = gwList.size();
+                                for (int j = 0; j < allgwSize; j++) {
+                                    SPUtils.put(Constants.RELAYTYPE + gwList.get(j).getDeviceSN(), gwList.get(j).getRelayType());
+                                }
+                            }
+
+                            //SPUtils.put(Constants.ALL_DEVICES_DATA, payload);
+
+                            long serverCurrentTime = allBindDevices.getNowTime();
+                            SPUtils.put(KeyConstants.SERVER_CURRENT_TIME, serverCurrentTime);
+
+                            if (allBindDevices != null) {
+                                homeShowDevices = allBindDevices.getHomeShow();
+                                com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
+                                LogUtils.d("设备更新  application");
+                                getDevicesFromServer.onNext(allBindDevices);
+                                // 增加一个数据回调监听
+                                if(mOnHomeShowDeviceChangeListener != null) {
+                                    mOnHomeShowDeviceChangeListener.dataChanged();
+                                    LogUtils.d("mOnHomeShowDeviceChangeListener.dataChanged()");
+                                }
+
+                                //缓存WiFi锁设备信息 到Dao
+                                if (allBindDevices.getData() != null && allBindDevices.getData().getWifiList() != null) {
+                                    List<WifiLockInfo> wifiList = allBindDevices.getData().getWifiList();
+                                    WifiLockInfoDao wifiLockInfoDao = getDaoWriteSession().getWifiLockInfoDao();
+                                    wifiLockInfoDao.deleteAll();
+                                    wifiLockInfoDao.insertInTx(wifiList);
+                                }
+
+                                //缓存晾衣机设备信息到Dao
+                                if (allBindDevices.getData() != null && allBindDevices.getData().getHangerList() != null) {
+                                    List<ClothesHangerMachineAllBean> hangerList = allBindDevices.getData().getHangerList();
+                                    ClothesHangerMachineAllBeanDao clothesHangerMachineAllBeanDao = getDaoWriteSession().getClothesHangerMachineAllBeanDao();
+                                    clothesHangerMachineAllBeanDao.deleteAll();
+                                    clothesHangerMachineAllBeanDao.insertInTx(hangerList);
+                                }
+
+                                //缓存产品型号信息列表 到Dao，主要是图片下载地址（下载过的图片不再下载）
+                                if (allBindDevices.getData() != null && allBindDevices.getData().getProductInfoList() != null) {
+                                    productLists = allBindDevices.getData().getProductInfoList();
+                                    ProductInfoDao productInfoDao = getDaoWriteSession().getProductInfoDao();
+                                    productInfoDao.deleteAll();
+                                    productInfoDao.insertInTx(productLists);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        LogUtils.d("getAllBindDevice onAckErrorCode " + baseResult.toString());
+                        LogUtils.d("   获取列表失败  " + allBindDevices.getCode());
+                        useHomeShowDeviceFromLocal();
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        useHomeShowDeviceFromLocal();
+                        LogUtils.d("getAllBindDevice onFailed " + throwable.toString());
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+
+    }
+
+   /*public void getAllDevicesByMqtt(boolean isForce) {
         if (!isForce) {
             if (allBindDevices != null) {
                 getDevicesFromServer.onNext(allBindDevices);
@@ -591,7 +686,7 @@ public class MyApplication extends Application {
 
                     SPUtils.put(Constants.ALL_DEVICES_DATA, payload);
 
-                    long serverCurrentTime = Long.parseLong(allBindDevices.getTimestamp());
+                    long serverCurrentTime = allBindDevices.getNowTime();
                     SPUtils.put(KeyConstants.SERVER_CURRENT_TIME, serverCurrentTime);
 
                     if (allBindDevices != null) {
@@ -637,7 +732,7 @@ public class MyApplication extends Application {
                         useHomeShowDeviceFromLocal();
                     }
                 });
-    }
+    }*/
 
     private void useHomeShowDeviceFromLocal() {
         if (!loclHomeShowDevices.isEmpty()) {

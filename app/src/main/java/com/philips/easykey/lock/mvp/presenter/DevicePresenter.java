@@ -86,7 +86,7 @@ public class DevicePresenter<T> extends BasePresenter<IDeviceView> {
                                 if ("200".equals(allBindDevices.getCode())) {
                                     MyApplication.getInstance().setAllBindDevices(allBindDevices);
                                     //重新获取数据
-                                    long serverCurrentTime = Long.parseLong(allBindDevices.getTimestamp());
+                                    long serverCurrentTime = allBindDevices.getNowTime();
                                     SPUtils.put(KeyConstants.SERVER_CURRENT_TIME, serverCurrentTime);
                                 } else {
                                     if (isSafe()) {

@@ -923,4 +923,11 @@ public interface IXiaoKaiNewService {
     @POST(HttpUrlConstants.GET_PRODUCTION_MODEL_LIST)
     @Headers({KeyConstants.VERSION})
     Observable<GetProductionModelListResult> getProductionModelList(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 获取设备列表
+     */
+    @POST(HttpUrlConstants.GET_ALLBINDDEVICE)
+    @Headers({KeyConstants.VERSION})
+    Observable<AllBindDevices> getAllBindDevice(@Header("timestamp") String timestamp, @Body RequestBody info);
 }

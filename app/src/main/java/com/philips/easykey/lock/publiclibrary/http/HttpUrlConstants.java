@@ -528,4 +528,10 @@ public class HttpUrlConstants {
      * 获取所有型号图片列表
      */
     public static final String GET_PRODUCTION_MODEL_LIST = BASE_URL + "production/model/list";
+
+
+    /**
+     * 获取设备列表
+     */
+    public static final String GET_ALLBINDDEVICE = BASE_URL + "app/user/getAllBindDevice";
 }

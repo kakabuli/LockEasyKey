@@ -12,6 +12,7 @@ import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddUserBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.AllBindDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.CodeLoginBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.DoorLockStatisticsBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.GetWeChatOpenIdBean;
@@ -1730,4 +1731,18 @@ public class XiaokaiNewServiceImp {
                 .compose(RxjavaHelper.observeOnMainThread());
     }
 
+
+    /**
+     * 获取设备列表
+     */
+    public static Observable<AllBindDevices> getAllBindDevice(String uid , int modelSearchType){
+        AllBindDeviceBean bean = new AllBindDeviceBean();
+        bean.setUid(uid);
+        bean.setModelSearchType(modelSearchType);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .getAllBindDevice(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
 }
