@@ -412,13 +412,21 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
             mPresenter.settingDevice(wifiLockInfo);
 
-            String productModel = wifiLockInfo.getProductModel() + "";
+           /* String productModel = wifiLockInfo.getProductModel() + "";
             if(TextUtils.equals(productModel,"TDA4A")){
                 tvDeviceModel.setText("DDL708-VP-5HW");
             }else if(TextUtils.equals(productModel,"TDA0A")){
                 tvDeviceModel.setText("DDL708-V-5HW");
             }else {
                 tvDeviceModel.setText(TextUtils.isEmpty(productModel ) ? null : productModel);
+            }*/
+            for (ProductInfo productInfo : productList) {
+                try {
+                    if (productInfo.getSnHead().equals(wifiSN.substring(0, 3))) {
+                        tvDeviceModel.setText(productInfo.getProductModel());
+                    }
+                } catch (Exception e) {
+                }
             }
            /* tvDeviceModel.setText(TextUtils.isEmpty(productModel + "") ? "" : productModel.contentEquals("K13") ? getString(R.string.lan_bo_ji_ni) : productModel);
             //适配服务器上的产品型号，适配不上则显示锁本地的研发型号

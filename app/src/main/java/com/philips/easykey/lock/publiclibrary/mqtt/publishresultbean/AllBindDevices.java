@@ -11,6 +11,7 @@ import com.philips.easykey.lock.publiclibrary.bean.ServerGwDevice;
 import com.philips.easykey.lock.publiclibrary.bean.ServerGatewayInfo;
 import com.philips.easykey.lock.publiclibrary.bean.WifiLockInfo;
 import com.philips.easykey.lock.publiclibrary.bean.ProductInfo;
+import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.ServerBleDevice;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.SPUtils;
@@ -19,7 +20,7 @@ import com.philips.easykey.lock.utils.greenDao.bean.ClothesHangerMachineAllBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllBindDevices {
+public class AllBindDevices extends BaseResult {
 
 
     /**
@@ -40,78 +41,26 @@ public class AllBindDevices {
      * "password1":"123456","password2":"654321","model":""}]}
      */
 
-    private int msgId;
-    private String msgtype;
-    private String userId;
-    private String gwId;
-    private String deviceId;
-    private String func;
-    private String code;
-    private String timestamp;
+    private long nowTime;
     private ReturnDataBean data;
 
-    public int getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(int msgId) {
-        this.msgId = msgId;
-    }
-
-    public String getMsgtype() {
-        return msgtype;
-    }
-
-    public void setMsgtype(String msgtype) {
-        this.msgtype = msgtype;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getGwId() {
-        return gwId;
-    }
-
-    public void setGwId(String gwId) {
-        this.gwId = gwId;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getFunc() {
-        return func;
-    }
-
-    public void setFunc(String func) {
-        this.func = func;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
+    public void setCode(String code){
         this.code = code;
     }
-
-    public String getTimestamp() {
-        return timestamp;
+    public String getCode(){
+        return this.code;
     }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setMsg(String msg){
+        this.msg = msg;
+    }
+    public String getMsg(){
+        return this.msg;
+    }
+    public void setNowTime(long nowTime){
+        this.nowTime = nowTime;
+    }
+    public long getNowTime(){
+        return this.nowTime;
     }
 
     public ReturnDataBean getData() {

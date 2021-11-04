@@ -1,10 +1,10 @@
 package com.philips.easykey.lock.publiclibrary.http.postbean;
 
-public class DoorLockStatisticsBean {
+public class AllBindDeviceBean {
 
 
     private String uid;
-    private String wifiSN;
+    private int modelSearchType;
 
     public String getUid() {
         return uid;
@@ -14,11 +14,11 @@ public class DoorLockStatisticsBean {
         this.uid = uid;
     }
 
-    public String getWifiSN() {
-        return wifiSN;
+    public int getModelSearchType() {
+        return modelSearchType;
     }
 
-    public void setWifiSN(String wifiSN) {
-        this.wifiSN = wifiSN;
+    public void setModelSearchType(int modelSearchType) {
+        this.modelSearchType = modelSearchType;
     }
 }
