@@ -131,6 +131,7 @@ public class PhilipsWifiLockOpenForceActivity extends BaseActivity<IWifiLockOpen
 
     private void setOpenForce() {
         openForce = getOpenForce();
+        if(wifiLockInfo == null)return;
         if(wifiLockInfo.getOpenForce() == openForce){
             finish();
         }else{

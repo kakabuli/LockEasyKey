@@ -108,6 +108,7 @@ public class PhilipsWifiVideoLockVoiceQualitySettingActivity extends BaseActivit
 
     private void setVoiceQuality() {
         voiceQuality = getVoiceQuality();
+        if(wifiLockInfo == null)return;
         if(wifiLockInfo.getVolLevel() == voiceQuality) {
             finish();
         }else{

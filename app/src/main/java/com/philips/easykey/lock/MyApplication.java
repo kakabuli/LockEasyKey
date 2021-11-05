@@ -892,7 +892,7 @@ public class MyApplication extends Application {
     public void setHomeShowDevice(List<HomeShowBean> homeShowDeviceList) {
         homeShowDevices = homeShowDeviceList;
         loclHomeShowDevices = homeShowDeviceList;
-        com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
+        LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
     }
 
     public List<HomeShowBean> getHomeShowDevices() {
@@ -902,7 +902,7 @@ public class MyApplication extends Application {
                 tem.add(homeShowBean);
             }
         }
-        com.blankj.utilcode.util.LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
+        LogUtils.d("homeShowDevices length: " + homeShowDevices.size());
         return tem;
     }
 

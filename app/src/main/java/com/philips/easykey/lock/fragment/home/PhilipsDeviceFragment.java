@@ -142,9 +142,14 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         mRvDevices = root.findViewById(R.id.rvDevices);
         mRvHomeDeviceAdapter = new PhilipsRvHomeDeviceAdapter(R.layout.philips_item_home_device_rv);
         mRvHomeDeviceAdapter.setOnItemClickListener((adapter, view, position) -> {
-            Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
-            intent.putExtra(KeyConstants.WIFI_SN, mWillShowDeviceBeans.get(position).getWifiSn());
-            startActivity(intent);
+            // TODO: 2021/11/5 这里再bugly报过mWillShowDeviceBeans数组越界，导致奔溃 
+            if(mWillShowDeviceBeans.size() >= position ){
+                Intent intent = new Intent(getActivity(), PhilipsWifiVideoLockDetailActivity.class);
+                intent.putExtra(KeyConstants.WIFI_SN, mWillShowDeviceBeans.get(position).getWifiSn());
+                startActivity(intent);
+            }else {
+                initDevices();
+            }
         });
         mRvDevices.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvDevices.setAdapter(mRvHomeDeviceAdapter);
