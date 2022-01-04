@@ -120,13 +120,13 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
 
                 if (myPhone != null) {
                     if (myPhone.equals(phone)) {
-                        ToastUtils.showShort(R.string.no_add_my);
+                        ToastUtils.showShort(getString(R.string.no_add_my));
                         return;
                     }
                 }
 
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtils.showShort(R.string.philips_noNet);
+                    ToastUtils.showShort(getString(R.string.philips_noNet));
                     return;
                 }
 
@@ -168,7 +168,7 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     @Override
     public void onAddUserSuccess() {
         hiddenLoading();
-        ToastUtils.showLong(R.string.share_success);
+        ToastUtils.showLong(getString(R.string.share_success));
         finish();
     }
 

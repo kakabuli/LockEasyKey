@@ -220,7 +220,7 @@ public class PhilipsWeChatLoginActivity extends NormalBaseActivity {
                 mCountDownTimer.start();
             }
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 
@@ -258,7 +258,7 @@ public class PhilipsWeChatLoginActivity extends NormalBaseActivity {
                         }
                     });
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
     private void loginSuccess(String token , String uid ,String phone) {

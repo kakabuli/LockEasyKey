@@ -213,12 +213,17 @@ public class PhilipsAddManuallyFragment extends Fragment {
 
         mPhilipsAddManuallyDeviceBean = new PhilipsAddManuallyDeviceBean();
         mPhilipsAddManuallyDeviceBean.setName(getResources().getString(R.string.philips_alpha_5hw));
-        mPhilipsAddManuallyDeviceBean.setId(R.drawable.philips_home_scan_img_alpha);
+        mPhilipsAddManuallyDeviceBean.setId(R.drawable.philips_home_scan_img_lockalpha);
         doorlockModelList.add(mPhilipsAddManuallyDeviceBean);
 
         mPhilipsAddManuallyDeviceBean = new PhilipsAddManuallyDeviceBean();
         mPhilipsAddManuallyDeviceBean.setName(getResources().getString(R.string.philips_alpha_vp_5hw));
-        mPhilipsAddManuallyDeviceBean.setId(R.drawable.philips_home_scan_img_alpha);
+        mPhilipsAddManuallyDeviceBean.setId(R.drawable.philips_home_scan_img_lockalpha);
+        doorlockModelList.add(mPhilipsAddManuallyDeviceBean);
+
+        mPhilipsAddManuallyDeviceBean = new PhilipsAddManuallyDeviceBean();
+        mPhilipsAddManuallyDeviceBean.setName(getResources().getString(R.string.philips_dl709K_vp_5hw));
+        mPhilipsAddManuallyDeviceBean.setId(R.drawable.philips_home_scan_img_709);
         doorlockModelList.add(mPhilipsAddManuallyDeviceBean);
     }
 

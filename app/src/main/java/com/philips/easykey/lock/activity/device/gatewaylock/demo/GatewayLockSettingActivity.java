@@ -68,32 +68,32 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
 
     @Override
     public void setArmLockedSuccess() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_1);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_1));
     }
 
     @Override
     public void setArmLockedFail() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_2);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_2));
     }
 
     @Override
     public void setArmLockedThrowable(Throwable throwable) {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_3);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_3));
     }
 
     @Override
     public void setAMSuccess() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_4);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_4));
     }
 
     @Override
     public void setAMFail() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_5);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_5));
     }
 
     @Override
     public void setAMThrowable(Throwable throwable) {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_6);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_6));
     }
 
     @Override
@@ -101,12 +101,12 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
         if (getArmLocked!=null){
             getArmLocked.setText(getString(R.string.philips_activity_gatewaylock_setting_7) + operatingMode);
         }
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_8);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_8));
     }
 
     @Override
     public void getArmLockedFail() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_9);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_9));
     }
 
     @Override
@@ -119,16 +119,16 @@ public class GatewayLockSettingActivity extends BaseActivity<CatwayLockSettingVi
         if (getAM!=null){
             getArmLocked.setText(getString(R.string.philips_activity_gatewaylock_setting_11,autoRelockTime + ""));
         }
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_12);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_12));
     }
 
     @Override
     public void getAMFail() {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_13);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_13));
     }
 
     @Override
     public void getAMThrowable(Throwable throwable) {
-        ToastUtils.showShort(R.string.philips_activity_gatewaylock_setting_14);
+        ToastUtils.showShort(getString(R.string.philips_activity_gatewaylock_setting_14));
     }
 }

@@ -52,11 +52,11 @@ public class ClothesHangerMachineAddActivity extends BaseActivity<IClothesHanger
         add.setOnClickListener(v -> {
             String name = wifi_lock_choose_to_input.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
-                ToastUtils.showShort(R.string.not_empty);
+                ToastUtils.showShort(getString(R.string.not_empty));
                 return;
             }
             if (!StringUtil.nicknameJudge(name)) {
-                ToastUtils.showShort(R.string.nickname_verify_error);
+                ToastUtils.showShort(getString(R.string.nickname_verify_error));
                 return;
             }
             mPresenter.searchClothesMachine(name);

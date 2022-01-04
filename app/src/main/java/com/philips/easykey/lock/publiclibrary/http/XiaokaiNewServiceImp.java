@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.http;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.philips.easykey.lock.MyApplication;
@@ -8,6 +10,7 @@ import com.philips.easykey.lock.bean.PushBean;
 import com.philips.easykey.lock.bean.PushSwitch;
 import com.philips.easykey.lock.bean.PushSwitchBean;
 import com.philips.easykey.lock.bean.VersionBean;
+import com.philips.easykey.lock.publiclibrary.bean.TmallDeviceListBean;
 import com.philips.easykey.lock.publiclibrary.ble.bean.WarringRecord;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.AddPasswordBean;
@@ -59,6 +62,10 @@ import com.philips.easykey.lock.publiclibrary.http.postbean.SendMessageBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAccountBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAlarmBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.SettingPwdDuressAlarmSwitchBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.TmallAddDeviceBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.TmallDelDeviceBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.TmallDeviceBean;
+import com.philips.easykey.lock.publiclibrary.http.postbean.TmallQueryDeviceBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpdateBleVersionBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpdateSoftwareVersionBean;
 import com.philips.easykey.lock.publiclibrary.http.postbean.UpgradeMultiOTABean;
@@ -116,6 +123,9 @@ import com.philips.easykey.lock.publiclibrary.http.result.RegisterResult;
 import com.philips.easykey.lock.publiclibrary.http.result.RegisterWeChatAndBindPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SinglePasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SwitchStatusResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallAddDeviceResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallDeviceListResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallQueryDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolVersionResult;
@@ -1742,6 +1752,70 @@ public class XiaokaiNewServiceImp {
         String timestamp = System.currentTimeMillis()/1000 + "";
         return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
                 .getAllBindDevice(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 天猫精灵扫码认证
+     */
+    public static Observable<TmallDeviceListResult> aligenieUserlogin(String uid ,  TmallDeviceBean.Code code){
+        TmallDeviceBean bean = new TmallDeviceBean();
+        bean.setUid(uid);
+        bean.setCode(code);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .aligenieUserlogin(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 天猫精灵用户分享设备
+     */
+    public static Observable<TmallAddDeviceResult> aligenieUserDeviceShare(String uid , String nickName, TmallDeviceListBean tmallDeviceListBean){
+        TmallAddDeviceBean bean = new TmallAddDeviceBean();
+        bean.setUid(uid);
+        bean.setWifiSN(tmallDeviceListBean.getWifiSN());
+        bean.setDeviceOpenId(tmallDeviceListBean.getDeviceOpenId());
+        bean.setUserOpenId(tmallDeviceListBean.getUserOpenId());
+        bean.setNickName(nickName);
+        bean.setAligenieDeviceModel(tmallDeviceListBean.getAligenieDeviceModel());
+        bean.setAligenieMac(tmallDeviceListBean.getAligenieMac());
+        bean.setAligenieSN(tmallDeviceListBean.getAligenieSN());
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .aligenieUserDeviceShare(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 查询用户分享猫精app的设备
+     */
+    public static Observable<TmallQueryDeviceListResult> aligenieUserDeviceShareQuery(String sn, String uid ){
+        TmallQueryDeviceBean bean = new TmallQueryDeviceBean();
+        bean.setUid(uid);
+        bean.setWifiSN(sn);
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .aligenieUserDeviceShareQuery(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
+                .subscribeOn(Schedulers.io())
+                .compose(RxjavaHelper.observeOnMainThread());
+    }
+
+    /**
+     * 天猫精灵删除分享设备
+     */
+    public static Observable<TmallAddDeviceResult> aligenieUserDeviceShareDel(TmallQueryDeviceListResult.TmallQueryDeviceList tmallQueryDeviceList , String uid){
+        TmallDelDeviceBean bean = new TmallDelDeviceBean();
+        bean.setUid(uid);
+        bean.setWifiSN(tmallQueryDeviceList.getWifiSN());
+        bean.setDeviceOpenId(tmallQueryDeviceList.getDeviceOpenId());
+        bean.setUserOpenId(tmallQueryDeviceList.getUserOpenId());
+        String timestamp = System.currentTimeMillis()/1000 + "";
+        return RetrofitServiceManager.getInstance().create(IXiaoKaiNewService.class)
+                .aligenieUserDeviceShareDel(timestamp, new HttpUtils<>().getBodyToken(bean, timestamp))
                 .subscribeOn(Schedulers.io())
                 .compose(RxjavaHelper.observeOnMainThread());
     }

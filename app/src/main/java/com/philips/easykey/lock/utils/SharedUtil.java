@@ -101,7 +101,7 @@ public class SharedUtil {
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData mClipData = ClipData.newPlainText("Label", text);
         cm.setPrimaryClip(mClipData);
-        ToastUtils.showShort(R.string.copy_success);
+        ToastUtils.showShort(context.getString(R.string.copy_success));
     }
     /**
      * 拨打电话

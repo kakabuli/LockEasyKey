@@ -137,7 +137,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
     @Override
     public void onUnbindSuccess() {
         tvNotice.setText(R.string.device_add_third_content_in_net);
-        ToastUtils.showShort(R.string.unbind_success_innet);
+        ToastUtils.showShort(getString(R.string.unbind_success_innet));
     }
 
     @Override
@@ -152,7 +152,7 @@ public class AddBluetoothThirdActivity extends BaseActivity<IBindBleView, BindBl
 
     @Override
     public void readLockTypeFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
     }
 
     @Override

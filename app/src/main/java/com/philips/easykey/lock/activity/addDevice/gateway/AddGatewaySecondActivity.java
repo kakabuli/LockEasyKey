@@ -34,7 +34,7 @@ public class AddGatewaySecondActivity extends BaseAddToApplicationActivity {
         scanGateway.setOnClickListener(v -> {
             String[] strings = PermissionUtil.getInstance().checkPermission(new String[]{  Manifest.permission.CAMERA});
             if (strings.length>0){
-                ToastUtils.showShort(R.string.philips_activity_deviceadd2);
+                ToastUtils.showShort(getString(R.string.philips_activity_deviceadd2));
                 PermissionUtil.getInstance().requestPermission(new String[]{  Manifest.permission.CAMERA}, this);
             }else {
                 Intent scanIntent=new Intent(this,QrCodeScanActivity.class);

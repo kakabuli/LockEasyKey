@@ -738,9 +738,6 @@ public class AlertDialogUtil {
                 alertDialog.dismiss();
             }
         });
-
-
-
     }
 
     //声明于条款弹窗
@@ -765,7 +762,7 @@ public class AlertDialogUtil {
                 context.startActivity(primatyIntent);
             }
         };
-        String termsOfUseStr = context.getResources().getString(R.string.philips_user_protocol2);
+        String termsOfUseStr = context.getResources().getString(R.string.philips_terms_of_use2);
         SpannableString termsOfUseSpannable = new SpannableString(termsOfUseStr);
         LinkClickableSpan termsOfUseSpan = new LinkClickableSpan() {
             @Override
@@ -774,7 +771,7 @@ public class AlertDialogUtil {
                 context.startActivity(agreementIntent);
             }
         };
-        termsOfUseSpannable.setSpan(termsOfUseSpan, 0, privacyPolicySpannable.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        termsOfUseSpannable.setSpan(termsOfUseSpan, 0, termsOfUseSpannable.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         privacyPolicySpannable.setSpan(privacyPolicySpan, 0, privacyPolicySpannable.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tvContent.append(privacyPolicySpannable);
         tvContent.append(context.getResources().getString(R.string.and));

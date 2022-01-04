@@ -76,7 +76,7 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
                 //todo 国际化的时候记得传入此时的语言类型
                 mPresenter.getFAQList(1);
             } else {
-                ToastUtils.showShort(R.string.philips_noNet);
+                ToastUtils.showShort(getString(R.string.philips_noNet));
             }
         }
     }
@@ -94,7 +94,7 @@ public class PersonalFAQLockHelpFragment  extends BaseFragment<IPersonalFAQView,
                     //todo 国际化的时候记得传入此时的语言类型
                     mPresenter.getFAQList(1);
                 } else {
-                    ToastUtils.showShort(R.string.philips_noNet);
+                    ToastUtils.showShort(getString(R.string.philips_noNet));
                 }
                 refreshLayout.finishRefresh(2000);
             }

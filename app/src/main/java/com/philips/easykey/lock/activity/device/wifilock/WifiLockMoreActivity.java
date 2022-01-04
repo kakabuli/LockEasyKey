@@ -338,7 +338,7 @@ public class WifiLockMoreActivity extends BaseActivity<IWifiLockMoreView, WifiLo
                             public void onClick(View v) {
                                 name = editText.getText().toString().trim();
                                 if (!StringUtil.nicknameJudge(name)) {
-                                    ToastUtils.showShort(R.string.nickname_verify_error);
+                                    ToastUtils.showShort(getString(R.string.nickname_verify_error));
                                     return;
                                 }
                                 if (deviceNickname != null) {

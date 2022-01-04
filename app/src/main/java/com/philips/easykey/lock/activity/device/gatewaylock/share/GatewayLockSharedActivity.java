@@ -198,7 +198,7 @@ public class GatewayLockSharedActivity extends BaseActivity<IGatewaySharedView, 
                         });
                     }
                 }else {
-                    ToastUtils.showShort(R.string.query_fail_requery);
+                    ToastUtils.showShort(getString(R.string.query_fail_requery));
                 }
                 break;
 

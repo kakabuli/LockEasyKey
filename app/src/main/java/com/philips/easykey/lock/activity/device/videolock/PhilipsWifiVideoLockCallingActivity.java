@@ -56,8 +56,10 @@ import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.philips.easykey.lock.utils.Rsa;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 import com.philips.easykey.lock.utils.WifiUtils;
+import com.philips.easykey.lock.widget.CircleImageView;
 import com.philips.easykey.lock.widget.avindicator.AVSpeakerView;
 import com.xm.sdk.struct.stream.AVStreamHeader;
 import com.xmitech.sdk.MP4Info;
@@ -83,6 +85,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivRefuseIcon1;
     AVSpeakerView avSpeakerView;
     TextView tvTips;
+    ImageView ivBack;
+    RelativeLayout rlConnectLoad;
+    CircleImageView ivPhoto;
     ProgressBar progress;
     ImageView ivSetting;
     ImageView back;
@@ -103,7 +108,7 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
     ImageView ivRecordSpot;
     TextView tvTime;
     ImageView ivRealTimeRefuseIcon;
-    RelativeLayout rlCallingTime;
+    LinearLayout rlCallingTime;
     TextView tvVideoTimeStamp;
     TextView tvCallingTips;
     ImageView ivCache;
@@ -159,8 +164,12 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         productList = MyApplication.getInstance().getProductInfos();
         if(isCalling == 0){
             rlCallingTime.setVisibility(View.GONE);
+            tvTips.setVisibility(View.GONE);
+            ivPhoto.setVisibility(View.GONE);
+            ivRealTimeRefuseIcon.setVisibility(View.GONE);
             isDoorbelling = false;
         }else if(isCalling == 1){
+            rlConnectLoad.setVisibility(View.GONE);
             ivRealTimeRefuseIcon.setVisibility(View.GONE);
             ivRefuseIcon1.setVisibility(View.GONE);
             if(tvTips != null)
@@ -208,9 +217,12 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         ivRefuseIcon = findViewById(R.id.iv_refuse_icon);
         ivRefuseIcon1 = findViewById(R.id.iv_refuse_icon_1);
         tvTips = findViewById(R.id.tv_tips);
+        rlConnectLoad = findViewById(R.id.rl_connect_load);
+        ivPhoto = findViewById(R.id.iv_photo);
         progress = findViewById(R.id.progress);
         ivSetting = findViewById(R.id.iv_setting);
         back = findViewById(R.id.back);
+        ivBack = findViewById(R.id.iv_back);
         mSufaceView = findViewById(R.id.surface_view);
         tvTemporaryPassword = findViewById(R.id.tv_temporary_password);
         rlVideoLayout = findViewById(R.id.rl_video_layout);
@@ -235,10 +247,15 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
         titleBar = findViewById(R.id.title_bar);
         mTvHeadTitle = findViewById(R.id.head_title);
         mIvTemporaryPwd = findViewById(R.id.iv_temporary_pwd);
+        String photoPath = (String) SPUtils.get(KeyConstants.HEAD_PATH, "");
+        if (!TextUtils.isEmpty(photoPath)) {
+            Glide.with(this).load(photoPath).into(ivPhoto);
+        }
     }
 
     private void initOnClickListener() {
         back.setOnClickListener(v -> finish());
+        ivBack.setOnClickListener(v -> finish());
         ivRealTimeRefuseIcon.setOnClickListener(v -> {
             mPresenter.stopConnect();
             tvTips.setVisibility(View.GONE);
@@ -274,8 +291,9 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
                 }).start();
             }else{
                 ivAnswerIcon.setVisibility(View.GONE);
-                ivRefuseIcon.setVisibility(View.GONE);
+                //ivRefuseIcon.setVisibility(View.GONE);
                 tvTips.setVisibility(View.VISIBLE);
+                tvTips.setText(getText(R.string.wifi_video_lock_p2p_connect));
                 isDoorbelling = false;
             }
         });
@@ -677,10 +695,8 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
     }
 
-    //开始视频回调，时间戳数据...
     @Override
-    public void onVideoDataAVStreamHeader(AVStreamHeader paramAVStreamHeader) {
-
+    public void onCodecNotify(int notify, Object object) {
         if(!isFirstAudio){
             if(isCalling == 0 || !isDoorbelling){
                 if(isShowAudio && mPresenter.startAudioStream() >= 0) {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56pt"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/tvDeviceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16pt"
+        android:textSize="16pt"
+        android:textColor="#333333"/>
+
+
+    <CheckBox
+        android:id="@+id/ck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="17pt"
+        android:button="@drawable/wandering_judge_time_selector"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/tvBinding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16pt"
+        android:text="@string/philips_tmall_bind"
+        android:textSize="15pt"
+        android:textColor="#189383"
+        android:visibility="gone"/>
+
+</RelativeLayout>

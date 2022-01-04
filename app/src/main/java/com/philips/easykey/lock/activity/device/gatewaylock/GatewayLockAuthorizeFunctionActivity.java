@@ -347,10 +347,10 @@ public class GatewayLockAuthorizeFunctionActivity extends BaseActivity<GatewayLo
                         }
                         mPresenter.setArmLocked(MyApplication.getInstance().getUid(), gatewayId, deviceId, armLock);
                     } else {
-                        ToastUtils.showShort(R.string.get_arm_lock_fail);
+                        ToastUtils.showShort(getString(R.string.get_arm_lock_fail));
                     }
                 } else {
-                    ToastUtils.showShort(R.string.get_aram_lock);
+                    ToastUtils.showShort(getString(R.string.get_aram_lock));
                 }
                 break;
             case R.id.delete_share:

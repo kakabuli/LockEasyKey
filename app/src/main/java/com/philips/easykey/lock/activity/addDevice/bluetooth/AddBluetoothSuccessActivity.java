@@ -99,11 +99,11 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
         save.setOnClickListener(v -> {
             String name = inputName.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
-                ToastUtils.showShort(R.string.not_empty);
+                ToastUtils.showShort(getString(R.string.not_empty));
                 return;
             }
             if (!StringUtil.nicknameJudge(name)) {
-                ToastUtils.showShort(R.string.nickname_verify_error);
+                ToastUtils.showShort(getString(R.string.nickname_verify_error));
                 return;
             }
 
@@ -169,7 +169,7 @@ public class AddBluetoothSuccessActivity extends BaseActivity<IBindBleSuccessVie
     @Override
     public void modifyDeviceNicknameSuccess() {
         hiddenLoading();
-        ToastUtils.showShort(R.string.save_success);
+        ToastUtils.showShort(getString(R.string.save_success));
         //设置成功  跳转到设备列别界面
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

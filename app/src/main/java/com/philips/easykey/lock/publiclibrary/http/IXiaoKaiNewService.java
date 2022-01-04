@@ -32,6 +32,9 @@ import com.philips.easykey.lock.publiclibrary.http.result.RegisterResult;
 import com.philips.easykey.lock.publiclibrary.http.result.RegisterWeChatAndBindPhoneResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SinglePasswordResult;
 import com.philips.easykey.lock.publiclibrary.http.result.SwitchStatusResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallAddDeviceResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallDeviceListResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallQueryDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserNickResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolResult;
 import com.philips.easykey.lock.publiclibrary.http.result.UserProtocolVersionResult;
@@ -930,4 +933,32 @@ public interface IXiaoKaiNewService {
     @POST(HttpUrlConstants.GET_ALLBINDDEVICE)
     @Headers({KeyConstants.VERSION})
     Observable<AllBindDevices> getAllBindDevice(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 天猫扫码认证
+     */
+    @POST(HttpUrlConstants.ALIGENIE_USER_LOGIN)
+    @Headers({KeyConstants.VERSION})
+    Observable<TmallDeviceListResult> aligenieUserlogin(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 用户分享设备
+     */
+    @POST(HttpUrlConstants.ALIGENIE_USER_DEVICE_SHARE)
+    @Headers({KeyConstants.VERSION})
+    Observable<TmallAddDeviceResult> aligenieUserDeviceShare(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 查询用户分享猫精app的设备
+     */
+    @POST(HttpUrlConstants.ALIGENIE_USER_DEVICE_SHARE_QUERY)
+    @Headers({KeyConstants.VERSION})
+    Observable<TmallQueryDeviceListResult> aligenieUserDeviceShareQuery(@Header("timestamp") String timestamp, @Body RequestBody info);
+
+    /**
+     * 查询用户分享猫精app的设备
+     */
+    @POST(HttpUrlConstants.ALIGENIE_USER_DEVICE_SHARE_DEL)
+    @Headers({KeyConstants.VERSION})
+    Observable<TmallAddDeviceResult> aligenieUserDeviceShareDel(@Header("timestamp") String timestamp, @Body RequestBody info);
 }

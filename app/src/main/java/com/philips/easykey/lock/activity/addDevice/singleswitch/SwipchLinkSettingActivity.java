@@ -143,7 +143,7 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
          case R.id.btn_next:
              if (!NetUtil.isNetworkAvailable()) {
-                 ToastUtils.showShort(R.string.please_have_net_add_pwd);
+                 ToastUtils.showShort(getString(R.string.please_have_net_add_pwd));
                  return;
              }
              // 非全天
@@ -316,12 +316,12 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void settingDeviceFail() {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override
     public void settingDeviceThrowable() {
-        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
+        ToastUtils.showShort(getString(R.string.philips_activity_swipchlink_4));
     }
 
     @Override
@@ -364,13 +364,13 @@ public class SwipchLinkSettingActivity extends BaseActivity<SingleFireSwitchView
 
     @Override
     public void bindingAndModifyDeviceFail() {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
 
     }
 
     @Override
     public void bindingAndModifyDeviceThrowable() {
-        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
+        ToastUtils.showShort(getString(R.string.philips_activity_swipchlink_4));
 
     }
 

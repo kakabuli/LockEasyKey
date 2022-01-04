@@ -398,10 +398,10 @@ public class PhilipsDoorLockMessageFragment extends BaseFragment<IDoorLockMessag
                 todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getDoorbellCount());
             }else if(i == 1){
                 todayLockStatisticsBean.setStatisticsType(2);
-                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getPwdOpenLockCount());
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getFingerprintOpenLockCount());
             }else if(i == 2){
                 todayLockStatisticsBean.setStatisticsType(3);
-                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getFingerprintOpenLockCount());
+                todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getPwdOpenLockCount());
             }else if(i == 3){
                 todayLockStatisticsBean.setStatisticsType(4);
                 todayLockStatisticsBean.setStatisticsCount(statisticsDayResult == null ? 0 : statisticsDayResult.getData().getCardOpenLockCount());

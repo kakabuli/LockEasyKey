@@ -130,21 +130,21 @@ public class DoorCardIdentificationActivity extends BaseBleActivity<IAddCardEndV
 
     @Override
     public void onUploadPasswordNickFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(getString(R.string.lock_set_success_please_sync));
         startActivity(new Intent(this,DoorCardManagerActivity.class));
         finish();
     }
 
     @Override
     public void onUploadPasswordNickFailedServer(BaseResult result) {
-        ToastUtils.showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(getString(R.string.lock_set_success_please_sync));
         startActivity(new Intent(this,DoorCardManagerActivity.class));
         finish();
     }
 
     @Override
     public void syncNumberFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.set_card_failed_number);
+        ToastUtils.showShort(getString(R.string.set_card_failed_number));
         startActivity(new Intent(this,DoorCardManagerActivity.class));
         finish();
     }

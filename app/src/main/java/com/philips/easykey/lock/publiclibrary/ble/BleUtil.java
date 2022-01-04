@@ -1087,6 +1087,12 @@ public class BleUtil {
                             iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_indoor_door_opening));
                         }
                         break;
+                    case 17:
+                        mTvContent.setText(mContext.getString(R.string.philips_tmall_opne_lock));
+                        if(iv != null){
+                            iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.philips_messagerecord_icon_indoor_door_opening));
+                        }
+                        break;
                     default:
                         break;
                 }

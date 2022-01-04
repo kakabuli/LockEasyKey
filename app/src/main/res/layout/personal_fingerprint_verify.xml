@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_80"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_35"
-        android:src="@mipmap/head_portrait_default" />
+        android:src="@drawable/philips_mine_img_profile" />
 
     <LinearLayout
         android:id="@+id/finger_click"

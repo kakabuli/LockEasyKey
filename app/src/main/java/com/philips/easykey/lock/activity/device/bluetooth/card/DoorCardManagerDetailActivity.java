@@ -113,11 +113,11 @@ public class DoorCardManagerDetailActivity extends BaseBleActivity<IPasswordDeta
                     public void onClick(View v) {
                         String name = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(name)) {
-                            ToastUtils.showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(getString(R.string.nickname_verify_error));
                             return;
                         }
                         if (StringUtil.judgeNicknameWhetherSame(card.getNickName(),name)){
-                            ToastUtils.showShort(R.string.nickname_not_modify);
+                            ToastUtils.showShort(getString(R.string.nickname_not_modify));
                             alertDialog.dismiss();
                             return;
                         }
@@ -193,7 +193,7 @@ public class DoorCardManagerDetailActivity extends BaseBleActivity<IPasswordDeta
 
     @Override
     public void updateNickNameSuccess(String nickName) {
-        ToastUtils.showShort(R.string.modify_success);
+        ToastUtils.showShort(getString(R.string.modify_success));
         hiddenLoading();
         Intent intent = new Intent(this, DoorCardManagerActivity.class);
         startActivity(intent);
@@ -212,13 +212,13 @@ public class DoorCardManagerDetailActivity extends BaseBleActivity<IPasswordDeta
 
     @Override
     public void onLockNoThisNumber() {
-        ToastUtils.showLong(R.string.lock_no_this_card);
+        ToastUtils.showLong(getString(R.string.lock_no_this_card));
         finish();
     }
 
     @Override
     public void onGetLockNumberFailed(Throwable throwable) {
-        ToastUtils.showLong(R.string.get_lock_card_failed);
+        ToastUtils.showLong(getString(R.string.get_lock_card_failed));
         finish();
     }
 }

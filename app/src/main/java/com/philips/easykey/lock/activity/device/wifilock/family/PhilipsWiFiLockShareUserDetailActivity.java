@@ -158,7 +158,7 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
                                 }
                             });
                 } else {
-                    ToastUtils.showLong(R.string.network_exception);
+                    ToastUtils.showLong(getString(R.string.network_exception));
                 }
                 break;
             case R.id.confirm:
@@ -169,7 +169,7 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
 
                 data = tvNumber.getText().toString().trim();
                 if (!StringUtil.nicknameJudge(data)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(getString(R.string.nickname_verify_error));
                     return;
                 }
                 showLoading(getString(R.string.is_modifing));
@@ -182,7 +182,7 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
 
     @Override
     public void deleteCommonUserListSuccess(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.delete_common_user_success);
+        ToastUtils.showShort(getString(R.string.delete_common_user_success));
         finish();
     }
 
@@ -203,7 +203,7 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
         nickname = data;
         tvNumber.setText(nickname);
         shareUser.setUserNickname(nickname);
-        ToastUtils.showShort(R.string.modify_user_nickname_success);
+        ToastUtils.showShort(getString(R.string.modify_user_nickname_success));
         hiddenLoading();
     }
 

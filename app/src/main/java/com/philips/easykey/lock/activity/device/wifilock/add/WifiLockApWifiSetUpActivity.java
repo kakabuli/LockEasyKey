@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.wifilock.PhilipsWifiLockRecordActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiApWifiSetUpPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockAPWifiSetUpView;
@@ -67,7 +68,7 @@ public class WifiLockApWifiSetUpActivity extends BaseActivity<IWifiLockAPWifiSet
             sSsid = mApSsidTV.getText().toString();
             String sPassword = mApPasswordET.getText().toString();
             if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
+                ToastUtils.showShort(getString(R.string.philips_wifi_name_disable_empty));
                 return;
             }
             if (TextUtils.isEmpty(sPassword)) { //WiFi密码为空

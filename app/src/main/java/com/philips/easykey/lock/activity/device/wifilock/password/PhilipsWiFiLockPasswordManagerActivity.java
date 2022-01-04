@@ -253,7 +253,7 @@ public class PhilipsWiFiLockPasswordManagerActivity extends BaseActivity<IWifiLo
         if (refreshLayout != null) {
             refreshLayout.finishRefresh();
         }
-        ToastUtils.showLong(R.string.refresh_failed_please_retry_later);
+        ToastUtils.showLong(getString(R.string.refresh_failed_please_retry_later));
     }
 
     @Override
@@ -261,7 +261,7 @@ public class PhilipsWiFiLockPasswordManagerActivity extends BaseActivity<IWifiLo
         if (refreshLayout != null) {
             refreshLayout.finishRefresh();
         }
-        ToastUtils.showLong(R.string.refresh_failed_please_retry_later);
+        ToastUtils.showLong(getString(R.string.refresh_failed_please_retry_later));
     }
 
     @Override

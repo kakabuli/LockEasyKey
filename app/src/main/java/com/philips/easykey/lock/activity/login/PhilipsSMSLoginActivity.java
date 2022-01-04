@@ -229,7 +229,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
                 mCountDownTimer.start();
             }
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
     public void sendRandomByPhone(String phone, String code) {
@@ -351,7 +351,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
                 }
             });
         }else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
     private void initTerms() {
@@ -386,7 +386,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
 
     private void wechatLogin() {
         if (!MyApplication.getInstance().getApi().isWXAppInstalled()) {
-            ToastUtils.showShort(R.string.you_have_not_installed_wechat);
+            ToastUtils.showShort(getString(R.string.you_have_not_installed_wechat));
             return;
         }
         // send oauth request

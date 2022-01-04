@@ -318,7 +318,7 @@ public class GatewayPasswordManagerActivity extends BaseActivity<IGatewayLockPas
     public void syncPasswordFailed(Throwable throwable) {
         LogUtils.d("获取开锁密码异常   " + throwable.getMessage());
         loadingDialog.dismiss();
-        ToastUtils.showShort(R.string.get_lock_pwd_list_fail);
+        ToastUtils.showShort(getString(R.string.get_lock_pwd_list_fail));
         passwordPageChange(false);
     }
 

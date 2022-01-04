@@ -29,8 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="331pt"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="75pt"
         android:layout_marginStart="22pt"
         android:layout_marginEnd="22pt"
@@ -38,27 +38,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/background_5effffff_3dp" />
+        android:background="@drawable/background_5effffff_3dp" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/philips_qr_code_scan_add_tips"
-        android:textColor="@color/white"
-        android:textSize="14pt"
-        android:layout_marginStart="31pt"
-        android:layout_marginBottom="222pt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
-    <ImageView
-        android:layout_width="79pt"
-        android:layout_height="65pt"
-        android:layout_marginEnd="27pt"
-        android:layout_marginBottom="202pt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/philips_home_scan_img_tips" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/philips_qr_code_scan_add_tips"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10pt"
+            android:textSize="14pt"/>
+
+        <ImageView
+            android:layout_width="79pt"
+            android:layout_height="65pt"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5pt"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/philips_home_scan_img_tips" />
+
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/ivFlashLight"

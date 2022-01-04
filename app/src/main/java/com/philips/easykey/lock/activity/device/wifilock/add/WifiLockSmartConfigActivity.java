@@ -78,12 +78,12 @@ public class WifiLockSmartConfigActivity extends BaseAddToApplicationActivity {
                 Intent intent = new Intent(WifiLockSmartConfigActivity.this, WifiLockAPAddFailedActivity.class);
                 intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
                 startActivity(intent);
-                ToastUtils.showLong(R.string.wifi_model_set_up_failed);
+                ToastUtils.showLong(getString(R.string.wifi_model_set_up_failed));
             }
 
             @Override
             public void onSetUpSuccess(String hostAddress) { //设置成功
-                ToastUtils.showShort(R.string.set_up_success2);
+                ToastUtils.showShort(getString(R.string.set_up_success2));
                 Intent intent = new Intent(WifiLockSmartConfigActivity.this, WifiLockInputAdminPasswordActivity.class);
                 intent.putExtra(KeyConstants.WIFI_LOCK_WIFI_SSID, sSsid);
                 startActivity(intent);

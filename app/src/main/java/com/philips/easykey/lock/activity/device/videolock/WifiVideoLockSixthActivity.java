@@ -73,7 +73,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
         findViewById(R.id.button_next).setOnClickListener(v -> {
             String adminPassword = apPasswordEdit.getText().toString().trim();
             if (!StringUtil.randomJudge(adminPassword)) {
-                ToastUtils.showShort(R.string.philips_random_verify_error);
+                ToastUtils.showShort(getString(R.string.philips_random_verify_error));
                 return;
             }
             //打开wifi
@@ -168,7 +168,7 @@ public class WifiVideoLockSixthActivity extends BaseActivity<IWifiLockVideoSixth
     public void onError(int errorCode) {
         runOnUiThread(() -> {
             finish();
-            ToastUtils.showShort(R.string.bind_failed);
+            ToastUtils.showShort(getString(R.string.bind_failed));
             startActivity(new Intent(WifiVideoLockSixthActivity.this, WifiLockAddNewScanFailedActivity.class));
         });
     }

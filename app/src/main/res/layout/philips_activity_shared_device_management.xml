@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="44pt"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -95,6 +96,46 @@
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tmall_shared_user"
+        app:layout_constraintTop_toBottomOf="@id/ll_has_data"
+        android:layout_width="match_parent"
+        android:layout_height="43pt"
+        android:background="@color/cF7F7F7"
+        android:textColor="@color/c666666"
+        android:textSize="14pt"
+        android:gravity="center_vertical"
+        android:paddingStart="16pt"
+        android:text="@string/philips_tmall_band_shared__user"/>
+
+    <LinearLayout
+        android:id="@+id/ll_tmall_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tmall_shared_user">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tmall_shared_user_tisp"
+        app:layout_constraintTop_toBottomOf="@id/ll_tmall_data"
+        android:layout_width="match_parent"
+        android:layout_height="43pt"
+        android:background="@color/cF7F7F7"
+        android:textColor="@color/c666666"
+        android:textSize="14pt"
+        android:gravity="center_vertical"
+        android:paddingStart="16pt"
+        android:text="@string/philips_tmall_band_shared__user_tisp"/>
+
 
     <TextView
         android:id="@+id/tv_no_user"

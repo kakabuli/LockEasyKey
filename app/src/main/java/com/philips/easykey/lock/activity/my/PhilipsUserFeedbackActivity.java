@@ -66,9 +66,9 @@ public class PhilipsUserFeedbackActivity extends BaseActivity<IUserFeedbackView,
             if (text.length() >= 8) {
                 mPresenter.userFeedback(MyApplication.getInstance().getUid(), text);
             } else if (text.length() > 0) {
-                ToastUtils.showShort(R.string.feedback_little);
+                ToastUtils.showShort(getString(R.string.feedback_little));
             } else {
-                ToastUtils.showShort(R.string.enter_feedback);
+                ToastUtils.showShort(getString(R.string.enter_feedback));
             }
         });
 
@@ -119,7 +119,7 @@ public class PhilipsUserFeedbackActivity extends BaseActivity<IUserFeedbackView,
 
     @Override
     public void userFeedbackSubmitSuccess() {
-        ToastUtils.showShort(R.string.submit_success);
+        ToastUtils.showShort(getString(R.string.submit_success));
         finish();
     }
 

@@ -122,7 +122,7 @@ public class PhilipsWifiVideoLockNickNameActivity extends BaseActivity<IWifiVide
 
     @Override
     public void modifyDeviceNicknameSuccess() {
-        ToastUtils.showShort(R.string.device_nick_name_update_success);
+        ToastUtils.showShort(getString(R.string.device_nick_name_update_success));
         Intent intent = new Intent();
         intent.putExtra(KeyConstants.WIFI_LOCK_NEW_NAME, mEtNickName.getText().toString().trim());
         setResult(RESULT_OK, intent);
@@ -131,13 +131,13 @@ public class PhilipsWifiVideoLockNickNameActivity extends BaseActivity<IWifiVide
 
     @Override
     public void modifyDeviceNicknameError(Throwable throwable) {
-        ToastUtils.showShort(R.string.philips_device_nick_name_update_failed);
+        ToastUtils.showShort(getString(R.string.philips_device_nick_name_update_failed));
         finish();
     }
 
     @Override
     public void modifyDeviceNicknameFail(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.philips_device_nick_name_update_failed);
+        ToastUtils.showShort(getString(R.string.philips_device_nick_name_update_failed));
         finish();
     }
 

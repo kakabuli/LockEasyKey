@@ -432,7 +432,7 @@ public class PhilipsAddVideoLockActivity extends NormalBaseActivity {
     /*-------------------------------- 输入管理密码 -----------------------------*/
 
     public void setAdminPwd(String adminPwd) {
-        if(!TextUtils.isEmpty(mRandomCode) && mRandomCode.length() != 79){
+        if(!TextUtils.isEmpty(mRandomCode)){
             WifiVideoPasswordFactorManager.FactorResult result = WifiVideoPasswordFactorManager.parsePasswordData(adminPwd,mRandomCode);
             LogUtils.d("输入管理密码错误次数：" + mTimes);
             if(result.result == 0) {

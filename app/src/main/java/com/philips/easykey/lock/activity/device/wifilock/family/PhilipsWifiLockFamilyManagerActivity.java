@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,11 +18,14 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.tmall.PhilipsTamllDeviceInfoActivity;
+import com.philips.easykey.lock.adapter.PhilipsTmallShareUserAdapter;
 import com.philips.easykey.lock.adapter.PhilipsWifiLockShareUserAdapter;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.wifilock.WifiLockFamilyManagerPresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockFamilyManagerView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallQueryDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 import com.philips.easykey.lock.publiclibrary.http.util.HttpUtils;
 import com.philips.easykey.lock.utils.AlertDialogUtil;
@@ -40,10 +45,15 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
 
     ImageView ivBack;//返回
     TextView tvContent;//标题
-    RecyclerView recycleview;
+    RecyclerView recycleview,recycleview1;
+    TextView tvSharedUser;
+    TextView tvTmallSharedUser;
+    TextView tvTmallSharedUserTisp;
 
     PhilipsWifiLockShareUserAdapter wifiLockShareUserAdapter;
+    PhilipsTmallShareUserAdapter tmallShareUserAdapter;
     List< WifiLockShareResult.WifiLockShareUser> shareUsers = new ArrayList<>();
+    List< TmallQueryDeviceListResult.TmallQueryDeviceList> tmallShareUsers = new ArrayList<>();
     boolean isNotData = true;
     SmartRefreshLayout refreshLayout;
 
@@ -63,10 +73,18 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         ivBack = findViewById(R.id.iv_back);
         tvContent = findViewById(R.id.tv_content);
         recycleview = findViewById(R.id.recycleview);
+        recycleview1 = findViewById(R.id.recycleview1);
         refreshLayout = findViewById(R.id.refreshLayout);
         tvNoUser = findViewById(R.id.tv_no_user);
         llAddUser = findViewById(R.id.ll_add_user);
         llHasData = findViewById(R.id.ll_has_data);
+        tvSharedUser = findViewById(R.id.tv_shared_user);
+        tvTmallSharedUser = findViewById(R.id.tv_tmall_shared_user);
+        tvTmallSharedUserTisp = findViewById(R.id.tv_tmall_shared_user_tisp);
+        tvSharedUser.setVisibility(View.GONE);
+        tvTmallSharedUser.setVisibility(View.GONE);
+        tvTmallSharedUserTisp.setVisibility(View.GONE);
+
 
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
 
@@ -80,6 +98,19 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
                 WifiLockShareResult.WifiLockShareUser wifiLockShareUser = shareUsers.get(position);
                 Intent intent = new Intent(PhilipsWifiLockFamilyManagerActivity.this, PhilipsWiFiLockShareUserDetailActivity.class);
                 intent.putExtra(KeyConstants.SHARE_USER_INFO, wifiLockShareUser);
+                startActivity(intent);
+            }
+        });
+
+        tmallShareUserAdapter = new PhilipsTmallShareUserAdapter(tmallShareUsers, R.layout.philips_item_has_shared_device);
+        recycleview1.setLayoutManager(new LinearLayoutManager(this));
+        recycleview1.setAdapter(tmallShareUserAdapter);
+        tmallShareUserAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                TmallQueryDeviceListResult.TmallQueryDeviceList tmallQueryDeviceList = tmallShareUsers.get(position);
+                Intent intent = new Intent(PhilipsWifiLockFamilyManagerActivity.this, PhilipsTamllDeviceInfoActivity.class);
+                intent.putExtra(KeyConstants.TMALL_SHARE_DEVICE, tmallQueryDeviceList);
                 startActivity(intent);
             }
         });
@@ -121,8 +152,9 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
     public void queryUser() {
         if (NetUtil.isNetworkAvailable()) {
             mPresenter.queryUserList(wifiSn);
+            mPresenter.aligenieUserDeviceShareQuery(wifiSn);
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 
@@ -130,8 +162,10 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         if (isNotData) {
             llHasData.setVisibility(View.GONE);
             tvNoUser.setVisibility(View.VISIBLE);
+            tvSharedUser.setVisibility(View.GONE);
         } else {
             llHasData.setVisibility(View.VISIBLE);
+            tvSharedUser.setVisibility(View.VISIBLE);
             tvNoUser.setVisibility(View.GONE);
         }
     }
@@ -216,5 +250,27 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         //刷新完成
         refreshLayout.finishRefresh();
         ToastUtils.showShort(HttpUtils.httpProtocolErrorCode(this, throwable));
+    }
+
+    @Override
+    public void queryTmallSuccess(TmallQueryDeviceListResult tmallQueryDeviceListResult) {
+        if(tmallQueryDeviceListResult != null && tmallQueryDeviceListResult.getData() != null
+                && tmallQueryDeviceListResult.getData().size() > 0){
+            tvTmallSharedUser.setVisibility(View.VISIBLE);
+            tvTmallSharedUserTisp.setVisibility(View.VISIBLE);
+            tvNoUser.setVisibility(View.GONE);
+            tmallShareUsers.clear();
+            tmallShareUsers.addAll(tmallQueryDeviceListResult.getData());
+            tmallShareUserAdapter.notifyDataSetChanged();
+        }else {
+            tvTmallSharedUser.setVisibility(View.GONE);
+            tvTmallSharedUserTisp.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void queryTmallFailed() {
+        tvTmallSharedUser.setVisibility(View.GONE);
+        tvTmallSharedUserTisp.setVisibility(View.GONE);
     }
 }

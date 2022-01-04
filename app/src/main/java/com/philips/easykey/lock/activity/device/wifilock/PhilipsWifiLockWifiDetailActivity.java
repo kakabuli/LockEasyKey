@@ -148,7 +148,7 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
                     return;
                 }
                 createDialog(getString(R.string.philips_closed_video_mode_title),getString(R.string.philips_closed_video_mode_content));
-                ToastUtils.showShort(R.string.philips_get_wifi_rssi_error);
+                ToastUtils.showShort(getString(R.string.philips_get_wifi_rssi_error));
                 return;
             }
 
@@ -184,8 +184,8 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
 
 
     private void showWifiDialog() {
-        AlertDialogUtil.getInstance().noEditTitleTwoButtonDialog(this, getString(R.string.activity_wifi_video_replace_wifi_again),
-                getString(R.string.philips_cancel), getString(R.string.philips_confirm), "#999999", "#1F95F7", new AlertDialogUtil.ClickListener() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.activity_wifi_video_replace_wifi_again),
+                getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
@@ -201,12 +201,10 @@ public class PhilipsWifiLockWifiDetailActivity extends BaseActivity<IPhilipsWifi
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     }
 
                     @Override
                     public void afterTextChanged(String toString) {
-
                     }
                 });
     }

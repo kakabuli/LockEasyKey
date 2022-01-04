@@ -136,7 +136,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
             changeReadState();
         } else if(view.getId() == R.id.btnRegister) {
             if(!isAgreed){
-                ToastUtils.showShort(R.string.philips_activity_register_agreenment);
+                ToastUtils.showShort(getString(R.string.philips_activity_register_agreenment));
                 return;
             }
             register();
@@ -191,7 +191,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
                 startActivity(privacyIntent);
             }
         };
-        privacyPolicySpannable.setSpan(privacyPolicySpan, 0, termsOfUseStr.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        privacyPolicySpannable.setSpan(privacyPolicySpan, 0, privacyPolicySpannable.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         mTvAgreement.append(getString(R.string.philips_register_agreement_tip));
         mTvAgreement.append(termsOfUseSpannable);
         mTvAgreement.append(getString(R.string.philips_and));
@@ -313,7 +313,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
                 mCountDownTimer.start();
             }
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 
@@ -342,7 +342,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
             }
 
             if (!isAgreed) {
-                ToastUtils.showShort(R.string.agree_user_protocol);
+                ToastUtils.showShort(getString(R.string.agree_user_protocol));
                 return;
             }
             if (StringUtil.isNumeric(account)) {
@@ -363,7 +363,7 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
                 }
             }
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 

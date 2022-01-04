@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +18,24 @@ import com.philips.easykey.lock.shulan.config.ForegroundNotification;
 import com.philips.easykey.lock.shulan.config.ForegroundNotificationClickListener;
 import com.philips.easykey.lock.shulan.config.RunMode;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LanguageUtil;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 
 public class BaseAddToApplicationActivity extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        //获取我们存储的语言环境 比如 "en","zh",等等
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            super.attachBaseContext(newBase);
+            return;
+        }
+        //attach 对应语言环境下的context
+        super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, spLanguage));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,12 +57,18 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
         startKeepAlive();
     }
 
+
+
     /**
      * 启动保活
      */
-    private void startKeepAlive() {
-        String title = String.format(MyApplication.getInstance().getString(R.string.app_name_notificatoin_title), MyApplication.getInstance().getString(R.string.app_name));
-        String content = String.format(MyApplication.getInstance().getString(R.string.app_name_notificatoin_content), MyApplication.getInstance().getString(R.string.app_name));
+    public void startKeepAlive() {
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(!TextUtils.isEmpty(spLanguage)) {
+            LanguageUtil.attachBaseContext(this, spLanguage);
+        }
+        String title = String.format(getString(R.string.app_name_notificatoin_title), getString(R.string.app_name));
+        String content = String.format(getString(R.string.app_name_notificatoin_content), getString(R.string.app_name));
 
         //启动保活服务
         KeepAliveManager.toKeepAlive(

@@ -452,7 +452,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
 //            Toast.makeText(getContext(), getString(R.string.sync_success), Toast.LENGTH_SHORT).show();
 //        }
         if(isNotice)
-            ToastUtils.showShort(R.string.sync_success);
+            ToastUtils.showShort(getString(R.string.sync_success));
     }
 
     @Override
@@ -462,7 +462,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
 //        }
 //        hiddenLoading();
         if(isNotice)
-            ToastUtils.showShort(R.string.synv_failed);
+            ToastUtils.showShort(getString(R.string.synv_failed));
 
     }
 
@@ -481,7 +481,7 @@ public class WifiVideoLockFragment extends BaseFragment<IWifiVideoLockView, Wifi
 //        }
 //        hiddenLoading();
         if (isNotice)
-            ToastUtils.showShort(R.string.no_data);
+            ToastUtils.showShort(getString(R.string.no_data));
 
     }
 

@@ -142,7 +142,7 @@ public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatil
                     public void onClick(View v) {
                         data = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(data)) {
-                            ToastUtils.showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(getString(R.string.nickname_verify_error));
                             return;
                         }
                         if (dataBean.getUnickname().equals(data)) {
@@ -166,7 +166,7 @@ public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatil
 
     @Override
     public void deleteCommonUserListSuccess(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.delete_common_user_success);
+        ToastUtils.showShort(getString(R.string.delete_common_user_success));
         finish();
     }
 
@@ -185,7 +185,7 @@ public class FamilyMemberDetailActivity extends BaseActivity<IFamilyMemberDeatil
         nickname = data;
         tvName.setText(nickname);
         dataBean.setUnickname(nickname);
-        ToastUtils.showShort(R.string.modify_user_nickname_success);
+        ToastUtils.showShort(getString(R.string.modify_user_nickname_success));
     }
 
     @Override

@@ -121,7 +121,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //门锁固件版本
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -132,6 +132,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             }
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500)
+                if(lockFirwareInfo == null)return;
                 if (lockFirwareInfo.getData() == null) {
                     if("210".equals(lockFirwareInfo.getCode())){
                         shownNewVersion();
@@ -148,7 +149,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //前面板
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -161,6 +162,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
 
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500) {
+                if(frontHardFirwareInfo == null)return;
                 if (frontHardFirwareInfo.getData() == null) {
                     if(frontHardFirwareInfo.getCode().equals("210")){
                         shownNewVersion();
@@ -178,7 +180,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //后面板
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -194,6 +196,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             }
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500) {
+                if(backHardFirwareInfo == null) return;
                 if (backHardFirwareInfo.getData() == null) {
                     if(backHardFirwareInfo.getCode().equals("210")){
                         shownNewVersion();
@@ -210,7 +213,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //视频模组版本
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -226,6 +229,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             }
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500) {
+                if(videoMoudleInfo == null)return;
                 if (videoMoudleInfo.getData() == null) {
                     if(videoMoudleInfo.getCode().equals("210")){
                         shownNewVersion();
@@ -242,7 +246,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //视频模组微控制器版本
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -258,6 +262,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             }
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500) {
+                if(videoMcuInfo == null)return;
                 if (videoMcuInfo.getData() == null) {
                     if(videoMcuInfo.getCode().equals("210")){
                       shownNewVersion();
@@ -274,7 +279,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             //wifi固件版本
             if (wifiLockInfo.getIsAdmin() != 1) return;
 
-            if (wifiLockInfo.getPower() < 30) {
+            if (wifiLockInfo.getPower() < 20) {
                 showLowBattery();
                 return;
             }
@@ -290,6 +295,7 @@ public class PhilipsWifiVideoLockDeviceInfoActivity extends BaseActivity<IWifiVi
             }
 
             if (avi.isShow() && System.currentTimeMillis() - time > 2500) {
+                if(videoWifiMoudleInfo == null)return;
                 if (videoWifiMoudleInfo.getData() == null) {
                     if(videoWifiMoudleInfo.getCode().equals("210")){
                         shownNewVersion();

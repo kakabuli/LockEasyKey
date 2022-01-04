@@ -265,7 +265,6 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             BleUtil.setTextViewOperationRecordByType(null,mTvLastRecord,records.get(0));
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get(0).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());
-            Log.d("zdx", "initOperationRecord: "  + records.get(0).getCreateTime());
             return;
         }
 
@@ -461,7 +460,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
     @Override
     public void onDeleteDeviceSuccess() {
-        ToastUtils.showShort(R.string.delete_success);
+        ToastUtils.showShort(getString(R.string.delete_success));
         hiddenLoading();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

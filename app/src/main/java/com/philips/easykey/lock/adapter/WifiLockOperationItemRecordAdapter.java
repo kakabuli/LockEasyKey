@@ -111,6 +111,14 @@ public class WifiLockOperationItemRecordAdapter extends BaseQuickAdapter<WifiLoc
                         left = mContext.getString(R.string.indoor_Induction);
                         right = "";
                         break;
+                    case 17:
+//                        right = mContext.getString(R.string.indoor_Induction);
+//                        if(left.equals("编号00")){
+//                            return;
+//                        }
+                        left = mContext.getString(R.string.philips_tmall_opne_lock);
+                        right = "";
+                        break;
                     default:
                         right = mContext.getString(R.string.unknown_open);
                         break;

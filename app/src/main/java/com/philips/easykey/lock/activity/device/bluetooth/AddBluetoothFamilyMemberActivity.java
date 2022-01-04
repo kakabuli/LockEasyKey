@@ -61,7 +61,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
 
                 if (myPhone != null) {
                     if (myPhone.equals(phone)) {
-                        ToastUtils.showShort(R.string.no_add_my);
+                        ToastUtils.showShort(getString(R.string.no_add_my));
                         return;
                     }
                 }
@@ -98,7 +98,7 @@ public class AddBluetoothFamilyMemberActivity extends BaseAddToApplicationActivi
                     }
 
                 } else {
-                    ToastUtils.showShort(R.string.philips_noNet);
+                    ToastUtils.showShort(getString(R.string.philips_noNet));
                 }
 
                 break;

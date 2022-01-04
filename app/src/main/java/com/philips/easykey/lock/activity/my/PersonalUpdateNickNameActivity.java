@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -51,23 +52,22 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
             String editText = etNickName.getText().toString().trim();
             if (NetUtil.isNetworkAvailable()) {
                 if (TextUtils.isEmpty(editText)) {
-                    ToastUtils.showShort(R.string.nickName_not_empty);
+                    ToastUtils.showShort(getString(R.string.nickName_not_empty));
                     return;
                 }
                 if (!StringUtil.nicknameJudge(editText, 10)) {
-
-                    ToastUtils.showShort(R.string.philips_nickname_verify_error);
+                    ToastUtils.showShort(getString(R.string.philips_nickname_verify_error));
                     return;
                 }
 
                 if (editText.equals(userName)) {
-                    ToastUtils.showShort(R.string.nickname_repeat);
+                    ToastUtils.showShort(getString(R.string.nickname_repeat));
                     return;
                 }
                 mPresenter.updateNickName(MyApplication.getInstance().getUid(), editText);
 
             } else {
-                ToastUtils.showShort(R.string.philips_noNet);
+                ToastUtils.showShort(getString(R.string.philips_noNet));
             }
         });
 
@@ -126,7 +126,7 @@ public class PersonalUpdateNickNameActivity extends BaseActivity<IPersonalUpdate
     public void updateNickNameSuccess(String nickName) {
         //更新成功
         SPUtils.put(SPUtils.USERNAME, nickName);
-        ToastUtils.showShort(R.string.update_nick_name);
+        ToastUtils.showShort(getString(R.string.update_nick_name));
         finish();
     }
 

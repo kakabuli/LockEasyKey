@@ -651,7 +651,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                ToastUtils.showShort(R.string.exit);
+                ToastUtils.showShort(getString(R.string.exit));
                 mExitTime = System.currentTimeMillis();
             } else {
 //                MainActivity.this.finish();
@@ -813,7 +813,7 @@ public class MainActivity extends BaseBleActivity<IMainActivityView, MainActivit
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){//同意授权
 
                 }else {
-                    ToastUtils.showShort(R.string.wifi_video_lock_microphone_permission);
+                    ToastUtils.showShort(getString(R.string.wifi_video_lock_microphone_permission));
                 }
                 break;
         }

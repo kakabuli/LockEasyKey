@@ -271,11 +271,15 @@ public class PhilipsWifiVideoLockAlbumDetailActivity extends BaseActivity<IMyAlb
             ToastUtils.showShort(getResources().getString(R.string.no_video));
             return;
         }
-        mediaPlayer.setMediaPlayerFromUri(filepath);
-        statusHelper.setMediaStatus(MediaStatus.START);
-        mediaPlayer.prepare();
-        initEvent();
-        autoPlayVideo();
+        try {
+            mediaPlayer.setMediaPlayerFromUri(filepath);
+            statusHelper.setMediaStatus(MediaStatus.START);
+            mediaPlayer.prepare();
+            initEvent();
+            autoPlayVideo();
+        }catch (Exception e){
+            e.getMessage();
+        }
     }
 
     private void initEvent() {

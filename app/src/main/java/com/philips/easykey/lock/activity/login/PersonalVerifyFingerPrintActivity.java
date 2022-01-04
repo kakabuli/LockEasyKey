@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
@@ -131,7 +132,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                     }
                     Intent successIntent = new Intent(mContext, MainActivity.class);
                     startActivity(successIntent);
-                    ToastUtils.showShort(R.string.fingerprint_success);
+                    ToastUtils.showShort(getString(R.string.fingerprint_success));
                     finish();
                 }
 
@@ -145,7 +146,7 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
                     if (translateAnimation != null && fingeprintImg != null) {
                         fingeprintImg.startAnimation(translateAnimation);
                     }
-                    ToastUtils.showShort(R.string.fingerprint_unidentifiable);
+                    ToastUtils.showShort(getString(R.string.fingerprint_unidentifiable));
                 }
 
                 @Override
@@ -273,18 +274,8 @@ public class PersonalVerifyFingerPrintActivity extends BaseActivity<IPersonalVer
     }
 
     private void showImage(String photoPath) {
-        if ("".equals(photoPath)) {
-            fingerImage.setImageDrawable(getResources().getDrawable(R.mipmap.default_head));
-        } else {
-            int degree = BitmapUtil.readPictureDegree(photoPath);
-            changeBitmap = BitmapUtil.ratio(photoPath, 720, 720);
-            /**
-             * 把图片旋转为正的方向
-             */
-            if (changeBitmap!=null){
-                Bitmap newbitmap = BitmapUtil.rotaingImageView(degree, changeBitmap);
-                fingerImage.setImageBitmap(newbitmap);
-            }
+        if (!TextUtils.isEmpty(photoPath)) {
+            Glide.with(this).load(photoPath).into(fingerImage);
         }
     }
 

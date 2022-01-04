@@ -1,5 +1,6 @@
 package com.philips.easykey.lock.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.activity.MainActivity;
 import com.philips.easykey.lock.activity.choosecountry.CountryActivity;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsLanguageSetActivity;
 import com.philips.easykey.lock.activity.my.PersonalUserAgreementActivity;
 import com.philips.easykey.lock.activity.my.PrivacyActivity;
 import com.philips.easykey.lock.normal.NormalBaseActivity;
@@ -47,6 +49,7 @@ import com.philips.easykey.lock.utils.Constants;
 import com.philips.easykey.lock.utils.DetectionEmailPhone;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.blankj.utilcode.util.LogUtils;
+import com.philips.easykey.lock.utils.LanguageUtil;
 import com.philips.easykey.lock.utils.LinkClickableSpan;
 import com.philips.easykey.lock.utils.MD5Utils;
 import com.philips.easykey.lock.utils.MMKVUtils;
@@ -66,6 +69,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 import io.reactivex.disposables.Disposable;
 
@@ -129,6 +134,18 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     @Override
     public int bindLayout() {
         return R.layout.philips_activity_login;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        //获取我们存储的语言环境 比如 "en","zh",等等
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            super.attachBaseContext(newBase);
+            return;
+        }
+        //attach 对应语言环境下的context
+        super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, spLanguage));
     }
 
     @Override
@@ -226,10 +243,30 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 mBtnLogin, mIvVerification, findViewById(R.id.ivWechat),
                 mTvSelectCountry, mIvShowOrHide, mTvGetCode,mlanguage);
 
+        initLanguage();
         initTerms();
         boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
         if(showStatementAndTerms){
             initStatement();
+        }
+    }
+
+    private void initLanguage() {
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            Locale locale = getResources().getConfiguration().locale;
+            String language = locale.getLanguage();
+            setLanguageType(language);
+        }else {
+            setLanguageType(spLanguage);
+        }
+    }
+
+    private void setLanguageType(String type){
+        if(TextUtils.equals(type,"zh")){
+            mlanguage.setText(R.string.setting_language_cn);
+        }else {
+            mlanguage.setText(R.string.setting_language_en);
         }
     }
 
@@ -292,7 +329,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 startActivity(privacyIntent);
             }
         };
-        privacyPolicySpannable.setSpan(privacyPolicySpan, 0, termsOfUseStr.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        privacyPolicySpannable.setSpan(privacyPolicySpan, 0, privacyPolicySpannable.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         mTvAgreement.append(termsOfUseSpannable);
         mTvAgreement.append(getString(R.string.philips_and));
         mTvAgreement.append(privacyPolicySpannable);
@@ -353,7 +390,9 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
             if(isCountdown) return;
             getVerification();
         } else if (view.getId() == R.id.tvLanguage){
-            //TODO 语言切换
+            Intent intent = new Intent(this, PhilipsLanguageSetActivity.class);
+            intent.putExtra("activity","login");
+            startActivity(intent);
         }
     }
 
@@ -395,6 +434,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
 
     private void changeLoginBtnStyle(boolean isCanLogin) {
         mBtnLogin.setEnabled(isCanLogin);
+        mBtnLogin.setTextColor(isCanLogin?Color.parseColor("#FFFFFF"):Color.parseColor("#0066A1"));
         mBtnLogin.setBackgroundResource(isCanLogin?R.drawable.philips_shape_btn_bg:R.drawable.philips_shape_btn_login_bg);
     }
 
@@ -474,27 +514,28 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     private void tokenDialog(String content) {
-        AlertDialogUtil.getInstance().noEditSingleButtonDialog(this, getString(R.string.hint), content, getString(R.string.dialog_confirm), new AlertDialogUtil.ClickListener() {
-            @Override
-            public void left() {
+        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), content,
+                null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
 
-            }
+                    }
 
-            @Override
-            public void right() {
+                    @Override
+                    public void right() {
 
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
 
-            }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            @Override
-            public void afterTextChanged(String toString) {
+                    }
 
-            }
-        });
+                    @Override
+                    public void afterTextChanged(String toString) {
 
+                    }
+                });
     }
 
 

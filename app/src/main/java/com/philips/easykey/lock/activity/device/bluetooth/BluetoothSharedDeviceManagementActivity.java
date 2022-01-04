@@ -127,7 +127,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
             if (NetUtil.isNetworkAvailable()) {
                 mPresenter.queryUserList(MyApplication.getInstance().getUid(), bleLockInfo.getServerLockInfo().getLockName());
             } else {
-                ToastUtils.showShort(R.string.philips_noNet);
+                ToastUtils.showShort(getString(R.string.philips_noNet));
             }
 
         }
@@ -178,7 +178,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
                     }
 
                 } else {
-                    ToastUtils.showShort(R.string.query_fail_requery);
+                    ToastUtils.showShort(getString(R.string.query_fail_requery));
                 }
                 break;
 
@@ -225,7 +225,7 @@ public class BluetoothSharedDeviceManagementActivity extends BaseActivity<IBluet
     @Override
     public void addCommonUserSuccess(BaseResult baseResult) {
         queryUser();
-        ToastUtils.showShort(R.string.add_common_user_success);
+        ToastUtils.showShort(getString(R.string.add_common_user_success));
     }
 
     @Override

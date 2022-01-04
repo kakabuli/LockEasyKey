@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -241,7 +242,7 @@ public class PhilipsWifiLockOpenRecordFragment extends BaseFragment<IWifiLockOpe
 
     @Override
     public void noMoreData() {
-        ToastUtils.showShort(R.string.no_more_data);
+        Toast.makeText(getActivity(),R.string.no_more_data,Toast.LENGTH_LONG).show();
         refreshLayout.finishLoadMore();
         refreshLayout.setEnableLoadMore(false);
     }

@@ -56,9 +56,9 @@ public class AddGatewayFailActivity extends BaseAddToApplicationActivity {
         msg=intent.getStringExtra("msg");
         if (!TextUtils.isEmpty(code)){
            if ("813".equals(code)){
-               ToastUtils.showShort(R.string.gateway_already_bind);
+               ToastUtils.showShort(getString(R.string.gateway_already_bind));
            } else if ("812".equals(code)){
-               ToastUtils.showShort(R.string.already_notify_admin_sure);
+               ToastUtils.showShort(getString(R.string.already_notify_admin_sure));
            }else{
                ToastUtils.showShort(msg);
            }

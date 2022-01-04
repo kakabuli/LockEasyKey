@@ -215,6 +215,8 @@ public class KeyConstants {
      * 声明弹窗
      */
     public static final String SHOW_STATEMENT_AND_TERMS = "show_statement_and_terms";
+
+    public static final String LANGUAGE_SET = "language_set";
     //app通知
     public static final String APP_NOTIFICATION_STATUS = "app_notification_status";
     //智能监测
@@ -449,6 +451,16 @@ public class KeyConstants {
      * 传递第i个胁迫密码信息
      */
     public static final String DURESS_PASSWORD_POSITION_INfO = "duressPasswordPositionInfo";
+
+    /**
+     * 天猫精灵设备信息
+     */
+    public static final String TMALL_DEVICE = "tmallDeviceBean";
+
+    /**
+     * 天猫精灵设备分享信息
+     */
+    public static final String TMALL_SHARE_DEVICE = "tmallshareDeviceBean";
 
     /**
      * 升级时，保存的设备蓝牙版本号的Key

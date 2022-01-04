@@ -73,7 +73,7 @@ public class WifiLockApCheckAdminPasswordActivity extends BaseAddToApplicationAc
             @Override
             public void run() {
                 finish();
-                ToastUtils.showShort(R.string.bind_failed);
+                ToastUtils.showShort(getString(R.string.bind_failed));
                 startActivity(new Intent(WifiLockApCheckAdminPasswordActivity.this, WifiLockApAddThirdActivity.class));
                 socketManager.destroy();
                 runOnUiThread(new Runnable() {

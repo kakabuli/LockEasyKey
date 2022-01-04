@@ -136,7 +136,7 @@ public class PhilipsWelcomeActivity extends BaseActivity<ISplashView, SplashPres
         if (NetUtil.isNetworkAvailable()) {
 //            mPresenter.getAppVersion();
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 

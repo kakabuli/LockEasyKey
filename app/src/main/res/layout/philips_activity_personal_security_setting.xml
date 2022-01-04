@@ -133,6 +133,32 @@
                 android:layout_marginRight="@dimen/dp_16" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_language_setting"
+            android:layout_width="match_parent"
+            android:layout_height="56pt"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:id="@+id/tv_language_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15pt"
+                android:text="@string/language_setting"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/philips_icon_more"
+                android:layout_marginRight="@dimen/dp_16" />
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>

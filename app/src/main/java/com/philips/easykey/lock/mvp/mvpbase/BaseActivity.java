@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
+
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,7 +15,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.philips.easykey.lock.MyApplication;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.LanguageUtil;
 import com.philips.easykey.lock.utils.LoadingDialog;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.networkListenerutil.NetWorkChangReceiver;
 
 
@@ -133,6 +139,18 @@ public abstract class BaseActivity<T extends IBaseView, V
             im.hideSoftInputFromWindow(token,
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        //获取我们存储的语言环境 比如 "en","zh",等等
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)) {
+            super.attachBaseContext(newBase);
+            return;
+        }
+        //attach 对应语言环境下的context
+        super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, spLanguage));
     }
 
 }

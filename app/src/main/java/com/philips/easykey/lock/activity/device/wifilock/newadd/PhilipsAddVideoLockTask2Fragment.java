@@ -142,17 +142,17 @@ public class PhilipsAddVideoLockTask2Fragment extends Fragment {
             String ssid = NetUtil.getWifiName().replaceAll("\"", "");
 
             if (TextUtils.isEmpty(wifiName)) {
-                ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
+                ToastUtils.showShort(getString(R.string.philips_wifi_name_disable_empty));
                 return;
             }
             if (TextUtils.isEmpty(wifiPwd)) {
-                ToastUtils.showShort(R.string.philips_password_len_not_less_8);
+                ToastUtils.showShort(getString(R.string.philips_password_len_not_less_8));
                 return;
             }
             if (!ssid.equals(wifiName)){
                 ///手机系统连接的wifi名和在wifi列表选择的wifiname不相等
                 if(wifiName.contains("5G")){
-                    ToastUtils.showShort(R.string.philips_please_24g_network_for_door_lock_distribution);
+                    ToastUtils.showShort(getString(R.string.philips_please_24g_network_for_door_lock_distribution));
                     return;
                 }
                 else {

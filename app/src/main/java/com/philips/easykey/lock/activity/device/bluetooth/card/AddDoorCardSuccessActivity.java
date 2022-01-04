@@ -113,7 +113,7 @@ public class AddDoorCardSuccessActivity extends BaseActivity<IAddFingerSuccessVi
             case R.id.btn_save:
                 String strDoorCardName = etDoorCardName.getText().toString();
                 if (!StringUtil.nicknameJudge(strDoorCardName)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(getString(R.string.nickname_verify_error));
                     return;
                 }
                 showLoading(getString(R.string.is_savving));

@@ -3,6 +3,7 @@ package com.philips.easykey.lock.mvp.view.wifilock;
 import com.philips.easykey.lock.mvp.mvpbase.IBaseView;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
 import com.philips.easykey.lock.publiclibrary.http.result.BluetoothSharedDeviceBean;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallQueryDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 
 import java.util.List;
@@ -23,5 +24,7 @@ public interface IWifiLockFamilyManagerView extends IBaseView {
      */
     void queryFailed(Throwable throwable);
 
+    void queryTmallSuccess(TmallQueryDeviceListResult users);
 
+    void queryTmallFailed();
 }

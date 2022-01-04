@@ -30,7 +30,9 @@ public interface IWifiLockVideoCallingView extends IBaseView {
     void onstartRecordMP4CallBack();
 
     //开始视频回调
-    void onVideoDataAVStreamHeader(AVStreamHeader paramAVStreamHeader);
+//    void onVideoDataAVStreamHeader(AVStreamHeader paramAVStreamHeader);
+
+    void onCodecNotify(int notify,Object object);
 
     //麦克风权限未打开Manifest.permission.RECORD_AUDIO
     void recordAudidFailed();

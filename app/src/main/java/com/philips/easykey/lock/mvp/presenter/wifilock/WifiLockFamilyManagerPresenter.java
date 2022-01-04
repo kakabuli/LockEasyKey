@@ -6,6 +6,7 @@ import com.philips.easykey.lock.mvp.mvpbase.BasePresenter;
 import com.philips.easykey.lock.mvp.view.wifilock.IWifiLockFamilyManagerView;
 import com.philips.easykey.lock.publiclibrary.http.XiaokaiNewServiceImp;
 import com.philips.easykey.lock.publiclibrary.http.result.BaseResult;
+import com.philips.easykey.lock.publiclibrary.http.result.TmallQueryDeviceListResult;
 import com.philips.easykey.lock.publiclibrary.http.result.WifiLockShareResult;
 import com.philips.easykey.lock.publiclibrary.http.util.BaseObserver;
 import com.philips.easykey.lock.utils.KeyConstants;
@@ -51,5 +52,34 @@ public class WifiLockFamilyManagerPresenter<T> extends BasePresenter<IWifiLockFa
                 });
     }
 
+    public void aligenieUserDeviceShareQuery(String wifiSN){
+        XiaokaiNewServiceImp.aligenieUserDeviceShareQuery(wifiSN, MyApplication.getInstance().getUid())
+                .subscribe(new BaseObserver<TmallQueryDeviceListResult>() {
+                    @Override
+                    public void onSuccess(TmallQueryDeviceListResult tmallQueryDeviceListResult) {
+                        if (isSafe()) {
+                            mViewRef.get().queryTmallSuccess(tmallQueryDeviceListResult);
+                        }
+                    }
 
+                    @Override
+                    public void onAckErrorCode(BaseResult baseResult) {
+                        if (isSafe()) {
+                            mViewRef.get().queryTmallFailed();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(Throwable throwable) {
+                        if (isSafe()) {
+                            mViewRef.get().queryTmallFailed();
+                        }
+                    }
+
+                    @Override
+                    public void onSubscribe1(Disposable d) {
+
+                    }
+                });
+    }
 }

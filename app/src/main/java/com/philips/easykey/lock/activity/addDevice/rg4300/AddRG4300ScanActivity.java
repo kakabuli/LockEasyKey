@@ -217,7 +217,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
             mPresenter.checkBind(device);
             showLoading(getString(R.string.is_checking_bind));
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 
@@ -516,7 +516,7 @@ public class AddRG4300ScanActivity extends BaseActivity<ISearchDeviceView, Searc
         switch (requestCode) {
             case REQUEST_CALL_PERMISSION: //拨打电话
                 if (permissions.length != 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {//失败
-                    ToastUtils.showShort(R.string.philips_activity_addbluetooth_search);
+                    ToastUtils.showShort(getString(R.string.philips_activity_addbluetooth_search));
                 } else {//成功
                     call("tel:"+"4008005919");
                 }

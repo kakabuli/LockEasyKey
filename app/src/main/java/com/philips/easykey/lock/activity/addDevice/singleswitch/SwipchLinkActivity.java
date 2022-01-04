@@ -520,7 +520,7 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void settingDeviceThrowable() {
-        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
+        ToastUtils.showShort(getString(R.string.philips_activity_swipchlink_4));
 
     }
 
@@ -583,12 +583,12 @@ public class SwipchLinkActivity extends BaseActivity<SingleFireSwitchView, Singl
 
     @Override
     public void bindingAndModifyDeviceFail() {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
     }
 
     @Override
     public void bindingAndModifyDeviceThrowable() {
-        ToastUtils.showShort(R.string.philips_activity_swipchlink_4);
+        ToastUtils.showShort(getString(R.string.philips_activity_swipchlink_4));
     }
 //    public void refresh() {
 //        if (switchIsEn) {

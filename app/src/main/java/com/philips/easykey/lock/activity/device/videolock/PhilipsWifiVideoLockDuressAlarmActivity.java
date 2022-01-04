@@ -239,10 +239,10 @@ public class PhilipsWifiVideoLockDuressAlarmActivity extends BaseActivity<IPhili
     @Override
     public void onSettingDuress(BaseResult baseResult) {
         if("200".equals(baseResult.getCode() + "")){
-            ToastUtils.showShort(R.string.set_success);
+            ToastUtils.showShort(getString(R.string.set_success));
             finish();
         }else{
-            ToastUtils.showShort(R.string.set_failed);
+            ToastUtils.showShort(getString(R.string.set_failed));
             finish();
         }
     }

@@ -126,6 +126,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.device.videolock.PhilipsLanguageSetActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.device.videolock.WifiVideoLockDeviceRecordActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -1301,6 +1305,15 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.addDevice.PhilipsAddDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.tmall.PhilipsTmallSelectDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.tmall.PhilipsAddTamllDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.device.tmall.PhilipsTamllDeviceInfoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.addDevice.PhilipsAddDeviceHelpActivity"

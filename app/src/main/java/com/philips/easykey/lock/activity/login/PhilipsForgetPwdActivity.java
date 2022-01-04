@@ -266,7 +266,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
                 mCountDownTimer.start();
             }
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 
@@ -314,7 +314,7 @@ public class PhilipsForgetPwdActivity extends NormalBaseActivity {
 
 
         } else {
-            ToastUtils.showShort(R.string.philips_noNet);
+            ToastUtils.showShort(getString(R.string.philips_noNet));
         }
     }
 

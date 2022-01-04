@@ -375,7 +375,7 @@ public class BleAuthActivity extends BaseBleActivity<IOldBleDetailView, OldAndAu
             public void onClick(View v) {
                 String name = editText.getText().toString().trim();
                 if (!StringUtil.randomJudge(name)) {
-                    ToastUtils.showShort(R.string.philips_random_verify_error);
+                    ToastUtils.showShort(getString(R.string.philips_random_verify_error));
                     return;
                 }
                 mPresenter.realOpenLock(name, false);

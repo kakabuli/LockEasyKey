@@ -105,7 +105,7 @@ public class GatewayDoorCardManagerActivity extends BaseAddToApplicationActivity
                 break;
             case R.id.ll_add:
                 if (!NetUtil.isNetworkAvailable()) {
-                    ToastUtils.showShort(R.string.please_have_net_add_card);
+                    ToastUtils.showShort(getString(R.string.please_have_net_add_card));
                     return;
                 }
 

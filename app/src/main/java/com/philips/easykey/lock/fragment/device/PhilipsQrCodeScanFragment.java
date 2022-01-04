@@ -27,7 +27,10 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.tmall.PhilipsTmallSelectDeviceActivity;
 import com.philips.easykey.lock.activity.device.wifilock.newadd.PhilipsAddVideoLockActivity;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.dialog.MessageDialog;
 import com.philips.easykey.lock.widget.image.GlideEngine;
 
@@ -120,7 +123,14 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
             if(getActivity() != null) {
                 getActivity().finish();
             }
-        } else {
+        } else if(code.contains("authUserCode")){
+            Intent wifiIntent = new Intent(getContext(), PhilipsTmallSelectDeviceActivity.class);
+            wifiIntent.putExtra("code", code);
+            startActivity(wifiIntent);
+            if(getActivity() != null) {
+                getActivity().finish();
+            }
+        }else {
             unKnowQr();
             // 停止扫描了
             if(mCameraScan != null) {
@@ -155,9 +165,17 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
     }
 
     private void createAlbum() {
+        int language = -1;
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(!TextUtils.isEmpty(spLanguage)){
+            if(!TextUtils.equals(spLanguage,"zh")){
+                language = 2;
+            }
+        }
         PictureSelector.create(this)
                 .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .isCamera(false)
+                .setLanguage(language)
                 .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .minSelectNum(1)// 最小选择数量
                 .imageSpanCount(4)// 每行显示个数
@@ -180,7 +198,7 @@ public class PhilipsQrCodeScanFragment extends Fragment implements CameraScan.On
                 String code = CodeUtils.parseCode(path);
                 processScanResult(code);
             }else {
-                ToastUtils.showShort(R.string.no_data);
+                ToastUtils.showShort(getString(R.string.no_data));
             }
         }
 

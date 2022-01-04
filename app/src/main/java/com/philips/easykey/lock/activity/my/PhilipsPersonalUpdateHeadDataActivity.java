@@ -39,6 +39,7 @@ import com.philips.easykey.lock.widget.image.GlideEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -175,9 +176,17 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     }
 
     private void createAlbum(){
+        int language = -1;
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(!TextUtils.isEmpty(spLanguage)){
+            if(!TextUtils.equals(spLanguage,"zh")){
+                language = 2;
+            }
+        }
         PictureSelector.create(PhilipsPersonalUpdateHeadDataActivity.this)
                 .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .isCamera(false)
+                .setLanguage(language)
                 .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .minSelectNum(1)// 最小选择数量
                 .imageSpanCount(4)// 每行显示个数
@@ -203,7 +212,7 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
                 }
                 uploadPhoto();
             }else {
-                ToastUtils.showShort(R.string.no_data);
+                ToastUtils.showShort(getString(R.string.no_data));
             }
         }
 
@@ -242,27 +251,27 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     }
 
     private void loginOut() {
-        AlertDialogUtil.getInstance().noEditTwoButtonDialog(this, getString(R.string.hint), getString(R.string.confirm_log_out), getString(R.string.philips_cancel), getString(R.string.query), new AlertDialogUtil.ClickListener() {
-            @Override
-            public void left() {
+        AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.confirm_log_out),
+                getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+                    @Override
+                    public void left() {
 
-            }
+                    }
 
-            @Override
-            public void right() {
-                mPresenter.loginOut();
-                showLoading(getString(R.string.is_login_out));
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    @Override
+                    public void right() {
+                        mPresenter.loginOut();
+                        showLoading(getString(R.string.is_login_out));
+                    }
 
-            }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
 
-            @Override
-            public void afterTextChanged(String toString) {
-
-            }
-        });
+                    @Override
+                    public void afterTextChanged(String toString) {
+                    }
+                });
     }
 
     //请求权限

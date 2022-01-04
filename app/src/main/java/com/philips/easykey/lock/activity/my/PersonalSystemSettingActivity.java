@@ -112,7 +112,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
             @Override
             public void right() {
                 //清除缓存数据，关闭会话。
-                ToastUtils.showShort(R.string.delete_cache_data_success);
+                ToastUtils.showShort(getString(R.string.delete_cache_data_success));
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -161,7 +161,7 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
                                   SelectMarket(isForced,upgradeBean);
 
                             }else {
-                                ToastUtils.showShort(R.string.new_version);
+                                ToastUtils.showShort(getString(R.string.new_version));
                             }
                       //  }
                         Log.e(GeTui.VideoLog,"currentCode:"+cuurentversioncode+" servercode:"+upgradeBean.getVersionCode());
@@ -174,14 +174,14 @@ public class PersonalSystemSettingActivity extends BaseActivity<ISystemSettingVi
 
                 }else {
                     Log.e(GeTui.VideoLog,"update.....获取数据为null");
-                    ToastUtils.showShort(R.string.get_version_code_fail);
+                    ToastUtils.showShort(getString(R.string.get_version_code_fail));
                 }
             }
 
             @Override
             public void ShowUpgradePresenterFail() {
                 Log.e(GeTui.VideoLog,"update.....fail.......失败");
-                ToastUtils.showShort(R.string.get_version_code_fail);
+                ToastUtils.showShort(getString(R.string.get_version_code_fail));
             }
         });
     }

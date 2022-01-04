@@ -97,7 +97,7 @@ public class PhilipsAddVideoLockTask5Fragment extends Fragment {
         btnNext.setOnClickListener(v -> {
             String adminPwd = mEtAdminPwd.getText().toString();
             if (!StringUtil.randomJudge(adminPwd)) {
-                ToastUtils.showShort(R.string.philips_random_verify_error);
+                ToastUtils.showShort(getString(R.string.philips_random_verify_error));
                 return;
             }
             if(mAddVideoLockActivity != null) {

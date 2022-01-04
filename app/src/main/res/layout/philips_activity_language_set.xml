@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/cF7F7F7"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/c0066A1">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16pt"
+            app:srcCompat="@drawable/philips_icon_back_white" />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lock_language"
+            android:textColor="@color/white"
+            android:textSize="17pt"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/zh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="@color/white"
+        android:layout_marginTop="12pt"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <TextView
+            android:id="@+id/zh_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/chinese"
+            android:textColor="#333333"
+            android:layout_marginStart="16pt"
+            android:textSize="16pt" />
+
+        <CheckBox
+            android:id="@+id/zh_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17pt"
+            android:button="@drawable/language_selector"
+            android:clickable="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/en_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/zh_layout">
+
+        <TextView
+            android:id="@+id/en_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16pt"
+            android:text="@string/setting_language_en"
+            android:textColor="#333333"
+            android:textSize="16pt" />
+
+        <CheckBox
+            android:id="@+id/en_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17pt"
+            android:button="@drawable/language_selector"
+            android:clickable="false" />
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

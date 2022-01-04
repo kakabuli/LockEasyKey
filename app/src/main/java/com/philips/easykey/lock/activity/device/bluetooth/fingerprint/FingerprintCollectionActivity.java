@@ -137,21 +137,21 @@ public class FingerprintCollectionActivity extends BaseBleActivity<IAddFingerpri
 
     @Override
     public void onUploadFingerFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(getString(R.string.lock_set_success_please_sync));
         startActivity(new Intent(this,FingerprintManagerActivity.class));
         finish();
     }
 
     @Override
     public void onUploadFingerFailedServer(BaseResult result) {
-        ToastUtils.showShort(R.string.lock_set_success_please_sync);
+        ToastUtils.showShort(getString(R.string.lock_set_success_please_sync));
         startActivity(new Intent(this,FingerprintManagerActivity.class));
         finish();
     }
 
     @Override
     public void onGetFingerNumberFailedFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.set_finger_failed_number);
+        ToastUtils.showShort(getString(R.string.set_finger_failed_number));
         startActivity(new Intent(this,FingerprintManagerActivity.class));
         finish();
     }

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.ToastUtils;
 import com.philips.easykey.lock.MyApplication;
 import com.philips.easykey.lock.R;
+import com.philips.easykey.lock.activity.device.videolock.PhilipsLanguageSetActivity;
 import com.philips.easykey.lock.mvp.mvpbase.BaseActivity;
 import com.philips.easykey.lock.mvp.presenter.personalpresenter.PersonalSecuritySettingPresenter;
 import com.philips.easykey.lock.mvp.view.personalview.IPersonalSecuritySettingView;
@@ -29,6 +30,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     ImageView ivRight;
     TextView securitySettingSwitchText;
     RelativeLayout updateHandPwdLayout;
+    RelativeLayout rlLanguageSetting;
     ImageView ivOpenHandPwd;
     ImageView ivOpenTouchId;
     RelativeLayout rlOpenHandPwd;
@@ -51,6 +53,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
         ivRight = findViewById(R.id.iv_right);
         securitySettingSwitchText = findViewById(R.id.security_setting_switch_text);
         updateHandPwdLayout = findViewById(R.id.update_hand_pwd_layout);
+        rlLanguageSetting = findViewById(R.id.rl_language_setting);
         ivOpenHandPwd = findViewById(R.id.iv_open_hand_pwd);
         ivOpenTouchId = findViewById(R.id.iv_open_touch_id);
         rlOpenHandPwd = findViewById(R.id.rl_open_hand_pwd);
@@ -107,6 +110,12 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
         rlOpenFaceId.setOnClickListener(v -> {
             faceId = !faceId;
             setFaceIdUI(faceId);
+        });
+
+        rlLanguageSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PhilipsLanguageSetActivity.class);
+            intent.putExtra("activity","main");
+            startActivity(intent);
         });
 
         initView();

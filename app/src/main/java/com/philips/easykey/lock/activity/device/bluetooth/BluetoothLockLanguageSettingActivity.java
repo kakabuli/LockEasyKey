@@ -122,13 +122,13 @@ public class BluetoothLockLanguageSettingActivity extends BaseBleActivity<ILangu
         } else {  //英文
             languageCurrent = "en";
         }
-        ToastUtils.showShort(R.string.set_success);
+        ToastUtils.showShort(getString(R.string.set_success));
         hiddenLoading();
     }
 
     @Override
     public void onSetLangFailed(Throwable throwable) {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
         hiddenLoading();
     }
 }

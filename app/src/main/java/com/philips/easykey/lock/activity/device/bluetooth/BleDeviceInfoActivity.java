@@ -172,7 +172,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
 
     @Override
     public void SoftwareRevDataError(Throwable throwable) {
-        ToastUtils.showShort(R.string.read_device_info_fail);
+        ToastUtils.showShort(getString(R.string.read_device_info_fail));
     }
 
     @Override
@@ -189,7 +189,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
 
     @Override
     public void HardwareRevDataError(Throwable throwable) {
-        ToastUtils.showShort(R.string.read_device_info_fail);
+        ToastUtils.showShort(getString(R.string.read_device_info_fail));
     }
 
     @Override
@@ -207,7 +207,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
 
     @Override
     public void FirmwareRevDataError(Throwable throwable) {
-        ToastUtils.showShort(R.string.read_device_info_fail);
+        ToastUtils.showShort(getString(R.string.read_device_info_fail));
     }
 
     @Override
@@ -221,7 +221,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
         deviceNickname = name;
         tvDeviceName.setText(deviceNickname);
         bleLockInfo.getServerLockInfo().setLockNickName(deviceNickname);
-        ToastUtils.showLong(R.string.device_nick_name_update_success);
+        ToastUtils.showLong(getString(R.string.device_nick_name_update_success));
     }
 
     @Override
@@ -262,7 +262,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
 
     @Override
     public void onRequestOtaFailed(Throwable throwable) {
-        ToastUtils.showLong(R.string.open_ota_failed);
+        ToastUtils.showLong(getString(R.string.open_ota_failed));
     }
 
     @Override
@@ -285,7 +285,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
             showLoading(getString(R.string.is_authing));
         } else {
             hiddenLoading();
-            ToastUtils.showLong(R.string.connet_failed_please_near);
+            ToastUtils.showLong(getString(R.string.connet_failed_please_near));
         }
     }
 
@@ -309,7 +309,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
             public void onDownFailed(String url, String path, Throwable throwable) {
                 LogUtils.d("下载文件失败，  " + throwable.getMessage());
                 hiddenLoading();
-                ToastUtils.showLong(R.string.down_file_failed_please_retry);
+                ToastUtils.showLong(getString(R.string.down_file_failed_please_retry));
             }
 
             @Override
@@ -358,7 +358,7 @@ public class BleDeviceInfoActivity extends BaseBleCheckInfoActivity<IDeviceInfoV
             public void onClick(View v) {
                 name = editText.getText().toString().trim();
                 if (!StringUtil.nicknameJudge(name)) {
-                    ToastUtils.showShort(R.string.nickname_verify_error);
+                    ToastUtils.showShort(getString(R.string.nickname_verify_error));
                     return;
                 }
                 if (deviceNickname != null) {

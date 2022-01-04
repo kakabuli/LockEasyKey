@@ -65,11 +65,11 @@ public class PhilipsAddVideoLockTask6Fragment extends Fragment {
             // TODO: 2021/5/10 立即体验
             String name = etName.getText().toString();
             if(TextUtils.isEmpty(name)) {
-                ToastUtils.showShort(R.string.nickName_not_empty);
+                ToastUtils.showShort(getString(R.string.nickName_not_empty));
                 return;
             }
             if (name.length() > 10 ) {
-                ToastUtils.showShort(R.string.philips_nickname_verify_error);
+                ToastUtils.showShort(getString(R.string.philips_nickname_verify_error));
                 return;
             }
 

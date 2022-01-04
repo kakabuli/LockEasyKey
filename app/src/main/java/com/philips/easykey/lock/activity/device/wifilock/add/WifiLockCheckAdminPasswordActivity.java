@@ -118,7 +118,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
                     return;
                 }
                 finish();
-                ToastUtils.showShort(R.string.bind_failed);
+                ToastUtils.showShort(getString(R.string.bind_failed));
                 Intent intent = new Intent(WifiLockCheckAdminPasswordActivity.this, WifiLockAPAddFailedActivity.class);
                 intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
                 startActivity(intent);
@@ -286,7 +286,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onBindFailed(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);
@@ -295,7 +295,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onBindThrowable(Throwable throwable) {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);
@@ -312,7 +312,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onUpdateFailed(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);
@@ -321,7 +321,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onUpdateThrowable(Throwable throwable) {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);
@@ -335,7 +335,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onSendFailed() {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);
@@ -343,7 +343,7 @@ public class WifiLockCheckAdminPasswordActivity extends BaseActivity<IWifiLockAP
 
     @Override
     public void onReceiverFailed() {
-        ToastUtils.showShort(R.string.bind_failed);
+        ToastUtils.showShort(getString(R.string.bind_failed));
         Intent intent = new Intent(this, WifiLockAPAddFailedActivity.class);
         intent.putExtra(KeyConstants.WIFI_LOCK_SETUP_IS_AP, false);
         startActivity(intent);

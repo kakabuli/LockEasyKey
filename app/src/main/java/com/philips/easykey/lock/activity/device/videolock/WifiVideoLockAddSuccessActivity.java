@@ -94,11 +94,11 @@ public class WifiVideoLockAddSuccessActivity extends BaseActivity<IWifiLockVideo
         save.setOnClickListener(v -> {
             name = inputName.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
-                ToastUtils.showShort(R.string.not_empty);
+                ToastUtils.showShort(getString(R.string.not_empty));
                 return;
             }
             if (!StringUtil.nicknameJudge(name)) {
-                ToastUtils.showShort(R.string.nickname_verify_error);
+                ToastUtils.showShort(getString(R.string.nickname_verify_error));
                 return;
             }
 

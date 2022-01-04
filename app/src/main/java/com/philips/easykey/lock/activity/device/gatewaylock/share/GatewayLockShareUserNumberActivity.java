@@ -158,7 +158,7 @@ public class GatewayLockShareUserNumberActivity extends BaseActivity<IGatewayDel
                     public void onClick(View v) {
                         data = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(data)) {
-                            ToastUtils.showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(getString(R.string.nickname_verify_error));
                             return;
                         }
                         if (dataBean.getUserNickname().equals(data)) {

@@ -75,7 +75,7 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
             if (!TextUtils.isEmpty(deviceId) && !TextUtils.isEmpty(gatewayId)) {
                 mPresenter.updateZigbeeLockName(gatewayId, deviceId, name);
             } else {
-                ToastUtils.showShort(R.string.gateway_or_device_null);
+                ToastUtils.showShort(getString(R.string.gateway_or_device_null));
             }
         });
 
@@ -188,13 +188,13 @@ public class AddZigbeeLockSuccessSaveActivity extends BaseActivity<AddZigbeeLock
 
     @Override
     public void updateDevNickNameFail() {
-        ToastUtils.showShort(R.string.update_nickname_fail);
+        ToastUtils.showShort(getString(R.string.update_nickname_fail));
     }
 
     @Override
     public void updateDevNickNameThrowable(Throwable throwable) {
         LogUtils.d("修改名称出现异常" + throwable.getMessage());
-        ToastUtils.showShort(R.string.update_nickname_exception);
+        ToastUtils.showShort(getString(R.string.update_nickname_exception));
     }
 
 

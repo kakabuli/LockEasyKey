@@ -19,22 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_time"
-        android:layout_below="@id/tv_day_time"
-        android:text="16:40"
-        android:textColor="@color/color_333333"
-        android:layout_marginEnd="16pt"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day_time"
-        android:layout_marginTop="14pt"
-        android:textSize="12pt"
-        app:layout_constraintEnd_toEndOf="parent"  />
-
-
     <ImageView
         android:id="@+id/iv"
         android:layout_width="21pt"
@@ -46,18 +30,38 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_day_time" />
 
 
-    <TextView
-        android:id="@+id/tv_right"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:layout_marginLeft="20pt"
+        android:layout_below="@id/tv_day_time"
+        android:layout_marginTop="14pt"
+        android:layout_marginLeft="30pt"
         app:layout_constraintStart_toEndOf="@id/iv"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day_time"
-        android:layout_marginTop="12pt"
-        android:text="16:40"
-        android:textColor="@color/color_333333"
-        android:textSize="16pt" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_time">
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:text="16:40"
+            android:layout_marginStart="20pt"
+            android:layout_marginEnd="20pt"
+            android:textColor="@color/color_333333"
+            android:layout_toStartOf="@+id/tv_time"
+            android:textSize="16pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_time"
+            android:text="16:40"
+            android:layout_marginEnd="16pt"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/color_333333"
+            android:textSize="12pt" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_pic"
@@ -66,7 +70,7 @@
         android:layout_marginTop="12pt"
         android:layout_marginStart="45pt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_right">
+        app:layout_constraintTop_toBottomOf="@+id/rl">
 
         <ImageView
             android:id="@+id/iv_content"

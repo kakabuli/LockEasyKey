@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f7f7f7">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44pt"
+        android:background="@color/c0066A1">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingStart="16pt"
+            android:paddingEnd="16pt"
+            app:srcCompat="@drawable/philips_icon_back_white" />
+
+        <TextView
+            android:id="@+id/head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/device_detail"
+            android:textColor="@color/white"
+            android:textSize="17pt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:layout_marginTop="12pt"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/device_name"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"
+            android:textSize="16pt"
+            android:layout_marginLeft="16pt"/>
+
+
+        <TextView
+            android:id="@+id/tv_device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#189383"
+            android:textSize="16pt"
+            android:layout_marginRight="16pt"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unit_type"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"
+            android:textSize="16pt"
+            android:layout_marginLeft="16pt"/>
+
+
+        <TextView
+            android:id="@+id/tv_device_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#189383"
+            android:textSize="16pt"
+            android:layout_marginRight="16pt"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/module_mark"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"
+            android:textSize="16pt"
+            android:layout_marginLeft="16pt"/>
+
+
+        <TextView
+            android:id="@+id/tv_device_mac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#189383"
+            android:textSize="16pt"
+            android:layout_marginRight="16pt"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56pt"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/serial_number"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"
+            android:textSize="16pt"
+            android:layout_marginLeft="16pt"/>
+
+
+        <TextView
+            android:id="@+id/tv_device_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#189383"
+            android:textSize="16pt"
+            android:layout_marginRight="16pt"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bt_del"
+            android:layout_width="match_parent"
+            android:layout_height="44pt"
+            android:layout_marginBottom="53pt"
+            android:layout_marginLeft="16pt"
+            android:layout_marginRight="16pt"
+            android:layout_alignParentBottom="true"
+            android:textSize="16pt"
+            android:textColor="#ffffff"
+            android:background="#0066A1"
+            android:text="@string/philips_tmall_band_unbind_device"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

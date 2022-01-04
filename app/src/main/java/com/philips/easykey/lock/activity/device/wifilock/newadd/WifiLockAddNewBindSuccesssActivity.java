@@ -65,11 +65,11 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
         findViewById(R.id.save).setOnClickListener(v -> {
             String name = inputName.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
-                ToastUtils.showShort(R.string.not_empty);
+                ToastUtils.showShort(getString(R.string.not_empty));
                 return;
             }
             if (!StringUtil.nicknameJudge(name)) {
-                ToastUtils.showShort(R.string.nickname_verify_error);
+                ToastUtils.showShort(getString(R.string.nickname_verify_error));
                 return;
             }
 
@@ -179,13 +179,13 @@ public class WifiLockAddNewBindSuccesssActivity extends BaseActivity<IWifiLockAd
 
     @Override
     public void onSetNameFailedNet(Throwable throwable) {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
         hiddenLoading();
     }
 
     @Override
     public void onSetNameFailedServer(BaseResult baseResult) {
-        ToastUtils.showShort(R.string.set_failed);
+        ToastUtils.showShort(getString(R.string.set_failed));
         hiddenLoading();
     }
 }

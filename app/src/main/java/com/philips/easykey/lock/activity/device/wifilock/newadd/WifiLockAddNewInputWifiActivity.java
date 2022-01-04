@@ -63,7 +63,7 @@ public class WifiLockAddNewInputWifiActivity extends BaseAddToApplicationActivit
             sSsid = apSsidText.getText().toString();
             String sPassword = apPasswordEdit.getText().toString();
             if (TextUtils.isEmpty(sSsid)) { //WiFi名为空
-                ToastUtils.showShort(R.string.philips_wifi_name_disable_empty);
+                ToastUtils.showShort(getString(R.string.philips_wifi_name_disable_empty));
                 return;
             }
             if (TextUtils.isEmpty(sPassword) ) { //WiFi密码为空

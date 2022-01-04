@@ -488,7 +488,7 @@ public class BleDetailActivity extends BaseBleActivity<IDeviceDetailView, BleDev
                         if (bleLockInfo.getSafeMode() == 1) {
                             ToastUtils.showLong(R.string.safe_mode_can_not_open);
                         } else if (bleLockInfo.getBackLock() == 0) {
-                            ToastUtils.showLong(R.string.back_lock_can_not_open);
+                            ToastUtils.showLong(getString(R.string.back_lock_can_not_open));
                             changLockStatus(2);
                         }
                         return;

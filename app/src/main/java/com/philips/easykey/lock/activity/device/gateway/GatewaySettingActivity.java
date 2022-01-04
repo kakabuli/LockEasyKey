@@ -182,7 +182,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
                 gatewaySettingItemBeanThree.setTitle(getString(R.string.gateway_setting_wifi_name));
             }
         }else {
-            ToastUtils.showShort(R.string.gateway_confirm_version);
+            ToastUtils.showShort(getString(R.string.gateway_confirm_version));
             return;
         }
         if (isAdmin==1){
@@ -645,7 +645,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if (loadingDialog!=null){
             loadingDialog.dismiss();
         }
-        ToastUtils.showShort(R.string.get_net_basic_fail);
+        ToastUtils.showShort(getString(R.string.get_net_basic_fail));
     }
 
     @Override
@@ -653,7 +653,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if (loadingDialog!=null){
             loadingDialog.dismiss();
         }
-        ToastUtils.showShort(R.string.get_net_basic_fail);
+        ToastUtils.showShort(getString(R.string.get_net_basic_fail));
     }
 
     @Override
@@ -683,7 +683,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if( (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW)) || (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW2)) ){  // 小网关
 
         }else{
-            ToastUtils.showShort(R.string.get_wifi_info_fail);
+            ToastUtils.showShort(getString(R.string.get_wifi_info_fail));
         }
 
     }
@@ -696,7 +696,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if( (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW)) || (!TextUtils.isEmpty(model) && model.equals(KeyConstants.SMALL_GW2)) ){  // 小网关
 
         }else{
-            ToastUtils.showShort(R.string.get_wifi_info_fail);
+            ToastUtils.showShort(getString(R.string.get_wifi_info_fail));
         }
     }
 
@@ -734,7 +734,7 @@ public class GatewaySettingActivity extends BaseActivity<GatewaySettingView, Gat
         if (loadingDialog!=null){
             loadingDialog.dismiss();
         }
-        ToastUtils.showShort(R.string.get_zb_channel_fail);
+        ToastUtils.showShort(getString(R.string.get_zb_channel_fail));
     }
 
     @Override

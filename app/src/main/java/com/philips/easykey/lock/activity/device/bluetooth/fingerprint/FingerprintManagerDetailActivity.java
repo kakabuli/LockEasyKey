@@ -137,11 +137,11 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
                     public void onClick(View v) {
                         String name = editText.getText().toString().trim();
                         if (!StringUtil.nicknameJudge(name)) {
-                            ToastUtils.showShort(R.string.nickname_verify_error);
+                            ToastUtils.showShort(getString(R.string.nickname_verify_error));
                             return;
                         }
                         if (StringUtil.judgeNicknameWhetherSame(fingerprint.getNickName(),name)){
-                            ToastUtils.showShort(R.string.nickname_not_modify);
+                            ToastUtils.showShort(getString(R.string.nickname_not_modify));
                             alertDialog.dismiss();
                             return;
                         }
@@ -190,7 +190,7 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
 
     @Override
     public void updateNickNameSuccess(String nickName) {
-        ToastUtils.showShort(R.string.modify_success);
+        ToastUtils.showShort(getString(R.string.modify_success));
         hiddenLoading();
         Intent intent = new Intent(this, FingerprintManagerActivity.class);
         startActivity(intent);
@@ -209,13 +209,13 @@ public class FingerprintManagerDetailActivity extends BaseBleActivity<IPasswordD
 
     @Override
     public void onLockNoThisNumber() {
-        ToastUtils.showLong(R.string.lock_no_this_finger);
+        ToastUtils.showLong(getString(R.string.lock_no_this_finger));
         finish();
     }
 
     @Override
     public void onGetLockNumberFailed(Throwable throwable) {
-        ToastUtils.showLong(R.string.get_lock_finger_failed);
+        ToastUtils.showLong(getString(R.string.get_lock_finger_failed));
         finish();
     }
 }

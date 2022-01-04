@@ -169,7 +169,7 @@ public class WifiLockAlarmRecordFragment extends BaseFragment<IWifiLockAlarmReco
 
     @Override
     public void noMoreData() {
-        ToastUtils.showShort(R.string.no_more_data);
+        ToastUtils.showShort(getString(R.string.no_more_data));
         refreshLayout.finishLoadMore();
         refreshLayout.setEnableLoadMore(false);
     }

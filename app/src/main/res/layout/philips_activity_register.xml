@@ -167,7 +167,7 @@
         android:id="@+id/ivAgreement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50pt"
+        android:layout_marginStart="39pt"
         android:layout_marginTop="16pt"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="parent"

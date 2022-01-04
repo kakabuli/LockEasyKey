@@ -256,7 +256,7 @@ public class PhilipsWifiVideoLockSettingDuressAlarmActivity extends BaseActivity
             });
         }
         else{
-            ToastUtils.showShort(R.string.set_failed);
+            ToastUtils.showShort(getString(R.string.set_failed));
             Intent intent = new Intent(this, PhilipsWifiVideoLockDuressAlarmActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, mPhilipsDuressBean.getWifiSN());
             startActivity(intent);

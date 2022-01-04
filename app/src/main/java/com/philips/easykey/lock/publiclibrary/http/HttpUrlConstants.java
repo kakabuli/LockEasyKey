@@ -534,4 +534,24 @@ public class HttpUrlConstants {
      * 获取设备列表
      */
     public static final String GET_ALLBINDDEVICE = BASE_URL + "app/user/getAllBindDevice";
+
+    /**
+     * 天猫扫码认证
+     */
+    public static final String ALIGENIE_USER_LOGIN = BASE_URL + "aligenie/user/login";
+
+    /**
+     * 用户分享设备
+     */
+    public static final String ALIGENIE_USER_DEVICE_SHARE = BASE_URL + "aligenie/user/device/share";
+
+    /**
+     * 查询用户分享猫精app的设备
+     */
+    public static final String ALIGENIE_USER_DEVICE_SHARE_QUERY = BASE_URL + "aligenie/user/device/share/query";
+
+    /**
+     * 解绑分享设备
+     */
+    public static final String ALIGENIE_USER_DEVICE_SHARE_DEL = BASE_URL + "aligenie/user/device/share/del";
 }
