@@ -391,8 +391,12 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
     }
 
     private void sendRandomFailedServer(BaseResult result) {
-
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
     }
 
     private void registerFailed(Throwable e) { //注册失败
@@ -403,9 +407,14 @@ public class PhilipsRegisterActivity extends NormalBaseActivity {
     private void registerFailedServer(BaseResult result) {
         hiddenLoading();
         if ("445".equals(result.getCode())){
-            AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_verification_code),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
+            AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, result.getMsg(),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
         }else {
-            ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+            if(TextUtils.isEmpty(result.getMsg())){
+                String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+                ToastUtils.showLong(httpErrorCode);
+            }else {
+                ToastUtils.showLong(result.getMsg());
+            }
         }
     }
 

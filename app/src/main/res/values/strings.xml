@@ -159,11 +159,12 @@
     <string name="no_support_fingeprint">Fingerprint recognition is not supported</string>
     <string name="please_open_hand_pwd">请开启手势密码</string>
     <string name="update_hand_pwd">更改手势密码</string>
+    <string name="acc_sign_out">Account cancellation</string>
     <string name="open_touch_id">Enable Touch ID</string>
     <string name="close_touch_id">Disable Touch ID</string>
     <string name="open_face_id">Enable Face ID</string>
     <string name="close_face_id">Disable Face ID</string>
-    <string name="kaadas_touch_id">“Philips EasyKey Plus”的触控ID</string>
+    <string name="philips_touch_id">“Philips EasyKey Plus”的触控ID</string>
     <string name="verify_telephone_fingerprint">Please verify the fingerprint via Home button</string>
     <string name="hand_pwd_drraw_the_ailure">绘制错误，请重新绘制</string>
     <string name="hand_pwd_drraw_the_old_ailure">请绘制旧手势密码</string>
@@ -897,6 +898,8 @@
     <string name="pick_proof">Anti-pry alert</string>
     <string name="stress_alarm">Duress Alarm</string>
     <string name="what_is_coercion_alarm">What is duress alert?</string>
+    <string name="lock_state">Door lock status</string>
+    <string name="lock_state_open">Door lock opened</string>
     <string name="lock_alarm">Lock-up alert</string>
     <string name="pir_trigger">PIR triggering</string>
     <string name="low_power_alarm">Low bettery level alert</string>

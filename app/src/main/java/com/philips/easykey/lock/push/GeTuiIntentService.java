@@ -58,6 +58,7 @@ public class GeTuiIntentService extends GTIntentService {
         Log.d(TAG, "onReceiveServicePid -> " + pid);
     }
 
+
     //onReceiveMessageData 处理透传消息<br>
     @Override
     public void onReceiveMessageData(Context context, GTTransmitMessage msg) {
@@ -160,7 +161,6 @@ public class GeTuiIntentService extends GTIntentService {
         Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
         LogUtils.d("shulan -- onReceiveClientId-->clientid=" + clientid);
 	//	SPUtils.put(context,"clientId_GetTui",clientid);
-        MMKVUtils.setMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,clientid);
         sendMessage(clientid, 1);
         if(!Rom.isEmui() && !Rom.isMiui() && !clientid.equals(MMKVUtils.getStringMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,""))){
             refreshedTokenToServer(clientid);
@@ -383,6 +383,8 @@ public class GeTuiIntentService extends GTIntentService {
             XiaokaiNewServiceImp.uploadPushId(uid, JpushId, type).subscribe(new BaseObserver<BaseResult>() {
                 @Override
                 public void onSuccess(BaseResult baseResult) {
+                    MMKVUtils.setMultiMMKV(SPUtils.FILE_NAME,GeTui.JPUSH_ID,JpushId);
+                    LogUtils.e(GeTui.VideoLog, "pushid上传成功,服务返回:" + baseResult);
                 }
 
                 @Override

@@ -295,6 +295,7 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                     public void right() {
                         SPUtils.putProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, false);
                         MyApplication.getInstance().initSDK();
+                        startKeepAliveSelf();
                     }
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -514,28 +515,28 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     private void tokenDialog(String content) {
-        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), content,
+        AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, "", content,
                 null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
                     public void left() {
 
-                    }
+            }
 
-                    @Override
-                    public void right() {
+            @Override
+            public void right() {
 
-                    }
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-                    }
+            @Override
+            public void afterTextChanged(String toString) {
 
-                    @Override
-                    public void afterTextChanged(String toString) {
+            }
+        });
 
-                    }
-                });
     }
 
 
@@ -623,7 +624,8 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
                 AlertDialogUtil.getInstance().noButtonDialogWithBackground(this, getString(R.string.philips_input_correct_account_or_password),Color.parseColor("#FFFFFF"),Color.parseColor("#000000"), (float) 0.5);
             }
         }else {
-            ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+            //ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+            ToastUtils.showShort(result.getMsg());
         }
     }
 
@@ -654,7 +656,11 @@ public class PhilipsLoginActivity extends NormalBaseActivity{
     }
 
     public void sendRandomFailedServer(BaseResult result) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        }else {
+            ToastUtils.showShort(result.getMsg());
+        }
     }
 
     public void sendRandomFailed(Throwable e) {

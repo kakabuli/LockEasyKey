@@ -1,6 +1,7 @@
 package com.philips.easykey.lock.activity.device.wifilock.newadd;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,6 +15,10 @@ import androidx.annotation.Nullable;
 import com.philips.easykey.lock.R;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.ConstantConfig;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
+
+import java.util.Locale;
 
 public class PhilipsModifyPassWordHelpActivity extends BaseAddToApplicationActivity {
 
@@ -40,7 +45,24 @@ public class PhilipsModifyPassWordHelpActivity extends BaseAddToApplicationActiv
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD);
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            Locale locale = getResources().getConfiguration().locale;
+            String language = locale.getLanguage();
+            if(TextUtils.equals(language,"zh")){
+                webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD_ZH);
+            }else if(TextUtils.equals(language,"en")){
+                webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD_EN);
+            }else {
+                webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD);
+            }
+        }else {
+            if(TextUtils.equals(spLanguage,"zh")){
+                webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD_ZH);
+            }else {
+                webView.loadUrl(ConstantConfig.PHILIPS_UPDATE_ADMIN_PASSWORD_EN);
+            }
+        }
     }
 
     public class MyWebViewClient extends WebViewClient {

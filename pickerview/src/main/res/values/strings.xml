@@ -8,4 +8,11 @@
     <string name="pickerview_hours">hour</string>
     <string name="pickerview_minutes">minute</string>
     <string name="pickerview_seconds">second</string>
+    <string name="pickerview_one">MON</string>
+    <string name="pickerview_two">TUE</string>
+    <string name="pickerview_three">WED</string>
+    <string name="pickerview_four">THU</string>
+    <string name="pickerview_five">FRI</string>
+    <string name="pickerview_six">SAT</string>
+    <string name="pickerview_sun">SUN</string>
 </resources>

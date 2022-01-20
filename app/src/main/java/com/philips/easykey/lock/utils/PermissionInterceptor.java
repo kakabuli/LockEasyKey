@@ -230,15 +230,6 @@ public final class PermissionInterceptor implements IPermissionInterceptor {
                     }
                     break;
                 }
-                case Permission.GET_ACCOUNTS:
-                case Permission.READ_CONTACTS:
-                case Permission.WRITE_CONTACTS: {
-                    String hint = context.getString(R.string.philips_common_permission_contacts);
-                    if (!hints.contains(hint)) {
-                        hints.add(hint);
-                    }
-                    break;
-                }
                 case Permission.READ_CALENDAR:
                 case Permission.WRITE_CALENDAR: {
                     String hint = context.getString(R.string.philips_common_permission_calendar);

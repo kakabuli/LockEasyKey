@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,9 +18,12 @@ import com.philips.easykey.lock.adapter.PersonalUserAgreementAdapter;
 import com.philips.easykey.lock.bean.PersonalUserAgreementBean;
 import com.philips.easykey.lock.mvp.mvpbase.BaseAddToApplicationActivity;
 import com.philips.easykey.lock.utils.ConstantConfig;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity implements View.OnClickListener {
@@ -51,7 +56,24 @@ public class PersonalUserAgreementActivity extends BaseAddToApplicationActivity 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE);
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            Locale locale = getResources().getConfiguration().locale;
+            String language = locale.getLanguage();
+            if(TextUtils.equals(language,"zh")){
+                webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE_ZH);
+            }else if(TextUtils.equals(language,"en")){
+                webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE_EN);
+            }else {
+                webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE);
+            }
+        }else {
+            if(TextUtils.equals(spLanguage,"zh")){
+                webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE_ZH);
+            }else {
+                webView.loadUrl(ConstantConfig.PHILIPS_TERMS_OF_USE_EN);
+            }
+        }
     }
 
 

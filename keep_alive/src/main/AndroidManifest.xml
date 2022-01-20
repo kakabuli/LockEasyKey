@@ -25,7 +25,8 @@
             ></service>
         <!--android:process=":slremote"-->
         <receiver android:name=".receive.NotificationClickReceiver"
-            android:process=":sllocal">
+            android:process=":sllocal"
+            android:exported="false">
             <intent-filter>
                 <action android:name="CLICK_NOTIFICATION"></action>
             </intent-filter>

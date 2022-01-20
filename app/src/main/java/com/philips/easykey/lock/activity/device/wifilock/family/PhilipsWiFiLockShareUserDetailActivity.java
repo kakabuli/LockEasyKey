@@ -188,7 +188,12 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
 
     @Override
     public void deleteCommonUserListFail(BaseResult baseResult) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        if(TextUtils.isEmpty(baseResult.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, baseResult.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(baseResult.getMsg());
+        }
         hiddenLoading();
     }
 
@@ -209,7 +214,12 @@ public class PhilipsWiFiLockShareUserDetailActivity extends BaseActivity<IWiFiLo
 
     @Override
     public void modifyCommonUserNicknameFail(BaseResult baseResult) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        if(TextUtils.isEmpty(baseResult.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, baseResult.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(baseResult.getMsg());
+        }
         hiddenLoading();
     }
 

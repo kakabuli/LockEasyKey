@@ -378,7 +378,12 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
 
     @Override
     public void photoUploadFail(BaseResult baseResult) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        if(TextUtils.isEmpty(baseResult.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, baseResult.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(baseResult.getMsg());
+        }
     }
 
     @Override
@@ -418,7 +423,12 @@ public class PhilipsPersonalUpdateHeadDataActivity extends BaseActivity<IPersona
     @Override
     public void onLoginOutFailedServer(BaseResult result) {
         hiddenLoading();
-        ToastUtils.showShort(getString(R.string.philips_code_logout_fail) + HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
         LogUtils.d("退出失败  " + result.getMsg());
     }
 

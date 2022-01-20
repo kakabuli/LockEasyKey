@@ -1,5 +1,7 @@
 package com.philips.easykey.lock.publiclibrary.http.util;
 
+import com.philips.easykey.lock.MyApplication;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,7 @@ public class HttpHeaderInterceptor implements Interceptor {
         Request.Builder requestBuilder = oldRequest.newBuilder();
         requestBuilder
                 .addHeader("Content-Type", "application/json")
+                .addHeader("lang", MyApplication.getInstance().getLanguage())
 //                .addHeader("Accept", "application/json")
         ;
         //添加公共参数,添加到header中

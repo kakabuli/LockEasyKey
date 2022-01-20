@@ -284,7 +284,12 @@ public class PhilipsWifiLockVistorRecordFragment extends BaseFragment<IWifiLockV
 
     @Override
     public void onLoadServerRecordFailedServer(BaseResult result) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(getActivity(), result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(getActivity(), result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
     }

@@ -36,7 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/philips_guide_page_two_hint"
+        android:gravity="center"
+        android:text="@string/philips_guide_page_three_hint"
         android:textColor="#0066A1"
         android:textSize="16pt" />
 
@@ -46,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/philips_one_trigger_open"
+        android:text="@string/philips_remote_control"
         android:textColor="#0066A1"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"

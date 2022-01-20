@@ -18,7 +18,7 @@
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="@dimen/dp_15"
-        android:text="@string/kaadas_touch_id"
+        android:text="@string/philips_touch_id"
         />
     <TextView
         android:layout_width="match_parent"

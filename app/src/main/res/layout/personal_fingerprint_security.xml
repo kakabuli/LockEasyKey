@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_7"
         android:gravity="center"
-        android:text="@string/kaadas_touch_id"
+        android:text="@string/philips_touch_id"
         android:textColor="#000000"
         android:textSize="@dimen/dp_15" />
 

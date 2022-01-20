@@ -23,7 +23,6 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.NetUtil;
 import com.blankj.utilcode.util.ToastUtils;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -35,6 +34,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import info.mqtt.android.service.Ack;
+import info.mqtt.android.service.MqttAndroidClient;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -164,7 +165,7 @@ public class MqttService extends Service {
         //
 
         if (mqttClient == null) {
-            mqttClient = new MqttAndroidClient(MyApplication.getInstance(), MqttConstant.MQTT_BASE_URL, "app:" + userId);
+            mqttClient = new MqttAndroidClient(MyApplication.getInstance(), MqttConstant.MQTT_BASE_URL, "app:" + userId, Ack.AUTO_ACK);
         }
 
         //已经连接
@@ -344,7 +345,7 @@ public class MqttService extends Service {
 
                 }
             });
-        } catch (MqttException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -414,7 +415,7 @@ public class MqttService extends Service {
             }else{
                 mqttConnection();
             }
-        } catch (MqttException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return onReceiverDataObservable;
@@ -452,7 +453,7 @@ public class MqttService extends Service {
                         disconnectObservable.onNext(false);
                     }
                 });
-            } catch (MqttException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
@@ -496,7 +497,7 @@ public class MqttService extends Service {
                         disconnectObservable.onNext(false);
                     }
                 });
-            } catch (MqttException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {

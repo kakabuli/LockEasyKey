@@ -159,6 +159,31 @@
                 android:layout_marginRight="@dimen/dp_16" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="56pt"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15pt"
+                android:text="@string/acc_sign_out"
+                android:textColor="#333333"
+                android:textSize="16pt" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/grey_right_icon"
+                android:layout_marginRight="@dimen/dp_16" />
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>

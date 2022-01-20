@@ -309,6 +309,7 @@ public class PhilipsDeviceFragment extends Fragment implements EasyPermissions.P
         }
         mWillShowDeviceBeans.clear();
         mWillShowDeviceBeans.addAll(mAllDeviceBeans);
+        mRvHomeDeviceAdapter.setList(mWillShowDeviceBeans);
         mVpHomeDevicesAdapter.notifyDataSetChanged();
     }
 

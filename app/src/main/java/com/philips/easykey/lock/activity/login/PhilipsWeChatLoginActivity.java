@@ -246,6 +246,7 @@ public class PhilipsWeChatLoginActivity extends NormalBaseActivity {
 
                         @Override
                         public void onAckErrorCode(BaseResult baseResult) {
+                            ToastUtils.showShort(baseResult.getMsg());
                         }
 
                         @Override
@@ -296,7 +297,7 @@ public class PhilipsWeChatLoginActivity extends NormalBaseActivity {
 
             @Override
             public void onAckErrorCode(BaseResult baseResult) {
-
+                ToastUtils.showShort(baseResult.getMsg());
             }
 
             @Override
@@ -337,7 +338,12 @@ public class PhilipsWeChatLoginActivity extends NormalBaseActivity {
                 });
     }
     public void sendRandomFailedServer(BaseResult result) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
     }
     public void sendRandomFailed(Throwable e) {
         LogUtils.d("验证码发送失败");

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -93,18 +94,20 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
         back.setOnClickListener(v -> finish());
         mRlDetailRecord.setOnClickListener(v -> {
+            if (wifiLockInfo == null) return;
             Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
             startActivity(intent);
         });
         mTvLastRecord.setOnClickListener(v -> {
+            if (wifiLockInfo == null) return;
             Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiLockRecordActivity.class);
             intent.putExtra(KeyConstants.WIFI_SN, wifiLockInfo.getWifiSN());
             startActivity(intent);
         });
         mRlDetailAlbum.setOnClickListener(v -> {
             Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockAlbumActivity.class);
-            intent.putExtra(KeyConstants.WIFI_SN,wifiSn);
+            intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
             startActivity(intent);
         });
         mRlDetailPassword.setOnClickListener(v -> {
@@ -129,22 +132,22 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         });
         mIvVideo.setOnClickListener(v -> {
             try {
-                if(wifiLockInfo.getPowerSave() == 0){
+                if (wifiLockInfo.getPowerSave() == 0) {
                     Intent intent = new Intent(PhilipsWifiVideoLockDetailActivity.this, PhilipsWifiVideoLockCallingActivity.class);
-                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING,0);
+                    intent.putExtra(KeyConstants.WIFI_VIDEO_LOCK_CALLING, 0);
                     intent.putExtra(KeyConstants.WIFI_SN, wifiSn);
                     startActivity(intent);
 
-                }else{
+                } else {
                     powerStatusDialog();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         });
         mIvDetailDelete.setOnClickListener(v -> {
-            AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this,getString(R.string.device_delete_dialog_head),
-                    getString(R.string.philips_cancel), getString(R.string.query),"#0066A1", "#FFFFFF",new AlertDialogUtil.ClickListener() {
+            AlertDialogUtil.getInstance().noEditTitleTwoButtonPhilipsDialog(this, getString(R.string.device_delete_dialog_head),
+                    getString(R.string.philips_cancel), getString(R.string.query), "#0066A1", "#FFFFFF", new AlertDialogUtil.ClickListener() {
                         @Override
                         public void left() {
 
@@ -153,9 +156,9 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                         @Override
                         public void right() {
                             showLoading(getString(R.string.is_deleting));
-                            if(isWifiVideoLockType){
+                            if (isWifiVideoLockType) {
                                 mPresenter.deleteVideoDevice(wifiLockInfo.getWifiSN());
-                            }else{
+                            } else {
                                 mPresenter.deleteDevice(wifiLockInfo.getWifiSN());
                             }
 
@@ -171,7 +174,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                     });
         });
 
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.colorPrimary);
+        StatusBarUtils.setWindowStatusBarColor(this, R.color.colorPrimary);
         initData();
     }
 
@@ -194,8 +197,8 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
     private void initData() {
         wifiSn = getIntent().getStringExtra(KeyConstants.WIFI_SN);
         wifiLockInfo = MyApplication.getInstance().getWifiLockInfoBySn(wifiSn);
-        if (wifiLockInfo != null){
-            if(MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSn) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK){
+        if (wifiLockInfo != null) {
+            if (MyApplication.getInstance().getWifiVideoLockTypeBySn(wifiSn) == HomeShowBean.TYPE_WIFI_VIDEO_LOCK) {
                 isWifiVideoLockType = true;
             }
 
@@ -209,11 +212,11 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
                 }.getType());
                 LogUtils.d("本地的分享用户为  shareUsers  " + (shareUsers == null ? 0 : shareUsers.size()));
             }
-            if(supportFunctions == null){
+            if (supportFunctions == null) {
                 String functionSet = wifiLockInfo.getFunctionSet(); //锁功能集
                 int func = 0x64;
                 try {
-                    if(!functionSet.isEmpty()){
+                    if (!functionSet.isEmpty()) {
 
                         func = Integer.parseInt(functionSet);
                     }
@@ -226,23 +229,23 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
             mPresenter.getPasswordList(wifiSn);
             mPresenter.queryUserList(wifiSn);
 
-            if(!wifiLockInfo.getLockNickname().isEmpty()){
-                if(wifiLockInfo.getLockNickname().length() > 8){
-                    mTvDeviceName.setText(wifiLockInfo.getLockNickname().substring(0,8) + "...");
-                }else {
+            if (!wifiLockInfo.getLockNickname().isEmpty()) {
+                if (wifiLockInfo.getLockNickname().length() > 8) {
+                    mTvDeviceName.setText(wifiLockInfo.getLockNickname().substring(0, 8) + "...");
+                } else {
                     mTvDeviceName.setText(wifiLockInfo.getLockNickname());
                 }
-            }else {
+            } else {
                 mTvDeviceName.setText(wifiSn);
             }
 
-            if(wifiLockInfo.getIsAdmin() == 1){
+            if (wifiLockInfo.getIsAdmin() == 1) {
                 mRlDetailPassword.setVisibility(View.VISIBLE);
                 mRlDetailShareSetting.setVisibility(View.GONE);
                 mRlDetailShare.setVisibility(View.VISIBLE);
                 mRlDetailAlbum.setVisibility(View.VISIBLE);
                 mIvDetailDelete.setVisibility(View.GONE);
-            }else{
+            } else {
                 mRlDetailPassword.setVisibility(View.GONE);
                 mRlDetailShareSetting.setVisibility(View.VISIBLE);
                 mRlDetailShare.setVisibility(View.GONE);
@@ -256,13 +259,13 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
     }
 
     private void initOperationRecord() {
-        String localRecord = (String) SPUtils.get(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSn,"");
+        String localRecord = (String) SPUtils.get(KeyConstants.WIFI_LOCK_OPERATION_RECORD + wifiSn, "");
         List<WifiLockOperationRecord> records = new Gson().fromJson(localRecord, new TypeToken<List<WifiLockOperationRecord>>() {
         }.getType());
-        if(records == null) return;
-        if(records.size() <= 0) return;
-        if(records.size() == 1){
-            BleUtil.setTextViewOperationRecordByType(null,mTvLastRecord,records.get(0));
+        if (records == null) return;
+        if (records.size() <= 0) return;
+        if (records.size() == 1) {
+            BleUtil.setTextViewOperationRecordByType(null, mTvLastRecord, records.get(0));
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get(0).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());
             return;
@@ -271,8 +274,8 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         long[] createTime = new long[2];
         createTime[0] = records.get(0).getCreateTime();
         createTime[1] = 0;
-        for(int i = 0;i < records.size();i++){
-            if(createTime[0] <= records.get(i).getCreateTime()){
+        for (int i = 0; i < records.size(); i++) {
+            if (createTime[0] <= records.get(i).getCreateTime()) {
                 createTime[0] = records.get(i).getCreateTime();
                 createTime[1] = i;
                 continue;
@@ -280,9 +283,8 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
         }
 
 
-
-        BleUtil.setTextViewOperationRecordByType(null,mTvLastRecord,records.get((int) createTime[1]));
-        if(!TextUtils.isEmpty(mTvLastRecord.getText())){
+        BleUtil.setTextViewOperationRecordByType(null, mTvLastRecord, records.get((int) createTime[1]));
+        if (!TextUtils.isEmpty(mTvLastRecord.getText())) {
             mTvLastRecord.setText(DateUtils.secondToDate2(records.get((int) createTime[1]).getCreateTime())
                     + " " + mTvLastRecord.getText().toString().trim());
         }
@@ -290,25 +292,26 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
     /**
      * 剩余电量
+     *
      * @param power
      */
     private void remainingCapacity(int power) {
-        if(power <= 20){
+        if (power <= 20) {
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low);
-        }else if(power > 20 && power <= 60){
+        } else if (power > 20 && power <= 60) {
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low2);
-        }else if(power > 60 && power <= 90){
+        } else if (power > 60 && power <= 90) {
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_low1);
-        }else {
+        } else {
             mIvPower.setImageResource(R.drawable.philips_home_icon_battery_full);
         }
     }
 
     /**
-     *  门锁模式
+     * 门锁模式
      */
     private void initLockMode() {
-        if(wifiLockInfo == null) return;
+        if (wifiLockInfo == null) return;
 
         int safeMode = wifiLockInfo.getSafeMode();  //安全模式
         int operatingMode = wifiLockInfo.getOperatingMode(); //反锁模式
@@ -335,7 +338,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
 
         mTvRightMode.setText(R.string.real_time_video_setting_normal);
 
-        if(operatingMode == 1){
+        if (operatingMode == 1) {
             mTvRightMode.setText(R.string.philips_fragment_wifi_video_anti_lock_mode);
         }
     }
@@ -401,7 +404,7 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
     }
 
 
-    public void powerStatusDialog(){
+    public void powerStatusDialog() {
         AlertDialogUtil.getInstance().noEditTwoButtonTwoContentDialog(this, getString(R.string.dialog_wifi_video_keep_alive_close), getString(R.string.dialog_wifi_video_doorbell_outside_door),
                 null, "", getString(R.string.philips_confirm), new AlertDialogUtil.ClickListener() {
                     @Override
@@ -477,8 +480,12 @@ public class PhilipsWifiVideoLockDetailActivity extends BaseActivity<IPhilipsWif
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
         LogUtils.d("删除失败   " + result.toString());
-        String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
-        ToastUtils.showLong(httpErrorCode);
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
         hiddenLoading();
     }
 }

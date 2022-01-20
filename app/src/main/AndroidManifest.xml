@@ -72,6 +72,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:extractNativeLibs="true"
         tool:ignore="LockedOrientationActivity"
         tools:replace="android:name,android:allowBackup">
         <activity android:name=".activity.login.PhilipsWeChatLoginActivity"></activity>
@@ -1215,6 +1216,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.my.SignOutTipsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.message.PhilipsDeviceSelectDialogActivity"
             android:launchMode="singleTask"
             android:theme="@style/DialogTransparent" />
@@ -1223,7 +1228,8 @@
         <service android:name=".publiclibrary.ble.BleService" />
         <service android:name=".publiclibrary.ota.ble.p6.BluetoothLeService" />
 
-        <receiver android:name=".utils.networkListenerutil.NetWorkChangReceiver">
+        <receiver android:name=".utils.networkListenerutil.NetWorkChangReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
@@ -1238,6 +1244,18 @@
                 <action android:name="com.cysmart.bluetooth.le.ACTION_OTA_DATA_AVAILABLE_V1" />
             </intent-filter>
         </receiver> <!-- &lt;!&ndash; process必须指定为":pushservice"，切勿随意更改 &ndash;&gt; -->
+
+        <receiver
+            android:name="com.huawei.hms.support.api.push.PushReceiver"
+            android:exported="true">
+
+        </receiver>
+        <receiver
+            android:name="com.huawei.hms.support.api.push.PushMsgReceiver"
+            android:exported="true">
+
+        </receiver>
+
         <meta-data
             android:name="GETUI_APPID"
             android:value="${GETUI_APPID}" />
@@ -1264,7 +1282,8 @@
 
         <receiver
             android:name="com.meizu.cloud.pushsdk.SystemReceiver"
-            android:process=":pushservice">
+            android:process=":pushservice"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.meizu.cloud.pushservice.action.PUSH_SERVICE_START" />
 
@@ -1273,7 +1292,8 @@
         </receiver>
         <receiver
             android:name="com.igexin.sdk.FlymePushReceiver"
-            android:process=":pushservice">
+            android:process=":pushservice"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
                 <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
@@ -1347,7 +1367,8 @@
 
         <receiver
             android:name="com.igexin.sdk.VivoPushMessageReceiver"
-            android:process=":pushservice">
+            android:process=":pushservice"
+            android:exported="false">
             <intent-filter>
 
                 <!-- 接收 push 消息 -->
@@ -1364,7 +1385,8 @@
 
         <service
             android:name="com.igexin.sdk.OppoPushService"
-            android:process=":pushservice">
+            android:process=":pushservice"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
             </intent-filter>
@@ -1386,8 +1408,10 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.philips.easykey.lock.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
+                tools:replace="android:resource"
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public" />
         </provider>

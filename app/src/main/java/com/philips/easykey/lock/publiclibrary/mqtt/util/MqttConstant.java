@@ -249,6 +249,8 @@ public class MqttConstant {
 
     //视频锁 门铃
     public static final String VIDEO_LOCK_DOORBELLING = "alarm";
+    //视频锁 开门
+    public static final String VIDEO_LOCK_INFO_OPEN = "action";
 
     public static final String UPDATE_DEV_PUSH_SWITCH = "updateDevPushSwitch";
 

@@ -2,6 +2,7 @@ package com.philips.easykey.lock.activity.my;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -130,7 +131,12 @@ public class PhilipsUserFeedbackActivity extends BaseActivity<IUserFeedbackView,
 
     @Override
     public void userFeedbackSubmitFailedServer(BaseResult result) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
     }
 
 }

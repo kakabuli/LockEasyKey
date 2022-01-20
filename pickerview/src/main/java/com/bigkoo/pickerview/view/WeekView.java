@@ -16,7 +16,13 @@ import com.bigkoo.pickerview.utils.CalendarUtil;
 
 public class WeekView extends View {
 
-    private String[] weekArray = {"日", "一", "二", "三", "四", "五", "六"};
+    private String[] weekArray = {getContext().getString(R.string.pickerview_sun)
+            , getContext().getString(R.string.pickerview_one)
+            , getContext().getString(R.string.pickerview_two)
+            , getContext().getString(R.string.pickerview_three)
+            , getContext().getString(R.string.pickerview_four)
+            , getContext().getString(R.string.pickerview_five)
+            , getContext().getString(R.string.pickerview_six)};
     private int weekSize = 14;//文字尺寸
     private int weekColor = Color.BLACK;//文字颜色
 

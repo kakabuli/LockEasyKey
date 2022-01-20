@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
 import android.util.Log;
+
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;

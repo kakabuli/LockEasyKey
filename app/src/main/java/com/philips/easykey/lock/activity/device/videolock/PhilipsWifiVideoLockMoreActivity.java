@@ -816,8 +816,12 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     public void onDeleteDeviceFailedServer(BaseResult result) {
         LogUtils.d("删除失败   " + result.toString());
-        String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
-        ToastUtils.showLong(httpErrorCode);
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
         hiddenLoading();
     }
 
@@ -841,7 +845,12 @@ public class PhilipsWifiVideoLockMoreActivity extends BaseActivity<IWifiVideoLoc
     @Override
     public void modifyDeviceNicknameFail(BaseResult baseResult) {
         hiddenLoading();
-        ToastUtils.showLong(HttpUtils.httpErrorCode(this, baseResult.getCode()));
+        if(TextUtils.isEmpty(baseResult.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, baseResult.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(baseResult.getMsg());
+        }
     }
 
     @Override

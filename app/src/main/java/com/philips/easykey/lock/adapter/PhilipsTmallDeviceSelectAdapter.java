@@ -35,7 +35,11 @@ public class PhilipsTmallDeviceSelectAdapter extends BaseQuickAdapter<TmallDevic
         TextView tvDeviceName = baseViewHolder.getView(R.id.tvDeviceName);
         TextView tvBinding = baseViewHolder.getView(R.id.tvBinding);
         CheckBox ck = baseViewHolder.getView(R.id.ck);
-        tvDeviceName.setText(tmallDeviceList.getProductModel());
+        if(tmallDeviceList.getLockNickname().length() > 10){
+            tvDeviceName.setText(tmallDeviceList.getLockNickname().substring(0,10) + "...");
+        }else {
+            tvDeviceName.setText(tmallDeviceList.getLockNickname());
+        }
         if(tmallDeviceList.getIsBind() == 0){
             tvBinding.setVisibility(View.GONE);
             ck.setVisibility(View.VISIBLE);

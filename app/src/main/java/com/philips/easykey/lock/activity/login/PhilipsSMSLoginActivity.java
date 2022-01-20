@@ -256,7 +256,12 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
                 });
     }
     public void sendRandomFailedServer(BaseResult result) {
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
     }
     public void sendRandomFailed(Throwable e) {
         LogUtils.d("验证码发送失败");
@@ -337,6 +342,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
 
                 @Override
                 public void onAckErrorCode(BaseResult baseResult) {
+                    ToastUtils.showShort(baseResult.getMsg());
                     LogUtils.d("手机验证码登录失败   " + baseResult.toString());
                 }
 
@@ -416,7 +422,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
 
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
-
+                        ToastUtils.showShort(baseResult.getMsg());
                     }
 
                     @Override
@@ -475,6 +481,7 @@ public class PhilipsSMSLoginActivity extends NormalBaseActivity {
                     @Override
                     public void onAckErrorCode(BaseResult baseResult) {
                         LogUtils.d("微信登陆失败   " + baseResult.toString());
+                        ToastUtils.showShort(baseResult.getMsg());
                     }
 
                     @Override

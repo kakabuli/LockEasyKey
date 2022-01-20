@@ -168,15 +168,20 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation files('libs/Native_Libs2.jar')
-    implementation files('libs/GetuiSDK-support-MZP-1.1.1.jar')
+//    implementation files('libs/GetuiSDK-support-MZP-1.1.1.jar')
     implementation files('libs/GetuiSDK-support-STP-1.0.1.jar')
-    implementation files('libs/GetuiSDK-support-VIVO-1.0.5.jar')
-    implementation files('libs/GetuiSDK-support-OPPO-1.0.7.jar')
+//    implementation files('libs/GetuiSDK-support-VIVO-1.0.5.jar')
+//    implementation files('libs/GetuiSDK-support-OPPO-1.0.7.jar')
+
+    // 根据所需厂商选择集成
+//    implementation 'com.assist-v3:oppo:3.1.0'  // oppo
+    implementation 'com.assist-v3:vivo:3.0.5'  // vivo
+    implementation 'com.getui.opt:mzp:3.1.0'   // 魅族
 
 //    implementation 'com.getui:sdk:2.14.1.0'
-    implementation 'com.getui:gtsdk:3.2.3.0'
-    implementation 'com.getui:gtc:3.1.4.0'
-    implementation 'com.huawei.hms:push:5.1.1.301'
+    implementation 'com.getui:gtsdk:3.2.7.0'
+    implementation 'com.getui:gtc:3.1.7.0'
+    implementation 'com.huawei.hms:push:6.1.0.300'
     implementation project(':push:pushsdk_xiaomi')
 
     implementation files('libs/xm-codec.jar')
@@ -206,8 +211,8 @@ dependencies {
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
 
     //mqtt
-    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
-    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.hannesa2:paho.mqtt.android:3.3.5-beta2'
 
     //zxing
     implementation 'com.king.zxing:zxing-lite:2.0.3'
@@ -263,4 +268,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     // 微信
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+
+
+
 }

@@ -175,11 +175,20 @@ public class PhilipsWiFiLockAddShareUserActivity extends BaseActivity<IWiFiLockS
     @Override
     public void onAddUserFailed(BaseResult result) {
         hiddenLoading();
-        ToastUtils.make()
-                .setTextColor(Color.WHITE)
-                .setBgResource(R.drawable.background_7f000000_3pt)
-                .setGravity(Gravity.CENTER, 0, 0)
-                .show(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            ToastUtils.make()
+                    .setTextColor(Color.WHITE)
+                    .setBgResource(R.drawable.background_7f000000_3pt)
+                    .setGravity(Gravity.CENTER, 0, 0)
+                    .show(HttpUtils.httpErrorCode(this, result.getCode()));
+        }else {
+            ToastUtils.make()
+                    .setTextColor(Color.WHITE)
+                    .setBgResource(R.drawable.background_7f000000_3pt)
+                    .setGravity(Gravity.CENTER, 0, 0)
+                    .show(result.getMsg());
+        }
+
     }
 
     @Override

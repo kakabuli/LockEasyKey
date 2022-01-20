@@ -10,10 +10,28 @@ public class ConstantConfig {
     public static final String MQTT_BASE_URL = BuildConfig.MQTT_HOST;//正式服务器
     public static final String LINPHONE_URL = BuildConfig.SIP_HOST;//正式sip
 
-    public static final String PHILIPS_PRIVACY_POLICY = "https://app.cone-x.com/mobile_h5/Philips_Android_Privacy_Policy_EasyKey+";
     public static final String PHILIPS_TERMS_OF_USE = "https://app.cone-x.com/mobile_h5/Philips_Terms_of_Use";
     public static final String PHILPS_DURRESS_HELP = "https://app.cone-x.com/mobile_h5/Philps_Durress_Help";
     public static final String PHILIPS_UPDATE_ADMIN_PASSWORD = "https://app.cone-x.com/mobile_h5/Philips_Update_Admin_Password";
     public static final String PHILIPS_ADD_SCAN_DEVICE = "https://app.cone-x.com/mobile_h5/Philips_Add_Scan_Device";
     public static final String PHILIPS_FQA = "https://app.cone-x.com/mobile_h5/Philips_FQA/";
+    public static final String PHILIPS_PRIVACY_POLICY = "https://app.cone-x.com/mobile_h5/Philips_Android_Privacy_Policy_EasyKey/";
+    public static final String PHILIPS_ACC_SIGN_OUT_TIPS_POLICY = "https://app.cone-x.com/mobile_h5/Philips_Cancellation_Account/";
+
+
+    public static final String PHILIPS_TERMS_OF_USE_EN = "https://app.cone-x.com/mobile_h5/Philips_Terms_of_Use/language/en";
+    public static final String PHILPS_DURRESS_HELP_EN = "https://app.cone-x.com/mobile_h5/Philps_Durress_Help/language/en";
+    public static final String PHILIPS_UPDATE_ADMIN_PASSWORD_EN = "https://app.cone-x.com/mobile_h5/Philips_Update_Admin_Password/language/en";
+    public static final String PHILIPS_ADD_SCAN_DEVICE_EN = "https://app.cone-x.com/mobile_h5/Philips_Add_Scan_Device/language/en";
+    public static final String PHILIPS_FQA_EN = "https://app.cone-x.com/mobile_h5/Philips_FQA/language/en/";
+    public static final String PHILIPS_PRIVACY_POLICY_EN = "https://app.cone-x.com/mobile_h5/Philips_Android_Privacy_Policy_EasyKey/language/en";
+    public static final String PHILIPS_ACC_SIGN_OUT_TIPS_POLICY_EN = "https://app.cone-x.com/mobile_h5/Philips_Cancellation_Account/language/en";
+
+    public static final String PHILIPS_TERMS_OF_USE_ZH = "https://app.cone-x.com/mobile_h5/Philips_Terms_of_Use/language/zh_cn";
+    public static final String PHILPS_DURRESS_HELP_ZH = "https://app.cone-x.com/mobile_h5/Philps_Durress_Help/language/zh_cn";
+    public static final String PHILIPS_UPDATE_ADMIN_PASSWORD_ZH = "https://app.cone-x.com/mobile_h5/Philips_Update_Admin_Password/language/zh_cn";
+    public static final String PHILIPS_ADD_SCAN_DEVICE_ZH = "https://app.cone-x.com/mobile_h5/Philips_Add_Scan_Device/language/zh_cn";
+    public static final String PHILIPS_FQA_ZH = "https://app.cone-x.com/mobile_h5/Philips_FQA/language/zh_cn/";
+    public static final String PHILIPS_PRIVACY_POLICY_ZH = "https://app.cone-x.com/mobile_h5/Philips_Android_Privacy_Policy_EasyKey/language/zh_cn";
+    public static final String PHILIPS_ACC_SIGN_OUT_TIPS_POLICY_ZH = "https://app.cone-x.com/mobile_h5/Philips_Cancellation_Account/language/zh_cn";
 }

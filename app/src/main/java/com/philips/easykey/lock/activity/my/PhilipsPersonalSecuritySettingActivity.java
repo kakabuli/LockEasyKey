@@ -31,6 +31,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
     TextView securitySettingSwitchText;
     RelativeLayout updateHandPwdLayout;
     RelativeLayout rlLanguageSetting;
+    RelativeLayout rlSignOut;
     ImageView ivOpenHandPwd;
     ImageView ivOpenTouchId;
     RelativeLayout rlOpenHandPwd;
@@ -62,6 +63,7 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
         rlOpenFaceId = findViewById(R.id.rl_open_face_id);
         faceIdStatus = findViewById(R.id.face_id_status);
         ivOpenFaceId = findViewById(R.id.iv_open_face_id);
+        rlSignOut = findViewById(R.id.rl_sign_out);
 
         ivBack.setOnClickListener(v -> finish());
         updateHandPwdLayout.setOnClickListener(v -> {
@@ -110,6 +112,10 @@ public class PhilipsPersonalSecuritySettingActivity extends BaseActivity<IPerson
         rlOpenFaceId.setOnClickListener(v -> {
             faceId = !faceId;
             setFaceIdUI(faceId);
+        });
+        rlSignOut.setOnClickListener(v->{
+            Intent intent = new Intent(this,SignOutTipsActivity.class);
+            startActivity(intent);
         });
 
         rlLanguageSetting.setOnClickListener(v -> {

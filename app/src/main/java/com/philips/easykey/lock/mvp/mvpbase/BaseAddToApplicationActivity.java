@@ -21,6 +21,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.philips.easykey.lock.utils.KeyConstants;
 import com.philips.easykey.lock.utils.LanguageUtil;
 import com.philips.easykey.lock.utils.SPUtils;
+import com.philips.easykey.lock.utils.KeyConstants;
+import com.philips.easykey.lock.utils.SPUtils;
 import com.philips.easykey.lock.utils.StatusBarUtils;
 
 public class BaseAddToApplicationActivity extends AppCompatActivity {
@@ -53,8 +55,11 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             KeepAliveManager.batteryOptimizations(getApplicationContext());
         }*/
-
-        startKeepAlive();
+        //勾选同意协议后才允许弹出通知
+        boolean showStatementAndTerms = (boolean) SPUtils.getProtect(KeyConstants.SHOW_STATEMENT_AND_TERMS, true);
+        if(!showStatementAndTerms){
+            startKeepAlive();
+        }
     }
 
 
@@ -86,6 +91,11 @@ public class BaseAddToApplicationActivity extends AppCompatActivity {
                             }
                         })
         );
+    }
+
+    //主动启动保活服务
+    public void startKeepAliveSelf(){
+        startKeepAlive();
     }
 
     /**

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -143,6 +144,11 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         queryUser();
     }
 
@@ -161,7 +167,9 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
     public void pageChange() {
         if (isNotData) {
             llHasData.setVisibility(View.GONE);
-            tvNoUser.setVisibility(View.VISIBLE);
+            if(tmallShareUsers.size() == 0){
+                tvNoUser.setVisibility(View.VISIBLE);
+            }
             tvSharedUser.setVisibility(View.GONE);
         } else {
             llHasData.setVisibility(View.VISIBLE);
@@ -241,7 +249,12 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
         querySuccess = false;
         //刷新完成
         refreshLayout.finishRefresh();
-        ToastUtils.showShort(HttpUtils.httpErrorCode(this, result.getCode()));
+        if(TextUtils.isEmpty(result.getMsg())){
+            String httpErrorCode = HttpUtils.httpErrorCode(this, result.getCode());
+            ToastUtils.showLong(httpErrorCode);
+        }else {
+            ToastUtils.showLong(result.getMsg());
+        }
     }
 
     @Override
@@ -263,6 +276,11 @@ public class PhilipsWifiLockFamilyManagerActivity extends BaseActivity<IWifiLock
             tmallShareUsers.addAll(tmallQueryDeviceListResult.getData());
             tmallShareUserAdapter.notifyDataSetChanged();
         }else {
+            tmallShareUsers.clear();
+            tmallShareUserAdapter.notifyDataSetChanged();
+            if(isNotData){
+                tvNoUser.setVisibility(View.VISIBLE);
+            }
             tvTmallSharedUser.setVisibility(View.GONE);
             tvTmallSharedUserTisp.setVisibility(View.GONE);
         }

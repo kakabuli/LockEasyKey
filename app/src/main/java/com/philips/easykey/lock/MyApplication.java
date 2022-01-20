@@ -387,6 +387,27 @@ public class MyApplication extends Application {
         this.uid = uid;
     }
 
+    public String getLanguage(){
+        String language = "en_US";
+        String spLanguage = (String) SPUtils.getProtect(KeyConstants.LANGUAGE_SET, "");
+        if(TextUtils.isEmpty(spLanguage)){
+            Locale locale = getResources().getConfiguration().locale;
+            language = locale.getLanguage();
+            if(TextUtils.equals(language,"zh")){
+                language = "zh_CN";
+            }else {
+                language = "en_US";
+            }
+        }else {
+            if(TextUtils.equals(spLanguage,"zh")){
+                language = "zh_CN";
+            }else {
+                language = "en_US";
+            }
+        }
+        return language;
+    }
+
     /**
      * @param isShowDialog 是否弹出对话框，提示用户token失效，需要重新登陆。如果是主动退出登录的那么不需要提示 是false
      *                     <p>
@@ -1026,7 +1047,7 @@ public class MyApplication extends Application {
 
     public void reStartApp() {
         Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
-        PendingIntent restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
         AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 1秒钟后重启应用
         System.exit(0);

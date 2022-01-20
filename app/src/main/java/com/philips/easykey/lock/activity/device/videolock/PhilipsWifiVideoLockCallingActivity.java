@@ -695,8 +695,10 @@ public class PhilipsWifiVideoLockCallingActivity extends BaseActivity<IWifiLockV
 
     }
 
+    //开始视频回调，时间戳数据...
     @Override
-    public void onCodecNotify(int notify, Object object) {
+    public void onVideoDataAVStreamHeader(AVStreamHeader paramAVStreamHeader) {
+
         if(!isFirstAudio){
             if(isCalling == 0 || !isDoorbelling){
                 if(isShowAudio && mPresenter.startAudioStream() >= 0) {
